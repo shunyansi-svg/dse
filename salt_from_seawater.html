@@ -1,0 +1,1648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Obtaining Salt from Seawater | HKDSE Chemistry Topic IV (c) + Topic XV</title>
+<meta name="theme-color" content="#000000">
+<style>
+  input[type=range]{accent-color:#3dd6c6;}
+.mode-btn.err.active{border-color:rgba(248,113,113,.8);background:rgba(239,68,68,.16);color:#fecaca;}
+.btn:hover{border-color:rgba(61,214,198,.6);}
+.btn-danger{background:rgba(239,68,68,.14);border-color:rgba(248,133,133,.55);color:#fecaca;}
+.btn-on{background:rgba(251,146,60,.2);border-color:rgba(251,146,60,.7);color:#fed7aa;}
+.field label{display:block;font-size:.75rem;text-transform:uppercase;letter-spacing:.05em;color:#94a3b8;margin-bottom:.25rem;font-weight:700;}
+.field input,.field select{width:100%;background:rgba(2,6,23,.8);border:1px solid rgba(148,163,184,.3);border-radius:.6rem;padding:.45rem .6rem;font-size:.9rem;color:#e2e8f0;}
+table.data{width:100%;font-size:.78rem;border-collapse:collapse;}
+table.data td{padding:.15rem .3rem;border-bottom:1px solid rgba(148,163,184,.14);}
+</style>
+<style id="lab-theme">/* Shared design system for the chemistry lab fleet. Source: _build/src/theme.css + tailwind.config.js. Edit the source, then run node _build/src/build.cjs. Do not hand-edit this block. */*,:after,:before{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(10,132,255,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(10,132,255,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }*,:after,:before{box-sizing:border-box;border:0 solid #d1d1d6}:after,:before{--tw-content:""}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;-o-tab-size:4;tab-size:4;font-family:-apple-system,BlinkMacSystemFont,SF Pro Text,SF Pro Display,Segoe UI Variable Text,Segoe UI,system-ui,Helvetica Neue,sans-serif;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:SF Mono,ui-monospace,Cascadia Mono,Segoe UI Mono,Consolas,monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0}fieldset,legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::-moz-placeholder,textarea::-moz-placeholder{opacity:1;color:#aeaeb2}input::placeholder,textarea::placeholder{opacity:1;color:#aeaeb2}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}.visible{visibility:visible}.invisible{visibility:hidden}.collapse{visibility:collapse}.static{position:static}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.sticky{position:sticky}.inset-0{inset:0}.z-10{z-index:10}.z-\[110\]{z-index:110}.col-span-1{grid-column:span 1/span 1}.col-span-2{grid-column:span 2/span 2}.mx-auto{margin-left:auto;margin-right:auto}.my-3{margin-top:.75rem;margin-bottom:.75rem}.mb-1{margin-bottom:.25rem}.mb-1\.5{margin-bottom:.375rem}.mb-10{margin-bottom:2.5rem}.mb-2{margin-bottom:.5rem}.mb-3{margin-bottom:.75rem}.mb-4{margin-bottom:1rem}.mb-5{margin-bottom:1.25rem}.mb-8{margin-bottom:2rem}.ml-1{margin-left:.25rem}.ml-auto{margin-left:auto}.mr-1{margin-right:.25rem}.mr-2{margin-right:.5rem}.ms-0{margin-inline-start:0}.ms-1{margin-inline-start:.25rem}.ms-2{margin-inline-start:.5rem}.mt-0{margin-top:0}.mt-0\.5{margin-top:.125rem}.mt-1{margin-top:.25rem}.mt-1\.5{margin-top:.375rem}.mt-2{margin-top:.5rem}.mt-3{margin-top:.75rem}.mt-4{margin-top:1rem}.mt-5{margin-top:1.25rem}.mt-6{margin-top:1.5rem}.block{display:block}.inline{display:inline}.flex{display:flex}.table{display:table}.grid{display:grid}.contents{display:contents}.hidden{display:none}.h-2{height:.5rem}.h-2\.5{height:.625rem}.h-3{height:.75rem}.h-auto{height:auto}.min-h-\[1\.25rem\]{min-height:1.25rem}.min-h-\[1rem\]{min-height:1rem}.min-h-\[24px\]{min-height:24px}.min-h-\[72px\]{min-height:72px}.w-14{width:3.5rem}.w-16{width:4rem}.w-20{width:5rem}.w-24{width:6rem}.w-28{width:7rem}.w-36{width:9rem}.w-6{width:1.5rem}.w-full{width:100%}.min-w-\[160px\]{min-width:160px}.max-w-3xl{max-width:48rem}.max-w-6xl{max-width:72rem}.max-w-sm{max-width:24rem}.max-w-xs{max-width:20rem}.flex-1{flex:1 1 0%}.shrink{flex-shrink:1}.grow{flex-grow:1}.border-collapse{border-collapse:collapse}.transform{transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.resize{resize:both}.list-inside{list-style-position:inside}.list-disc{list-style-type:disc}.grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}.grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid-cols-\[3rem_1fr\]{grid-template-columns:3rem 1fr}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-start{align-items:flex-start}.items-end{align-items:flex-end}.items-center{align-items:center}.items-baseline{align-items:baseline}.items-stretch{align-items:stretch}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-1{gap:.25rem}.gap-2{gap:.5rem}.gap-3{gap:.75rem}.gap-4{gap:1rem}.gap-5{gap:1.25rem}.gap-x-4{-moz-column-gap:1rem;column-gap:1rem}.gap-x-8{-moz-column-gap:2rem;column-gap:2rem}.gap-y-1{row-gap:.25rem}.gap-y-4{row-gap:1rem}.space-y-1>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.25rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.25rem*var(--tw-space-y-reverse))}.space-y-1\.5>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.375rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.375rem*var(--tw-space-y-reverse))}.space-y-2>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.5rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.5rem*var(--tw-space-y-reverse))}.space-y-3>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.75rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.75rem*var(--tw-space-y-reverse))}.space-y-4>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem*var(--tw-space-y-reverse))}.space-y-5>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.25rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.25rem*var(--tw-space-y-reverse))}.space-y-6>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.5rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.5rem*var(--tw-space-y-reverse))}.self-end{align-self:flex-end}.self-center{align-self:center}.overflow-hidden{overflow:hidden}.overflow-x-auto{overflow-x:auto}.whitespace-nowrap{white-space:nowrap}.whitespace-pre-line{white-space:pre-line}.whitespace-pre-wrap{white-space:pre-wrap}.text-wrap{text-wrap:wrap}.rounded{border-radius:.625rem}.rounded-2xl{border-radius:1.125rem}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:.75rem}.rounded-xl{border-radius:1rem}.border{border-width:1px}.border-l-\[3px\]{border-left-width:3px}.border-t{border-top-width:1px}.border-dashed{border-style:dashed}.\!border-indigo-500{--tw-border-opacity:1!important;border-color:rgb(10 132 255/var(--tw-border-opacity,1))!important}.border-amber-500{--tw-border-opacity:1;border-color:rgb(255 159 10/var(--tw-border-opacity,1))}.border-amber-500\/25{border-color:rgba(255,159,10,.25)}.border-amber-500\/30{border-color:rgba(255,159,10,.3)}.border-amber-500\/40{border-color:rgba(255,159,10,.4)}.border-amber-800{--tw-border-opacity:1;border-color:rgb(95 56 0/var(--tw-border-opacity,1))}.border-amber-800\/40{border-color:rgba(95,56,0,.4)}.border-emerald-500{--tw-border-opacity:1;border-color:rgb(48 209 88/var(--tw-border-opacity,1))}.border-emerald-500\/40{border-color:rgba(48,209,88,.4)}.border-emerald-600{--tw-border-opacity:1;border-color:rgb(36 168 63/var(--tw-border-opacity,1))}.border-emerald-600\/25{border-color:rgba(36,168,63,.25)}.border-emerald-600\/30{border-color:rgba(36,168,63,.3)}.border-emerald-600\/40{border-color:rgba(36,168,63,.4)}.border-emerald-700{--tw-border-opacity:1;border-color:rgb(27 122 46/var(--tw-border-opacity,1))}.border-emerald-700\/40{border-color:rgba(27,122,46,.4)}.border-emerald-800{--tw-border-opacity:1;border-color:rgb(18 84 31/var(--tw-border-opacity,1))}.border-emerald-800\/40{border-color:rgba(18,84,31,.4)}.border-indigo-500{--tw-border-opacity:1;border-color:rgb(10 132 255/var(--tw-border-opacity,1))}.border-indigo-500\/25{border-color:rgba(10,132,255,.25)}.border-indigo-500\/30{border-color:rgba(10,132,255,.3)}.border-orange-600{--tw-border-opacity:1;border-color:rgb(204 122 0/var(--tw-border-opacity,1))}.border-rose-500{--tw-border-opacity:1;border-color:rgb(255 69 63/var(--tw-border-opacity,1))}.border-rose-500\/25{border-color:rgba(255,69,63,.25)}.border-rose-500\/40{border-color:rgba(255,69,63,.4)}.border-rose-600{--tw-border-opacity:1;border-color:rgb(217 44 38/var(--tw-border-opacity,1))}.border-rose-600\/30{border-color:rgba(217,44,38,.3)}.border-rose-800{--tw-border-opacity:1;border-color:rgb(107 21 18/var(--tw-border-opacity,1))}.border-rose-800\/40{border-color:rgba(107,21,18,.4)}.border-sky-500{--tw-border-opacity:1;border-color:rgb(100 210 255/var(--tw-border-opacity,1))}.border-sky-500\/40{border-color:rgba(100,210,255,.4)}.border-sky-800{--tw-border-opacity:1;border-color:rgb(0 77 104/var(--tw-border-opacity,1))}.border-sky-800\/40{border-color:rgba(0,77,104,.4)}.border-slate-500{--tw-border-opacity:1;border-color:rgb(174 174 178/var(--tw-border-opacity,1))}.border-slate-600{--tw-border-opacity:1;border-color:rgb(161 161 166/var(--tw-border-opacity,1))}.border-slate-700{--tw-border-opacity:1;border-color:rgb(152 152 157/var(--tw-border-opacity,1))}.border-slate-700\/50{border-color:hsla(240,2%,61%,.5)}.border-slate-700\/60{border-color:hsla(240,2%,61%,.6)}.border-slate-700\/70{border-color:hsla(240,2%,61%,.7)}.border-slate-800{--tw-border-opacity:1;border-color:rgb(84 84 88/var(--tw-border-opacity,1))}.border-teal-500{--tw-border-opacity:1;border-color:rgb(100 210 255/var(--tw-border-opacity,1))}.border-teal-500\/25{border-color:rgba(100,210,255,.25)}.border-teal-500\/30{border-color:rgba(100,210,255,.3)}.border-teal-500\/40{border-color:rgba(100,210,255,.4)}.border-teal-500\/50{border-color:rgba(100,210,255,.5)}.border-teal-700{--tw-border-opacity:1;border-color:rgb(0 117 158/var(--tw-border-opacity,1))}.border-teal-700\/40{border-color:rgba(0,117,158,.4)}.border-teal-800{--tw-border-opacity:1;border-color:rgb(0 77 104/var(--tw-border-opacity,1))}.border-teal-800\/40{border-color:rgba(0,77,104,.4)}.border-white{--tw-border-opacity:1;border-color:rgb(245 245 247/var(--tw-border-opacity,1))}.border-white\/10{border-color:rgba(245,245,247,.1)}.\!bg-indigo-600{--tw-bg-opacity:1!important;background-color:rgb(0 96 223/var(--tw-bg-opacity,1))!important}.\!bg-teal-950{--tw-bg-opacity:1!important;background-color:rgb(0 23 31/var(--tw-bg-opacity,1))!important}.\!bg-teal-950\/40{background-color:rgba(0,23,31,.4)!important}.bg-amber-500{--tw-bg-opacity:1;background-color:rgb(255 159 10/var(--tw-bg-opacity,1))}.bg-amber-950{--tw-bg-opacity:1;background-color:rgb(29 17 0/var(--tw-bg-opacity,1))}.bg-amber-950\/10{background-color:rgba(29,17,0,.1)}.bg-amber-950\/20{background-color:rgba(29,17,0,.2)}.bg-amber-950\/30{background-color:rgba(29,17,0,.3)}.bg-emerald-600{--tw-bg-opacity:1;background-color:rgb(36 168 63/var(--tw-bg-opacity,1))}.bg-emerald-700{--tw-bg-opacity:1;background-color:rgb(27 122 46/var(--tw-bg-opacity,1))}.bg-emerald-950{--tw-bg-opacity:1;background-color:rgb(4 24 10/var(--tw-bg-opacity,1))}.bg-emerald-950\/10{background-color:rgba(4,24,10,.1)}.bg-emerald-950\/20{background-color:rgba(4,24,10,.2)}.bg-emerald-950\/35{background-color:rgba(4,24,10,.35)}.bg-emerald-950\/40{background-color:rgba(4,24,10,.4)}.bg-indigo-600{--tw-bg-opacity:1;background-color:rgb(0 96 223/var(--tw-bg-opacity,1))}.bg-indigo-950{--tw-bg-opacity:1;background-color:rgb(0 18 51/var(--tw-bg-opacity,1))}.bg-indigo-950\/10{background-color:rgba(0,18,51,.1)}.bg-indigo-950\/20{background-color:rgba(0,18,51,.2)}.bg-orange-700{--tw-bg-opacity:1;background-color:rgb(149 88 0/var(--tw-bg-opacity,1))}.bg-rose-950{--tw-bg-opacity:1;background-color:rgb(33 6 5/var(--tw-bg-opacity,1))}.bg-rose-950\/10{background-color:rgba(33,6,5,.1)}.bg-rose-950\/20{background-color:rgba(33,6,5,.2)}.bg-rose-950\/30{background-color:rgba(33,6,5,.3)}.bg-rose-950\/35{background-color:rgba(33,6,5,.35)}.bg-sky-950{--tw-bg-opacity:1;background-color:rgb(0 23 31/var(--tw-bg-opacity,1))}.bg-sky-950\/20{background-color:rgba(0,23,31,.2)}.bg-sky-950\/35{background-color:rgba(0,23,31,.35)}.bg-slate-700{--tw-bg-opacity:1;background-color:rgb(152 152 157/var(--tw-bg-opacity,1))}.bg-slate-800{--tw-bg-opacity:1;background-color:rgb(84 84 88/var(--tw-bg-opacity,1))}.bg-slate-800\/80{background-color:rgba(84,84,88,.8)}.bg-slate-900{--tw-bg-opacity:1;background-color:rgb(58 58 60/var(--tw-bg-opacity,1))}.bg-slate-900\/50{background-color:rgba(58,58,60,.5)}.bg-slate-900\/60{background-color:rgba(58,58,60,.6)}.bg-slate-950{--tw-bg-opacity:1;background-color:rgb(11 11 13/var(--tw-bg-opacity,1))}.bg-slate-950\/40{background-color:rgba(11,11,13,.4)}.bg-slate-950\/50{background-color:rgba(11,11,13,.5)}.bg-slate-950\/60{background-color:rgba(11,11,13,.6)}.bg-slate-950\/70{background-color:rgba(11,11,13,.7)}.bg-slate-950\/80{background-color:rgba(11,11,13,.8)}.bg-teal-600{--tw-bg-opacity:1;background-color:rgb(0 164 221/var(--tw-bg-opacity,1))}.bg-teal-700{--tw-bg-opacity:1;background-color:rgb(0 117 158/var(--tw-bg-opacity,1))}.bg-teal-950{--tw-bg-opacity:1;background-color:rgb(0 23 31/var(--tw-bg-opacity,1))}.bg-teal-950\/10{background-color:rgba(0,23,31,.1)}.bg-teal-950\/20{background-color:rgba(0,23,31,.2)}.bg-teal-950\/30{background-color:rgba(0,23,31,.3)}.bg-teal-950\/40{background-color:rgba(0,23,31,.4)}.p-2{padding:.5rem}.p-3{padding:.75rem}.p-4{padding:1rem}.p-5{padding:1.25rem}.p-6{padding:1.5rem}.p-8{padding:2rem}.px-2{padding-left:.5rem;padding-right:.5rem}.px-3{padding-left:.75rem;padding-right:.75rem}.px-4{padding-left:1rem;padding-right:1rem}.px-5{padding-left:1.25rem;padding-right:1.25rem}.py-1{padding-top:.25rem;padding-bottom:.25rem}.py-1\.5{padding-top:.375rem;padding-bottom:.375rem}.py-10{padding-top:2.5rem;padding-bottom:2.5rem}.py-2{padding-top:.5rem;padding-bottom:.5rem}.py-2\.5{padding-top:.625rem;padding-bottom:.625rem}.py-3{padding-top:.75rem;padding-bottom:.75rem}.py-6{padding-top:1.5rem;padding-bottom:1.5rem}.py-8{padding-top:2rem;padding-bottom:2rem}.pb-1{padding-bottom:.25rem}.pb-4{padding-bottom:1rem}.pb-8{padding-bottom:2rem}.pt-1{padding-top:.25rem}.pt-2{padding-top:.5rem}.pt-4{padding-top:1rem}.pt-5{padding-top:1.25rem}.text-left{text-align:left}.text-center{text-align:center}.text-right{text-align:right}.align-middle{vertical-align:middle}.font-mono{font-family:SF Mono,ui-monospace,Cascadia Mono,Segoe UI Mono,Consolas,monospace}.text-2xl{font-size:1.6rem;line-height:2.05rem}.text-3xl{font-size:1.95rem;line-height:2.3rem}.text-\[10px\]{font-size:10px}.text-\[11px\]{font-size:11px}.text-base{font-size:1rem;line-height:1.65rem}.text-lg{font-size:1.125rem;line-height:1.65rem}.text-sm{font-size:.9375rem;line-height:1.5rem}.text-xl{font-size:1.3125rem;line-height:1.8rem}.text-xs{font-size:.8125rem;line-height:1.35rem}.font-bold{font-weight:700}.font-extrabold{font-weight:800}.font-normal{font-weight:400}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.normal-case{text-transform:none}.italic{font-style:italic}.tabular-nums{--tw-numeric-spacing:tabular-nums;font-variant-numeric:var(--tw-ordinal) var(--tw-slashed-zero) var(--tw-numeric-figure) var(--tw-numeric-spacing) var(--tw-numeric-fraction)}.leading-relaxed{line-height:1.625}.leading-snug{line-height:1.375}.leading-tight{line-height:1.25}.tracking-wide{letter-spacing:.025em}.tracking-wider{letter-spacing:.05em}.tracking-widest{letter-spacing:.1em}.text-amber-200{--tw-text-opacity:1;color:rgb(255 214 168/var(--tw-text-opacity,1))}.text-amber-200\/80{color:rgba(255,214,168,.8)}.text-amber-200\/90{color:rgba(255,214,168,.9)}.text-amber-300{--tw-text-opacity:1;color:rgb(255 188 122/var(--tw-text-opacity,1))}.text-amber-300\/90{color:rgba(255,188,122,.9)}.text-cyan-200{--tw-text-opacity:1;color:rgb(174 228 255/var(--tw-text-opacity,1))}.text-emerald-100{--tw-text-opacity:1;color:rgb(217 242 225/var(--tw-text-opacity,1))}.text-emerald-200{--tw-text-opacity:1;color:rgb(168 230 189/var(--tw-text-opacity,1))}.text-emerald-200\/90{color:rgba(168,230,189,.9)}.text-emerald-200\/95{color:rgba(168,230,189,.95)}.text-emerald-300{--tw-text-opacity:1;color:rgb(108 224 143/var(--tw-text-opacity,1))}.text-emerald-300\/90{color:rgba(108,224,143,.9)}.text-emerald-400{--tw-text-opacity:1;color:rgb(76 212 111/var(--tw-text-opacity,1))}.text-indigo-200{--tw-text-opacity:1;color:rgb(191 220 255/var(--tw-text-opacity,1))}.text-indigo-300{--tw-text-opacity:1;color:rgb(115 177 255/var(--tw-text-opacity,1))}.text-orange-300{--tw-text-opacity:1;color:rgb(255 188 122/var(--tw-text-opacity,1))}.text-rose-100{--tw-text-opacity:1;color:rgb(255 220 217/var(--tw-text-opacity,1))}.text-rose-200{--tw-text-opacity:1;color:rgb(255 182 177/var(--tw-text-opacity,1))}.text-rose-200\/95{color:hsla(4,100%,85%,.95)}.text-rose-300{--tw-text-opacity:1;color:rgb(255 139 133/var(--tw-text-opacity,1))}.text-rose-300\/90{color:hsla(3,100%,76%,.9)}.text-rose-400{--tw-text-opacity:1;color:rgb(255 96 88/var(--tw-text-opacity,1))}.text-sky-200{--tw-text-opacity:1;color:rgb(174 228 255/var(--tw-text-opacity,1))}.text-sky-200\/95{color:rgba(174,228,255,.95)}.text-sky-300{--tw-text-opacity:1;color:rgb(131 214 255/var(--tw-text-opacity,1))}.text-slate-100{--tw-text-opacity:1;color:rgb(245 245 247/var(--tw-text-opacity,1))}.text-slate-200{--tw-text-opacity:1;color:rgb(229 229 234/var(--tw-text-opacity,1))}.text-slate-300{--tw-text-opacity:1;color:rgb(209 209 214/var(--tw-text-opacity,1))}.text-slate-400{--tw-text-opacity:1;color:rgb(199 199 204/var(--tw-text-opacity,1))}.text-slate-500{--tw-text-opacity:1;color:rgb(174 174 178/var(--tw-text-opacity,1))}.text-slate-600{--tw-text-opacity:1;color:rgb(161 161 166/var(--tw-text-opacity,1))}.text-slate-900{--tw-text-opacity:1;color:rgb(58 58 60/var(--tw-text-opacity,1))}.text-teal-100{--tw-text-opacity:1;color:rgb(217 242 255/var(--tw-text-opacity,1))}.text-teal-100\/90{color:rgba(217,242,255,.9)}.text-teal-200{--tw-text-opacity:1;color:rgb(174 228 255/var(--tw-text-opacity,1))}.text-teal-200\/80{color:rgba(174,228,255,.8)}.text-teal-300{--tw-text-opacity:1;color:rgb(131 214 255/var(--tw-text-opacity,1))}.text-teal-400{--tw-text-opacity:1;color:rgb(108 210 255/var(--tw-text-opacity,1))}.text-violet-300{--tw-text-opacity:1;color:rgb(212 155 255/var(--tw-text-opacity,1))}.text-white{--tw-text-opacity:1;color:rgb(245 245 247/var(--tw-text-opacity,1))}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.accent-teal-400{accent-color:#6cd2ff}.opacity-70{opacity:.7}.opacity-80{opacity:.8}.shadow{--tw-shadow:0 8px 24px rgba(0,0,0,.45);--tw-shadow-colored:0 8px 24px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}.outline-none{outline:2px solid transparent;outline-offset:2px}.outline{outline-style:solid}.ring-1{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color)}.ring-1,.ring-2{box-shadow:var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow,0 0 #0000)}.ring-2{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color)}.ring-teal-400{--tw-ring-opacity:1;--tw-ring-color:rgb(108 210 255/var(--tw-ring-opacity,1))}.ring-teal-400\/50{--tw-ring-color:rgba(108,210,255,.5)}.blur{--tw-blur:blur(8px)}.blur,.invert{filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.invert{--tw-invert:invert(100%)}.filter{filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.transition{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,-webkit-backdrop-filter;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter,-webkit-backdrop-filter;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.hover\:border-teal-400:hover{--tw-border-opacity:1;border-color:rgb(108 210 255/var(--tw-border-opacity,1))}.hover\:bg-amber-400:hover{--tw-bg-opacity:1;background-color:rgb(255 161 74/var(--tw-bg-opacity,1))}.hover\:bg-emerald-500:hover{--tw-bg-opacity:1;background-color:rgb(48 209 88/var(--tw-bg-opacity,1))}.hover\:bg-emerald-600:hover{--tw-bg-opacity:1;background-color:rgb(36 168 63/var(--tw-bg-opacity,1))}.hover\:bg-indigo-500:hover{--tw-bg-opacity:1;background-color:rgb(10 132 255/var(--tw-bg-opacity,1))}.hover\:bg-orange-600:hover{--tw-bg-opacity:1;background-color:rgb(204 122 0/var(--tw-bg-opacity,1))}.hover\:bg-slate-600:hover{--tw-bg-opacity:1;background-color:rgb(161 161 166/var(--tw-bg-opacity,1))}.hover\:bg-slate-700:hover{--tw-bg-opacity:1;background-color:rgb(152 152 157/var(--tw-bg-opacity,1))}.hover\:bg-teal-500:hover{--tw-bg-opacity:1;background-color:rgb(100 210 255/var(--tw-bg-opacity,1))}.hover\:bg-teal-600:hover{--tw-bg-opacity:1;background-color:rgb(0 164 221/var(--tw-bg-opacity,1))}.focus\:border-teal-400:focus{--tw-border-opacity:1;border-color:rgb(108 210 255/var(--tw-border-opacity,1))}.disabled\:cursor-not-allowed:disabled{cursor:not-allowed}.disabled\:opacity-40:disabled{opacity:.4}@media (min-width:640px){.sm\:col-span-2{grid-column:span 2/span 2}.sm\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.sm\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.sm\:grid-cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}}@media (min-width:768px){.md\:col-span-2{grid-column:span 2/span 2}.md\:col-span-5{grid-column:span 5/span 5}.md\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.md\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.md\:grid-cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}.md\:grid-cols-5{grid-template-columns:repeat(5,minmax(0,1fr))}.md\:text-3xl{font-size:1.95rem;line-height:2.3rem}.md\:text-4xl{font-size:2.35rem;line-height:2.6rem}.md\:text-base{font-size:1rem;line-height:1.65rem}.md\:text-sm{font-size:.9375rem;line-height:1.5rem}}@media (min-width:1024px){.lg\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.lg\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.lg\:grid-cols-6{grid-template-columns:repeat(6,minmax(0,1fr))}}:root {color-scheme: dark;--ink:        #000000;--panel:      #1c1c1e;--panel-2:    #2c2c2e;--panel-3:    #3a3a3c;--hairline:   rgba(84, 84, 88, .65);--hairline-2: rgba(84, 84, 88, .42);--label:      #f5f5f7;--label-2:    #a1a1a6;--label-3:    #6e6e73;--action:     #0a84ff;--action-hi:  #409cff;--action-dim: rgba(10, 132, 255, .14);--locked:     #ff9f0a;--locked-dim: rgba(255, 159, 10, .13);--correct:    #30d158;--correct-dim:rgba(48, 209, 88, .13);--wrong:      #ff453f;--wrong-dim:  rgba(255, 69, 63, .12);--font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display","Segoe UI Variable Text", "Segoe UI", system-ui, "Helvetica Neue", sans-serif;--font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display","Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif;--font-mono: "SF Mono", ui-monospace, "Cascadia Mono", "Segoe UI Mono", Consolas, monospace;--r-sm: 8px;--r-md: 12px;--r-lg: 18px;--r-xl: 24px;--ease-out:   cubic-bezier(.25, .1, .25, 1);--ease-spring:cubic-bezier(.32, .72, 0, 1);--dur-1: .18s;--dur-2: .32s;--dur-3: .55s;--shadow-1: 0 1px 2px rgba(0,0,0,.4);--shadow-2: 0 8px 24px rgba(0,0,0,.45);--shadow-3: 0 20px 60px rgba(0,0,0,.55);--gut: clamp(1rem, 4vw, 2rem);}*, *::before, *::after { box-sizing: border-box; }html {-webkit-text-size-adjust: 100%;text-size-adjust: 100%;scroll-behavior: smooth;scroll-padding-top: 5rem;}body {margin: 0;font-family: var(--font-sans);background: var(--ink);color: var(--label);min-height: 100dvh;-webkit-font-smoothing: antialiased;letter-spacing: 0;}body::before {content: "";position: fixed;inset: -20% -10% auto -10%;height: 60vh;background: radial-gradient(60% 100% at 50% 0%, rgba(10,132,255,.09), transparent 70%);pointer-events: none;z-index: 0;}main, body > div:first-of-type { position: relative; z-index: 1; }h1 { font-size: 1.9rem; }h2 { font-size: 1.35rem; }h3 { font-size: 1.125rem; }h4 { font-size: 1rem; }h1, h2, h3, h4 {font-family: var(--font-display);font-weight: 700;letter-spacing: -.003em;text-wrap: balance;}p { text-wrap: pretty; }b, strong { font-weight: 600; color: var(--label); }sub, sup { font-size: .8em; line-height: 0; }a { color: var(--action-hi); text-decoration: none; }::selection { background: rgba(10,132,255,.32); }:focus-visible {outline: 2px solid var(--action-hi);outline-offset: 2px;border-radius: 4px;}[class*="text-[10px]"], [class*="text-[11px]"] { font-size: .8125rem; }body {padding-top: env(safe-area-inset-top);padding-bottom: calc(var(--next-bar-h, 0px) + env(safe-area-inset-bottom));}.glass, .panel, .shell, .ro-card, .eqcard, .control-card, .guide-card,.method-card, .progress-card, .mixer-card, .heq-card, .map-box {background: var(--panel);border: 1px solid var(--hairline-2);border-radius: var(--r-lg);}.glass, .panel, .shell { box-shadow: var(--shadow-2); }header.glass { padding: clamp(1.1rem, 3vw, 1.75rem); }#hdr-title, .app-title {font-family: var(--font-display);font-weight: 700;font-size: clamp(1.5rem, 1.2rem + 1.1vw, 2.1rem);line-height: 1.15;letter-spacing: -.015em;}#hdr-sub, .app-subtitle { color: var(--label-2); font-size: 1rem; margin-top: .35rem; }.chip, .chip-dim, .chip-dse, .chip-warn, .ms-chip, .assume-chip, .badge,.dock-step, .dock-state, .ladder-tag, .section-kicker {display: inline-flex;align-items: center;gap: .3rem;padding: .2rem .6rem;border-radius: 999px;border: 1px solid var(--hairline);background: rgba(255,255,255,.05);color: var(--label-2);font-size: .75rem;font-weight: 600;letter-spacing: .01em;line-height: 1.5;}.chip, .chip-dim, .chip-dse, .chip-warn, .ms-chip, .assume-chip, .badge {max-width: 100%;align-self: flex-start;}.chip-dse, .chip:not(.chip-dim):not(.chip-warn) {border-color: rgba(10,132,255,.34);background: var(--action-dim);color: var(--action-hi);}.chip-dim, .assume-off { color: var(--label-3); background: rgba(255,255,255,.04); }.chip-warn { border-color: rgba(255,159,10,.38); background: var(--locked-dim); color: var(--locked); }.badge.ox  { border-color: rgba(255,159,10,.4); background: var(--locked-dim); color: var(--locked); }.badge.red { border-color: rgba(10,132,255,.4); background: var(--action-dim); color: var(--action-hi); }.section-kicker {background: none; border: 0; padding: 0;color: var(--label-3);font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;}.section-title { font-size: 1.35rem; }.section-lead  { color: var(--label-2); font-size: 1rem; line-height: 1.6; }#main-tabs, .main-tabs {display: flex;flex-wrap: nowrap;gap: .375rem;overflow-x: auto;scroll-snap-type: x proximity;scrollbar-width: none;-webkit-overflow-scrolling: touch;padding-block: .25rem;-webkit-mask-image: linear-gradient(90deg, transparent, #000 1.25rem, #000 calc(100% - 1.25rem), transparent);mask-image: linear-gradient(90deg, transparent, #000 1.25rem, #000 calc(100% - 1.25rem), transparent);}#main-tabs::-webkit-scrollbar, .main-tabs::-webkit-scrollbar { display: none; }.tab-btn, .view-btn, .mode-btn, .sim-mode-btn, .mbtn, .rbtn, .probe-btn,.pol-btn, .rp-btn, .ctrl-btn, .samp-btn, .sp-btn, .drill-btn, .sim-btn,.sub-btn, .mini-btn, .act-btn, .hint-btn, .btn, .btn-ghost, .btn-teal,.btn-primary, .route-btn, .guide-toggle, #next-go, .btn-run {font-family: inherit;font-size: .9375rem;font-weight: 600;color: var(--label);background: var(--panel-2);border: 1px solid transparent;border-radius: var(--r-md);padding: .55rem .95rem;cursor: pointer;display: inline-flex;align-items: center;gap: .45rem;flex: 0 1 auto;scroll-snap-align: center;transition: background var(--dur-1) var(--ease-out), color var(--dur-1) var(--ease-out),border-color var(--dur-1) var(--ease-out), transform var(--dur-1) var(--ease-spring);-webkit-tap-highlight-color: transparent;}.tab-btn { white-space: nowrap; flex: 0 0 auto; }.tab-btn { color: var(--label-2); background: transparent; }.tab-btn:hover { color: var(--label); background: rgba(255,255,255,.06); }.tab-btn.active {color: var(--label);background: var(--panel-2);box-shadow: var(--shadow-1), inset 0 1px 0 rgba(255,255,255,.07);}button:hover:not(:disabled) { background: var(--panel-3); }button:active:not(:disabled) { transform: scale(.97); }button:disabled, [aria-disabled="true"] { opacity: .38; cursor: not-allowed; }.btn-primary, .btn-run { background: var(--action); color: #fff; }.btn-primary:hover:not(:disabled), .btn-run:hover:not(:disabled) { background: var(--action-hi); }.sp-btn.on, .samp-btn.sel, .sub-btn.on, .mini-btn.on, .mode-btn.active,.mbtn.active, .rbtn.active, .drill-btn.on, .route-btn.on, .map-box.on,.view-btn.on, .pol-btn.on {background: var(--action-dim);border-color: rgba(10,132,255,.45);color: var(--action-hi);}.tab-panel { display: none; }.tab-panel.active {display: block;animation: panel-in var(--dur-3) var(--ease-spring) both;}@keyframes panel-in {from { opacity: 0; transform: translateY(10px) scale(.994); }to   { opacity: 1; transform: none; }}.dock {position: relative;border: 1px solid var(--hairline);border-radius: var(--r-lg);background: var(--panel);padding: clamp(.9rem, 2.5vw, 1.15rem);overflow: hidden;transition: border-color var(--dur-2) var(--ease-out), box-shadow var(--dur-2) var(--ease-out);}.dock::before {content: "";position: absolute;inset: 0 auto 0 0;width: 3px;background: var(--label-3);transition: background var(--dur-2) var(--ease-out);}.dock.locked   { border-color: rgba(255,159,10,.38); }.dock.locked::before   { background: var(--locked); }.dock.unlocked { border-color: rgba(48,209,88,.4); }.dock.unlocked::before { background: var(--correct); }.dock-head { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; }.dock-step {background: rgba(255,255,255,.06);border-color: var(--hairline);color: var(--label-2);font-size: .75rem;letter-spacing: .04em;text-transform: uppercase;border-radius: var(--r-sm);}.dock-state { margin-left: auto; font-weight: 700; }.st-lock { background: var(--locked-dim); border-color: rgba(255,159,10,.4); color: var(--locked); }.st-open { background: var(--correct-dim); border-color: rgba(48,209,88,.4);  color: var(--correct); }.dock-why, #dock-locknote { color: var(--label-2); font-size: .9375rem; line-height: 1.55; }@keyframes dock-unlock {0%   { box-shadow: 0 0 0 0 rgba(48,209,88,.55); }70%  { box-shadow: 0 0 0 10px rgba(48,209,88,0); }100% { box-shadow: 0 0 0 0 rgba(48,209,88,0); }}.dock.just-unlocked { animation: dock-unlock .7s var(--ease-out) 1; }@keyframes tick-in { from { opacity: 0; transform: scale(.4); } to { opacity: 1; transform: scale(1); } }.dock.just-unlocked .st-open { animation: tick-in .35s var(--ease-spring) both; }.pr-opt, .pred-opt {display: block;width: 100%;text-align: left;background: var(--panel-2);border: 1px solid var(--hairline-2);border-radius: var(--r-md);padding: .7rem .85rem;font-size: .9375rem;color: var(--label);cursor: pointer;white-space: normal;transition: border-color var(--dur-1) var(--ease-out), background var(--dur-1) var(--ease-out),transform var(--dur-1) var(--ease-spring);}.pr-opt:hover:not(:disabled), .pred-opt:hover:not(:disabled) { border-color: rgba(10,132,255,.5); background: var(--panel-3); }.pr-opt:active:not(:disabled), .pred-opt:active:not(:disabled) { transform: scale(.99); }.pr-opt.picked, .pred-opt.picked { border-color: var(--action); background: var(--action-dim); color: var(--label); }.pr-opt.correct, .pred-opt.correct, .route-btn.right, .mcq-opt.correct {border-color: rgba(48,209,88,.65);background: var(--correct-dim);}.pr-opt.wrong, .pred-opt.wrong, .route-btn.bad, .mcq-opt.wrong {border-color: rgba(255,69,63,.55);background: var(--wrong-dim);}.pred-opt:disabled { cursor: not-allowed; opacity: .45; }#next-bar {position: sticky;bottom: 0;z-index: 40;padding: .45rem var(--gut) max(.45rem, env(safe-area-inset-bottom));}#next-bar > .glass {max-width: 76rem;margin-inline: auto;display: flex;align-items: center;gap: .6rem;flex-wrap: wrap;padding: .4rem .4rem .4rem .85rem;border-radius: var(--r-lg);background: rgba(28,28,30,.82);border: 1px solid var(--hairline);box-shadow: var(--shadow-2);-webkit-backdrop-filter: saturate(180%) blur(20px);backdrop-filter: saturate(180%) blur(20px);}#next-text, .next-copy, #next-bar #next-text {color: var(--label);font-size: .9375rem;min-width: 0;flex: 1 1 15rem;}#next-go {flex: 0 0 auto;background: var(--action);color: #fff;border: 0;padding: .5rem .85rem;font-size: .875rem;}#next-go:hover:not(:disabled) { background: var(--action-hi); }.ico { width: 1.05em; height: 1.05em; flex: 0 0 auto; vertical-align: -.18em; }.canvas-wrap {position: relative;width: 100%;min-height: 0;background: var(--panel);border: 1px solid var(--hairline-2);border-radius: var(--r-lg);overflow: hidden;}.canvas-wrap canvas {position: static;display: block;width: 100%;height: auto;border-radius: 0;}.ro-k, .ro-l, .lbl, .map-lab, .field-l, .progress-label {color: var(--label-3);font-size: .75rem;font-weight: 700;letter-spacing: .05em;text-transform: uppercase;}.ro-v, .map-val, .stat, .mixer-readout { color: var(--label); font-variant-numeric: tabular-nums; }.ro-card, .map-box, .control-card {border: 1px solid var(--hairline-2);background: var(--panel-2);border-radius: var(--r-md);}.bar-track, .progress-track { background: var(--panel-3); border-radius: 999px; overflow: hidden; }.bar-fill, .progress-fill { background: var(--action); transition: width var(--dur-3) var(--ease-spring); }.work, .eqbox, .kbd, .eqline, code, pre { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }.work {background: var(--ink);border: 1px solid var(--hairline-2);border-radius: var(--r-md);color: var(--label-2);font-size: .9375rem;line-height: 1.7;padding: .9rem 1rem;overflow-x: auto;}.work .hl { color: var(--action-hi); }.work .dim { color: var(--label-3); }.step-h {color: var(--action-hi);font-size: .8125rem;font-weight: 700;letter-spacing: .05em;text-transform: uppercase;}input[type="text"], input[type="number"], input[type="search"], select, textarea,.field, .field-i, .calc-inp {width: 100%;font-family: inherit;font-size: 1rem;color: var(--label);background: var(--panel-2);border: 1px solid var(--hairline);border-radius: var(--r-md);padding: .55rem .7rem;transition: border-color var(--dur-1) var(--ease-out), background var(--dur-1) var(--ease-out);-webkit-appearance: none;appearance: none;}input:focus, select:focus, textarea:focus { outline: none; border-color: var(--action); background: var(--panel); }select {background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23a1a1a6' d='M1.4 0 6 4.6 10.6 0 12 1.4 6 8 0 1.4z'/%3E%3C/svg%3E");background-repeat: no-repeat;background-position: right .65rem center;padding-right: 1.9rem;}label, .calc-lbl, .field-l {color: var(--label-2); font-size: .8125rem; font-weight: 600; letter-spacing: 0; text-transform: none;}input[type="range"] {-webkit-appearance: none; appearance: none;width: 100%; height: 28px; background: transparent; cursor: pointer;accent-color: var(--action);}input[type="range"]::-webkit-slider-runnable-track { height: 4px; border-radius: 999px; background: var(--panel-3); }input[type="range"]::-webkit-slider-thumb {-webkit-appearance: none; appearance: none;width: 24px; height: 24px; margin-top: -10px;border-radius: 50%; background: #fff; border: 0;box-shadow: 0 1px 4px rgba(0,0,0,.5);transition: transform var(--dur-1) var(--ease-spring);}input[type="range"]:active::-webkit-slider-thumb { transform: scale(1.12); }input[type="range"]::-moz-range-track { height: 4px; border-radius: 999px; background: var(--panel-3); }input[type="range"]::-moz-range-thumb { width: 22px; height: 22px; border: 0; border-radius: 50%; background: #fff; }input[type="checkbox"], input[type="radio"] { width: 1.1rem; height: 1.1rem; accent-color: var(--action); }.mcq-opt, .myth-card, .ms-point, .evidence-grid > *, .concept-grid > *, .guide-card {border: 1px solid var(--hairline-2);border-radius: var(--r-md);background: var(--panel-2);}.mcq-opt { padding: .75rem .9rem; font-size: .9375rem; cursor: pointer; }.mcq-opt:hover { border-color: rgba(10,132,255,.5); }.myth-card { cursor: pointer; transition: border-color var(--dur-2) var(--ease-out); }.myth-card:hover { border-color: rgba(10,132,255,.45); }.myth-back { display: none; }.myth-card.flipped .myth-front { display: none; }.myth-card.flipped .myth-back { display: block; animation: flip-in var(--dur-2) var(--ease-spring) both; }@keyframes flip-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }.tag-w { background: var(--correct-dim); border-color: rgba(48,209,88,.4); color: var(--correct); }.tag-c { background: var(--locked-dim);  border-color: rgba(255,159,10,.4);  color: var(--locked); }.tag-i { background: var(--wrong-dim);   border-color: rgba(255,69,63,.4);   color: var(--wrong); }.hint-btn { border-color: rgba(255,159,10,.35); background: var(--locked-dim); color: var(--locked); font-size: .8125rem; }.fail-box { border-left: 3px solid var(--wrong); background: var(--wrong-dim); border-radius: var(--r-md); padding: .7rem .9rem; }table, .datatbl { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }th, td { padding: .55rem .7rem; text-align: left; border-bottom: 1px solid var(--hairline-2); font-size: .9375rem; }th { color: var(--label-3); font-size: .75rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; }tbody tr:last-child > td { border-bottom: 0; }tbody tr { transition: background var(--dur-1) var(--ease-out); }tbody tr:hover { background: rgba(255,255,255,.04); }.lab-card {display: block;border: 1px solid var(--hairline-2);border-radius: var(--r-lg);background: var(--panel);color: var(--label);transition: transform var(--dur-2) var(--ease-spring), border-color var(--dur-2) var(--ease-out),box-shadow var(--dur-2) var(--ease-out);}.lab-card:hover { transform: translateY(-3px); border-color: rgba(10,132,255,.5); box-shadow: var(--shadow-3); }.lab-card:active { transform: translateY(-1px) scale(.995); }.reveal { opacity: 0; transform: translateY(14px); }.reveal.shown {opacity: 1; transform: none;transition: opacity var(--dur-3) var(--ease-out), transform var(--dur-3) var(--ease-spring);transition-delay: calc(var(--i, 0) * 45ms);}@media (pointer: coarse) {button, summary, [role="button"], .tab-btn, .pr-opt, .pred-opt, .mcq-opt,.myth-card, .lab-card, select, .field, .field-i, .calc-inp, .ans,input:not([type="checkbox"]):not([type="radio"]):not([type="range"]) { min-height: 44px !important; }input[type="checkbox"], input[type="radio"] { min-width: 28px !important; min-height: 28px !important; }label:has(> input[type="checkbox"]), label:has(> input[type="radio"]),.ms-point { min-height: 44px; display: flex; align-items: center; }.pr-opt, .pred-opt, .mcq-opt { display: flex; align-items: center; }li:has(> input[type="checkbox"]), li:has(> input[type="radio"]),li:has(.goal-check), li:has(.mloss) {cursor: pointer;min-height: 44px;display: flex;align-items: flex-start;padding-block: .3rem;}}@media (max-width: 640px) {.chip, .chip-dim, .chip-dse, .chip-warn, .badge, .dock-step, .dock-state, .ladder-tag {padding: .1rem .45rem;}#hdr-sub, .app-subtitle { font-size: .9375rem; line-height: 1.5; }#next-bar > .glass > span:first-child { display: none; }header.glass { gap: .6rem; }}@media (max-width: 768px) {.flex { flex-wrap: wrap; }}@media (min-width: 1024px) {:root { --gut: 2rem; }#main-tabs, .main-tabs {gap: .25rem;background: var(--panel-2);border-radius: var(--r-md);padding: .25rem;margin-inline: 0;overflow: visible;width: fit-content;-webkit-mask-image: none;mask-image: none;}.tab-btn { border-radius: var(--r-sm); }}:root {--bg: #000000;--bg-2: #0b0b0d;--panel: #1c1c1e;--panel-2: #2c2c2e;--panel-3: #37373a;--line: rgba(84, 84, 88, .42);--line-strong: rgba(84, 84, 88, .65);--text: #f5f5f7;--muted: #a1a1a6;--faint: #6e6e73;--teal: #64d2ff;--blue: #0a84ff;--amber: #ff9f0a;--rose: #ff453f;--green: #30d158;--radius: 12px;--shadow: 0 8px 24px rgba(0,0,0,.45);}@media (prefers-reduced-motion: reduce) {html { scroll-behavior: auto; }*, *::before, *::after {animation-duration: .001ms !important;animation-iteration-count: 1 !important;transition-duration: .001ms !important;}.reveal { opacity: 1; transform: none; }}@media print {html, body { background: #fff !important; color: #111 !important; }body::before { display: none; }* {color: #111 !important;background-image: none !important;box-shadow: none !important;-webkit-backdrop-filter: none !important;backdrop-filter: none !important;}.glass, .panel, .shell, .dock, .canvas-wrap, .ro-card, .mcq-opt, .myth-card,.lab-card, .btn, button, table, th, td { border-color: #c7c7cc !important; background-color: #fff !important; }.tab-panel { display: block !important; break-inside: avoid; }#next-bar, #btn-teacher, #pr-reveal, #pr-why, .hint-btn { display: none !important; }.reveal { opacity: 1 !important; transform: none !important; }.myth-back { display: block !important; }.myth-front { display: none !important; }}</style>
+</head>
+<body class="text-slate-200">
+<main class="max-w-6xl mx-auto px-4 py-6">
+
+  <!-- ============ HEADER ============ -->
+  <header class="glass p-5 mb-5 flex flex-wrap items-start justify-between gap-3">
+    <div>
+      <div class="flex items-center gap-2 flex-wrap mb-1">
+        <span class="chip">HKDSE Chemistry</span>
+        <span class="chip">Topic I (b)–(c)</span>
+        <span class="chip">Topic IV (d)</span>
+        <span class="chip">+ Topic XV (b) purity</span>
+        <span class="chip">sea water · crystallisation</span>
+</div>
+      <h1 id="hdr-title" class="text-2xl md:text-3xl font-extrabold text-white leading-tight">Interactive Lab</h1>
+      <p id="hdr-sub" class="text-sm text-slate-400 mt-1">Subtitle.</p>
+    </div>
+    <button type="button" id="btn-teacher" onclick="toggleTeacher()" class="btn btn-ghost"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg><span>Teacher notes</span></button>
+  </header>
+  <div id="teacher-panel" class="glass p-5 mb-5 hidden">
+    <h2 id="teacher-title" class="font-bold text-amber-300 mb-2">Teacher notes</h2>
+    <div id="teacher-content" class="text-sm text-slate-300 space-y-2 leading-relaxed"></div>
+  </div>
+
+  <!-- ============ TABS ============ -->
+  <nav id="main-tabs" class="flex flex-wrap gap-2 mb-5">
+    <button type="button" id="tab-intro" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold border border-slate-700 bg-slate-900/60" data-tab="intro" onclick="setTab('intro')">1 · Introduction</button>
+    <button type="button" id="tab-sim"   class="tab-btn active px-4 py-2 rounded-xl text-sm font-semibold border border-slate-700 bg-slate-900/60" data-tab="sim"   onclick="setTab('sim')">2 · Simulation</button>
+    <button type="button" id="tab-calc"  class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold border border-slate-700 bg-slate-900/60" data-tab="calc"  onclick="setTab('calc')">3 · Calculations</button>
+    <button type="button" id="tab-mcq"   class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold border border-slate-700 bg-slate-900/60" data-tab="mcq"   onclick="setTab('mcq')">4 · Past-paper practice</button>
+    <button type="button" id="tab-recap" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold border border-slate-700 bg-slate-900/60" data-tab="recap" onclick="setTab('recap')">5 · Recap &amp; misconceptions</button>
+  </nav>
+
+  <!-- ============ PANEL: INTRODUCTION ============ -->
+  <section id="panel-intro" class="tab-panel mb-5">
+    <div class="glass p-6 space-y-5">
+      <h2 id="intro-h1" class="text-xl font-bold text-white"></h2>
+      <p id="intro-lead" class="text-sm md:text-base text-slate-300 leading-relaxed"></p>
+      <div id="intro-cards" class="grid md:grid-cols-2 gap-3"></div>
+    </div>
+  </section>
+
+  <!-- ============ PANEL: SIMULATION ============ -->
+  <section id="panel-sim" class="tab-panel active mb-5">
+    <div id="sim-dock" class="dock locked mb-3" aria-live="polite">
+      <div class="dock-head mb-2">
+        <span class="dock-step">Task 1</span>
+        <span class="text-sm font-bold text-white" id="dock-title">Predict before you heat anything</span>
+        <span class="dock-state st-lock" id="dock-state">Locked</span>
+      </div>
+      <p class="text-xs text-slate-300 mb-2">Commit to an answer and the apparatus controls below will unlock — then run it and see whether you were right.</p>
+      <p id="pr-q" class="text-sm font-semibold text-slate-100 leading-relaxed"></p>
+      <div id="pr-opts" class="flex flex-wrap gap-2 mt-3"></div>
+      <button type="button" id="pr-reveal" class="act-btn mt-3 px-3 py-1.5 rounded-lg text-xs font-semibold">Reveal · mark-scheme answer</button>
+      <p id="pr-why" class="hidden mt-3 text-xs text-emerald-200/95 bg-emerald-950/35 border border-emerald-800/40 rounded-xl p-3 leading-relaxed"></p>
+      <p class="text-xs text-amber-200 mt-2" id="dock-locknote">Locked until you answer the prediction above — the apparatus controls below will not respond yet. — answer the prediction above to unlock the controls.</p>
+    </div>
+
+    <div class="glass p-5">
+      <div class="flex flex-wrap gap-2 mb-3" id="sim-modes"></div>
+      <div class="canvas-wrap rounded-xl border border-slate-700/70 bg-slate-950/70"><canvas id="sim-canvas" aria-label="Seawater separation apparatus simulation canvas"></canvas></div>
+      <p id="sim-status" class="text-sm mt-3 min-h-[1.25rem] text-teal-200 leading-relaxed"></p>
+      <p id="sim-caption" class="text-xs text-slate-400 mt-2 leading-relaxed"></p>
+      <div id="sim-readouts" class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-4"></div>
+      <div id="graph-wrap" class="canvas-wrap rounded-xl border border-slate-700/70 bg-slate-950/70 mt-4 hidden"><canvas id="graph-canvas" aria-label="Solubility curve graph canvas"></canvas></div>
+    </div>
+    <div class="glass p-5 mt-4">
+      <h3 class="font-bold text-white mb-3">Controls</h3>
+      <div id="ctrl-panel" class="grid md:grid-cols-2 gap-x-8 gap-y-4"></div>
+    </div>
+  </section>
+
+  
+    <div class="glass p-5 mt-4">
+      <div class="dock-head mb-2"><span class="dock-step">Task 2</span><span class="text-sm font-bold text-white">Break it on purpose</span></div>
+      <p class="text-xs text-slate-400 mb-3">Each is an error HKDSE candidates really make when separating a salt from solution. Break it, read the consequence, then never do it again.</p>
+      <div class="flex flex-wrap gap-2 mb-3">
+        <button type="button" class="act-btn" data-fail="a">Evaporate the seawater to dryness</button>
+        <button type="button" class="act-btn" data-fail="b">Filter the mixture while it is hot and concentrated</button>
+        <button type="button" class="act-btn" data-fail="c">Weigh the crystals while they are still wet</button>
+        <button type="button" class="act-btn" id="fail-clear">Clear</button>
+      </div>
+      <div id="fail-panel" class="text-sm text-slate-300"></div>
+    </div>
+
+    <div class="glass p-5 mt-4">
+      <div class="dock-head mb-2"><span class="dock-step">Task 3</span><span class="text-sm font-bold text-white">Explain the method, with hints if you need them</span></div>
+      <p class="text-sm text-slate-200 mb-2"><i>A student is asked to obtain pure sodium chloride crystals from seawater. Describe the method and explain why the solution must NOT be evaporated to dryness. (4)</i></p>
+      <div class="flex flex-wrap gap-2 mb-2">
+        <button type="button" class="act-btn" data-hint="1">Hint 1</button>
+        <button type="button" class="act-btn" data-hint="2">Hint 2</button>
+        <button type="button" class="act-btn" data-hint="3">Hint 3</button>
+      </div>
+      <p id="hint-text" class="text-sm text-amber-200 mb-3"></p>
+      <p class="text-xs font-bold text-teal-200 mb-2">Mark your own answer — tick each line you actually wrote</p>
+      <div id="selfmarks" class="space-y-2">
+        <label class="flex items-start gap-2 text-sm text-slate-300"><input type="checkbox" class="selfmk"><span>I said the mixture is FILTERED first, to remove insoluble sand and grit</span></label>
+        <label class="flex items-start gap-2 text-sm text-slate-300"><input type="checkbox" class="selfmk"><span>I said the filtered solution is then heated to EVAPORATE some of the water, not all of it</span></label>
+        <label class="flex items-start gap-2 text-sm text-slate-300"><input type="checkbox" class="selfmk"><span>I said the solution is left to COOL / crystallise slowly, so crystals form</span></label>
+        <label class="flex items-start gap-2 text-sm text-slate-300"><input type="checkbox" class="selfmk"><span>I said the crystals are separated by filtration, then washed with a little cold distilled water</span></label>
+        <label class="flex items-start gap-2 text-sm text-slate-300"><input type="checkbox" class="selfmk"><span>I said the crystals are dried between filter papers (or in a warm oven), NOT heated strongly</span></label>
+        <label class="flex items-start gap-2 text-sm text-slate-300"><input type="checkbox" class="selfmk"><span>WHY not to dryness: other dissolved salts (impurities) would also crystallise and contaminate the product, and spitting can occur</span></label>
+      </div>
+      <p id="selfmarks-total" class="text-xs text-slate-400 mt-2"></p>
+    </div>
+<!-- ============ PANEL: CALCULATIONS ============ -->
+  <section id="panel-calc" class="tab-panel mb-5">
+    <div class="glass p-6 space-y-5">
+      <h2 id="calc-title" class="text-xl font-bold text-white">Worked calculation</h2>
+      <p id="calc-sub" class="text-sm text-slate-400"></p>
+      <div class="field max-w-xs">
+        <label for="calc-mode">Calculation type</label>
+        <select id="calc-mode"><option value="ppm">ppm (mg per kg)</option><option value="conc">concentration: g dm⁻³ &amp; mol dm⁻³</option><option value="yield">percentage yield</option><option value="cmass">heat to constant mass (the practical paper)</option></select>
+      </div>
+      <div id="calc-inputs" class="grid md:grid-cols-3 gap-4"></div>
+      <div id="calc-note" class="text-xs text-slate-400 leading-relaxed"></div>
+      <div>
+        <button type="button" class="px-4 py-2 rounded-xl text-sm font-semibold bg-indigo-600 hover:bg-indigo-500 text-white" onclick="runCalc()">Check working</button>
+      </div>
+      <div id="calc-working" class="text-sm font-mono bg-slate-950/70 border border-slate-700/60 rounded-xl p-4 whitespace-pre-wrap text-slate-300 hidden"></div>
+    </div>
+  
+    <div id="ladder-step" class="glass p-6 mt-4 space-y-3">
+      <h3 class="text-sm font-bold text-emerald-200">Step 1 &mdash; Worked example: reacting-mass arithmetic on a salt</h3>
+      <p class="text-xs text-slate-400">Everything in this topic comes back to the mole. Read the reasoning line first, then the arithmetic.</p>
+      <div class="work"><span class="hl">Question</span>
+  2.50 g of hydrated copper(II) sulfate, CuSO₄.xH₂O, is heated to constant mass and 1.60 g of
+  anhydrous CuSO₄ remains. Find x.  (Molar masses: CuSO₄ = 160 g mol⁻¹, H₂O = 18.0 g mol⁻¹)
+
+<span class="hl">Step 1 - find the mass that was LOST, by subtraction</span>
+  mass of water lost = 2.50 - 1.60 = 0.90 g
+  <span class="dim">The water left as a gas, so it is the mass LOST. This subtraction line is a marking point.</span>
+
+<span class="hl">Step 2 - convert BOTH masses to moles</span>
+  n(CuSO4) = 1.60 / 160 = 0.0100 mol
+  n(H2O)   = 0.90 / 18.0 = 0.0500 mol
+
+<span class="hl">Step 3 - divide by the smaller to get a whole-number ratio</span>
+  x = n(H2O) / n(CuSO4) = 0.0500 / 0.0100 = 5
+  So the formula is CuSO₄.5H₂O.
+
+<span class="hl">Significant figures</span>
+  The data are given to 3 significant figures (2.50 g, 1.60 g), so the answer is quoted to 3 s.f. where it
+  matters, and x itself is a whole number because it is a ratio of moles.
+
+<span class="dim">Sense check: the water is about five times the moles of the salt, so x should be about 5. If you got 0.2, you divided the wrong way round.</span></div>
+      <h3 class="text-sm font-bold text-amber-200 pt-2">Step 2 &mdash; Completion: fill the blanks</h3>
+      <p class="text-sm text-slate-200 mb-2"><i>Seawater contains 35.0 g of dissolved salts per dm³ of solution. 200 cm³ of this seawater is evaporated until only the dissolved salts remain. Calculate the mass of salt obtained, in g to 3 significant figures.</i></p>
+      <div><label class="field-l" for="lad-g1">Blank 1 &mdash; volume in dm³</label><input id="lad-g1" class="field" inputmode="decimal" placeholder="e.g. 0.200"></div>
+      <div class="mt-2"><label class="field-l" for="lad-g2">Blank 2 &mdash; mass of salt / g</label><input id="lad-g2" class="field" inputmode="decimal" placeholder="e.g. 7.00"></div>
+      <div class="mt-2"><label class="field-l" for="lad-g3">Blank 3 &mdash; the same mass in mg</label><input id="lad-g3" class="field" inputmode="decimal" placeholder="e.g. 7000"></div>
+      <div class="mt-2 flex flex-wrap gap-2"><button type="button" class="act-btn" id="lad-check">Check the three blanks</button><button type="button" class="act-btn" id="lad-hint">Hint</button></div>
+      <p id="lad-hinttext" class="text-xs text-amber-200 mt-2"></p><div id="lad-fb" class="mt-2"></div>
+      <h3 class="text-sm font-bold text-rose-200 pt-2">Step 3 &mdash; Independent, no help</h3>
+      <p class="text-xs text-slate-400 mb-2">Write it out on paper with units on every line before you reveal anything.</p>
+      <p class="text-sm text-slate-200"><i>A student evaporates 250 cm³ of seawater and obtains 8.75 g of dry solid. (a) Calculate the concentration of dissolved salts in the seawater in g dm⁻³. (b) Express that concentration in ppm (mg per kg of solution), taking the density of the seawater as 1.02 g cm⁻³. (c) State ONE reason why the mass obtained is likely to be slightly too HIGH.</i></p>
+      <button type="button" class="act-btn mt-2" id="ind-reveal">Reveal marking scheme</button>
+      <div id="ind-out" class="mt-2"></div>
+    </div>
+</section>
+
+  <!-- ============ PANEL: PAST PAPER MCQs ============ -->
+  <section id="panel-mcq" class="tab-panel mb-5">
+    <div class="glass p-6">
+      <h2 id="pp-title" class="text-xl font-bold text-white mb-1">Past-paper practice</h2>
+      <p id="pp-sub" class="text-xs text-slate-400 mb-5"></p>
+      <div id="pp-questions" class="space-y-6"></div>
+    </div>
+  </section>
+
+  <!-- ============ PANEL: RECAP + MISCONCEPTION CARDS ============ -->
+  <section id="panel-recap" class="tab-panel mb-5">
+    <div class="glass rounded-2xl p-6 space-y-6">
+      <div>
+        <h2 id="recap-title" class="text-xl font-bold text-white">Recap checklist</h2>
+        <p id="recap-sub" class="text-sm text-slate-400 mt-1 mb-3">Tick each goal only when you can explain it without notes.</p>
+        <ul id="recap-list" class="space-y-2"></ul>
+        <p id="recap-progress" class="text-xs text-slate-500 mt-3"></p>
+      </div>
+      <div class="border-t border-white/10 pt-5">
+        <h3 class="text-sm font-bold text-rose-300 uppercase tracking-wide mb-2" id="myth-title">Common misconceptions</h3>
+        <p class="text-xs text-slate-400 mb-4" id="myth-lead">Tap a card to flip.</p>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3" id="myth-cards"></div>
+      </div>
+    </div>
+  
+      <div class="border-t border-white/10 pt-5">
+        <h3 class="text-sm font-bold text-amber-300 uppercase tracking-wide mb-2" id="markloss-title">Where marks are lost in salt preparation</h3>
+        <p class="text-xs text-slate-400 mb-3" id="markloss-lead">Tick the ones you have actually done.</p>
+        <ul id="markloss-list" class="grid sm:grid-cols-2 gap-2">
+          <li><label class="flex items-start gap-2 text-sm text-slate-300"><input type="checkbox" class="mloss"><span>I evaporated the solution to dryness, so impurities crystallised too.</span></label></li>
+          <li><label class="flex items-start gap-2 text-sm text-slate-300"><input type="checkbox" class="mloss"><span>I forgot to filter out the insoluble sand before evaporating.</span></label></li>
+          <li><label class="flex items-start gap-2 text-sm text-slate-300"><input type="checkbox" class="mloss"><span>I put the volume in cm³ straight into a concentration calculation.</span></label></li>
+          <li><label class="flex items-start gap-2 text-sm text-slate-300"><input type="checkbox" class="mloss"><span>I weighed the crystals while they were still wet, so my mass was too high.</span></label></li>
+          <li><label class="flex items-start gap-2 text-sm text-slate-300"><input type="checkbox" class="mloss"><span>I said the crystals should be dried by strong heating.</span></label></li>
+          <li><label class="flex items-start gap-2 text-sm text-slate-300"><input type="checkbox" class="mloss"><span>I gave a percentage or ppm answer without stating the units, or with the wrong number of significant figures.</span></label></li>
+        </ul>
+      </div>
+</section>
+
+  <footer class="text-center text-xs text-slate-600 pb-8">HKDSE Chemistry · Topic I (b)–(c) sea water and separation + Topic IV (d) salt preparation · interactive lab</footer>
+
+</main>
+
+<div id="next-bar" class="max-w-6xl mx-auto px-5 pb-4">
+  <div class="glass rounded-xl px-4 py-2 flex flex-wrap items-center gap-3 text-sm">
+    <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Next step</span>
+    <span id="next-text" class="text-slate-200 font-semibold flex-1">Commit to a prediction in the panel above the apparatus</span>
+    <button type="button" id="next-go" class="act-btn" onclick="goNext()">Take me there</button>
+  </div>
+</div>
+<script>
+/* =====================================================================
+   STRINGS — flat English-only T. No Chinese, no language toggle.
+   Content truth: _build/briefs/salt_from_seawater.md (+ wiki
+   concepts/separating-mixtures.md, examiner-insights notes).
+   Syllabus: HKDSE Topic I (b)–(c) sea water and separation, Topic IV (d) salt preparation, with the practical skill of Topic XV (b).
+===================================================================== */
+const T = {
+  title: 'Obtaining Salt from Seawater',
+  subtitle: 'Topic I (b)–(c) + IV (d) — filter and crystallise sea salt, and account for what you weighed',
+  wch: 'HKDSE',
+  introH1: 'One beaker of muddy seawater → a weighed mass of crude salt',
+  introLead: 'Seawater is a mixture: insoluble sand and silt suspended in water that contains about 35 g dm⁻³ of dissolved ions (Na⁺, Cl⁻, Mg²⁺, SO₄²⁻, Ca²⁺, K⁺). This lab runs the separation in the order the mark scheme wants — filter, then concentrate, then crystallise, then dry — but the examinable skill is the judgement: NaCl has an almost flat solubility curve, so you must remove water by evaporation, and you must stop before the basin is dry. Every readout below is live data, and every decision is scored the way an examiner would score it.',
+  concepts: [
+    { t: 'What is actually in 100 cm³ of seawater', d: '<table class="data"><tr><td>total dissolved solids</td><td><b>≈ 35 g dm⁻³</b> (3.50 g per 100 cm³)</td></tr><tr><td>per kg seawater</td><td>Cl⁻ 19.4 g · Na⁺ 10.8 g · SO₄²⁻ 2.7 g · <b>Mg²⁺ 1.3 g</b> · Ca²⁺ 0.41 g · K⁺ 0.39 g</td></tr><tr><td>NaCl share of dried sea salt</td><td>≈ 78 % (2.73 g per 100 cm³)</td></tr><tr><td>insoluble fraction</td><td>sand / silt → the <b>residue</b></td></tr><tr><td>why crude salt tastes bitter</td><td>MgCl₂ and MgSO₄ — also make it deliquescent</td></tr></table><p class="text-xs text-slate-500 mt-2">Values approximate, typical open-ocean composition (1.94×10⁴ ppm Cl⁻, 1.3×10³ ppm Mg²⁺).</p>' },
+    { t: 'Choosing the method — read the curve, not the habit', d: 'Dissolved solid in a solution → <b>crystallisation</b>. NaCl: 35.7 g per 100 g water at 0 °C → 39.8 g at 100 °C — a <b>flat</b> curve, so cooling barely crystallises anything: you must <b>evaporate</b> the water. KNO₃: ≈13 g per 100 g water at 0 °C → ≈246 g at 100 °C — a <b>steep</b> curve, so a hot saturated solution gives a big crop of crystals on cooling. Command word: "explain" = quote the shape of the curve.' },
+    { t: 'The 5-mark procedure (a past-paper session MS)', d: '1 Add water / dissolve · 2 <b>Filter</b> (residue = sand) · 3 <b>Heat the filtrate in an evaporating basin until its volume has about halved</b> (or until crystals just appear) · 4 <b>Leave to cool so crystals form</b> · 5 Filter or decant the mother liquor and <b>dry between filter papers</b>. "Warm only" = rejected. "Evaporate to dryness" = <b>0 marks</b>.' },
+    { t: 'Evaporation vs simple distillation — what do you KEEP?', d: 'They are not "the same thing with different apparatus". <b>Evaporation / crystallisation keeps the solid</b> (salt) and loses the water to the air. <b>Simple distillation keeps the liquid</b> (the solvent, pure water) and leaves the salt and non-volatile impurities behind in the flask. State which fraction is the useful product.' },
+    { t: 'Is the salt pure? Test the ions (1.12, 8.19ii)', d: 'Cl⁻: add dilute <b>HNO₃</b> then <b>AgNO₃(aq)</b> → white precipitate, dissolves in dilute NH₃ — Ag⁺(aq) + Cl⁻(aq) → AgCl(s). SO₄²⁻: acidify with dilute <b>HCl</b>, add <b>BaCl₂(aq)</b> → white precipitate — Ba²⁺(aq) + SO₄²⁻(aq) → BaSO₄(s). Mg²⁺: add <b>NaOH(aq)</b> → white precipitate, insoluble in excess. Never acidify the sulfate test with H₂SO₄ — it adds SO₄²⁻.' },
+    { t: 'How to use this lab', d: 'Tab 2: run the six scenes in order — filter, then evaporate and <b>stop while it is still wet</b>, then deliberately destroy a second batch by boiling to dryness, then compare cooling crystallisation and simple distillation, then test the ions. Write down the numbers the readouts give you. Tab 3: check each number with the step-by-step working. Tab 4: three exam questions. Tab 5: tick the goals only without notes.' },
+    { t: 'Out of scope here / where it goes next', d: 'No <b>K</b><sub>sp</sub> (the solubility product is not in this syllabus). No titration arithmetique — 1.5 explicitly excludes titration calculations, and 8.20–8.23 live in the acid–base titration lab. Enthalpy of solution is Topic VIII. Fractional distillation of crude oil is Topic V (a) (separate lab). The three salt-making routes (excess base, titration, precipitation) belong to the salt-preparation strand of Topic IV (d).' }
+  ],
+  simCaption: '',
+  teacherTitle: 'Teacher notes',
+  teacher: [
+    '<b>Placement:</b> HKDSE Topic I (b)–(c), week 1–2, while teaching concentration in g dm⁻³ and mol dm⁻³ — the apparatus itself is GCSE-legacy knowledge that the practical paper then assesses in a "new practical situation" (syllabus L1331). Re-use it before the the practical paper written practical paper.',
+    '<b>Misconception to probe live:</b> ask every student, before they press the flame, "what will you do when the first crystals appear?" Expect "boil it until it is all dry" — then make them run mode 3 and read the loss figures. The mark scheme rejects "evaporate to dryness" outright.',
+    '<b>Watch for residue/filtrate confusion:</b> in mode 1 ask them to state which beaker contains the NaCl and which contains the sand, and why the <b>mass of dissolved salt does not change</b> during filtration.',
+    '<b>5-minute task:</b> in mode 2, record Mg²⁺ ppm and c(NaCl) at three volumes, then predict the reading at 10.0 cm³ before moving the slider; finish with the constant-mass dataset in Tab 3 (which two readings prove dryness, and what happens to % yield if you stop at the first weighing).',
+    '<b>Classic examiner complaint:</b> "some salt is lost" scores nothing. Full marks name the route and the step: salt left dissolved in the mother liquor that is poured off, crystals spat out of the basin on strong heating, solid left on the glass rod / basin / filter paper. And a yield above 100 % means the crystals were <b>not dry</b> — not a successful experiment.'
+  ],
+  calcTitle: 'Calculations for this practical',
+  calcSub: 'ppm = mg of substance per kg of solution (1.5 context) · c = n/V with n = m/M · % yield = actual/theoretical × 100 · constant mass (the practical paper). Give final answers to 3 significant figures and keep the unit on every line.',
+  calcBtn: 'Check working',
+  ppTitle: 'Past-paper practice',
+  ppSub: 'HKDSE-style items modelled on past-paper patterns: Formulae, Equations and Amounts of Substance MCQ-1 (raw L34); the mark scheme (the mark scheme, wiki acids-bases-and-salts); the practical paper Jun 2026 Q1c (wch13-2026jun-question-bank). Feedback uses mark-scheme keywords.',
+  questions: [
+    {
+      q: 'The mass of magnesium ions in 1 kg of seawater is 1.3 g. What is the concentration of these ions, in ppm, in the seawater?',
+      o: ['1.3 × 10⁶', '1.3 × 10³', '1.3 × 10⁻³', '1.3 × 10⁻⁶'],
+      a: 1,
+      why: 'B. ppm = mg per kg. 1.3 g = 1300 mg in 1 kg → 1.3 × 10³ ppm. Trap: option A comes from multiplying by 10⁶ (as if ppm were µg per kg or from g → mg → µg twice); C and D come from treating ppm as g per kg or dividing instead of multiplying. State the definition first in any structured answer. (Source: Formulae, Equations and Amounts of Substance MCQ-1 QP, raw L34.)'
+    },
+    {
+      q: 'After excess insoluble solid has been removed by filtration, a student must obtain a pure, dry sample of the soluble salt from the filtrate. Which procedure gains full marks?',
+      o: ['Evaporate the filtrate to dryness over a roaring blue flame, then scrape out the solid.',
+          'Heat the filtrate until its volume has about halved, leave it to cool so that crystals form, filter (or decant) the crystals, then dry them between filter papers.',
+          'Warm the filtrate gently in the evaporating basin and pour the warm solution into a labelled container.',
+          'Add water to the filtrate, cool it in an ice-bath, then filter off the crystals and dry them.'],
+      a: 1,
+      why: 'B. Mark scheme order: heat filtrate until volume about halved (1) → allow to cool / crystals form (1) → filter or decant off the mother liquor (1) → dry between filter papers (1). A scores 0: "evaporate to dryness" spits crystals and keeps the impurities in the solid. C is rejected — "warm only" with no concentration step gains no marks. D dilutes the solution, so nothing crystallises. (Source: the mark scheme, the mark scheme; wiki acids-bases-and-salts.)'
+    },
+    {
+      q: 'A student tests a sample of purified seawater with acidified barium chloride solution and observes a white precipitate. Which ion was present?',
+      o: ['Cl⁻', 'SO₄²⁻', 'Mg²⁺', 'CO₃²⁻'],
+      a: 1,
+      why: 'B. Ba²⁺(aq) + SO₄²⁻(aq) → BaSO₄(s), a white precipitate — state symbols are required for the equation mark. Cl⁻ needs AgNO₃ with dilute HNO₃ (white AgCl, dissolves in dilute NH₃); Mg²⁺ gives a white precipitate with NaOH(aq) that is insoluble in excess. Observation ≠ inference: you saw a white solid, you concluded sulfate. Acidify with dilute HCl or HNO₃ only — "sulfuric acid scores 0" because it introduces SO₄²⁻. (Source: the practical paper Jun 2026 Q1c, wch13-2026jun-question-bank; syllabus 8.19ii.)'
+    }
+  ],
+  recapTitle: 'Recap checklist',
+  recapGoals: [
+    '<b>1.5</b> — Calculate the concentration of an ion in seawater in g dm⁻³ and in mol dm⁻³ using c = n/V and n = m/M, and convert between ppm (mg per kg) and g per kg. No titration working is required at this stage.',
+    '<b>1.9</b> — Calculate the percentage yield of crude sea salt (actual/theoretical × 100) and give three <i>named</i> reasons why it is below 100 % in this practical, plus what a yield above 100 % tells you.',
+    '<b>1.12</b> — Link the ionic and full equations, with state symbols, to what you see in the test-tube panel: Ba²⁺(aq) + SO₄²⁻(aq) → BaSO₄(s) white; Ag⁺(aq) + Cl⁻(aq) → AgCl(s) white, dissolves in dilute NH₃; Mg²⁺(aq) + 2OH⁻(aq) → Mg(OH)₂(s) white, insoluble in excess.',
+    '<b>the practical paper skill</b> — Describe and justify the separation in order: filter (residue/filtrate) → concentrate in an evaporating basin → stop while crystals are present and the solid is still wet → filter/decant → dry. Choose evaporative crystallisation for NaCl (flat curve) and cooling crystallisation for KNO₃ (steep curve); choose simple distillation when the <i>solvent</i> is the wanted product.',
+    '<b>the practical paper skill</b> — Use "heat to constant mass" correctly: weigh → heat → cool in a desiccator → reweigh → repeat until two successive masses agree to within ±0.05 g, and explain why the first reading is not the dry mass.'
+  ],
+  mythTitle: 'Common misconceptions',
+  mythLead: 'Tap a card to flip. Each myth on the front is a sentence that has actually been written in an script.',
+  mythFlip: 'Tap to flip',
+  mythLabelMyth: 'Myth?',
+  mythLabelFact: 'Fact',
+  myths: [
+    { m: '"Crystallise the salt" means boil the seawater until the basin is completely dry.', f: 'Concentrate, stop when crystals have formed while the mixture is still wet (or test by dipping a glass rod and waving it in air), cool, then dry the crystals between filter papers. Evaporating to dryness scores 0: the crystals spit out of the basin and strong heating drives off water of crystallisation. (a past-paper session MS; separating-mixtures "common mistakes".)' },
+    { m: 'The filtrate is the residue — both are the solid left behind.', f: 'The <b>residue</b> is the insoluble solid retained <i>on</i> the filter paper (sand and silt). The <b>filtrate</b> is the solution that passes <i>through</i> it (aqueous NaCl and the other dissolved ions). The dissolved particles are far smaller than the paper\'s pores, so they are not separated by filtering.' },
+    { m: 'ppm means grams per kilogram, so 1.3 g of Mg²⁺ in 1 kg of seawater is 1.3 ppm.', f: 'ppm = <b>milli</b>grams per kilogram. 1.3 g = 1300 mg in 1 kg → 1.3 × 10³ ppm. (Formulae & Equations MCQ-1: answer B.) For a volume of solution, first find its mass from density: 100 cm³ of seawater at 1.025 kg dm⁻³ has mass 0.1025 kg.' },
+    { m: 'The percentage yield is below 100 % "because some salt is lost".', f: 'Name the route and the step: some NaCl stays <b>dissolved in the mother liquor</b> that is poured off (its solubility is never zero); crystals are <b>spat out</b> of the basin by strong heating; solid is <b>left behind</b> on the glass rod, on the basin and in the filter paper. And a yield above 100 % means the crystals still contained water — they were not dry.' },
+    { m: 'Sea salt is pure NaCl, so there is nothing to test for.', f: 'Dried sea salt is a <b>mixture</b>: NaCl is only ≈78 % of it. Crude salt gives a white precipitate with acidified BaCl₂(aq) (SO₄²⁻) and a white precipitate with NaOH(aq), insoluble in excess (Mg²⁺); the MgCl₂/MgSO₄ make it bitter and deliquescent. Purification would need recrystallisation.' },
+    { m: 'Simple distillation and evaporation are the same method with different glassware.', f: 'They differ in <b>which fraction you keep</b>. Simple distillation keeps the <b>solvent</b> — the water evaporates, is condensed in the condenser and collected as the distillate. Evaporation/crystallisation keeps the <b>solid</b> — the water is deliberately lost to the air and the salt stays in the basin.' }
+  ]
+};
+function t() { return T; }
+document.documentElement.lang = 'en';
+
+/* =====================================================================
+   REAL DATA (from the brief; approx where textbook-rounded)
+===================================================================== */
+const DW = 760, DH = 400;
+const D = {
+  vol0: 100,          // cm³ of turbid seawater used
+  rho: 1.025,         // kg dm⁻³ (approx)
+  tds: 3.50,          // g total dissolved salts in 100 cm³ (35 g dm⁻³)
+  naclFrac: 0.78,     // NaCl share of dried sea salt
+  mgPerKg: 1.30,      // g Mg²⁺ per kg seawater → 1.3×10³ ppm
+  naclM: 58.5,
+  transferLoss: 0.03, // g left on rod / basin / paper — realistic
+  ionsPerKg: [['Cl⁻', 19.4], ['Na⁺', 10.8], ['SO₄²⁻', 2.7], ['Mg²⁺', 1.30], ['Ca²⁺', 0.41], ['K⁺', 0.39]],
+  nacl: [[0, 35.7], [20, 36.0], [40, 36.6], [60, 37.3], [80, 38.4], [100, 39.8]],
+  kno3: [[0, 13], [20, 32], [40, 64], [60, 110], [80, 169], [100, 246]]
+};
+function interp(pts, x) {
+  if (x <= pts[0][0]) return pts[0][1];
+  for (let i = 1; i < pts.length; i++) {
+    if (x <= pts[i][0]) { const a = pts[i - 1], b = pts[i]; return a[1] + (b[1] - a[1]) * (x - a[0]) / (b[0] - a[0]); }
+  }
+  return pts[pts.length - 1][1];
+}
+const SUP = { '0': '⁰', '1': '¹', '2': '²', '3': '³', '4': '⁴', '5': '⁵', '6': '⁶', '7': '⁷', '8': '⁸', '9': '⁹', '-': '⁻' };
+function sup(n) { return String(n).split('').map(c => SUP[c] || c).join(''); }
+function sci(v, dp) {
+  if (!isFinite(v) || v === 0) return '0';
+  const e = Math.floor(Math.log10(Math.abs(v)));
+  return (v / Math.pow(10, e)).toFixed(dp === undefined ? 2 : dp) + '×10' + sup(e);
+}
+function fx(v, dp) { return isFinite(v) ? v.toFixed(dp === undefined ? 2 : dp) : '—'; }
+/* approximate additive volumes: liquid phase = water + dissolved salt (partial molar ≈0.30 cm³ g⁻¹) */
+function solVol(water, diss) { return water + 0.30 * diss; }             // cm³ of liquid phase
+function concGdm3(water, diss) { const v = solVol(water, diss); return v > 0 ? diss / (v / 1000) : 0; }
+
+/* =====================================================================
+   TAB PLUMBING
+===================================================================== */
+let activeTab = 'sim';
+function setTab(name) {
+  activeTab = name;
+  document.querySelectorAll('.tab-btn').forEach(b => { b.classList.toggle('active', b.dataset.tab === name); });
+  ['intro', 'sim', 'calc', 'mcq', 'recap'].forEach(p => {
+    document.getElementById('panel-' + p).classList.toggle('active', p === name);
+  });
+  scheduleResize();
+  if (name === 'sim') { resizeCanvas(); }
+}
+function toggleTeacher() { document.getElementById('teacher-panel').classList.toggle('hidden'); }
+
+/* =====================================================================
+   SIM STATE
+===================================================================== */
+const sim = {
+  mode: 'evaporate', t: 0, lastMsg: '',
+  /* stage 1 — filtration */
+  paperOn: false, pouring: false, pour: 0, filtrate: 0, sandResidue: 0, sandInFiltrate: 0,
+  pore: 10,
+  /* stage 2/3 — evaporation (shared by correct protocol + error mode) */
+  water: 0, salt: 0, spilled: 0, heatOn: false, power: 1.5, stir: false, temp: 22,
+  toDryness: false, stopped: false, result: null, rodTest: '', drops: [], steam: [], ions: [], crys: [], splat: [],
+  /* stage 4 — cooling crystallisation */
+  coolT: 100, coolSalt: 'kno3', coolMass: 24.6,
+  /* stage 5 — distillation */
+  heat2: false, distillate: 0, distRate: 1, distTested: false, vapour: [],
+  /* stage 6 — ion tests */
+  tubes: [null, null, null], acid: '',
+  prPick: {}, prReveal: {}
+};
+const EVAP_MASS = D.vol0 * D.rho - D.tds; /* g water in 100 cm³ of seawater ≈ 99.0 */
+function resetEvap() {
+  sim.water = EVAP_MASS; sim.salt = D.tds; sim.spilled = 0; sim.heatOn = false;
+  sim.stir = false; sim.temp = 22; sim.stopped = false; sim.result = null; sim.rodTest = '';
+  sim.drops.length = 0; sim.steam.length = 0; sim.splat.length = 0; sim.crys.length = 0;
+  sim.toDryness = (sim.mode === 'dryness');
+  for (let i = 0; i < 26; i++) sim.crys.push({ x: -54 + Math.random() * 108, y: Math.random() * 7, s: 2 + Math.random() * 2.4 });
+  seedIons(28);
+}
+function seedIons(n) {
+  sim.ions.length = 0;
+  const kinds = [['Cl⁻', '#34d399'], ['Na⁺', '#f59e0b'], ['Cl⁻', '#34d399'], ['Na⁺', '#f59e0b'], ['Mg²⁺', '#a78bfa'], ['SO₄²⁻', '#fbbf24']];
+  for (let i = 0; i < n; i++) {
+    const k = kinds[i % kinds.length];
+    sim.ions.push({ x: Math.random(), y: Math.random(), vx: (Math.random() - .5) * .3, vy: (Math.random() - .5) * .3, l: k[0], c: k[1] });
+  }
+}
+function resetFilter() {
+  sim.paperOn = false; sim.pouring = false; sim.pour = 0; sim.filtrate = 0;
+  sim.sandResidue = 0; sim.sandInFiltrate = 0; sim.pore = 10;
+}
+function evapState() {
+  const sat = interp(D.nacl, Math.min(100, Math.max(20, sim.temp))) ;
+  const diss = Math.max(0, Math.min(sim.salt, sat * sim.water / 100));
+  const cryst = Math.max(0, sim.salt - diss);
+  return { sat: sat, diss: diss, cryst: cryst };
+}
+
+/* =====================================================================
+   CANVAS PLUMBING — never paint at boot; the RAF loop paints.
+===================================================================== */
+let ctx = null, canvasEl = null, W = 700, H = 340;
+let gctx = null, graphEl = null, GW = 700, GH = 300;
+const _ro = {};
+function ro(id) { if (!_ro[id]) _ro[id] = document.getElementById(id); return _ro[id]; }
+
+function sizeOne(el, minH, ratio) {
+  const wrap = el.closest('.canvas-wrap');
+  const rect = wrap ? wrap.getBoundingClientRect() : { width: 0 };
+  const w = Math.max(rect.width, el.offsetWidth || 0);
+  if (!w || w < 50) return false;
+  const h = Math.max(minH, w * ratio);
+  el.width = Math.round(w); el.height = Math.round(h);
+  return true;
+}
+function resizeCanvas() {
+  canvasEl = canvasEl || document.getElementById('sim-canvas');
+  if (sizeOne(canvasEl, 340, 0.5)) { W = canvasEl.width; H = canvasEl.height; ctx = canvasEl.getContext('2d'); }
+  graphEl = graphEl || document.getElementById('graph-canvas');
+  if (sizeOne(graphEl, 300, 0.42)) { GW = graphEl.width; GH = graphEl.height; gctx = graphEl.getContext('2d'); }
+  // NOTE: no drawing here — boot must not touch the 2D API.
+}
+function scheduleResize() { resizeCanvas(); }
+
+/* --- drawing helpers (design space 760 × 400) --- */
+function txt(s, x, y, size, col, align, weight) {
+  ctx.font = (weight || 700) + ' ' + size + 'px ui-sans-serif,system-ui,sans-serif';
+  ctx.fillStyle = col; ctx.textAlign = align || 'left'; ctx.textBaseline = 'middle';
+  ctx.fillText(s, x, y);
+}
+function line(x1, y1, x2, y2, col, w) {
+  ctx.strokeStyle = col; ctx.lineWidth = w || 1.5; ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke();
+}
+function box(x, y, w, h, fill, stroke, lw) {
+  ctx.fillStyle = fill; ctx.fillRect(x, y, w, h);
+  if (stroke) { ctx.strokeStyle = stroke; ctx.lineWidth = lw || 1.5; ctx.strokeRect(x, y, w, h); }
+}
+function leader(x1, y1, x2, y2, label, col) {
+  line(x1, y1, x2, y2, col || 'rgba(148,163,184,.55)', 1);
+  ctx.beginPath(); ctx.arc(x1, y1, 2, 0, Math.PI * 2); ctx.fillStyle = col || 'rgba(148,163,184,.8)'; ctx.fill();
+  txt(label, x2 + (x2 >= x1 ? 4 : -4), y2, 10.5, '#cbd5e1', x2 >= x1 ? 'left' : 'right', 600);
+}
+function bowl(bx, by, w) {
+  ctx.beginPath(); ctx.moveTo(bx - w, by); ctx.quadraticCurveTo(bx - w * 0.92, by + w * 0.52, bx, by + w * 0.56);
+  ctx.quadraticCurveTo(bx + w * 0.92, by + w * 0.52, bx + w, by); ctx.closePath();
+}
+function rig(bx, topY) {
+  const spread = 58;
+  ctx.strokeStyle = '#8b98ab'; ctx.lineWidth = 4;
+  ctx.beginPath(); ctx.moveTo(bx - spread, topY + 4); ctx.lineTo(bx - spread + 14, 356); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(bx + spread, topY + 4); ctx.lineTo(bx + spread - 14, 356); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(bx, topY + 6); ctx.lineTo(bx, 356); ctx.stroke();
+  ctx.strokeStyle = '#a9b6c6'; ctx.lineWidth = 3;
+  ctx.beginPath(); ctx.ellipse(bx, topY, spread + 4, 7, 0, 0, Math.PI * 2); ctx.stroke();
+  box(bx - spread - 10, topY - 5, (spread + 10) * 2, 5, 'rgba(203,213,225,.55)', 'rgba(148,163,184,.7)', 1);
+  for (let i = -5; i <= 5; i++) line(bx + i * 12, topY - 5, bx + i * 12 + 8, topY, 'rgba(100,116,139,.6)', 1);
+}
+function burner(bx, on, power) {
+  box(bx - 30, 344, 60, 12, '#1f2937', 'rgba(148,163,184,.5)', 1);
+  box(bx - 8, 300, 16, 44, '#334155', 'rgba(148,163,184,.55)', 1);
+  box(bx - 14, 322, 12, 6, '#475569', 'rgba(148,163,184,.4)', 1);
+  if (on) {
+    const fl = 0.85 + 0.15 * Math.sin(sim.t * 12), h = 30 * Math.min(1.6, power) * fl;
+    ctx.fillStyle = 'rgba(96,165,250,.30)';
+    ctx.beginPath(); ctx.moveTo(bx - 11, 300); ctx.quadraticCurveTo(bx, 300 - h * 1.35, bx + 11, 300); ctx.closePath(); ctx.fill();
+    ctx.fillStyle = 'rgba(147,197,253,.85)';
+    ctx.beginPath(); ctx.moveTo(bx - 6.5, 300); ctx.quadraticCurveTo(bx, 300 - h, bx + 6.5, 300); ctx.closePath(); ctx.fill();
+    ctx.fillStyle = 'rgba(226,232,240,.9)';
+    ctx.beginPath(); ctx.moveTo(bx - 2.6, 300); ctx.quadraticCurveTo(bx, 300 - h * 0.55, bx + 2.6, 300); ctx.closePath(); ctx.fill();
+  }
+}
+function legend(x, y) {
+  const rows = [['H₂O', 'rgba(147,197,253,.55)'], ['Na⁺', '#f59e0b'], ['Cl⁻', '#34d399'], ['Mg²⁺', '#a78bfa'], ['SO₄²⁻', '#fbbf24'], ['sand', '#a16207']];
+  box(x - 8, y - 12, 108, rows.length * 15 + 8, 'rgba(2,6,23,.55)', 'rgba(148,163,184,.25)', 1);
+  rows.forEach((r, i) => {
+    ctx.beginPath(); ctx.arc(x + 4, y + i * 15, 4, 0, Math.PI * 2); ctx.fillStyle = r[1]; ctx.fill();
+    txt(r[0], x + 16, y + i * 15, 10.5, '#cbd5e1', 'left', 600);
+  });
+}
+function frame(title, sub) {
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  const g = ctx.createLinearGradient ? ctx.createLinearGradient(0, 0, 0, H) : null;
+  ctx.fillStyle = '#0b1220'; ctx.fillRect(0, 0, W, H);
+  if (g) { g.addColorStop(0, 'rgba(61,214,198,.10)'); g.addColorStop(1, 'rgba(0,0,0,0)'); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H); }
+  const s = Math.min(W / DW, H / DH);
+  ctx.setTransform(s, 0, 0, s, (W - DW * s) / 2, (H - DH * s) / 2);
+  txt(title, 16, 20, 13, '#d1faf5');
+  if (sub) txt(sub, 16, 38, 10.5, 'rgba(203,213,225,.75)', 'left', 600);
+  line(0, 356, DW, 356, 'rgba(148,163,184,.18)', 2);
+}
+
+/* ---------- scene 1: filtration ---------- */
+function drawFilter() {
+  frame('STEP 1 · Filtration — separate the insoluble sand from the solution',
+    'Standard filter paper pores ≈ 10 µm · sand grains ≈ 50–500 µm · dissolved ions ≈ 0.2–0.4 nm (hydrated)');
+  const bx = 250;
+  box(150, 336, 190, 12, '#26313f', 'rgba(148,163,184,.5)', 1);
+  line(bx - 55, 120, bx - 55, 336, '#8b98ab', 5);
+  line(bx - 55, 176, bx + 6, 176, '#8b98ab', 4);
+  ctx.strokeStyle = 'rgba(203,213,225,.75)'; ctx.lineWidth = 2.5;
+  ctx.beginPath(); ctx.moveTo(bx - 62, 150); ctx.lineTo(bx + 62, 150); ctx.lineTo(bx + 9, 224); ctx.lineTo(bx - 9, 224); ctx.closePath(); ctx.stroke();
+  ctx.fillStyle = 'rgba(147,197,253,.06)'; ctx.fill();
+  line(bx - 8, 224, bx - 8, 258, 'rgba(203,213,225,.75)', 2.5); line(bx + 8, 224, bx + 8, 258, 'rgba(203,213,225,.75)', 2.5);
+  if (sim.paperOn) {
+    ctx.beginPath(); ctx.moveTo(bx - 54, 154); ctx.lineTo(bx + 54, 154); ctx.lineTo(bx + 6, 218); ctx.lineTo(bx - 6, 218); ctx.closePath();
+    ctx.fillStyle = 'rgba(250,247,240,.92)'; ctx.fill();
+    ctx.strokeStyle = 'rgba(203,213,225,.6)'; ctx.lineWidth = 1; ctx.stroke();
+    const sh = Math.min(1, sim.sandResidue / 0.62);
+    if (sh > 0.02) {
+      ctx.beginPath(); ctx.moveTo(bx - 20 * sh, 186); ctx.quadraticCurveTo(bx, 176 + 30 * (1 - sh), bx + 20 * sh, 186);
+      ctx.quadraticCurveTo(bx, 200, bx - 20 * sh, 186); ctx.closePath();
+      ctx.fillStyle = 'rgba(146,94,40,' + (0.55 + 0.4 * sh) + ')'; ctx.fill();
+    }
+    leader(bx, 168, bx - 150, 96, 'filter paper (folded cone)', 'rgba(148,163,184,.6)');
+  } else {
+    txt('no filter paper yet', bx, 190, 11, 'rgba(248,113,113,.9)', 'center');
+  }
+  /* receiving beaker */
+  box(bx - 55, 262, 110, 74, 'rgba(148,163,184,.05)', 'rgba(203,213,225,.6)', 2);
+  const lvl = Math.min(1, sim.filtrate / 96);
+  if (lvl > 0) {
+    const turb = Math.min(1, sim.sandInFiltrate / 0.3);
+    box(bx - 53, 336 - 72 * lvl, 106, 72 * lvl, 'rgba(125,190,220,' + (0.30 + 0.35 * turb) + ')', null);
+    if (turb > 0.05) txt('cloudy — sand has passed through!', bx, 330 - 60 * lvl, 10, 'rgba(252,165,165,.95)', 'center');
+  }
+  /* pouring beaker */
+  const pb = { x: 500, y: 96 };
+  ctx.save(); ctx.translate(pb.x, pb.y);
+  if (sim.pouring || sim.pour > 0) ctx.rotate(-0.55);
+  box(-46, 0, 92, 74, 'rgba(148,163,184,.05)', 'rgba(203,213,225,.6)', 2);
+  const leftH = 68 * Math.max(0, 1 - sim.pour);
+  if (leftH > 1) box(-44, 72 - leftH, 88, leftH, 'rgba(146,94,40,.62)', null);
+  txt('muddy seawater', 0, 34, 10.5, '#e2e8f0', 'center');
+  ctx.restore();
+  if (sim.pouring && sim.paperOn) {
+    line(452, 120, bx + 6, 152, 'rgba(125,190,220,.75)', 3);
+    line(452, 124, bx - 4, 152, 'rgba(125,190,220,.45)', 2);
+  }
+  /* grains and ions travelling */
+  const n = sim.pouring ? 14 : 0;
+  for (let i = 0; i < n; i++) {
+    const ph = (sim.t * 0.55 + i / n) % 1;
+    const x = 452 + (bx - 452) * ph, y = 122 + (156 - 122) * ph;
+    ctx.beginPath(); ctx.arc(x, y, i % 3 === 0 ? 3 : 2, 0, Math.PI * 2);
+    ctx.fillStyle = i % 3 === 0 ? 'rgba(146,94,40,.9)' : 'rgba(52,211,153,.8)'; ctx.fill();
+  }
+  if (sim.pour > 0.08) {
+    const f = sim.pour;
+    txt('residue', bx + 70, 196, 11, '#fbbf24'); txt('= insoluble sand + silt, ' + fx(sim.sandResidue, 2) + ' g', bx + 70, 210, 10, 'rgba(203,213,225,.8)', 'left', 500);
+    txt('filtrate', bx + 70, 300, 11, '#6ee7b7'); txt('= aqueous NaCl + Mg²⁺ + SO₄²⁻', bx + 70, 314, 10, 'rgba(203,213,225,.8)', 'left', 500);
+    txt(fx(sim.filtrate, 0) + ' cm³ collected of the 100 cm³ poured', bx - 52, 254, 9, 'rgba(148,163,184,.75)', 'left', 500);
+    txt('dissolved salt in filtrate: ' + fx(D.tds * Math.min(1, sim.pour), 2) + ' g — unchanged', 430, 250, 11, '#99f6e4', 'left');
+    txt('salt in residue: 0.00 g (dissolved particles pass the paper)', 430, 266, 10, 'rgba(203,213,225,.75)', 'left', 500);
+    if (sim.sandInFiltrate > 0.001) txt('sand in filtrate: ' + fx(sim.sandInFiltrate, 3) + ' g → filtration FAILED', 430, 282, 10, 'rgba(252,165,165,.95)', 'left');
+  }
+  /* real data box — composition driving every number in this lab */
+  box(16, 150, 124, 152, 'rgba(2,6,23,.72)', 'rgba(61,214,198,.4)', 1);
+  txt('SEAWATER DATA (approx)', 22, 162, 10, '#99f6e4');
+  D.ionsPerKg.forEach((r, i) => {
+    txt(r[0], 22, 180 + i * 15, 10.5, '#e2e8f0', 'left', 700);
+    txt(fx(r[1], 2) + ' g kg⁻¹', 56, 180 + i * 15, 10, 'rgba(203,213,225,.9)', 'left', 600);
+  });
+  txt('TDS 3.50 g/100 cm³ · NaCl 78 %', 22, 278, 9, 'rgba(148,163,184,.9)', 'left', 600);
+  txt('sand + silt 0.62 g (insoluble)', 22, 292, 9, 'rgba(148,163,184,.9)', 'left', 600);
+  legend(630, 120);
+}
+
+/* ---------- scene 2 & 3: evaporating basin ---------- */
+function drawEvap() {
+  const err = sim.mode === 'dryness';
+  frame(err ? 'STEP 3 · ERROR MODE — "boil it to dryness" (this is what scores 0 marks)'
+            : 'STEP 2 · Evaporative crystallisation in an evaporating basin — stop while it is still wet',
+    'time is compressed ≈50×; brine density and boiling-point rise are approximations');
+  const bx = 380, topY = 196;
+  rig(bx, topY); burner(bx, sim.heatOn, sim.power);
+  bowl(bx, 158, 82);
+  ctx.save(); ctx.clip();
+  const wf = Math.max(0, Math.min(1, sim.water / EVAP_MASS));
+  const lvl = 205 - 46 * Math.pow(wf, 0.7);
+  const st = evapState();
+  const satFrac = st.diss / Math.max(1e-6, st.sat * sim.water / 100);
+  ctx.fillStyle = 'rgba(' + (120 - 20 * satFrac) + ',' + (170 - 25 * satFrac) + ',215,' + (0.30 + 0.45 * wf) + ')';
+  ctx.fillRect(bx - 84, lvl, 168, 210 - lvl);
+  ctx.restore();
+  ctx.strokeStyle = 'rgba(226,232,240,.75)'; ctx.lineWidth = 2.5; bowl(bx, 158, 82); ctx.stroke();
+  line(bx - 82, 158, bx + 82, 158, 'rgba(226,232,240,.5)', 2);
+  /* crystals on the floor of the basin */
+  const nc = Math.round(26 * Math.min(1, st.cryst / D.tds));
+  for (let i = 0; i < nc; i++) {
+    const c = sim.crys[i];
+    ctx.fillStyle = 'rgba(248,250,252,.95)';
+    ctx.fillRect(bx + c.x - c.s / 2, 199 + c.y - c.s / 2, c.s, c.s);
+    ctx.strokeStyle = 'rgba(203,213,225,.5)'; ctx.lineWidth = 0.6; ctx.strokeRect(bx + c.x - c.s / 2, 199 + c.y - c.s / 2, c.s, c.s);
+  }
+  /* dissolved ions bouncing in the liquid */
+  const ni = Math.max(4, Math.min(28, Math.round(6 + 22 * (concGdm3(sim.water, st.diss) / 350))));
+  for (let i = 0; i < ni && i < sim.ions.length; i++) {
+    const p = sim.ions[i];
+    const x = bx - 74 + p.x * 148, y = lvl + 4 + p.y * Math.max(2, 198 - lvl);
+    ctx.beginPath(); ctx.arc(x, y, 3.1, 0, Math.PI * 2); ctx.fillStyle = p.c; ctx.fill();
+    if (i < 4) txt(p.l, x + 6, y - 4, 9, 'rgba(226,232,240,.85)', 'left', 600);
+  }
+  /* steam */
+  for (const s of sim.steam) {
+    ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(226,232,240,' + (0.05 + 0.22 * s.a) + ')'; ctx.fill();
+  }
+  /* spattered salt */
+  for (const p of sim.splat) {
+    ctx.fillStyle = 'rgba(248,250,252,' + Math.max(0.15, p.a) + ')';
+    ctx.fillRect(p.x - 1.6, p.y - 1.6, 3.2, 3.2);
+  }
+  /* glass rod */
+  if (sim.stir) {
+    const wob = Math.sin(sim.t * 6) * 6;
+    line(bx + 60 + wob, 96, bx + 12 + wob * 0.4, 200, 'rgba(203,213,225,.55)', 3.5);
+    txt('glass rod — stirring', bx + 66 + wob, 100, 10, 'rgba(203,213,225,.8)', 'left', 600);
+  }
+  /* annotations */
+  leader(bx + 80, 168, bx + 168, 132, 'evaporating basin');
+  leader(bx + 66, topY - 3, bx + 168, topY + 6, 'wire gauze');
+  leader(bx - 46, topY + 40, bx - 170, 150, 'tripod');
+  leader(bx, 320, bx - 170, 322, 'Bunsen burner — roaring blue flame');
+  txt('water vapour → air', bx + 96, 74, 10, 'rgba(203,213,225,.7)', 'left', 600);
+  if (st.cryst > 0.001) txt('crude sea salt crystals (' + fx(st.cryst, 2) + ' g)', bx - 168, 214, 10.5, '#f8fafc');
+  txt('mother liquor (saturated brine): ' + fx(st.diss, 2) + ' g salt still dissolved', bx - 168, 230, 10.5, 'rgba(147,197,253,.9)', 'left', 600);
+  /* result / loss accounting */
+  const x0 = 512, y0 = 208;
+  box(x0 - 6, y0 - 18, 250, sim.result ? 138 : 84, 'rgba(2,6,23,.72)', err ? 'rgba(248,113,113,.55)' : 'rgba(61,214,198,.45)', 1);
+  txt(err ? 'LOSS ACCOUNT (error run)' : 'LIVE ACCOUNT', x0 + 4, y0 - 6, 11, err ? '#fca5a5' : '#99f6e4');
+  txt('theoretical crude salt: ' + fx(D.tds, 2) + ' g', x0 + 4, y0 + 12, 10.5, '#cbd5e1', 'left', 600);
+  txt('spat out of basin: ' + fx(sim.spilled, 3) + ' g', x0 + 4, y0 + 27, 10.5, sim.spilled > 0.02 ? '#fca5a5' : '#cbd5e1', 'left', 600);
+  txt('still dissolved: ' + fx(st.diss, 2) + ' g', x0 + 4, y0 + 42, 10.5, '#cbd5e1', 'left', 600);
+  if (sim.result) {
+    txt('recovered dry: ' + fx(sim.result.recovered, 2) + ' g → % yield ' + fx(sim.result.yieldPct, 1) + ' %', x0 + 4, y0 + 62, 11, '#d1fae5');
+    txt('lost in mother liquor: ' + fx(sim.result.dissolved, 2) + ' g', x0 + 4, y0 + 78, 10, 'rgba(203,213,225,.85)', 'left', 600);
+    txt('left on rod/basin/paper: ' + fx(D.transferLoss, 2) + ' g', x0 + 4, y0 + 92, 10, 'rgba(203,213,225,.85)', 'left', 600);
+    txt('spattering loss: ' + fx(sim.result.spilled, 2) + ' g', x0 + 4, y0 + 106, 10, 'rgba(252,165,165,.9)', 'left', 600);
+  } else {
+    txt(sim.water <= 0.05 && sim.toDryness ? 'basin is DRY — this is the failure state' : 'stop heating to lock in your mass', x0 + 4, y0 + 60, 10, 'rgba(148,163,184,.85)', 'left', 600);
+  }
+  legend(24, 96);
+}
+
+/* ---------- scene 4: cooling crystallisation ---------- */
+function drawCool() {
+  const isK = sim.coolSalt === 'kno3';
+  frame('STEP 4 · Cooling crystallisation — the curve decides whether cooling works',
+    (isK ? 'KNO₃' : 'NaCl') + ' saturated solution: ' + fx(sim.coolMass, 1) + ' g solute in 100 g water, cooled from 100 °C');
+  const bx = 200;
+  box(bx - 60, 150, 120, 150, 'rgba(148,163,184,.05)', 'rgba(203,213,225,.65)', 2.5);
+  box(bx - 66, 300, 132, 10, '#26313f', 'rgba(148,163,184,.5)', 1);
+  const pts = isK ? D.kno3 : D.nacl;
+  const sat = interp(pts, sim.coolT);
+  const diss = Math.max(0, Math.min(sim.coolMass, sat));
+  const crys = Math.max(0, sim.coolMass - diss);
+  const lvl = 300 - 130 * (0.30 + 0.55 * ((sim.coolT - 0) / 100 * 0.15 + 0.6));
+  ctx.fillStyle = 'rgba(125,190,220,' + (0.25 + 0.4 * (sim.coolT / 100)) + ')';
+  ctx.fillRect(bx - 58, lvl, 116, 298 - lvl);
+  const nc = Math.min(30, Math.round(crys / sim.coolMass * 30));
+  for (let i = 0; i < nc; i++) {
+    const c = sim.crys[i]; if (!c) break;
+    ctx.fillStyle = 'rgba(248,250,252,.95)';
+    ctx.fillRect(bx - 52 + (c.x + 54) * 0.9, 292 - (i % 3) * 5, 3, 3);
+  }
+  line(bx + 34, 120, bx + 34, 250, 'rgba(203,213,225,.6)', 3);
+  box(bx + 29, 250, 10, 44, 'rgba(248,113,113,.8)', 'rgba(203,213,225,.6)', 1);
+  txt(fx(sim.coolT, 0) + ' °C', bx + 48, 268, 11, '#fca5a5');
+  txt('thermometer', bx + 48, 150, 10, 'rgba(203,213,225,.8)', 'left', 600);
+  if (sim.heatOn) { txt('heating', bx, 138, 10, 'rgba(251,146,60,.95)', 'center'); }
+  txt(isK ? 'KNO₃(aq)' : 'NaCl(aq)', bx - 40, 180, 12, '#e2e8f0');
+  txt('undissolved solute: ' + fx(crys, 1) + ' g', bx - 56, 320, 10.5, '#d1fae5', 'left', 600);
+  const x0 = 430, y0 = 108;
+  box(x0 - 8, y0 - 24, 320, 190, 'rgba(2,6,23,.72)', 'rgba(61,214,198,.4)', 1);
+  txt('Saturated at 100 °C → cooled to ' + fx(sim.coolT, 0) + ' °C', x0, y0 - 10, 11.5, '#99f6e4');
+  txt('solubility now: ' + fx(sat, 1) + ' g per 100 g water', x0, y0 + 8, 11, '#e2e8f0', 'left', 600);
+  txt('dissolved: ' + fx(diss, 1) + ' g   ·   crystals: ' + fx(crys, 1) + ' g', x0, y0 + 26, 11, '#e2e8f0', 'left', 600);
+  txt('crop recovered: ' + fx(crys / sim.coolMass * 100, 1) + ' % of the solute', x0, y0 + 44, 11, '#e2e8f0', 'left', 600);
+  const kSat = interp(D.kno3, sim.coolT), nSat = interp(D.nacl, sim.coolT);
+  txt('SAME temperature, both salts:', x0, y0 + 68, 10.5, 'rgba(148,163,184,.9)');
+  txt('KNO₃ crop = ' + fx(Math.max(0, 246 - kSat) / 246 * 100, 1) + ' % of 246 g', x0, y0 + 84, 11, '#a78bfa', 'left', 600);
+  txt('NaCl crop = ' + fx(Math.max(0, 39.8 - nSat) / 39.8 * 100, 1) + ' % of 39.8 g', x0, y0 + 100, 11, '#f59e0b', 'left', 600);
+  txt(isK ? 'steep curve → cooling is the right method' : 'flat curve → cooling is useless for NaCl:', x0, y0 + 124, 11, isK ? '#6ee7b7' : '#fca5a5');
+  if (!isK) txt('you must evaporate the water instead (steps 2–3).', x0, y0 + 142, 10.5, 'rgba(252,165,165,.9)', 'left', 600);
+  txt('axes: solubility (g per 100 g water) vs temperature (°C) below', x0, y0 + 160, 10, 'rgba(148,163,184,.8)', 'left', 500);
+}
+
+/* ---------- scene 5: simple distillation ---------- */
+function drawDistill() {
+  frame('STEP 5 · Simple distillation — here the WATER is the wanted product',
+    'same heating, opposite purpose: the vapour is trapped, condensed and collected; the salt stays behind');
+  const fx0 = 150, topY = 214;
+  rig(fx0, topY); burner(fx0, sim.heat2, sim.distRate);
+  ctx.strokeStyle = 'rgba(226,232,240,.7)'; ctx.lineWidth = 2.5;
+  ctx.beginPath(); ctx.arc(fx0, 196, 40, Math.PI * 0.28, Math.PI * 0.72, true); ctx.stroke();
+  ctx.beginPath(); ctx.arc(fx0, 196, 40, 0, Math.PI * 2); ctx.stroke();
+  box(fx0 - 9, 128, 18, 46, 'rgba(148,163,184,.05)', 'rgba(226,232,240,.7)', 2.5);
+  ctx.save(); ctx.beginPath(); ctx.arc(fx0, 196, 38, 0, Math.PI * 2); ctx.clip();
+  const wf = Math.max(0, Math.min(1, sim.water / EVAP_MASS));
+  ctx.fillStyle = 'rgba(125,190,220,.55)'; ctx.fillRect(fx0 - 40, 196 + 38 - 70 * wf, 80, 70 * wf);
+  ctx.restore();
+  for (const v of sim.vapour) { ctx.beginPath(); ctx.arc(v.x, v.y, v.r, 0, Math.PI * 2); ctx.fillStyle = 'rgba(226,232,240,' + (0.06 + 0.2 * v.a) + ')'; ctx.fill(); }
+  line(fx0 + 2, 104, fx0 + 2, 176, 'rgba(203,213,225,.6)', 3);
+  box(fx0 - 3, 176, 10, 18, 'rgba(248,113,113,.85)', 'rgba(203,213,225,.6)', 1);
+  txt('thermometer at still head: reads ' + fx(sim.heat2 ? 100 + 7 * (1 - wf) : 22, 0) + ' °C', fx0 + 16, 116, 10, 'rgba(203,213,225,.85)', 'left', 600);
+  /* condenser */
+  ctx.save(); ctx.translate(300, 150); ctx.rotate(0.30);
+  box(0, -18, 190, 36, 'rgba(148,163,184,.10)', 'rgba(203,213,225,.55)', 2);
+  box(0, -6, 190, 12, 'rgba(2,6,23,.5)', 'rgba(203,213,225,.7)', 1.5);
+  box(-6, 26, 26, 10, 'rgba(56,189,248,.25)', 'rgba(56,189,248,.6)', 1); txt('water in', 4, 48, 9.5, 'rgba(125,211,252,.9)', 'center', 600);
+  box(164, -36, 26, 10, 'rgba(56,189,248,.25)', 'rgba(56,189,248,.6)', 1); txt('water out', 176, -44, 9.5, 'rgba(125,211,252,.9)', 'center', 600);
+  if (sim.heat2) {
+    for (let i = 0; i < 7; i++) { const p = (sim.t * 0.42 + i / 7) % 1; ctx.beginPath(); ctx.arc(10 + p * 170, -1 + Math.sin(p * 6) * 2, 2, 0, Math.PI * 2); ctx.fillStyle = 'rgba(226,232,240,.6)'; ctx.fill(); }
+  }
+  ctx.restore();
+  line(262, 140, 306, 156, 'rgba(203,213,225,.5)', 2);
+  /* receiver */
+  box(520, 214, 44, 122, 'rgba(148,163,184,.05)', 'rgba(203,213,225,.65)', 2);
+  const dl = Math.min(1, sim.distillate / 95);
+  ctx.fillStyle = 'rgba(125,211,252,.5)'; ctx.fillRect(522, 334 - 118 * dl, 40, 118 * dl);
+  for (let i = 1; i < 10; i++) line(520, 334 - 11.8 * i, 530, 334 - 11.8 * i, 'rgba(203,213,225,.45)', 1);
+  txt('measuring cylinder', 542, 200, 10, 'rgba(203,213,225,.85)', 'center', 600);
+  txt(fx(sim.distillate, 1) + ' cm³', 586, 334 - 118 * dl, 11, '#7dd3fc');
+  if (sim.heat2) { const d = (sim.t * 1.2) % 1; line(497, 214, 497, 214 - 8, 'rgba(125,211,252,.8)', 2); ctx.beginPath(); ctx.arc(497, 218 + d * 6, 2.2, 0, Math.PI * 2); ctx.fillStyle = 'rgba(125,211,252,.85)'; ctx.fill(); }
+  line(494, 210, 494, 224, 'rgba(203,213,225,.6)', 2);
+  /* annotations */
+  leader(fx0, 226, fx0 - 96, 262, 'salt + non-volatile impurities stay in the flask');
+  txt('water remaining in flask: ' + fx(sim.water, 1) + ' g', fx0 - 96, 286, 10.5, 'rgba(203,213,225,.85)', 'left', 600);
+  txt('crude salt left behind: ' + fx(D.tds, 2) + ' g (none distils over)', fx0 - 96, 302, 10.5, 'rgba(203,213,225,.85)', 'left', 600);
+  const x0 = 470, y0 = 96;
+  box(x0 - 8, y0 - 26, 250, sim.distTested ? 96 : 78, 'rgba(2,6,23,.72)', 'rgba(61,214,198,.4)', 1);
+  txt('WHICH FRACTION DO YOU KEEP?', x0, y0 - 12, 11, '#99f6e4');
+  txt('distillation → keep the DISTILLATE (pure water)', x0, y0 + 6, 10.5, '#e2e8f0', 'left', 600);
+  txt('evaporation → keep the SOLID in the basin', x0, y0 + 22, 10.5, '#e2e8f0', 'left', 600);
+  txt('distillate: ' + fx(sim.distillate, 1) + ' cm³ · Cl⁻ in distillate: 0 ppm', x0, y0 + 40, 10.5, 'rgba(148,163,184,.9)', 'left', 600);
+  if (sim.distTested) txt('test: acidified AgNO₃ added → NO precipitate → water is pure', x0, y0 + 58, 10.5, '#6ee7b7', 'left', 600);
+  legend(24, 96);
+}
+
+/* ---------- scene 6: ion tests ---------- */
+function drawTest() {
+  frame('STEP 6 · Is the crude salt pure? Precipitation tests — observation, then inference',
+    'sample of dissolved crude sea salt in each tube. Add the reagent, read the OBSERVATION, then write the ION and the equation with state symbols.');
+  const tubes = [
+    { x: 150, name: 'Tube 1 — test for SO₄²⁻', r1: 'acidify with dilute ' + (sim.acid ? (sim.acid === 'h2so4' ? 'H₂SO₄ (WRONG)' : 'HCl') : '—') + ', then BaCl₂(aq)' },
+    { x: 380, name: 'Tube 2 — test for Cl⁻', r1: 'dilute HNO₃, then AgNO₃(aq)' },
+    { x: 600, name: 'Tube 3 — test for Mg²⁺', r1: 'NaOH(aq), dropwise to excess' }
+  ];
+  tubes.forEach((tb, i) => {
+    const st = sim.tubes[i] || { phase: 0, ppt: 0, cleared: 0 };
+    box(tb.x - 26, 120, 52, 16, '#26313f', 'rgba(148,163,184,.4)', 1);
+    ctx.strokeStyle = 'rgba(226,232,240,.7)'; ctx.lineWidth = 2.5;
+    ctx.beginPath(); ctx.moveTo(tb.x - 22, 132); ctx.lineTo(tb.x - 22, 250); ctx.quadraticCurveTo(tb.x - 22, 276, tb.x, 276);
+    ctx.quadraticCurveTo(tb.x + 22, 276, tb.x + 22, 250); ctx.lineTo(tb.x + 22, 132); ctx.stroke();
+    ctx.save();
+    ctx.beginPath(); ctx.moveTo(tb.x - 20, 134); ctx.lineTo(tb.x - 20, 250); ctx.quadraticCurveTo(tb.x - 20, 274, tb.x, 274);
+    ctx.quadraticCurveTo(tb.x + 20, 274, tb.x + 20, 250); ctx.lineTo(tb.x + 20, 134); ctx.closePath(); ctx.clip();
+    ctx.fillStyle = 'rgba(125,190,220,.35)'; ctx.fillRect(tb.x - 22, 190, 44, 86);
+    if (st.ppt > 0.02) {
+      ctx.fillStyle = 'rgba(248,250,252,' + Math.min(0.95, 0.35 + st.ppt) + ')';
+      ctx.fillRect(tb.x - 21, 262, 42, 12);
+      for (let k = 0; k < 26; k++) {
+        const yy = 258 - ((sim.t * 26 + k * 13) % 70);
+        const a = Math.max(0, 1 - (262 - yy) / 70);
+        ctx.beginPath(); ctx.arc(tb.x - 14 + (k * 7) % 29, yy, 1.6, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(248,250,252,' + (0.15 + 0.7 * a * st.ppt) + ')'; ctx.fill();
+      }
+    }
+    ctx.restore();
+    if (st.phase > 0 && st.phase < 1) {
+      const y = 130 + st.phase * 60;
+      ctx.beginPath(); ctx.arc(tb.x, y, 2.4, 0, Math.PI * 2); ctx.fillStyle = 'rgba(226,232,240,.85)'; ctx.fill();
+    }
+    txt(tb.name, tb.x, 300, 11, '#d1faf5', 'center');
+    txt(tb.r1, tb.x, 316, 10, 'rgba(203,213,225,.8)', 'center', 600);
+    let obs;
+    if (st.pure) obs = i === 1 ? 'white ppt → Cl⁻ is in pure NaCl too' : 'NO precipitate — expected for pure NaCl';
+    else if (i === 0) obs = !st.formed ? (sim.acid ? 'add BaCl₂(aq) →' : 'acidify first, then BaCl₂(aq) →') : (sim.acid === 'h2so4' ? 'white ppt — but INVALID: you added SO₄²⁻ (0 marks)' : 'OBSERVATION: white ppt → inference: SO₄²⁻');
+    else if (i === 1) obs = st.cleared > 0.5 ? 'white ppt DISSOLVED in dilute NH₃ → Cl⁻ confirmed' : (st.formed ? 'OBSERVATION: white curdly ppt → Cl⁻' : 'add HNO₃ then AgNO₃(aq) →');
+    else obs = st.formed ? 'OBSERVATION: white ppt, INSOLUBLE in excess NaOH → Mg²⁺' : 'add NaOH(aq) to excess →';
+    txt(obs, tb.x, 334, 10, (i === 0 && st.formed && sim.acid === 'h2so4') ? '#fca5a5' : (st.formed || st.pure ? '#6ee7b7' : 'rgba(148,163,184,.85)'), 'center', 600);
+  });
+  const eqs = ['Ba²⁺(aq) + SO₄²⁻(aq) → BaSO₄(s)', 'Ag⁺(aq) + Cl⁻(aq) → AgCl(s)', 'Mg²⁺(aq) + 2OH⁻(aq) → Mg(OH)₂(s)'];
+  txt('IONIC EQUATIONS (state symbols carry the mark):', 24, 78, 11, '#99f6e4');
+  eqs.forEach((e, i) => txt(e, 24, 96 + i * 17, 11.5, '#e2e8f0', 'left', 600));
+  txt('Acidify with dilute HCl or HNO₃ only — H₂SO₄ adds SO₄²⁻ and scores 0 (the practical paper Jun 2026 Q1c).', 24, 350 - 4, 10, 'rgba(252,165,165,.9)', 'left', 600);
+}
+
+/* ---------- solubility graph (second canvas) ---------- */
+function drawGraph() {
+  if (!gctx) return;
+  const s = Math.min(GW / DW, GH / 300);
+  gctx.setTransform(1, 0, 0, 1, 0, 0);
+  gctx.fillStyle = '#0b1220'; gctx.fillRect(0, 0, GW, GH);
+  gctx.setTransform(s, 0, 0, s, (GW - DW * s) / 2, (GH - 300 * s) / 2);
+  const prev = ctx; ctx = gctx;
+  const ox = 70, oy = 250, w = 560, h = 205;
+  line(ox, oy, ox + w, oy, 'rgba(148,163,184,.6)', 1.5);
+  line(ox, oy, ox, oy - h, 'rgba(148,163,184,.6)', 1.5);
+  txt('solubility / g per 100 g water', ox, oy - h - 16, 11, '#cbd5e1');
+  txt('temperature / °C', ox + w, oy + 30, 11, '#cbd5e1', 'right');
+  for (let i = 0; i <= 5; i++) {
+    const x = ox + w * i / 5, y = oy - h * i / 5;
+    txt(String(i * 20), x, oy + 14, 9.5, 'rgba(148,163,184,.9)', 'center', 500);
+    txt(String(i * 50), ox - 8, y, 9.5, 'rgba(148,163,184,.9)', 'right', 500);
+    line(x, oy, x, oy + 4, 'rgba(148,163,184,.5)', 1); line(ox - 4, y, ox, y, 'rgba(148,163,184,.5)', 1);
+  }
+  function curve(pts, col, dash) {
+    ctx.strokeStyle = col; ctx.lineWidth = 2.6; if (dash && ctx.setLineDash) ctx.setLineDash(dash);
+    ctx.beginPath();
+    for (let T = 0; T <= 100; T += 2) {
+      const v = interp(pts, T), x = ox + w * T / 100, y = oy - h * v / 250;
+      if (T === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+    }
+    ctx.stroke(); if (dash && ctx.setLineDash) ctx.setLineDash([]);
+  }
+  curve(D.kno3, '#a78bfa');
+  curve(D.nacl, '#f59e0b');
+  const mx = ox + w * sim.coolT / 100;
+  line(mx, oy, mx, oy - h, 'rgba(61,214,198,.7)', 1.5);
+  txt(fx(sim.coolT, 0) + ' °C', mx + 5, oy - h + 12, 10.5, '#99f6e4');
+  txt('KNO₃ — steep curve → cooling crystallisation', ox + 150, oy - h * 0.55, 11, '#c4b5fd');
+  txt('NaCl — flat curve → evaporative crystallisation', ox + 150, oy - h * 0.09, 11, '#fcd34d');
+  txt('approximate textbook values (KNO₃ ≈13 g at 0 °C → ≈246 g at 100 °C)', 16, 300 - 14, 9.5, 'rgba(148,163,184,.8)', 'left', 500);
+  ctx = prev;
+}
+
+/* =====================================================================
+   STEP (physics / bookkeeping) — RAF driven, dt in seconds
+===================================================================== */
+function stepFilter(dt) {
+  if (sim.pouring && sim.paperOn) {
+    sim.pour = Math.min(1, sim.pour + dt * 0.22);
+    const fracPass = sim.pour;
+    sim.filtrate = Math.min(96, 96 * fracPass);
+    const sandPass = 1 / (1 + Math.exp(-(Math.log10(sim.pore) - Math.log10(50)) * 6));
+    sim.sandInFiltrate = 0.62 * fracPass * sandPass;
+    sim.sandResidue = 0.62 * fracPass * (1 - sandPass);
+  }
+}
+function stepEvap(dt) {
+  const st = evapState();
+  if (sim.heatOn && !sim.stopped) {
+    sim.temp = Math.min(sim.temp + dt * 30, sim.water > 0.1 ? 100 + 7 * (st.diss / Math.max(1e-6, st.sat * sim.water / 100)) : 160);
+    const evap = 1.8 * sim.power * (sim.stir ? 1.35 : 1) * (sim.temp > 95 ? 1 : sim.temp / 95);
+    if (sim.water > 0) sim.water = Math.max(0, sim.water - evap * dt);
+    /* spattering once solid is present and getting dry */
+    const st2 = evapState();
+    if (st2.cryst > 0.002 && sim.water > 0) {
+      const inten = Math.max(0, Math.min(1, (14 - sim.water) / 14));
+      const rate = 0.11 * sim.power * inten * (sim.stir ? 0.35 : 1);
+      const lost = Math.min(sim.salt, rate * dt);
+      sim.salt -= lost; sim.spilled += lost;
+      if (Math.random() < inten * 0.9) sim.splat.push({ x: 380 + (Math.random() - .5) * 90, y: 168, vy: -60 - Math.random() * 90, vx: (Math.random() - .5) * 90, a: 1 });
+    }
+    if (sim.water === 0 && sim.salt > 0 && sim.toDryness) {
+      const lost = Math.min(sim.salt, 0.05 * dt); sim.salt -= lost; sim.spilled += lost;
+    }
+    if (sim.water <= 0 && sim.heatOn && !sim.toDryness) { sim.heatOn = false; doStop(); }
+  } else if (!sim.heatOn && !sim.stopped) {
+    sim.temp = Math.max(22, sim.temp - dt * 12);
+  }
+  /* particles */
+  const st3 = evapState(), lvl = 205 - 46 * Math.pow(Math.max(0, sim.water / EVAP_MASS), 0.7);
+  const s = Math.min(W / DW, H / DH);
+  for (const p of sim.ions) {
+    p.x += p.vx * dt * (0.4 + sim.temp / 60); p.y += p.vy * dt * (0.4 + sim.temp / 60);
+    if (p.x < 0 || p.x > 1) p.vx = -p.vx; if (p.y < 0 || p.y > 1) p.vy = -p.vy;
+    p.x = Math.min(1, Math.max(0, p.x)); p.y = Math.min(1, Math.max(0, p.y));
+  }
+  if (sim.heatOn && sim.water > 0 && Math.random() < 0.55) {
+    sim.steam.push({ x: 380 + (Math.random() - .5) * 120, y: lvl - 2, r: 3 + Math.random() * 5, a: 1, vy: -22 - Math.random() * 26 });
+  }
+  for (let i = sim.steam.length - 1; i >= 0; i--) {
+    const p = sim.steam[i]; p.y += p.vy * dt; p.x += Math.sin((p.y + p.r) * 0.05) * 8 * dt; p.r += 6 * dt; p.a -= 0.35 * dt;
+    if (p.a <= 0 || p.y < 40) sim.steam.splice(i, 1);
+  }
+  for (let i = sim.splat.length - 1; i >= 0; i--) {
+    const p = sim.splat[i]; p.vy += 240 * dt; p.x += p.vx * dt; p.y += p.vy * dt; p.a -= 0.9 * dt;
+    if (p.a <= 0 || p.y > 300) sim.splat.splice(i, 1);
+  }
+  if (sim.toDryness && sim.water <= 0 && !sim.stopped) doStop();
+}
+function stepCool(dt) {
+  if (sim.heatOn) sim.coolT = Math.min(100, sim.coolT + dt * 14);
+}
+function stepDistill(dt) {
+  if (sim.heat2 && sim.water > 0) {
+    const rate = 1.1 * sim.distRate;
+    sim.water = Math.max(0, sim.water - rate * dt);
+    sim.distillate = Math.min(99, sim.distillate + rate * dt * 1.0);
+    if (Math.random() < 0.5) sim.vapour.push({ x: 150 + (Math.random() - .5) * 60, y: 190, r: 3 + Math.random() * 4, a: 1, vy: -30 });
+  }
+  for (let i = sim.vapour.length - 1; i >= 0; i--) {
+    const v = sim.vapour[i]; v.y += v.vy * dt; v.a -= 0.5 * dt; v.r += 5 * dt;
+    if (v.a <= 0 || v.y < 130) sim.vapour.splice(i, 1);
+  }
+  if (sim.water <= 0) sim.heat2 = false;
+}
+function stepTest(dt) {
+  for (let i = 0; i < 3; i++) {
+    const st = sim.tubes[i]; if (!st) continue;
+    if (st.pure) { st.phase = Math.min(1, (st.phase || 0) + dt * 1.4); continue; }
+    if (st.phase > 0 && st.phase < 1) { st.phase = Math.min(1, st.phase + dt * 1.4); if (st.phase >= 1) st.ppt = Math.max(st.ppt, 0.05); }
+    if (st.clearing) { st.cleared = Math.min(1, st.cleared + dt * 0.6); if (st.cleared >= 1) { st.ppt = 0; st.clearing = false; } }
+    if (st.ppt > 0 && st.ppt < 1) st.ppt = Math.min(1, st.ppt + dt * 1.2);
+    if (st.ppt > 0.05) st.formed = true;
+  }
+}
+function doStop() {
+  const st = evapState();
+  sim.stopped = true; sim.heatOn = false;
+  const transfer = st.cryst > 0 ? D.transferLoss : 0;
+  const recovered = Math.max(0, st.cryst - transfer);
+  sim.result = {
+    recovered: recovered, cryst: st.cryst, dissolved: st.diss, spilled: sim.spilled, transfer: transfer,
+    yieldPct: recovered / D.tds * 100, motherLost: st.diss
+  };
+}
+function judgement() {
+  const st = evapState();
+  if (!sim.stopped) {
+    if (!sim.heatOn) return sim.toDryness
+      ? 'Error demo: press 🔥 and leave it until the basin is completely dry. Watch the loss account — then compare with mode 2.'
+      : 'Press 🔥 to ignite the Bunsen. Watch the readouts: the mass of dissolved salt does NOT change until the solution saturates.';
+    if (st.cryst <= 0.001) return 'Heating: water is leaving, so c(NaCl) is rising and Mg²⁺ ppm is rising, but the mass of dissolved salt is still ' + fx(sim.salt, 2) + ' g — nothing has crystallised yet.';
+    return 'Saturated: ' + fx(st.cryst, 2) + ' g of crystals have formed. Stir, and stop heating while the solid is still WET — ' + fx(sim.spilled, 3) + ' g already spat out.';
+  }
+  const r = sim.result;
+  if (r.cryst <= 0.001) return 'STOPPED TOO EARLY — the solution was not saturated, so there was no solid to collect: ' + fx(r.yieldPct, 1) + ' % yield. Concentrate further next time.';
+  if (sim.water <= 0.06 || sim.toDryness) return 'EVAPORATED TO DRYNESS — 0 marks for the method (a past-paper session MS). Crystals spat out (' + fx(r.spilled, 2) + ' g = ' + fx(r.spilled / D.tds * 100, 1) + ' % of the theoretical crop), and strong heating drives off water of crystallisation and decomposes the Mg salts, so the mass you read is too low. Yield here: ' + fx(r.yieldPct, 1) + ' %.';
+  if (r.yieldPct >= 60) return 'CORRECT JUDGEMENT — you stopped with crystals present and the mixture still wet, then dried between filter papers. Yield ' + fx(r.yieldPct, 1) + ' % (full-mark method). Losses: mother liquor ' + fx(r.motherLost, 2) + ' g, spattering ' + fx(r.spilled, 2) + ' g, glassware ' + fx(r.transfer, 2) + ' g.';
+  return 'Valid method, weak concentration — ' + fx(r.motherLost, 2) + ' g of salt was still dissolved when you stopped, so it went down the drain with the mother liquor. Yield ' + fx(r.yieldPct, 1) + ' %. Target: keep evaporating until only about 2–3 g of water remain (≈5–8 cm³ of liquid) with plenty of crystals forming, stirring all the time — but stop before the basin looks dry, and never bake it.';
+}
+
+/* =====================================================================
+   READOUTS + STATUS (text only; no DOM creation in the loop)
+===================================================================== */
+const READOUTS = {
+  filter: [['ro-sand', 'Sand in residue (g)'], ['ro-filt', 'Filtrate (cm³)'], ['ro-saltfil', 'Dissolved salt in filtrate (g)'], ['ro-turb', 'Filtrate turbidity']],
+  evaporate: [['ro-water', 'Water remaining (g)'], ['ro-diss', 'Salt dissolved / saturation (g per 100 g water)'], ['ro-conc', 'c of brine'], ['ro-mol', 'c as NaCl (mol dm⁻³)'], ['ro-ppm', 'Mg²⁺ in mother liquor (ppm)'], ['ro-cry', 'Crystals formed (g)'], ['ro-yield', '% yield'], ['ro-mark', 'Method mark']],
+  dryness: [['ro-water', 'Water remaining (g)'], ['ro-diss', 'Salt dissolved / saturation (g per 100 g water)'], ['ro-conc', 'c of brine'], ['ro-mol', 'c as NaCl (mol dm⁻³)'], ['ro-ppm', 'Mg²⁺ in mother liquor (ppm)'], ['ro-cry', 'Crystals formed (g)'], ['ro-yield', '% yield'], ['ro-mark', 'Method mark']],
+  cooling: [['ro-temp', 'Temperature (°C)'], ['ro-sol', 'Solubility (g/100 g water)'], ['ro-crop', 'Crystals (g)'], ['ro-rec', 'Crop (% of solute)']],
+  distill: [['ro-dist', 'Distillate (cm³)'], ['ro-flask', 'Water in flask (g)'], ['ro-salt', 'Salt left in flask (g)'], ['ro-cl', 'Cl⁻ in distillate (ppm)']],
+  test: [['ro-t1', 'Tube 1 (SO₄²⁻)'], ['ro-t2', 'Tube 2 (Cl⁻)'], ['ro-t3', 'Tube 3 (Mg²⁺)'], ['ro-pure', 'Conclusion on purity']]
+};
+function readoutCard(id, label) {
+  return '<div class="glass p-3"><p class="text-xs font-bold uppercase tracking-wide text-slate-400">' + label + '</p><p class="text-lg font-bold text-teal-200 mt-1" id="' + id + '">—</p></div>';
+}
+function setRO(id, v) { const e = ro(id); if (e) e.textContent = v; }
+function updateReadouts() {
+  const st = evapState();
+  if (sim.mode === 'filter') {
+    setRO('ro-sand', fx(sim.sandResidue, 3) + (sim.sandInFiltrate > 0.001 ? ' (+' + fx(sim.sandInFiltrate, 3) + ' passed)' : ''));
+    setRO('ro-filt', fx(sim.filtrate, 1));
+    setRO('ro-saltfil', fx(D.tds * sim.pour, 2));
+    setRO('ro-turb', sim.pour < 0.02 ? 'n/a' : (sim.sandInFiltrate > 0.005 ? 'CLOUDY — paper too open' : 'clear ✓'));
+  } else if (sim.mode === 'evaporate' || sim.mode === 'dryness') {
+    setRO('ro-water', fx(sim.water, 2));
+    setRO('ro-diss', fx(st.diss / Math.max(0.001, sim.water) * 100, 1) + ' / ' + fx(st.sat, 1));
+    const c = concGdm3(sim.water, st.diss);
+    setRO('ro-conc', fx(c, 1) + ' g dm⁻³');
+    setRO('ro-mol', fx(c / D.naclM, 2));
+    const kg = (sim.water + st.diss) / 1000;
+    const mgMass = D.mgPerKg * (D.vol0 * D.rho / 1000);
+    setRO('ro-ppm', sci(kg > 0 ? mgMass * 1000 / kg : 0, 2));
+    setRO('ro-cry', fx(st.cryst, 2));
+    setRO('ro-yield', sim.result ? fx(sim.result.yieldPct, 1) + ' %' : '— (stop heating)');
+    setRO('ro-mark', sim.result ? (sim.toDryness || sim.water <= 0.06 ? '0 / full marks lost' : (sim.result.cryst <= 0.001 ? 'method ok, crop tiny' : '✓ full marks')) : 'in progress');
+  } else if (sim.mode === 'cooling') {
+    const pts = sim.coolSalt === 'kno3' ? D.kno3 : D.nacl;
+    const sat = interp(pts, sim.coolT), diss = Math.max(0, Math.min(sim.coolMass, sat)), crys = sim.coolMass - diss;
+    setRO('ro-temp', fx(sim.coolT, 0));
+    setRO('ro-sol', fx(sat, 1));
+    setRO('ro-crop', fx(crys, 1));
+    setRO('ro-rec', fx(crys / sim.coolMass * 100, 1) + ' %');
+  } else if (sim.mode === 'distill') {
+    setRO('ro-dist', fx(sim.distillate, 1));
+    setRO('ro-flask', fx(sim.water, 1));
+    setRO('ro-salt', fx(D.tds, 2));
+    setRO('ro-cl', sim.distTested ? '0 ✓ (negative test)' : 'unknown — test it');
+  } else if (sim.mode === 'test') {
+    const flag = i => {
+      const s = sim.tubes[i];
+      if (!s) return '—';
+      if (s.pure) return 'no ppt ✓ (pure NaCl)';
+      if (s.formed) return i === 1 && s.cleared > 0.5 ? 'white ppt, then DISSOLVED in NH₃ ✓' : (i === 0 && sim.acid === 'h2so4' ? 'ppt but INVALID acidifier' : 'white ppt ✓');
+      return 'adding reagent…';
+    };
+    setRO('ro-t1', flag(0)); setRO('ro-t2', flag(1)); setRO('ro-t3', flag(2));
+    const pos = [0, 1, 2].filter(i => sim.tubes[i] && sim.tubes[i].formed && !sim.tubes[i].pure).length;
+    const tested = [0, 1, 2].filter(i => sim.tubes[i]).length;
+    setRO('ro-pure', sim.tubes.some(s => s && s.pure) ? 'control: pure NaCl → no ppt in tubes 1 & 3' : (pos >= 2 ? 'IMPURE — crude salt is a mixture' : (tested ? 'still testing' : 'test to continue')));
+  }
+}
+function updateStatus() {
+  let m = '';
+  if (sim.mode === 'filter') m = sim.paperOn ? (sim.pour >= 1 ? 'Filtration complete. The clear filtrate holds all ' + fx(D.tds, 2) + ' g of dissolved salt — filtering cannot separate a dissolved solid. Go to mode 2.' : (sim.pouring ? 'Filtering… the sand is retained as the residue; water and dissolved ions pass through as the filtrate.' : 'Filter paper placed. Now press "Pour the muddy seawater".')) : 'Apparatus first: place the filter paper in the funnel, or the sand falls straight into the filtrate.';
+  else if (sim.mode === 'evaporate' || sim.mode === 'dryness') m = judgement() + (sim.rodTest ? '  ‖  ' + sim.rodTest : '');
+  else if (sim.mode === 'cooling') m = 'Cool the hot saturated ' + (sim.coolSalt === 'kno3' ? 'KNO₃' : 'NaCl') + ' solution with the slider and watch the crop. Then switch the salt and repeat — the curve, not the habit, chooses the method.';
+  else if (sim.mode === 'distill') m = sim.water <= 0 ? 'All the water has gone over. The salt remains in the flask: distillation kept the solvent, evaporation would have kept the solid.' : 'Heat the flask: water vapour passes into the condenser and the salt cannot. Collect the distillate and test it.';
+  else if (sim.mode === 'test') m = 'Acidify tube 1 first — choose the acid carefully. Then add each reagent and record the OBSERVATION before you name the ion.';
+  const el = ro('sim-status');
+  if (el && m !== sim.lastMsg) { el.textContent = m; sim.lastMsg = m; }
+}
+
+/* =====================================================================
+   MODE UI
+===================================================================== */
+const MODES = [
+  ['filter', '1 · Filter'], ['evaporate', '2 · Evaporate & crystallise'], ['dryness', '3 · Boil to dryness — ERROR'],
+  ['cooling', '4 · Cooling crystallisation'], ['distill', '5 · Simple distillation'], ['test', '6 · Test the ions']
+];
+const CAPTIONS = {
+  filter: 'Models: filter paper as a size sieve — sand (≈50–500 µm) is retained as the residue, water and hydrated ions (≈0.2–0.4 nm) pass into the filtrate. Simplified: real filtration takes minutes, the paper holds ~2 cm³ of solution in its pores, and you rinse the beaker residue into the funnel with a little distilled water.',
+  evaporate: 'Models: open evaporation from an evaporating basin on gauze over a tripod. NaCl solubility (35.7 → 39.8 g per 100 g water, 0 → 100 °C) is used as the saturation rule for the whole 3.50 g crop of crude salt — the true mixed-salt system saturates later and the Mg salts are the last to crystallise. Boiling-point rise of the brine, spattering and the 0.03 g left on the glassware are modelled; convection currents and crust formation on the basin wall are not.',
+  dryness: 'The identical physics, run to the failure state: no stirring, heating continued after all the water has gone. You get spattering losses, decomposition of the hydrated Mg salts and a mass reading that is too low — and the method itself scores 0. Compare this loss account with the numbers from mode 2.',
+  cooling: 'Saturated solution prepared at 100 °C then cooled; the crop is read straight off the solubility curve (approximate textbook values, 0–100 °C). Simplified: real cooling also super-saturates briefly, and seed crystals or scratching the glass with a rod start crystallisation.',
+  distill: 'Simple distillation of the same 100 cm³ of seawater: water boils off, condenses in the Liebig condenser and is collected; the salt and non-volatile impurities stay in the flask. Simplified: no anti-bumping granules are shown, heat losses and the small amount of spray carried over are ignored, and the still-head temperature is fixed near 100 °C.',
+  test: 'Precipitation tests on the dried crude salt redissolved in water. Observations are generated from the real seawater composition in the brief (Cl⁻ 19.4, SO₄²⁻ 2.7, Mg²⁺ 1.3 g per kg), so all three positive results are expected. Simplified: ppt colour/texture and how fast it settles are stylised; carbonate would also ppt with Ba²⁺, which is why the acid step matters.'
+};
+function buildModeUI() {
+  /* readout cards are re-created below → drop the cached node references */
+  Object.keys(_ro).forEach(k => { delete _ro[k]; });
+  document.getElementById('sim-modes').innerHTML = MODES.map(m =>
+    '<button type="button" class="mode-btn' + (m[0] === 'dryness' ? ' err' : '') + (m[0] === sim.mode ? ' active' : '') + ' px-3 py-1.5 rounded-lg text-xs font-semibold" data-mode="' + m[0] + '">' + m[1] + '</button>').join('');
+  document.querySelectorAll('.mode-btn').forEach(b => { b.onclick = () => setMode(b.dataset.mode); });
+  document.getElementById('sim-caption').textContent = CAPTIONS[sim.mode];
+  document.getElementById('sim-readouts').innerHTML = READOUTS[sim.mode].map(r => readoutCard(r[0], r[1])).join('');
+  document.getElementById('graph-wrap').classList.toggle('hidden', sim.mode !== 'cooling');
+  buildControls();
+  buildPredict();
+  applySaltGate();
+  bindSaltTasks();
+}
+/* =====================================================================
+   v3 dock gate. This lab previously let you heat, filter and distil before
+   committing to any prediction. The gate state lives here and the bind()
+   helper enforces it, so no control can be reached early.
+===================================================================== */
+const saltDock = { answered: false };
+function saltGateOpen(){ return saltDock.answered === true; }
+function applySaltGate(){
+  const locked = !saltGateOpen();
+  const dock = document.getElementById('sim-dock');
+  if (dock){ dock.classList.remove('locked','unlocked'); dock.classList.add(locked ? 'locked' : 'unlocked'); }
+  const st = document.getElementById('dock-state');
+  if (st){ st.className = 'dock-state ' + (locked ? 'st-lock' : 'st-open'); st.textContent = locked ? '\ud83d\udd12 Locked' : '\u2713 Unlocked'; }
+  const ln = document.getElementById('dock-locknote');
+  if (ln) ln.textContent = locked
+    ? 'Locked \u2014 answer the prediction above (and reveal it) to unlock the apparatus controls.'
+    : 'Unlocked \u2014 now run the separation and watch what happens.';
+  const nt = document.getElementById('next-text');
+  if (nt) nt.textContent = locked
+    ? 'Answer the prediction in the panel above the apparatus'
+    : 'Now use the controls to run the separation';
+}
+function saltLockedMsg(){
+  const p = document.getElementById('dock-locknote');
+  if (p){ p.textContent = 'Locked \u2014 answer the prediction above and press Reveal first.'; p.style.color = '#fde68a'; }
+}
+/* =====================================================================
+   v3 teaching-spine wiring: failure cards, hint ladder, completion blanks,
+   self-marking, independent marking scheme.
+===================================================================== */
+function bindSaltTasks(){
+  const fails = {
+    a: { name:'Evaporating the seawater to dryness',
+      txt:'The student heats the basin until all the water has gone and a dry solid remains.',
+      what:'Seawater is not just sodium chloride solution - it also contains dissolved magnesium and calcium salts. If you evaporate to dryness, those impurities crystallise out as well and contaminate the product, so the mass is too high and the sample is not pure NaCl. Strong heating to dryness can also cause spitting, which throws solid out of the basin and loses mass unpredictably.',
+      fix:'Heat gently until crystals START to appear (about half the water has gone), then remove the flame and let the hot, saturated solution cool slowly. Crystals of sodium chloride form as the solubility falls. Filter them off, wash with a little COLD distilled water, and dry between filter papers.',
+      ms:'HKDSE marking: the reason must name IMPURITIES crystallising out, not just "it might spit". Stopping the evaporation early is the technique mark.' },
+    b: { name:'Filtering the mixture while hot and concentrated',
+      txt:'The student filters the hot, nearly saturated solution to collect the crystals.',
+      what:'A hot concentrated solution dissolves far more solid than a cold one. If you filter while hot, much of the sodium chloride is still DISSOLVED and passes straight through the filter paper, so you lose product and your yield is far too low.',
+      fix:'Cool the solution first. Crystallisation happens as the solubility falls with temperature, so by the time you filter, the solid you want is actually solid. Then filter the COLD mixture and wash the crystals with a little cold distilled water.',
+      ms:'HKDSE marking: the sequence evaporation → cooling → filtration is required. Filtering hot loses the yield mark.' },
+    c: { name:'Weighing the crystals while still wet',
+      txt:'The student filters the crystals and weighs them straight away, then reports the mass.',
+      what:'Wet crystals carry water on their surface, and some salts (magnesium and calcium chlorides in particular) are deliquescent - they absorb water from the air. The mass is therefore too high, and a percentage yield can even come out ABOVE 100 %, which is impossible and always means the sample was not dry.',
+      fix:'Wash the crystals with a little cold distilled water, then press them between two pieces of dry filter paper to remove surface water, and leave them to dry (or in a warm oven, not a roaring flame). Weigh to CONSTANT MASS - reheat or redry and reweigh until two readings agree.',
+      ms:'HKDSE marking: "dry to constant mass" earns the mark. A yield above 100 % is the diagnostic that the sample was wet.' }
+  };
+  const fb = document.querySelectorAll('[data-fail]');
+  for (let i = 0; i < fb.length; i++){
+    fb[i].onclick = function(){
+      const f = fails[this.getAttribute('data-fail')];
+      if (!f) return;
+      const p = document.getElementById('fail-panel');
+      if (p) p.innerHTML = '<div class="space-y-2">' +
+        '<div class="rounded-xl border border-amber-500/30 bg-amber-950/20 p-3"><p class="text-xs font-bold text-amber-200 uppercase tracking-wide mb-1">' + f.name + '</p><p class="text-sm text-slate-200">' + f.txt + '</p></div>' +
+        '<div class="border-l-[3px] border-rose-500 bg-rose-950/20 rounded-lg p-3"><p class="text-xs font-bold text-rose-200 uppercase tracking-wide mb-1">What is wrong with it</p><p class="text-sm text-slate-200">' + f.what + '</p></div>' +
+        '<div class="rounded-xl border border-emerald-600/30 bg-emerald-950/20 p-3"><p class="text-xs font-bold text-emerald-200 uppercase tracking-wide mb-1">Do it this way instead</p><p class="text-sm text-slate-200">' + f.fix + '</p></div>' +
+        '<p class="text-xs text-teal-300">' + f.ms + '</p></div>';
+    };
+  }
+  const cl = document.getElementById('fail-clear');
+  if (cl) cl.onclick = function(){ const p = document.getElementById('fail-panel'); if (p) p.innerHTML = ''; };
+
+  const hints = {
+    1: 'Start from what seawater actually is. Is it a solution of one substance or several?',
+    2: 'Think about what happens to the OTHER dissolved salts if you keep heating after the crystals start to form.',
+    3: 'Name the steps in order, then give the reason as a cause and a consequence: impurities crystallise too, so the product is contaminated.'
+  };
+  const hs = document.querySelectorAll('[data-hint]');
+  for (let k = 0; k < hs.length; k++){
+    hs[k].onclick = function(){ const t = document.getElementById('hint-text'); if (t) t.textContent = hints[this.getAttribute('data-hint')] || ''; };
+  }
+  const sm = document.querySelectorAll('.selfmk');
+  for (let m = 0; m < sm.length; m++) sm[m].onchange = updateSaltSelfMark;
+  updateSaltSelfMark();
+
+  const lc = document.getElementById('lad-check');
+  if (lc) lc.onclick = function(){
+    const g1 = parseFloat((document.getElementById('lad-g1') || {}).value);
+    const g2 = parseFloat((document.getElementById('lad-g2') || {}).value);
+    const g3 = parseFloat((document.getElementById('lad-g3') || {}).value);
+    const ok1 = isFinite(g1) && Math.abs(g1 - 0.200) < 0.003;
+    const ok2 = isFinite(g2) && Math.abs(g2 - 7.00) < 0.08;
+    const ok3 = isFinite(g3) && Math.abs(g3 - 7000) < 80;
+    let n = 0; [ok1, ok2, ok3].forEach(function(o){ if (o) n++; });
+    const box = document.getElementById('lad-fb');
+    if (box) box.innerHTML = '<div class="rounded-xl border border-slate-700/60 bg-slate-950/50 p-3 space-y-1 text-xs">' +
+      '<div class="' + (ok1?'text-emerald-300':'text-rose-300') + '">' + (ok1?'\u2713':'\u2717') + ' Blank 1: 200 cm³ / 1000 = 0.200 dm³. Use dm³ because the concentration is per dm³.</div>' +
+      '<div class="' + (ok2?'text-emerald-300':'text-rose-300') + '">' + (ok2?'\u2713':'\u2717') + ' Blank 2: mass = 35.0 g dm⁻³ x 0.200 dm³ = 7.00 g. Note that dm³ cancels, leaving g.</div>' +
+      '<div class="' + (ok3?'text-emerald-300':'text-rose-300') + '">' + (ok3?'\u2713':'\u2717') + ' Blank 3: 7.00 g = 7000 mg. (1 g = 1000 mg.)</div>' +
+      '<div class="text-slate-400 pt-1">' + (n===3 ? 'All three correct, and all three to 3 significant figures.' : 'The blank you missed is the mark you would lose. The cm³ to dm³ conversion is the one that costs most candidates.') + '</div></div>';
+  };
+  const lh = document.getElementById('lad-hint');
+  if (lh) lh.onclick = function(){ const t = document.getElementById('lad-hinttext'); if (t) t.textContent = 'Convert the volume to dm³ FIRST (divide by 1000). Then the concentration in g dm⁻³ multiplied by the volume in dm³ gives the mass in g. To finish, remember 1 g = 1000 mg.'; };
+
+  const ir = document.getElementById('ind-reveal');
+  if (ir) ir.onclick = function(){
+    const o = document.getElementById('ind-out');
+    if (o) o.innerHTML = '<div class="work"><span class="hl">Marking scheme</span>\n' +
+      '  (a) V = 250 cm³ / 1000 = 0.250 dm³' + "\n" +
+      '      c = mass / volume = 8.75 g / 0.250 dm³ = 35.0 g dm⁻³                              (1)\n\n' +
+      '  (b) mass of solution = V x density = 250 cm³ x 1.02 g cm⁻³ = 255 g\n' +
+      '      ppm = mg of solute per kg of solution\n' +
+      '          = (8.75 x 1000 mg) / (255 / 1000 kg)\n' +
+      '          = 8750 mg / 0.255 kg = 34 300 ppm = 3.43 x 10^4 ppm                       (1)\n' +
+      '      <span class="dim">Working in g dm⁻³ with a density of about 1, ppm is numerically very close to the g dm⁻³ value - which is exactly why ppm is a convenient unit for seawater. Do not simply copy 35.0 as ppm; use the density you were given.</span>\n\n' +
+      '  (c) Any ONE of:                                                            (1)\n' +
+      '      \u2022 the solid was not dried to constant mass, so it still contained water\n' +
+      '      \u2022 other dissolved salts (MgCl₂, MgSO4) crystallised out with the sodium chloride\n' +
+      '      \u2022 the solid is deliquescent and absorbed water from the air after drying\n\n' +
+      '<span class="hl">Where candidates lose marks</span>\n' +
+      '  \u2022 using 250 rather than 0.250 in part (a) - a factor of 1000 error\n' +
+      '  \u2022 giving ppm as 35.0 without using the density\n' +
+      '  \u2022 answering (c) with "some salt is lost", which is about a LOW mass and contradicts the question\n' +
+      '  \u2022 quoting 34 300 ppm to 5 significant figures when the mass data only justify 3</div>';
+  };
+}
+function updateSaltSelfMark(){
+  const bs = document.querySelectorAll('.selfmk');
+  let n = 0;
+  for (let i = 0; i < bs.length; i++) if (bs[i].checked) n++;
+  const el = document.getElementById('selfmarks-total');
+  if (el && bs.length) el.textContent = n + ' / ' + bs.length + ' points ticked. ' +
+    (n === bs.length ? 'That is a full-mark answer.' : 'The unticked points are the marks you did not write.');
+}
+function goNext(){
+  const g = document.getElementById('next-go');
+  const tab = (g && g.dataset.go) ? g.dataset.go : 'sim';
+  setTab(tab);
+  const t = tab === 'sim' ? document.getElementById('sim-dock') : document.getElementById('panel-' + tab);
+  if (t && t.scrollIntoView) t.scrollIntoView({ behavior:'smooth', block:'start' });
+}
+function bind(id, fn) {
+  const e = document.getElementById(id);
+  if (e) e.onclick = function(){ if (!saltGateOpen()){ saltLockedMsg(); return; } fn(); };
+}
+function bindIn(id, fn) { const e = document.getElementById(id); if (e) e.oninput = fn; }
+function ctrl(title, inner, hint) {
+  return '<div><p class="text-xs font-bold uppercase tracking-wide text-slate-400 mb-1.5">' + title + '</p>' + inner +
+    (hint ? '<p class="text-xs text-slate-500 mt-1.5 leading-relaxed">' + hint + '</p>' : '') + '</div>';
+}
+function btn(id, label, cls) { return '<button type="button" id="' + id + '" class="' + (cls || 'btn') + ' px-3 py-2 rounded-lg text-xs font-semibold">' + label + '</button>'; }
+function sld(id, min, max, stepv, val, label) {
+  return '<div class="flex items-center gap-2"><input type="range" id="' + id + '" min="' + min + '" max="' + max + '" step="' + stepv + '" value="' + val + '" aria-label="' + label + '"><span class="text-xs text-slate-400 w-16 text-right" id="' + id + '-v"></span></div>';
+}
+function buildControls() {
+  const el = document.getElementById('ctrl-panel');
+  let h = '';
+  if (sim.mode === 'filter') {
+    h = ctrl('Apparatus (order matters)', btn('btn-paper', 'Fold & place filter paper in the funnel'), 'Skip this and the sand goes straight through — the mistake the game version hid behind a click.')
+      + ctrl('Step 1b', btn('btn-pour', 'Pour the muddy seawater') + ' ' + btn('btn-pour-stop', 'Stop'), '100 cm³ of turbid seawater: 3.50 g dissolved salt + 0.62 g sand and silt.')
+      + ctrl('Filter paper pore size (µm)', sld('sl-pore', 0.3, 200, 0.1, 10, 'filter paper pore size'), 'Whatman-type paper ≈ 10 µm. Drag above ≈50 µm and the residue fails to form.')
+      + ctrl('Reset', btn('btn-reset-sim', 'Reset this stage', 'btn'), 'Run the whole separation again from mode 1.');
+  } else if (sim.mode === 'evaporate' || sim.mode === 'dryness') {
+    h = ctrl('Bunsen burner', btn('btn-flame', '🔥 Ignite / cancel the flame', sim.heatOn ? 'btn btn-on' : 'btn'), 'Real lab: safety screen, hair tied back, heat gently and move the burner — never one spot.')
+      + ctrl('Flame size (sim, time compressed)', sld('sl-power', 0.5, 3, 0.1, sim.power, 'flame size'))
+      + ctrl('Stirring', btn('btn-stir', sim.stir ? 'Stirring with glass rod — ON' : 'Stir with a glass rod', sim.stir ? 'btn btn-on' : 'btn'), 'Stirring spreads the heat and cuts spattering losses by ≈65 % — visible in the loss account.')
+      + ctrl('Is it ready? (exam test)', btn('btn-rod', 'Dip a glass rod, wave it in air'), 'If crystals form on the rod as it cools, the solution is saturated and you may concentrate further.')
+      + ctrl(sim.mode === 'dryness' ? 'Stop (before total loss)' : 'Exam protocol: stop while still wet', btn('btn-stop', sim.mode === 'dryness' ? 'Stop heating now' : 'Stop heating & dry on filter paper', 'btn btn-primary'), 'Crystals + a little mother liquor left in the basin, then dry between filter papers.')
+      + ctrl('Reset', btn('btn-reset-sim', 'Fresh 100 cm³ of filtrate', 'btn'), 'Resets to 99.0 g water + 3.50 g dissolved crude salt.');
+  } else if (sim.mode === 'cooling') {
+    h = ctrl('Salt in the hot saturated solution', btn('btn-salt', sim.coolSalt === 'kno3' ? 'KNO₃ (steep curve)' : 'NaCl (flat curve)'), 'Same starting temperature, same 100 g of water — only the curve differs.')
+      + ctrl('Temperature of the solution (°C)', sld('sl-temp', 0, 100, 1, 100, 'temperature'), 'Drag down from 100 °C, or use the ice-bath button.')
+      + ctrl('Cooling', btn('btn-ice', 'Ice-bath: cool to 20 °C', 'btn btn-primary'), 'Cool slowly for large crystals; scratch the glass with a rod to start crystallisation.')
+      + ctrl('Reset', btn('btn-reset-sim', 'Re-saturate at 100 °C', 'btn'));
+  } else if (sim.mode === 'distill') {
+    h = ctrl('Burner under the flask', btn('btn-flame2', sim.heat2 ? 'Stop heating' : '🔥 Heat the flask', sim.heat2 ? 'btn btn-on' : 'btn'), 'Anti-bumping granules in the real apparatus; never heat a closed system.')
+      + ctrl('Heating rate', sld('sl-rate', 0.4, 2.5, 0.1, sim.distRate, 'distillation rate'), 'Distil at ~1 drop per second in the real lab; faster and you carry spray over.')
+      + ctrl('Purity check on the distillate', btn('btn-dtest', 'Add acidified AgNO₃(aq) to the distillate'), 'Observation: no precipitate → no Cl⁻ → the distillate is pure water.')
+      + ctrl('Reset', btn('btn-reset-sim', 'Reset the apparatus', 'btn'));
+  } else if (sim.mode === 'test') {
+    h = ctrl('Tube 1 — acidify before adding BaCl₂(aq)', btn('btn-acid-hcl', 'dilute HCl') + ' ' + btn('btn-acid-h2so4', 'dilute H₂SO₄', 'btn btn-danger'), 'Choosing H₂SO₄ adds SO₄²⁻ yourself: the white ppt proves nothing and scores 0.')
+      + ctrl('Add the reagents', btn('btn-t1', 'Tube 1: add BaCl₂(aq)') + ' ' + btn('btn-t2', 'Tube 2: HNO₃ then AgNO₃(aq)') + '<div class="mt-2">' + btn('btn-t2n', 'Tube 2: then dilute NH₃(aq)') + ' ' + btn('btn-t3', 'Tube 3: NaOH(aq) to excess') + '</div>', 'Write observation first, then the ion: "white precipitate formed" is an observation, "sulfate is present" is the inference.')
+      + ctrl('Expected results for crude sea salt', btn('btn-texpected', 'Show what a PURE NaCl sample would give'), 'Pure NaCl: no ppt in tube 1 and no ppt in tube 3 — the positives prove the mixture.')
+      + ctrl('Reset', btn('btn-reset-sim', 'Fresh tubes', 'btn'));
+  }
+  el.innerHTML = h;
+  /* wire handlers (no timers; state flags only) */
+  if (sim.mode === 'filter') {
+    bind('btn-paper', () => { sim.paperOn = true; buildControls(); });
+    bind('btn-pour', () => { if (!sim.paperOn) { sim.pouring = false; return; } sim.pouring = !sim.pouring; buildControls(); });
+    bind('btn-pour-stop', () => { sim.pouring = false; buildControls(); });
+    bindIn('sl-pore', e => { sim.pore = Math.max(0.3, +e.target.value || 10); const v = document.getElementById('sl-pore-v'); if (v) v.textContent = fx(sim.pore, 1) + ' µm'; });
+  } else if (sim.mode === 'evaporate' || sim.mode === 'dryness') {
+    bind('btn-flame', () => { if (!sim.stopped) { sim.heatOn = !sim.heatOn; } buildControls(); });
+    bindIn('sl-power', e => { sim.power = +e.target.value || 1.5; const v = document.getElementById('sl-power-v'); if (v) v.textContent = fx(sim.power, 1) + '×'; });
+    bind('btn-stir', () => { sim.stir = !sim.stir; buildControls(); });
+    bind('btn-rod', () => {
+      const st = evapState();
+      if (sim.water < 0.3) { sim.rodTest = 'Glass-rod test: the basin is dry — there is no solution left to test. This is the failure state; the method scores 0.'; return; }
+      sim.rodTest = st.diss >= st.sat * sim.water / 100 - 1e-6
+        ? 'Glass-rod test: crystals appeared as the rod cooled in air → the solution IS saturated; keep concentrating, then stop while still wet.'
+        : 'Glass-rod test: no crystals formed — ' + fx(st.diss / Math.max(0.01, sim.water) * 100, 1) + ' g of salt per 100 g water, below the ' + fx(st.sat, 1) + ' g needed at ' + fx(sim.temp, 0) + ' °C. Evaporate more water.';
+    });
+    bind('btn-stop', () => { if (!sim.stopped) doStop(); buildControls(); });
+  } else if (sim.mode === 'cooling') {
+    bind('btn-salt', () => {
+      sim.coolSalt = sim.coolSalt === 'kno3' ? 'nacl' : 'kno3';
+      sim.coolMass = sim.coolSalt === 'kno3' ? interp(D.kno3, 100) : interp(D.nacl, 100);
+      buildControls();
+    });
+    bindIn('sl-temp', e => { sim.coolT = Math.max(0, Math.min(100, +e.target.value || 0)); const v = document.getElementById('sl-temp-v'); if (v) v.textContent = fx(sim.coolT, 0) + ' °C'; });
+    bind('btn-ice', () => { sim.coolT = 20; sim.heatOn = false; buildControls(); });
+  } else if (sim.mode === 'distill') {
+    bind('btn-flame2', () => { sim.heat2 = !sim.heat2; buildControls(); });
+    bindIn('sl-rate', e => { sim.distRate = +e.target.value || 1; const v = document.getElementById('sl-rate-v'); if (v) v.textContent = fx(sim.distRate, 1) + '×'; });
+    bind('btn-dtest', () => { sim.distTested = true; });
+  } else if (sim.mode === 'test') {
+    const tube = extra => Object.assign({ phase: 0, ppt: 0, cleared: 0, formed: false, pure: false }, extra || {});
+    bind('btn-acid-hcl', () => { sim.acid = 'hcl'; sim.tubes[0] = tube(sim.tubes[0] && sim.tubes[0].formed ? { formed: true, ppt: 1 } : null); buildControls(); });
+    bind('btn-acid-h2so4', () => { sim.acid = 'h2so4'; sim.tubes[0] = tube(sim.tubes[0] && sim.tubes[0].formed ? { formed: true, ppt: 1 } : null); buildControls(); });
+    bind('btn-t1', () => { if (sim.acid) sim.tubes[0] = tube({ phase: 0.01, ppt: 0.06 }); });
+    bind('btn-t2', () => { sim.tubes[1] = tube({ phase: 0.01, ppt: 0.06 }); });
+    bind('btn-t2n', () => { if (sim.tubes[1] && sim.tubes[1].ppt > 0) { sim.tubes[1].clearing = true; } });
+    bind('btn-t3', () => { sim.tubes[2] = tube({ phase: 0.01, ppt: 0.06 }); });
+    bind('btn-texpected', () => { sim.tubes[0] = tube({ phase: 0.01, pure: true }); sim.tubes[1] = tube({ phase: 0.01, ppt: 0.06 }); sim.tubes[2] = tube({ phase: 0.01, pure: true }); });
+  }
+  bind('btn-reset-sim', () => { setMode(sim.mode); });
+  const pv = document.getElementById('sl-pore-v'); if (pv) pv.textContent = fx(sim.pore, 1) + ' µm';
+  const vv = document.getElementById('sl-power-v'); if (vv) vv.textContent = fx(sim.power, 1) + '×';
+  const tv = document.getElementById('sl-temp-v'); if (tv) tv.textContent = fx(sim.coolT, 0) + ' °C';
+  const rv = document.getElementById('sl-rate-v'); if (rv) rv.textContent = fx(sim.distRate, 1) + '×';
+}
+
+/* ---------- Predict → check checkpoints (one per main variable) ---------- */
+const PREDICT = {
+  filter: {
+    q: 'Filtration removes the sand. What happens to the MASS of dissolved sodium chloride in the beaker, compared with the 3.50 g in the original muddy seawater?',
+    o: ['It decreases — some salt is trapped in the paper with the sand',
+        'It is unchanged — dissolved NaCl passes through the paper into the filtrate',
+        'It increases — the filtrate is more concentrated than the seawater'],
+    a: 1,
+    why: 'Unchanged. The dissolved particles (hydrated Na⁺ and Cl⁻, ≈0.2–0.4 nm) are far smaller than the pores of the filter paper (≈10 µm), so they pass through with the water and appear in the filtrate. Filtration separates an INSOLUBLE solid from a liquid; it cannot separate a dissolved solid. Concentration is also unchanged, because solute and solvent pass through together — it is evaporation, not filtration, that concentrates the brine.'
+  },
+  evaporate: {
+    q: 'Before heating, Mg²⁺ is 1.3 × 10³ ppm in this seawater. After half the water has evaporated and BEFORE any crystals appear, the Mg²⁺ concentration of the remaining solution is about:',
+    o: ['6.5 × 10² ppm', '1.3 × 10³ ppm', '2.5 × 10³ ppm', '1.3 × 10⁴ ppm'],
+    a: 2,
+    why: '≈2.5 × 10³ ppm. ppm = mg of ion per kg of solution. The mass of Mg²⁺ has not changed (1.3 g per kg → 0.133 g in this 102.5 g sample = 133 mg); the mass of solution has halved, from 102.5 g to ≈53 g. 133 mg ÷ 0.053 kg = 2.5 × 10³ ppm. Two traps: ppm is mg per kg, NOT g per kg; and the number must rise because the solvent is leaving, not stay fixed because "the salt is the same".'
+  },
+  dryness: {
+    q: 'Why is the percentage yield from this practical below 100 %? Choose the answer that would gain full marks.',
+    o: ['Some of the salt decomposes when it is heated',
+        'Some salt stays dissolved in the mother liquor that is poured off, some is spat out of the basin on strong heating, and some is left on the glass rod, basin and filter paper',
+        'The balance is not accurate enough',
+        'Some of the water evaporated, so there is less salt'],
+    a: 1,
+    why: 'Name the route AND the step. (1) Solubility is never zero, so a saturated mother liquor is poured off carrying dissolved NaCl; (2) crystals are spat ("spit") out of the basin when heating is pressed to dryness; (3) solid is left on the glass rod, on the basin wall and on the filter paper, and some is lost during transfer and washing. Option A is wrong for NaCl (it does not decompose on gentle heating — but the hydrated Mg salts in crude salt do lose water, which is another reason not to bake it). Option D is a category error: the water was never part of the salt. And if your yield comes out ABOVE 100 %, the correct explanation is that the crystals were not dry.'
+  },
+  cooling: {
+    q: 'A saturated solution of each salt, prepared at 100 °C in 100 g of water, is cooled to 20 °C. Which gives the larger crop of crystals, and why?',
+    o: ['NaCl, because its solubility falls steeply with temperature',
+        'KNO₃, because its solubility falls steeply with temperature',
+        'Both give the same crop, because both cool through the same 80 °C'],
+    a: 1,
+    why: 'KNO₃. Its solubility falls from ≈246 g to ≈32 g per 100 g water, so ≈87 % of the dissolved salt crystallises. NaCl falls only from ≈39.8 g to ≈36.0 g per 100 g water — under 10 % of the crop — because its curve is almost FLAT. That is the reason seawater salt is recovered by EVAPORATIVE crystallisation: for NaCl you must remove the solvent, not the heat. "Both cool through the same ΔT" is the trap: what matters is the gradient of the curve.'
+  },
+  distill: {
+    q: 'In simple distillation of seawater, which fraction is the useful product, and why?',
+    o: ['The solid left in the flask, because that is where the salt is',
+        'The distillate, because in distillation the SOLVENT is the wanted product',
+        'Neither — both are waste',
+        'The distillate, because the salt boils at 100 °C and comes over first'],
+    a: 1,
+    why: 'The distillate: pure water. Simple distillation is used when the LIQUID (the solvent) is wanted — the water evaporates, is condensed in the condenser and collected, while the salt and other non-volatile impurities stay in the flask. Evaporation/crystallisation is used when the SOLID is wanted. Option D is the classic wording error: NaCl does not boil at 100 °C; water does, and the salt is non-volatile.'
+  },
+  test: {
+    q: 'To test the redissolved crude salt for SO₄²⁻ with BaCl₂(aq), what should you acidify it with first?',
+    o: ['Dilute sulfuric acid, H₂SO₄(aq)', 'Dilute hydrochloric acid, HCl(aq)', 'Pure water — no acid is needed'],
+    a: 1,
+    why: 'Dilute HCl (or dilute HNO₃). Acidifying removes carbonate and other ions that would also give a white ppt with Ba²⁺. H₂SO₄ would add SO₄²⁻ ions yourself, so the white BaSO₄ precipitate would prove nothing — "sulfuric acid scores 0" (the practical paper Jun 2026 Q1c). No acid at all is the other zero: the test would be inconclusive if CO₃²⁻ were present.'
+  }
+};
+function buildPredict() {
+  const p = PREDICT[sim.mode];
+  ro('pr-q').textContent = p.q;
+  ro('pr-why').classList.add('hidden'); ro('pr-why').textContent = '';
+  ro('pr-opts').innerHTML = p.o.map((o, i) =>
+    '<button type="button" class="pr-opt btn px-3 py-2 rounded-lg text-xs font-semibold text-left" data-p="' + i + '">' + 'ABCD'[i] + ' · ' + o + '</button>').join('');
+  document.querySelectorAll('.pr-opt').forEach(b => {
+    b.onclick = () => { sim.prPick[sim.mode] = +b.dataset.p; document.querySelectorAll('.pr-opt').forEach(x => x.classList.toggle('picked', x === b)); };
+  });
+  ro('pr-reveal').onclick = () => {
+    const why = ro('pr-why');
+    const pick = sim.prPick[sim.mode];
+    const right = (pick === p.a);
+    /* v3: only a CORRECT prediction unlocks the apparatus, and a wrong pick stays retryable */
+    if (right){ saltDock.answered = true; applySaltGate();
+  bindSaltTasks(); }
+    const verdict = pick === undefined ? 'No prediction made yet.' : (pick === p.a ? 'Correct — ' : 'Not correct — ');
+    why.textContent = 'Answer ' + 'ABCD'[p.a] + '. ' + verdict + p.why;
+    why.classList.remove('hidden');
+  };
+}
+function setMode(m) {
+  sim.mode = m;
+  if (m === 'filter') resetFilter();
+  if (m === 'evaporate' || m === 'dryness') resetEvap();
+  if (m === 'cooling') { sim.coolMass = sim.coolSalt === 'kno3' ? interp(D.kno3, 100) : interp(D.nacl, 100); sim.coolT = 100; sim.heatOn = false; }
+  if (m === 'distill') { sim.water = EVAP_MASS; sim.heat2 = false; sim.distillate = 0; sim.distTested = false; sim.vapour.length = 0; }
+  if (m === 'test') { sim.tubes = [null, null, null]; sim.acid = ''; }
+  sim.prPick = sim.prPick || {};
+  buildModeUI();
+  updateReadouts();
+  resizeCanvas();
+}
+
+/* =====================================================================
+   RAF LOOP
+===================================================================== */
+let last = 0;
+function loop(now) {
+  requestAnimationFrame(loop);
+  if (activeTab !== 'sim') return;
+  const t = (now || 0) / 1000;
+  let dt = last ? Math.min(0.05, t - last) : 0.016;
+  last = t;
+  sim.t += dt;
+  if (sim.mode === 'filter') stepFilter(dt);
+  else if (sim.mode === 'evaporate' || sim.mode === 'dryness') stepEvap(dt);
+  else if (sim.mode === 'cooling') stepCool(dt);
+  else if (sim.mode === 'distill') stepDistill(dt);
+  else stepTest(dt);
+  updateReadouts();
+  updateStatus();
+  if (!ctx) resizeCanvas();
+  if (ctx) {
+    if (sim.mode === 'filter') drawFilter();
+    else if (sim.mode === 'evaporate' || sim.mode === 'dryness') drawEvap();
+    else if (sim.mode === 'cooling') { drawCool(); drawGraph(); }
+    else if (sim.mode === 'distill') drawDistill();
+    else drawTest();
+  }
+}
+requestAnimationFrame(loop);
+
+/* =====================================================================
+   RENDERERS — static panels from T
+===================================================================== */
+function renderIntro() {
+  const s = t();
+  document.getElementById('hdr-title').textContent = s.title;
+  document.getElementById('hdr-sub').textContent = s.subtitle;
+  document.getElementById('intro-h1').textContent = s.introH1;
+  document.getElementById('intro-lead').textContent = s.introLead;
+  document.getElementById('sim-caption').textContent = CAPTIONS[sim.mode];
+  document.getElementById('teacher-title').textContent = s.teacherTitle;
+  document.getElementById('teacher-content').innerHTML = s.teacher.map(x => '<p>• ' + x + '</p>').join('');
+  document.getElementById('intro-cards').innerHTML = s.concepts.map(c =>
+    '<div class="glass p-4"><h3 class="font-bold text-indigo-300 text-sm mb-1">' + c.t + '</h3><p class="text-sm text-slate-300 leading-relaxed">' + c.d + '</p></div>').join('');
+}
+function renderCalc() {
+  const s = t();
+  document.getElementById('calc-title').textContent = s.calcTitle;
+  document.getElementById('calc-sub').textContent = s.calcSub;
+  const sel = document.getElementById('calc-mode');
+  sel.onchange = () => { renderCalcInputs(sel.value); };
+  renderCalcInputs('ppm');
+}
+const CALC = {
+  ppm: {
+    note: 'ppm = mg of substance per kg of solution. For a measured VOLUME you must first use the density: ρ(seawater) ≈ 1.025 kg dm⁻³.',
+    fields: [['c-mass', 'mass of ion in the sample (g)', 0.133], ['c-vol', 'volume of seawater (cm³)', 100], ['c-rho', 'density of seawater (kg dm⁻³)', 1.025]]
+  },
+  conc: {
+    note: 'c = n/V with V in dm³, and n = m/M. 1.5 asks for both g dm⁻³ and mol dm⁻³; titration calculations are NOT required at this stage.',
+    fields: [['c-mass', 'mass of solute (g)', 2.73], ['c-mr', 'M of solute (g mol⁻¹)', 58.5], ['c-vol', 'volume of solution (cm³)', 100]]
+  },
+  yield: {
+    note: '% yield = (actual / theoretical) × 100. Actual mass must be the mass at CONSTANT mass. A yield above 100 % means the sample still contained water.',
+    fields: [['c-actual', 'mass of dry salt obtained (g)', 3.10], ['c-theo', 'theoretical mass (g)', 3.50]]
+  },
+  cmass: {
+    note: 'the practical paper wording: weigh → heat → cool → reweigh → repeat until CONSTANT MASS (two successive masses agreeing to ±0.05 g). Dataset: empty evaporating basin 24.12 g; basin + wet salt 27.60 g; after 1st heating 27.28 g; after 2nd 27.22 g; after 3rd 27.22 g.',
+    fields: [['c-empty', 'empty basin (g)', 24.12], ['c-w1', 'after 1st heat & cool (g)', 27.28], ['c-w2', 'after 2nd heat & cool (g)', 27.22], ['c-w3', 'after 3rd heat & cool (g)', 27.22], ['c-theo', 'theoretical mass (g)', 3.50], ['c-mass', 'mass of wet salt + basin (g)', 27.60]]
+  }
+};
+function renderCalcInputs(mode) {
+  const c = CALC[mode];
+  document.getElementById('calc-inputs').innerHTML = c.fields.map(f =>
+    '<div class="field"><label for="' + f[0] + '">' + f[1] + '</label><input type="number" step="0.01" id="' + f[0] + '" value="' + f[2] + '"></div>').join('');
+  document.getElementById('calc-note').textContent = c.note;
+  document.getElementById('calc-working').classList.add('hidden');
+}
+function inp(id, def) {
+  const e = document.getElementById(id);
+  const v = e ? parseFloat(e.value) : NaN;
+  return isFinite(v) ? v : def;
+}
+function runCalc() {
+  const mode = (document.getElementById('calc-mode') || {}).value || 'ppm';
+  const w = document.getElementById('calc-working');
+  w.classList.remove('hidden');
+  let out = '';
+  if (mode === 'ppm') {
+    const m = inp('c-mass', 0.133), V = inp('c-vol', 100), rho = inp('c-rho', 1.025);
+    const kg = V / 1000 * rho, mg = m * 1000, ppm = kg > 0 ? mg / kg : 0;
+    out = 'STEP 1  mass of solution = V × ρ = (' + fx(V, 0) + ' / 1000) dm³ × ' + fx(rho, 3) + ' kg dm⁻³ = ' + fx(kg, 4) + ' kg\n' +
+      'STEP 2  mass of ion in mg = ' + fx(m, 3) + ' g × 1000 = ' + fx(mg, 1) + ' mg\n' +
+      'STEP 3  ppm = mg per kg = ' + fx(mg, 1) + ' mg ÷ ' + fx(kg, 4) + ' kg = ' + fx(ppm, 0) + ' ppm\n' +
+      'ANSWER  ' + sci(ppm, 2) + ' ppm  (3 s.f.: ' + fx(ppm, 3) + ' ppm)\n\n' +
+      'EXAM LINK  1.3 g of Mg²⁺ in 1 kg → 1300 mg kg⁻¹ = 1.3×10³ ppm. NOT 1.3 ppm — ppm is mg per kg, not g per kg.\n' +
+          'Check against the sim: 0.133 g Mg²⁺ in the ORIGINAL 100 cm³ sample reads 1.3×10³ ppm; after half the water is gone the readout doubles.';
+  } else if (mode === 'conc') {
+    const m = inp('c-mass', 2.73), M = inp('c-mr', 58.5), V = inp('c-vol', 100);
+    const n = M > 0 ? m / M : 0, dm3 = V / 1000, c = dm3 > 0 ? n / dm3 : 0;
+    out = 'STEP 1  n = m / M = ' + fx(m, 2) + ' g ÷ ' + fx(M, 1) + ' g mol⁻¹ = ' + n.toPrecision(3) + ' mol\n' +
+      'STEP 2  V = ' + fx(V, 0) + ' cm³ ÷ 1000 = ' + fx(dm3, 3) + ' dm³\n' +
+      'STEP 3  c = n / V = ' + n.toPrecision(3) + ' mol ÷ ' + fx(dm3, 3) + ' dm³ = ' + c.toPrecision(3) + ' mol dm⁻³\n' +
+      'ALSO    c in g dm⁻³ = m / V = ' + fx(m, 2) + ' g ÷ ' + fx(dm3, 3) + ' dm³ = ' + fx(m / dm3, 1) + ' g dm⁻³\n' +
+      'CHECK   g dm⁻³ ÷ M = ' + fx(m / dm3 / M, 3) + ' mol dm⁻³  ✓ the two routes agree\n\n' +
+      'SEAWATER  3.50 g of dissolved salts per 100 cm³ = 35 g dm⁻³; the NaCl part (78 %) = 2.73 g → 0.467 mol dm⁻³.\n' +
+      'Watch the units: mol dm⁻³ ≡ M; never divide by cm³.';
+  } else if (mode === 'yield') {
+    const a = inp('c-actual', 3.10), th = inp('c-theo', 3.50);
+    const y = th > 0 ? a / th * 100 : 0;
+    out = 'STEP 1  % yield = (actual / theoretical) × 100\n' +
+      'STEP 2  = ' + fx(a, 2) + ' g ÷ ' + fx(th, 2) + ' g × 100\n' +
+      'STEP 3  = ' + fx(a / (th || 1), 4) + ' × 100\n' +
+      'ANSWER  ' + y.toPrecision(3) + ' %  (3 s.f. — the data are given to 3 s.f.)\n\n' +
+      'THEORETICAL MASS for 100 cm³ of seawater = 3.50 g (TDS ≈ 35 g dm⁻³).\n' +
+      (y > 100 ? 'Your answer is ABOVE 100 % → the salt was NOT dry (water still in the solid) or it still holds MgCl₂/MgSO₄ which absorb water from the air. Reheat to constant mass.'
+               : 'Below 100 % is EXPECTED. Name the routes: salt left dissolved in the mother liquor, crystals spat out of the basin, solid left on rod/basin/paper.') ;
+  } else {
+    const e = inp('c-empty', 24.12), w1 = inp('c-w1', 27.28), w2 = inp('c-w2', 27.22), w3 = inp('c-w3', 27.22), th = inp('c-theo', 3.50), wet = inp('c-mass', 27.60);
+    const d12 = w1 - w2, d23 = w2 - w3, dry = w3 - e;
+    out = 'READING ORDER   weigh empty basin → add wet salt → heat → COOL → reweigh → repeat\n\n' +
+      'empty basin                 ' + fx(e, 2) + ' g\n' +
+      'basin + wet salt            ' + fx(wet, 2) + ' g   (water still present)\n' +
+      'after 1st heating           ' + fx(w1, 2) + ' g   Δ vs next = ' + fx(d12, 2) + ' g\n' +
+      'after 2nd heating           ' + fx(w2, 2) + ' g   Δ vs next = ' + fx(d23, 2) + ' g\n' +
+      'after 3rd heating           ' + fx(w3, 2) + ' g\n\n' +
+      'STEP 1  constant mass?  2nd vs 3rd differ by ' + fx(d23, 2) + ' g ≤ 0.05 g → CONSTANT MASS reached after the 2nd heating; the 1st → 2nd change of ' + fx(d12, 2) + ' g shows water was still going off, so the 1st reading must NOT be used.\n' +
+      'STEP 2  mass of dry salt = ' + fx(w3, 2) + ' − ' + fx(e, 2) + ' = ' + fx(dry, 2) + ' g\n' +
+      'STEP 3  water removed = ' + fx(wet, 2) + ' − ' + fx(w3, 2) + ' = ' + fx(wet - w3, 2) + ' g\n' +
+      'STEP 4  % yield = ' + fx(dry, 2) + ' ÷ ' + fx(th, 2) + ' × 100 = ' + fx(th > 0 ? dry / th * 100 : 0, 1) + ' %\n\n' +
+      'IF YOU HAD STOPPED at the 1st heating you would report ' + fx(w1 - e, 2) + ' g → ' + fx(th > 0 ? (w1 - e) / th * 100 : 0, 1) + ' % — too HIGH, because the salt was still wet. Cooling before each weighing matters too: a hot basin sets up convection in the balance and the reading drifts.';
+  }
+  w.textContent = out;
+}
+function renderMcq() {
+  const s = t();
+  document.getElementById('pp-title').textContent = s.ppTitle;
+  document.getElementById('pp-sub').textContent = s.ppSub;
+  document.getElementById('pp-questions').innerHTML = s.questions.map((q, qi) =>
+    '<div class="space-y-2"><p class="font-semibold text-slate-100 text-sm leading-relaxed">' + (qi + 1) + '. ' + q.q + '</p>' +
+    q.o.map((o, oi) =>
+      '<button type="button" class="mcq-opt w-full text-left text-sm px-4 py-2 rounded-xl border border-slate-700 bg-slate-900/50" data-q="' + qi + '" data-o="' + oi + '">' + 'ABCD'[oi] + ' · ' + o + '</button>').join('') +
+    '<p class="mcq-why hidden text-xs text-emerald-300/90 bg-emerald-950/40 border border-emerald-800/40 rounded-xl p-3 leading-relaxed"></p></div>').join('');
+  document.querySelectorAll('.mcq-opt').forEach(btn => {
+    btn.onclick = () => {
+      const q = s.questions[+btn.dataset.q];
+      const opts = document.querySelectorAll('.mcq-opt[data-q="' + btn.dataset.q + '"]');
+      opts.forEach(o => o.classList.remove('correct', 'wrong'));
+      btn.classList.add(+btn.dataset.o === q.a ? 'correct' : 'wrong');
+      opts[q.a].classList.add('correct');
+      const why = btn.closest('.space-y-2').querySelector('.mcq-why');
+      why.textContent = q.why;
+      why.classList.remove('hidden');
+    };
+  });
+}
+function renderRecap() {
+  const s = t();
+  document.getElementById('recap-title').textContent = s.recapTitle;
+  document.getElementById('recap-list').innerHTML = s.recapGoals.map((g, i) =>
+    '<li class="flex items-start gap-2 text-sm"><input type="checkbox" class="goal-check mt-1" data-g="' + i + '"><span class="text-slate-300">' + g + '</span></li>').join('');
+  document.querySelectorAll('.goal-check').forEach(c => c.onchange = updateRecapProgress);
+  updateRecapProgress();
+  renderMyths();
+}
+function updateRecapProgress() {
+  const checks = document.querySelectorAll('.goal-check');
+  let n = 0;
+  checks.forEach(c => { if (c.checked) n++; });
+  document.getElementById('recap-progress').textContent = n + ' / ' + (checks.length || 5) + ' goals confirmed. Goals map to 1.5, 1.9, 1.12, 8.14/8.19ii and the the practical paper practical-skill statements.';
+}
+function renderMyths() {
+  const s = t();
+  document.getElementById('myth-title').textContent = s.mythTitle;
+  document.getElementById('myth-lead').textContent = s.mythLead;
+  document.getElementById('myth-cards').innerHTML = s.myths.map((m, i) =>
+    '<div class="myth-card glass rounded-xl p-4" data-myth="' + i + '">' +
+    '<div class="myth-front"><span class="text-xs font-bold text-rose-400 uppercase">' + s.mythLabelMyth + '</span>' +
+    '<p class="text-sm text-slate-200 mt-2">' + m.m + '</p>' +
+    '<p class="text-xs text-slate-500 mt-3">' + s.mythFlip + '</p></div>' +
+    '<div class="myth-back"><span class="text-xs font-bold text-emerald-400 uppercase">' + s.mythLabelFact + '</span>' +
+    '<p class="text-sm text-slate-200 mt-2">' + m.f + '</p></div></div>').join('');
+  document.querySelectorAll('.myth-card').forEach(c => c.onclick = () => c.classList.toggle('flipped'));
+}
+
+renderIntro();
+renderCalc();
+renderMcq();
+renderRecap();
+setMode('evaporate');
+resizeCanvas();
+</script>
+<script id="lab-runtime">(function () {
+'use strict';
+var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function relayout() {
+if (typeof window.scheduleResize === 'function') window.scheduleResize();
+else if (typeof window.resizeCanvas === 'function') window.resizeCanvas();
+}
+var pending = 0;
+function onRequestRelayout() {
+if (pending) return;
+pending = requestAnimationFrame(function () { pending = 0; relayout(); });
+}
+if (window.ResizeObserver) {
+var ro = new ResizeObserver(onRequestRelayout);
+document.querySelectorAll('.canvas-wrap').forEach(function (el) { ro.observe(el); });
+}
+window.addEventListener('orientationchange', onRequestRelayout);
+window.addEventListener('resize', onRequestRelayout);
+var bar = document.getElementById('next-bar');
+if (bar) {
+var setBarPad = function () {
+var h = Math.round(bar.offsetHeight);
+if (h > 0) document.body.style.setProperty('--next-bar-h', h + 'px');
+};
+setBarPad();
+if (window.ResizeObserver) new ResizeObserver(setBarPad).observe(bar);
+window.addEventListener('load', setBarPad);
+}
+var rail = document.getElementById('main-tabs');
+if (rail) {
+rail.setAttribute('role', 'tablist');
+var pills = Array.prototype.slice.call(rail.querySelectorAll('.tab-btn'));
+pills.forEach(function (btn, i) {
+var panel = document.getElementById('panel-' + btn.dataset.tab);
+btn.setAttribute('role', 'tab');
+btn.setAttribute('aria-selected', btn.classList.contains('active') ? 'true' : 'false');
+if (panel) {
+panel.setAttribute('role', 'tabpanel');
+btn.setAttribute('aria-controls', panel.id);
+panel.setAttribute('aria-labelledby', btn.id);
+}
+btn.addEventListener('keydown', function (e) {
+var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+if (!d) return;
+e.preventDefault();
+var next = pills[(i + d + pills.length) % pills.length];
+next.focus();
+if (typeof window.setTab === 'function') window.setTab(next.dataset.tab);
+});
+});
+rail.addEventListener('click', function () {
+setTimeout(function () {
+pills.forEach(function (b) { b.setAttribute('aria-selected', b.classList.contains('active') ? 'true' : 'false'); });
+var on = rail.querySelector('.tab-btn.active');
+if (on) on.scrollIntoView({ block: 'nearest', inline: 'center', behavior: reduce ? 'auto' : 'smooth' });
+}, 0);
+});
+}
+var dock = document.getElementById('sim-dock');
+if (dock && window.MutationObserver && !reduce) {
+new MutationObserver(function (m) {
+m.forEach(function (change) {
+var el = change.target;
+if (el.classList.contains('unlocked') && change.oldValue && /(^|\s)locked(\s|$)/.test(change.oldValue)) {
+el.classList.add('just-unlocked');
+setTimeout(function () { el.classList.remove('just-unlocked'); }, 750);
+}
+});
+}).observe(dock, { attributes: true, attributeFilter: ['class'], attributeOldValue: true });
+}
+document.addEventListener('click', function (e) {
+if (!e.target || !e.target.closest) return;
+if (e.target.closest('input, label, button, a, select')) return;
+var li = e.target.closest('li');
+if (!li) return;
+var box = li.querySelector('input[type="checkbox"], input[type="radio"]');
+if (!box || box.disabled) return;
+box.checked = box.type === 'checkbox' ? !box.checked : true;
+box.dispatchEvent(new Event('change', { bubbles: true }));
+box.dispatchEvent(new Event('input', { bubbles: true }));
+});
+if (window.IntersectionObserver && !reduce) {
+var io = new IntersectionObserver(function (entries) {
+entries.forEach(function (en) {
+if (!en.isIntersecting) return;
+en.target.classList.add('shown');
+io.unobserve(en.target);
+});
+}, { rootMargin: '0px 0px -6% 0px', threshold: 0.01 });
+document.querySelectorAll('.tab-panel > *').forEach(function (el, i) {
+el.classList.add('reveal');
+el.style.setProperty('--i', String(i));
+io.observe(el);
+});
+setTimeout(function () {
+document.querySelectorAll('.reveal:not(.shown)').forEach(function (el) { el.classList.add('shown'); });
+}, 2500);
+}
+})();</script>
+</body>
+</html>

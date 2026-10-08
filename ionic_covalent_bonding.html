@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Ionic &amp; Covalent Bonding — Electron Diagrams | HKDSE Chemistry Topic II (e)–(i)</title>
+<meta name="theme-color" content="#000000">
+<style>
+  input[type=range]{accent-color:#3dd6c6;}
+.mode-chip{padding:.4rem 1.1rem;border-radius:.8rem;font-size:.85rem;font-weight:700;border:1px solid rgba(148,163,184,.35);background:rgba(15,23,42,.7);color:#94a3b8;cursor:pointer;}
+.mode-chip.on{background:rgba(61,214,198,.16);color:#d1faf5;border-color:rgba(61,214,198,.6);}
+.mode-chip:disabled{opacity:.45;cursor:not-allowed;}
+.btn-sp{padding:.3rem .75rem;border-radius:.6rem;font-size:.82rem;font-weight:700;border:1px solid rgba(148,163,184,.3);background:rgba(15,23,42,.7);color:#cbd5e1;cursor:pointer;}
+.btn-sp.on{border-color:rgba(61,214,198,.7);background:rgba(61,214,198,.14);color:#d1faf5;}
+.btn-sp:disabled{opacity:.45;cursor:not-allowed;}
+.swatch{display:inline-block;width:1.1rem;height:1.1rem;border-radius:.3rem;border:1px solid rgba(255,255,255,.35);vertical-align:-.2rem;}
+.tab-lite{padding:.3rem .7rem;border-radius:.6rem;font-size:.78rem;font-weight:700;border:1px solid rgba(148,163,184,.3);background:rgba(15,23,42,.7);color:#cbd5e1;cursor:pointer;}
+.tab-lite.on{border-color:rgba(61,214,198,.7);background:rgba(61,214,198,.14);color:#d1faf5;}
+table.data{width:100%;border-collapse:collapse;font-size:.78rem;}
+table.data th,table.data td{border:1px solid rgba(148,163,184,.25);padding:.35rem .5rem;text-align:left;vertical-align:top;}
+table.data th{background:rgba(15,23,42,.85);color:#99f6e4;font-size:.75rem;text-transform:uppercase;}
+table.data td{color:#cbd5e1;}
+</style>
+<style id="lab-theme">/* Shared design system for the chemistry lab fleet. Source: _build/src/theme.css + tailwind.config.js. Edit the source, then run node _build/src/build.cjs. Do not hand-edit this block. */*,:after,:before{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(10,132,255,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(10,132,255,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }*,:after,:before{box-sizing:border-box;border:0 solid #d1d1d6}:after,:before{--tw-content:""}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;-o-tab-size:4;tab-size:4;font-family:-apple-system,BlinkMacSystemFont,SF Pro Text,SF Pro Display,Segoe UI Variable Text,Segoe UI,system-ui,Helvetica Neue,sans-serif;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:SF Mono,ui-monospace,Cascadia Mono,Segoe UI Mono,Consolas,monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0}fieldset,legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::-moz-placeholder,textarea::-moz-placeholder{opacity:1;color:#aeaeb2}input::placeholder,textarea::placeholder{opacity:1;color:#aeaeb2}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}.visible{visibility:visible}.invisible{visibility:hidden}.collapse{visibility:collapse}.static{position:static}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.sticky{position:sticky}.inset-0{inset:0}.z-10{z-index:10}.z-\[110\]{z-index:110}.col-span-1{grid-column:span 1/span 1}.col-span-2{grid-column:span 2/span 2}.mx-auto{margin-left:auto;margin-right:auto}.my-3{margin-top:.75rem;margin-bottom:.75rem}.mb-1{margin-bottom:.25rem}.mb-1\.5{margin-bottom:.375rem}.mb-10{margin-bottom:2.5rem}.mb-2{margin-bottom:.5rem}.mb-3{margin-bottom:.75rem}.mb-4{margin-bottom:1rem}.mb-5{margin-bottom:1.25rem}.mb-8{margin-bottom:2rem}.ml-1{margin-left:.25rem}.ml-auto{margin-left:auto}.mr-1{margin-right:.25rem}.mr-2{margin-right:.5rem}.ms-0{margin-inline-start:0}.ms-1{margin-inline-start:.25rem}.ms-2{margin-inline-start:.5rem}.mt-0{margin-top:0}.mt-0\.5{margin-top:.125rem}.mt-1{margin-top:.25rem}.mt-1\.5{margin-top:.375rem}.mt-2{margin-top:.5rem}.mt-3{margin-top:.75rem}.mt-4{margin-top:1rem}.mt-5{margin-top:1.25rem}.mt-6{margin-top:1.5rem}.block{display:block}.inline{display:inline}.flex{display:flex}.table{display:table}.grid{display:grid}.contents{display:contents}.hidden{display:none}.h-2{height:.5rem}.h-2\.5{height:.625rem}.h-3{height:.75rem}.h-auto{height:auto}.min-h-\[1\.25rem\]{min-height:1.25rem}.min-h-\[1rem\]{min-height:1rem}.min-h-\[24px\]{min-height:24px}.min-h-\[72px\]{min-height:72px}.w-14{width:3.5rem}.w-16{width:4rem}.w-20{width:5rem}.w-24{width:6rem}.w-28{width:7rem}.w-36{width:9rem}.w-6{width:1.5rem}.w-full{width:100%}.min-w-\[160px\]{min-width:160px}.max-w-3xl{max-width:48rem}.max-w-6xl{max-width:72rem}.max-w-sm{max-width:24rem}.max-w-xs{max-width:20rem}.flex-1{flex:1 1 0%}.shrink{flex-shrink:1}.grow{flex-grow:1}.border-collapse{border-collapse:collapse}.transform{transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.resize{resize:both}.list-inside{list-style-position:inside}.list-disc{list-style-type:disc}.grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}.grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid-cols-\[3rem_1fr\]{grid-template-columns:3rem 1fr}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-start{align-items:flex-start}.items-end{align-items:flex-end}.items-center{align-items:center}.items-baseline{align-items:baseline}.items-stretch{align-items:stretch}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-1{gap:.25rem}.gap-2{gap:.5rem}.gap-3{gap:.75rem}.gap-4{gap:1rem}.gap-5{gap:1.25rem}.gap-x-4{-moz-column-gap:1rem;column-gap:1rem}.gap-x-8{-moz-column-gap:2rem;column-gap:2rem}.gap-y-1{row-gap:.25rem}.gap-y-4{row-gap:1rem}.space-y-1>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.25rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.25rem*var(--tw-space-y-reverse))}.space-y-1\.5>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.375rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.375rem*var(--tw-space-y-reverse))}.space-y-2>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.5rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.5rem*var(--tw-space-y-reverse))}.space-y-3>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.75rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.75rem*var(--tw-space-y-reverse))}.space-y-4>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem*var(--tw-space-y-reverse))}.space-y-5>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.25rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.25rem*var(--tw-space-y-reverse))}.space-y-6>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.5rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.5rem*var(--tw-space-y-reverse))}.self-end{align-self:flex-end}.self-center{align-self:center}.overflow-hidden{overflow:hidden}.overflow-x-auto{overflow-x:auto}.whitespace-nowrap{white-space:nowrap}.whitespace-pre-line{white-space:pre-line}.whitespace-pre-wrap{white-space:pre-wrap}.text-wrap{text-wrap:wrap}.rounded{border-radius:.625rem}.rounded-2xl{border-radius:1.125rem}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:.75rem}.rounded-xl{border-radius:1rem}.border{border-width:1px}.border-l-\[3px\]{border-left-width:3px}.border-t{border-top-width:1px}.border-dashed{border-style:dashed}.\!border-indigo-500{--tw-border-opacity:1!important;border-color:rgb(10 132 255/var(--tw-border-opacity,1))!important}.border-amber-500{--tw-border-opacity:1;border-color:rgb(255 159 10/var(--tw-border-opacity,1))}.border-amber-500\/25{border-color:rgba(255,159,10,.25)}.border-amber-500\/30{border-color:rgba(255,159,10,.3)}.border-amber-500\/40{border-color:rgba(255,159,10,.4)}.border-amber-800{--tw-border-opacity:1;border-color:rgb(95 56 0/var(--tw-border-opacity,1))}.border-amber-800\/40{border-color:rgba(95,56,0,.4)}.border-emerald-500{--tw-border-opacity:1;border-color:rgb(48 209 88/var(--tw-border-opacity,1))}.border-emerald-500\/40{border-color:rgba(48,209,88,.4)}.border-emerald-600{--tw-border-opacity:1;border-color:rgb(36 168 63/var(--tw-border-opacity,1))}.border-emerald-600\/25{border-color:rgba(36,168,63,.25)}.border-emerald-600\/30{border-color:rgba(36,168,63,.3)}.border-emerald-600\/40{border-color:rgba(36,168,63,.4)}.border-emerald-700{--tw-border-opacity:1;border-color:rgb(27 122 46/var(--tw-border-opacity,1))}.border-emerald-700\/40{border-color:rgba(27,122,46,.4)}.border-emerald-800{--tw-border-opacity:1;border-color:rgb(18 84 31/var(--tw-border-opacity,1))}.border-emerald-800\/40{border-color:rgba(18,84,31,.4)}.border-indigo-500{--tw-border-opacity:1;border-color:rgb(10 132 255/var(--tw-border-opacity,1))}.border-indigo-500\/25{border-color:rgba(10,132,255,.25)}.border-indigo-500\/30{border-color:rgba(10,132,255,.3)}.border-orange-600{--tw-border-opacity:1;border-color:rgb(204 122 0/var(--tw-border-opacity,1))}.border-rose-500{--tw-border-opacity:1;border-color:rgb(255 69 63/var(--tw-border-opacity,1))}.border-rose-500\/25{border-color:rgba(255,69,63,.25)}.border-rose-500\/40{border-color:rgba(255,69,63,.4)}.border-rose-600{--tw-border-opacity:1;border-color:rgb(217 44 38/var(--tw-border-opacity,1))}.border-rose-600\/30{border-color:rgba(217,44,38,.3)}.border-rose-800{--tw-border-opacity:1;border-color:rgb(107 21 18/var(--tw-border-opacity,1))}.border-rose-800\/40{border-color:rgba(107,21,18,.4)}.border-sky-500{--tw-border-opacity:1;border-color:rgb(100 210 255/var(--tw-border-opacity,1))}.border-sky-500\/40{border-color:rgba(100,210,255,.4)}.border-sky-800{--tw-border-opacity:1;border-color:rgb(0 77 104/var(--tw-border-opacity,1))}.border-sky-800\/40{border-color:rgba(0,77,104,.4)}.border-slate-500{--tw-border-opacity:1;border-color:rgb(174 174 178/var(--tw-border-opacity,1))}.border-slate-600{--tw-border-opacity:1;border-color:rgb(161 161 166/var(--tw-border-opacity,1))}.border-slate-700{--tw-border-opacity:1;border-color:rgb(152 152 157/var(--tw-border-opacity,1))}.border-slate-700\/50{border-color:hsla(240,2%,61%,.5)}.border-slate-700\/60{border-color:hsla(240,2%,61%,.6)}.border-slate-700\/70{border-color:hsla(240,2%,61%,.7)}.border-slate-800{--tw-border-opacity:1;border-color:rgb(84 84 88/var(--tw-border-opacity,1))}.border-teal-500{--tw-border-opacity:1;border-color:rgb(100 210 255/var(--tw-border-opacity,1))}.border-teal-500\/25{border-color:rgba(100,210,255,.25)}.border-teal-500\/30{border-color:rgba(100,210,255,.3)}.border-teal-500\/40{border-color:rgba(100,210,255,.4)}.border-teal-500\/50{border-color:rgba(100,210,255,.5)}.border-teal-700{--tw-border-opacity:1;border-color:rgb(0 117 158/var(--tw-border-opacity,1))}.border-teal-700\/40{border-color:rgba(0,117,158,.4)}.border-teal-800{--tw-border-opacity:1;border-color:rgb(0 77 104/var(--tw-border-opacity,1))}.border-teal-800\/40{border-color:rgba(0,77,104,.4)}.border-white{--tw-border-opacity:1;border-color:rgb(245 245 247/var(--tw-border-opacity,1))}.border-white\/10{border-color:rgba(245,245,247,.1)}.\!bg-indigo-600{--tw-bg-opacity:1!important;background-color:rgb(0 96 223/var(--tw-bg-opacity,1))!important}.\!bg-teal-950{--tw-bg-opacity:1!important;background-color:rgb(0 23 31/var(--tw-bg-opacity,1))!important}.\!bg-teal-950\/40{background-color:rgba(0,23,31,.4)!important}.bg-amber-500{--tw-bg-opacity:1;background-color:rgb(255 159 10/var(--tw-bg-opacity,1))}.bg-amber-950{--tw-bg-opacity:1;background-color:rgb(29 17 0/var(--tw-bg-opacity,1))}.bg-amber-950\/10{background-color:rgba(29,17,0,.1)}.bg-amber-950\/20{background-color:rgba(29,17,0,.2)}.bg-amber-950\/30{background-color:rgba(29,17,0,.3)}.bg-emerald-600{--tw-bg-opacity:1;background-color:rgb(36 168 63/var(--tw-bg-opacity,1))}.bg-emerald-700{--tw-bg-opacity:1;background-color:rgb(27 122 46/var(--tw-bg-opacity,1))}.bg-emerald-950{--tw-bg-opacity:1;background-color:rgb(4 24 10/var(--tw-bg-opacity,1))}.bg-emerald-950\/10{background-color:rgba(4,24,10,.1)}.bg-emerald-950\/20{background-color:rgba(4,24,10,.2)}.bg-emerald-950\/35{background-color:rgba(4,24,10,.35)}.bg-emerald-950\/40{background-color:rgba(4,24,10,.4)}.bg-indigo-600{--tw-bg-opacity:1;background-color:rgb(0 96 223/var(--tw-bg-opacity,1))}.bg-indigo-950{--tw-bg-opacity:1;background-color:rgb(0 18 51/var(--tw-bg-opacity,1))}.bg-indigo-950\/10{background-color:rgba(0,18,51,.1)}.bg-indigo-950\/20{background-color:rgba(0,18,51,.2)}.bg-orange-700{--tw-bg-opacity:1;background-color:rgb(149 88 0/var(--tw-bg-opacity,1))}.bg-rose-950{--tw-bg-opacity:1;background-color:rgb(33 6 5/var(--tw-bg-opacity,1))}.bg-rose-950\/10{background-color:rgba(33,6,5,.1)}.bg-rose-950\/20{background-color:rgba(33,6,5,.2)}.bg-rose-950\/30{background-color:rgba(33,6,5,.3)}.bg-rose-950\/35{background-color:rgba(33,6,5,.35)}.bg-sky-950{--tw-bg-opacity:1;background-color:rgb(0 23 31/var(--tw-bg-opacity,1))}.bg-sky-950\/20{background-color:rgba(0,23,31,.2)}.bg-sky-950\/35{background-color:rgba(0,23,31,.35)}.bg-slate-700{--tw-bg-opacity:1;background-color:rgb(152 152 157/var(--tw-bg-opacity,1))}.bg-slate-800{--tw-bg-opacity:1;background-color:rgb(84 84 88/var(--tw-bg-opacity,1))}.bg-slate-800\/80{background-color:rgba(84,84,88,.8)}.bg-slate-900{--tw-bg-opacity:1;background-color:rgb(58 58 60/var(--tw-bg-opacity,1))}.bg-slate-900\/50{background-color:rgba(58,58,60,.5)}.bg-slate-900\/60{background-color:rgba(58,58,60,.6)}.bg-slate-950{--tw-bg-opacity:1;background-color:rgb(11 11 13/var(--tw-bg-opacity,1))}.bg-slate-950\/40{background-color:rgba(11,11,13,.4)}.bg-slate-950\/50{background-color:rgba(11,11,13,.5)}.bg-slate-950\/60{background-color:rgba(11,11,13,.6)}.bg-slate-950\/70{background-color:rgba(11,11,13,.7)}.bg-slate-950\/80{background-color:rgba(11,11,13,.8)}.bg-teal-600{--tw-bg-opacity:1;background-color:rgb(0 164 221/var(--tw-bg-opacity,1))}.bg-teal-700{--tw-bg-opacity:1;background-color:rgb(0 117 158/var(--tw-bg-opacity,1))}.bg-teal-950{--tw-bg-opacity:1;background-color:rgb(0 23 31/var(--tw-bg-opacity,1))}.bg-teal-950\/10{background-color:rgba(0,23,31,.1)}.bg-teal-950\/20{background-color:rgba(0,23,31,.2)}.bg-teal-950\/30{background-color:rgba(0,23,31,.3)}.bg-teal-950\/40{background-color:rgba(0,23,31,.4)}.p-2{padding:.5rem}.p-3{padding:.75rem}.p-4{padding:1rem}.p-5{padding:1.25rem}.p-6{padding:1.5rem}.p-8{padding:2rem}.px-2{padding-left:.5rem;padding-right:.5rem}.px-3{padding-left:.75rem;padding-right:.75rem}.px-4{padding-left:1rem;padding-right:1rem}.px-5{padding-left:1.25rem;padding-right:1.25rem}.py-1{padding-top:.25rem;padding-bottom:.25rem}.py-1\.5{padding-top:.375rem;padding-bottom:.375rem}.py-10{padding-top:2.5rem;padding-bottom:2.5rem}.py-2{padding-top:.5rem;padding-bottom:.5rem}.py-2\.5{padding-top:.625rem;padding-bottom:.625rem}.py-3{padding-top:.75rem;padding-bottom:.75rem}.py-6{padding-top:1.5rem;padding-bottom:1.5rem}.py-8{padding-top:2rem;padding-bottom:2rem}.pb-1{padding-bottom:.25rem}.pb-4{padding-bottom:1rem}.pb-8{padding-bottom:2rem}.pt-1{padding-top:.25rem}.pt-2{padding-top:.5rem}.pt-4{padding-top:1rem}.pt-5{padding-top:1.25rem}.text-left{text-align:left}.text-center{text-align:center}.text-right{text-align:right}.align-middle{vertical-align:middle}.font-mono{font-family:SF Mono,ui-monospace,Cascadia Mono,Segoe UI Mono,Consolas,monospace}.text-2xl{font-size:1.6rem;line-height:2.05rem}.text-3xl{font-size:1.95rem;line-height:2.3rem}.text-\[10px\]{font-size:10px}.text-\[11px\]{font-size:11px}.text-base{font-size:1rem;line-height:1.65rem}.text-lg{font-size:1.125rem;line-height:1.65rem}.text-sm{font-size:.9375rem;line-height:1.5rem}.text-xl{font-size:1.3125rem;line-height:1.8rem}.text-xs{font-size:.8125rem;line-height:1.35rem}.font-bold{font-weight:700}.font-extrabold{font-weight:800}.font-normal{font-weight:400}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.normal-case{text-transform:none}.italic{font-style:italic}.tabular-nums{--tw-numeric-spacing:tabular-nums;font-variant-numeric:var(--tw-ordinal) var(--tw-slashed-zero) var(--tw-numeric-figure) var(--tw-numeric-spacing) var(--tw-numeric-fraction)}.leading-relaxed{line-height:1.625}.leading-snug{line-height:1.375}.leading-tight{line-height:1.25}.tracking-wide{letter-spacing:.025em}.tracking-wider{letter-spacing:.05em}.tracking-widest{letter-spacing:.1em}.text-amber-200{--tw-text-opacity:1;color:rgb(255 214 168/var(--tw-text-opacity,1))}.text-amber-200\/80{color:rgba(255,214,168,.8)}.text-amber-200\/90{color:rgba(255,214,168,.9)}.text-amber-300{--tw-text-opacity:1;color:rgb(255 188 122/var(--tw-text-opacity,1))}.text-amber-300\/90{color:rgba(255,188,122,.9)}.text-cyan-200{--tw-text-opacity:1;color:rgb(174 228 255/var(--tw-text-opacity,1))}.text-emerald-100{--tw-text-opacity:1;color:rgb(217 242 225/var(--tw-text-opacity,1))}.text-emerald-200{--tw-text-opacity:1;color:rgb(168 230 189/var(--tw-text-opacity,1))}.text-emerald-200\/90{color:rgba(168,230,189,.9)}.text-emerald-200\/95{color:rgba(168,230,189,.95)}.text-emerald-300{--tw-text-opacity:1;color:rgb(108 224 143/var(--tw-text-opacity,1))}.text-emerald-300\/90{color:rgba(108,224,143,.9)}.text-emerald-400{--tw-text-opacity:1;color:rgb(76 212 111/var(--tw-text-opacity,1))}.text-indigo-200{--tw-text-opacity:1;color:rgb(191 220 255/var(--tw-text-opacity,1))}.text-indigo-300{--tw-text-opacity:1;color:rgb(115 177 255/var(--tw-text-opacity,1))}.text-orange-300{--tw-text-opacity:1;color:rgb(255 188 122/var(--tw-text-opacity,1))}.text-rose-100{--tw-text-opacity:1;color:rgb(255 220 217/var(--tw-text-opacity,1))}.text-rose-200{--tw-text-opacity:1;color:rgb(255 182 177/var(--tw-text-opacity,1))}.text-rose-200\/95{color:hsla(4,100%,85%,.95)}.text-rose-300{--tw-text-opacity:1;color:rgb(255 139 133/var(--tw-text-opacity,1))}.text-rose-300\/90{color:hsla(3,100%,76%,.9)}.text-rose-400{--tw-text-opacity:1;color:rgb(255 96 88/var(--tw-text-opacity,1))}.text-sky-200{--tw-text-opacity:1;color:rgb(174 228 255/var(--tw-text-opacity,1))}.text-sky-200\/95{color:rgba(174,228,255,.95)}.text-sky-300{--tw-text-opacity:1;color:rgb(131 214 255/var(--tw-text-opacity,1))}.text-slate-100{--tw-text-opacity:1;color:rgb(245 245 247/var(--tw-text-opacity,1))}.text-slate-200{--tw-text-opacity:1;color:rgb(229 229 234/var(--tw-text-opacity,1))}.text-slate-300{--tw-text-opacity:1;color:rgb(209 209 214/var(--tw-text-opacity,1))}.text-slate-400{--tw-text-opacity:1;color:rgb(199 199 204/var(--tw-text-opacity,1))}.text-slate-500{--tw-text-opacity:1;color:rgb(174 174 178/var(--tw-text-opacity,1))}.text-slate-600{--tw-text-opacity:1;color:rgb(161 161 166/var(--tw-text-opacity,1))}.text-slate-900{--tw-text-opacity:1;color:rgb(58 58 60/var(--tw-text-opacity,1))}.text-teal-100{--tw-text-opacity:1;color:rgb(217 242 255/var(--tw-text-opacity,1))}.text-teal-100\/90{color:rgba(217,242,255,.9)}.text-teal-200{--tw-text-opacity:1;color:rgb(174 228 255/var(--tw-text-opacity,1))}.text-teal-200\/80{color:rgba(174,228,255,.8)}.text-teal-300{--tw-text-opacity:1;color:rgb(131 214 255/var(--tw-text-opacity,1))}.text-teal-400{--tw-text-opacity:1;color:rgb(108 210 255/var(--tw-text-opacity,1))}.text-violet-300{--tw-text-opacity:1;color:rgb(212 155 255/var(--tw-text-opacity,1))}.text-white{--tw-text-opacity:1;color:rgb(245 245 247/var(--tw-text-opacity,1))}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.accent-teal-400{accent-color:#6cd2ff}.opacity-70{opacity:.7}.opacity-80{opacity:.8}.shadow{--tw-shadow:0 8px 24px rgba(0,0,0,.45);--tw-shadow-colored:0 8px 24px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}.outline-none{outline:2px solid transparent;outline-offset:2px}.outline{outline-style:solid}.ring-1{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color)}.ring-1,.ring-2{box-shadow:var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow,0 0 #0000)}.ring-2{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color)}.ring-teal-400{--tw-ring-opacity:1;--tw-ring-color:rgb(108 210 255/var(--tw-ring-opacity,1))}.ring-teal-400\/50{--tw-ring-color:rgba(108,210,255,.5)}.blur{--tw-blur:blur(8px)}.blur,.invert{filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.invert{--tw-invert:invert(100%)}.filter{filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.transition{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,-webkit-backdrop-filter;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter,-webkit-backdrop-filter;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.hover\:border-teal-400:hover{--tw-border-opacity:1;border-color:rgb(108 210 255/var(--tw-border-opacity,1))}.hover\:bg-amber-400:hover{--tw-bg-opacity:1;background-color:rgb(255 161 74/var(--tw-bg-opacity,1))}.hover\:bg-emerald-500:hover{--tw-bg-opacity:1;background-color:rgb(48 209 88/var(--tw-bg-opacity,1))}.hover\:bg-emerald-600:hover{--tw-bg-opacity:1;background-color:rgb(36 168 63/var(--tw-bg-opacity,1))}.hover\:bg-indigo-500:hover{--tw-bg-opacity:1;background-color:rgb(10 132 255/var(--tw-bg-opacity,1))}.hover\:bg-orange-600:hover{--tw-bg-opacity:1;background-color:rgb(204 122 0/var(--tw-bg-opacity,1))}.hover\:bg-slate-600:hover{--tw-bg-opacity:1;background-color:rgb(161 161 166/var(--tw-bg-opacity,1))}.hover\:bg-slate-700:hover{--tw-bg-opacity:1;background-color:rgb(152 152 157/var(--tw-bg-opacity,1))}.hover\:bg-teal-500:hover{--tw-bg-opacity:1;background-color:rgb(100 210 255/var(--tw-bg-opacity,1))}.hover\:bg-teal-600:hover{--tw-bg-opacity:1;background-color:rgb(0 164 221/var(--tw-bg-opacity,1))}.focus\:border-teal-400:focus{--tw-border-opacity:1;border-color:rgb(108 210 255/var(--tw-border-opacity,1))}.disabled\:cursor-not-allowed:disabled{cursor:not-allowed}.disabled\:opacity-40:disabled{opacity:.4}@media (min-width:640px){.sm\:col-span-2{grid-column:span 2/span 2}.sm\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.sm\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.sm\:grid-cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}}@media (min-width:768px){.md\:col-span-2{grid-column:span 2/span 2}.md\:col-span-5{grid-column:span 5/span 5}.md\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.md\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.md\:grid-cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}.md\:grid-cols-5{grid-template-columns:repeat(5,minmax(0,1fr))}.md\:text-3xl{font-size:1.95rem;line-height:2.3rem}.md\:text-4xl{font-size:2.35rem;line-height:2.6rem}.md\:text-base{font-size:1rem;line-height:1.65rem}.md\:text-sm{font-size:.9375rem;line-height:1.5rem}}@media (min-width:1024px){.lg\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.lg\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.lg\:grid-cols-6{grid-template-columns:repeat(6,minmax(0,1fr))}}:root {color-scheme: dark;--ink:        #000000;--panel:      #1c1c1e;--panel-2:    #2c2c2e;--panel-3:    #3a3a3c;--hairline:   rgba(84, 84, 88, .65);--hairline-2: rgba(84, 84, 88, .42);--label:      #f5f5f7;--label-2:    #a1a1a6;--label-3:    #6e6e73;--action:     #0a84ff;--action-hi:  #409cff;--action-dim: rgba(10, 132, 255, .14);--locked:     #ff9f0a;--locked-dim: rgba(255, 159, 10, .13);--correct:    #30d158;--correct-dim:rgba(48, 209, 88, .13);--wrong:      #ff453f;--wrong-dim:  rgba(255, 69, 63, .12);--font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display","Segoe UI Variable Text", "Segoe UI", system-ui, "Helvetica Neue", sans-serif;--font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display","Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif;--font-mono: "SF Mono", ui-monospace, "Cascadia Mono", "Segoe UI Mono", Consolas, monospace;--r-sm: 8px;--r-md: 12px;--r-lg: 18px;--r-xl: 24px;--ease-out:   cubic-bezier(.25, .1, .25, 1);--ease-spring:cubic-bezier(.32, .72, 0, 1);--dur-1: .18s;--dur-2: .32s;--dur-3: .55s;--shadow-1: 0 1px 2px rgba(0,0,0,.4);--shadow-2: 0 8px 24px rgba(0,0,0,.45);--shadow-3: 0 20px 60px rgba(0,0,0,.55);--gut: clamp(1rem, 4vw, 2rem);}*, *::before, *::after { box-sizing: border-box; }html {-webkit-text-size-adjust: 100%;text-size-adjust: 100%;scroll-behavior: smooth;scroll-padding-top: 5rem;}body {margin: 0;font-family: var(--font-sans);background: var(--ink);color: var(--label);min-height: 100dvh;-webkit-font-smoothing: antialiased;letter-spacing: 0;}body::before {content: "";position: fixed;inset: -20% -10% auto -10%;height: 60vh;background: radial-gradient(60% 100% at 50% 0%, rgba(10,132,255,.09), transparent 70%);pointer-events: none;z-index: 0;}main, body > div:first-of-type { position: relative; z-index: 1; }h1 { font-size: 1.9rem; }h2 { font-size: 1.35rem; }h3 { font-size: 1.125rem; }h4 { font-size: 1rem; }h1, h2, h3, h4 {font-family: var(--font-display);font-weight: 700;letter-spacing: -.003em;text-wrap: balance;}p { text-wrap: pretty; }b, strong { font-weight: 600; color: var(--label); }sub, sup { font-size: .8em; line-height: 0; }a { color: var(--action-hi); text-decoration: none; }::selection { background: rgba(10,132,255,.32); }:focus-visible {outline: 2px solid var(--action-hi);outline-offset: 2px;border-radius: 4px;}[class*="text-[10px]"], [class*="text-[11px]"] { font-size: .8125rem; }body {padding-top: env(safe-area-inset-top);padding-bottom: calc(var(--next-bar-h, 0px) + env(safe-area-inset-bottom));}.glass, .panel, .shell, .ro-card, .eqcard, .control-card, .guide-card,.method-card, .progress-card, .mixer-card, .heq-card, .map-box {background: var(--panel);border: 1px solid var(--hairline-2);border-radius: var(--r-lg);}.glass, .panel, .shell { box-shadow: var(--shadow-2); }header.glass { padding: clamp(1.1rem, 3vw, 1.75rem); }#hdr-title, .app-title {font-family: var(--font-display);font-weight: 700;font-size: clamp(1.5rem, 1.2rem + 1.1vw, 2.1rem);line-height: 1.15;letter-spacing: -.015em;}#hdr-sub, .app-subtitle { color: var(--label-2); font-size: 1rem; margin-top: .35rem; }.chip, .chip-dim, .chip-dse, .chip-warn, .ms-chip, .assume-chip, .badge,.dock-step, .dock-state, .ladder-tag, .section-kicker {display: inline-flex;align-items: center;gap: .3rem;padding: .2rem .6rem;border-radius: 999px;border: 1px solid var(--hairline);background: rgba(255,255,255,.05);color: var(--label-2);font-size: .75rem;font-weight: 600;letter-spacing: .01em;line-height: 1.5;}.chip, .chip-dim, .chip-dse, .chip-warn, .ms-chip, .assume-chip, .badge {max-width: 100%;align-self: flex-start;}.chip-dse, .chip:not(.chip-dim):not(.chip-warn) {border-color: rgba(10,132,255,.34);background: var(--action-dim);color: var(--action-hi);}.chip-dim, .assume-off { color: var(--label-3); background: rgba(255,255,255,.04); }.chip-warn { border-color: rgba(255,159,10,.38); background: var(--locked-dim); color: var(--locked); }.badge.ox  { border-color: rgba(255,159,10,.4); background: var(--locked-dim); color: var(--locked); }.badge.red { border-color: rgba(10,132,255,.4); background: var(--action-dim); color: var(--action-hi); }.section-kicker {background: none; border: 0; padding: 0;color: var(--label-3);font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;}.section-title { font-size: 1.35rem; }.section-lead  { color: var(--label-2); font-size: 1rem; line-height: 1.6; }#main-tabs, .main-tabs {display: flex;flex-wrap: nowrap;gap: .375rem;overflow-x: auto;scroll-snap-type: x proximity;scrollbar-width: none;-webkit-overflow-scrolling: touch;padding-block: .25rem;-webkit-mask-image: linear-gradient(90deg, transparent, #000 1.25rem, #000 calc(100% - 1.25rem), transparent);mask-image: linear-gradient(90deg, transparent, #000 1.25rem, #000 calc(100% - 1.25rem), transparent);}#main-tabs::-webkit-scrollbar, .main-tabs::-webkit-scrollbar { display: none; }.tab-btn, .view-btn, .mode-btn, .sim-mode-btn, .mbtn, .rbtn, .probe-btn,.pol-btn, .rp-btn, .ctrl-btn, .samp-btn, .sp-btn, .drill-btn, .sim-btn,.sub-btn, .mini-btn, .act-btn, .hint-btn, .btn, .btn-ghost, .btn-teal,.btn-primary, .route-btn, .guide-toggle, #next-go, .btn-run {font-family: inherit;font-size: .9375rem;font-weight: 600;color: var(--label);background: var(--panel-2);border: 1px solid transparent;border-radius: var(--r-md);padding: .55rem .95rem;cursor: pointer;display: inline-flex;align-items: center;gap: .45rem;flex: 0 1 auto;scroll-snap-align: center;transition: background var(--dur-1) var(--ease-out), color var(--dur-1) var(--ease-out),border-color var(--dur-1) var(--ease-out), transform var(--dur-1) var(--ease-spring);-webkit-tap-highlight-color: transparent;}.tab-btn { white-space: nowrap; flex: 0 0 auto; }.tab-btn { color: var(--label-2); background: transparent; }.tab-btn:hover { color: var(--label); background: rgba(255,255,255,.06); }.tab-btn.active {color: var(--label);background: var(--panel-2);box-shadow: var(--shadow-1), inset 0 1px 0 rgba(255,255,255,.07);}button:hover:not(:disabled) { background: var(--panel-3); }button:active:not(:disabled) { transform: scale(.97); }button:disabled, [aria-disabled="true"] { opacity: .38; cursor: not-allowed; }.btn-primary, .btn-run { background: var(--action); color: #fff; }.btn-primary:hover:not(:disabled), .btn-run:hover:not(:disabled) { background: var(--action-hi); }.sp-btn.on, .samp-btn.sel, .sub-btn.on, .mini-btn.on, .mode-btn.active,.mbtn.active, .rbtn.active, .drill-btn.on, .route-btn.on, .map-box.on,.view-btn.on, .pol-btn.on {background: var(--action-dim);border-color: rgba(10,132,255,.45);color: var(--action-hi);}.tab-panel { display: none; }.tab-panel.active {display: block;animation: panel-in var(--dur-3) var(--ease-spring) both;}@keyframes panel-in {from { opacity: 0; transform: translateY(10px) scale(.994); }to   { opacity: 1; transform: none; }}.dock {position: relative;border: 1px solid var(--hairline);border-radius: var(--r-lg);background: var(--panel);padding: clamp(.9rem, 2.5vw, 1.15rem);overflow: hidden;transition: border-color var(--dur-2) var(--ease-out), box-shadow var(--dur-2) var(--ease-out);}.dock::before {content: "";position: absolute;inset: 0 auto 0 0;width: 3px;background: var(--label-3);transition: background var(--dur-2) var(--ease-out);}.dock.locked   { border-color: rgba(255,159,10,.38); }.dock.locked::before   { background: var(--locked); }.dock.unlocked { border-color: rgba(48,209,88,.4); }.dock.unlocked::before { background: var(--correct); }.dock-head { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; }.dock-step {background: rgba(255,255,255,.06);border-color: var(--hairline);color: var(--label-2);font-size: .75rem;letter-spacing: .04em;text-transform: uppercase;border-radius: var(--r-sm);}.dock-state { margin-left: auto; font-weight: 700; }.st-lock { background: var(--locked-dim); border-color: rgba(255,159,10,.4); color: var(--locked); }.st-open { background: var(--correct-dim); border-color: rgba(48,209,88,.4);  color: var(--correct); }.dock-why, #dock-locknote { color: var(--label-2); font-size: .9375rem; line-height: 1.55; }@keyframes dock-unlock {0%   { box-shadow: 0 0 0 0 rgba(48,209,88,.55); }70%  { box-shadow: 0 0 0 10px rgba(48,209,88,0); }100% { box-shadow: 0 0 0 0 rgba(48,209,88,0); }}.dock.just-unlocked { animation: dock-unlock .7s var(--ease-out) 1; }@keyframes tick-in { from { opacity: 0; transform: scale(.4); } to { opacity: 1; transform: scale(1); } }.dock.just-unlocked .st-open { animation: tick-in .35s var(--ease-spring) both; }.pr-opt, .pred-opt {display: block;width: 100%;text-align: left;background: var(--panel-2);border: 1px solid var(--hairline-2);border-radius: var(--r-md);padding: .7rem .85rem;font-size: .9375rem;color: var(--label);cursor: pointer;white-space: normal;transition: border-color var(--dur-1) var(--ease-out), background var(--dur-1) var(--ease-out),transform var(--dur-1) var(--ease-spring);}.pr-opt:hover:not(:disabled), .pred-opt:hover:not(:disabled) { border-color: rgba(10,132,255,.5); background: var(--panel-3); }.pr-opt:active:not(:disabled), .pred-opt:active:not(:disabled) { transform: scale(.99); }.pr-opt.picked, .pred-opt.picked { border-color: var(--action); background: var(--action-dim); color: var(--label); }.pr-opt.correct, .pred-opt.correct, .route-btn.right, .mcq-opt.correct {border-color: rgba(48,209,88,.65);background: var(--correct-dim);}.pr-opt.wrong, .pred-opt.wrong, .route-btn.bad, .mcq-opt.wrong {border-color: rgba(255,69,63,.55);background: var(--wrong-dim);}.pred-opt:disabled { cursor: not-allowed; opacity: .45; }#next-bar {position: sticky;bottom: 0;z-index: 40;padding: .45rem var(--gut) max(.45rem, env(safe-area-inset-bottom));}#next-bar > .glass {max-width: 76rem;margin-inline: auto;display: flex;align-items: center;gap: .6rem;flex-wrap: wrap;padding: .4rem .4rem .4rem .85rem;border-radius: var(--r-lg);background: rgba(28,28,30,.82);border: 1px solid var(--hairline);box-shadow: var(--shadow-2);-webkit-backdrop-filter: saturate(180%) blur(20px);backdrop-filter: saturate(180%) blur(20px);}#next-text, .next-copy, #next-bar #next-text {color: var(--label);font-size: .9375rem;min-width: 0;flex: 1 1 15rem;}#next-go {flex: 0 0 auto;background: var(--action);color: #fff;border: 0;padding: .5rem .85rem;font-size: .875rem;}#next-go:hover:not(:disabled) { background: var(--action-hi); }.ico { width: 1.05em; height: 1.05em; flex: 0 0 auto; vertical-align: -.18em; }.canvas-wrap {position: relative;width: 100%;min-height: 0;background: var(--panel);border: 1px solid var(--hairline-2);border-radius: var(--r-lg);overflow: hidden;}.canvas-wrap canvas {position: static;display: block;width: 100%;height: auto;border-radius: 0;}.ro-k, .ro-l, .lbl, .map-lab, .field-l, .progress-label {color: var(--label-3);font-size: .75rem;font-weight: 700;letter-spacing: .05em;text-transform: uppercase;}.ro-v, .map-val, .stat, .mixer-readout { color: var(--label); font-variant-numeric: tabular-nums; }.ro-card, .map-box, .control-card {border: 1px solid var(--hairline-2);background: var(--panel-2);border-radius: var(--r-md);}.bar-track, .progress-track { background: var(--panel-3); border-radius: 999px; overflow: hidden; }.bar-fill, .progress-fill { background: var(--action); transition: width var(--dur-3) var(--ease-spring); }.work, .eqbox, .kbd, .eqline, code, pre { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }.work {background: var(--ink);border: 1px solid var(--hairline-2);border-radius: var(--r-md);color: var(--label-2);font-size: .9375rem;line-height: 1.7;padding: .9rem 1rem;overflow-x: auto;}.work .hl { color: var(--action-hi); }.work .dim { color: var(--label-3); }.step-h {color: var(--action-hi);font-size: .8125rem;font-weight: 700;letter-spacing: .05em;text-transform: uppercase;}input[type="text"], input[type="number"], input[type="search"], select, textarea,.field, .field-i, .calc-inp {width: 100%;font-family: inherit;font-size: 1rem;color: var(--label);background: var(--panel-2);border: 1px solid var(--hairline);border-radius: var(--r-md);padding: .55rem .7rem;transition: border-color var(--dur-1) var(--ease-out), background var(--dur-1) var(--ease-out);-webkit-appearance: none;appearance: none;}input:focus, select:focus, textarea:focus { outline: none; border-color: var(--action); background: var(--panel); }select {background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23a1a1a6' d='M1.4 0 6 4.6 10.6 0 12 1.4 6 8 0 1.4z'/%3E%3C/svg%3E");background-repeat: no-repeat;background-position: right .65rem center;padding-right: 1.9rem;}label, .calc-lbl, .field-l {color: var(--label-2); font-size: .8125rem; font-weight: 600; letter-spacing: 0; text-transform: none;}input[type="range"] {-webkit-appearance: none; appearance: none;width: 100%; height: 28px; background: transparent; cursor: pointer;accent-color: var(--action);}input[type="range"]::-webkit-slider-runnable-track { height: 4px; border-radius: 999px; background: var(--panel-3); }input[type="range"]::-webkit-slider-thumb {-webkit-appearance: none; appearance: none;width: 24px; height: 24px; margin-top: -10px;border-radius: 50%; background: #fff; border: 0;box-shadow: 0 1px 4px rgba(0,0,0,.5);transition: transform var(--dur-1) var(--ease-spring);}input[type="range"]:active::-webkit-slider-thumb { transform: scale(1.12); }input[type="range"]::-moz-range-track { height: 4px; border-radius: 999px; background: var(--panel-3); }input[type="range"]::-moz-range-thumb { width: 22px; height: 22px; border: 0; border-radius: 50%; background: #fff; }input[type="checkbox"], input[type="radio"] { width: 1.1rem; height: 1.1rem; accent-color: var(--action); }.mcq-opt, .myth-card, .ms-point, .evidence-grid > *, .concept-grid > *, .guide-card {border: 1px solid var(--hairline-2);border-radius: var(--r-md);background: var(--panel-2);}.mcq-opt { padding: .75rem .9rem; font-size: .9375rem; cursor: pointer; }.mcq-opt:hover { border-color: rgba(10,132,255,.5); }.myth-card { cursor: pointer; transition: border-color var(--dur-2) var(--ease-out); }.myth-card:hover { border-color: rgba(10,132,255,.45); }.myth-back { display: none; }.myth-card.flipped .myth-front { display: none; }.myth-card.flipped .myth-back { display: block; animation: flip-in var(--dur-2) var(--ease-spring) both; }@keyframes flip-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }.tag-w { background: var(--correct-dim); border-color: rgba(48,209,88,.4); color: var(--correct); }.tag-c { background: var(--locked-dim);  border-color: rgba(255,159,10,.4);  color: var(--locked); }.tag-i { background: var(--wrong-dim);   border-color: rgba(255,69,63,.4);   color: var(--wrong); }.hint-btn { border-color: rgba(255,159,10,.35); background: var(--locked-dim); color: var(--locked); font-size: .8125rem; }.fail-box { border-left: 3px solid var(--wrong); background: var(--wrong-dim); border-radius: var(--r-md); padding: .7rem .9rem; }table, .datatbl { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }th, td { padding: .55rem .7rem; text-align: left; border-bottom: 1px solid var(--hairline-2); font-size: .9375rem; }th { color: var(--label-3); font-size: .75rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; }tbody tr:last-child > td { border-bottom: 0; }tbody tr { transition: background var(--dur-1) var(--ease-out); }tbody tr:hover { background: rgba(255,255,255,.04); }.lab-card {display: block;border: 1px solid var(--hairline-2);border-radius: var(--r-lg);background: var(--panel);color: var(--label);transition: transform var(--dur-2) var(--ease-spring), border-color var(--dur-2) var(--ease-out),box-shadow var(--dur-2) var(--ease-out);}.lab-card:hover { transform: translateY(-3px); border-color: rgba(10,132,255,.5); box-shadow: var(--shadow-3); }.lab-card:active { transform: translateY(-1px) scale(.995); }.reveal { opacity: 0; transform: translateY(14px); }.reveal.shown {opacity: 1; transform: none;transition: opacity var(--dur-3) var(--ease-out), transform var(--dur-3) var(--ease-spring);transition-delay: calc(var(--i, 0) * 45ms);}@media (pointer: coarse) {button, summary, [role="button"], .tab-btn, .pr-opt, .pred-opt, .mcq-opt,.myth-card, .lab-card, select, .field, .field-i, .calc-inp, .ans,input:not([type="checkbox"]):not([type="radio"]):not([type="range"]) { min-height: 44px !important; }input[type="checkbox"], input[type="radio"] { min-width: 28px !important; min-height: 28px !important; }label:has(> input[type="checkbox"]), label:has(> input[type="radio"]),.ms-point { min-height: 44px; display: flex; align-items: center; }.pr-opt, .pred-opt, .mcq-opt { display: flex; align-items: center; }li:has(> input[type="checkbox"]), li:has(> input[type="radio"]),li:has(.goal-check), li:has(.mloss) {cursor: pointer;min-height: 44px;display: flex;align-items: flex-start;padding-block: .3rem;}}@media (max-width: 640px) {.chip, .chip-dim, .chip-dse, .chip-warn, .badge, .dock-step, .dock-state, .ladder-tag {padding: .1rem .45rem;}#hdr-sub, .app-subtitle { font-size: .9375rem; line-height: 1.5; }#next-bar > .glass > span:first-child { display: none; }header.glass { gap: .6rem; }}@media (max-width: 768px) {.flex { flex-wrap: wrap; }}@media (min-width: 1024px) {:root { --gut: 2rem; }#main-tabs, .main-tabs {gap: .25rem;background: var(--panel-2);border-radius: var(--r-md);padding: .25rem;margin-inline: 0;overflow: visible;width: fit-content;-webkit-mask-image: none;mask-image: none;}.tab-btn { border-radius: var(--r-sm); }}:root {--bg: #000000;--bg-2: #0b0b0d;--panel: #1c1c1e;--panel-2: #2c2c2e;--panel-3: #37373a;--line: rgba(84, 84, 88, .42);--line-strong: rgba(84, 84, 88, .65);--text: #f5f5f7;--muted: #a1a1a6;--faint: #6e6e73;--teal: #64d2ff;--blue: #0a84ff;--amber: #ff9f0a;--rose: #ff453f;--green: #30d158;--radius: 12px;--shadow: 0 8px 24px rgba(0,0,0,.45);}@media (prefers-reduced-motion: reduce) {html { scroll-behavior: auto; }*, *::before, *::after {animation-duration: .001ms !important;animation-iteration-count: 1 !important;transition-duration: .001ms !important;}.reveal { opacity: 1; transform: none; }}@media print {html, body { background: #fff !important; color: #111 !important; }body::before { display: none; }* {color: #111 !important;background-image: none !important;box-shadow: none !important;-webkit-backdrop-filter: none !important;backdrop-filter: none !important;}.glass, .panel, .shell, .dock, .canvas-wrap, .ro-card, .mcq-opt, .myth-card,.lab-card, .btn, button, table, th, td { border-color: #c7c7cc !important; background-color: #fff !important; }.tab-panel { display: block !important; break-inside: avoid; }#next-bar, #btn-teacher, #pr-reveal, #pr-why, .hint-btn { display: none !important; }.reveal { opacity: 1 !important; transform: none !important; }.myth-back { display: block !important; }.myth-front { display: none !important; }}</style>
+</head>
+<body class="text-slate-200">
+<main class="max-w-6xl mx-auto px-5 py-6 relative z-10">
+
+  <header class="glass p-5 mb-4">
+    <div class="flex flex-wrap items-start justify-between gap-4">
+      <div>
+        <div class="flex flex-wrap items-center gap-2 mb-2">
+        <span class="chip">HKDSE Chemistry</span>
+        <span class="chip">Topic II (e)</span>
+        <span class="chip">Topic II (f) (g)</span>
+        <span class="chip">Topic II (i)</span>
+</div>
+        <h1 id="hdr-title" class="text-2xl md:text-3xl font-extrabold text-white leading-tight">Ionic &amp; Covalent Bonding — Electron Diagrams</h1>
+        <p id="hdr-sub" class="text-sm text-slate-400 mt-1">Topic II (e): electron transfer to form cations and anions, and sharing to form single, double and triple bonds, drawn as <b>electron diagrams</b>. (f) (g): giant ionic and simple molecular structures. (i): comparing giant ionic, giant covalent, simple molecular and giant metallic substances.</p>
+      </div>
+      <button type="button" id="btn-teacher" onclick="toggleTeacher()" class="btn btn-ghost"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg><span>Teacher notes</span></button>
+    </div>
+  </header>
+
+  <div id="teacher-panel" class="glass p-5 mb-4 hidden">
+    <h2 id="teacher-title" class="font-bold text-amber-300 mb-2">Teacher notes</h2>
+    <div id="teacher-content" class="text-sm text-slate-300 space-y-2 leading-relaxed"></div>
+  </div>
+
+  <nav id="main-tabs" class="flex flex-wrap gap-2 mb-4">
+    <button type="button" id="tab-sim"   class="tab-btn active px-4 py-2 rounded-xl text-sm font-semibold border border-slate-700 bg-slate-900/60" data-tab="sim"   onclick="setTab('sim')">1 · Investigate</button>
+    <button type="button" id="tab-intro" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold border border-slate-700 bg-slate-900/60" data-tab="intro" onclick="setTab('intro')">2 · Learn</button>
+    <button type="button" id="tab-calc"  class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold border border-slate-700 bg-slate-900/60" data-tab="calc"  onclick="setTab('calc')">3 · Names &amp; formulae</button>
+    <button type="button" id="tab-mcq"   class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold border border-slate-700 bg-slate-900/60" data-tab="mcq"   onclick="setTab('mcq')">4 · Exam practice</button>
+    <button type="button" id="tab-recap" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold border border-slate-700 bg-slate-900/60" data-tab="recap" onclick="setTab('recap')">5 · Recap</button>
+  </nav>
+
+  <section id="panel-sim" class="tab-panel active mb-5">
+
+    <div id="sim-dock" class="dock locked mb-3" aria-live="polite">
+      <div class="dock-head mb-2">
+        <span class="dock-step">Task 1 of 3</span>
+        <span class="text-sm font-bold text-white" id="dock-title">Predict</span>
+        <span class="dock-state st-lock" id="dock-state">Locked</span>
+      </div>
+      <p id="predict-q" class="text-sm text-slate-200 mb-3"></p>
+      <div id="predict-opts" class="grid sm:grid-cols-3 gap-2"></div>
+      <p id="predict-why" class="hidden text-xs text-emerald-200 bg-emerald-950/40 border border-emerald-700/40 rounded-xl p-3 leading-relaxed mt-3"></p>
+      <p class="mt-2 text-xs text-amber-200" id="dock-locknote"></p>
+    </div>
+
+    <div class="glass p-4">
+      <div class="canvas-wrap rounded-xl border border-slate-700/70 bg-slate-950/70">
+        <canvas id="sim-canvas" aria-label="Electron diagram canvas: on the ionic side an outer-shell electron moves from a metal atom to a non-metal atom to form a cation and an anion; on the covalent side two atoms come together and share a pair of electrons in the overlap"></canvas>
+      </div>
+      <p id="sim-caption" class="text-xs text-slate-400 mt-3 leading-relaxed"></p>
+
+      <div id="ctrl-panel" class="mt-3 rounded-xl border border-slate-700/60 bg-slate-950/50 p-3">
+        <p class="ro-k mb-2" id="ctrl-heading">Controls</p>
+        <div class="flex flex-wrap gap-2 mb-3" id="sim-modes"></div>
+        <div class="grid md:grid-cols-2 gap-3">
+          <div>
+            <p class="ro-k mb-2">Substance</p>
+            <div class="flex flex-wrap gap-2" id="sim-species"></div>
+            <div class="mt-3 flex flex-wrap items-center gap-3">
+              <button type="button" id="btn-react" class="btn btn-primary">Bond them</button>
+              <button type="button" id="btn-reset-sim" class="btn btn-ghost">Reset</button>
+              <label class="text-xs text-slate-300 flex items-center gap-2"><input type="checkbox" id="chk-labels" checked> Show labels</label>
+            </div>
+          </div>
+          <div>
+            <p class="ro-k mb-2">The three things an electron diagram must get right</p>
+            <ul class="text-xs text-slate-300 space-y-1 list-disc list-inside">
+              <li><b>Outer shell only</b> — inner shells may be left out.</li>
+              <li><b>Charges on the ions</b> — an ionic diagram without charges has lost its point.</li>
+              <li><b>Shared pair inside the overlap</b> — for covalent substances.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-4 mt-4">
+        <div id="sim-readouts" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
+        <div class="glass p-4 rounded-xl">
+          <p class="ro-k mb-2">What the diagram is telling you</p>
+          <p id="sim-explain" class="text-sm text-slate-300 leading-relaxed"></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="glass p-5 mt-4">
+      <div class="dock-head mb-2">
+        <span class="dock-step">Task 2 of 3</span>
+        <span class="text-sm font-bold text-white">Break it on purpose</span>
+      </div>
+      <p class="text-xs text-slate-400 mb-3">Each of these is an error HKDSE candidates really make. Break it, see the consequence, then never write it again.</p>
+      <div class="flex flex-wrap gap-2 mb-3">
+        <button type="button" class="drill-btn" id="fail-btn-a" data-fail="a">Draw NaCl without charges</button>
+        <button type="button" class="drill-btn" id="fail-btn-b" data-fail="b">Call NaCl a molecule</button>
+        <button type="button" class="drill-btn" id="fail-btn-c" data-fail="c">Say ionic solids conduct</button>
+        <button type="button" class="btn btn-ghost" id="fail-clear">Clear</button>
+      </div>
+      <div id="fail-panel" class="text-sm text-slate-300"></div>
+    </div>
+
+    <div class="glass p-5 mt-4">
+      <div class="dock-head mb-2">
+        <span class="dock-step">Task 3 of 3</span>
+        <span class="text-sm font-bold text-white">Colours of ions in aqueous solution</span>
+      </div>
+      <p class="text-xs text-slate-400 mb-3">Topic II (e) requires you to <b>describe the colours of some common ions in aqueous solutions</b>. Say the colour out loud before you reveal it.</p>
+      <div class="flex flex-wrap gap-2 mb-3" id="colour-tabs"></div>
+      <div id="colour-body"></div>
+    </div>
+  </section>
+
+  <section id="panel-intro" class="tab-panel mb-5">
+    <div class="glass p-6 space-y-5">
+      <div>
+        <h2 id="intro-h1" class="text-xl font-bold text-white"></h2>
+        <p id="intro-lead" class="text-sm md:text-base text-slate-300 leading-relaxed mt-2"></p>
+      </div>
+      <div>
+        <h3 class="text-sm font-bold text-teal-300 uppercase tracking-wide mb-2">What Topic II (e) requires</h3>
+        <div id="intro-cards" class="grid md:grid-cols-2 gap-3"></div>
+      </div>
+      <div>
+        <h3 class="text-sm font-bold text-teal-300 uppercase tracking-wide mb-2">Comparing the four kinds of structure — Topic II (i)</h3>
+        <div id="compare-table"></div>
+      </div>
+      <div>
+        <h3 class="text-sm font-bold text-teal-300 uppercase tracking-wide mb-2">In scope, and what is not expected</h3>
+        <div id="scope-cards" class="grid md:grid-cols-2 gap-3"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="panel-calc" class="tab-panel mb-5">
+    <div class="glass p-6 space-y-6">
+      <div>
+        <h2 id="calc-title" class="text-xl font-bold text-white">Names and formulae — a required Topic II outcome</h2>
+        <p id="calc-sub" class="text-sm text-slate-400 mt-1"></p>
+      </div>
+      <div class="rounded-2xl border border-teal-500/25 bg-teal-950/10 p-4">
+        <h3 class="font-bold text-teal-200 text-sm mb-3">Tool 1 — formula from charges (worked, then you choose)</h3>
+        <div class="grid md:grid-cols-3 gap-3 items-end">
+          <div>
+            <label for="calc-cat" class="field-l">Cation (positive ion)</label>
+            <select id="calc-cat" class="field">
+              <option value="Na|1|Na" selected>Na</option>
+              <option value="K|1|K">K</option>
+              <option value="Mg|2|Mg">Mg</option>
+              <option value="Ca|2|Ca">Ca</option>
+              <option value="Al|3|Al">Al</option>
+              <option value="NH4|1|NH4">NH₄ (polyatomic)</option>
+              <option value="Cu|2|Cu">Cu</option>
+            </select>
+          </div>
+          <div>
+            <label for="calc-an" class="field-l">Anion (negative ion)</label>
+            <select id="calc-an" class="field">
+              <option value="Cl|1|Cl" selected>Cl</option>
+              <option value="Br|1|Br">Br</option>
+              <option value="O|2|O">O</option>
+              <option value="S|2|S">S</option>
+              <option value="OH|1|OH">OH (polyatomic)</option>
+              <option value="NO3|1|NO3">NO₃ (polyatomic)</option>
+              <option value="SO4|2|SO4">SO₄ (polyatomic)</option>
+              <option value="CO3|2|CO3">CO₃ (polyatomic)</option>
+            </select>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <button type="button" class="btn btn-primary" id="btn-formula">Build the formula</button>
+          </div>
+        </div>
+        <div id="formula-out" class="mt-3"></div>
+      </div>
+      <div class="rounded-2xl border border-amber-500/25 bg-amber-950/10 p-4">
+        <h3 class="font-bold text-amber-200 text-sm mb-3">Step 1 (worked example) + Step 2 (completion) — read structure off the properties</h3>
+        <div id="prop-tool"></div>
+      </div>
+      <div class="rounded-2xl border border-rose-500/25 bg-rose-950/10 p-4">
+        <h3 class="font-bold text-rose-200 text-sm mb-1">Step 3 — independent task, no help at all</h3>
+        <p class="text-xs text-slate-400 mb-3">Write the answer on paper first — it is the most-repeated comparison question in Topic II.</p>
+        <p class="text-sm text-slate-200 mb-3"><i>Substance X has a high melting point, does not conduct electricity when solid, and conducts when molten. Substance Y has a low melting point and never conducts. Identify the type of structure of X and of Y and explain both sets of observations. (5)</i></p>
+        <div class="flex flex-wrap gap-2">
+          <button type="button" class="btn btn-teal" id="ind-reveal">Reveal marking scheme</button>
+          <button type="button" class="hint-btn" id="ind-hint">Hint</button>
+        </div>
+        <p class="text-xs text-amber-200 mt-2" id="ind-hinttext"></p>
+        <div id="ind-out" class="mt-3"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="panel-mcq" class="tab-panel mb-5">
+    <div class="glass p-6">
+      <h2 id="pp-title" class="text-xl font-bold text-white mb-1">Exam practice</h2>
+      <p id="pp-sub" class="text-xs text-slate-400 mb-5"></p>
+      <div id="pp-questions" class="space-y-6"></div>
+      <div class="mt-6 pt-5 border-t border-white/10">
+        <h3 class="font-bold text-white text-sm mb-1">Paper 1B style — write it out, then mark yourself</h3>
+        <p class="text-xs text-slate-400 mb-3">Tick only the marking points you actually wrote.</p>
+        <div id="pp-structured"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="panel-recap" class="tab-panel mb-5">
+    <div class="glass rounded-2xl p-6 space-y-6">
+      <div>
+        <h2 id="recap-title" class="text-xl font-bold text-white">Recap — "I can…"</h2>
+        <p id="recap-sub" class="text-sm text-slate-400 mt-1 mb-3">Tick each one only when you can do it without notes.</p>
+        <ul id="recap-list" class="space-y-2"></ul>
+        <p id="recap-progress" class="text-xs text-slate-500 mt-3"></p>
+        <div class="border-t border-white/10 pt-5 mt-4">
+          <h3 class="text-sm font-bold text-rose-300 uppercase tracking-wide mb-2" id="myth-title">Common misconceptions</h3>
+          <p class="text-xs text-slate-400 mb-4" id="myth-lead">Tap a card to flip.</p>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3" id="myth-cards"></div>
+        </div>
+      </div>
+      <div class="border-t border-white/10 pt-5">
+        <h3 class="text-sm font-bold text-amber-300 uppercase tracking-wide mb-2" id="markloss-title"></h3>
+        <p class="text-xs text-slate-400 mb-3" id="markloss-lead"></p>
+        <ul id="markloss-list" class="grid sm:grid-cols-2 gap-2"></ul>
+      </div>
+    </div>
+  </section>
+
+  <footer class="text-center text-xs text-slate-600 pb-4">HKDSE Chemistry · Topic II (e) ionic and covalent bond · (f) (g) structures and properties · (i) comparison · interactive lab · English</footer>
+</main>
+
+<div id="next-bar" class="max-w-6xl mx-auto px-5 pb-4">
+  <div class="glass rounded-xl px-4 py-2 flex flex-wrap items-center gap-3 text-sm">
+    <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Next step</span>
+    <span id="next-text" class="text-slate-200 font-semibold flex-1">Answer Task 1 in the panel above the diagram</span>
+    <button type="button" id="next-go" class="btn btn-teal py-1.5" onclick="goNext()">Take me there</button>
+  </div>
+</div>
+
+<script>
+/* =====================================================================
+   STRINGS — flat English T only.
+   SCOPE: HKDSE Chemistry Topic II (e) ionic and covalent bond, (f) giant ionic,
+   (g) simple molecular, (i) comparison. Authority: C&A Guide (S4-6)
+   Notes for Teachers supplement 18/08/2018.
+   NOT included (not DSE Topic II): Al2Cl6 (the DSE dative examples are H3O+ and
+   NH4+), hybridisation, d-orbitals, Born-Haber, and bond angles as required
+   answers (shapes belong to Topic VI; stating bond angles is "not expected").
+===================================================================== */
+const T = {
+  title: 'Ionic & Covalent Bonding — Electron Diagrams',
+  teacherTitle: 'Teacher notes',
+  calcSub: 'Topic II (e) expects you to construct a formula from the component ions and to name compounds. The formula follows from CHARGE BALANCE — the total positive charge must equal the total negative charge. It never follows from counting outer electrons.',
+  introH1: 'Two ways to get a full outer shell: give electrons away, or share them',
+  introLead: 'HKDSE calls these drawings <b>electron diagrams</b>. They are the language of Topic II (e): you must show an outer-shell electron moving from a metal atom to a non-metal atom to make a cation and an anion, and you must show two non-metal atoms sharing a pair of electrons in the overlap between them.',
+  concepts: [
+    { t: 'Ions form by electron transfer (II e)', d: 'A metal atom loses its outer-shell electrons to become a cation; a non-metal atom gains electrons to complete its outer shell and become an anion. Sodium 2,8,1 gives Na 2,8. Chlorine 2,8,7 gives Cl 2,8,8. The whole outer shell is lost, which is why a cation is smaller than its atom.' },
+    { t: 'Electron diagrams: what earns the marks', d: 'Outer shell only (inner shells may be omitted). <b>Charges on the ions are required</b> — an ionic diagram without charges has lost the point of the diagram. For covalent substances the shared pair must sit in the overlap between the two nuclei, and single, double and triple bonds are shown by one, two or three shared pairs.' },
+    { t: 'Dative covalent bond (II e)', d: 'A covalent bond in which BOTH electrons of the shared pair come from the same atom. HKDSE examples are H₃O (a lone pair on oxygen donated to H) and NH₄ (a lone pair on nitrogen donated to H). Once formed it is an ordinary shared pair — only its origin is different.' },
+    { t: 'Giant ionic structures (II f)', d: 'Sodium chloride and caesium chloride are giant lattices of ions held by strong electrostatic attraction between oppositely charged ions. High melting points; they do not conduct when solid because the ions are held in fixed positions; they conduct when molten or in aqueous solution because the ions become free to move.' },
+    { t: 'Simple molecular structures (II g)', d: 'Carbon dioxide and iodine consist of small discrete molecules with strong covalent bonds INSIDE each molecule, but only weak van der Waals\u2019 forces between molecules. Low melting points because only those weak forces need to be overcome, and they never conduct because there are no mobile charged particles.' },
+    { t: 'Comparing the four structures (II i)', d: 'Giant ionic, giant covalent, simple molecular and giant metallic. Decide the type first, then say which bonds or forces are overcome, then read the property off that. A property question is always answered in that order.' }
+  ],
+  scope: [
+    { t: 'In scope and examined', d: 'Transfer of electrons to form ions; cations and anions; electron diagrams of simple ionic compounds; names and formulae of ionic compounds; ionic structure as illustrated by sodium chloride (and caesium chloride); sharing of electrons; single, double and triple bonds; electron diagrams of simple covalent molecules; dative bond using H₃O and NH₄; formula mass and relative molecular mass; colours of common ions in aqueous solution; properties of giant ionic and simple molecular substances; comparison of the four structure types.' },
+    { t: 'Not expected — do not present it as required', d: 'Stating bond angles is <b>"not expected"</b>, and shapes of molecules belong to <b>Topic VI</b>. Bond polarity, electronegativity and intermolecular forces also belong to <b>Topic VI</b>. Beyond the syllabus: hybridisation, d-orbitals, Born\u2013Haber cycles and unit cells.' },
+    { t: 'An example that must NOT appear here', d: 'Many textbooks use <b>Al₂Cl₆</b> to teach the dative bond. That is <b>not</b> in the HKDSE syllabus. The DSE examples are <b>H₃O⁺</b> and <b>NH₄⁺</b> — both drawn as an electron diagram with a lone pair donated to H⁺.' },
+    { t: 'How to use this lab', d: 'Tab 1: answer Task 1 before the controls unlock, then break the three deliberate errors and work down the ion-colour list. Tab 2: the rules and the four-structure comparison table. Tab 3: names and formulae, the structure-from-properties pattern, and one independent answer. Tabs 4\u20135: exam practice and the honest mark-loss list.' }
+  ],
+  teacher: [
+    'Placement: HKDSE Topic II (e), after electronic arrangements (II a) and before the properties of structures (II f\u2013i). Everything here is assumed by Topic IV (acids and bases) and Topic VII (redox).',
+    'The three errors this lab targets: (1) drawing an ionic electron diagram with no charges; (2) calling an ionic solid a molecule; (3) saying ionic compounds conduct when solid. All three are common in HKDSE scripts.',
+    'Do not use Al₂Cl₆ here. If a student has met it in a textbook, say plainly that the DSE examples are H₃O⁺ and NH₄⁺.',
+    'Ion colours are a required outcome and are easy marks: Cu²⁺ blue, Fe²⁺ pale green, Fe³⁺ yellowish-brown, MnO₄⁻ purple, Cr₂O₇²⁻ orange. Have students recall these before revealing.',
+    'Do not ask for bond angles. Shapes of molecules are Topic VI, and stating bond angles is explicitly "not expected".',
+    '5-minute task: give the X and Y property question in Tool 3 cold, and mark only the sentence that names which bonds or forces are overcome. That sentence decides the marks.'
+  ],
+  simCaption: 'What this models: a 2-D electron diagram in the style HKDSE expects — outer shell only, with two colours marking which atom each electron came from. The ionic side moves an outer-shell electron from the metal to the non-metal and then labels the charges; the covalent side brings the atoms together until their outer shells overlap and places the shared pair(s) in the overlap. What it does not model: real orbital shapes, inner shells (deliberately omitted, as the syllabus allows) or the true 3-D geometry of a lattice — a giant ionic lattice is represented by an ion pair plus the structural description.',
+  species: {
+    NaCl: { mode:'ionic', short:'NaCl', name:'sodium chloride', structure:'giant ionic', cation:'Na', anion:'Cl', ratio:'1 : 1', mp:'801 \u00b0C', cond:'no when solid; yes when molten or in solution', colour:'both ions colourless',
+      atoms:[ {el:'Na', outer:1, lose:1, lab0:'Na \u00b7 2,8,1', lab1:'Na \u00b7 2,8'},
+              {el:'Cl', outer:7, gain:1, lab0:'Cl \u00b7 2,8,7', lab1:'Cl \u00b7 2,8,8'} ],
+      eq:'Na \u2192 Na⁺ + e\u2212    \u00b7    Cl + e\u2212 \u2192 Cl⁻', note:'The metal loses its one outer electron; the non-metal gains one to complete its outer shell.' },
+    MgO: { mode:'ionic', short:'MgO', name:'magnesium oxide', structure:'giant ionic', cation:'Mg', anion:'O', ratio:'1 : 1', mp:'2852 \u00b0C', cond:'no when solid; yes when molten', colour:'both ions colourless',
+      atoms:[ {el:'Mg', outer:2, lose:2, lab0:'Mg \u00b7 2,8,2', lab1:'Mg \u00b7 2,8'},
+              {el:'O', outer:6, gain:2, lab0:'O \u00b7 2,6', lab1:'O \u00b7 2,8'} ],
+      eq:'Mg \u2192 Mg²⁺ + 2e\u2212    \u00b7    O + 2e\u2212 \u2192 O²⁻', note:'Doubly charged ions attract far more strongly, so the melting point is far higher than sodium chloride\u2019s even though the arrangement is the same.' },
+    CaCl2: { mode:'ionic', short:'CaCl₂', name:'calcium chloride', structure:'giant ionic', cation:'Ca', anion:'Cl', ratio:'1 : 2', mp:'772 \u00b0C', cond:'no when solid; yes when molten or in solution', colour:'both ions colourless',
+      atoms:[ {el:'Ca', outer:2, lose:2, lab0:'Ca \u00b7 2,8,8,2', lab1:'Ca \u00b7 2,8,8'},
+              {el:'Cl', outer:7, gain:1, lab0:'Cl \u00b7 2,8,7', lab1:'Cl \u00b7 2,8,8'} ],
+      eq:'Ca \u2192 Ca²⁺ + 2e\u2212    \u00b7    2Cl + 2e\u2212 \u2192 2Cl⁻', note:'One calcium atom must lose two electrons and each chlorine needs one, so two chloride ions form per calcium ion \u2014 that balance gives the formula CaCl₂.' },
+    CsCl: { mode:'ionic', short:'CsCl', name:'caesium chloride', structure:'giant ionic', cation:'Cs', anion:'Cl', ratio:'1 : 1', mp:'645 \u00b0C', cond:'no when solid; yes when molten', colour:'both ions colourless',
+      atoms:[ {el:'Cs', outer:1, lose:1, lab0:'Cs \u00b7 2,8,18,18,1', lab1:'Cs \u00b7 2,8,18,18'},
+              {el:'Cl', outer:7, gain:1, lab0:'Cl \u00b7 2,8,7', lab1:'Cl \u00b7 2,8,8'} ],
+      eq:'Cs \u2192 Cs⁺ + e\u2212    \u00b7    Cl + e\u2212 \u2192 Cl⁻', note:'HKDSE names caesium chloride alongside sodium chloride as an example of a giant ionic structure. Caesium has more inner shells so its ion is larger, which is why its melting point is lower than sodium chloride\u2019s.' },
+    Cl2: { mode:'covalent', short:'Cl₂', name:'chlorine', structure:'simple molecular', bt:'single bond (one shared pair)', mp:'\u2212101 \u00b0C', cond:'never conducts', colour:'greenish-yellow gas',
+      atoms:[ {el:'Cl', outer:7, lab0:'Cl \u00b7 2,8,7', lab1:'Cl \u00b7 2,8,8 counting the shared pair'},
+              {el:'Cl', outer:7, lab0:'Cl \u00b7 2,8,7', lab1:'Cl \u00b7 2,8,8 counting the shared pair'} ],
+      bonds:1, eq:'Cl + Cl \u2192 Cl₂   (one shared pair)', note:'Each chlorine brings one unpaired outer electron, so ONE shared pair completes both outer shells.' },
+    O2: { mode:'covalent', short:'O₂', name:'oxygen', structure:'simple molecular', bt:'double bond (two shared pairs)', mp:'\u2212218 \u00b0C', cond:'never conducts', colour:'colourless gas',
+      atoms:[ {el:'O', outer:6, lab0:'O \u00b7 2,6', lab1:'O \u00b7 2,8 counting the shared pairs'},
+              {el:'O', outer:6, lab0:'O \u00b7 2,6', lab1:'O \u00b7 2,8 counting the shared pairs'} ],
+      bonds:2, eq:'O + O \u2192 O₂   (two shared pairs)', note:'Each oxygen has two unpaired outer electrons, so TWO shared pairs are needed \u2014 a double bond. Still only two atoms are joined.' },
+    N2: { mode:'covalent', short:'N₂', name:'nitrogen', structure:'simple molecular', bt:'triple bond (three shared pairs)', mp:'\u2212210 \u00b0C', cond:'never conducts', colour:'colourless gas',
+      atoms:[ {el:'N', outer:5, lab0:'N \u00b7 2,5', lab1:'N \u00b7 2,8 counting the shared pairs'},
+              {el:'N', outer:5, lab0:'N \u00b7 2,5', lab1:'N \u00b7 2,8 counting the shared pairs'} ],
+      bonds:3, eq:'N + N \u2192 N₂   (three shared pairs)', note:'Three shared pairs give each nitrogen a complete outer shell. The triple bond is strong to break, which is why nitrogen is so unreactive \u2014 but that is about reactions, not about boiling.' },
+    H2O: { mode:'covalent', short:'H₂O', name:'water', structure:'simple molecular', bt:'two single bonds', mp:'0 \u00b0C', cond:'pure water does not conduct', colour:'colourless liquid',
+      atoms:[ {el:'O', outer:6, lab0:'O \u00b7 2,6', lab1:'O \u00b7 2,8 (2 shared + 2 lone pairs)'},
+              {el:'H', outer:1, lab0:'H \u00b7 1', lab1:'H \u00b7 2 (duplet)'},
+              {el:'H', outer:1, lab0:'H \u00b7 1', lab1:'H \u00b7 2 (duplet)'} ],
+      bonds:'H₂O', eq:'2H + O \u2192 H₂O   (two shared pairs)', note:'Hydrogen is complete with TWO electrons, not eight. Writing that hydrogen needs eight is a standard error.' },
+    CO2: { mode:'covalent', short:'CO₂', name:'carbon dioxide', structure:'simple molecular', bt:'two double bonds', mp:'\u221278 \u00b0C (sublimes)', cond:'never conducts', colour:'colourless gas',
+      atoms:[ {el:'C', outer:4, lab0:'C \u00b7 2,4', lab1:'C \u00b7 2,8 counting the shared pairs'},
+              {el:'O', outer:6, lab0:'O \u00b7 2,6', lab1:'O \u00b7 2,8 counting the shared pairs'},
+              {el:'O', outer:6, lab0:'O \u00b7 2,6', lab1:'O \u00b7 2,8 counting the shared pairs'} ],
+      bonds:'CO₂', eq:'C + 2O \u2192 CO₂   (two double bonds)', note:'HKDSE names carbon dioxide as an example of a simple molecular structure. It is a gas at room temperature, yet it contains strong C=O bonds \u2014 those two facts are about different things.' },
+    H3O: { mode:'covalent', short:'H₃O', name:'oxonium ion (dative bond)', structure:'simple molecular ion', bt:'2 single bonds + 1 DATIVE bond', mp:'(only in aqueous acid)', cond:'\u2014', colour:'colourless',
+      atoms:[ {el:'O', outer:6, lab0:'O \u00b7 2,6 with a lone pair', lab1:'O \u00b7 2,8'},
+              {el:'H', outer:1, lab0:'H \u00b7 1', lab1:'H \u00b7 2 (duplet)'},
+              {el:'H', outer:1, lab0:'H \u00b7 1', lab1:'H \u00b7 2 (duplet)'},
+              {el:'H', outer:0, lab0:'H⁺ \u00b7 no electrons', lab1:'H \u00b7 2 (both from O)'} ],
+      bonds:'H₃O', eq:'H₂O + H⁺ \u2192 H₃O⁺', note:'The third bond is DATIVE: oxygen donates a lone pair to the bare proton H⁺, which brought no electrons at all.' },
+    NH4: { mode:'covalent', short:'NH₄', name:'ammonium ion (dative bond)', structure:'simple molecular ion', bt:'3 single bonds + 1 DATIVE bond', mp:'(in ammonium salts)', cond:'\u2014', colour:'colourless',
+      atoms:[ {el:'N', outer:5, lab0:'N \u00b7 2,5 with a lone pair', lab1:'N \u00b7 2,8'},
+              {el:'H', outer:1, lab0:'H \u00b7 1', lab1:'H \u00b7 2 (duplet)'},
+              {el:'H', outer:1, lab0:'H \u00b7 1', lab1:'H \u00b7 2 (duplet)'},
+              {el:'H', outer:1, lab0:'H \u00b7 1', lab1:'H \u00b7 2 (duplet)'},
+              {el:'H', outer:0, lab0:'H⁺ \u00b7 no electrons', lab1:'H \u00b7 2 (both from N)'} ],
+      bonds:'NH₄', eq:'NH₃ + H⁺ \u2192 NH₄⁺', note:'Nitrogen donates its lone pair to H⁺. This is the second DSE example of a dative covalent bond.' }
+  },
+  predictQ: 'Sodium has one electron in its outer shell. When sodium bonds with chlorine, what happens to that electron, and what is left behind?',
+  predicts: [
+    { t: 'It is shared equally \u2014 sodium and chlorine both count it in their outer shell.' },
+    { t: 'It is transferred to chlorine, leaving Na⁺ and Cl⁻ \u2014 two oppositely charged ions.' },
+    { t: 'It disappears, because sodium becomes stable by losing it completely.' }
+  ],
+  predictA: 1,
+  predictWhy: 'The electron is <b>transferred</b>, not shared. That is what makes ionic bonding different from covalent bonding, where the pair is shared. Option A describes a covalent bond, which is the wrong mechanism between a metal and a non-metal. Option C is a real misconception \u2014 nothing disappears: the electron goes to the chlorine, and charge is conserved, so the two ions end up with equal and opposite charges.',
+  fails: {
+    a: { name:'Electron diagram drawn without charges',
+      tryTxt:'A student draws sodium and chlorine with complete outer shells and writes "NaCl" underneath, but puts no + or \u2212 anywhere on the diagram.',
+      what:'The drawing now looks exactly like a covalent substance \u2014 two atoms with full shells and no charge. The whole point of an ionic electron diagram is that the particles are ions, and the charges are what show it.',
+      fix:'Every ionic electron diagram must carry the charges: Na⁺ and Cl⁻ (and for the 2\u2212 cases, O²⁻ and S²⁻). Write the charge next to each ion and write the transfer underneath: Na \u2192 Na⁺ + e\u2212.',
+      ms:'HKDSE marking: charges on the ions are required. A diagram with correct shells but no charges is incomplete.' },
+    b: { name:'Calling an ionic solid a molecule',
+      tryTxt:'A student writes "an NaCl molecule contains one sodium ion and one chloride ion".',
+      what:'There is no such thing as an NaCl molecule. Sodium chloride is a GIANT IONIC STRUCTURE: a very large lattice in which each Na⁺ is surrounded by Cl⁻ and vice versa, in a 1:1 ratio that continues throughout the crystal. The formula NaCl gives the simplest ratio of ions, not a molecule.',
+      fix:'Say "the formula NaCl shows the ratio of sodium ions to chloride ions in the lattice, which is 1:1". If asked to describe the structure, say it is a giant lattice of ions held by strong electrostatic attraction between oppositely charged ions.',
+      ms:'HKDSE marking: "giant ionic structure / lattice of ions" earns the mark; "molecule" does not, and usually costs the structure mark too.' },
+    c: { name:'Ionic compound said to conduct when solid',
+      tryTxt:'A student explains the conductivity of sodium chloride: "it conducts because it contains ions, and ions carry charge".',
+      what:'Solid sodium chloride does NOT conduct. It certainly contains ions \u2014 but they are held in FIXED POSITIONS in the lattice by strong electrostatic attraction, so they cannot move to carry charge. Presence of ions is not the same as mobility of ions.',
+      fix:'Write it in two parts: (1) when solid, the ions are held in fixed positions in the lattice so there are no mobile charge carriers and it does not conduct; (2) when molten or in aqueous solution the lattice breaks down and the ions become free to move, so it conducts.',
+      ms:'HKDSE marking: "mobile / free to move" is the key phrase. An answer that only says "it contains ions" earns nothing for conductivity.' }
+  },
+  colours: [
+    { k:'basic', label:'Ions you must know', rows:[
+      ['Na⁺, K⁺, Ca²⁺, Mg²⁺, Al³⁺', 'colourless', '#e2e8f0', 'Group I and II metal ions and Al³⁺ are colourless in aqueous solution.'],
+      ['Cl⁻, Br⁻, I⁻, NO₃⁻, SO₄²⁻, CO₃²⁻', 'colourless', '#e2e8f0', 'Most common anions are colourless. Iodide solution is colourless \u2014 it is the iodine formed on oxidation that is brown.'],
+      ['Cu²⁺', 'blue', '#3b82f6', 'The classic blue of copper(II) sulfate solution.'],
+      ['Fe²⁺', 'pale green', '#86efac', 'Pale green \u2014 easily oxidised to Fe³⁺ in air, which changes the colour.'],
+      ['Fe³⁺', 'yellowish-brown', '#b45309', 'Yellowish-brown in aqueous solution.'],
+      ['MnO₄⁻', 'purple', '#8b5cf6', 'Potassium permanganate solution: intense purple. Used in the ion-migration practical.'],
+      ['Cr₂O₇²⁻', 'orange', '#f97316', 'Potassium dichromate solution: orange. Used with copper(II) chromate in the ion-migration practical.']
+    ]},
+    { k:'predict', label:'Predict an unfamiliar ion', rows:[
+      ['K+', 'colourless', '#e2e8f0', 'Potassium is in Group I, like sodium. Group I ions are colourless \u2014 predict by group first.'],
+      ['Cr3+', 'green', '#22c55e', 'Chromium(III) is green. If the data identify Cr³⁺ as the only coloured ion present, that is the colour of the solution.'],
+      ['Cu+', 'colourless', '#e2e8f0', 'A trap: copper(I) is colourless even though copper(II) is blue. Do not assume all copper compounds are blue.'],
+      ['SO₄²⁻', 'colourless', '#e2e8f0', 'A polyatomic anion containing no transition metal \u2014 colourless. Colour comes from the ion that absorbs visible light.']
+    ]}
+  ],
+  ppTitle: 'Exam practice',
+  ppSub: 'HKDSE-style items built on Topic II (e), (f), (g) and (i) outcomes, with feedback in HKDSE marking language (accept / not accept).',
+  questions: [
+    { q:'Which statement about the formation of an ionic bond is correct?',
+      o:['Electrons are shared between the two atoms.',
+         'One or more electrons are transferred from a metal atom to a non-metal atom, forming oppositely charged ions.',
+         'Protons are transferred from the metal to the non-metal.',
+         'The two atoms join by weak van der Waals\u2019 forces.'],
+      a:1,
+      why:'<b>Accept B.</b> Ionic bonding forms by TRANSFER of electrons, giving a cation and an anion which then attract electrostatically. <b>Not accept</b> A \u2014 sharing is covalent bonding, which is the distinction Topic II (e) is built on. C is wrong because protons are in the nucleus and are not transferred in chemical change. D names an intermolecular force, which acts BETWEEN molecules, not within a compound.' },
+    { q:'Which is the best explanation of why solid sodium chloride does not conduct electricity, but molten sodium chloride does?',
+      o:['Solid sodium chloride contains no ions.',
+         'In the solid the ions are held in fixed positions in the lattice, but when molten the ions become free to move.',
+         'In the solid the ions carry no charge, but when molten they become charged.',
+         'Melting transfers electrons from the chloride ions to the sodium ions.'],
+      a:1,
+      why:'<b>Accept B.</b> The ions are always charged; what changes on melting is their <b>mobility</b>. <b>Not accept</b> A \u2014 the ions are present in the solid, just fixed. C is wrong because the charges do not change on melting. D describes a redox change that does not happen on melting.' },
+    { q:'Which of the following substances has a giant covalent structure?',
+      o:['Iodine, I₂', 'Carbon dioxide, CO₂', 'Quartz, SiO₂', 'Caesium chloride, CsCl'],
+      a:2,
+      why:'<b>Accept C.</b> Quartz is a giant covalent substance: each silicon atom is covalently bonded to four oxygen atoms and each oxygen to two silicon atoms, throughout the structure. A and B are simple molecular (small discrete molecules with weak van der Waals\u2019 forces between them) and D is giant ionic.' },
+    { q:'Which of the following pairs of ions BOTH give a coloured solution in water?',
+      o:['Na⁺ and Cl⁻', 'Cu²⁺ and MnO₄⁻', 'K⁺ and Cr₂O₇²⁻', 'Fe²⁺ and SO₄²⁻'],
+      a:1,
+      why:'<b>Accept B.</b> Cu²⁺ is blue and MnO₄⁻ is purple \u2014 both coloured. <b>Not accept</b> C, which is a deliberate trap: Cr₂O₇²⁻ is orange and coloured, but K⁺ is colourless, so the PAIR is not both coloured. The question asks about the pair, so read it carefully.' }
+  ],
+  structured: {
+    q:'Sodium chloride and carbon dioxide are both compounds containing a non-metal.\n(a) Draw an electron diagram to show the formation of sodium chloride from a sodium atom and a chlorine atom. Show the charges on the ions. (3)\n(b) Explain why sodium chloride has a very high melting point. (2)\n(c) Carbon dioxide has a very low melting point, even though it contains strong covalent bonds. Explain this. (2)\n(d) The dative covalent bond is illustrated in the HKDSE syllabus by the ammonium ion. Describe how the dative covalent bond is formed in NH₄⁺. (2)',
+    ms:[
+      '(a) Sodium shown with its single outer-shell electron transferred, so its outer shell is now complete/empty, giving Na⁺',
+      '(a) Chlorine shown GAINING that electron, completing its outer shell of eight, giving Cl⁻',
+      '(a) Charges shown on BOTH ions (Na⁺ and Cl⁻) \u2014 a diagram without charges loses the mark',
+      '(b) Sodium chloride has a GIANT IONIC STRUCTURE / a lattice of oppositely charged ions held by STRONG ELECTROSTATIC ATTRACTION',
+      '(b) A large amount of energy is needed to overcome these attractions, so the melting point is very high',
+      '(c) Carbon dioxide is a SIMPLE MOLECULAR substance; melting only overcomes the WEAK VAN DER WAALS\u2019 FORCES between the molecules',
+      '(c) The strong covalent bonds WITHIN each CO₂ molecule are NOT broken on melting',
+      '(d) The nitrogen atom in NH₃ has a lone pair of electrons',
+      '(d) The lone pair is donated to an H⁺ ion, so both electrons of the shared pair come from the nitrogen atom',
+      'Quality: "van der Waals\u2019 forces between molecules" must be contrasted with "covalent bonds within the molecule". Mixing the two loses both marks in (c).'
+    ],
+    note:'Part (c) is the most-missed item in Topic II. Both ideas \u2014 strong covalent bonds inside the molecule, weak forces between molecules \u2014 must appear and must be attached to the right location.'
+  },
+  recapTitle: 'Recap — "I can…"',
+  recapGoals: [
+    'Describe the formation of ions by loss or gain of electrons, including the electron arrangements of the resulting ions (II e).',
+    'Draw an electron diagram of a simple ionic compound with the charges on the ions shown (II e).',
+    'Draw electron diagrams showing single, double and triple covalent bonds, with the shared pairs in the overlap (II e).',
+    'Describe the dative covalent bond using H₃O⁺ and NH₄⁺ (II e).',
+    'Name ionic and covalent compounds and construct a formula from the component ions (II e).',
+    'Describe the colours of common ions in aqueous solution (II e).',
+    'Explain the properties of a giant ionic structure in terms of mobile ions (II f).',
+    'Explain the properties of a simple molecular substance in terms of weak van der Waals\u2019 forces between molecules (II g).',
+    'Compare giant ionic, giant covalent, simple molecular and giant metallic structures and deduce properties from structure (II i).'
+  ],
+  marklossTitle: 'Where marks are lost on this topic',
+  marklossLead: 'Tick the ones you have actually done. Each is a real error in HKDSE scripts.',
+  markloss: [
+    'I drew an ionic electron diagram without the charges on the ions.',
+    'I called an ionic substance a molecule, or said the formula gives a molecule.',
+    'I said an ionic solid conducts because it contains ions, without saying the ions are fixed.',
+    'I forgot the words "mobile" or "free to move" when explaining conduction in a melt or solution.',
+    'I said a simple molecular substance has a low melting point because its covalent bonds are weak.',
+    'I wrote "intermolecular forces" for a giant covalent or giant ionic substance, which has no molecules.',
+    'I gave hydrogen eight electrons in its outer shell instead of a duplet.',
+    'I used Al₂Cl₆ for the dative bond instead of the DSE examples H₃O⁺ and NH₄⁺.',
+    'I stated a bond angle when none was asked (and it is "not expected").',
+    'I balanced a formula by counting outer electrons instead of balancing charge.'
+  ],
+  mythTitle: 'Common misconceptions',
+  mythLead: 'Tap a card to flip. Check you would never write the front side in an exam.',
+  mythFlip: 'Tap to flip',
+  mythLabelMyth: 'Myth?',
+  mythLabelFact: 'Fact',
+  myths: [
+    { m:'"Sodium and chlorine share an electron, so the bond is ionic."', f:'Ionic bonding forms by TRANSFER of electrons, producing oppositely charged ions. Sharing electrons is COVALENT bonding. Do not mix the two mechanisms in one answer.' },
+    { m:'"An NaCl molecule contains one Na⁺ and one Cl⁻."', f:'There are no NaCl molecules. Sodium chloride is a giant ionic structure \u2014 a lattice of ions in a 1:1 ratio. The formula gives the simplest ratio of ions, not a molecule.' },
+    { m:'"Solid NaCl conducts because it is full of ions."', f:'Ions must be MOBILE to carry charge. In the solid they are held in fixed positions by strong electrostatic attraction, so it does not conduct. It conducts only when molten or in aqueous solution.' },
+    { m:'"Cl₂ boils at a low temperature because its covalent bonds are weak."', f:'Boiling overcomes the weak VAN DER WAALS\u2019 FORCES between the molecules. The strong Cl\u2013Cl covalent bond is not broken at all. Always name the force you are overcoming.' },
+    { m:'"Hydrogen needs eight electrons to be stable, like the other atoms."', f:'Hydrogen is complete with TWO electrons (a duplet) because its outer shell holds only two. Giving H eight electrons is a standard error in electron diagrams.' },
+    { m:'"All copper compounds are blue."', f:'Cu²⁺ is blue, but Cu⁺ is colourless. Predict a colour from the specific ion, not from the element.' },
+    { m:'"Interionic and intermolecular attractions are the same thing."', f:'In a giant ionic lattice the attraction is between oppositely charged IONS throughout the lattice. Intermolecular forces act BETWEEN molecules and are much weaker \u2014 a simple molecular substance has no ionic lattice at all.' },
+    { m:'"Al₂Cl₆ shows the dative bond, so I should use it."', f:'Al₂Cl₆ is not in the HKDSE syllabus for this. The DSE examples are H₃O⁺ and NH₄⁺, in both of which a lone pair on O or N is donated to H⁺.' }
+  ]
+};
+function t() { return T; }
+document.documentElement.lang = 'en';
+
+/* =====================================================================
+   HELPERS (sandbox-safe)
+===================================================================== */
+function $(id){ return document.getElementById(id); }
+function qsa(el, sel){ if (!el || typeof el.querySelectorAll !== 'function') return []; try { return el.querySelectorAll(sel); } catch (e) { return []; } }
+function qs(el, sel){ if (!el || typeof el.querySelector !== 'function') return null; try { return el.querySelector(sel); } catch (e) { return null; } }
+function setTxt(id, s){ const el = $(id); if (el) el.textContent = s; }
+function setHTML(id, s){ const el = $(id); if (el) el.innerHTML = s; }
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+/* sub/sup by code point so every digit works (a literal map previously dropped 9) */
+function sub(n){ const s = String(n); let out = ''; for (let i = 0; i < s.length; i++){ const c = s.charCodeAt(i) - 48; out += (c >= 0 && c <= 9) ? String.fromCharCode(0x2080 + c) : s[i]; } return out; }
+function sup(n){ const s = String(n); let out = ''; for (let i = 0; i < s.length; i++){ const c = s.charCodeAt(i) - 48; out += (c >= 0 && c <= 9) ? String.fromCharCode(0x2070 + c) : s[i]; } return out; }
+function ionTxt(sym, charge){
+  if (!charge) return sym;
+  return sym + (charge > 0 ? sup(charge + '+') : sup(Math.abs(charge) + '\u2212'));
+}
+
+/* =====================================================================
+   v3 DOCK + STICKY NEXT-STEP BAR
+===================================================================== */
+let failedOnce = false, lookedColours = false;
+function setDock(state){
+  const dock = $('sim-dock');
+  if (dock){ dock.classList.remove('locked','unlocked'); dock.classList.add(state === 'locked' ? 'locked' : 'unlocked'); }
+  const st = $('dock-state');
+  if (st){
+    st.className = 'dock-state ' + (state === 'locked' ? 'st-lock' : 'st-open');
+    st.textContent = state === 'locked' ? '\ud83d\udd12 Locked' : '\u2713 Unlocked';
+  }
+  setTxt('dock-title', state === 'locked' ? 'Predict' : 'Prediction locked in');
+  setTxt('dock-locknote', state === 'locked'
+    ? 'The mode buttons, substance buttons and Bond them button below stay locked until you answer this.'
+    : 'Good \u2014 now bond the atoms and check whether your prediction was right.');
+  let txt = 'Answer Task 1 in the panel above the diagram', go = 'sim';
+  if (state !== 'locked'){
+    if (!sim.done) txt = 'Press "Bond them" under the diagram';
+    else if (!failedOnce) txt = 'Task 2 \u2014 break one of the three errors on purpose';
+    else if (!lookedColours) txt = 'Task 3 \u2014 work down the ion-colour list';
+    else { txt = 'Go to "Names & formulae" and build a formula'; go = 'calc'; }
+  }
+  setTxt('next-text', txt);
+  const g = $('next-go'); if (g) g.dataset.go = go;
+}
+function goNext(){
+  const g = $('next-go');
+  const tab = (g && g.dataset.go) ? g.dataset.go : 'sim';
+  setTab(tab);
+  const target = tab === 'sim' ? $('sim-dock') : $('panel-' + tab);
+  if (target && target.scrollIntoView) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+function toggleTeacher(){ const p = $('teacher-panel'); if (p) p.classList.toggle('hidden'); }
+function syncSimDisabled(){
+  const locked = !sim.predLocked;
+  ['btn-react','btn-reset-sim','chk-labels','fail-btn-a','fail-btn-b','fail-btn-c'].forEach(function(id){
+    const el = $(id); if (el) el.disabled = locked;
+  });
+  const mb = qsa(document, '[data-mode]');
+  for (let i = 0; i < mb.length; i++) mb[i].disabled = locked;
+  const sb = qsa(document, '[data-mol]');
+  for (let i = 0; i < sb.length; i++) sb[i].disabled = locked;
+  setTxt('ctrl-heading', locked ? 'Controls \u2014 locked until you answer Task 1' : 'Controls \u2014 ready');
+}
+
+/* =====================================================================
+   TABS
+===================================================================== */
+let activeTab = 'sim';
+function setTab(name){
+  activeTab = name;
+  const btns = qsa(document, '.tab-btn');
+  for (let i = 0; i < btns.length; i++) btns[i].classList.toggle('active', btns[i].dataset.tab === name);
+  ['intro','sim','calc','mcq','recap'].forEach(function(p){
+    const el = $('panel-' + p);
+    if (el) el.classList.toggle('active', p === name);
+  });
+  scheduleResize();
+  if (name === 'sim') resizeCanvas();
+}
+
+/* =====================================================================
+   CANVAS \u2014 electron diagrams
+===================================================================== */
+const sim = { mol: 'NaCl', mode: 'ionic', t: 0, last: 0, anim: false, predLocked: false, done: false, showLabels: true };
+let ctx = null, canvasEl = null, W = 900, H = 460;
+const DOT = '#fb7185', CROSS = '#38bdf8';
+
+function resizeCanvas(){
+  if (!canvasEl) return;
+  const wrap = canvasEl.closest ? canvasEl.closest('.canvas-wrap') : null;
+  let w = 0;
+  if (wrap && wrap.getBoundingClientRect) w = wrap.getBoundingClientRect().width || 0;
+  if (!w) w = canvasEl.offsetWidth || 0;
+  if (!w || w < 80) w = 720;
+  W = Math.max(560, Math.round(w));
+  H = Math.max(460, Math.round(W * 0.5));
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  canvasEl.width = Math.round(W * dpr);
+  canvasEl.height = Math.round(H * dpr);
+  if (ctx && ctx.setTransform) ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  draw();
+}
+function scheduleResize(){ if (activeTab === 'sim') resizeCanvas(); }
+function shellRing(cx, cy, r, n, colour, startDeg){
+  if (n <= 0) return;
+  for (let i = 0; i < n; i++){
+    const a = (startDeg + i * (360 / n)) * Math.PI / 180;
+    ctx.beginPath();
+    ctx.arc(cx + r * Math.cos(a), cy + r * Math.sin(a), 3.4, 0, Math.PI * 2);
+    ctx.fillStyle = colour; ctx.fill();
+  }
+}
+function atomCircle(cx, cy, R, label, colour){
+  ctx.beginPath(); ctx.arc(cx, cy, R, 0, Math.PI * 2);
+  ctx.fillStyle = 'rgba(15,23,42,0.92)'; ctx.fill();
+  ctx.strokeStyle = colour; ctx.lineWidth = 2; ctx.stroke();
+  ctx.font = '700 15px -apple-system, Segoe UI, sans-serif';
+  ctx.fillStyle = '#e2e8f0'; ctx.textAlign = 'center';
+  ctx.fillText(label, cx, cy + 5); ctx.textAlign = 'left';
+}
+function draw(){
+  if (!ctx || !canvasEl) return;
+  const sp = t().species[sim.mol];
+  ctx.clearRect(0, 0, W, H);
+  ctx.fillStyle = 'rgba(2,6,12,0.55)'; ctx.fillRect(0, 0, W, H);
+  ctx.font = '600 13px -apple-system, Segoe UI, sans-serif';
+  ctx.fillStyle = '#99f6e4';
+  ctx.fillText((sim.mode === 'ionic' ? 'Ionic \u2014 electron transfer' : 'Covalent \u2014 shared pairs') + '   \u00b7   ' + sp.name, 18, 26);
+  ctx.font = '500 12px -apple-system, Segoe UI, sans-serif';
+  ctx.fillStyle = '#94a3b8';
+  ctx.fillText('Outer shell shown only \u00b7 the two electron colours mark which atom each electron came from', 18, 46);
+  const R = Math.max(42, Math.min(74, W / 11));
+  const k = sim.anim ? Math.min(1, sim.t) : 0;
+
+  if (sim.mode === 'ionic'){
+    const n = sp.atoms.length;
+    const gap = n === 2 ? R * 2.7 : R * 2.4;
+    const cx0 = W / 2 - gap * (n - 1) / 2;
+    const cy = H / 2 + 6;
+    for (let i = 0; i < n; i++){
+      const a = sp.atoms[i];
+      const cx = cx0 + i * gap;
+      const isCation = a.lose > 0;
+      const outerNow = k > 0 ? (isCation ? 0 : 8) : a.outer;
+      const charge = k > 0 ? (isCation ? a.lose : -a.gain) : 0;
+      atomCircle(cx, cy, R, ionTxt(a.el, charge), isCation ? '#7dd3fc' : '#fbbf24');
+      shellRing(cx, cy, R * 0.82, outerNow, isCation ? DOT : CROSS, -90);
+      if (k > 0 && k < 1 && isCation){
+        const src = cx0, dst = cx0 + gap;
+        const ex = (src + R * 0.82) + ((dst - R * 0.82) - (src + R * 0.82)) * k;
+        ctx.beginPath(); ctx.arc(ex, cy - R * 0.45, 4.5, 0, Math.PI * 2);
+        ctx.fillStyle = DOT; ctx.fill();
+      }
+      ctx.font = k >= 1 ? '700 12px -apple-system, Segoe UI, sans-serif' : '500 12px -apple-system, Segoe UI, sans-serif';
+      ctx.fillStyle = k >= 1 ? (isCation ? '#7dd3fc' : '#fbbf24') : '#64748b';
+      ctx.textAlign = 'center';
+      ctx.fillText(k >= 1 ? a.lab1 : a.lab0, cx, cy + R + 24);
+      ctx.textAlign = 'left';
+    }
+    ctx.font = '700 13px -apple-system, Segoe UI, sans-serif';
+    ctx.fillStyle = '#5eead4';
+    ctx.fillText('Transfer: ' + sp.eq, 18, H - 22);
+    ctx.font = '700 12px -apple-system, Segoe UI, sans-serif';
+    ctx.fillStyle = '#fca5a5';
+    ctx.fillText('HKDSE requires the CHARGES on both ions in an ionic electron diagram.', 18, H - 44);
+    if (k < 1){
+      ctx.font = '500 12px -apple-system, Segoe UI, sans-serif';
+      ctx.fillStyle = '#fbbf24';
+      ctx.fillText('Before bonding: neutral atoms. Press "Bond them" to move the electron.', 18, H - 66);
+    }
+  } else {
+    const n = sp.atoms.length;
+    const cx = W / 2, cy = H / 2 + 4;
+    const sep = R * (2.35 - 0.8 * k);
+    if (n === 2){
+      const ax = cx - sep, bx = cx + sep;
+      atomCircle(ax, cy, R, sp.atoms[0].el, '#7dd3fc');
+      atomCircle(bx, cy, R, sp.atoms[1].el, '#fbbf24');
+      const nb = typeof sp.bonds === 'number' ? sp.bonds : 1;
+      shellRing(ax, cy, R * 0.82, 7 - nb, DOT, -90);
+      shellRing(bx, cy, R * 0.82, 7 - nb, CROSS, -90);
+      const mid = (ax + bx) / 2;
+      for (let i = 0; i < nb; i++){
+        const off = (i - (nb - 1) / 2) * 14;
+        ctx.beginPath(); ctx.arc(mid - 6, cy + off, 3.6, 0, Math.PI * 2); ctx.fillStyle = DOT; ctx.fill();
+        ctx.beginPath(); ctx.arc(mid + 6, cy + off, 3.6, 0, Math.PI * 2); ctx.fillStyle = CROSS; ctx.fill();
+      }
+      ctx.font = '500 12px -apple-system, Segoe UI, sans-serif';
+      ctx.fillStyle = k >= 1 ? '#5eead4' : '#fbbf24';
+      ctx.fillText(k >= 1 ? ('Shared pair(s) inside the overlap \u2014 ' + sp.bt) : 'Separate atoms: each has an unpaired outer electron', 18, H - 68);
+    } else {
+      const central = sp.atoms[0];
+      atomCircle(cx, cy, R, central.el, '#7dd3fc');
+      const others = sp.atoms.slice(1);
+      for (let i = 0; i < others.length; i++){
+        const ang = (-90 + i * (360 / others.length)) * Math.PI / 180;
+        const ox = cx + sep * Math.cos(ang), oy = cy + sep * Math.sin(ang);
+        ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(ox, oy);
+        ctx.strokeStyle = 'rgba(148,163,184,0.5)'; ctx.lineWidth = 1.5; ctx.stroke();
+        atomCircle(ox, oy, R * 0.6, others[i].el, '#fbbf24');
+        const mx = (cx + ox) / 2, my = (cy + oy) / 2;
+        ctx.beginPath(); ctx.arc(mx - 5, my, 3.2, 0, Math.PI * 2); ctx.fillStyle = DOT; ctx.fill();
+        ctx.beginPath(); ctx.arc(mx + 5, my, 3.2, 0, Math.PI * 2); ctx.fillStyle = CROSS; ctx.fill();
+      }
+      ctx.font = '500 12px -apple-system, Segoe UI, sans-serif';
+      ctx.fillStyle = k >= 1 ? '#5eead4' : '#fbbf24';
+      ctx.fillText(k >= 1 ? ('Shared pairs drawn between the nuclei \u2014 ' + sp.bt) : 'Separate atoms before bonding', 18, H - 68);
+    }
+    ctx.font = '700 13px -apple-system, Segoe UI, sans-serif';
+    ctx.fillStyle = '#5eead4';
+    ctx.fillText(sp.eq, 18, H - 22);
+  }
+}
+function step(ts){
+  const dt = Math.min(0.05, (ts - (sim.last || ts)) / 1000);
+  sim.last = ts;
+  if (sim.anim && sim.t < 1) sim.t = Math.min(1, sim.t + dt * 0.9);
+  if (activeTab === 'sim' && canvasEl) draw();
+}
+function loop(ts){ step(ts); requestAnimationFrame(loop); }
+
+/* =====================================================================
+   SIM UI
+===================================================================== */
+function renderSim(){
+  const s = t();
+  setTxt('sim-caption', s.simCaption);
+  const mb = $('sim-modes');
+  if (mb && !mb.dataset.built){
+    mb.innerHTML = '<button type="button" class="mode-chip' + (sim.mode === 'ionic' ? ' on' : '') + '" data-mode="ionic">Ionic \u2014 transfer</button>' +
+                   '<button type="button" class="mode-chip' + (sim.mode === 'covalent' ? ' on' : '') + '" data-mode="covalent">Covalent \u2014 sharing</button>';
+    const bs = qsa(mb, '[data-mode]');
+    for (let i = 0; i < bs.length; i++) bs[i].onclick = function(){ setMode(bs[i].dataset.mode); };
+    mb.dataset.built = '1';
+  }
+  const mb2 = qsa(document, '[data-mode]');
+  for (let i = 0; i < mb2.length; i++) mb2[i].classList.toggle('on', mb2[i].dataset.mode === sim.mode);
+  const sb = $('sim-species');
+  if (sb){
+    const keys = Object.keys(s.species).filter(function(k){ return s.species[k].mode === sim.mode; });
+    sb.innerHTML = keys.map(function(k){
+      return '<button type="button" class="btn-sp' + (sim.mol === k ? ' on' : '') + '" data-mol="' + k + '">' + esc(s.species[k].short) + '</button>';
+    }).join('');
+    const bs = qsa(sb, '[data-mol]');
+    for (let i = 0; i < bs.length; i++) bs[i].onclick = function(){ sim.mol = bs[i].dataset.mol; sim.t = 0; sim.anim = false; sim.done = false; renderSim(); draw(); setDock(sim.predLocked ? 'unlocked' : 'locked'); };
+  }
+  const br = $('btn-react');
+  if (br) br.onclick = function(){ sim.t = 0; sim.anim = true; sim.done = true; renderReadouts(); setDock(sim.predLocked ? 'unlocked' : 'locked'); };
+  const bs2 = $('btn-reset-sim');
+  if (bs2) bs2.onclick = function(){ sim.t = 0; sim.anim = false; sim.done = false; renderSim(); draw(); setDock(sim.predLocked ? 'unlocked' : 'locked'); };
+  const cb = $('chk-labels');
+  if (cb) cb.onchange = function(){ sim.showLabels = !!cb.checked; draw(); };
+  const fb = qsa(document, '[data-fail]');
+  for (let i = 0; i < fb.length; i++) fb[i].onclick = function(){ runFailure(fb[i].dataset.fail); };
+  const fc = $('fail-clear'); if (fc) fc.onclick = clearFailure;
+  syncSimDisabled();
+  renderReadouts();
+}
+function setMode(m){
+  sim.mode = m;
+  const s = t();
+  const keys = Object.keys(s.species).filter(function(k){ return s.species[k].mode === m; });
+  if (keys.indexOf(sim.mol) < 0) sim.mol = keys[0];
+  sim.t = 0; sim.anim = false; sim.done = false;
+  renderSim(); draw(); setDock(sim.predLocked ? 'unlocked' : 'locked');
+}
+function renderReadouts(){
+  const box = $('sim-readouts');
+  if (!box) return;
+  const sp = t().species[sim.mol];
+  const catIon = ionTxt(sp.cation, sp.cation === 'NH4' ? 1 : 0);
+  const anIon = ionTxt(sp.anion, 0);
+  const ionLabel = sp.mode === 'ionic'
+    ? (sp.cation === 'Na' || sp.cation === 'K' || sp.cation === 'Cs' ? sp.cation + '\u207a' : sp.cation + '\u00b2\u207a') + ' and ' + (sp.anion === 'Cl' ? 'Cl⁻' : sp.anion) + ' \u2014 ratio ' + sp.ratio
+    : sp.bt;
+  const cards = [
+    ['Type of structure', sp.structure, ''],
+    [sp.mode === 'ionic' ? 'Ions formed' : 'Bond', ionLabel, ''],
+    ['Melting point', sp.mp, ''],
+    ['Conducts?', sp.cond, ''],
+    ['Colour in water', sp.colour, '']
+  ];
+  box.innerHTML = cards.map(function(c){
+    return '<div class="ro-card"><p class="ro-k">' + esc(c[0]) + '</p><p class="ro-v">' + esc(c[1]) + (c[2] ? ' <span class="ro-u">' + esc(c[2]) + '</span>' : '') + '</p></div>';
+  }).join('');
+  const ex = $('sim-explain');
+  if (ex){
+    if (sim.mode === 'ionic'){
+      ex.innerHTML = '<b>' + esc(sp.short) + '</b> is a <b>giant ionic structure</b>: a lattice of positive and negative ions in a ' + esc(sp.ratio) + ' ratio, held by strong electrostatic attraction between oppositely charged ions. The high melting point is the energy needed to overcome those attractions. It does <b>not</b> conduct when solid because the ions are held in fixed positions \u2014 no mobile charge carriers. When molten or in aqueous solution the ions become free to move, so it conducts. ' + esc(sp.note);
+    } else {
+      ex.innerHTML = '<b>' + esc(sp.short) + '</b> is a <b>simple molecular</b> substance: small discrete molecules with strong covalent bonds <b>inside</b> each molecule and only weak van der Waals\u2019 forces <b>between</b> molecules. The low melting point is because only those weak forces are overcome \u2014 the covalent bonds are not broken. It never conducts because there are no mobile ions or electrons. ' + esc(sp.note);
+    }
+  }
+}
+function renderPredict(){
+  const s = t();
+  setTxt('predict-q', s.predictQ);
+  const box = $('predict-opts');
+  if (!box) return;
+  box.innerHTML = s.predicts.map(function(p, i){
+    return '<button type="button" class="pred-opt text-left px-3 py-2 rounded-xl text-sm border border-slate-700 bg-slate-900/60" data-pred="' + i + '">' + esc(p.t) + '</button>';
+  }).join('');
+  const bs = qsa(box, '[data-pred]');
+  for (let i = 0; i < bs.length; i++) bs[i].onclick = function(){ answerPredict(i); };
+  setDock('locked');
+}
+function answerPredict(i){
+  const s = t();
+  const bs = qsa(document, '[data-pred]');
+  for (let k = 0; k < bs.length; k++){
+    bs[k].classList.remove('picked','correct','wrong');
+    bs[k].disabled = true;
+    if (k === i) bs[k].classList.add('picked', i === s.predictA ? 'correct' : 'wrong');
+    if (k === s.predictA) bs[k].classList.add('correct');
+  }
+  const w = $('predict-why');
+  if (w){ w.classList.remove('hidden'); w.innerHTML = (i === s.predictA ? '' : 'Not the right one \u2014 the correct choice is marked in green. ') + s.predictWhy; }
+  sim.predLocked = true;
+  syncSimDisabled();
+  setDock('unlocked');
+  const b = $('btn-react'); if (b && b.focus) b.focus();
+}
+function runFailure(k){
+  const s = t();
+  failedOnce = true;
+  const f = s.fails[k];
+  const p = $('fail-panel');
+  if (p){
+    p.innerHTML = '<div class="space-y-3">' +
+      '<div class="rounded-xl border border-amber-500/30 bg-amber-950/20 p-3"><p class="text-xs font-bold text-amber-200 uppercase tracking-wide mb-1">' + esc(f.name) + '</p><p class="text-sm text-slate-200">' + esc(f.tryTxt) + '</p></div>' +
+      '<div class="fail-box"><p class="text-xs font-bold text-rose-200 uppercase tracking-wide mb-1">What is wrong with it</p><p class="text-sm text-slate-200">' + esc(f.what) + '</p></div>' +
+      '<div class="rounded-xl border border-emerald-600/30 bg-emerald-950/20 p-3"><p class="text-xs font-bold text-emerald-200 uppercase tracking-wide mb-1">Write it this way instead</p><p class="text-sm text-slate-200">' + esc(f.fix) + '</p></div>' +
+      '<p class="text-xs text-teal-300">' + esc(f.ms) + '</p></div>';
+  }
+  const bs = qsa(document, '[data-fail]');
+  for (let i = 0; i < bs.length; i++) bs[i].classList.toggle('on', bs[i].dataset.fail === k);
+  setDock(sim.predLocked ? 'unlocked' : 'locked');
+}
+function clearFailure(){
+  failedOnce = false;
+  setHTML('fail-panel','');
+  const bs = qsa(document, '[data-fail]');
+  for (let i = 0; i < bs.length; i++) bs[i].classList.remove('on');
+  setDock(sim.predLocked ? 'unlocked' : 'locked');
+}
+
+/* =====================================================================
+   TASK 3 \u2014 ion colours
+===================================================================== */
+const colour = { k: 'basic', revealed: {} };
+function renderColours(){
+  const s = t();
+  const tb = $('colour-tabs');
+  if (tb){
+    tb.innerHTML = s.colours.map(function(g){
+      return '<button type="button" class="tab-lite' + (colour.k === g.k ? ' on' : '') + '" data-cg="' + g.k + '">' + esc(g.label) + '</button>';
+    }).join('');
+    const bs = qsa(tb, '[data-cg]');
+    for (let i = 0; i < bs.length; i++) bs[i].onclick = function(){ colour.k = bs[i].dataset.cg; lookedColours = true; renderColours(); setDock(sim.predLocked ? 'unlocked' : 'locked'); };
+  }
+  const group = s.colours.filter(function(g){ return g.k === colour.k; })[0] || s.colours[0];
+  const body = $('colour-body');
+  if (!body) return;
+  body.innerHTML = '<div class="space-y-2">' + group.rows.map(function(r, i){
+    const key = colour.k + ':' + i;
+    const shown = !!colour.revealed[key];
+    return '<div class="flex flex-wrap items-center gap-3 rounded-xl border border-slate-700/60 bg-slate-950/50 p-3">' +
+      '<span class="text-sm font-bold text-slate-100" style="min-width:11rem">' + esc(r[0]) + '</span>' +
+      (shown
+        ? '<span class="swatch" style="background:' + r[2] + '"></span><span class="text-sm text-emerald-200 font-semibold">' + esc(r[1]) + '</span><span class="text-xs text-slate-400 flex-1">' + esc(r[3]) + '</span>'
+        : '<button type="button" class="btn btn-ghost py-1 text-xs" data-revc="' + key + '">Say it, then reveal</button>') +
+      '</div>';
+  }).join('') + '</div>';
+  const rs = qsa(body, '[data-revc]');
+  for (let i = 0; i < rs.length; i++) rs[i].onclick = function(){ colour.revealed[rs[i].dataset.revc] = true; lookedColours = true; renderColours(); setDock(sim.predLocked ? 'unlocked' : 'locked'); };
+}
+
+/* =====================================================================
+   LEARN
+===================================================================== */
+function renderIntro(){
+  const s = t();
+  setTxt('intro-h1', s.introH1);
+  setHTML('intro-lead', s.introLead);
+  setTxt('calc-sub', s.calcSub);
+  setHTML('intro-cards', s.concepts.map(function(c){
+    return '<div class="rounded-xl border border-slate-700/60 bg-slate-950/50 p-3"><p class="text-sm font-bold text-teal-200">' + esc(c.t) + '</p><p class="text-xs text-slate-300 mt-1 leading-relaxed">' + c.d + '</p></div>';
+  }).join(''));
+  setHTML('scope-cards', s.scope.map(function(c){
+    return '<div class="rounded-xl border border-slate-700/60 bg-slate-950/50 p-3"><p class="text-sm font-bold text-indigo-200">' + esc(c.t) + '</p><p class="text-xs text-slate-300 mt-1 leading-relaxed">' + c.d + '</p></div>';
+  }).join(''));
+  setHTML('compare-table',
+    '<div class="overflow-x-auto"><table class="data"><thead><tr>' +
+    '<th>Structure</th><th>Particles and bonding</th><th>Melting point</th><th>Conducts?</th><th>Examples</th></tr></thead><tbody>' +
+    '<tr><td><b>Giant ionic</b></td><td>Lattice of ions; strong electrostatic attraction between oppositely charged ions</td><td>High</td><td>Only when molten or in aqueous solution (mobile ions)</td><td>NaCl, CsCl, MgO</td></tr>' +
+    '<tr><td><b>Giant covalent</b></td><td>Every atom joined to its neighbours by strong covalent bonds throughout</td><td>Very high</td><td>Usually no; graphite does (delocalised electrons)</td><td>diamond, graphite, quartz</td></tr>' +
+    '<tr><td><b>Simple molecular</b></td><td>Small molecules; strong covalent bonds inside, weak van der Waals\u2019 forces between</td><td>Low</td><td>Never</td><td>CO₂, I₂, H₂O</td></tr>' +
+    '<tr><td><b>Giant metallic</b></td><td>Lattice of positive ions in a sea of electrons</td><td>Usually high</td><td>Yes, solid and molten (mobile electrons)</td><td>Na, Mg, Fe</td></tr>' +
+    '</tbody></table></div>' +
+    '<p class="text-xs text-slate-400 mt-2">Answer every property question in this order: <b>name the structure type</b> \u2192 <b>say which bonds or forces are overcome</b> \u2192 <b>read the property off that</b>.</p>');
+  setHTML('teacher-content', '<p class="font-bold text-slate-200">' + esc(s.teacherTitle) + '</p>' + s.teacher.map(function(x){ return '<p>\u2022 ' + esc(x) + '</p>'; }).join(''));
+}
+
+/* =====================================================================
+   NAMES & FORMULAE
+===================================================================== */
+/* Build one side of a formula.
+   - monatomic ion: symbol + subscript for the count (Al + O with counts 2 and 3 gives Al2O3)
+   - polyatomic ion: brackets when the count is more than 1, then the subscript ((NH4)2S)
+   - OH is the one polyatomic ion written without brackets by convention (Ca(OH)2 uses brackets;
+     NaOH does not, because the count is 1) — so brackets appear only when count > 1. */
+function frag(ionSym, count){
+  const poly = /^(NH4|OH|NO3|SO4|CO3)$/.test(ionSym);
+  const units = ionSym.replace(/([0-9])/g, function(d){ return subD(+d); });
+  if (poly && count > 1) return '(' + units + ')' + subD(count);
+  return units + (count > 1 ? subD(count) : '');
+}
+function subD(n){ let s = String(n), out = ''; for (let i = 0; i < s.length; i++){ const c = s.charCodeAt(i) - 48; out += (c >= 0 && c <= 9) ? String.fromCharCode(0x2080 + c) : s[i]; } return out; }
+function runFormula(){
+  const cat = ($('calc-cat') || {}).value || 'Na|1|Na';
+  const an = ($('calc-an') || {}).value || 'Cl|1|Cl';
+  const c = cat.split('|'), a = an.split('|');
+  const cz = parseInt(c[1], 10), az = parseInt(a[1], 10);
+  const lcm = cz * az / gcd(cz, az);
+  const nc = lcm / cz, na = lcm / az;
+  const formula = frag(c[2], nc) + frag(a[2], na);
+  const catSym = c[2].replace(/([0-9])/g, function(d){ return subD(+d); });
+  const anSym = a[2].replace(/([0-9])/g, function(d){ return subD(+d); });
+  setHTML('formula-out', '<div class="work"><span class="hl">Step 1 \u2014 write the charges</span>\n' +
+    '  cation: ' + catSym + ' carries ' + cz + '+      anion: ' + anSym + ' carries ' + az + '\u2212\n\n' +
+    '<span class="hl">Step 2 \u2014 balance the charges (total + must equal total \u2212)</span>\n' +
+    '  LCM of ' + cz + ' and ' + az + ' = ' + lcm + ', so you need ' + nc + ' cation(s) and ' + na + ' anion(s)\n' +
+    '  check: ' + (nc * cz) + '+ and ' + (na * az) + '\u2212   \u2192  balanced\n\n' +
+    '<span class="hl">Step 3 \u2014 write the formula</span>\n' +
+    '  <b>' + formula + '</b>\n\n' +
+    '<span class="dim">A polyatomic ion takes brackets when more than one is needed: (NH4)2S, not NH₄₂S.\n' +
+    'Never balance a formula by counting outer electrons \u2014 only the charges matter.</span></div>');
+}
+function gcd(x, y){ return y === 0 ? x : gcd(y, x % y); }
+function renderPropTool(){
+  const host = $('prop-tool');
+  if (!host) return;
+  host.innerHTML =
+    '<p class="text-sm text-slate-200 mb-2"><i>Substance Z has a high melting point, does not conduct when solid, and does not conduct when molten. What type of structure does it have, and why?</i></p>' +
+    '<div class="work"><span class="hl">1 \u2014 use the high melting point to narrow it down</span>\n' +
+    '  A high melting point means strong bonding throughout the structure is being overcome: either a giant ionic\n' +
+    '  lattice (strong electrostatic attraction between ions) or a giant covalent network (strong covalent bonds).\n' +
+    '  So Z is giant something \u2014 it is certainly not simple molecular, which would melt low.\n\n' +
+    '<span class="hl">2 \u2014 use the conduction behaviour to decide between them</span>\n' +
+    '  This is the deciding observation. A giant IONIC substance WOULD conduct when molten, because its ions\n' +
+    '  become free to move. Since Z does not conduct even when molten, there are no mobile ions \u2014 so it is NOT ionic.\n\n' +
+    '<span class="hl">3 \u2014 conclude</span>\n' +
+    '  Z is a GIANT COVALENT substance. Its outer electrons are all used in covalent bonds, so there are no mobile\n' +
+    '  charge carriers in any state, and melting requires breaking strong covalent bonds \u2014 hence the high melting point.\n\n' +
+    '<span class="dim">The method to copy: use each observation to ELIMINATE a structure type, then name what is left.</span></div>' +
+    '<div class="border-t border-white/10 mt-4 pt-4">' +
+    '<p class="text-xs font-bold text-amber-200 mb-2">Now your turn \u2014 completion task</p>' +
+    '<p class="text-sm text-slate-200 mb-2"><i>Substance W has a low melting point and does not conduct in any state. Which structure type is it, and what exactly is overcome when it melts?</i></p>' +
+    '<div><label class="field-l" for="prop-g1">Gap 1 \u2014 structure type</label><input id="prop-g1" class="field" placeholder="e.g. simple molecular"></div>' +
+    '<div class="mt-2"><label class="field-l" for="prop-g2">Gap 2 \u2014 what is overcome on melting (name the force and where it acts)</label><input id="prop-g2" class="field" placeholder="the ... forces between ..."></div>' +
+    '<div class="mt-2 flex flex-wrap gap-2"><button type="button" class="btn btn-primary" id="prop-check">Check the two gaps</button>' +
+    '<button type="button" class="hint-btn" id="prop-hint">Hint</button></div>' +
+    '<p class="text-xs text-amber-200 mt-2" id="prop-hinttext"></p><div id="prop-fb" class="mt-2"></div></div>';
+  const c1 = $('prop-check'); if (c1) c1.onclick = checkPropGaps;
+  const h1 = $('prop-hint'); if (h1) h1.onclick = function(){ setTxt('prop-hinttext', 'Gap 1: low melting point plus no conduction in any state. Gap 2: if there are molecules, name the weak force BETWEEN them \u2014 and be careful to say the covalent bonds inside are NOT broken.'); };
+}
+function checkPropGaps(){
+  const a1 = String(($('prop-g1') || {}).value || '').toLowerCase();
+  const a2 = String(($('prop-g2') || {}).value || '').toLowerCase();
+  const ok1 = /simple molecular|molecular/.test(a1);
+  const ok2 = /van der waals|weak|intermolecular/.test(a2) && /between/.test(a2);
+  function row(ok, txt){ return '<div class="ms-point"><span class="' + (ok ? 'text-emerald-400' : 'text-rose-400') + ' font-bold">' + (ok ? '\u2713' : '\u2717') + '</span><span>' + txt + '</span></div>'; }
+  setHTML('prop-fb', '<div class="rounded-xl border border-slate-700/60 bg-slate-950/50 p-3 space-y-2">' +
+    row(ok1, 'Gap 1 \u2014 <b>simple molecular</b>. A low melting point with no conduction in any state points to small molecules with weak forces between them.') +
+    row(ok2, 'Gap 2 \u2014 melting overcomes the <b>weak van der Waals\u2019 forces between the molecules</b>. The strong covalent bonds <b>inside</b> each molecule are not broken.') +
+    '<p class="text-xs text-slate-400 pt-1">Full answer: W is a simple molecular substance. On melting only the weak van der Waals\u2019 forces between the molecules are overcome; the strong covalent bonds within each molecule stay intact. It does not conduct because there are no mobile ions or electrons.</p></div>');
+}
+function renderIndependent(){
+  const rv = $('ind-reveal');
+  if (rv) rv.onclick = function(){
+    setHTML('ind-out', '<div class="work"><span class="hl">Marking scheme (5 marks)</span>\n' +
+      '  X: giant ionic structure / lattice of oppositely charged ions                            (1)\n' +
+      '  High melting point: a large amount of energy is needed to overcome the strong\n' +
+      '  electrostatic attraction between the oppositely charged ions                             (1)\n' +
+      '  Does not conduct when solid: the ions are held in fixed positions in the lattice,\n' +
+      '  so there are no mobile charge carriers                                                   (1)\n' +
+      '  Conducts when molten: the lattice breaks down and the ions become free to move           (1)\n' +
+      '  Y: simple molecular; low melting point because only the weak van der Waals\u2019 forces\n' +
+      '  between the molecules are overcome, and it never conducts because there are no\n' +
+      '  mobile charged particles                                                                 (1)\n\n' +
+      '<span class="hl">Where candidates lose these marks</span>\n' +
+      '  \u2022 saying X conducts when molten "because it has ions" without the words mobile / free to move\n' +
+      '  \u2022 saying Y has weak covalent bonds (it has weak forces BETWEEN molecules)\n' +
+      '  \u2022 naming the structure type without saying which bonds or forces are overcome</div>');
+  };
+  const h = $('ind-hint');
+  if (h) h.onclick = function(){ setTxt('ind-hinttext', 'Two substances in one answer means two separate explanations. For X the key word is "mobile". For Y the key contrast is "between the molecules" versus "within the molecule".'); };
+}
+
+/* =====================================================================
+   MCQ + STRUCTURED
+===================================================================== */
+function renderMcq(){
+  const s = t();
+  setTxt('pp-title', s.ppTitle);
+  setTxt('pp-sub', s.ppSub);
+  const box = $('pp-questions');
+  if (box){
+    box.innerHTML = s.questions.map(function(q, qi){
+      return '<div class="rounded-2xl border border-slate-700/60 bg-slate-950/40 p-4">' +
+        '<p class="text-sm font-semibold text-slate-100 mb-3">' + (qi + 1) + '. ' + esc(q.q) + '</p><div class="space-y-2">' +
+        q.o.map(function(o, oi){
+          return '<button type="button" class="mcq-opt w-full text-left px-4 py-2 rounded-xl text-sm border border-slate-700 bg-slate-900/60" data-q="' + qi + '" data-o="' + oi + '">' + String.fromCharCode(65 + oi) + '. ' + esc(o) + '</button>';
+        }).join('') +
+        '</div><p class="mcq-why hidden text-xs text-emerald-200 bg-emerald-950/40 border border-emerald-800/40 rounded-xl p-3 leading-relaxed mt-3"></p></div>';
+    }).join('');
+    const bs = qsa(box, '.mcq-opt');
+    for (let i = 0; i < bs.length; i++) bs[i].onclick = function(){ answerMcq(bs[i]); };
+  }
+  const st = $('pp-structured');
+  if (st){
+    const q = s.structured;
+    st.innerHTML = '<div class="rounded-2xl border border-slate-700/60 bg-slate-950/40 p-4">' +
+      '<p class="text-sm text-slate-100 mb-3 leading-relaxed whitespace-pre-line">' + esc(q.q) + '</p>' +
+      '<p class="text-xs text-slate-400 mb-2">Write it on paper first. Then reveal the scheme and tick every point you actually wrote.</p>' +
+      '<button type="button" class="btn btn-teal" id="btn-ms-reveal">Reveal marking scheme</button>' +
+      '<div id="ms-points" class="mt-3 space-y-2"></div><p id="ms-total" class="text-xs text-slate-400 mt-2"></p>' +
+      '<p class="text-xs text-slate-500 mt-2">' + esc(q.note) + '</p></div>';
+    const b = $('btn-ms-reveal'); if (b) b.onclick = revealStructured;
+  }
+}
+function answerMcq(btn){
+  const s = t();
+  const qi = parseInt(btn.dataset.q, 10), oi = parseInt(btn.dataset.o, 10);
+  const q = s.questions[qi];
+  const group = btn.parentElement;
+  const opts = qsa(group, '.mcq-opt');
+  for (let i = 0; i < opts.length; i++){
+    opts[i].classList.remove('correct','wrong');
+    if (i === oi) opts[i].classList.add(oi === q.a ? 'correct' : 'wrong');
+    if (i === q.a) opts[i].classList.add('correct');
+  }
+  const why = group && group.parentElement ? qs(group.parentElement, '.mcq-why') : null;
+  if (why){ why.classList.remove('hidden'); why.innerHTML = q.why; }
+}
+function revealStructured(){
+  const s = t();
+  const box = $('ms-points');
+  if (!box) return;
+  box.innerHTML = s.structured.ms.map(function(m, i){
+    return '<label class="ms-point"><input type="checkbox" class="mspt" data-i="' + i + '"> <span>' + esc(m) + '</span></label>';
+  }).join('');
+  const bs = qsa(box, '.mspt');
+  for (let i = 0; i < bs.length; i++) bs[i].onchange = updateMsTotal;
+  updateMsTotal();
+}
+function updateMsTotal(){
+  const bs = qsa(document, '.mspt');
+  let n = 0;
+  for (let i = 0; i < bs.length; i++) if (bs[i].checked) n++;
+  const el = $('ms-total');
+  if (el) el.textContent = n + ' / ' + bs.length + ' marking points ticked. ' +
+    (n === bs.length ? 'Full marks \u2014 and you can prove it, because you wrote every line.' : 'The unticked points are the marks you did not know were available.');
+}
+
+/* =====================================================================
+   RECAP
+===================================================================== */
+function renderRecap(){
+  const s = t();
+  setTxt('recap-title', s.recapTitle);
+  const ul = $('recap-list');
+  if (ul){
+    ul.innerHTML = s.recapGoals.map(function(g, i){
+      return '<li class="flex items-start gap-3 rounded-xl border border-slate-700/50 bg-slate-950/40 p-3">' +
+        '<input type="checkbox" class="goal-check mt-0.5" data-g="' + i + '" id="goal-' + i + '">' +
+        '<label for="goal-' + i + '" class="text-sm text-slate-300 leading-relaxed">' + esc(g) + '</label></li>';
+    }).join('');
+    const bs = qsa(ul, '.goal-check');
+    for (let i = 0; i < bs.length; i++) bs[i].onchange = updateRecapProgress;
+  }
+  updateRecapProgress();
+  setTxt('markloss-title', s.marklossTitle);
+  setTxt('markloss-lead', s.marklossLead);
+  const ml = $('markloss-list');
+  if (ml){
+    ml.innerHTML = s.markloss.map(function(m, i){
+      return '<li><label class="ms-point"><input type="checkbox" class="mloss" data-i="' + i + '"> <span>' + esc(m) + '</span></label></li>';
+    }).join('');
+  }
+  renderMyths();
+}
+function updateRecapProgress(){
+  const bs = qsa(document, '.goal-check');
+  let n = 0, arr = [];
+  for (let i = 0; i < bs.length; i++){ if (bs[i].checked){ n++; arr.push(i); } }
+  try { localStorage.setItem('dse_bonding_recap', JSON.stringify(arr)); } catch (e) {}
+  const el = $('recap-progress');
+  if (el && bs.length){
+    el.textContent = n + ' / ' + bs.length + ' goals ticked. ' +
+      (n === bs.length ? 'All ticked \u2014 now draw one electron diagram from memory, charges included.' : 'Untick anything you cannot do without notes.');
+  }
+}
+function renderMyths(){
+  const s = t();
+  setTxt('myth-title', s.mythTitle);
+  setTxt('myth-lead', s.mythLead);
+  const box = $('myth-cards');
+  if (!box) return;
+  box.innerHTML = s.myths.map(function(m, i){
+    return '<div class="myth-card glass rounded-xl p-4" data-myth="' + i + '">' +
+      '<div class="myth-front"><span class="text-xs font-bold text-rose-400 uppercase">' + esc(s.mythLabelMyth) + '</span>' +
+      '<p class="text-sm text-slate-200 mt-2">' + esc(m.m) + '</p><p class="text-xs text-slate-500 mt-3">' + esc(s.mythFlip) + '</p></div>' +
+      '<div class="myth-back"><span class="text-xs font-bold text-emerald-400 uppercase">' + esc(s.mythLabelFact) + '</span>' +
+      '<p class="text-sm text-slate-200 mt-2">' + m.f + '</p></div></div>';
+  }).join('');
+  const cs = qsa(box, '.myth-card');
+  for (let i = 0; i < cs.length; i++) cs[i].onclick = function(){ cs[i].classList.toggle('flipped'); };
+}
+
+/* =====================================================================
+   BOOT
+===================================================================== */
+function boot(){
+  setDock('locked');
+  canvasEl = $('sim-canvas');
+  if (canvasEl && canvasEl.getContext) ctx = canvasEl.getContext('2d');
+  renderPredict();
+  renderSim();
+  renderColours();
+  renderIntro();
+  const bf = $('btn-formula'); if (bf) bf.onclick = runFormula;
+  runFormula();
+  renderPropTool();
+  renderIndependent();
+  renderMcq();
+  renderRecap();
+  try {
+    const raw = localStorage.getItem('dse_bonding_recap');
+    if (raw){
+      const arr = JSON.parse(raw);
+      for (let i = 0; i < arr.length; i++){ const el = $('goal-' + arr[i]); if (el) el.checked = true; }
+      updateRecapProgress();
+    }
+  } catch (e) {}
+  resizeCanvas();
+  requestAnimationFrame(loop);
+}
+try { boot(); } catch (e) { if (typeof console !== 'undefined') console.warn('boot', e); }
+</script>
+<script id="lab-runtime">(function () {
+'use strict';
+var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function relayout() {
+if (typeof window.scheduleResize === 'function') window.scheduleResize();
+else if (typeof window.resizeCanvas === 'function') window.resizeCanvas();
+}
+var pending = 0;
+function onRequestRelayout() {
+if (pending) return;
+pending = requestAnimationFrame(function () { pending = 0; relayout(); });
+}
+if (window.ResizeObserver) {
+var ro = new ResizeObserver(onRequestRelayout);
+document.querySelectorAll('.canvas-wrap').forEach(function (el) { ro.observe(el); });
+}
+window.addEventListener('orientationchange', onRequestRelayout);
+window.addEventListener('resize', onRequestRelayout);
+var bar = document.getElementById('next-bar');
+if (bar) {
+var setBarPad = function () {
+var h = Math.round(bar.offsetHeight);
+if (h > 0) document.body.style.setProperty('--next-bar-h', h + 'px');
+};
+setBarPad();
+if (window.ResizeObserver) new ResizeObserver(setBarPad).observe(bar);
+window.addEventListener('load', setBarPad);
+}
+var rail = document.getElementById('main-tabs');
+if (rail) {
+rail.setAttribute('role', 'tablist');
+var pills = Array.prototype.slice.call(rail.querySelectorAll('.tab-btn'));
+pills.forEach(function (btn, i) {
+var panel = document.getElementById('panel-' + btn.dataset.tab);
+btn.setAttribute('role', 'tab');
+btn.setAttribute('aria-selected', btn.classList.contains('active') ? 'true' : 'false');
+if (panel) {
+panel.setAttribute('role', 'tabpanel');
+btn.setAttribute('aria-controls', panel.id);
+panel.setAttribute('aria-labelledby', btn.id);
+}
+btn.addEventListener('keydown', function (e) {
+var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+if (!d) return;
+e.preventDefault();
+var next = pills[(i + d + pills.length) % pills.length];
+next.focus();
+if (typeof window.setTab === 'function') window.setTab(next.dataset.tab);
+});
+});
+rail.addEventListener('click', function () {
+setTimeout(function () {
+pills.forEach(function (b) { b.setAttribute('aria-selected', b.classList.contains('active') ? 'true' : 'false'); });
+var on = rail.querySelector('.tab-btn.active');
+if (on) on.scrollIntoView({ block: 'nearest', inline: 'center', behavior: reduce ? 'auto' : 'smooth' });
+}, 0);
+});
+}
+var dock = document.getElementById('sim-dock');
+if (dock && window.MutationObserver && !reduce) {
+new MutationObserver(function (m) {
+m.forEach(function (change) {
+var el = change.target;
+if (el.classList.contains('unlocked') && change.oldValue && /(^|\s)locked(\s|$)/.test(change.oldValue)) {
+el.classList.add('just-unlocked');
+setTimeout(function () { el.classList.remove('just-unlocked'); }, 750);
+}
+});
+}).observe(dock, { attributes: true, attributeFilter: ['class'], attributeOldValue: true });
+}
+document.addEventListener('click', function (e) {
+if (!e.target || !e.target.closest) return;
+if (e.target.closest('input, label, button, a, select')) return;
+var li = e.target.closest('li');
+if (!li) return;
+var box = li.querySelector('input[type="checkbox"], input[type="radio"]');
+if (!box || box.disabled) return;
+box.checked = box.type === 'checkbox' ? !box.checked : true;
+box.dispatchEvent(new Event('change', { bubbles: true }));
+box.dispatchEvent(new Event('input', { bubbles: true }));
+});
+if (window.IntersectionObserver && !reduce) {
+var io = new IntersectionObserver(function (entries) {
+entries.forEach(function (en) {
+if (!en.isIntersecting) return;
+en.target.classList.add('shown');
+io.unobserve(en.target);
+});
+}, { rootMargin: '0px 0px -6% 0px', threshold: 0.01 });
+document.querySelectorAll('.tab-panel > *').forEach(function (el, i) {
+el.classList.add('reveal');
+el.style.setProperty('--i', String(i));
+io.observe(el);
+});
+setTimeout(function () {
+document.querySelectorAll('.reveal:not(.shown)').forEach(function (el) { el.classList.add('shown'); });
+}, 2500);
+}
+})();</script>
+</body>
+</html>

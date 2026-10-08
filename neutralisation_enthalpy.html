@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Enthalpy of Neutralisation | HKDSE Chemistry Topic VIII</title>
+<meta name="theme-color" content="#000000">
+<style>
+  .graph-wrap{min-height:360px;}
+input[type=range]{accent-color:#3dd6c6;}
+.sim-mode-btn.sim-on{background:rgba(61,214,198,.18);border-color:rgba(61,214,198,.65);color:#d1faf5;}
+.ro-tile{background:rgba(2,6,12,.55);border:1px solid rgba(255,255,255,.08);border-radius:.8rem;padding:.55rem .7rem;}
+.ro-tile .ro-k{font-size:.75rem;text-transform:uppercase;letter-spacing:.04em;color:#7dd3c8;}
+.ro-tile .ro-v{font-size:1.02rem;font-weight:800;color:#f1f5f9;font-variant-numeric:tabular-nums;}
+.assume-chip.assume-off{border-color:rgba(248,113,113,.5);color:#fecaca;background:rgba(127,29,29,.35);}
+select.lab-in,input.lab-in{background:rgba(2,6,12,.7);border:1px solid rgba(255,255,255,.14);border-radius:.6rem;color:#e2e8f0;padding:.4rem .6rem;font-size:.85rem;width:100%;}
+</style>
+<style id="lab-theme">/* Shared design system for the chemistry lab fleet. Source: _build/src/theme.css + tailwind.config.js. Edit the source, then run node _build/src/build.cjs. Do not hand-edit this block. */*,:after,:before{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(10,132,255,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(10,132,255,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }*,:after,:before{box-sizing:border-box;border:0 solid #d1d1d6}:after,:before{--tw-content:""}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;-o-tab-size:4;tab-size:4;font-family:-apple-system,BlinkMacSystemFont,SF Pro Text,SF Pro Display,Segoe UI Variable Text,Segoe UI,system-ui,Helvetica Neue,sans-serif;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:SF Mono,ui-monospace,Cascadia Mono,Segoe UI Mono,Consolas,monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0}fieldset,legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::-moz-placeholder,textarea::-moz-placeholder{opacity:1;color:#aeaeb2}input::placeholder,textarea::placeholder{opacity:1;color:#aeaeb2}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}.visible{visibility:visible}.invisible{visibility:hidden}.collapse{visibility:collapse}.static{position:static}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.sticky{position:sticky}.inset-0{inset:0}.z-10{z-index:10}.z-\[110\]{z-index:110}.col-span-1{grid-column:span 1/span 1}.col-span-2{grid-column:span 2/span 2}.mx-auto{margin-left:auto;margin-right:auto}.my-3{margin-top:.75rem;margin-bottom:.75rem}.mb-1{margin-bottom:.25rem}.mb-1\.5{margin-bottom:.375rem}.mb-10{margin-bottom:2.5rem}.mb-2{margin-bottom:.5rem}.mb-3{margin-bottom:.75rem}.mb-4{margin-bottom:1rem}.mb-5{margin-bottom:1.25rem}.mb-8{margin-bottom:2rem}.ml-1{margin-left:.25rem}.ml-auto{margin-left:auto}.mr-1{margin-right:.25rem}.mr-2{margin-right:.5rem}.ms-0{margin-inline-start:0}.ms-1{margin-inline-start:.25rem}.ms-2{margin-inline-start:.5rem}.mt-0{margin-top:0}.mt-0\.5{margin-top:.125rem}.mt-1{margin-top:.25rem}.mt-1\.5{margin-top:.375rem}.mt-2{margin-top:.5rem}.mt-3{margin-top:.75rem}.mt-4{margin-top:1rem}.mt-5{margin-top:1.25rem}.mt-6{margin-top:1.5rem}.block{display:block}.inline{display:inline}.flex{display:flex}.table{display:table}.grid{display:grid}.contents{display:contents}.hidden{display:none}.h-2{height:.5rem}.h-2\.5{height:.625rem}.h-3{height:.75rem}.h-auto{height:auto}.min-h-\[1\.25rem\]{min-height:1.25rem}.min-h-\[1rem\]{min-height:1rem}.min-h-\[24px\]{min-height:24px}.min-h-\[72px\]{min-height:72px}.w-14{width:3.5rem}.w-16{width:4rem}.w-20{width:5rem}.w-24{width:6rem}.w-28{width:7rem}.w-36{width:9rem}.w-6{width:1.5rem}.w-full{width:100%}.min-w-\[160px\]{min-width:160px}.max-w-3xl{max-width:48rem}.max-w-6xl{max-width:72rem}.max-w-sm{max-width:24rem}.max-w-xs{max-width:20rem}.flex-1{flex:1 1 0%}.shrink{flex-shrink:1}.grow{flex-grow:1}.border-collapse{border-collapse:collapse}.transform{transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.resize{resize:both}.list-inside{list-style-position:inside}.list-disc{list-style-type:disc}.grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}.grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid-cols-\[3rem_1fr\]{grid-template-columns:3rem 1fr}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-start{align-items:flex-start}.items-end{align-items:flex-end}.items-center{align-items:center}.items-baseline{align-items:baseline}.items-stretch{align-items:stretch}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-1{gap:.25rem}.gap-2{gap:.5rem}.gap-3{gap:.75rem}.gap-4{gap:1rem}.gap-5{gap:1.25rem}.gap-x-4{-moz-column-gap:1rem;column-gap:1rem}.gap-x-8{-moz-column-gap:2rem;column-gap:2rem}.gap-y-1{row-gap:.25rem}.gap-y-4{row-gap:1rem}.space-y-1>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.25rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.25rem*var(--tw-space-y-reverse))}.space-y-1\.5>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.375rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.375rem*var(--tw-space-y-reverse))}.space-y-2>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.5rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.5rem*var(--tw-space-y-reverse))}.space-y-3>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.75rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.75rem*var(--tw-space-y-reverse))}.space-y-4>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem*var(--tw-space-y-reverse))}.space-y-5>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.25rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.25rem*var(--tw-space-y-reverse))}.space-y-6>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.5rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.5rem*var(--tw-space-y-reverse))}.self-end{align-self:flex-end}.self-center{align-self:center}.overflow-hidden{overflow:hidden}.overflow-x-auto{overflow-x:auto}.whitespace-nowrap{white-space:nowrap}.whitespace-pre-line{white-space:pre-line}.whitespace-pre-wrap{white-space:pre-wrap}.text-wrap{text-wrap:wrap}.rounded{border-radius:.625rem}.rounded-2xl{border-radius:1.125rem}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:.75rem}.rounded-xl{border-radius:1rem}.border{border-width:1px}.border-l-\[3px\]{border-left-width:3px}.border-t{border-top-width:1px}.border-dashed{border-style:dashed}.\!border-indigo-500{--tw-border-opacity:1!important;border-color:rgb(10 132 255/var(--tw-border-opacity,1))!important}.border-amber-500{--tw-border-opacity:1;border-color:rgb(255 159 10/var(--tw-border-opacity,1))}.border-amber-500\/25{border-color:rgba(255,159,10,.25)}.border-amber-500\/30{border-color:rgba(255,159,10,.3)}.border-amber-500\/40{border-color:rgba(255,159,10,.4)}.border-amber-800{--tw-border-opacity:1;border-color:rgb(95 56 0/var(--tw-border-opacity,1))}.border-amber-800\/40{border-color:rgba(95,56,0,.4)}.border-emerald-500{--tw-border-opacity:1;border-color:rgb(48 209 88/var(--tw-border-opacity,1))}.border-emerald-500\/40{border-color:rgba(48,209,88,.4)}.border-emerald-600{--tw-border-opacity:1;border-color:rgb(36 168 63/var(--tw-border-opacity,1))}.border-emerald-600\/25{border-color:rgba(36,168,63,.25)}.border-emerald-600\/30{border-color:rgba(36,168,63,.3)}.border-emerald-600\/40{border-color:rgba(36,168,63,.4)}.border-emerald-700{--tw-border-opacity:1;border-color:rgb(27 122 46/var(--tw-border-opacity,1))}.border-emerald-700\/40{border-color:rgba(27,122,46,.4)}.border-emerald-800{--tw-border-opacity:1;border-color:rgb(18 84 31/var(--tw-border-opacity,1))}.border-emerald-800\/40{border-color:rgba(18,84,31,.4)}.border-indigo-500{--tw-border-opacity:1;border-color:rgb(10 132 255/var(--tw-border-opacity,1))}.border-indigo-500\/25{border-color:rgba(10,132,255,.25)}.border-indigo-500\/30{border-color:rgba(10,132,255,.3)}.border-orange-600{--tw-border-opacity:1;border-color:rgb(204 122 0/var(--tw-border-opacity,1))}.border-rose-500{--tw-border-opacity:1;border-color:rgb(255 69 63/var(--tw-border-opacity,1))}.border-rose-500\/25{border-color:rgba(255,69,63,.25)}.border-rose-500\/40{border-color:rgba(255,69,63,.4)}.border-rose-600{--tw-border-opacity:1;border-color:rgb(217 44 38/var(--tw-border-opacity,1))}.border-rose-600\/30{border-color:rgba(217,44,38,.3)}.border-rose-800{--tw-border-opacity:1;border-color:rgb(107 21 18/var(--tw-border-opacity,1))}.border-rose-800\/40{border-color:rgba(107,21,18,.4)}.border-sky-500{--tw-border-opacity:1;border-color:rgb(100 210 255/var(--tw-border-opacity,1))}.border-sky-500\/40{border-color:rgba(100,210,255,.4)}.border-sky-800{--tw-border-opacity:1;border-color:rgb(0 77 104/var(--tw-border-opacity,1))}.border-sky-800\/40{border-color:rgba(0,77,104,.4)}.border-slate-500{--tw-border-opacity:1;border-color:rgb(174 174 178/var(--tw-border-opacity,1))}.border-slate-600{--tw-border-opacity:1;border-color:rgb(161 161 166/var(--tw-border-opacity,1))}.border-slate-700{--tw-border-opacity:1;border-color:rgb(152 152 157/var(--tw-border-opacity,1))}.border-slate-700\/50{border-color:hsla(240,2%,61%,.5)}.border-slate-700\/60{border-color:hsla(240,2%,61%,.6)}.border-slate-700\/70{border-color:hsla(240,2%,61%,.7)}.border-slate-800{--tw-border-opacity:1;border-color:rgb(84 84 88/var(--tw-border-opacity,1))}.border-teal-500{--tw-border-opacity:1;border-color:rgb(100 210 255/var(--tw-border-opacity,1))}.border-teal-500\/25{border-color:rgba(100,210,255,.25)}.border-teal-500\/30{border-color:rgba(100,210,255,.3)}.border-teal-500\/40{border-color:rgba(100,210,255,.4)}.border-teal-500\/50{border-color:rgba(100,210,255,.5)}.border-teal-700{--tw-border-opacity:1;border-color:rgb(0 117 158/var(--tw-border-opacity,1))}.border-teal-700\/40{border-color:rgba(0,117,158,.4)}.border-teal-800{--tw-border-opacity:1;border-color:rgb(0 77 104/var(--tw-border-opacity,1))}.border-teal-800\/40{border-color:rgba(0,77,104,.4)}.border-white{--tw-border-opacity:1;border-color:rgb(245 245 247/var(--tw-border-opacity,1))}.border-white\/10{border-color:rgba(245,245,247,.1)}.\!bg-indigo-600{--tw-bg-opacity:1!important;background-color:rgb(0 96 223/var(--tw-bg-opacity,1))!important}.\!bg-teal-950{--tw-bg-opacity:1!important;background-color:rgb(0 23 31/var(--tw-bg-opacity,1))!important}.\!bg-teal-950\/40{background-color:rgba(0,23,31,.4)!important}.bg-amber-500{--tw-bg-opacity:1;background-color:rgb(255 159 10/var(--tw-bg-opacity,1))}.bg-amber-950{--tw-bg-opacity:1;background-color:rgb(29 17 0/var(--tw-bg-opacity,1))}.bg-amber-950\/10{background-color:rgba(29,17,0,.1)}.bg-amber-950\/20{background-color:rgba(29,17,0,.2)}.bg-amber-950\/30{background-color:rgba(29,17,0,.3)}.bg-emerald-600{--tw-bg-opacity:1;background-color:rgb(36 168 63/var(--tw-bg-opacity,1))}.bg-emerald-700{--tw-bg-opacity:1;background-color:rgb(27 122 46/var(--tw-bg-opacity,1))}.bg-emerald-950{--tw-bg-opacity:1;background-color:rgb(4 24 10/var(--tw-bg-opacity,1))}.bg-emerald-950\/10{background-color:rgba(4,24,10,.1)}.bg-emerald-950\/20{background-color:rgba(4,24,10,.2)}.bg-emerald-950\/35{background-color:rgba(4,24,10,.35)}.bg-emerald-950\/40{background-color:rgba(4,24,10,.4)}.bg-indigo-600{--tw-bg-opacity:1;background-color:rgb(0 96 223/var(--tw-bg-opacity,1))}.bg-indigo-950{--tw-bg-opacity:1;background-color:rgb(0 18 51/var(--tw-bg-opacity,1))}.bg-indigo-950\/10{background-color:rgba(0,18,51,.1)}.bg-indigo-950\/20{background-color:rgba(0,18,51,.2)}.bg-orange-700{--tw-bg-opacity:1;background-color:rgb(149 88 0/var(--tw-bg-opacity,1))}.bg-rose-950{--tw-bg-opacity:1;background-color:rgb(33 6 5/var(--tw-bg-opacity,1))}.bg-rose-950\/10{background-color:rgba(33,6,5,.1)}.bg-rose-950\/20{background-color:rgba(33,6,5,.2)}.bg-rose-950\/30{background-color:rgba(33,6,5,.3)}.bg-rose-950\/35{background-color:rgba(33,6,5,.35)}.bg-sky-950{--tw-bg-opacity:1;background-color:rgb(0 23 31/var(--tw-bg-opacity,1))}.bg-sky-950\/20{background-color:rgba(0,23,31,.2)}.bg-sky-950\/35{background-color:rgba(0,23,31,.35)}.bg-slate-700{--tw-bg-opacity:1;background-color:rgb(152 152 157/var(--tw-bg-opacity,1))}.bg-slate-800{--tw-bg-opacity:1;background-color:rgb(84 84 88/var(--tw-bg-opacity,1))}.bg-slate-800\/80{background-color:rgba(84,84,88,.8)}.bg-slate-900{--tw-bg-opacity:1;background-color:rgb(58 58 60/var(--tw-bg-opacity,1))}.bg-slate-900\/50{background-color:rgba(58,58,60,.5)}.bg-slate-900\/60{background-color:rgba(58,58,60,.6)}.bg-slate-950{--tw-bg-opacity:1;background-color:rgb(11 11 13/var(--tw-bg-opacity,1))}.bg-slate-950\/40{background-color:rgba(11,11,13,.4)}.bg-slate-950\/50{background-color:rgba(11,11,13,.5)}.bg-slate-950\/60{background-color:rgba(11,11,13,.6)}.bg-slate-950\/70{background-color:rgba(11,11,13,.7)}.bg-slate-950\/80{background-color:rgba(11,11,13,.8)}.bg-teal-600{--tw-bg-opacity:1;background-color:rgb(0 164 221/var(--tw-bg-opacity,1))}.bg-teal-700{--tw-bg-opacity:1;background-color:rgb(0 117 158/var(--tw-bg-opacity,1))}.bg-teal-950{--tw-bg-opacity:1;background-color:rgb(0 23 31/var(--tw-bg-opacity,1))}.bg-teal-950\/10{background-color:rgba(0,23,31,.1)}.bg-teal-950\/20{background-color:rgba(0,23,31,.2)}.bg-teal-950\/30{background-color:rgba(0,23,31,.3)}.bg-teal-950\/40{background-color:rgba(0,23,31,.4)}.p-2{padding:.5rem}.p-3{padding:.75rem}.p-4{padding:1rem}.p-5{padding:1.25rem}.p-6{padding:1.5rem}.p-8{padding:2rem}.px-2{padding-left:.5rem;padding-right:.5rem}.px-3{padding-left:.75rem;padding-right:.75rem}.px-4{padding-left:1rem;padding-right:1rem}.px-5{padding-left:1.25rem;padding-right:1.25rem}.py-1{padding-top:.25rem;padding-bottom:.25rem}.py-1\.5{padding-top:.375rem;padding-bottom:.375rem}.py-10{padding-top:2.5rem;padding-bottom:2.5rem}.py-2{padding-top:.5rem;padding-bottom:.5rem}.py-2\.5{padding-top:.625rem;padding-bottom:.625rem}.py-3{padding-top:.75rem;padding-bottom:.75rem}.py-6{padding-top:1.5rem;padding-bottom:1.5rem}.py-8{padding-top:2rem;padding-bottom:2rem}.pb-1{padding-bottom:.25rem}.pb-4{padding-bottom:1rem}.pb-8{padding-bottom:2rem}.pt-1{padding-top:.25rem}.pt-2{padding-top:.5rem}.pt-4{padding-top:1rem}.pt-5{padding-top:1.25rem}.text-left{text-align:left}.text-center{text-align:center}.text-right{text-align:right}.align-middle{vertical-align:middle}.font-mono{font-family:SF Mono,ui-monospace,Cascadia Mono,Segoe UI Mono,Consolas,monospace}.text-2xl{font-size:1.6rem;line-height:2.05rem}.text-3xl{font-size:1.95rem;line-height:2.3rem}.text-\[10px\]{font-size:10px}.text-\[11px\]{font-size:11px}.text-base{font-size:1rem;line-height:1.65rem}.text-lg{font-size:1.125rem;line-height:1.65rem}.text-sm{font-size:.9375rem;line-height:1.5rem}.text-xl{font-size:1.3125rem;line-height:1.8rem}.text-xs{font-size:.8125rem;line-height:1.35rem}.font-bold{font-weight:700}.font-extrabold{font-weight:800}.font-normal{font-weight:400}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.normal-case{text-transform:none}.italic{font-style:italic}.tabular-nums{--tw-numeric-spacing:tabular-nums;font-variant-numeric:var(--tw-ordinal) var(--tw-slashed-zero) var(--tw-numeric-figure) var(--tw-numeric-spacing) var(--tw-numeric-fraction)}.leading-relaxed{line-height:1.625}.leading-snug{line-height:1.375}.leading-tight{line-height:1.25}.tracking-wide{letter-spacing:.025em}.tracking-wider{letter-spacing:.05em}.tracking-widest{letter-spacing:.1em}.text-amber-200{--tw-text-opacity:1;color:rgb(255 214 168/var(--tw-text-opacity,1))}.text-amber-200\/80{color:rgba(255,214,168,.8)}.text-amber-200\/90{color:rgba(255,214,168,.9)}.text-amber-300{--tw-text-opacity:1;color:rgb(255 188 122/var(--tw-text-opacity,1))}.text-amber-300\/90{color:rgba(255,188,122,.9)}.text-cyan-200{--tw-text-opacity:1;color:rgb(174 228 255/var(--tw-text-opacity,1))}.text-emerald-100{--tw-text-opacity:1;color:rgb(217 242 225/var(--tw-text-opacity,1))}.text-emerald-200{--tw-text-opacity:1;color:rgb(168 230 189/var(--tw-text-opacity,1))}.text-emerald-200\/90{color:rgba(168,230,189,.9)}.text-emerald-200\/95{color:rgba(168,230,189,.95)}.text-emerald-300{--tw-text-opacity:1;color:rgb(108 224 143/var(--tw-text-opacity,1))}.text-emerald-300\/90{color:rgba(108,224,143,.9)}.text-emerald-400{--tw-text-opacity:1;color:rgb(76 212 111/var(--tw-text-opacity,1))}.text-indigo-200{--tw-text-opacity:1;color:rgb(191 220 255/var(--tw-text-opacity,1))}.text-indigo-300{--tw-text-opacity:1;color:rgb(115 177 255/var(--tw-text-opacity,1))}.text-orange-300{--tw-text-opacity:1;color:rgb(255 188 122/var(--tw-text-opacity,1))}.text-rose-100{--tw-text-opacity:1;color:rgb(255 220 217/var(--tw-text-opacity,1))}.text-rose-200{--tw-text-opacity:1;color:rgb(255 182 177/var(--tw-text-opacity,1))}.text-rose-200\/95{color:hsla(4,100%,85%,.95)}.text-rose-300{--tw-text-opacity:1;color:rgb(255 139 133/var(--tw-text-opacity,1))}.text-rose-300\/90{color:hsla(3,100%,76%,.9)}.text-rose-400{--tw-text-opacity:1;color:rgb(255 96 88/var(--tw-text-opacity,1))}.text-sky-200{--tw-text-opacity:1;color:rgb(174 228 255/var(--tw-text-opacity,1))}.text-sky-200\/95{color:rgba(174,228,255,.95)}.text-sky-300{--tw-text-opacity:1;color:rgb(131 214 255/var(--tw-text-opacity,1))}.text-slate-100{--tw-text-opacity:1;color:rgb(245 245 247/var(--tw-text-opacity,1))}.text-slate-200{--tw-text-opacity:1;color:rgb(229 229 234/var(--tw-text-opacity,1))}.text-slate-300{--tw-text-opacity:1;color:rgb(209 209 214/var(--tw-text-opacity,1))}.text-slate-400{--tw-text-opacity:1;color:rgb(199 199 204/var(--tw-text-opacity,1))}.text-slate-500{--tw-text-opacity:1;color:rgb(174 174 178/var(--tw-text-opacity,1))}.text-slate-600{--tw-text-opacity:1;color:rgb(161 161 166/var(--tw-text-opacity,1))}.text-slate-900{--tw-text-opacity:1;color:rgb(58 58 60/var(--tw-text-opacity,1))}.text-teal-100{--tw-text-opacity:1;color:rgb(217 242 255/var(--tw-text-opacity,1))}.text-teal-100\/90{color:rgba(217,242,255,.9)}.text-teal-200{--tw-text-opacity:1;color:rgb(174 228 255/var(--tw-text-opacity,1))}.text-teal-200\/80{color:rgba(174,228,255,.8)}.text-teal-300{--tw-text-opacity:1;color:rgb(131 214 255/var(--tw-text-opacity,1))}.text-teal-400{--tw-text-opacity:1;color:rgb(108 210 255/var(--tw-text-opacity,1))}.text-violet-300{--tw-text-opacity:1;color:rgb(212 155 255/var(--tw-text-opacity,1))}.text-white{--tw-text-opacity:1;color:rgb(245 245 247/var(--tw-text-opacity,1))}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.accent-teal-400{accent-color:#6cd2ff}.opacity-70{opacity:.7}.opacity-80{opacity:.8}.shadow{--tw-shadow:0 8px 24px rgba(0,0,0,.45);--tw-shadow-colored:0 8px 24px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}.outline-none{outline:2px solid transparent;outline-offset:2px}.outline{outline-style:solid}.ring-1{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color)}.ring-1,.ring-2{box-shadow:var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow,0 0 #0000)}.ring-2{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color)}.ring-teal-400{--tw-ring-opacity:1;--tw-ring-color:rgb(108 210 255/var(--tw-ring-opacity,1))}.ring-teal-400\/50{--tw-ring-color:rgba(108,210,255,.5)}.blur{--tw-blur:blur(8px)}.blur,.invert{filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.invert{--tw-invert:invert(100%)}.filter{filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.transition{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,-webkit-backdrop-filter;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter,-webkit-backdrop-filter;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.hover\:border-teal-400:hover{--tw-border-opacity:1;border-color:rgb(108 210 255/var(--tw-border-opacity,1))}.hover\:bg-amber-400:hover{--tw-bg-opacity:1;background-color:rgb(255 161 74/var(--tw-bg-opacity,1))}.hover\:bg-emerald-500:hover{--tw-bg-opacity:1;background-color:rgb(48 209 88/var(--tw-bg-opacity,1))}.hover\:bg-emerald-600:hover{--tw-bg-opacity:1;background-color:rgb(36 168 63/var(--tw-bg-opacity,1))}.hover\:bg-indigo-500:hover{--tw-bg-opacity:1;background-color:rgb(10 132 255/var(--tw-bg-opacity,1))}.hover\:bg-orange-600:hover{--tw-bg-opacity:1;background-color:rgb(204 122 0/var(--tw-bg-opacity,1))}.hover\:bg-slate-600:hover{--tw-bg-opacity:1;background-color:rgb(161 161 166/var(--tw-bg-opacity,1))}.hover\:bg-slate-700:hover{--tw-bg-opacity:1;background-color:rgb(152 152 157/var(--tw-bg-opacity,1))}.hover\:bg-teal-500:hover{--tw-bg-opacity:1;background-color:rgb(100 210 255/var(--tw-bg-opacity,1))}.hover\:bg-teal-600:hover{--tw-bg-opacity:1;background-color:rgb(0 164 221/var(--tw-bg-opacity,1))}.focus\:border-teal-400:focus{--tw-border-opacity:1;border-color:rgb(108 210 255/var(--tw-border-opacity,1))}.disabled\:cursor-not-allowed:disabled{cursor:not-allowed}.disabled\:opacity-40:disabled{opacity:.4}@media (min-width:640px){.sm\:col-span-2{grid-column:span 2/span 2}.sm\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.sm\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.sm\:grid-cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}}@media (min-width:768px){.md\:col-span-2{grid-column:span 2/span 2}.md\:col-span-5{grid-column:span 5/span 5}.md\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.md\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.md\:grid-cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}.md\:grid-cols-5{grid-template-columns:repeat(5,minmax(0,1fr))}.md\:text-3xl{font-size:1.95rem;line-height:2.3rem}.md\:text-4xl{font-size:2.35rem;line-height:2.6rem}.md\:text-base{font-size:1rem;line-height:1.65rem}.md\:text-sm{font-size:.9375rem;line-height:1.5rem}}@media (min-width:1024px){.lg\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.lg\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.lg\:grid-cols-6{grid-template-columns:repeat(6,minmax(0,1fr))}}:root {color-scheme: dark;--ink:        #000000;--panel:      #1c1c1e;--panel-2:    #2c2c2e;--panel-3:    #3a3a3c;--hairline:   rgba(84, 84, 88, .65);--hairline-2: rgba(84, 84, 88, .42);--label:      #f5f5f7;--label-2:    #a1a1a6;--label-3:    #6e6e73;--action:     #0a84ff;--action-hi:  #409cff;--action-dim: rgba(10, 132, 255, .14);--locked:     #ff9f0a;--locked-dim: rgba(255, 159, 10, .13);--correct:    #30d158;--correct-dim:rgba(48, 209, 88, .13);--wrong:      #ff453f;--wrong-dim:  rgba(255, 69, 63, .12);--font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display","Segoe UI Variable Text", "Segoe UI", system-ui, "Helvetica Neue", sans-serif;--font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display","Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif;--font-mono: "SF Mono", ui-monospace, "Cascadia Mono", "Segoe UI Mono", Consolas, monospace;--r-sm: 8px;--r-md: 12px;--r-lg: 18px;--r-xl: 24px;--ease-out:   cubic-bezier(.25, .1, .25, 1);--ease-spring:cubic-bezier(.32, .72, 0, 1);--dur-1: .18s;--dur-2: .32s;--dur-3: .55s;--shadow-1: 0 1px 2px rgba(0,0,0,.4);--shadow-2: 0 8px 24px rgba(0,0,0,.45);--shadow-3: 0 20px 60px rgba(0,0,0,.55);--gut: clamp(1rem, 4vw, 2rem);}*, *::before, *::after { box-sizing: border-box; }html {-webkit-text-size-adjust: 100%;text-size-adjust: 100%;scroll-behavior: smooth;scroll-padding-top: 5rem;}body {margin: 0;font-family: var(--font-sans);background: var(--ink);color: var(--label);min-height: 100dvh;-webkit-font-smoothing: antialiased;letter-spacing: 0;}body::before {content: "";position: fixed;inset: -20% -10% auto -10%;height: 60vh;background: radial-gradient(60% 100% at 50% 0%, rgba(10,132,255,.09), transparent 70%);pointer-events: none;z-index: 0;}main, body > div:first-of-type { position: relative; z-index: 1; }h1 { font-size: 1.9rem; }h2 { font-size: 1.35rem; }h3 { font-size: 1.125rem; }h4 { font-size: 1rem; }h1, h2, h3, h4 {font-family: var(--font-display);font-weight: 700;letter-spacing: -.003em;text-wrap: balance;}p { text-wrap: pretty; }b, strong { font-weight: 600; color: var(--label); }sub, sup { font-size: .8em; line-height: 0; }a { color: var(--action-hi); text-decoration: none; }::selection { background: rgba(10,132,255,.32); }:focus-visible {outline: 2px solid var(--action-hi);outline-offset: 2px;border-radius: 4px;}[class*="text-[10px]"], [class*="text-[11px]"] { font-size: .8125rem; }body {padding-top: env(safe-area-inset-top);padding-bottom: calc(var(--next-bar-h, 0px) + env(safe-area-inset-bottom));}.glass, .panel, .shell, .ro-card, .eqcard, .control-card, .guide-card,.method-card, .progress-card, .mixer-card, .heq-card, .map-box {background: var(--panel);border: 1px solid var(--hairline-2);border-radius: var(--r-lg);}.glass, .panel, .shell { box-shadow: var(--shadow-2); }header.glass { padding: clamp(1.1rem, 3vw, 1.75rem); }#hdr-title, .app-title {font-family: var(--font-display);font-weight: 700;font-size: clamp(1.5rem, 1.2rem + 1.1vw, 2.1rem);line-height: 1.15;letter-spacing: -.015em;}#hdr-sub, .app-subtitle { color: var(--label-2); font-size: 1rem; margin-top: .35rem; }.chip, .chip-dim, .chip-dse, .chip-warn, .ms-chip, .assume-chip, .badge,.dock-step, .dock-state, .ladder-tag, .section-kicker {display: inline-flex;align-items: center;gap: .3rem;padding: .2rem .6rem;border-radius: 999px;border: 1px solid var(--hairline);background: rgba(255,255,255,.05);color: var(--label-2);font-size: .75rem;font-weight: 600;letter-spacing: .01em;line-height: 1.5;}.chip, .chip-dim, .chip-dse, .chip-warn, .ms-chip, .assume-chip, .badge {max-width: 100%;align-self: flex-start;}.chip-dse, .chip:not(.chip-dim):not(.chip-warn) {border-color: rgba(10,132,255,.34);background: var(--action-dim);color: var(--action-hi);}.chip-dim, .assume-off { color: var(--label-3); background: rgba(255,255,255,.04); }.chip-warn { border-color: rgba(255,159,10,.38); background: var(--locked-dim); color: var(--locked); }.badge.ox  { border-color: rgba(255,159,10,.4); background: var(--locked-dim); color: var(--locked); }.badge.red { border-color: rgba(10,132,255,.4); background: var(--action-dim); color: var(--action-hi); }.section-kicker {background: none; border: 0; padding: 0;color: var(--label-3);font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;}.section-title { font-size: 1.35rem; }.section-lead  { color: var(--label-2); font-size: 1rem; line-height: 1.6; }#main-tabs, .main-tabs {display: flex;flex-wrap: nowrap;gap: .375rem;overflow-x: auto;scroll-snap-type: x proximity;scrollbar-width: none;-webkit-overflow-scrolling: touch;padding-block: .25rem;-webkit-mask-image: linear-gradient(90deg, transparent, #000 1.25rem, #000 calc(100% - 1.25rem), transparent);mask-image: linear-gradient(90deg, transparent, #000 1.25rem, #000 calc(100% - 1.25rem), transparent);}#main-tabs::-webkit-scrollbar, .main-tabs::-webkit-scrollbar { display: none; }.tab-btn, .view-btn, .mode-btn, .sim-mode-btn, .mbtn, .rbtn, .probe-btn,.pol-btn, .rp-btn, .ctrl-btn, .samp-btn, .sp-btn, .drill-btn, .sim-btn,.sub-btn, .mini-btn, .act-btn, .hint-btn, .btn, .btn-ghost, .btn-teal,.btn-primary, .route-btn, .guide-toggle, #next-go, .btn-run {font-family: inherit;font-size: .9375rem;font-weight: 600;color: var(--label);background: var(--panel-2);border: 1px solid transparent;border-radius: var(--r-md);padding: .55rem .95rem;cursor: pointer;display: inline-flex;align-items: center;gap: .45rem;flex: 0 1 auto;scroll-snap-align: center;transition: background var(--dur-1) var(--ease-out), color var(--dur-1) var(--ease-out),border-color var(--dur-1) var(--ease-out), transform var(--dur-1) var(--ease-spring);-webkit-tap-highlight-color: transparent;}.tab-btn { white-space: nowrap; flex: 0 0 auto; }.tab-btn { color: var(--label-2); background: transparent; }.tab-btn:hover { color: var(--label); background: rgba(255,255,255,.06); }.tab-btn.active {color: var(--label);background: var(--panel-2);box-shadow: var(--shadow-1), inset 0 1px 0 rgba(255,255,255,.07);}button:hover:not(:disabled) { background: var(--panel-3); }button:active:not(:disabled) { transform: scale(.97); }button:disabled, [aria-disabled="true"] { opacity: .38; cursor: not-allowed; }.btn-primary, .btn-run { background: var(--action); color: #fff; }.btn-primary:hover:not(:disabled), .btn-run:hover:not(:disabled) { background: var(--action-hi); }.sp-btn.on, .samp-btn.sel, .sub-btn.on, .mini-btn.on, .mode-btn.active,.mbtn.active, .rbtn.active, .drill-btn.on, .route-btn.on, .map-box.on,.view-btn.on, .pol-btn.on {background: var(--action-dim);border-color: rgba(10,132,255,.45);color: var(--action-hi);}.tab-panel { display: none; }.tab-panel.active {display: block;animation: panel-in var(--dur-3) var(--ease-spring) both;}@keyframes panel-in {from { opacity: 0; transform: translateY(10px) scale(.994); }to   { opacity: 1; transform: none; }}.dock {position: relative;border: 1px solid var(--hairline);border-radius: var(--r-lg);background: var(--panel);padding: clamp(.9rem, 2.5vw, 1.15rem);overflow: hidden;transition: border-color var(--dur-2) var(--ease-out), box-shadow var(--dur-2) var(--ease-out);}.dock::before {content: "";position: absolute;inset: 0 auto 0 0;width: 3px;background: var(--label-3);transition: background var(--dur-2) var(--ease-out);}.dock.locked   { border-color: rgba(255,159,10,.38); }.dock.locked::before   { background: var(--locked); }.dock.unlocked { border-color: rgba(48,209,88,.4); }.dock.unlocked::before { background: var(--correct); }.dock-head { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; }.dock-step {background: rgba(255,255,255,.06);border-color: var(--hairline);color: var(--label-2);font-size: .75rem;letter-spacing: .04em;text-transform: uppercase;border-radius: var(--r-sm);}.dock-state { margin-left: auto; font-weight: 700; }.st-lock { background: var(--locked-dim); border-color: rgba(255,159,10,.4); color: var(--locked); }.st-open { background: var(--correct-dim); border-color: rgba(48,209,88,.4);  color: var(--correct); }.dock-why, #dock-locknote { color: var(--label-2); font-size: .9375rem; line-height: 1.55; }@keyframes dock-unlock {0%   { box-shadow: 0 0 0 0 rgba(48,209,88,.55); }70%  { box-shadow: 0 0 0 10px rgba(48,209,88,0); }100% { box-shadow: 0 0 0 0 rgba(48,209,88,0); }}.dock.just-unlocked { animation: dock-unlock .7s var(--ease-out) 1; }@keyframes tick-in { from { opacity: 0; transform: scale(.4); } to { opacity: 1; transform: scale(1); } }.dock.just-unlocked .st-open { animation: tick-in .35s var(--ease-spring) both; }.pr-opt, .pred-opt {display: block;width: 100%;text-align: left;background: var(--panel-2);border: 1px solid var(--hairline-2);border-radius: var(--r-md);padding: .7rem .85rem;font-size: .9375rem;color: var(--label);cursor: pointer;white-space: normal;transition: border-color var(--dur-1) var(--ease-out), background var(--dur-1) var(--ease-out),transform var(--dur-1) var(--ease-spring);}.pr-opt:hover:not(:disabled), .pred-opt:hover:not(:disabled) { border-color: rgba(10,132,255,.5); background: var(--panel-3); }.pr-opt:active:not(:disabled), .pred-opt:active:not(:disabled) { transform: scale(.99); }.pr-opt.picked, .pred-opt.picked { border-color: var(--action); background: var(--action-dim); color: var(--label); }.pr-opt.correct, .pred-opt.correct, .route-btn.right, .mcq-opt.correct {border-color: rgba(48,209,88,.65);background: var(--correct-dim);}.pr-opt.wrong, .pred-opt.wrong, .route-btn.bad, .mcq-opt.wrong {border-color: rgba(255,69,63,.55);background: var(--wrong-dim);}.pred-opt:disabled { cursor: not-allowed; opacity: .45; }#next-bar {position: sticky;bottom: 0;z-index: 40;padding: .45rem var(--gut) max(.45rem, env(safe-area-inset-bottom));}#next-bar > .glass {max-width: 76rem;margin-inline: auto;display: flex;align-items: center;gap: .6rem;flex-wrap: wrap;padding: .4rem .4rem .4rem .85rem;border-radius: var(--r-lg);background: rgba(28,28,30,.82);border: 1px solid var(--hairline);box-shadow: var(--shadow-2);-webkit-backdrop-filter: saturate(180%) blur(20px);backdrop-filter: saturate(180%) blur(20px);}#next-text, .next-copy, #next-bar #next-text {color: var(--label);font-size: .9375rem;min-width: 0;flex: 1 1 15rem;}#next-go {flex: 0 0 auto;background: var(--action);color: #fff;border: 0;padding: .5rem .85rem;font-size: .875rem;}#next-go:hover:not(:disabled) { background: var(--action-hi); }.ico { width: 1.05em; height: 1.05em; flex: 0 0 auto; vertical-align: -.18em; }.canvas-wrap {position: relative;width: 100%;min-height: 0;background: var(--panel);border: 1px solid var(--hairline-2);border-radius: var(--r-lg);overflow: hidden;}.canvas-wrap canvas {position: static;display: block;width: 100%;height: auto;border-radius: 0;}.ro-k, .ro-l, .lbl, .map-lab, .field-l, .progress-label {color: var(--label-3);font-size: .75rem;font-weight: 700;letter-spacing: .05em;text-transform: uppercase;}.ro-v, .map-val, .stat, .mixer-readout { color: var(--label); font-variant-numeric: tabular-nums; }.ro-card, .map-box, .control-card {border: 1px solid var(--hairline-2);background: var(--panel-2);border-radius: var(--r-md);}.bar-track, .progress-track { background: var(--panel-3); border-radius: 999px; overflow: hidden; }.bar-fill, .progress-fill { background: var(--action); transition: width var(--dur-3) var(--ease-spring); }.work, .eqbox, .kbd, .eqline, code, pre { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }.work {background: var(--ink);border: 1px solid var(--hairline-2);border-radius: var(--r-md);color: var(--label-2);font-size: .9375rem;line-height: 1.7;padding: .9rem 1rem;overflow-x: auto;}.work .hl { color: var(--action-hi); }.work .dim { color: var(--label-3); }.step-h {color: var(--action-hi);font-size: .8125rem;font-weight: 700;letter-spacing: .05em;text-transform: uppercase;}input[type="text"], input[type="number"], input[type="search"], select, textarea,.field, .field-i, .calc-inp {width: 100%;font-family: inherit;font-size: 1rem;color: var(--label);background: var(--panel-2);border: 1px solid var(--hairline);border-radius: var(--r-md);padding: .55rem .7rem;transition: border-color var(--dur-1) var(--ease-out), background var(--dur-1) var(--ease-out);-webkit-appearance: none;appearance: none;}input:focus, select:focus, textarea:focus { outline: none; border-color: var(--action); background: var(--panel); }select {background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23a1a1a6' d='M1.4 0 6 4.6 10.6 0 12 1.4 6 8 0 1.4z'/%3E%3C/svg%3E");background-repeat: no-repeat;background-position: right .65rem center;padding-right: 1.9rem;}label, .calc-lbl, .field-l {color: var(--label-2); font-size: .8125rem; font-weight: 600; letter-spacing: 0; text-transform: none;}input[type="range"] {-webkit-appearance: none; appearance: none;width: 100%; height: 28px; background: transparent; cursor: pointer;accent-color: var(--action);}input[type="range"]::-webkit-slider-runnable-track { height: 4px; border-radius: 999px; background: var(--panel-3); }input[type="range"]::-webkit-slider-thumb {-webkit-appearance: none; appearance: none;width: 24px; height: 24px; margin-top: -10px;border-radius: 50%; background: #fff; border: 0;box-shadow: 0 1px 4px rgba(0,0,0,.5);transition: transform var(--dur-1) var(--ease-spring);}input[type="range"]:active::-webkit-slider-thumb { transform: scale(1.12); }input[type="range"]::-moz-range-track { height: 4px; border-radius: 999px; background: var(--panel-3); }input[type="range"]::-moz-range-thumb { width: 22px; height: 22px; border: 0; border-radius: 50%; background: #fff; }input[type="checkbox"], input[type="radio"] { width: 1.1rem; height: 1.1rem; accent-color: var(--action); }.mcq-opt, .myth-card, .ms-point, .evidence-grid > *, .concept-grid > *, .guide-card {border: 1px solid var(--hairline-2);border-radius: var(--r-md);background: var(--panel-2);}.mcq-opt { padding: .75rem .9rem; font-size: .9375rem; cursor: pointer; }.mcq-opt:hover { border-color: rgba(10,132,255,.5); }.myth-card { cursor: pointer; transition: border-color var(--dur-2) var(--ease-out); }.myth-card:hover { border-color: rgba(10,132,255,.45); }.myth-back { display: none; }.myth-card.flipped .myth-front { display: none; }.myth-card.flipped .myth-back { display: block; animation: flip-in var(--dur-2) var(--ease-spring) both; }@keyframes flip-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }.tag-w { background: var(--correct-dim); border-color: rgba(48,209,88,.4); color: var(--correct); }.tag-c { background: var(--locked-dim);  border-color: rgba(255,159,10,.4);  color: var(--locked); }.tag-i { background: var(--wrong-dim);   border-color: rgba(255,69,63,.4);   color: var(--wrong); }.hint-btn { border-color: rgba(255,159,10,.35); background: var(--locked-dim); color: var(--locked); font-size: .8125rem; }.fail-box { border-left: 3px solid var(--wrong); background: var(--wrong-dim); border-radius: var(--r-md); padding: .7rem .9rem; }table, .datatbl { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }th, td { padding: .55rem .7rem; text-align: left; border-bottom: 1px solid var(--hairline-2); font-size: .9375rem; }th { color: var(--label-3); font-size: .75rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; }tbody tr:last-child > td { border-bottom: 0; }tbody tr { transition: background var(--dur-1) var(--ease-out); }tbody tr:hover { background: rgba(255,255,255,.04); }.lab-card {display: block;border: 1px solid var(--hairline-2);border-radius: var(--r-lg);background: var(--panel);color: var(--label);transition: transform var(--dur-2) var(--ease-spring), border-color var(--dur-2) var(--ease-out),box-shadow var(--dur-2) var(--ease-out);}.lab-card:hover { transform: translateY(-3px); border-color: rgba(10,132,255,.5); box-shadow: var(--shadow-3); }.lab-card:active { transform: translateY(-1px) scale(.995); }.reveal { opacity: 0; transform: translateY(14px); }.reveal.shown {opacity: 1; transform: none;transition: opacity var(--dur-3) var(--ease-out), transform var(--dur-3) var(--ease-spring);transition-delay: calc(var(--i, 0) * 45ms);}@media (pointer: coarse) {button, summary, [role="button"], .tab-btn, .pr-opt, .pred-opt, .mcq-opt,.myth-card, .lab-card, select, .field, .field-i, .calc-inp, .ans,input:not([type="checkbox"]):not([type="radio"]):not([type="range"]) { min-height: 44px !important; }input[type="checkbox"], input[type="radio"] { min-width: 28px !important; min-height: 28px !important; }label:has(> input[type="checkbox"]), label:has(> input[type="radio"]),.ms-point { min-height: 44px; display: flex; align-items: center; }.pr-opt, .pred-opt, .mcq-opt { display: flex; align-items: center; }li:has(> input[type="checkbox"]), li:has(> input[type="radio"]),li:has(.goal-check), li:has(.mloss) {cursor: pointer;min-height: 44px;display: flex;align-items: flex-start;padding-block: .3rem;}}@media (max-width: 640px) {.chip, .chip-dim, .chip-dse, .chip-warn, .badge, .dock-step, .dock-state, .ladder-tag {padding: .1rem .45rem;}#hdr-sub, .app-subtitle { font-size: .9375rem; line-height: 1.5; }#next-bar > .glass > span:first-child { display: none; }header.glass { gap: .6rem; }}@media (max-width: 768px) {.flex { flex-wrap: wrap; }}@media (min-width: 1024px) {:root { --gut: 2rem; }#main-tabs, .main-tabs {gap: .25rem;background: var(--panel-2);border-radius: var(--r-md);padding: .25rem;margin-inline: 0;overflow: visible;width: fit-content;-webkit-mask-image: none;mask-image: none;}.tab-btn { border-radius: var(--r-sm); }}:root {--bg: #000000;--bg-2: #0b0b0d;--panel: #1c1c1e;--panel-2: #2c2c2e;--panel-3: #37373a;--line: rgba(84, 84, 88, .42);--line-strong: rgba(84, 84, 88, .65);--text: #f5f5f7;--muted: #a1a1a6;--faint: #6e6e73;--teal: #64d2ff;--blue: #0a84ff;--amber: #ff9f0a;--rose: #ff453f;--green: #30d158;--radius: 12px;--shadow: 0 8px 24px rgba(0,0,0,.45);}@media (prefers-reduced-motion: reduce) {html { scroll-behavior: auto; }*, *::before, *::after {animation-duration: .001ms !important;animation-iteration-count: 1 !important;transition-duration: .001ms !important;}.reveal { opacity: 1; transform: none; }}@media print {html, body { background: #fff !important; color: #111 !important; }body::before { display: none; }* {color: #111 !important;background-image: none !important;box-shadow: none !important;-webkit-backdrop-filter: none !important;backdrop-filter: none !important;}.glass, .panel, .shell, .dock, .canvas-wrap, .ro-card, .mcq-opt, .myth-card,.lab-card, .btn, button, table, th, td { border-color: #c7c7cc !important; background-color: #fff !important; }.tab-panel { display: block !important; break-inside: avoid; }#next-bar, #btn-teacher, #pr-reveal, #pr-why, .hint-btn { display: none !important; }.reveal { opacity: 1 !important; transform: none !important; }.myth-back { display: block !important; }.myth-front { display: none !important; }}</style>
+</head>
+<body class="text-slate-200">
+<div class="max-w-6xl mx-auto px-4 py-6">
+
+  <!-- ============ HEADER ============ -->
+  <header class="glass p-5 mb-5 flex flex-wrap items-start justify-between gap-3">
+    <div>
+      <div class="flex items-center gap-2 flex-wrap mb-1">
+        <span class="chip">HKDSE Chemistry</span>
+        <span class="chip">Topic VIII (a)–(b)</span>
+        <span class="chip">enthalpy change · calorimetry</span>
+        <span class="chip">practical skill</span>
+</div>
+      <h1 id="hdr-title" class="text-2xl md:text-3xl font-extrabold text-white leading-tight">Interactive Lab</h1>
+      <p id="hdr-sub" class="text-sm text-slate-400 mt-1">Subtitle</p>
+    </div>
+    <button type="button" id="btn-teacher" onclick="toggleTeacher()" class="btn btn-ghost"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg><span>Teacher notes</span></button>
+  </header>
+  <div id="teacher-panel" class="glass p-5 mb-5 hidden">
+    <h2 id="teacher-title" class="font-bold text-amber-300 mb-2">Teacher notes</h2>
+    <div id="teacher-content" class="text-sm text-slate-300 space-y-2 leading-relaxed"></div>
+  </div>
+
+  <!-- ============ TABS ============ -->
+  <nav id="main-tabs" class="flex flex-wrap gap-2 mb-5">
+    <button type="button" id="tab-intro" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold border border-slate-700 bg-slate-900/60" data-tab="intro" onclick="setTab('intro')">1 · Introduction</button>
+    <button type="button" id="tab-sim"   class="tab-btn active px-4 py-2 rounded-xl text-sm font-semibold border border-slate-700 bg-slate-900/60" data-tab="sim"   onclick="setTab('sim')">2 · Simulation</button>
+    <button type="button" id="tab-calc"  class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold border border-slate-700 bg-slate-900/60" data-tab="calc"  onclick="setTab('calc')">3 · Calculations</button>
+    <button type="button" id="tab-mcq"   class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold border border-slate-700 bg-slate-900/60" data-tab="mcq"   onclick="setTab('mcq')">4 · Past-paper practice</button>
+    <button type="button" id="tab-recap" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold border border-slate-700 bg-slate-900/60" data-tab="recap" onclick="setTab('recap')">5 · Recap &amp; misconceptions</button>
+  </nav>
+
+  <!-- ============ PANEL: INTRODUCTION ============ -->
+  <section id="panel-intro" class="tab-panel mb-5">
+    <div class="glass p-6 space-y-5">
+      <h2 id="intro-h1" class="text-xl font-bold text-white"></h2>
+      <p id="intro-lead" class="text-sm md:text-base text-slate-300 leading-relaxed"></p>
+      <div id="intro-cards" class="grid md:grid-cols-2 gap-3"></div>
+    </div>
+  </section>
+
+  <!-- ============ PANEL: SIMULATION ============ -->
+  <section id="panel-sim" class="tab-panel active mb-5">
+    <div id="sim-dock" class="dock locked mb-3" aria-live="polite">
+      <div class="dock-head mb-2">
+        <span class="dock-step">Task 1</span>
+        <span class="text-sm font-bold text-white" id="dock-title">Predict before you run it</span>
+        <span class="dock-state st-lock" id="dock-state">Locked</span>
+      </div>
+      <div id="predict-card"></div>
+      <p class="text-xs text-amber-200 mt-2" id="dock-locknote">Locked — commit to a prediction and the run controls below will unlock.</p>
+      <div class="mt-3 hidden" id="weak-card">
+        <h3 class="font-bold text-amber-300 mb-1 text-sm">Checkpoint 2 &middot; Why was the temperature rise smaller this time?</h3>
+        <p id="weak-q" class="text-sm text-slate-300 mb-3"></p>
+        <button type="button" class="act-btn px-4 py-2 rounded-xl text-sm font-semibold bg-teal-600 hover:bg-teal-500 text-white" onclick="revealWeak()">Reveal answer (mark-scheme wording)</button>
+        <p id="weak-why" class="hidden text-xs text-emerald-300/90 bg-emerald-950/40 border border-emerald-800/40 rounded-xl p-3 mt-3 leading-relaxed"></p>
+      </div>
+    </div>
+
+    <div class="glass p-5">
+      <div class="flex flex-wrap gap-2 mb-3" id="sim-modes"></div>
+      <div class="canvas-wrap rounded-xl border border-slate-700/70 bg-slate-950/70"><canvas id="sim-canvas" aria-label="Polystyrene cup calorimeter animation: acid poured into base with thermometer, stirring rod and energy-level diagram"></canvas></div>
+      <div class="canvas-wrap graph-wrap rounded-xl border border-slate-700/70 bg-slate-950/70 mt-3"><canvas id="graph-canvas" aria-label="Hand-drawn temperature against time graph with pre-mix baseline, exothermic rise, cooling tail and dashed extrapolation lines giving the corrected temperature rise"></canvas></div>
+      <p id="sim-caption" class="text-xs text-slate-400 mt-3 leading-relaxed"></p>
+      <div class="flex flex-wrap gap-2 mt-3" id="assumption-chips"></div>
+      <div id="sim-readouts" class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-4"></div>
+      <div id="obs-panel" class="text-xs text-slate-300 bg-slate-950/60 border border-slate-700/50 rounded-xl p-3 mt-4 leading-relaxed"></div>
+    </div>
+
+    <div class="glass p-5 mt-4">
+      <h3 class="font-bold text-white mb-3">Controls</h3>
+      <div id="ctrl-panel" class="grid md:grid-cols-2 gap-x-8 gap-y-4"></div>
+    </div>
+
+  </section>
+
+  
+    <!-- Task 2: deliberate errors -->
+    <div class="glass p-5 mt-4">
+      <div class="dock-head mb-2"><span class="dock-step">Task 2</span><span class="text-sm font-bold text-white">Break it on purpose</span></div>
+      <p class="text-xs text-slate-400 mb-3">Each is an error HKDSE candidates really make in calorimetry. Break it, read the consequence, then never do it again.</p>
+      <div class="flex flex-wrap gap-2 mb-3">
+        <button type="button" class="act-btn" data-fail="a">Use the acid volume alone for the mass</button>
+        <button type="button" class="act-btn" data-fail="b">Use the maximum thermometer reading as ΔT</button>
+        <button type="button" class="act-btn" data-fail="c">Divide by n(acid) instead of n(water)</button>
+        <button type="button" class="act-btn" id="fail-clear">Clear</button>
+      </div>
+      <div id="fail-panel" class="text-sm text-slate-300"></div>
+    </div>
+
+    <!-- Task 3: hint ladder + self-mark -->
+    <div class="glass p-5 mt-4">
+      <div class="dock-head mb-2"><span class="dock-step">Task 3</span><span class="text-sm font-bold text-white">Explain the result, with hints if you need them</span></div>
+      <p class="text-sm text-slate-200 mb-2"><i>When 25.0 cm³ of 1.00 mol dm⁻³ ethanoic acid is neutralised by 25.0 cm³ of 1.00 mol dm⁻³ sodium hydroxide, the measured enthalpy change is about −55.2 kJ mol⁻¹ instead of −57.3 kJ mol⁻¹. Explain the difference. (2)</i></p>
+      <div class="flex flex-wrap gap-2 mb-2">
+        <button type="button" class="act-btn" data-hint="1">Hint 1</button>
+        <button type="button" class="act-btn" data-hint="2">Hint 2</button>
+        <button type="button" class="act-btn" data-hint="3">Hint 3</button>
+      </div>
+      <p id="hint-text" class="text-sm text-amber-200 mb-3"></p>
+      <p class="text-xs font-bold text-teal-200 mb-2">Mark your own answer — tick each line you actually wrote</p>
+      <div id="selfmarks" class="space-y-2">
+        <label class="flex items-start gap-2 text-sm text-slate-300"><input type="checkbox" class="selfmk"><span>I said ethanoic acid is a WEAK acid and is only partially ionised in solution</span></label>
+        <label class="flex items-start gap-2 text-sm text-slate-300"><input type="checkbox" class="selfmk"><span>I said energy is needed to ionise it fully, and that this ionisation is ENDOTHERMIC</span></label>
+        <label class="flex items-start gap-2 text-sm text-slate-300"><input type="checkbox" class="selfmk"><span>I said some of the heat released by H⁺(aq) + OH⁻(aq) → H₂O(l) is used up by that ionisation</span></label>
+        <label class="flex items-start gap-2 text-sm text-slate-300"><input type="checkbox" class="selfmk"><span>I concluded that the temperature rise is smaller, so the measured ΔH is LESS exothermic</span></label>
+        <label class="flex items-start gap-2 text-sm text-slate-300"><input type="checkbox" class="selfmk"><span>I did NOT say the reaction is incomplete or that the acid is "used up" — the neutralisation goes to completion</span></label>
+      </div>
+      <p id="selfmarks-total" class="text-xs text-slate-400 mt-2"></p>
+    </div>
+<!-- ============ PANEL: CALCULATIONS ============ -->
+  <section id="panel-calc" class="tab-panel mb-5">
+    <div class="glass p-6 space-y-5">
+      <h2 id="calc-title" class="text-xl font-bold text-white">Worked calculation</h2>
+      <p id="calc-sub" class="text-sm text-slate-400"></p>
+      <div class="flex flex-wrap gap-2" id="calc-assumptions"></div>
+      <div id="calc-inputs" class="grid md:grid-cols-3 gap-4"></div>
+      <div class="flex flex-wrap gap-2">
+        <button type="button" class="px-4 py-2 rounded-xl text-sm font-semibold bg-slate-800 hover:bg-slate-700 border border-slate-600 text-slate-200" onclick="loadLastRun()">↺ Load data from last run</button>
+        <button type="button" id="btn-run-calc" class="px-4 py-2 rounded-xl text-sm font-semibold bg-indigo-600 hover:bg-indigo-500 text-white" onclick="runCalc()">Check working</button>
+      </div>
+      <div id="calc-working" class="text-sm font-mono bg-slate-950/70 border border-slate-700/60 rounded-xl p-4 whitespace-pre-wrap text-slate-300 hidden"></div>
+      <div class="border-t border-white/10 pt-5">
+        <h3 class="font-bold text-white mb-2">Your answer — <span class="kbd">ΔH</span> for this run</h3>
+        <div class="flex flex-wrap items-center gap-2">
+          <label class="text-sm text-slate-300 font-semibold">ΔH = </label>
+          <input type="number" step="0.1" id="calc-answer" placeholder="e.g. -56.9" class="lab-in w-36 text-center font-bold">
+          <span class="text-sm font-semibold text-slate-300">kJ mol⁻¹ (3 s.f., sign matters)</span>
+          <button type="button" class="px-4 py-2 rounded-xl text-sm font-semibold bg-teal-600 hover:bg-teal-500 text-white" onclick="checkStudentAnswer()">Check answer</button>
+        </div>
+        <p id="calc-feedback" class="text-sm font-bold mt-3 min-h-[24px]"></p>
+      </div>
+    </div>
+  
+    <div id="ladder-step" class="glass p-6 mt-4 space-y-3">
+      <h3 class="text-sm font-bold text-emerald-200">Step 1 &mdash; Worked example: the whole chain, in order</h3>
+      <p class="text-xs text-slate-400">Every line below is a line an examiner can credit. The chain is always: volumes &rarr; total mass &rarr; q &rarr; moles of water &rarr; &Delta;H.</p>
+      <div class="work"><span class="hl">Question</span>
+  25.0 cm³ of 1.00 mol dm⁻³ hydrochloric acid is mixed with 25.0 cm³ of 1.00 mol dm⁻³ sodium hydroxide.
+  The extrapolated temperature rise is 6.80 degrees C. Calculate the enthalpy change of neutralisation.
+  Assume density 1.00 g cm⁻³ and c = 4.18 J g⁻¹ K⁻¹.
+
+<span class="hl">Step 1 - total volume, then total mass</span>
+  V_total = 25.0 + 25.0 = 50.0 cm³
+  m = V_total x density = 50.0 cm³ x 1.00 g cm⁻³ = 50.0 g
+  <span class="dim">The mass is the TOTAL solution, not the acid alone. Using 25.0 g here is the single most common error.</span>
+
+<span class="hl">Step 2 - energy transferred</span>
+  q = m x c x dT = 50.0 g x 4.18 J g⁻¹ K⁻¹ x 6.80 K = 1421 J
+  <span class="dim">dT is the RISE (final minus initial), and it is the SAME number in K and in degrees C. Never add 273.</span>
+
+<span class="hl">Step 3 - moles of water formed</span>
+  HCl + NaOH → NaCl + H₂O, a 1:1 reaction in both the acid and the base.
+  n(H2O) = c x V = 1.00 mol dm⁻³ x (25.0 / 1000) dm³ = 0.0250 mol
+  <span class="dim">Both solutions are 25.0 cm³ of 1.00 mol dm⁻³, so both give 0.0250 mol. The solution is NOT in excess here.</span>
+
+<span class="hl">Step 4 - enthalpy change per mole</span>
+  dH = -q / n = -1421 J / 0.0250 mol = -56 840 J mol⁻¹ = -56.8 kJ mol⁻¹
+  <span class="dim">The MINUS sign matters: neutralisation is exothermic. Divide by 1000 to convert J to kJ.</span>
+
+<span class="hl">Sense check</span>
+  The accepted value is about -57.3 kJ mol⁻¹, so -56.8 is close but slightly less exothermic, which is exactly
+  what heat loss to the surroundings does. A value MORE exothermic than -57.3 is impossible for this reaction
+  and means an error in the mass or the moles.
+
+<span class="dim">Assumptions being made: density and specific heat capacity of the solution are taken as those of
+water; the reaction goes to completion; heat loss is negligible; the cup, lid and thermometer absorb no heat.</span></div>
+      <h3 class="text-sm font-bold text-amber-200 pt-2">Step 2 &mdash; Completion: fill the blanks</h3>
+      <p class="text-sm text-slate-200 mb-2"><i>50.0 cm³ of 1.00 mol dm⁻³ nitric acid is mixed with 50.0 cm³ of 1.00 mol dm⁻³ potassium hydroxide. The extrapolated temperature rise is 6.60 degrees C. Calculate &Delta;H for the reaction in kJ mol⁻¹.</i></p>
+      <div><label class="field-l" for="lad-g1">Blank 1 &mdash; total mass of solution / g</label><input id="lad-g1" class="field" inputmode="decimal" placeholder="e.g. 50"></div>
+      <div class="mt-2"><label class="field-l" for="lad-g2">Blank 2 &mdash; q = m x c x dT / J</label><input id="lad-g2" class="field" inputmode="decimal" placeholder="e.g. 1421"></div>
+      <div class="mt-2"><label class="field-l" for="lad-g3">Blank 3 &mdash; n(H2O) / mol</label><input id="lad-g3" class="field" inputmode="decimal" placeholder="e.g. 0.0250"></div>
+      <div class="mt-2"><label class="field-l" for="lad-g4">Blank 4 &mdash; &Delta;H / kJ mol⁻¹ (include the sign)</label><input id="lad-g4" class="field" inputmode="decimal" placeholder="e.g. -56.8"></div>
+      <div class="mt-2 flex flex-wrap gap-2"><button type="button" class="act-btn" id="lad-check">Check the four blanks</button><button type="button" class="act-btn" id="lad-hint">Hint</button></div>
+      <p id="lad-hinttext" class="text-xs text-amber-200 mt-2"></p><div id="lad-fb" class="mt-2"></div>
+      <h3 class="text-sm font-bold text-rose-200 pt-2">Step 3 &mdash; Independent, no help</h3>
+      <p class="text-xs text-slate-400 mb-2">Write this one out with the unit on every line before you reveal anything.</p>
+      <p class="text-sm text-slate-200"><i>In an experiment, 25.0 cm³ of 2.00 mol dm⁻³ hydrochloric acid was mixed with 25.0 cm³ of 2.00 mol dm⁻³ sodium hydroxide and the extrapolated temperature rise was 13.5 degrees C. Calculate &Delta;H for the reaction in kJ mol⁻¹, and state ONE reason why the measured value is likely to be slightly less exothermic than the accepted value.</i></p>
+      <button type="button" class="act-btn mt-2" id="ind-reveal">Reveal marking scheme</button>
+      <div id="ind-out" class="mt-2"></div>
+    </div>
+</section>
+
+  <!-- ============ PANEL: PAST PAPER MCQs ============ -->
+  <section id="panel-mcq" class="tab-panel mb-5">
+    <div class="glass p-6">
+      <h2 id="pp-title" class="text-xl font-bold text-white mb-1">Past-paper practice</h2>
+      <p id="pp-sub" class="text-xs text-slate-400 mb-5"></p>
+      <div id="pp-questions" class="space-y-6"></div>
+    </div>
+  </section>
+
+  <!-- ============ PANEL: RECAP + MISCONCEPTION CARDS ============ -->
+  <section id="panel-recap" class="tab-panel mb-5">
+    <div class="glass rounded-2xl p-6 space-y-6">
+      <div>
+        <h2 id="recap-title" class="text-xl font-bold text-white">Recap checklist</h2>
+        <p id="recap-sub" class="text-sm text-slate-400 mt-1 mb-3">Tick each goal only when you can explain it without notes.</p>
+        <ul id="recap-list" class="space-y-2"></ul>
+        <p id="recap-progress" class="text-xs text-slate-500 mt-3"></p>
+      </div>
+      <div class="border-t border-white/10 pt-5">
+        <h3 class="text-sm font-bold text-rose-300 uppercase tracking-wide mb-2" id="myth-title">Common misconceptions</h3>
+        <p class="text-xs text-slate-400 mb-4" id="myth-lead">Tap a card to flip.</p>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3" id="myth-cards"></div>
+      </div>
+    </div>
+  
+      <div class="border-t border-white/10 pt-5">
+        <h3 class="text-sm font-bold text-amber-300 uppercase tracking-wide mb-2" id="markloss-title">Where marks are lost in calorimetry</h3>
+        <p class="text-xs text-slate-400 mb-3" id="markloss-lead">Tick the ones you have actually done.</p>
+        <ul id="markloss-list" class="grid sm:grid-cols-2 gap-2">
+          <li><label class="flex items-start gap-2 text-sm text-slate-300"><input type="checkbox" class="mloss"><span>I used the acid volume alone for the mass instead of the TOTAL solution volume.</span></label></li>
+          <li><label class="flex items-start gap-2 text-sm text-slate-300"><input type="checkbox" class="mloss"><span>I used the maximum thermometer reading as ΔT instead of the temperature RISE.</span></label></li>
+          <li><label class="flex items-start gap-2 text-sm text-slate-300"><input type="checkbox" class="mloss"><span>I added 273 to convert ΔT (it is the same in °C and K).</span></label></li>
+          <li><label class="flex items-start gap-2 text-sm text-slate-300"><input type="checkbox" class="mloss"><span>I forgot the minus sign, or gave an answer that is more exothermic than −57.3 kJ mol⁻¹.</span></label></li>
+          <li><label class="flex items-start gap-2 text-sm text-slate-300"><input type="checkbox" class="mloss"><span>I divided by the moles of acid or base instead of the moles of WATER formed.</span></label></li>
+          <li><label class="flex items-start gap-2 text-sm text-slate-300"><input type="checkbox" class="mloss"><span>I forgot to divide by 1000 when converting J to kJ.</span></label></li>
+          <li><label class="flex items-start gap-2 text-sm text-slate-300"><input type="checkbox" class="mloss"><span>I did not say which assumption or error makes the measured value less exothermic.</span></label></li>
+          <li><label class="flex items-start gap-2 text-sm text-slate-300"><input type="checkbox" class="mloss"><span>I used the wrong concentration or volume when finding n(H₂O) for a 2:1 acid.</span></label></li>
+        </ul>
+      </div>
+</section>
+
+  <footer class="text-center text-xs text-slate-600 pb-8">HKDSE Chemistry · Topic VIII (a)–(b) · enthalpy change of neutralisation · interactive lab</footer>
+</div>
+
+
+<div id="next-bar" class="max-w-6xl mx-auto px-5 pb-4">
+  <div class="glass rounded-xl px-4 py-2 flex flex-wrap items-center gap-3 text-sm">
+    <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Next step</span>
+    <span id="next-text" class="text-slate-200 font-semibold flex-1">Commit to a prediction in the panel above the calorimeter</span>
+    <button type="button" id="next-go" class="act-btn" onclick="goNext()">Take me there</button>
+  </div>
+</div>
+<script>
+/* =====================================================================
+   STRINGS — flat English-only T.
+===================================================================== */
+const T = {
+  title: 'Enthalpy of Neutralisation',
+  subtitle: 'Topic VIII (a)–(b) — mix acid and base in a polystyrene cup, extrapolate the cooling curve for ΔT, then find ΔH per mole of water',
+  board: 'HKDSE Topic VIII',
+  introH1: 'What this lab is about',
+  introLead: 'Neutralisation is exothermic: mixing HCl(aq) with NaOH(aq) gives H₂O(l) plus a salt, and the solution warms up. In Topic VIII you must (a) define the standard enthalpy change of neutralisation per mole of water (6.4iv), (b) turn measured temperatures into energy with q = mcΔT, (c) reproduce the the practical polystyrene-cup method, and (d) correct the temperature rise by extrapolating the cooling curve and evaluate the assumptions. This sim runs the experiment for any acid/base pair with live ΔT, a hand-drawn temperature–time graph with extrapolation, and a step-by-step calculation scaffold.',
+  concepts: [
+    { t: 'Definition you must memorise (6.4iv)', d: 'Standard enthalpy change of neutralisation, ΔneutH⦵: the enthalpy change when 1 MOLE OF WATER is formed from the reaction of an acid(aq) with an alkali/base(aq) under standard conditions (100 kPa, usually 298 K). Marks are awarded for "1 mole of water" — never write "per mole of acid" or "per mole of salt".' },
+    { t: 'Ionic equation and the benchmark value', d: 'H⁺(aq) + OH⁻(aq) → H₂O(l). Every strong-acid + strong-base pair gives ΔneutH⦵ ≈ −57.3 kJ mol⁻¹ (tables quote −57 to −58; the accepted value is −57.7) because the SAME reaction occurs — Na⁺, K⁺, Cl⁻, NO₃⁻ are spectator ions. Weak electrolytes: CH₃COOH + NaOH = −55.2; HCl + NH₃ ≈ −53.9 (weak base) — LESS exothermic because energy is needed to ionise the weak acid/base.' },
+    { t: 'The calculation chain', d: 'V_total = V_acid + V_base → m = V_total × 1.00 g cm⁻³ (mass of the TOTAL solution, not 25 g!) → q = m × 4.18 × ΔT → n(H₂O) = moles of LIMITING reagent → ΔH = −q/n ÷ 1000 kJ mol⁻¹. Exothermic means the MINUS sign; 3 s.f. For H₂SO₄, n(H₂O) = 2 × n(acid) when base is in excess — ΔH is still per mole of water.' },
+    { t: 'The graph skill examiners reward', d: 'The maximum thermometer reading is NOT ΔT. Plot temperature against time, take the linear cooling branch, extrapolate it back to the time of mixing, and read ΔT_corrected. Heat loss makes the measured ΔH LESS exothermic than −57.3, never more.' },
+    { t: 'How to use this lab', d: 'Work through tabs 1→5. In the Simulation tab, answer Checkpoint 1 BEFORE pressing Run. Try: strong/strong in Ideal then Real insulation, then CH₃COOH + NaOH, then H₂SO₄ + NaOH (spot the n(H₂O) trap). Recalculate every run in the Calculations tab.' },
+    { t: 'Out of scope here', d: 'Ka and enthalpy-of-ionisation calculations, bond-enthalpy cycles, thermometric-titration endpoint graphs (a different skill), and the KHCO₃ Hess-law version of the practical — this lab is only the mixing-calorimetry version that 6.5 allows ("substances mixed in an insulated container").' }
+  ],
+  simCaption: 'The model runs the the practical procedure: 25.0 cm³ of alkali in a polystyrene cup with a lid, thermometer (±0.1 °C) and stirring rod; acid is added in one go and the mixture is stirred. The temperature curve is generated live from ΔT = n(H₂O) × |ΔH_pair| / (m_total × 4.18). Simplified vs reality: mixing is instantly uniform, the cooling tail is perfectly straight, and the heat absorbed by the cup, lid and thermometer is ignored — which is exactly what the assumption chips record and what 6.8 asks you to criticise.',
+  teacherTitle: 'Teacher notes',
+  teacher: [
+    'Placement: HKDSE Topic VIII (b), before the calorimetry practical; it assumes q = mcΔT. Pairs fit Paper 2 Section-B calculation questions.',
+    'Probe this misconception: "per mole of acid". Run the H₂SO₄ + NaOH pair and make students explain why n(H₂O) = 2 × n(H₂SO₄) when the base is in excess, yet ΔH stays −57.3 kJ mol⁻¹ per mole of water.',
+    '5-minute task: predict ΔT for 25.0 cm³ + 25.0 cm³ of 1.00 mol dm⁻³ HCl/NaOH (≈ 6.8 °C), then run Ideal vs Real insulation and write one exam-sentence explaining why the measured value is less exothermic than −57.3.',
+    'Classic examiner complaints: mass taken as 25 g (acid only), maximum reading used as ΔT instead of extrapolated temperature rise, 273 added to ΔT, and a positive ΔH for an exothermic reaction (capped mark). All four traps are live in this sim.',
+    'Extension: HKDSE weak-base case (NH₃ + HCl) — students reproduce ≈ −53.9 kJ mol⁻¹ in the Calculations tab and explain the deficit using "energy is needed to ionise".'
+  ],
+  calcTitle: 'From temperatures to ΔH — full exam working',
+  calcSub: 'Enter the run data (or load it from the sim), then show every step with units, state symbols and 3 significant figures. Sign and units are marked independently — an exothermic ΔH must carry a minus sign.',
+  calcBtn: 'Check working',
+  ppTitle: 'Past-paper practice',
+  ppSub: 'HKDSE-style questions modelled on past-paper patterns. Feedback uses HKDSE marking language (accept / not accept). One targets the classic mass-and-ΔT trap.',
+  questions: [
+    {
+      q: '50.0 cm³ of 1.00 mol dm⁻³ hydrochloric acid are mixed with 50.0 cm³ of 1.00 mol dm⁻³ sodium hydroxide. The temperature rises from 19.5 °C to 26.3 °C. The specific heat capacity of the solution is 4.18 J g⁻¹ K⁻¹ and the density of the solution is 1.00 g cm⁻³. Which calculation gives the energy released, in joules?',
+      o: ['50.0 × 4.18 × 26.3', '100.0 × 4.18 × 6.8', '100.0 × 4.18 × 26.3', '50.0 × 4.18 × 6.8'],
+      a: 1,
+      why: 'B. Mass = TOTAL solution: 50.0 + 50.0 = 100.0 g (density 1.00 g cm⁻³), and ΔT = temperature RISE = 26.3 − 19.5 = 6.8 °C, not the maximum temperature 26.3 °C. Using 50.0 g (the acid alone) or the maximum reading are the two most common errors here. (past-paper pattern)'
+    },
+    {
+      q: 'The standard enthalpy change of neutralisation for HCl(aq) + NaOH(aq) is −57.3 kJ mol⁻¹, but for CH₃COOH(aq) + NaOH(aq) it is −55.2 kJ mol⁻¹. Which explains the difference?',
+      o: ['Ethanoic acid is weak / only partially ionised — energy is required to ionise it fully during the reaction', 'Ethanoic acid is more concentrated than hydrochloric acid', 'Some heat energy is gained from the surroundings', 'The sodium ethanoate salt formed absorbs heat as it dissolves'],
+      a: 0,
+      why: 'A. Ionising the weakly-ionised CH₃COOH is endothermic, so part of the heat released by H⁺(aq) + OH⁻(aq) → H₂O(l) is used up — ΔH is LESS exothermic (−55.2 vs −57.3). Same reasoning gives NH₃ + HCl ≈ −53.9 kJ mol⁻¹ (weak base). The trap answer C reverses reality: heat LOSS makes measured values less exothermic in the lab, but the −55.2 vs −57.3 comparison is an ionisation-energy effect.'
+    },
+    {
+      q: 'Which statement is the correct definition of the standard enthalpy change of neutralisation?',
+      o: ['The enthalpy change per mole of acid neutralised', 'The enthalpy change when 1 mole of water is formed from the reaction of an acid(aq) with an alkali/base(aq) under standard conditions', 'The heat energy released when an acid and a base react completely', 'The enthalpy change when 1 mole of salt is formed from an acid and a base'],
+      a: 1,
+      why: 'B — word for word for the marks: "1 mole of WATER", "acid(aq) + alkali/base(aq)", "standard conditions". "Per mole of acid" fails for H₂SO₄ (it forms 2 mol of water, so ΔH = y/2) and "1 mole of salt" is rejected by mark schemes. '
+    }
+  ],
+  recapTitle: 'Recap checklist',
+  recapGoals: [
+    'I can define ΔH as the heat-energy change at constant pressure and state standard conditions (100 kPa, usually 298 K), recalling that exothermic means negative ΔH.',
+    'I can define the standard enthalpy change of neutralisation per MOLE OF WATER formed from acid(aq) + alkali(aq), and write the ionic equation H⁺(aq) + OH⁻(aq) → H₂O(l). (6.4iv)',
+    'I can calculate energy transferred with q = m × c × ΔT using the TOTAL solution mass and ΔT as a RISE, then ΔH = −q/n in kJ mol⁻¹ with sign and 3 s.f.',
+    'I can describe the the practical polystyrene-cup method (25 cm³ 1.0 mol dm⁻³ HCl + 25 cm³ 1.0 mol dm⁻³ NaOH, lid, stir, one go, max reading) and list its exam-marked assumptions.',
+    'I can extrapolate the cooling curve back to the time of mixing to obtain ΔT_corrected, and evaluate error sources and assumptions in exam wording.'
+  ],
+  mythTitle: 'Common misconceptions',
+  mythLead: 'Tap a card to flip. Check you would not write the myth side in an exam.',
+  mythFlip: 'Tap to flip',
+  mythLabelMyth: 'Myth?',
+  mythLabelFact: 'Fact',
+  myths: [
+    { m: 'The mass for q = mcΔT is 25 g (the volume of the acid).', f: 'm = mass of the TOTAL solution: V_acid + V_base, e.g. 50 g after mixing 25 + 25 cm³, using ρ = 1.00 g cm⁻³. Examiner reports repeat this error (PEF Oct 2020 / Jan 2024 / Oct 2024).' },
+    { m: 'Add 273 to convert the temperature for ΔT.', f: 'ΔT is IDENTICAL in °C and K — a rise of 6.8 °C is a rise of 6.8 K. Never add 273 to a temperature CHANGE (PEF Jan 2024).' },
+    { m: 'Report ΔH_neut = 57 kJ mol⁻¹.', f: 'Neutralisation is exothermic, so ΔH = −57.3 kJ mol⁻¹. A positive sign caps the mark — mark schemes award max 1 with the wrong sign.' },
+    { m: 'Weak acids are more exothermic because they are "stronger chemicals".', f: 'Weak electrolytes make ΔH LESS exothermic: CH₃COOH + NaOH = −55.2 and NH₃ + HCl ≈ −53.9 kJ mol⁻¹, because energy is needed to ionise the weak acid/base.' },
+    { m: 'A measured value MORE exothermic than −57 kJ mol⁻¹ proves good technique.', f: 'Heat loss makes the measured ΔH LESS exothermic (smaller ΔT). A value more exothermic than theory means a calculation error — typically the mass trap.' },
+    { m: 'ΔT = the highest number on the thermometer.', f: 'ΔT = the temperature RISE (T_max − T_initial), best found by extrapolating the cooling branch back to the time of mixing (the classic trap).' }
+  ]
+};
+function t() { return T; }
+document.documentElement.lang = 'en';
+
+/* =====================================================================
+   CHEMISTRY DATA (grounded in the knowledge brief)
+   ΔH values are per MOLE OF WATER formed.
+===================================================================== */
+const ACIDS = {
+  HCl:     { label: 'HCl — hydrochloric acid (strong)',      f: 'HCl',      basicity: 1, strong: true,  ions: ['H₃O⁺', 'Cl⁻'] },
+  HNO3:    { label: 'HNO₃ — nitric acid (strong)',           f: 'HNO₃',     basicity: 1, strong: true,  ions: ['H₃O⁺', 'NO₃⁻'] },
+  CH3COOH: { label: 'CH₃COOH — ethanoic acid (WEAK)',        f: 'CH₃COOH',  basicity: 1, strong: false, ions: ['CH₃COOH', 'H₃O⁺', 'CH₃COO⁻'] },
+  H2SO4:   { label: 'H₂SO₄ — sulfuric acid (strong, DIPROTIC)', f: 'H₂SO₄', basicity: 2, strong: true,  ions: ['H₃O⁺', 'SO₄²⁻'] }
+};
+const BASES = {
+  NaOH: { label: 'NaOH — sodium hydroxide (strong alkali)', f: 'NaOH', acidity: 1, strong: true,  ions: ['Na⁺', 'OH⁻'] },
+  KOH:  { label: 'KOH — potassium hydroxide (strong alkali)',  f: 'KOH',  acidity: 1, strong: true,  ions: ['K⁺', 'OH⁻'] },
+  NH3:  { label: 'NH₃ — aqueous ammonia (WEAK base)', f: 'NH₃',  acidity: 1, strong: false, ions: ['NH₃', 'NH₄⁺', 'OH⁻'] }
+};
+/* ΔH per mole of water formed for each pair (kJ mol⁻¹), from the brief. */
+function pairDH(aKey, bKey) {
+  const sa = ACIDS[aKey].strong, sb = BASES[bKey].strong;
+  if (sa && sb) return -57.3;         /* any strong/strong pair: same ionic equation */
+  if (!sa && sb) return -55.2;        /* CH₃COOH + NaOH (brief); extended to KOH */
+  if (sa && !sb) return -53.9;        /* strong acid + NH₃  (weak base) */
+  return -51.0;                       /* weak + weak: approximate — ionisation cost on BOTH */
+}
+function pairNote(aKey, bKey) {
+  if (!ACIDS[aKey].strong && !BASES[bKey].strong) return 'approx — both electrolytes weak';
+  if (!ACIDS[aKey].strong || !BASES[bKey].strong) return 'approx';
+  return 'benchmark';
+}
+function molWater(aKey, bKey, aC, aV, bC, bV) {
+  const nA = aC * aV / 1000, nB = bC * bV / 1000;
+  const nWatMax = nA * ACIDS[aKey].basicity;  /* moles of H₃O⁺ the acid can supply */
+  const nOH = nB * BASES[bKey].acidity;       /* moles of OH⁻ (or H⁺ sites for NH₃) */
+  return { nA: nA, nB: nB, nLim: Math.min(nWatMax, nOH), acidLimited: nWatMax <= nOH };
+}
+
+const C_WATER = 4.18, RHO = 1.00; /* J g⁻¹ K⁻¹ ; g cm⁻³ — assumption chips */
+
+/* =====================================================================
+   SIM STATE
+===================================================================== */
+let activeTab = 'sim';
+function setTab(name) {
+  activeTab = name;
+  document.querySelectorAll('.tab-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.tab === name);
+  });
+  ['intro', 'sim', 'calc', 'mcq', 'recap'].forEach(p => {
+    const el = document.getElementById('panel-' + p);
+    el.classList.toggle('active', p === name);
+  });
+  scheduleResize();
+  if (name === 'sim') { lastTs = 0; resizeCanvas(); }
+}
+/* =====================================================================
+   v3 dock gate: the run controls stay locked until the prediction is
+   committed (and correct). Added because v2 gated nothing here.
+===================================================================== */
+const enthDock = { answered: false };
+function applyEnthGate(){
+  const locked = !enthDock.answered;
+  const dock = document.getElementById('sim-dock');
+  if (dock){ dock.classList.remove('locked','unlocked'); dock.classList.add(locked ? 'locked' : 'unlocked'); }
+  const st = document.getElementById('dock-state');
+  if (st){ st.className = 'dock-state ' + (locked ? 'st-lock' : 'st-open'); st.textContent = locked ? '\ud83d\udd12 Locked' : '\u2713 Unlocked'; }
+  const ln = document.getElementById('dock-locknote');
+  if (ln) ln.textContent = locked
+    ? 'Locked \u2014 answer the prediction card above and the run controls below will unlock.'
+    : 'Unlocked \u2014 now run the experiment and watch the temperature\u2013time trace.';
+  const nt = document.getElementById('next-text');
+  if (nt) nt.textContent = locked
+    ? 'Answer the prediction card in the panel above the calorimeter'
+    : 'Now press Run experiment and watch the cooling tail';
+  /* the real control IDs in this lab (the run button and the setup sliders) */
+  const ids = ['btn-run-sim','btn-reset-sim','ctrl-acid-c','ctrl-acid-v','ctrl-base-c','ctrl-base-v'];
+  ids.forEach(function(id){ const el = document.getElementById(id); if (el) el.disabled = locked; });
+  const btns = document.querySelectorAll('[data-run]');
+  for (let i = 0; i < btns.length; i++) btns[i].disabled = locked;
+}
+function goNext(){
+  const g = document.getElementById('next-go');
+  const tab = (g && g.dataset.go) ? g.dataset.go : 'sim';
+  setTab(tab);
+  const t = tab === 'sim' ? document.getElementById('sim-dock') : document.getElementById('panel-' + tab);
+  if (t && t.scrollIntoView) t.scrollIntoView({ behavior:'smooth', block:'start' });
+}
+/* =====================================================================
+   v3 teaching-spine wiring: failure cards, hint ladder, completion blanks,
+   self-marking, independent marking scheme.
+===================================================================== */
+function bindEnthTasks(){
+  const fails = {
+    a: { name:'Using the acid volume alone for the mass',
+      txt:'A student writes: m = 25.0 g, because 25.0 cm³ of acid was used.',
+      what:'The heat is released into the WHOLE mixture, not just the acid. Both solutions end up in the cup and both are warmed, so the mass in q = m c dT is the total mass: 25.0 + 25.0 = 50.0 g. Using 25.0 g halves the calculated q, so the reported dH comes out about half the true value - roughly -28 kJ mol⁻¹ instead of -57.',
+      fix:'Always add the volumes first: V_total = V_acid + V_base, then m = V_total x density. With density 1.00 g cm⁻³ this is numerically the same number in grams.',
+      ms:'HKDSE marking: the TOTAL solution mass is required. The acid-only mass is a recorded distractor.' },
+    b: { name:'Using the maximum thermometer reading as dT',
+      txt:'The thermometer reaches 31.3 degrees C, so the student uses dT = 31.3 degrees C.',
+      what:'dT is a temperature RISE, not a temperature. The solutions started at about 25.0 degrees C, so the rise is 31.3 - 25.0 = 6.3 degrees C. Using 31.3 makes the answer about five times too exothermic.',
+      fix:'Record the initial temperature of BOTH solutions before mixing, then take dT = T_final - T_initial. Better still, extrapolate the cooling branch of the graph back to the time of mixing, because the maximum reading underestimates the true rise (heat is already being lost as you read it).',
+      ms:'HKDSE marking: dT defined as the temperature rise, ideally from an extrapolated graph. The raw maximum reading is not the rise.' },
+    c: { name:'Dividing by n(acid) instead of n(water)',
+      txt:'For H₂SO₄ + 2NaOH the student divides q by n(H2SO4).',
+      what:'The enthalpy change of NEUTRALISATION is defined per mole of WATER formed, and the reaction is H⁺(aq) + OH⁻(aq) → H2O(l) whatever the acid. With a diprotic acid one mole of acid makes TWO moles of water, so dividing by n(acid) doubles the answer.',
+      fix:'Find n(H2O) from the equation ratio. For H₂SO₄ + 2NaOH → Na₂SO₄ + 2H₂O, n(H2O) = 2 x n(H2SO4). Then dH = -q / n(H2O).',
+      ms:'HKDSE marking: dividing by the moles of WATER formed is required. Using n(acid) for a diprotic acid loses the answer mark even if q is right.' }
+  };
+  const fb = document.querySelectorAll('[data-fail]');
+  for (let i = 0; i < fb.length; i++){
+    fb[i].onclick = function(){
+      const f = fails[this.getAttribute('data-fail')];
+      if (!f) return;
+      const p = document.getElementById('fail-panel');
+      if (p) p.innerHTML = '<div class="space-y-2">' +
+        '<div class="rounded-xl border border-amber-500/30 bg-amber-950/20 p-3"><p class="text-xs font-bold text-amber-200 uppercase tracking-wide mb-1">' + f.name + '</p><p class="text-sm text-slate-200">' + f.txt + '</p></div>' +
+        '<div class="border-l-[3px] border-rose-500 bg-rose-950/20 rounded-lg p-3"><p class="text-xs font-bold text-rose-200 uppercase tracking-wide mb-1">What is wrong with it</p><p class="text-sm text-slate-200">' + f.what + '</p></div>' +
+        '<div class="rounded-xl border border-emerald-600/30 bg-emerald-950/20 p-3"><p class="text-xs font-bold text-emerald-200 uppercase tracking-wide mb-1">Do it this way instead</p><p class="text-sm text-slate-200">' + f.fix + '</p></div>' +
+        '<p class="text-xs text-teal-300">' + f.ms + '</p></div>';
+    };
+  }
+  const cl = document.getElementById('fail-clear');
+  if (cl) cl.onclick = function(){ const p = document.getElementById('fail-panel'); if (p) p.innerHTML = ''; };
+
+  const hints = {
+    1: 'Compare the two values. Which acid is weaker, and what does "weak" mean about how much of it is ionised in solution?',
+    2: 'If some of the acid has to be ionised before it can react, where does the energy for that ionisation come from?',
+    3: 'Finish with the consequence for the temperature rise, and therefore for the sign and size of the measured dH compared with -57.3.'
+  };
+  const hs = document.querySelectorAll('[data-hint]');
+  for (let k = 0; k < hs.length; k++){
+    hs[k].onclick = function(){ const t = document.getElementById('hint-text'); if (t) t.textContent = hints[this.getAttribute('data-hint')] || ''; };
+  }
+  const sm = document.querySelectorAll('.selfmk');
+  for (let m = 0; m < sm.length; m++) sm[m].onchange = updateEnthSelfMark;
+  updateEnthSelfMark();
+
+  const lc = document.getElementById('lad-check');
+  if (lc) lc.onclick = function(){
+    const g1 = parseFloat((document.getElementById('lad-g1') || {}).value);
+    const g2 = parseFloat((document.getElementById('lad-g2') || {}).value);
+    const g3 = parseFloat((document.getElementById('lad-g3') || {}).value);
+    const g4 = parseFloat((document.getElementById('lad-g4') || {}).value);
+    const ok1 = isFinite(g1) && Math.abs(g1 - 100.0) < 1.5;
+    const ok2 = isFinite(g2) && Math.abs(g2 - 2759) < 60;
+    const ok3 = isFinite(g3) && Math.abs(g3 - 0.0500) < 0.002;
+    const ok4 = isFinite(g4) && Math.abs(g4 + 55.2) < 2.5;
+    let n = 0; [ok1,ok2,ok3,ok4].forEach(function(o){ if (o) n++; });
+    const box = document.getElementById('lad-fb');
+    if (box) box.innerHTML = '<div class="rounded-xl border border-slate-700/60 bg-slate-950/50 p-3 space-y-1 text-xs">' +
+      '<div class="' + (ok1?'text-emerald-300':'text-rose-300') + '">' + (ok1?'\u2713':'\u2717') + ' Blank 1: m = 50.0 + 50.0 = 100.0 g. Both solutions are warmed, so the TOTAL mass is used.</div>' +
+      '<div class="' + (ok2?'text-emerald-300':'text-rose-300') + '">' + (ok2?'\u2713':'\u2717') + ' Blank 2: q = 100.0 x 4.18 x 6.60 = 2759 J.</div>' +
+      '<div class="' + (ok3?'text-emerald-300':'text-rose-300') + '">' + (ok3?'\u2713':'\u2717') + ' Blank 3: n(H2O) = 1.00 x 50.0/1000 = 0.0500 mol (1:1 for HNO₃ + KOH).</div>' +
+      '<div class="' + (ok4?'text-emerald-300':'text-rose-300') + '">' + (ok4?'\u2713':'\u2717') + ' Blank 4: dH = -2759 / 0.0500 / 1000 = -55.2 kJ mol⁻¹. The minus sign is required.</div>' +
+      '<div class="text-slate-400 pt-1">' + (n===4 ? 'All four correct. Notice the answer is slightly less exothermic than -57.3, which is what heat loss does.' : 'The blank you missed is the mark you would lose. In order: total mass, q, n(water), then dH with its sign.') + '</div></div>';
+  };
+  const lh = document.getElementById('lad-hint');
+  if (lh) lh.onclick = function(){ const t = document.getElementById('lad-hinttext'); if (t) t.textContent = 'Work down the chain: add the two volumes for the mass; q = m x c x dT; then n(H2O) from c x V (1:1 here, so 0.0500 mol); finally divide -q by n and by 1000 for kJ. Keep the minus sign.'; };
+
+  const ir = document.getElementById('ind-reveal');
+  if (ir) ir.onclick = function(){
+    const o = document.getElementById('ind-out');
+    if (o) o.innerHTML = '<div class="work"><span class="hl">Marking scheme</span>\n' +
+      '  m = 25.0 + 25.0 = 50.0 g                                             (1)\n' +
+      '  q = 50.0 x 4.18 x 13.5 = 2821.5 J                                     (1)\n' +
+      '  n(H2O) = 2.00 x 25.0/1000 = 0.0500 mol  (HCl + NaOH is 1:1)           (1)\n' +
+      '  dH = -2821.5 / 0.0500 / 1000 = -56.4 kJ mol⁻¹                         (1)\n\n' +
+      '  Reason for the measured value being less exothermic than -57.3: any ONE of\n' +
+      '    \u2022 heat is lost to the surroundings (the cup is not perfectly insulated)\n' +
+      '    \u2022 the cup, lid, thermometer and stirring rod absorb some heat\n' +
+      '    \u2022 the reaction may take a moment, so some heat is lost before the maximum\n' +
+      '    \u2022 the solutions are assumed to have the density and specific heat capacity of water  (1)\n\n' +
+      '<span class="hl">Note on the significance of the answer</span>\n' +
+      '  Doubling the concentration to 2.00 mol dm⁻³ did NOT change the enthalpy change per mole: it doubled both\n' +
+      '  q and n(H2O), so they cancel. This is the point of the experiment - the enthalpy change of neutralisation\n' +
+      '  is a property of the reaction H⁺(aq) + OH⁻(aq) → H2O(l), not of how concentrated the solutions were.\n\n' +
+      '<span class="dim">Notice also that the answer is close to -57.3 even though the temperature rise doubled (13.5 against 6.8). That is the sense check that the working is right.</span></div>';
+  };
+}
+function updateEnthSelfMark(){
+  const bs = document.querySelectorAll('.selfmk');
+  let n = 0;
+  for (let i = 0; i < bs.length; i++) if (bs[i].checked) n++;
+  const el = document.getElementById('selfmarks-total');
+  if (el && bs.length) el.textContent = n + ' / ' + bs.length + ' points ticked. ' +
+    (n === bs.length ? 'That is a full-mark answer.' : 'The unticked points are the marks you did not write.');
+}
+function toggleTeacher() {
+  document.getElementById('teacher-panel').classList.toggle('hidden');
+}
+
+const sim = {
+  mode: 'ideal',            /* 'ideal' | 'real' (insulation model) */
+  phase: 'ready',           /* ready | running | done */
+  t: -1.6,                  /* graph time axis, minutes; mixing at t = 0 */
+  lastTs: 0,
+  T1: 25.0,
+  peak: 0.8,                /* minutes to reach max raw reading */
+  dots: [],
+  res: null                 /* results object filled when a run completes */
+};
+let ctx = null, canvasEl = null, W = 700, H = 340;
+let gctx = null, graphEl = null, GW = 700, GH = 360;
+let lastTs = 0;
+
+function v(id) { const el = document.getElementById(id); return el ? el.value : ''; }
+function num(id, dflt) { const x = parseFloat(v(id)); return isFinite(x) ? x : dflt; }
+function r1(x) { return Math.round(x * 10) / 10; }
+/* thermometer resolution: a 0.1 °C scale can only be read DOWN to the last visible division */
+function fr1(x) { return Math.floor(x * 10 + 1e-9) / 10; }
+function fmt(x, d) { return x.toFixed(d); }
+
+function readSetup() {
+  /* keys must be validated: sandbox stubs return junk like '40' for .value at boot */
+  let aKey = v('ctrl-acid'); if (!ACIDS[aKey]) aKey = 'HCl';
+  let bKey = v('ctrl-base'); if (!BASES[bKey]) bKey = 'NaOH';
+  const aC = Math.min(2, Math.max(0.25, num('ctrl-acid-c', 1)));
+  const aV = Math.min(100, Math.max(10, num('ctrl-acid-v', 25)));
+  const bC = Math.min(2, Math.max(0.25, num('ctrl-base-c', 1)));
+  const bV = Math.min(100, Math.max(10, num('ctrl-base-v', 25)));
+  return { aKey: aKey, bKey: bKey, aC: aC, aV: aV, bC: bC, bV: bV };
+}
+function computeRun(s) {
+  const mTot = (s.aV + s.bV) * RHO;
+  const mol = molWater(s.aKey, s.bKey, s.aC, s.aV, s.bC, s.bV);
+  const dH = pairDH(s.aKey, s.bKey);
+  const qTheo = mol.nLim * Math.abs(dH) * 1000;             /* J */
+  const dTTheor = qTheo / (mTot * C_WATER);
+  let dTRaw, dTCorr;
+  if (sim.mode === 'ideal') { dTRaw = dTTheor; dTCorr = dTTheor; }
+  else { dTRaw = 0.80 * dTTheor; dTCorr = 0.92 * dTTheor; }  /* unrecoverable cup/wall loss */
+  dTRaw = fr1(dTRaw); dTCorr = fr1(dTCorr);
+  const qUse = mTot * C_WATER * dTCorr;                       /* J used by the calculation tab */
+  const dHMeas = mol.nLim > 0 ? -(qUse / mol.nLim) / 1000 : NaN;
+  return {
+    m: mTot, mol: mol, dHpair: dH, dTTheor: dTTheor, modeUsed: sim.mode,
+    dTRaw: dTRaw, dTCorr: dTCorr, q: qUse, dHMeas: dHMeas,
+    Tmax: r1(sim.T1 + dTRaw)
+  };
+}
+/* Thermometer reading at graph time t (minutes), live during a run. */
+function tempAt(t, res) {
+  if (t <= 0) return sim.T1;
+  if (t < sim.peak) {
+    const u = (t - 0) / (sim.peak - 0);
+    return sim.T1 + res.dTRaw * (u * u * (3 - 2 * u)); /* smoothstep rise */
+  }
+  if (res.modeUsed === 'ideal') return sim.T1 + res.dTRaw; /* insulated: flat, no tail to correct */
+  const slope = (res.dTRaw - res.dTCorr) / sim.peak;   /* NEGATIVE; branch back-extraps to T1+dTCorr at t=0 */
+  return Math.max(sim.T1, sim.T1 + res.dTRaw + slope * (t - sim.peak));
+}
+
+/* =====================================================================
+   CANVAS PLUMBING (never paint at boot)
+===================================================================== */
+function sizeOne(el, wrapMinH, ratio) {
+  const wrap = el.closest ? el.closest('.canvas-wrap') : null;
+  const rect = wrap && wrap.getBoundingClientRect ? wrap.getBoundingClientRect() : { width: 0, height: 0 };
+  const w = Math.max(rect.width || 0, el.offsetWidth || 0);
+  if (!w || w < 50) return null;                 /* hidden-tab guard */
+  const h = Math.max(wrapMinH, w * ratio);
+  el.width = Math.round(w); el.height = Math.round(h);
+  return { ctx: el.getContext('2d'), w: Math.round(w), h: Math.round(h) };
+}
+function resizeCanvas() {
+  canvasEl = canvasEl || document.getElementById('sim-canvas');
+  graphEl = graphEl || document.getElementById('graph-canvas');
+  const a = sizeOne(canvasEl, 340, 0.45);
+  if (a) { ctx = a.ctx; W = a.w; H = a.h; }
+  const b = sizeOne(graphEl, 340, 0.42);
+  if (b) { gctx = b.ctx; GW = b.w; GH = b.h; }
+}
+function scheduleResize() { resizeCanvas(); }
+
+/* =====================================================================
+   RENDERERS — static panels (boot-safe: text/innerHTML only)
+===================================================================== */
+function renderIntro() {
+  const s = t();
+  document.getElementById('hdr-title').textContent = s.title;
+  document.getElementById('hdr-sub').textContent = s.subtitle;
+  document.getElementById('intro-h1').textContent = s.introH1;
+  document.getElementById('intro-lead').textContent = s.introLead;
+  document.getElementById('sim-caption').textContent = s.simCaption;
+  document.getElementById('teacher-title').textContent = s.teacherTitle;
+  document.getElementById('teacher-content').innerHTML = s.teacher.map(x => '<p>• ' + x + '</p>').join('');
+  document.getElementById('intro-cards').innerHTML = s.concepts.map(c =>
+    '<div class="glass p-4"><h3 class="font-bold text-teal-300 text-sm mb-1">' + c.t + '</h3><p class="text-sm text-slate-300 leading-relaxed">' + c.d + '</p></div>').join('');
+}
+function renderCalc() {
+  const s = t();
+  document.getElementById('calc-title').textContent = s.calcTitle;
+  document.getElementById('calc-sub').textContent = s.calcSub;
+  document.getElementById('calc-assumptions').innerHTML =
+    '<span class="text-xs text-slate-400 mr-1 self-center font-bold">Assumptions used stepwise:</span>' +
+    '<span class="assume-chip">A1 ρ = 1.00 g cm⁻³</span>' +
+    '<span class="assume-chip">A2 c = 4.18 J g⁻¹ K⁻¹ (of water)</span>' +
+    '<span class="assume-chip">A3 reaction complete</span>' +
+    '<span class="assume-chip">A4 heat loss negligible (cup/lid/thermometer absorb none)</span>';
+  const acidOpts = Object.keys(ACIDS).map(k => '<option value="' + k + '">' + ACIDS[k].label + '</option>').join('');
+  const baseOpts = Object.keys(BASES).map(k => '<option value="' + k + '">' + BASES[k].label + '</option>').join('');
+  document.getElementById('calc-inputs').innerHTML =
+    '<div><label class="text-xs text-slate-400 font-bold">Acid</label><select id="calc-acid" class="lab-in mt-1">' + acidOpts + '</select></div>' +
+    '<div><label class="text-xs text-slate-400 font-bold">Base</label><select id="calc-base" class="lab-in mt-1">' + baseOpts + '</select></div>' +
+    '<div><label class="text-xs text-slate-400 font-bold">ΔT used / °C <span class="text-teal-400">(enter the extrapolated rise)</span></label><input type="number" step="0.1" id="calc-dt" class="lab-in mt-1" value="6.8"></div>' +
+    '<div><label class="text-xs text-slate-400 font-bold">c(acid) / mol dm⁻³</label><input type="number" step="0.05" id="calc-ac" class="lab-in mt-1" value="1.00"></div>' +
+    '<div><label class="text-xs text-slate-400 font-bold">V(acid) / cm³</label><input type="number" step="1" id="calc-av" class="lab-in mt-1" value="25"></div>' +
+    '<div><label class="text-xs text-slate-400 font-bold">c(base) / mol dm⁻³</label><input type="number" step="0.05" id="calc-bc" class="lab-in mt-1" value="1.00"></div>' +
+    '<div><label class="text-xs text-slate-400 font-bold">V(base) / cm³</label><input type="number" step="1" id="calc-bv" class="lab-in mt-1" value="25"></div>' +
+    '<div><label class="text-xs text-slate-400 font-bold">c(H⁺ from H₂SO₄) note</label><p class="text-xs text-slate-500 mt-1 leading-relaxed">For H₂SO₄: n(H₃O⁺) = 2 × n(H₂SO₄). n(H₂O) = min(n(H₃O⁺), n(OH⁻)) — moles of limiting reagent.</p></div>';
+}
+function renderMcq() {
+  const s = t();
+  document.getElementById('pp-title').textContent = s.ppTitle;
+  document.getElementById('pp-sub').textContent = s.ppSub;
+  document.getElementById('pp-questions').innerHTML = s.questions.map((q, qi) =>
+    '<div class="space-y-2"><p class="font-semibold text-slate-100 text-sm leading-relaxed">' + (qi + 1) + '. ' + q.q + '</p>' +
+    q.o.map((o, oi) =>
+      '<button type="button" class="mcq-opt w-full text-left text-sm px-4 py-2 rounded-xl border border-slate-700 bg-slate-900/50" data-q="' + qi + '" data-o="' + oi + '">' + 'ABCD'[oi] + ' · ' + o + '</button>').join('') +
+    '<p class="mcq-why hidden text-xs text-emerald-300/90 bg-emerald-950/40 border border-emerald-800/40 rounded-xl p-3 leading-relaxed"></p></div>').join('');
+  document.querySelectorAll('.mcq-opt').forEach(btn => {
+    btn.onclick = () => {
+      const q = s.questions[+btn.dataset.q];
+      const opts = document.querySelectorAll('.mcq-opt[data-q="' + btn.dataset.q + '"]');
+      opts.forEach(o => o.classList.remove('correct', 'wrong'));
+      btn.classList.add(+btn.dataset.o === q.a ? 'correct' : 'wrong');
+      opts[q.a].classList.add('correct');
+      const why = btn.closest('.space-y-2').querySelector('.mcq-why');
+      why.textContent = q.why;
+      why.classList.remove('hidden');
+    };
+  });
+}
+function renderRecap() {
+  const s = t();
+  document.getElementById('recap-title').textContent = s.recapTitle;
+  document.getElementById('recap-list').innerHTML = s.recapGoals.map((g, i) =>
+    '<li class="flex items-start gap-2 text-sm"><input type="checkbox" class="goal-check mt-1" data-g="' + i + '"><span class="text-slate-300">' + g + '</span></li>').join('');
+  document.querySelectorAll('.goal-check').forEach(c => c.onchange = updateRecapProgress);
+  updateRecapProgress();
+  renderMyths();
+}
+function updateRecapProgress() {
+  const checks = document.querySelectorAll('.goal-check');
+  let n = 0;
+  checks.forEach(c => { if (c.checked) n++; });
+  document.getElementById('recap-progress').textContent = n + ' / ' + checks.length + ' goals confirmed.';
+}
+function renderMyths() {
+  const s = t();
+  document.getElementById('myth-title').textContent = s.mythTitle;
+  document.getElementById('myth-lead').textContent = s.mythLead;
+  document.getElementById('myth-cards').innerHTML = s.myths.map((m, i) =>
+    '<div class="myth-card glass rounded-xl p-4" data-myth="' + i + '">' +
+    '<div class="myth-front"><span class="text-xs font-bold text-rose-400 uppercase">' + s.mythLabelMyth + '</span>' +
+    '<p class="text-sm text-slate-200 mt-2 leading-relaxed">' + m.m + '</p>' +
+    '<p class="text-xs text-slate-500 mt-3">' + s.mythFlip + '</p></div>' +
+    '<div class="myth-back"><span class="text-xs font-bold text-emerald-400 uppercase">' + s.mythLabelFact + '</span>' +
+    '<p class="text-sm text-slate-200 mt-2 leading-relaxed">' + m.f + '</p></div></div>').join('');
+  document.querySelectorAll('.myth-card').forEach(c => c.onclick = () => c.classList.toggle('flipped'));
+}
+
+/* ---- Sim tab chrome: modes, controls, readouts, chips, checkpoint ---- */
+function renderSimChrome() {
+  document.getElementById('sim-modes').innerHTML =
+    '<span class="text-xs text-slate-400 self-center mr-1 font-bold">INSULATION MODEL:</span>' +
+    '<button type="button" id="mode-ideal" class="sim-mode-btn px-3 py-1.5 rounded-lg text-xs font-bold" onclick="setMode(\'ideal\')">Ideal — no heat loss</button>' +
+    '<button type="button" id="mode-real" class="sim-mode-btn px-3 py-1.5 rounded-lg text-xs font-bold" onclick="setMode(\'real\')">Real — heat loss (measured less exothermic)</button>';
+  syncModeButtons();
+  const acidOpts = Object.keys(ACIDS).map(k => '<option value="' + k + '">' + ACIDS[k].label + '</option>').join('');
+  const baseOpts = Object.keys(BASES).map(k => '<option value="' + k + '">' + BASES[k].label + '</option>').join('');
+  document.getElementById('ctrl-panel').innerHTML =
+    '<div class="space-y-4">' +
+      '<div><label class="text-xs text-slate-400 font-bold">ACID (real species: H₃O⁺ + anion)</label>' +
+      '<select id="ctrl-acid" class="lab-in mt-1" onchange="setupChanged()">' + acidOpts + '</select></div>' +
+      '<div><label class="text-xs text-slate-400 font-bold">Concentration / mol dm⁻³ — <span id="lab-acid-c" class="text-teal-300 kbd">1.00</span></label>' +
+      '<input type="range" id="ctrl-acid-c" min="0.25" max="2" step="0.05" value="1" class="w-full mt-2" oninput="setupChanged()"></div>' +
+      '<div><label class="text-xs text-slate-400 font-bold">Volume / cm³ — <span id="lab-acid-v" class="text-teal-300 kbd">25</span></label>' +
+      '<input type="range" id="ctrl-acid-v" min="10" max="100" step="5" value="25" class="w-full mt-2" oninput="setupChanged()"></div>' +
+    '</div>' +
+    '<div class="space-y-4">' +
+      '<div><label class="text-xs text-slate-400 font-bold">BASE / ALKALI</label>' +
+      '<select id="ctrl-base" class="lab-in mt-1" onchange="setupChanged()">' + baseOpts + '</select></div>' +
+      '<div><label class="text-xs text-slate-400 font-bold">Concentration / mol dm⁻³ — <span id="lab-base-c" class="text-teal-300 kbd">1.00</span></label>' +
+      '<input type="range" id="ctrl-base-c" min="0.25" max="2" step="0.05" value="1" class="w-full mt-2" oninput="setupChanged()"></div>' +
+      '<div><label class="text-xs text-slate-400 font-bold">Volume / cm³ — <span id="lab-base-v" class="text-teal-300 kbd">25</span></label>' +
+      '<input type="range" id="ctrl-base-v" min="10" max="100" step="5" value="25" class="w-full mt-2" oninput="setupChanged()"></div>' +
+      '<div class="flex gap-2 pt-1">' +
+      '<button type="button" id="btn-run-sim" class="flex-1 px-4 py-2 rounded-xl text-sm font-bold bg-teal-600 hover:bg-teal-500 text-white" onclick="runExperiment()">▶ Run experiment</button>' +
+      '<button type="button" id="btn-reset-sim" class="px-4 py-2 rounded-xl text-sm font-bold bg-slate-800 hover:bg-slate-700 border border-slate-600 text-slate-200" onclick="resetExperiment()">Reset</button>' +
+      '</div>' +
+    '</div>' +
+    '<div class="md:col-span-2 text-xs text-slate-500" id="live-hints"></div>';
+  document.getElementById('sim-readouts').innerHTML =
+    '<div class="ro-tile"><div class="ro-k">T_initial (both solutions)</div><div class="ro-v" id="ro-t1">25.0 °C</div></div>' +
+    '<div class="ro-tile"><div class="ro-k">T_max raw reading</div><div class="ro-v" id="ro-tmax">—</div></div>' +
+    '<div class="ro-tile"><div class="ro-k">ΔT raw / °C</div><div class="ro-v" id="ro-dtraw">—</div></div>' +
+    '<div class="ro-tile"><div class="ro-k">ΔT extrapolated / °C</div><div class="ro-v" id="ro-dtcorr">—</div></div>' +
+    '<div class="ro-tile"><div class="ro-k">n(H₂O) formed</div><div class="ro-v" id="ro-n">—</div></div>' +
+    '<div class="ro-tile"><div class="ro-k">q = m·c·ΔT / J</div><div class="ro-v" id="ro-q">—</div></div>' +
+    '<div class="ro-tile"><div class="ro-k">ΔH_pair (theoretical)</div><div class="ro-v" id="ro-dhpair">—</div></div>' +
+    '<div class="ro-tile"><div class="ro-k">ΔH measured = −q/n</div><div class="ro-v" id="ro-dhmeas">—</div></div>';
+  renderAssumptions();
+  renderPredict();
+  applyEnthGate();
+  bindEnthTasks();
+  applyEnthGate();
+  document.getElementById('obs-panel').textContent = 'Before you run: pipette the alkali into the dry polystyrene cup, fit the lid, insert the thermometer and stirring rod, and record T_initial. Add the acid in ONE GO (not gradually), stir gently, and watch for the maximum reading — then the cooling tail the extrapolation will correct.';
+  setupChanged();
+}
+function renderAssumptions() {
+  const real = sim.mode === 'real';
+  document.getElementById('assumption-chips').innerHTML =
+    '<span class="text-xs text-slate-400 self-center mr-1 font-bold">ASSUMPTIONS:</span>' +
+    '<span class="assume-chip">ρ = 1.00 g cm⁻³ (solution like water)</span>' +
+    '<span class="assume-chip">c = 4.18 J g⁻¹ K⁻¹ (solution like water)</span>' +
+    '<span class="assume-chip">reaction goes to completion</span>' +
+    (real
+      ? '<span class="assume-chip assume-off">heat loss NOT negligible → measured ΔH less exothermic</span>'
+      : '<span class="assume-chip">negligible heat loss (insulated cup + lid)</span>') +
+    '<span class="assume-chip">cup, lid & thermometer absorb no heat</span>';
+}
+function renderPredict() {
+  document.getElementById('predict-card').innerHTML =
+    '<p class="text-sm text-slate-200 leading-relaxed mb-2">For the the practical standard run — <b>25.0 cm³ of 1.00 mol dm⁻³ HCl(aq) + 25.0 cm³ of 1.00 mol dm⁻³ NaOH(aq)</b>, well insulated — the temperature rise is closest to:</p>' +
+    '<div class="flex flex-wrap gap-2 mb-2">' +
+    ['≈ 3.4 °C', '≈ 6.8 °C', '≈ 13.7 °C', '≈ 68 °C'].map((o, i) =>
+      '<button type="button" class="mcq-opt px-3 py-1.5 rounded-xl text-sm border border-slate-700 bg-slate-900/50" id="pred-' + i + '" onclick="predictChoose(' + i + ')">' + o + '</button>').join('') +
+    '<button type="button" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-800 border border-slate-600 text-slate-300" onclick="predictReveal()">Reveal working</button>' +
+    '</div>' +
+    '<p id="pred-fb" class="hidden text-xs text-emerald-300/90 bg-emerald-950/40 border border-emerald-800/40 rounded-xl p-3 leading-relaxed"></p>';
+}
+function predictChoose(i) {
+  const gotIt = (i === 1);   /* correct option is B: about 6.8 degrees C */
+  for (let k = 0; k < 4; k++) {
+    const b = document.getElementById('pred-' + k);
+    if (!b) continue;
+    b.classList.remove('correct', 'wrong');
+    /* a wrong choice must stay clickable, or one careless click locks the card forever */
+    b.disabled = gotIt;
+    if (k === i) b.classList.add(gotIt ? 'correct' : 'wrong');
+  }
+  if (gotIt) { const b = document.getElementById('pred-1'); if (b) b.classList.add('correct'); }
+  predictReveal();
+  if (gotIt) { enthDock.answered = true; applyEnthGate();
+  bindEnthTasks(); }
+}
+function predictReveal() {
+  const fb = document.getElementById('pred-fb');
+  fb.innerHTML = 'B ≈ 6.8 °C. n(H₂O) = 1.00 × 25.0/1000 = 0.0250 mol; q = 0.0250 × 57 300 = 1433 J; m = 25.0 + 25.0 = 50.0 g (TOTAL, A1); ' +
+    'ΔT = q/(mc) = 1433/(50.0 × 4.18) = 6.85 °C — closest to 6.8 (a 0.1 °C thermometer cannot show the extra 0.05). ' +
+    'Why the others fail: 3.4 °C used m = 100 g; 13.7 °C used m = 25 g (acid alone — the classic trap); 68 °C mixes up J and kJ. After the run, compare with the extrapolated ΔT in the readouts.';
+  fb.classList.remove('hidden');
+}
+function revealWeak() {
+  const cfg = readSetup(), s = cfg.aKey, b = cfg.bKey;
+  const el = document.getElementById('weak-why');
+  const who = !ACIDS[s].strong && !BASES[b].strong ? 'both the acid and the base' : !ACIDS[s].strong ? 'the weak acid ' + ACIDS[s].f : 'the weak base ' + BASES[b].f;
+  el.textContent = 'Mark-scheme answer: ' + who + ' is only partially ionised in solution; energy is needed to ionise it fully (ionisation is endothermic). The heat released by H⁺(aq) + OH⁻(aq) → H₂O(l) is partly used up, so the temperature rise and the measured ΔH are LESS exothermic than −57.3 kJ mol⁻¹ (CH₃COOH: −55.2; NH₃ + HCl: ≈ −53.9, HKDSE weak-base case).';
+  el.classList.remove('hidden');
+}
+
+/* ---- mode + live setup hints ---- */
+function syncModeButtons() {
+  const i = document.getElementById('mode-ideal'), r = document.getElementById('mode-real');
+  if (i) i.classList.toggle('sim-on', sim.mode === 'ideal');
+  if (r) r.classList.toggle('sim-on', sim.mode === 'real');
+}
+function setMode(m) {
+  if (sim.mode === m) return;
+  sim.mode = m;
+  syncModeButtons();
+  renderAssumptions();
+  if (sim.phase !== 'ready') resetExperiment(true);
+  document.getElementById('obs-panel').textContent = m === 'real'
+    ? 'REAL insulation model: some heat escapes while you stir and read, so the raw maximum reading undershoots; extrapolating the cooling branch recovers most (but not all) of it. Expect measured ΔH LESS exothermic than the benchmark.'
+    : 'IDEAL insulation model: no heat escapes at all — the extrapolated rise equals the theoretical ΔT from ΔH_pair. Compare against −57.3 kJ mol⁻¹ (strong/strong).';
+}
+function setupChanged() {
+  const s = readSetup();
+  const lc = document.getElementById('lab-acid-c'), lv = document.getElementById('lab-acid-v');
+  const kc = document.getElementById('lab-base-c'), kv = document.getElementById('lab-base-v');
+  if (lc) lc.textContent = fmt(s.aC, 2);
+  if (lv) lv.textContent = fmt(s.aV, 0);
+  if (kc) kc.textContent = fmt(s.bC, 2);
+  if (kv) kv.textContent = fmt(s.bV, 0);
+  const r = computeRun(s);
+  const hint = document.getElementById('live-hints');
+  if (hint) hint.innerHTML = 'LIVE (units shown, ΔT hidden until you run): m_total = ' + fmt(r.m, 1) + ' g · n(H₃O⁺ from acid) = ' + fmt(r.mol.nA * ACIDS[s.aKey].basicity, 4) +
+    ' mol · n(OH⁻/NH₃ sites) = ' + fmt(r.mol.nB * BASES[s.bKey].acidity, 4) + ' mol · n(H₂O) = ' + fmt(r.mol.nLim, 4) +
+    ' mol (' + (r.mol.acidLimited ? 'acid' : 'base') + ' is the limiting reagent) · benchmark ΔH_pair = ' + fmt(r.dHpair, 1) + ' kJ mol⁻¹ [' + pairNote(s.aKey, s.bKey) + '] · press <b>Run</b> only after Checkpoint 1.';
+}
+
+/* ---- run / reset ---- */
+function setSetupEnabled(on) {
+  ['ctrl-acid', 'ctrl-base', 'ctrl-acid-c', 'ctrl-acid-v', 'ctrl-base-c', 'ctrl-base-v'].forEach(id => {
+    const el = document.getElementById(id); if (el) el.disabled = !on;
+  });
+}
+function runExperiment() {
+  const s = readSetup();
+  sim.res = computeRun(s);
+  sim.res.setup = s;
+  sim.phase = 'running';
+  sim.t = -1.6;
+  lastTs = 0;
+  setSetupEnabled(false);
+  makeDots(s);
+  ['ro-tmax', 'ro-dtraw', 'ro-dtcorr', 'ro-n', 'ro-q', 'ro-dhpair', 'ro-dhmeas'].forEach(id => {
+    const el = document.getElementById(id); if (el) el.textContent = 'recording…';
+  });
+  document.getElementById('obs-panel').textContent = 'Pouring in one go — observe the thermometer: a fast rise to the raw maximum reading, then a slow cooling tail. The dashed extrapolation recovers the heat lost after mixing.';
+  const wk = document.getElementById('weak-card'); if (wk) wk.classList.add('hidden');
+}
+function resetExperiment(keepRes) {
+  sim.phase = 'ready';
+  sim.t = -1.6;
+  sim.dots = [];
+  if (!keepRes) sim.res = null;
+  setSetupEnabled(true);
+  ['ro-tmax', 'ro-dtraw', 'ro-dtcorr', 'ro-n', 'ro-q', 'ro-dhpair', 'ro-dhmeas'].forEach(id => {
+    const el = document.getElementById(id); if (el) el.textContent = '—';
+  });
+  document.getElementById('obs-panel').textContent = 'Run reset. Adjust the pair, volumes and insulation model, answer Checkpoint 1, then press Run again.';
+  const wk = document.getElementById('weak-card'); if (wk) wk.classList.add('hidden');
+  const we = document.getElementById('weak-why'); if (we) we.classList.add('hidden');
+}
+function makeDots(s) {
+  sim.dots = [];
+  const A = ACIDS[s.aKey], B = BASES[s.bKey];
+  function push(label, n, fromBeaker) {
+    for (let i = 0; i < n; i++) sim.dots.push({
+      x: 0.2 + Math.random() * 0.6, y: 0.2 + Math.random() * 0.6,
+      vx: (Math.random() - .5) * 0.02, vy: (Math.random() - .5) * 0.02,
+      label: label, inBeaker: !!fromBeaker
+    });
+  }
+  if (A.strong) { push('H₃O⁺', 4, true); push(A.ions[1], 4, true); }
+  else { push('CH₃COOH', 5, true); push('H₃O⁺', 1, true); push('CH₃COO⁻', 1, true); }
+  if (B.strong) { push(B.ions[0], 4, false); push('OH⁻', 4, false); }
+  else { push('NH₃', 5, false); push('NH₄⁺', 1, false); push('OH⁻', 1, false); }
+}
+function finalizeRun() {
+  const r = sim.res; if (!r) return;
+  const s = r.setup;
+  document.getElementById('ro-tmax').textContent = fmt(r.Tmax, 1) + ' °C';
+  document.getElementById('ro-dtraw').textContent = fmt(r.dTRaw, 1) + ' °C';
+  document.getElementById('ro-dtcorr').textContent = fmt(r.dTCorr, 1) + ' °C';
+  document.getElementById('ro-n').textContent = fmt(r.mol.nLim, 4) + ' mol';
+  document.getElementById('ro-q').textContent = fmt(r.q, 0) + ' J';
+  document.getElementById('ro-dhpair').textContent = fmt(r.dHpair, 1) + ' kJ mol⁻¹ [' + pairNote(s.aKey, s.bKey) + ']';
+  document.getElementById('ro-dhmeas').textContent = fmt(r.dHMeas, 1) + ' kJ mol⁻¹';
+  setSetupEnabled(true);
+  let msg = 'Run complete. Raw maximum reading ' + fmt(r.Tmax, 1) + ' °C (ΔT raw = ' + fmt(r.dTRaw, 1) + ' °C) — using that as ΔT is the Jan 2026 Q3 trap. Extrapolated rise ΔT = ' + fmt(r.dTCorr, 1) + ' °C → q = ' + fmt(r.m, 1) + ' g × 4.18 × ' + fmt(r.dTCorr, 1) + ' = ' + fmt(r.q, 0) + ' J; ΔH = −q/' + fmt(r.mol.nLim, 4) + ' = ' + fmt(r.dHMeas, 1) + ' kJ mol⁻¹. ';
+  if (sim.mode === 'real') msg += 'In Real mode this is ' + fmt(Math.abs(r.dHpair) - Math.abs(r.dHMeas), 1) + ' kJ mol⁻¹ LESS exothermic than the pair benchmark ' + fmt(r.dHpair, 1) + ' kJ mol⁻¹ — heat escaped to the cup and surroundings, which is why measured ΔH can never be MORE exothermic than theory.';
+  else msg += 'In Ideal mode the corrected rise equals the theoretical ΔT (true ' + fmt(r.dTTheor, 2) + ' °C, read at 0.1 °C thermometer precision) — this is what assumption A4 buys.';
+  if (ACIDS[s.aKey].basicity === 2) msg += ' NOTE the H₂SO₄ trap: n(H₂O) = ' + (r.mol.acidLimited ? '2 × n(H₂SO₄)' : 'n(NaOH)-limited') + ', but ΔH is STILL per mole of water — never divide by moles of acid.';
+  document.getElementById('obs-panel').textContent = msg;
+  if (!ACIDS[s.aKey].strong || !BASES[s.bKey].strong) {
+    document.getElementById('weak-q').textContent = 'You used ' + ACIDS[s.aKey].f + '(aq) + ' + BASES[s.bKey].f + '(aq): the rise was ' + fmt(r.dTCorr, 1) + ' °C — smaller than a strong/strong pair at the same concentrations. "Explain, in terms of bonding/energy, why the measured ΔH (' + fmt(r.dHMeas, 1) + ' kJ mol⁻¹) is LESS exothermic than −57.3 kJ mol⁻¹." Think, then reveal.';
+    document.getElementById('weak-card').classList.remove('hidden');
+  }
+  /* prefill calculation tab with this run */
+  loadLastRun();
+}
+
+/* =====================================================================
+   RAF LOOP — step + paint (never runs at boot in sandbox)
+===================================================================== */
+function step() {
+  if (sim.phase !== 'running' || !sim.res) return;
+  const now = (window.performance && performance.now) ? performance.now() : 0;
+  if (!lastTs) lastTs = now;
+  let dt = (now - lastTs) / 1000; lastTs = now;
+  if (!(dt > 0)) dt = 0.016;
+  if (dt > 0.05) dt = 0.05;
+  sim.t += dt * 1.15;                        /* graph minutes */
+  for (const d of sim.dots) {
+    d.x += d.vx * dt * 8; d.y += d.vy * dt * 8;
+    if (d.x < 0.05 || d.x > 0.95) d.vx = -d.vx;
+    if (d.y < 0.05 || d.y > 0.95) d.vy = -d.vy;
+  }
+  if (sim.t >= 6.4) { sim.t = 6.4; sim.phase = 'done'; finalizeRun(); }
+}
+function currentLiveTemp() {
+  if (!sim.res) return sim.T1;
+  return tempAt(Math.min(sim.t, sim.res ? 6.4 : sim.t), sim.res);
+}
+
+function draw() {
+  drawScene();
+  drawGraph();
+}
+function drawScene() {
+  if (!ctx) return;
+  ctx.clearRect(0, 0, W, H);
+  const bg = ctx.createLinearGradient(0, 0, 0, H);
+  bg.addColorStop(0, '#0c1420'); bg.addColorStop(1, '#070b12');
+  ctx.fillStyle = bg; ctx.fillRect(0, 0, W, H);
+  ctx.strokeStyle = 'rgba(255,255,255,0.10)'; ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.moveTo(0, H * 0.88); ctx.lineTo(W * 0.55, H * 0.88); ctx.stroke();
+
+  const res = sim.phase === 'ready' ? null : sim.res;
+  const s = res ? res.setup : readSetup();
+  const A = ACIDS[s.aKey], B = BASES[s.bKey];
+  const cupX = W * 0.30, cupTop = H * 0.40, cupBot = H * 0.88, cupW = W * 0.185;
+  const liqTop = cupTop + (cupBot - cupTop) * 0.30;
+
+  /* ---- acid beaker (pours into cup during the pour window) ---- */
+  const pourProg = sim.phase === 'ready' ? -1 : Math.min(1, Math.max(0, (sim.t + 1.6) / 1.1));
+  const bkX = W * 0.075, bkY = H * 0.14, bkW = W * 0.10, bkH = H * 0.22;
+  ctx.save();
+  ctx.translate(bkX + bkW / 2, bkY + bkH / 2);
+  if (pourProg >= 0) ctx.rotate(-0.9 * Math.min(1, pourProg * 1.4));
+  ctx.strokeStyle = 'rgba(226,232,240,0.75)'; ctx.lineWidth = 2.5;
+  ctx.strokeRect(-bkW / 2, -bkH / 2, bkW, bkH);
+  ctx.fillStyle = 'rgba(248,113,113,0.28)';
+  ctx.fillRect(-bkW / 2 + 2, bkH * 0.05, bkW - 4, bkH * 0.45);
+  ctx.fillStyle = '#fda4af'; ctx.font = '600 11px system-ui';
+  ctx.fillText(A.f + '(aq)', -bkW / 2 + 4, bkH * 0.36);
+  ctx.fillText(fmt(s.aC, 2) + ' mol dm⁻³', -bkW / 2 + 4, bkH * 0.36 + 13);
+  ctx.restore();
+  if (pourProg >= 0 && pourProg < 1) {
+    const spX = bkX + bkW / 2 + Math.cos(0.9) * bkW * 0.55, spY = bkY + bkH * 0.52;
+    ctx.strokeStyle = 'rgba(248,113,113,0.85)'; ctx.lineWidth = 3.5;
+    ctx.beginPath(); ctx.moveTo(spX, spY);
+    ctx.quadraticCurveTo((spX + cupX) / 2, spY + 40, cupX, liqTop + 6);
+    ctx.stroke();
+    ctx.fillStyle = '#fca5a5';
+    for (let i = 0; i < 5; i++) {
+      const u = (0.25 + 0.75 * ((Date.now() / 90 + i * 37) % 100) / 100) % 1;
+      ctx.beginPath(); ctx.arc(spX + (cupX - spX) * u, spY + (liqTop - spY) * u + 18 * Math.sin(u * Math.PI), 2, 0, 7); ctx.fill();
+    }
+  }
+
+  /* ---- polystyrene cup with lid ---- */
+  ctx.fillStyle = '#e7eef5';
+  ctx.beginPath();
+  ctx.moveTo(cupX - cupW / 2, cupTop);
+  ctx.lineTo(cupX + cupW / 2, cupTop);
+  ctx.lineTo(cupX + cupW * 0.40, cupBot);
+  ctx.lineTo(cupX - cupW * 0.40, cupBot);
+  ctx.closePath(); ctx.fill();
+  ctx.fillStyle = '#0c1420';
+  ctx.beginPath();
+  ctx.moveTo(cupX - cupW / 2 + 7, cupTop + 6);
+  ctx.lineTo(cupX + cupW / 2 - 7, cupTop + 6);
+  ctx.lineTo(cupX + cupW * 0.40 - 6, cupBot - 5);
+  ctx.lineTo(cupX - cupW * 0.40 + 6, cupBot - 5);
+  ctx.closePath(); ctx.fill();
+  /* liquid inside cup */
+  const heat = res ? Math.min(1, (currentLiveTemp() - sim.T1) / 12) : 0;
+  const liqCol = 'rgba(' + Math.round(96 + 150 * heat) + ',' + Math.round(165 - 60 * heat) + ',235,0.55)';
+  ctx.fillStyle = sim.phase === 'ready' && (!res) ? 'rgba(96,165,235,0.55)' : liqCol;
+  ctx.beginPath();
+  ctx.moveTo(cupX - cupW * 0.365, liqTop);
+  ctx.lineTo(cupX + cupW * 0.365, liqTop);
+  ctx.lineTo(cupX + cupW * 0.385, cupBot - 6);
+  ctx.lineTo(cupX - cupW * 0.385, cupBot - 6);
+  ctx.closePath(); ctx.fill();
+  /* lid */
+  ctx.fillStyle = '#cbd5e1';
+  ctx.fillRect(cupX - cupW / 2 - 4, cupTop - 8, cupW + 8, 8);
+  /* species dots */
+  const mixed = sim.t > 0.15;
+  ctx.font = '600 9.5px system-ui';
+  for (let i = 0; i < sim.dots.length; i++) {
+    const d = sim.dots[i];
+    const inBeakerZone = d.inBeaker && !mixed;
+    const cx2 = inBeakerZone ? bkX + bkW * (0.2 + d.x * 0.6) : cupX + (d.x - 0.5) * cupW * 0.62;
+    const cy2 = inBeakerZone ? bkY + bkH * (0.15 + d.y * 0.28) : liqTop + 8 + d.y * (cupBot - liqTop - 22);
+    ctx.fillStyle = 'rgba(255,255,255,0.75)';
+    ctx.beginPath(); ctx.arc(cx2, cy2, 2.2, 0, 7); ctx.fill();
+    if (i % 4 === 0) { ctx.fillStyle = '#e2e8f0'; ctx.fillText(d.label, cx2 + 4, cy2 + 3); }
+  }
+  /* stirring rod — gentle swirl while running */
+  const wob = sim.phase === 'running' ? Math.sin(Date.now() / 110) * 5 : 0;
+  ctx.strokeStyle = 'rgba(148,163,184,0.9)'; ctx.lineWidth = 3;
+  ctx.beginPath(); ctx.moveTo(cupX - cupW * 0.22 + wob, cupTop - 34); ctx.lineTo(cupX - cupW * 0.18 + wob * 0.4, cupBot - 14); ctx.stroke();
+  /* thermometer */
+  const tx = cupX + cupW * 0.26;
+  ctx.fillStyle = 'rgba(226,232,240,0.25)';
+  ctx.fillRect(tx - 4, H * 0.12, 8, cupBot - 8 - H * 0.12);
+  ctx.strokeStyle = 'rgba(226,232,240,0.8)'; ctx.lineWidth = 1.5;
+  ctx.strokeRect(tx - 4, H * 0.12, 8, cupBot - 8 - H * 0.12);
+  ctx.beginPath(); ctx.arc(tx, cupBot - 10, 6, 0, 7); ctx.fillStyle = '#ef4444'; ctx.fill();
+  const tNow = res ? currentLiveTemp() : sim.T1;
+  const colH = Math.max(6, ((tNow - 20) / 15) * (cupBot - 16 - H * 0.12));
+  ctx.fillStyle = '#ef4444'; ctx.fillRect(tx - 2, cupBot - 12 - colH, 4, colH);
+  ctx.fillStyle = '#fca5a5'; ctx.font = '700 12px system-ui';
+  ctx.fillText(fmt(tNow, 1) + ' °C', tx + 9, H * 0.16);
+  /* labels */
+  ctx.fillStyle = '#94a3b8'; ctx.font = '600 10.5px system-ui';
+  ctx.fillText('polystyrene cup + lid (assumption A4)', cupX - cupW * 0.55, cupBot + 16);
+  ctx.fillText(B.f + '(aq) in cup — T₁ = ' + fmt(sim.T1, 1) + ' °C', cupX - cupW * 0.55, cupTop - 14);
+  ctx.fillText('thermometer ±0.1 °C', tx - 26, H * 0.10);
+  ctx.fillText('stirring rod', cupX - cupW * 0.60, cupTop + 4);
+  /* mode chip */
+  ctx.fillStyle = sim.mode === 'real' ? 'rgba(248,113,113,0.85)' : 'rgba(61,214,198,0.85)';
+  ctx.font = '700 10.5px system-ui';
+  ctx.fillText(sim.mode === 'real' ? 'INSULATION: REAL — heat escapes to cup + air' : 'INSULATION: IDEAL — no heat escapes (assumption A4)', 10, 16);
+
+  /* ---- energy-level diagram once the run is done ---- */
+  if (sim.phase === 'done' && res) {
+    const px = W * 0.58, pw = W * 0.38, py = H * 0.16, ph = H * 0.64;
+    ctx.fillStyle = 'rgba(2,6,12,0.55)';
+    ctx.strokeStyle = 'rgba(255,255,255,0.12)';
+    ctx.beginPath(); ctx.rect(px, py, pw, ph); ctx.fill(); ctx.stroke();
+    ctx.fillStyle = '#e2e8f0'; ctx.font = '700 11px system-ui';
+    ctx.fillText('Energy-level diagram (exothermic)', px + 10, py + 18);
+    const y1 = py + ph * 0.34, y2 = py + ph * 0.72, x1 = px + 26, x2 = px + pw - 26;
+    ctx.strokeStyle = '#7dd3fc'; ctx.lineWidth = 2.5;
+    ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y1); ctx.stroke();
+    ctx.strokeStyle = '#f9a8d4';
+    ctx.beginPath(); ctx.moveTo(x1, y2); ctx.lineTo(x2, y2); ctx.stroke();
+    ctx.fillStyle = '#7dd3fc'; ctx.font = '600 10px system-ui';
+    ctx.fillText('reactants: ' + A.f + '(aq) + ' + B.f + '(aq)', x1, y1 - 6);
+    ctx.fillStyle = '#f9a8d4';
+    ctx.fillText('products: salt(aq) + H₂O(l)', x1, y2 + 13);
+    ctx.strokeStyle = '#3dd6c6'; ctx.fillStyle = '#3dd6c6'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo((x1 + x2) / 2, y1 + 4); ctx.lineTo((x1 + x2) / 2, y2 - 4); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo((x1 + x2) / 2, y2 - 2); ctx.lineTo((x1 + x2) / 2 - 4, y2 - 10); ctx.lineTo((x1 + x2) / 2 + 4, y2 - 10); ctx.closePath(); ctx.fill();
+    ctx.font = '700 11px system-ui';
+    ctx.fillText('ΔH = ' + fmt(res.dHpair, 1) + ' kJ mol⁻¹', (x1 + x2) / 2 + 8, (y1 + y2) / 2);
+    ctx.fillStyle = '#64748b'; ctx.font = '600 9.5px system-ui';
+    ctx.fillText('(per mole of H₂O formed)', (x1 + x2) / 2 + 8, (y1 + y2) / 2 + 13);
+  }
+}
+function drawGraph() {
+  if (!gctx) return;
+  const res = sim.phase === 'ready' ? null : sim.res;
+  gctx.clearRect(0, 0, GW, GH);
+  gctx.fillStyle = '#070b12'; gctx.fillRect(0, 0, GW, GH);
+  const mL = 58, mR = 16, mT = 34, mB = 44;
+  const gW = GW - mL - mR, gH = GH - mT - mB;
+  const tMin = -2.2, tMax = 7.2;
+  const dTRaw = res ? res.dTRaw : 0, dTCorr = res ? res.dTCorr : 0;
+  const yLo = sim.T1 - 1.0, yHi = sim.T1 + Math.max(dTRaw, 6) + 2.2;
+  function X(t) { return mL + (t - tMin) / (tMax - tMin) * gW; }
+  function Y(T) { return mT + (yHi - T) / (yHi - yLo) * gH; }
+  /* grid + ticks */
+  gctx.strokeStyle = 'rgba(255,255,255,0.07)'; gctx.lineWidth = 1;
+  gctx.fillStyle = '#64748b'; gctx.font = '600 9.5px system-ui';
+  for (let t = -2; t <= 7; t++) { gctx.beginPath(); gctx.moveTo(X(t), mT); gctx.lineTo(X(t), mT + gH); gctx.stroke(); gctx.fillText(String(t), X(t) - 3, mT + gH + 14); }
+  const yStep = (yHi - yLo) > 14 ? 2 : 1;
+  for (let T = Math.ceil(yLo); T <= yHi; T += yStep) { gctx.beginPath(); gctx.moveTo(mL, Y(T)); gctx.lineTo(mL + gW, Y(T)); gctx.stroke(); gctx.fillText(T + '°', mL - 30, Y(T) + 3); }
+  /* axes */
+  gctx.strokeStyle = 'rgba(255,255,255,0.35)'; gctx.lineWidth = 1.5;
+  gctx.beginPath(); gctx.moveTo(mL, mT); gctx.lineTo(mL, mT + gH); gctx.lineTo(mL + gW, mT + gH); gctx.stroke();
+  gctx.fillStyle = '#94a3b8'; gctx.font = '700 11px system-ui';
+  gctx.fillText('time / min', mL + gW - 60, GH - 8);
+  gctx.fillText('temperature / °C', 8, 14);
+  /* mixing line */
+  gctx.strokeStyle = 'rgba(148,163,184,0.35)'; gctx.setLineDash([3, 4]);
+  gctx.beginPath(); gctx.moveTo(X(0), mT); gctx.lineTo(X(0), mT + gH); gctx.stroke(); gctx.setLineDash([]);
+  gctx.fillStyle = '#94a3b8'; gctx.font = '600 9.5px system-ui';
+  gctx.fillText('mixing (t = 0)', X(0) + 4, mT + 10);
+  /* solid data trace */
+  if (res) {
+    gctx.strokeStyle = '#3dd6c6'; gctx.lineWidth = 2.4; gctx.beginPath();
+    const tEnd = sim.phase === 'done' ? 6.4 : sim.t;
+    let started = false;
+    for (let t = -1.5; t <= Math.min(tEnd, 6.4); t += 0.05) {
+      const T = tempAt(t, res);
+      if (!started) { gctx.moveTo(X(t), Y(T)); started = true; } else gctx.lineTo(X(t), Y(T));
+    }
+    gctx.stroke();
+    gctx.fillStyle = '#3dd6c6';
+    gctx.beginPath(); gctx.arc(X(Math.min(tEnd, 6.4)), Y(tempAt(Math.min(tEnd, 6.4), res)), 3, 0, 7); gctx.fill();
+    /* extrapolation: dashed back-extension of cooling branch (or flat tail in Ideal) */
+    if (sim.t > 2.2) {
+      const tCool0 = sim.peak, tCool1 = Math.min(sim.t, 5.6);
+      const T0v = tempAt(tCool0, res), T1v = tempAt(tCool1, res);
+      const slope = tCool1 > tCool0 ? (T1v - T0v) / (tCool1 - tCool0) : 0;
+      gctx.strokeStyle = 'rgba(251,191,36,0.9)'; gctx.lineWidth = 1.6; gctx.setLineDash([5, 4]);
+      /* dashed extension of the cooling branch back to t = 0 — it lands exactly on T1 + ΔT_corr */
+      gctx.beginPath(); gctx.moveTo(X(tCool1), Y(T1v)); gctx.lineTo(X(0), Y(sim.T1 + res.dTCorr)); gctx.stroke();
+      gctx.beginPath(); gctx.moveTo(X(-1.5), Y(sim.T1)); gctx.lineTo(X(0.15), Y(sim.T1)); gctx.stroke();
+      gctx.setLineDash([]);
+      const tcorr = sim.T1 + res.dTCorr;
+      gctx.fillStyle = '#fbbf24';
+      gctx.beginPath(); gctx.arc(X(0), Y(tcorr), 4.5, 0, 7); gctx.fill();
+      gctx.strokeStyle = '#fbbf24'; gctx.lineWidth = 1.4;
+      gctx.beginPath(); gctx.arc(X(0), Y(tcorr), 8, 0, 7); gctx.stroke();
+      gctx.font = '700 10px system-ui';
+      gctx.fillText('corrected max T (extrapolation)', X(0) + 12, Y(tcorr) - 4);
+      /* ΔT arrows */
+      function arrow(x0, y0, y1, col, label) {
+        gctx.strokeStyle = col; gctx.fillStyle = col; gctx.lineWidth = 1.6;
+        gctx.beginPath(); gctx.moveTo(x0, y0); gctx.lineTo(x0, y1); gctx.stroke();
+        const dir = y1 > y0 ? -1 : 1;
+        gctx.beginPath(); gctx.moveTo(x0, y1); gctx.lineTo(x0 - 3, y1 + 6 * dir); gctx.lineTo(x0 + 3, y1 + 6 * dir); gctx.closePath(); gctx.fill();
+        gctx.font = '700 10px system-ui'; gctx.fillText(label, x0 + 5, (y0 + y1) / 2);
+      }
+      arrow(X(-1.15), Y(sim.T1), Y(sim.T1 + res.dTCorr), '#34d399', 'ΔT extrapolated = ' + fmt(res.dTCorr, 1));
+      arrow(X(sim.peak + 0.35), Y(sim.T1), Y(sim.T1 + res.dTRaw), '#f87171', 'ΔT raw = ' + fmt(res.dTRaw, 1) + ' (max reading ' + fmt(res.Tmax, 1) + ' °C)');
+      if (res.modeUsed === 'real') {
+        gctx.fillStyle = '#f87171'; gctx.font = '600 9.5px system-ui';
+        gctx.fillText('heat lost after mixing — recovered by extrapolation', X(0) + 14, Y(sim.T1 + res.dTRaw) + 14);
+      }
+    }
+  } else {
+    gctx.fillStyle = '#334155'; gctx.font = '600 12px system-ui';
+    gctx.fillText('Press ▶ Run experiment — the temperature–time trace (with the cooling tail used for the 6.8 extrapolation) draws itself here.', mL + 12, mT + gH / 2);
+    gctx.strokeStyle = 'rgba(61,214,198,0.5)'; gctx.setLineDash([4, 5]);
+    gctx.beginPath(); gctx.moveTo(mL, Y(sim.T1)); gctx.lineTo(mL + gW, Y(sim.T1)); gctx.stroke();
+    gctx.setLineDash([]);
+    gctx.fillStyle = '#64748b'; gctx.fillText('T₁ = 25.0 °C baseline appears here', mL + 12, Y(sim.T1) - 6);
+  }
+  /* legend */
+  gctx.font = '600 9.5px system-ui';
+  gctx.fillStyle = '#3dd6c6'; gctx.fillText('— thermometer reading (solid)', GW - 250, 14);
+  gctx.fillStyle = '#fbbf24'; gctx.fillText(' - - best-fit extrapolation → ΔT_corrected', GW - 250, 26);
+}
+function loop() {
+  requestAnimationFrame(loop);
+  if (activeTab !== 'sim') return;
+  step();
+  draw();
+}
+requestAnimationFrame(loop);
+
+/* =====================================================================
+   CALCULATION TAB — real q = mcΔT → ΔH = −q/n scaffold
+===================================================================== */
+let calcExpected = NaN;
+function loadLastRun() {
+  if (!sim.res) return;
+  const r = sim.res, s = r.setup;
+  const set = (id, val) => { const el = document.getElementById(id); if (el) el.value = val; };
+  set('calc-acid', s.aKey); set('calc-base', s.bKey);
+  set('calc-ac', fmt(s.aC, 2)); set('calc-av', fmt(s.aV, 0));
+  set('calc-bc', fmt(s.bC, 2)); set('calc-bv', fmt(s.bV, 0));
+  set('calc-dt', fmt(r.dTCorr, 1));
+}
+function runCalc() {
+  const w = document.getElementById('calc-working');
+  w.classList.remove('hidden');
+  let aKey = v('calc-acid'); if (!ACIDS[aKey]) aKey = 'HCl';
+  let bKey = v('calc-base'); if (!BASES[bKey]) bKey = 'NaOH';
+  const aC = parseFloat(v('calc-ac')), aV = parseFloat(v('calc-av'));
+  const bC = parseFloat(v('calc-bc')), bV = parseFloat(v('calc-bv'));
+  const dT = parseFloat(v('calc-dt'));
+  const A = ACIDS[aKey], B = BASES[bKey];
+  if (!(aC > 0) || !(aV > 0) || !(bC > 0) || !(bV > 0) || !(dT > 0)) {
+    w.textContent = 'Enter positive values for both concentrations, both volumes, and a POSITIVE ΔT (the temperature RISE).';
+    calcExpected = NaN; return;
+  }
+  const nA = aC * aV / 1000, nB = bC * bV / 1000;
+  const nH = nA * A.basicity, nOH = nB * B.acidity;
+  const nLim = Math.min(nH, nOH), acidLim = nH <= nOH;
+  const m = (aV + bV) * RHO;
+  const q = m * C_WATER * dT;
+  const dH = -(q / nLim) / 1000;
+  calcExpected = dH;
+  const L = [];
+  L.push('STEP 1 — moles of each reagent   [n = c × V/1000]');
+  L.push('  n(' + A.f + ') = ' + fmt(aC, 2) + ' × ' + fmt(aV, 0) + '/1000 = ' + nA.toFixed(4) + ' mol');
+  L.push('  n(' + B.f + ') = ' + fmt(bC, 2) + ' × ' + fmt(bV, 0) + '/1000 = ' + nB.toFixed(4) + ' mol');
+  if (A.basicity === 2) L.push('  H₂SO₄ is DIPROTIC: n(H₃O⁺) = 2 × ' + nA.toFixed(4) + ' = ' + nH.toFixed(4) + ' mol');
+  L.push('');
+  L.push('STEP 2 — moles of WATER formed = limiting reagent   [H⁺(aq) + OH⁻(aq) → H₂O(l)' + (B.strong ? '' : ', NH₃(aq) + H₃O⁺(aq) → NH₄⁺(aq) + H₂O(l)') + ']');
+  L.push('  n(H₂O) = min(' + nH.toFixed(4) + ', ' + nOH.toFixed(4) + ') = ' + nLim.toFixed(4) + ' mol   [' + (acidLim ? 'acid' : 'base') + ' limits]');
+  if (A.basicity === 2) L.push('  ⚠ The trap: n(H₂O) = 2 × n(' + A.f + ') here — yet ΔH_neut is STILL per mole of water.');
+  L.push('');
+  L.push('STEP 3 — mass of the TOTAL solution   [assumption A1: ρ = 1.00 g cm⁻³]');
+  L.push('  m = (' + fmt(aV, 0) + ' + ' + fmt(bV, 0) + ') cm³ × 1.00 g cm⁻³ = ' + fmt(m, 1) + ' g   ← not ' + fmt(aV, 0) + ' g!');
+  L.push('');
+  L.push('STEP 4 — energy transferred   [assumption A2: c = 4.18 J g⁻¹ K⁻¹ · 6.5]');
+  L.push('  q = m × c × ΔT = ' + fmt(m, 1) + ' × 4.18 × ' + fmt(dT, 1) + ' = ' + fmt(q, 0) + ' J');
+  L.push('  (ΔT is the temperature RISE — identical in °C and K, do NOT add 273)');
+  L.push('');
+  L.push('STEP 5 — enthalpy change per mole of water   [assumptions A3+A4]');
+  L.push('  ΔH = −q / n = −' + fmt(q, 0) + ' J ÷ ' + nLim.toFixed(4) + ' mol = ' + (dH * 1000).toFixed(0) + ' J mol⁻¹');
+  L.push('  ΔH = −q / n / 1000 = ' + fmt(dH, 1) + ' kJ mol⁻¹   (3 s.f., MINUS sign: exothermic)');
+  L.push('');
+  L.push('CHECK — benchmark for this pair: ΔH_pair = ' + fmt(pairDH(aKey, bKey), 1) + ' kJ mol⁻¹ [' + pairNote(aKey, bKey) + '].' +
+    (dH > pairDH(aKey, bKey) ? ' Your value is LESS exothermic — in Real mode heat loss causes that; in Ideal mode it is only the 0.1 °C reading. A measured ΔH can never be MORE exothermic than theory.' : ' Your value reaches the benchmark.'));
+  w.textContent = L.join('\n');
+  document.getElementById('calc-feedback').textContent = '';
+}
+function checkStudentAnswer() {
+  const fb = document.getElementById('calc-feedback');
+  const el = document.getElementById('calc-answer');
+  const val = parseFloat(el.value);
+  if (!isFinite(calcExpected)) { fb.textContent = 'Press "Check working" first so the data are computed.'; fb.style.color = '#fbbf24'; return; }
+  if (isNaN(val)) { fb.textContent = 'Enter a number in kJ mol⁻¹.'; fb.style.color = '#fbbf24'; return; }
+  if (Math.abs(val - calcExpected) <= 1.5) {
+    fb.textContent = 'Correct — ' + fmt(calcExpected, 1) + ' kJ mol⁻¹ (±1.5 accepted). Sign, units and 3 s.f. all present. Full marks.';
+    fb.style.color = '#34d399'; el.style.borderColor = '#34d399';
+  } else {
+    let hint = '';
+    if (Math.abs(Math.abs(val) - Math.abs(calcExpected)) <= 1.5) hint = ' Your magnitude is right but the SIGN is wrong — neutralisation is exothermic, so ΔH must be negative.';
+    else if (Math.abs(val) > Math.abs(calcExpected) * 1.5) hint = ' Too exothermic — did you use only the acid volume for the mass, or the raw reading with a kJ/J slip?';
+    else hint = ' Not enough energy — check m = TOTAL volume, ΔT = RISE (not max reading), and q ÷ n(H₂O), not n(acid).';
+    fb.textContent = 'Try again — the working above evaluates to ' + fmt(calcExpected, 1) + ' kJ mol⁻¹.' + hint;
+    fb.style.color = '#fb923c'; el.style.borderColor = '#fb923c';
+  }
+}
+
+/* =====================================================================
+   BOOT — define-and-render only (no timers, no painting)
+===================================================================== */
+renderIntro();
+renderCalc();
+renderMcq();
+renderRecap();
+renderSimChrome();
+resizeCanvas();
+</script>
+<script id="lab-runtime">(function () {
+'use strict';
+var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function relayout() {
+if (typeof window.scheduleResize === 'function') window.scheduleResize();
+else if (typeof window.resizeCanvas === 'function') window.resizeCanvas();
+}
+var pending = 0;
+function onRequestRelayout() {
+if (pending) return;
+pending = requestAnimationFrame(function () { pending = 0; relayout(); });
+}
+if (window.ResizeObserver) {
+var ro = new ResizeObserver(onRequestRelayout);
+document.querySelectorAll('.canvas-wrap').forEach(function (el) { ro.observe(el); });
+}
+window.addEventListener('orientationchange', onRequestRelayout);
+window.addEventListener('resize', onRequestRelayout);
+var bar = document.getElementById('next-bar');
+if (bar) {
+var setBarPad = function () {
+var h = Math.round(bar.offsetHeight);
+if (h > 0) document.body.style.setProperty('--next-bar-h', h + 'px');
+};
+setBarPad();
+if (window.ResizeObserver) new ResizeObserver(setBarPad).observe(bar);
+window.addEventListener('load', setBarPad);
+}
+var rail = document.getElementById('main-tabs');
+if (rail) {
+rail.setAttribute('role', 'tablist');
+var pills = Array.prototype.slice.call(rail.querySelectorAll('.tab-btn'));
+pills.forEach(function (btn, i) {
+var panel = document.getElementById('panel-' + btn.dataset.tab);
+btn.setAttribute('role', 'tab');
+btn.setAttribute('aria-selected', btn.classList.contains('active') ? 'true' : 'false');
+if (panel) {
+panel.setAttribute('role', 'tabpanel');
+btn.setAttribute('aria-controls', panel.id);
+panel.setAttribute('aria-labelledby', btn.id);
+}
+btn.addEventListener('keydown', function (e) {
+var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+if (!d) return;
+e.preventDefault();
+var next = pills[(i + d + pills.length) % pills.length];
+next.focus();
+if (typeof window.setTab === 'function') window.setTab(next.dataset.tab);
+});
+});
+rail.addEventListener('click', function () {
+setTimeout(function () {
+pills.forEach(function (b) { b.setAttribute('aria-selected', b.classList.contains('active') ? 'true' : 'false'); });
+var on = rail.querySelector('.tab-btn.active');
+if (on) on.scrollIntoView({ block: 'nearest', inline: 'center', behavior: reduce ? 'auto' : 'smooth' });
+}, 0);
+});
+}
+var dock = document.getElementById('sim-dock');
+if (dock && window.MutationObserver && !reduce) {
+new MutationObserver(function (m) {
+m.forEach(function (change) {
+var el = change.target;
+if (el.classList.contains('unlocked') && change.oldValue && /(^|\s)locked(\s|$)/.test(change.oldValue)) {
+el.classList.add('just-unlocked');
+setTimeout(function () { el.classList.remove('just-unlocked'); }, 750);
+}
+});
+}).observe(dock, { attributes: true, attributeFilter: ['class'], attributeOldValue: true });
+}
+document.addEventListener('click', function (e) {
+if (!e.target || !e.target.closest) return;
+if (e.target.closest('input, label, button, a, select')) return;
+var li = e.target.closest('li');
+if (!li) return;
+var box = li.querySelector('input[type="checkbox"], input[type="radio"]');
+if (!box || box.disabled) return;
+box.checked = box.type === 'checkbox' ? !box.checked : true;
+box.dispatchEvent(new Event('change', { bubbles: true }));
+box.dispatchEvent(new Event('input', { bubbles: true }));
+});
+if (window.IntersectionObserver && !reduce) {
+var io = new IntersectionObserver(function (entries) {
+entries.forEach(function (en) {
+if (!en.isIntersecting) return;
+en.target.classList.add('shown');
+io.unobserve(en.target);
+});
+}, { rootMargin: '0px 0px -6% 0px', threshold: 0.01 });
+document.querySelectorAll('.tab-panel > *').forEach(function (el, i) {
+el.classList.add('reveal');
+el.style.setProperty('--i', String(i));
+io.observe(el);
+});
+setTimeout(function () {
+document.querySelectorAll('.reveal:not(.shown)').forEach(function (el) { el.classList.add('shown'); });
+}, 2500);
+}
+})();</script>
+</body>
+</html>

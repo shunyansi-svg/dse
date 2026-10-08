@@ -1,0 +1,179 @@
+<main class="max-w-6xl mx-auto px-5 py-10 relative z-10">
+
+  <header class="glass rounded-2xl p-8 mb-8">
+    <div class="flex flex-wrap items-center gap-2 mb-3">
+      <span class="chip">HKDSE Chemistry</span><span class="chip chip-dim">19 interactive labs</span><span class="chip chip-dim">Topics I–XV · Papers 1A, 1B and 2</span><span class="chip chip-dim">works offline</span>
+    </div>
+    <h1 class="text-3xl md:text-4xl font-extrabold text-white leading-tight">Chemistry Interactive Labs</h1>
+    <p class="text-slate-400 mt-3 max-w-3xl leading-relaxed text-base">
+      Every lab opens on a simulation you have to <b class="text-slate-200">predict before you can run</b>: the controls stay
+      locked until you commit, a wrong answer is diagnosed by its cause rather than marked wrong, and the worked support
+      fades from example to completion to independent practice. Each one follows
+      <b class="text-slate-200">Introduction → Simulation → Calculations → Exam practice → Recap &amp; misconceptions</b>,
+      in HKEAA mark-scheme wording, with tap-to-flip misconception cards and collapsible teacher notes.
+      The topic code in each header is the HKDSE unit it serves. Open any file directly in a browser: no network, no build, no account.
+    </p>
+    <p class="text-xs text-slate-500 mt-4">One design system across all 19 labs: <span class="kbd">_build/src/theme.css</span> and <span class="kbd">tailwind.config.js</span>, rebuilt with <span class="kbd">node _build/src/build.cjs</span> and checked on phone, iPad and laptop viewports by <span class="kbd">node _build/src/qa.cjs</span>.</p>
+  </header>
+
+  <section class="mb-8">
+    <h2 class="section-kicker mb-3">Start here · the toolkit every other lab assumes</h2>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <a href="amount_of_substance.html" class="lab-card glass rounded-2xl p-5 block"><span class="chip">Topic III (c) + IX (c)</span><h3 class="font-bold text-white mt-2">Amount of Substance &mdash; The Mole Toolkit</h3><p class="text-xs text-slate-400 mt-1">The lab this collection was missing. <b>Choose the relationship before you calculate</b> on a mole road map, then a ladder that fades: worked &rarr; completion &rarr; independent. Wrong answers are diagnosed (1000 conversion, mol ratio, &deg;C vs K), with self-marked mark schemes, unit drills and an honest &ldquo;where I lose marks&rdquo; list.</p><p class="text-xs text-slate-600 mt-2">NEW &middot; moles, concentration, gas volumes, formulae, yield &amp; atom economy</p></a>
+      <div class="glass rounded-2xl p-5 border-dashed opacity-80"><span class="chip chip-dim">study order</span><h3 class="font-bold text-white mt-2">How to use the collection</h3><p class="text-sm text-slate-400 mt-1">Do the mole toolkit first, then Ionic &amp; Covalent Bonding, then Giant Covalent Structures. Every later lab assumes the calculation habits and the structure–property reasoning those three build.</p></div>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <h2 class="section-kicker mb-3">Structure and bonding · Topic II</h2>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <a href="ionic_covalent_bonding.html" class="lab-card glass rounded-2xl p-5 block"><span class="chip">Topic II (e)–(g), (i)</span><h3 class="font-bold text-white mt-2">Ionic &amp; Covalent Bonding</h3><p class="text-xs text-slate-400 mt-1">Dot-and-cross with Bohr 2,8,8 shells — electron transfer (NaCl, MgO…) vs shared pairs (Cl₂…NH₃), dative NH₄⁺, structure→properties.</p></a>
+      <a href="giant_covalent_structures.html" class="lab-card glass rounded-2xl p-5 block"><span class="chip">Topic II (h)–(i)</span><h3 class="font-bold text-white mt-2">Giant Covalent Structures &mdash; Diamond, Graphite, Graphene</h3><p class="text-xs text-slate-400 mt-1">Same element, same bond, opposite materials. <b>Build the bonds one at a time</b> and watch the fourth electron become delocalised; heat / conduct / cut probes; three failure states to diagnose; CO<sub>2</sub> vs SiO<sub>2</sub> full mark scheme. Covers graphene plus the applications requires.</p><p class="text-xs text-slate-600 mt-2">NEW &middot; includes graphene, silicon dioxide contrast and the named uses</p></a>
+      <a href="graphite_structure.html" class="lab-card glass rounded-2xl p-5 block"><span class="chip">Topic II (h)</span><h3 class="font-bold text-white mt-2">Graphite — Layers &amp; Electrons</h3><p class="text-xs text-slate-400 mt-1">Stacked hexagonal sheets, delocalised-electron drift (never ions), shear-slide lubrication mode, 522 kJ bond-energy maths.</p></a>
+      <a href="metallic_conductivity.html" class="lab-card glass rounded-2xl p-5 block"><span class="chip">Topic II (c)–(d)</span><h3 class="font-bold text-white mt-2">Why Metals Conduct (Ionic Solids Don't)</h3><p class="text-xs text-slate-400 mt-1">Electron-sea drift across Na→Cu, vs solid/molten NaCl carrier swap — the carrier-identification question examiners keep returning to, as a sim. <b>Upgraded:</b> the switch stays locked until you commit to a prediction, a carrier ledger names the moving particle at every boundary, and the calculation support now fades (worked &rarr; completion &rarr; independent).</p></a>
+      <a href="metal_melting_points.html" class="lab-card glass rounded-2xl p-5 block"><span class="chip">Topic II (c)–(d)</span><h3 class="font-bold text-white mt-2">Melting Points of Metals</h3><p class="text-xs text-slate-400 mt-1">Heat a real lattice till it flows; Period-3 race. <b>Upgraded:</b> the ramp auto-pauses at every real m.p. so the Mg 650 / Al 660 near-tie can actually be seen, atomic-vs-ionic radius bars kill the 227 pm trap, and the bond-index figure is now honest. Two-blank student task before the full working, plus the Jan-26 MS chain builder.</p></a>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <h2 class="section-kicker mb-3">Metals, redox and electrolysis · Topics III, VII, XII</h2>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <a href="metal_reactions.html" class="lab-card glass rounded-2xl p-5 block"><span class="chip">Topic III (b) + II (b)</span><h3 class="font-bold text-white mt-2">Group 1 &amp; 2 Metal Reactions</h3><p class="text-xs text-slate-400 mt-1">Float/melt/ignite physics from real ρ &amp; m.p. data; NaOH never Na₂O; steam gives the oxide; solubility-trend traps.</p></a>
+      <a href="metal_displacement.html" class="lab-card glass rounded-2xl p-5 block"><span class="chip">Topic III (b) + VII (c)</span><h3 class="font-bold text-white mt-2">Displacement as Redox</h3><p class="text-xs text-slate-400 mt-1">Half-equations + oxidation numbers (no "reactivity number"), halogen two-layer colours incl. I₂ violet in upper cyclohexane, LCM ionic balancer.</p></a>
+      <a href="electrolysis_of_water.html" class="lab-card glass rounded-2xl p-5 block"><span class="chip">Topic VII (e)</span><h3 class="font-bold text-white mt-2">Electrolysis of Water</h3><p class="text-xs text-slate-400 mt-1">6-step guided rig: electrolyte-choice quiz, 2:1 tubes with ratio readout, pop/relight tests unlock the half-equations. e⁻ in wires ≠ ions in solution.</p></a>
+      <a href="electrolysis_cells.html" class="lab-card glass rounded-2xl p-5 block"><span class="chip">Topic VII (e)</span><h3 class="font-bold text-white mt-2">Electrolytic Cells</h3><p class="text-xs text-slate-400 mt-1">Predict both products before power flows; ion-inventory habit, molten vs aqueous, live Cl₂↔O₂ concentration switch, molten Al₂O₃.</p></a>
+      <a href="fuel_cell.html" class="lab-card glass rounded-2xl p-5 block"><span class="chip">Topic VII (d)</span><h3 class="font-bold text-white mt-2">Hydrogen–Oxygen Fuel Cell</h3><p class="text-xs text-slate-400 mt-1">Dual PEM/AEM particle engine with 2e⁻/H₂ ledger, live +1.23 V both media, primary-cell run-down contrast, methanol chip.</p></a>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <h2 class="section-kicker mb-3">Acids, bases, salts and analysis · Topics I, IV, XV</h2>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <a href="acid_base_ionisation.html" class="lab-card glass rounded-2xl p-5 block"><span class="chip">Topic IV (b)–(c)</span><h3 class="font-bold text-white mt-2">Ionisation of Acids &amp; Bases</h3><p class="text-xs text-slate-400 mt-1">Strong → vs weak ⇌ at true α (0.1 M CH₃COOH ≈ 1.3 %, pH 2.89), dilution shifts the equilibrium live, conductivity bulb, Ba(OH)₂ ×2 trap.</p></a>
+      <a href="acid_base_titration.html" class="lab-card glass rounded-2xl p-5 block"><span class="chip">Topic IV (e)–(f) + XV (c)</span><h3 class="font-bold text-white mt-2">Acid–Base Titration</h3><p class="text-xs text-slate-400 mt-1">Burette to 0.05 cm³, concordant-set mean (not mean-of-all), wet-apparatus reasoning, H₂SO₄ 1:2 stoichiometry, standard-solution prep.</p></a>
+      <a href="salt_from_seawater.html" class="lab-card glass rounded-2xl p-5 block"><span class="chip">Topic I (b)–(c) + IV (d)</span><h3 class="font-bold text-white mt-2">Obtaining Salt from Seawater</h3><p class="text-xs text-slate-400 mt-1">Filter→evaporate with real solubility physics, the boil-to-dryness failure mode (spatter scored in loss account), cooling-crystallisation contrast, ppm &amp; constant-mass calcs.</p></a>
+      <a href="flame_test.html" class="lab-card glass rounded-2xl p-5 block"><span class="chip">Topic XV (a)</span><h3 class="font-bold text-white mt-2">Flame Tests</h3><p class="text-xs text-slate-400 mt-1">The full mark-scheme procedure as a state machine — wire choice, conc-HCl, non-luminous mask, cobalt glass over Na bleed; Unknowns mode rejects charge-less answers.</p></a>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <h2 class="section-kicker mb-3">Energy and rate · Topics VIII, IX, XIII</h2>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <a href="neutralisation_enthalpy.html" class="lab-card glass rounded-2xl p-5 block"><span class="chip">Topic VIII (a)–(b)</span><h3 class="font-bold text-white mt-2">Enthalpy of Neutralisation</h3><p class="text-xs text-slate-400 mt-1">Cooling-curve extrapolation, weak-acid −55.2 &amp; diprotic traps, Ideal vs Real insulation — measured can never beat theory.</p></a>
+      <a href="iodine_clock.html" class="lab-card glass rounded-2xl p-5 block"><span class="chip">Topic IX (a)–(b) + XIII (b)–(c)</span><h3 class="font-bold text-white mt-2">Iodine Clock Reaction</h3><p class="text-xs text-slate-400 mt-1">Real kinetics engine (k=0.0500, Ea=57.5 kJ mol⁻¹, 25.0 s default flash), constant-50 cm³ recipe, hand-drawn 1/t and Arrhenius plots, half-life card.</p></a>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <h2 class="section-kicker mb-3">Carbon compounds · Topics V, XI</h2>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <a href="crude_oil_fractional_distillation.html" class="lab-card glass rounded-2xl p-5 block"><span class="chip">Topic V (a) + (c)</span><h3 class="font-bold text-white mt-2">Crude Oil &amp; Fractional Distillation</h3><p class="text-xs text-slate-400 mt-1">Particles condense where column T falls to their b.p. (no random heights); Cracking mode splits C₁₀H₂₂ over Al₂O₃ — separation vs chemical change.</p></a>
+      <a href="enantiomers.html" class="lab-card glass rounded-2xl p-5 block"><span class="chip">Topic XI (b)</span><h3 class="font-bold text-white mt-2">Enantiomers in 3D</h3><p class="text-xs text-slate-400 mt-1">Drag-rotate real mirror pairs, superimpose slider scores n/4 groups aligned (chiral never hits 4/4), racemate &amp; HCN-addition panel.</p></a>
+    </div>
+  </section>
+
+  <footer class="glass rounded-2xl p-6 text-xs text-slate-400 leading-relaxed">
+    <b class="text-slate-200">How to study with a lab:</b> (1) read the Introduction and answer the hook question before you are shown anything &mdash; the commitment is what makes the rest stick; (2) in the Simulation, lock in every prediction first: the good labs keep the controls disabled until you do; (3) break the deliberate failure states and read what actually changed; (4) in Calculations, do the worked example, then the completion problem, then the independent one &mdash; the fading support is the point; (5) mark your own written answer against the revealed mark scheme and be honest; (6) in Recap, tick every goal you can do without notes and every mark loss you have actually made. Teacher-notes button (top right of each lab) lists the misconception to watch and a 5-minute task.
+  </footer>
+</main>
+<script id="lab-runtime">(function () {
+'use strict';
+var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function relayout() {
+if (typeof window.scheduleResize === 'function') window.scheduleResize();
+else if (typeof window.resizeCanvas === 'function') window.resizeCanvas();
+}
+var pending = 0;
+function onRequestRelayout() {
+if (pending) return;
+pending = requestAnimationFrame(function () { pending = 0; relayout(); });
+}
+if (window.ResizeObserver) {
+var ro = new ResizeObserver(onRequestRelayout);
+document.querySelectorAll('.canvas-wrap').forEach(function (el) { ro.observe(el); });
+}
+window.addEventListener('orientationchange', onRequestRelayout);
+window.addEventListener('resize', onRequestRelayout);
+var bar = document.getElementById('next-bar');
+if (bar) {
+var setBarPad = function () {
+var h = Math.round(bar.offsetHeight);
+if (h > 0) document.body.style.setProperty('--next-bar-h', h + 'px');
+};
+setBarPad();
+if (window.ResizeObserver) new ResizeObserver(setBarPad).observe(bar);
+window.addEventListener('load', setBarPad);
+}
+var rail = document.getElementById('main-tabs');
+if (rail) {
+rail.setAttribute('role', 'tablist');
+var pills = Array.prototype.slice.call(rail.querySelectorAll('.tab-btn'));
+pills.forEach(function (btn, i) {
+var panel = document.getElementById('panel-' + btn.dataset.tab);
+btn.setAttribute('role', 'tab');
+btn.setAttribute('aria-selected', btn.classList.contains('active') ? 'true' : 'false');
+if (panel) {
+panel.setAttribute('role', 'tabpanel');
+btn.setAttribute('aria-controls', panel.id);
+panel.setAttribute('aria-labelledby', btn.id);
+}
+btn.addEventListener('keydown', function (e) {
+var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+if (!d) return;
+e.preventDefault();
+var next = pills[(i + d + pills.length) % pills.length];
+next.focus();
+if (typeof window.setTab === 'function') window.setTab(next.dataset.tab);
+});
+});
+rail.addEventListener('click', function () {
+setTimeout(function () {
+pills.forEach(function (b) { b.setAttribute('aria-selected', b.classList.contains('active') ? 'true' : 'false'); });
+var on = rail.querySelector('.tab-btn.active');
+if (on) on.scrollIntoView({ block: 'nearest', inline: 'center', behavior: reduce ? 'auto' : 'smooth' });
+}, 0);
+});
+}
+var dock = document.getElementById('sim-dock');
+if (dock && window.MutationObserver && !reduce) {
+new MutationObserver(function (m) {
+m.forEach(function (change) {
+var el = change.target;
+if (el.classList.contains('unlocked') && change.oldValue && /(^|\s)locked(\s|$)/.test(change.oldValue)) {
+el.classList.add('just-unlocked');
+setTimeout(function () { el.classList.remove('just-unlocked'); }, 750);
+}
+});
+}).observe(dock, { attributes: true, attributeFilter: ['class'], attributeOldValue: true });
+}
+document.addEventListener('click', function (e) {
+if (!e.target || !e.target.closest) return;
+if (e.target.closest('input, label, button, a, select')) return;
+var li = e.target.closest('li');
+if (!li) return;
+var box = li.querySelector('input[type="checkbox"], input[type="radio"]');
+if (!box || box.disabled) return;
+box.checked = box.type === 'checkbox' ? !box.checked : true;
+box.dispatchEvent(new Event('change', { bubbles: true }));
+box.dispatchEvent(new Event('input', { bubbles: true }));
+});
+if (window.IntersectionObserver && !reduce) {
+var io = new IntersectionObserver(function (entries) {
+entries.forEach(function (en) {
+if (!en.isIntersecting) return;
+en.target.classList.add('shown');
+io.unobserve(en.target);
+});
+}, { rootMargin: '0px 0px -6% 0px', threshold: 0.01 });
+document.querySelectorAll('.tab-panel > *').forEach(function (el, i) {
+el.classList.add('reveal');
+el.style.setProperty('--i', String(i));
+io.observe(el);
+});
+setTimeout(function () {
+document.querySelectorAll('.reveal:not(.shown)').forEach(function (el) { el.classList.add('shown'); });
+}, 2500);
+}
+})();</script>
+</body>
+</html>

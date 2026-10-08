@@ -1,0 +1,1392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Electrolytic Cells — Molten vs Aqueous | HKDSE Chemistry Topic VII (e)</title>
+<meta name="theme-color" content="#000000">
+<style>
+  input[type=range]{accent-color:#3dd6c6;}
+.chip-rose{border-color:rgba(251,113,133,.5);color:#fda4af;background:rgba(251,113,133,.09);}
+.chip-btn{padding:.35rem .7rem;border-radius:.7rem;font-size:.75rem;font-weight:600;border:1px solid rgba(148,163,184,.35);background:rgba(15,23,42,.6);color:#cbd5e1;transition:all .15s;}
+.chip-btn:hover{border-color:rgba(61,214,198,.7);color:#d1faf5;}
+.chip-btn.active{background:rgba(61,214,198,.16);color:#d1faf5;border-color:rgba(61,214,198,.65);}
+select.ial,input.ial{background:rgba(2,6,14,.7);border:1px solid rgba(148,163,184,.35);border-radius:.6rem;padding:.45rem .6rem;font-size:.85rem;color:#e2e8f0;width:100%;outline:none;}
+select.ial:focus,input.ial:focus{border-color:rgba(61,214,198,.7);}
+.tile{background:rgba(2,6,14,.55);border:1px solid rgba(148,163,184,.18);border-radius:.8rem;padding:.6rem .7rem;}
+.tile h4{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#64748b;margin-bottom:.25rem;}
+</style>
+<style id="lab-theme">/* Shared design system for the chemistry lab fleet. Source: _build/src/theme.css + tailwind.config.js. Edit the source, then run node _build/src/build.cjs. Do not hand-edit this block. */*,:after,:before{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(10,132,255,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(10,132,255,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }*,:after,:before{box-sizing:border-box;border:0 solid #d1d1d6}:after,:before{--tw-content:""}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;-o-tab-size:4;tab-size:4;font-family:-apple-system,BlinkMacSystemFont,SF Pro Text,SF Pro Display,Segoe UI Variable Text,Segoe UI,system-ui,Helvetica Neue,sans-serif;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:SF Mono,ui-monospace,Cascadia Mono,Segoe UI Mono,Consolas,monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0}fieldset,legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::-moz-placeholder,textarea::-moz-placeholder{opacity:1;color:#aeaeb2}input::placeholder,textarea::placeholder{opacity:1;color:#aeaeb2}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}.visible{visibility:visible}.invisible{visibility:hidden}.collapse{visibility:collapse}.static{position:static}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.sticky{position:sticky}.inset-0{inset:0}.z-10{z-index:10}.z-\[110\]{z-index:110}.col-span-1{grid-column:span 1/span 1}.col-span-2{grid-column:span 2/span 2}.mx-auto{margin-left:auto;margin-right:auto}.my-3{margin-top:.75rem;margin-bottom:.75rem}.mb-1{margin-bottom:.25rem}.mb-1\.5{margin-bottom:.375rem}.mb-10{margin-bottom:2.5rem}.mb-2{margin-bottom:.5rem}.mb-3{margin-bottom:.75rem}.mb-4{margin-bottom:1rem}.mb-5{margin-bottom:1.25rem}.mb-8{margin-bottom:2rem}.ml-1{margin-left:.25rem}.ml-auto{margin-left:auto}.mr-1{margin-right:.25rem}.mr-2{margin-right:.5rem}.ms-0{margin-inline-start:0}.ms-1{margin-inline-start:.25rem}.ms-2{margin-inline-start:.5rem}.mt-0{margin-top:0}.mt-0\.5{margin-top:.125rem}.mt-1{margin-top:.25rem}.mt-1\.5{margin-top:.375rem}.mt-2{margin-top:.5rem}.mt-3{margin-top:.75rem}.mt-4{margin-top:1rem}.mt-5{margin-top:1.25rem}.mt-6{margin-top:1.5rem}.block{display:block}.inline{display:inline}.flex{display:flex}.table{display:table}.grid{display:grid}.contents{display:contents}.hidden{display:none}.h-2{height:.5rem}.h-2\.5{height:.625rem}.h-3{height:.75rem}.h-auto{height:auto}.min-h-\[1\.25rem\]{min-height:1.25rem}.min-h-\[1rem\]{min-height:1rem}.min-h-\[24px\]{min-height:24px}.min-h-\[72px\]{min-height:72px}.w-14{width:3.5rem}.w-16{width:4rem}.w-20{width:5rem}.w-24{width:6rem}.w-28{width:7rem}.w-36{width:9rem}.w-6{width:1.5rem}.w-full{width:100%}.min-w-\[160px\]{min-width:160px}.max-w-3xl{max-width:48rem}.max-w-6xl{max-width:72rem}.max-w-sm{max-width:24rem}.max-w-xs{max-width:20rem}.flex-1{flex:1 1 0%}.shrink{flex-shrink:1}.grow{flex-grow:1}.border-collapse{border-collapse:collapse}.transform{transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.resize{resize:both}.list-inside{list-style-position:inside}.list-disc{list-style-type:disc}.grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}.grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid-cols-\[3rem_1fr\]{grid-template-columns:3rem 1fr}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-start{align-items:flex-start}.items-end{align-items:flex-end}.items-center{align-items:center}.items-baseline{align-items:baseline}.items-stretch{align-items:stretch}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-1{gap:.25rem}.gap-2{gap:.5rem}.gap-3{gap:.75rem}.gap-4{gap:1rem}.gap-5{gap:1.25rem}.gap-x-4{-moz-column-gap:1rem;column-gap:1rem}.gap-x-8{-moz-column-gap:2rem;column-gap:2rem}.gap-y-1{row-gap:.25rem}.gap-y-4{row-gap:1rem}.space-y-1>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.25rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.25rem*var(--tw-space-y-reverse))}.space-y-1\.5>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.375rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.375rem*var(--tw-space-y-reverse))}.space-y-2>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.5rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.5rem*var(--tw-space-y-reverse))}.space-y-3>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.75rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.75rem*var(--tw-space-y-reverse))}.space-y-4>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem*var(--tw-space-y-reverse))}.space-y-5>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.25rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.25rem*var(--tw-space-y-reverse))}.space-y-6>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.5rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.5rem*var(--tw-space-y-reverse))}.self-end{align-self:flex-end}.self-center{align-self:center}.overflow-hidden{overflow:hidden}.overflow-x-auto{overflow-x:auto}.whitespace-nowrap{white-space:nowrap}.whitespace-pre-line{white-space:pre-line}.whitespace-pre-wrap{white-space:pre-wrap}.text-wrap{text-wrap:wrap}.rounded{border-radius:.625rem}.rounded-2xl{border-radius:1.125rem}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:.75rem}.rounded-xl{border-radius:1rem}.border{border-width:1px}.border-l-\[3px\]{border-left-width:3px}.border-t{border-top-width:1px}.border-dashed{border-style:dashed}.\!border-indigo-500{--tw-border-opacity:1!important;border-color:rgb(10 132 255/var(--tw-border-opacity,1))!important}.border-amber-500{--tw-border-opacity:1;border-color:rgb(255 159 10/var(--tw-border-opacity,1))}.border-amber-500\/25{border-color:rgba(255,159,10,.25)}.border-amber-500\/30{border-color:rgba(255,159,10,.3)}.border-amber-500\/40{border-color:rgba(255,159,10,.4)}.border-amber-800{--tw-border-opacity:1;border-color:rgb(95 56 0/var(--tw-border-opacity,1))}.border-amber-800\/40{border-color:rgba(95,56,0,.4)}.border-emerald-500{--tw-border-opacity:1;border-color:rgb(48 209 88/var(--tw-border-opacity,1))}.border-emerald-500\/40{border-color:rgba(48,209,88,.4)}.border-emerald-600{--tw-border-opacity:1;border-color:rgb(36 168 63/var(--tw-border-opacity,1))}.border-emerald-600\/25{border-color:rgba(36,168,63,.25)}.border-emerald-600\/30{border-color:rgba(36,168,63,.3)}.border-emerald-600\/40{border-color:rgba(36,168,63,.4)}.border-emerald-700{--tw-border-opacity:1;border-color:rgb(27 122 46/var(--tw-border-opacity,1))}.border-emerald-700\/40{border-color:rgba(27,122,46,.4)}.border-emerald-800{--tw-border-opacity:1;border-color:rgb(18 84 31/var(--tw-border-opacity,1))}.border-emerald-800\/40{border-color:rgba(18,84,31,.4)}.border-indigo-500{--tw-border-opacity:1;border-color:rgb(10 132 255/var(--tw-border-opacity,1))}.border-indigo-500\/25{border-color:rgba(10,132,255,.25)}.border-indigo-500\/30{border-color:rgba(10,132,255,.3)}.border-orange-600{--tw-border-opacity:1;border-color:rgb(204 122 0/var(--tw-border-opacity,1))}.border-rose-500{--tw-border-opacity:1;border-color:rgb(255 69 63/var(--tw-border-opacity,1))}.border-rose-500\/25{border-color:rgba(255,69,63,.25)}.border-rose-500\/40{border-color:rgba(255,69,63,.4)}.border-rose-600{--tw-border-opacity:1;border-color:rgb(217 44 38/var(--tw-border-opacity,1))}.border-rose-600\/30{border-color:rgba(217,44,38,.3)}.border-rose-800{--tw-border-opacity:1;border-color:rgb(107 21 18/var(--tw-border-opacity,1))}.border-rose-800\/40{border-color:rgba(107,21,18,.4)}.border-sky-500{--tw-border-opacity:1;border-color:rgb(100 210 255/var(--tw-border-opacity,1))}.border-sky-500\/40{border-color:rgba(100,210,255,.4)}.border-sky-800{--tw-border-opacity:1;border-color:rgb(0 77 104/var(--tw-border-opacity,1))}.border-sky-800\/40{border-color:rgba(0,77,104,.4)}.border-slate-500{--tw-border-opacity:1;border-color:rgb(174 174 178/var(--tw-border-opacity,1))}.border-slate-600{--tw-border-opacity:1;border-color:rgb(161 161 166/var(--tw-border-opacity,1))}.border-slate-700{--tw-border-opacity:1;border-color:rgb(152 152 157/var(--tw-border-opacity,1))}.border-slate-700\/50{border-color:hsla(240,2%,61%,.5)}.border-slate-700\/60{border-color:hsla(240,2%,61%,.6)}.border-slate-700\/70{border-color:hsla(240,2%,61%,.7)}.border-slate-800{--tw-border-opacity:1;border-color:rgb(84 84 88/var(--tw-border-opacity,1))}.border-teal-500{--tw-border-opacity:1;border-color:rgb(100 210 255/var(--tw-border-opacity,1))}.border-teal-500\/25{border-color:rgba(100,210,255,.25)}.border-teal-500\/30{border-color:rgba(100,210,255,.3)}.border-teal-500\/40{border-color:rgba(100,210,255,.4)}.border-teal-500\/50{border-color:rgba(100,210,255,.5)}.border-teal-700{--tw-border-opacity:1;border-color:rgb(0 117 158/var(--tw-border-opacity,1))}.border-teal-700\/40{border-color:rgba(0,117,158,.4)}.border-teal-800{--tw-border-opacity:1;border-color:rgb(0 77 104/var(--tw-border-opacity,1))}.border-teal-800\/40{border-color:rgba(0,77,104,.4)}.border-white{--tw-border-opacity:1;border-color:rgb(245 245 247/var(--tw-border-opacity,1))}.border-white\/10{border-color:rgba(245,245,247,.1)}.\!bg-indigo-600{--tw-bg-opacity:1!important;background-color:rgb(0 96 223/var(--tw-bg-opacity,1))!important}.\!bg-teal-950{--tw-bg-opacity:1!important;background-color:rgb(0 23 31/var(--tw-bg-opacity,1))!important}.\!bg-teal-950\/40{background-color:rgba(0,23,31,.4)!important}.bg-amber-500{--tw-bg-opacity:1;background-color:rgb(255 159 10/var(--tw-bg-opacity,1))}.bg-amber-950{--tw-bg-opacity:1;background-color:rgb(29 17 0/var(--tw-bg-opacity,1))}.bg-amber-950\/10{background-color:rgba(29,17,0,.1)}.bg-amber-950\/20{background-color:rgba(29,17,0,.2)}.bg-amber-950\/30{background-color:rgba(29,17,0,.3)}.bg-emerald-600{--tw-bg-opacity:1;background-color:rgb(36 168 63/var(--tw-bg-opacity,1))}.bg-emerald-700{--tw-bg-opacity:1;background-color:rgb(27 122 46/var(--tw-bg-opacity,1))}.bg-emerald-950{--tw-bg-opacity:1;background-color:rgb(4 24 10/var(--tw-bg-opacity,1))}.bg-emerald-950\/10{background-color:rgba(4,24,10,.1)}.bg-emerald-950\/20{background-color:rgba(4,24,10,.2)}.bg-emerald-950\/35{background-color:rgba(4,24,10,.35)}.bg-emerald-950\/40{background-color:rgba(4,24,10,.4)}.bg-indigo-600{--tw-bg-opacity:1;background-color:rgb(0 96 223/var(--tw-bg-opacity,1))}.bg-indigo-950{--tw-bg-opacity:1;background-color:rgb(0 18 51/var(--tw-bg-opacity,1))}.bg-indigo-950\/10{background-color:rgba(0,18,51,.1)}.bg-indigo-950\/20{background-color:rgba(0,18,51,.2)}.bg-orange-700{--tw-bg-opacity:1;background-color:rgb(149 88 0/var(--tw-bg-opacity,1))}.bg-rose-950{--tw-bg-opacity:1;background-color:rgb(33 6 5/var(--tw-bg-opacity,1))}.bg-rose-950\/10{background-color:rgba(33,6,5,.1)}.bg-rose-950\/20{background-color:rgba(33,6,5,.2)}.bg-rose-950\/30{background-color:rgba(33,6,5,.3)}.bg-rose-950\/35{background-color:rgba(33,6,5,.35)}.bg-sky-950{--tw-bg-opacity:1;background-color:rgb(0 23 31/var(--tw-bg-opacity,1))}.bg-sky-950\/20{background-color:rgba(0,23,31,.2)}.bg-sky-950\/35{background-color:rgba(0,23,31,.35)}.bg-slate-700{--tw-bg-opacity:1;background-color:rgb(152 152 157/var(--tw-bg-opacity,1))}.bg-slate-800{--tw-bg-opacity:1;background-color:rgb(84 84 88/var(--tw-bg-opacity,1))}.bg-slate-800\/80{background-color:rgba(84,84,88,.8)}.bg-slate-900{--tw-bg-opacity:1;background-color:rgb(58 58 60/var(--tw-bg-opacity,1))}.bg-slate-900\/50{background-color:rgba(58,58,60,.5)}.bg-slate-900\/60{background-color:rgba(58,58,60,.6)}.bg-slate-950{--tw-bg-opacity:1;background-color:rgb(11 11 13/var(--tw-bg-opacity,1))}.bg-slate-950\/40{background-color:rgba(11,11,13,.4)}.bg-slate-950\/50{background-color:rgba(11,11,13,.5)}.bg-slate-950\/60{background-color:rgba(11,11,13,.6)}.bg-slate-950\/70{background-color:rgba(11,11,13,.7)}.bg-slate-950\/80{background-color:rgba(11,11,13,.8)}.bg-teal-600{--tw-bg-opacity:1;background-color:rgb(0 164 221/var(--tw-bg-opacity,1))}.bg-teal-700{--tw-bg-opacity:1;background-color:rgb(0 117 158/var(--tw-bg-opacity,1))}.bg-teal-950{--tw-bg-opacity:1;background-color:rgb(0 23 31/var(--tw-bg-opacity,1))}.bg-teal-950\/10{background-color:rgba(0,23,31,.1)}.bg-teal-950\/20{background-color:rgba(0,23,31,.2)}.bg-teal-950\/30{background-color:rgba(0,23,31,.3)}.bg-teal-950\/40{background-color:rgba(0,23,31,.4)}.p-2{padding:.5rem}.p-3{padding:.75rem}.p-4{padding:1rem}.p-5{padding:1.25rem}.p-6{padding:1.5rem}.p-8{padding:2rem}.px-2{padding-left:.5rem;padding-right:.5rem}.px-3{padding-left:.75rem;padding-right:.75rem}.px-4{padding-left:1rem;padding-right:1rem}.px-5{padding-left:1.25rem;padding-right:1.25rem}.py-1{padding-top:.25rem;padding-bottom:.25rem}.py-1\.5{padding-top:.375rem;padding-bottom:.375rem}.py-10{padding-top:2.5rem;padding-bottom:2.5rem}.py-2{padding-top:.5rem;padding-bottom:.5rem}.py-2\.5{padding-top:.625rem;padding-bottom:.625rem}.py-3{padding-top:.75rem;padding-bottom:.75rem}.py-6{padding-top:1.5rem;padding-bottom:1.5rem}.py-8{padding-top:2rem;padding-bottom:2rem}.pb-1{padding-bottom:.25rem}.pb-4{padding-bottom:1rem}.pb-8{padding-bottom:2rem}.pt-1{padding-top:.25rem}.pt-2{padding-top:.5rem}.pt-4{padding-top:1rem}.pt-5{padding-top:1.25rem}.text-left{text-align:left}.text-center{text-align:center}.text-right{text-align:right}.align-middle{vertical-align:middle}.font-mono{font-family:SF Mono,ui-monospace,Cascadia Mono,Segoe UI Mono,Consolas,monospace}.text-2xl{font-size:1.6rem;line-height:2.05rem}.text-3xl{font-size:1.95rem;line-height:2.3rem}.text-\[10px\]{font-size:10px}.text-\[11px\]{font-size:11px}.text-base{font-size:1rem;line-height:1.65rem}.text-lg{font-size:1.125rem;line-height:1.65rem}.text-sm{font-size:.9375rem;line-height:1.5rem}.text-xl{font-size:1.3125rem;line-height:1.8rem}.text-xs{font-size:.8125rem;line-height:1.35rem}.font-bold{font-weight:700}.font-extrabold{font-weight:800}.font-normal{font-weight:400}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.normal-case{text-transform:none}.italic{font-style:italic}.tabular-nums{--tw-numeric-spacing:tabular-nums;font-variant-numeric:var(--tw-ordinal) var(--tw-slashed-zero) var(--tw-numeric-figure) var(--tw-numeric-spacing) var(--tw-numeric-fraction)}.leading-relaxed{line-height:1.625}.leading-snug{line-height:1.375}.leading-tight{line-height:1.25}.tracking-wide{letter-spacing:.025em}.tracking-wider{letter-spacing:.05em}.tracking-widest{letter-spacing:.1em}.text-amber-200{--tw-text-opacity:1;color:rgb(255 214 168/var(--tw-text-opacity,1))}.text-amber-200\/80{color:rgba(255,214,168,.8)}.text-amber-200\/90{color:rgba(255,214,168,.9)}.text-amber-300{--tw-text-opacity:1;color:rgb(255 188 122/var(--tw-text-opacity,1))}.text-amber-300\/90{color:rgba(255,188,122,.9)}.text-cyan-200{--tw-text-opacity:1;color:rgb(174 228 255/var(--tw-text-opacity,1))}.text-emerald-100{--tw-text-opacity:1;color:rgb(217 242 225/var(--tw-text-opacity,1))}.text-emerald-200{--tw-text-opacity:1;color:rgb(168 230 189/var(--tw-text-opacity,1))}.text-emerald-200\/90{color:rgba(168,230,189,.9)}.text-emerald-200\/95{color:rgba(168,230,189,.95)}.text-emerald-300{--tw-text-opacity:1;color:rgb(108 224 143/var(--tw-text-opacity,1))}.text-emerald-300\/90{color:rgba(108,224,143,.9)}.text-emerald-400{--tw-text-opacity:1;color:rgb(76 212 111/var(--tw-text-opacity,1))}.text-indigo-200{--tw-text-opacity:1;color:rgb(191 220 255/var(--tw-text-opacity,1))}.text-indigo-300{--tw-text-opacity:1;color:rgb(115 177 255/var(--tw-text-opacity,1))}.text-orange-300{--tw-text-opacity:1;color:rgb(255 188 122/var(--tw-text-opacity,1))}.text-rose-100{--tw-text-opacity:1;color:rgb(255 220 217/var(--tw-text-opacity,1))}.text-rose-200{--tw-text-opacity:1;color:rgb(255 182 177/var(--tw-text-opacity,1))}.text-rose-200\/95{color:hsla(4,100%,85%,.95)}.text-rose-300{--tw-text-opacity:1;color:rgb(255 139 133/var(--tw-text-opacity,1))}.text-rose-300\/90{color:hsla(3,100%,76%,.9)}.text-rose-400{--tw-text-opacity:1;color:rgb(255 96 88/var(--tw-text-opacity,1))}.text-sky-200{--tw-text-opacity:1;color:rgb(174 228 255/var(--tw-text-opacity,1))}.text-sky-200\/95{color:rgba(174,228,255,.95)}.text-sky-300{--tw-text-opacity:1;color:rgb(131 214 255/var(--tw-text-opacity,1))}.text-slate-100{--tw-text-opacity:1;color:rgb(245 245 247/var(--tw-text-opacity,1))}.text-slate-200{--tw-text-opacity:1;color:rgb(229 229 234/var(--tw-text-opacity,1))}.text-slate-300{--tw-text-opacity:1;color:rgb(209 209 214/var(--tw-text-opacity,1))}.text-slate-400{--tw-text-opacity:1;color:rgb(199 199 204/var(--tw-text-opacity,1))}.text-slate-500{--tw-text-opacity:1;color:rgb(174 174 178/var(--tw-text-opacity,1))}.text-slate-600{--tw-text-opacity:1;color:rgb(161 161 166/var(--tw-text-opacity,1))}.text-slate-900{--tw-text-opacity:1;color:rgb(58 58 60/var(--tw-text-opacity,1))}.text-teal-100{--tw-text-opacity:1;color:rgb(217 242 255/var(--tw-text-opacity,1))}.text-teal-100\/90{color:rgba(217,242,255,.9)}.text-teal-200{--tw-text-opacity:1;color:rgb(174 228 255/var(--tw-text-opacity,1))}.text-teal-200\/80{color:rgba(174,228,255,.8)}.text-teal-300{--tw-text-opacity:1;color:rgb(131 214 255/var(--tw-text-opacity,1))}.text-teal-400{--tw-text-opacity:1;color:rgb(108 210 255/var(--tw-text-opacity,1))}.text-violet-300{--tw-text-opacity:1;color:rgb(212 155 255/var(--tw-text-opacity,1))}.text-white{--tw-text-opacity:1;color:rgb(245 245 247/var(--tw-text-opacity,1))}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.accent-teal-400{accent-color:#6cd2ff}.opacity-70{opacity:.7}.opacity-80{opacity:.8}.shadow{--tw-shadow:0 8px 24px rgba(0,0,0,.45);--tw-shadow-colored:0 8px 24px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}.outline-none{outline:2px solid transparent;outline-offset:2px}.outline{outline-style:solid}.ring-1{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color)}.ring-1,.ring-2{box-shadow:var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow,0 0 #0000)}.ring-2{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color)}.ring-teal-400{--tw-ring-opacity:1;--tw-ring-color:rgb(108 210 255/var(--tw-ring-opacity,1))}.ring-teal-400\/50{--tw-ring-color:rgba(108,210,255,.5)}.blur{--tw-blur:blur(8px)}.blur,.invert{filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.invert{--tw-invert:invert(100%)}.filter{filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.transition{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,-webkit-backdrop-filter;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter,-webkit-backdrop-filter;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.hover\:border-teal-400:hover{--tw-border-opacity:1;border-color:rgb(108 210 255/var(--tw-border-opacity,1))}.hover\:bg-amber-400:hover{--tw-bg-opacity:1;background-color:rgb(255 161 74/var(--tw-bg-opacity,1))}.hover\:bg-emerald-500:hover{--tw-bg-opacity:1;background-color:rgb(48 209 88/var(--tw-bg-opacity,1))}.hover\:bg-emerald-600:hover{--tw-bg-opacity:1;background-color:rgb(36 168 63/var(--tw-bg-opacity,1))}.hover\:bg-indigo-500:hover{--tw-bg-opacity:1;background-color:rgb(10 132 255/var(--tw-bg-opacity,1))}.hover\:bg-orange-600:hover{--tw-bg-opacity:1;background-color:rgb(204 122 0/var(--tw-bg-opacity,1))}.hover\:bg-slate-600:hover{--tw-bg-opacity:1;background-color:rgb(161 161 166/var(--tw-bg-opacity,1))}.hover\:bg-slate-700:hover{--tw-bg-opacity:1;background-color:rgb(152 152 157/var(--tw-bg-opacity,1))}.hover\:bg-teal-500:hover{--tw-bg-opacity:1;background-color:rgb(100 210 255/var(--tw-bg-opacity,1))}.hover\:bg-teal-600:hover{--tw-bg-opacity:1;background-color:rgb(0 164 221/var(--tw-bg-opacity,1))}.focus\:border-teal-400:focus{--tw-border-opacity:1;border-color:rgb(108 210 255/var(--tw-border-opacity,1))}.disabled\:cursor-not-allowed:disabled{cursor:not-allowed}.disabled\:opacity-40:disabled{opacity:.4}@media (min-width:640px){.sm\:col-span-2{grid-column:span 2/span 2}.sm\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.sm\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.sm\:grid-cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}}@media (min-width:768px){.md\:col-span-2{grid-column:span 2/span 2}.md\:col-span-5{grid-column:span 5/span 5}.md\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.md\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.md\:grid-cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}.md\:grid-cols-5{grid-template-columns:repeat(5,minmax(0,1fr))}.md\:text-3xl{font-size:1.95rem;line-height:2.3rem}.md\:text-4xl{font-size:2.35rem;line-height:2.6rem}.md\:text-base{font-size:1rem;line-height:1.65rem}.md\:text-sm{font-size:.9375rem;line-height:1.5rem}}@media (min-width:1024px){.lg\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.lg\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.lg\:grid-cols-6{grid-template-columns:repeat(6,minmax(0,1fr))}}:root {color-scheme: dark;--ink:        #000000;--panel:      #1c1c1e;--panel-2:    #2c2c2e;--panel-3:    #3a3a3c;--hairline:   rgba(84, 84, 88, .65);--hairline-2: rgba(84, 84, 88, .42);--label:      #f5f5f7;--label-2:    #a1a1a6;--label-3:    #6e6e73;--action:     #0a84ff;--action-hi:  #409cff;--action-dim: rgba(10, 132, 255, .14);--locked:     #ff9f0a;--locked-dim: rgba(255, 159, 10, .13);--correct:    #30d158;--correct-dim:rgba(48, 209, 88, .13);--wrong:      #ff453f;--wrong-dim:  rgba(255, 69, 63, .12);--font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display","Segoe UI Variable Text", "Segoe UI", system-ui, "Helvetica Neue", sans-serif;--font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display","Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif;--font-mono: "SF Mono", ui-monospace, "Cascadia Mono", "Segoe UI Mono", Consolas, monospace;--r-sm: 8px;--r-md: 12px;--r-lg: 18px;--r-xl: 24px;--ease-out:   cubic-bezier(.25, .1, .25, 1);--ease-spring:cubic-bezier(.32, .72, 0, 1);--dur-1: .18s;--dur-2: .32s;--dur-3: .55s;--shadow-1: 0 1px 2px rgba(0,0,0,.4);--shadow-2: 0 8px 24px rgba(0,0,0,.45);--shadow-3: 0 20px 60px rgba(0,0,0,.55);--gut: clamp(1rem, 4vw, 2rem);}*, *::before, *::after { box-sizing: border-box; }html {-webkit-text-size-adjust: 100%;text-size-adjust: 100%;scroll-behavior: smooth;scroll-padding-top: 5rem;}body {margin: 0;font-family: var(--font-sans);background: var(--ink);color: var(--label);min-height: 100dvh;-webkit-font-smoothing: antialiased;letter-spacing: 0;}body::before {content: "";position: fixed;inset: -20% -10% auto -10%;height: 60vh;background: radial-gradient(60% 100% at 50% 0%, rgba(10,132,255,.09), transparent 70%);pointer-events: none;z-index: 0;}main, body > div:first-of-type { position: relative; z-index: 1; }h1 { font-size: 1.9rem; }h2 { font-size: 1.35rem; }h3 { font-size: 1.125rem; }h4 { font-size: 1rem; }h1, h2, h3, h4 {font-family: var(--font-display);font-weight: 700;letter-spacing: -.003em;text-wrap: balance;}p { text-wrap: pretty; }b, strong { font-weight: 600; color: var(--label); }sub, sup { font-size: .8em; line-height: 0; }a { color: var(--action-hi); text-decoration: none; }::selection { background: rgba(10,132,255,.32); }:focus-visible {outline: 2px solid var(--action-hi);outline-offset: 2px;border-radius: 4px;}[class*="text-[10px]"], [class*="text-[11px]"] { font-size: .8125rem; }body {padding-top: env(safe-area-inset-top);padding-bottom: calc(var(--next-bar-h, 0px) + env(safe-area-inset-bottom));}.glass, .panel, .shell, .ro-card, .eqcard, .control-card, .guide-card,.method-card, .progress-card, .mixer-card, .heq-card, .map-box {background: var(--panel);border: 1px solid var(--hairline-2);border-radius: var(--r-lg);}.glass, .panel, .shell { box-shadow: var(--shadow-2); }header.glass { padding: clamp(1.1rem, 3vw, 1.75rem); }#hdr-title, .app-title {font-family: var(--font-display);font-weight: 700;font-size: clamp(1.5rem, 1.2rem + 1.1vw, 2.1rem);line-height: 1.15;letter-spacing: -.015em;}#hdr-sub, .app-subtitle { color: var(--label-2); font-size: 1rem; margin-top: .35rem; }.chip, .chip-dim, .chip-dse, .chip-warn, .ms-chip, .assume-chip, .badge,.dock-step, .dock-state, .ladder-tag, .section-kicker {display: inline-flex;align-items: center;gap: .3rem;padding: .2rem .6rem;border-radius: 999px;border: 1px solid var(--hairline);background: rgba(255,255,255,.05);color: var(--label-2);font-size: .75rem;font-weight: 600;letter-spacing: .01em;line-height: 1.5;}.chip, .chip-dim, .chip-dse, .chip-warn, .ms-chip, .assume-chip, .badge {max-width: 100%;align-self: flex-start;}.chip-dse, .chip:not(.chip-dim):not(.chip-warn) {border-color: rgba(10,132,255,.34);background: var(--action-dim);color: var(--action-hi);}.chip-dim, .assume-off { color: var(--label-3); background: rgba(255,255,255,.04); }.chip-warn { border-color: rgba(255,159,10,.38); background: var(--locked-dim); color: var(--locked); }.badge.ox  { border-color: rgba(255,159,10,.4); background: var(--locked-dim); color: var(--locked); }.badge.red { border-color: rgba(10,132,255,.4); background: var(--action-dim); color: var(--action-hi); }.section-kicker {background: none; border: 0; padding: 0;color: var(--label-3);font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;}.section-title { font-size: 1.35rem; }.section-lead  { color: var(--label-2); font-size: 1rem; line-height: 1.6; }#main-tabs, .main-tabs {display: flex;flex-wrap: nowrap;gap: .375rem;overflow-x: auto;scroll-snap-type: x proximity;scrollbar-width: none;-webkit-overflow-scrolling: touch;padding-block: .25rem;-webkit-mask-image: linear-gradient(90deg, transparent, #000 1.25rem, #000 calc(100% - 1.25rem), transparent);mask-image: linear-gradient(90deg, transparent, #000 1.25rem, #000 calc(100% - 1.25rem), transparent);}#main-tabs::-webkit-scrollbar, .main-tabs::-webkit-scrollbar { display: none; }.tab-btn, .view-btn, .mode-btn, .sim-mode-btn, .mbtn, .rbtn, .probe-btn,.pol-btn, .rp-btn, .ctrl-btn, .samp-btn, .sp-btn, .drill-btn, .sim-btn,.sub-btn, .mini-btn, .act-btn, .hint-btn, .btn, .btn-ghost, .btn-teal,.btn-primary, .route-btn, .guide-toggle, #next-go, .btn-run {font-family: inherit;font-size: .9375rem;font-weight: 600;color: var(--label);background: var(--panel-2);border: 1px solid transparent;border-radius: var(--r-md);padding: .55rem .95rem;cursor: pointer;display: inline-flex;align-items: center;gap: .45rem;flex: 0 1 auto;scroll-snap-align: center;transition: background var(--dur-1) var(--ease-out), color var(--dur-1) var(--ease-out),border-color var(--dur-1) var(--ease-out), transform var(--dur-1) var(--ease-spring);-webkit-tap-highlight-color: transparent;}.tab-btn { white-space: nowrap; flex: 0 0 auto; }.tab-btn { color: var(--label-2); background: transparent; }.tab-btn:hover { color: var(--label); background: rgba(255,255,255,.06); }.tab-btn.active {color: var(--label);background: var(--panel-2);box-shadow: var(--shadow-1), inset 0 1px 0 rgba(255,255,255,.07);}button:hover:not(:disabled) { background: var(--panel-3); }button:active:not(:disabled) { transform: scale(.97); }button:disabled, [aria-disabled="true"] { opacity: .38; cursor: not-allowed; }.btn-primary, .btn-run { background: var(--action); color: #fff; }.btn-primary:hover:not(:disabled), .btn-run:hover:not(:disabled) { background: var(--action-hi); }.sp-btn.on, .samp-btn.sel, .sub-btn.on, .mini-btn.on, .mode-btn.active,.mbtn.active, .rbtn.active, .drill-btn.on, .route-btn.on, .map-box.on,.view-btn.on, .pol-btn.on {background: var(--action-dim);border-color: rgba(10,132,255,.45);color: var(--action-hi);}.tab-panel { display: none; }.tab-panel.active {display: block;animation: panel-in var(--dur-3) var(--ease-spring) both;}@keyframes panel-in {from { opacity: 0; transform: translateY(10px) scale(.994); }to   { opacity: 1; transform: none; }}.dock {position: relative;border: 1px solid var(--hairline);border-radius: var(--r-lg);background: var(--panel);padding: clamp(.9rem, 2.5vw, 1.15rem);overflow: hidden;transition: border-color var(--dur-2) var(--ease-out), box-shadow var(--dur-2) var(--ease-out);}.dock::before {content: "";position: absolute;inset: 0 auto 0 0;width: 3px;background: var(--label-3);transition: background var(--dur-2) var(--ease-out);}.dock.locked   { border-color: rgba(255,159,10,.38); }.dock.locked::before   { background: var(--locked); }.dock.unlocked { border-color: rgba(48,209,88,.4); }.dock.unlocked::before { background: var(--correct); }.dock-head { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; }.dock-step {background: rgba(255,255,255,.06);border-color: var(--hairline);color: var(--label-2);font-size: .75rem;letter-spacing: .04em;text-transform: uppercase;border-radius: var(--r-sm);}.dock-state { margin-left: auto; font-weight: 700; }.st-lock { background: var(--locked-dim); border-color: rgba(255,159,10,.4); color: var(--locked); }.st-open { background: var(--correct-dim); border-color: rgba(48,209,88,.4);  color: var(--correct); }.dock-why, #dock-locknote { color: var(--label-2); font-size: .9375rem; line-height: 1.55; }@keyframes dock-unlock {0%   { box-shadow: 0 0 0 0 rgba(48,209,88,.55); }70%  { box-shadow: 0 0 0 10px rgba(48,209,88,0); }100% { box-shadow: 0 0 0 0 rgba(48,209,88,0); }}.dock.just-unlocked { animation: dock-unlock .7s var(--ease-out) 1; }@keyframes tick-in { from { opacity: 0; transform: scale(.4); } to { opacity: 1; transform: scale(1); } }.dock.just-unlocked .st-open { animation: tick-in .35s var(--ease-spring) both; }.pr-opt, .pred-opt {display: block;width: 100%;text-align: left;background: var(--panel-2);border: 1px solid var(--hairline-2);border-radius: var(--r-md);padding: .7rem .85rem;font-size: .9375rem;color: var(--label);cursor: pointer;white-space: normal;transition: border-color var(--dur-1) var(--ease-out), background var(--dur-1) var(--ease-out),transform var(--dur-1) var(--ease-spring);}.pr-opt:hover:not(:disabled), .pred-opt:hover:not(:disabled) { border-color: rgba(10,132,255,.5); background: var(--panel-3); }.pr-opt:active:not(:disabled), .pred-opt:active:not(:disabled) { transform: scale(.99); }.pr-opt.picked, .pred-opt.picked { border-color: var(--action); background: var(--action-dim); color: var(--label); }.pr-opt.correct, .pred-opt.correct, .route-btn.right, .mcq-opt.correct {border-color: rgba(48,209,88,.65);background: var(--correct-dim);}.pr-opt.wrong, .pred-opt.wrong, .route-btn.bad, .mcq-opt.wrong {border-color: rgba(255,69,63,.55);background: var(--wrong-dim);}.pred-opt:disabled { cursor: not-allowed; opacity: .45; }#next-bar {position: sticky;bottom: 0;z-index: 40;padding: .45rem var(--gut) max(.45rem, env(safe-area-inset-bottom));}#next-bar > .glass {max-width: 76rem;margin-inline: auto;display: flex;align-items: center;gap: .6rem;flex-wrap: wrap;padding: .4rem .4rem .4rem .85rem;border-radius: var(--r-lg);background: rgba(28,28,30,.82);border: 1px solid var(--hairline);box-shadow: var(--shadow-2);-webkit-backdrop-filter: saturate(180%) blur(20px);backdrop-filter: saturate(180%) blur(20px);}#next-text, .next-copy, #next-bar #next-text {color: var(--label);font-size: .9375rem;min-width: 0;flex: 1 1 15rem;}#next-go {flex: 0 0 auto;background: var(--action);color: #fff;border: 0;padding: .5rem .85rem;font-size: .875rem;}#next-go:hover:not(:disabled) { background: var(--action-hi); }.ico { width: 1.05em; height: 1.05em; flex: 0 0 auto; vertical-align: -.18em; }.canvas-wrap {position: relative;width: 100%;min-height: 0;background: var(--panel);border: 1px solid var(--hairline-2);border-radius: var(--r-lg);overflow: hidden;}.canvas-wrap canvas {position: static;display: block;width: 100%;height: auto;border-radius: 0;}.ro-k, .ro-l, .lbl, .map-lab, .field-l, .progress-label {color: var(--label-3);font-size: .75rem;font-weight: 700;letter-spacing: .05em;text-transform: uppercase;}.ro-v, .map-val, .stat, .mixer-readout { color: var(--label); font-variant-numeric: tabular-nums; }.ro-card, .map-box, .control-card {border: 1px solid var(--hairline-2);background: var(--panel-2);border-radius: var(--r-md);}.bar-track, .progress-track { background: var(--panel-3); border-radius: 999px; overflow: hidden; }.bar-fill, .progress-fill { background: var(--action); transition: width var(--dur-3) var(--ease-spring); }.work, .eqbox, .kbd, .eqline, code, pre { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }.work {background: var(--ink);border: 1px solid var(--hairline-2);border-radius: var(--r-md);color: var(--label-2);font-size: .9375rem;line-height: 1.7;padding: .9rem 1rem;overflow-x: auto;}.work .hl { color: var(--action-hi); }.work .dim { color: var(--label-3); }.step-h {color: var(--action-hi);font-size: .8125rem;font-weight: 700;letter-spacing: .05em;text-transform: uppercase;}input[type="text"], input[type="number"], input[type="search"], select, textarea,.field, .field-i, .calc-inp {width: 100%;font-family: inherit;font-size: 1rem;color: var(--label);background: var(--panel-2);border: 1px solid var(--hairline);border-radius: var(--r-md);padding: .55rem .7rem;transition: border-color var(--dur-1) var(--ease-out), background var(--dur-1) var(--ease-out);-webkit-appearance: none;appearance: none;}input:focus, select:focus, textarea:focus { outline: none; border-color: var(--action); background: var(--panel); }select {background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23a1a1a6' d='M1.4 0 6 4.6 10.6 0 12 1.4 6 8 0 1.4z'/%3E%3C/svg%3E");background-repeat: no-repeat;background-position: right .65rem center;padding-right: 1.9rem;}label, .calc-lbl, .field-l {color: var(--label-2); font-size: .8125rem; font-weight: 600; letter-spacing: 0; text-transform: none;}input[type="range"] {-webkit-appearance: none; appearance: none;width: 100%; height: 28px; background: transparent; cursor: pointer;accent-color: var(--action);}input[type="range"]::-webkit-slider-runnable-track { height: 4px; border-radius: 999px; background: var(--panel-3); }input[type="range"]::-webkit-slider-thumb {-webkit-appearance: none; appearance: none;width: 24px; height: 24px; margin-top: -10px;border-radius: 50%; background: #fff; border: 0;box-shadow: 0 1px 4px rgba(0,0,0,.5);transition: transform var(--dur-1) var(--ease-spring);}input[type="range"]:active::-webkit-slider-thumb { transform: scale(1.12); }input[type="range"]::-moz-range-track { height: 4px; border-radius: 999px; background: var(--panel-3); }input[type="range"]::-moz-range-thumb { width: 22px; height: 22px; border: 0; border-radius: 50%; background: #fff; }input[type="checkbox"], input[type="radio"] { width: 1.1rem; height: 1.1rem; accent-color: var(--action); }.mcq-opt, .myth-card, .ms-point, .evidence-grid > *, .concept-grid > *, .guide-card {border: 1px solid var(--hairline-2);border-radius: var(--r-md);background: var(--panel-2);}.mcq-opt { padding: .75rem .9rem; font-size: .9375rem; cursor: pointer; }.mcq-opt:hover { border-color: rgba(10,132,255,.5); }.myth-card { cursor: pointer; transition: border-color var(--dur-2) var(--ease-out); }.myth-card:hover { border-color: rgba(10,132,255,.45); }.myth-back { display: none; }.myth-card.flipped .myth-front { display: none; }.myth-card.flipped .myth-back { display: block; animation: flip-in var(--dur-2) var(--ease-spring) both; }@keyframes flip-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }.tag-w { background: var(--correct-dim); border-color: rgba(48,209,88,.4); color: var(--correct); }.tag-c { background: var(--locked-dim);  border-color: rgba(255,159,10,.4);  color: var(--locked); }.tag-i { background: var(--wrong-dim);   border-color: rgba(255,69,63,.4);   color: var(--wrong); }.hint-btn { border-color: rgba(255,159,10,.35); background: var(--locked-dim); color: var(--locked); font-size: .8125rem; }.fail-box { border-left: 3px solid var(--wrong); background: var(--wrong-dim); border-radius: var(--r-md); padding: .7rem .9rem; }table, .datatbl { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }th, td { padding: .55rem .7rem; text-align: left; border-bottom: 1px solid var(--hairline-2); font-size: .9375rem; }th { color: var(--label-3); font-size: .75rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; }tbody tr:last-child > td { border-bottom: 0; }tbody tr { transition: background var(--dur-1) var(--ease-out); }tbody tr:hover { background: rgba(255,255,255,.04); }.lab-card {display: block;border: 1px solid var(--hairline-2);border-radius: var(--r-lg);background: var(--panel);color: var(--label);transition: transform var(--dur-2) var(--ease-spring), border-color var(--dur-2) var(--ease-out),box-shadow var(--dur-2) var(--ease-out);}.lab-card:hover { transform: translateY(-3px); border-color: rgba(10,132,255,.5); box-shadow: var(--shadow-3); }.lab-card:active { transform: translateY(-1px) scale(.995); }.reveal { opacity: 0; transform: translateY(14px); }.reveal.shown {opacity: 1; transform: none;transition: opacity var(--dur-3) var(--ease-out), transform var(--dur-3) var(--ease-spring);transition-delay: calc(var(--i, 0) * 45ms);}@media (pointer: coarse) {button, summary, [role="button"], .tab-btn, .pr-opt, .pred-opt, .mcq-opt,.myth-card, .lab-card, select, .field, .field-i, .calc-inp, .ans,input:not([type="checkbox"]):not([type="radio"]):not([type="range"]) { min-height: 44px !important; }input[type="checkbox"], input[type="radio"] { min-width: 28px !important; min-height: 28px !important; }label:has(> input[type="checkbox"]), label:has(> input[type="radio"]),.ms-point { min-height: 44px; display: flex; align-items: center; }.pr-opt, .pred-opt, .mcq-opt { display: flex; align-items: center; }li:has(> input[type="checkbox"]), li:has(> input[type="radio"]),li:has(.goal-check), li:has(.mloss) {cursor: pointer;min-height: 44px;display: flex;align-items: flex-start;padding-block: .3rem;}}@media (max-width: 640px) {.chip, .chip-dim, .chip-dse, .chip-warn, .badge, .dock-step, .dock-state, .ladder-tag {padding: .1rem .45rem;}#hdr-sub, .app-subtitle { font-size: .9375rem; line-height: 1.5; }#next-bar > .glass > span:first-child { display: none; }header.glass { gap: .6rem; }}@media (max-width: 768px) {.flex { flex-wrap: wrap; }}@media (min-width: 1024px) {:root { --gut: 2rem; }#main-tabs, .main-tabs {gap: .25rem;background: var(--panel-2);border-radius: var(--r-md);padding: .25rem;margin-inline: 0;overflow: visible;width: fit-content;-webkit-mask-image: none;mask-image: none;}.tab-btn { border-radius: var(--r-sm); }}:root {--bg: #000000;--bg-2: #0b0b0d;--panel: #1c1c1e;--panel-2: #2c2c2e;--panel-3: #37373a;--line: rgba(84, 84, 88, .42);--line-strong: rgba(84, 84, 88, .65);--text: #f5f5f7;--muted: #a1a1a6;--faint: #6e6e73;--teal: #64d2ff;--blue: #0a84ff;--amber: #ff9f0a;--rose: #ff453f;--green: #30d158;--radius: 12px;--shadow: 0 8px 24px rgba(0,0,0,.45);}@media (prefers-reduced-motion: reduce) {html { scroll-behavior: auto; }*, *::before, *::after {animation-duration: .001ms !important;animation-iteration-count: 1 !important;transition-duration: .001ms !important;}.reveal { opacity: 1; transform: none; }}@media print {html, body { background: #fff !important; color: #111 !important; }body::before { display: none; }* {color: #111 !important;background-image: none !important;box-shadow: none !important;-webkit-backdrop-filter: none !important;backdrop-filter: none !important;}.glass, .panel, .shell, .dock, .canvas-wrap, .ro-card, .mcq-opt, .myth-card,.lab-card, .btn, button, table, th, td { border-color: #c7c7cc !important; background-color: #fff !important; }.tab-panel { display: block !important; break-inside: avoid; }#next-bar, #btn-teacher, #pr-reveal, #pr-why, .hint-btn { display: none !important; }.reveal { opacity: 1 !important; transform: none !important; }.myth-back { display: block !important; }.myth-front { display: none !important; }}</style>
+</head>
+<body class="text-slate-200">
+<div class="max-w-6xl mx-auto px-4 py-6">
+
+  <!-- ============ HEADER ============ -->
+  <header class="glass p-5 mb-5 flex flex-wrap items-start justify-between gap-3">
+    <div>
+      <div class="flex items-center gap-2 flex-wrap mb-1">
+        <span class="chip">HKDSE Chemistry</span>
+        <span class="chip">Topic VII (e)</span>
+        <span class="chip">molten vs aqueous</span>
+        <span class="chip">+ Topic III (a) extraction</span>
+</div>
+      <h1 id="hdr-title" class="text-2xl md:text-3xl font-extrabold text-white leading-tight">Interactive Lab</h1>
+      <p id="hdr-sub" class="text-sm text-slate-400 mt-1">Subtitle.</p>
+    </div>
+    <button type="button" id="btn-teacher" onclick="toggleTeacher()" class="btn btn-ghost"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg><span>Teacher notes</span></button>
+  </header>
+  <div id="teacher-panel" class="glass p-5 mb-5 hidden">
+    <h2 id="teacher-title" class="font-bold text-amber-300 mb-2">Teacher notes</h2>
+    <div id="teacher-content" class="text-sm text-slate-300 space-y-2 leading-relaxed"></div>
+    <div class="grid sm:grid-cols-3 gap-3 mt-4">
+      <div class="myth-card glass rounded-xl p-4" onclick="this.classList.toggle('flipped')">
+        <div class="myth-front"><span class="text-xs font-bold text-rose-400 uppercase">Myth</span><p class="text-sm text-slate-200 mt-2">H₂ always forms at the cathode of any aqueous solution.</p><p class="text-xs text-slate-500 mt-3">Tap to flip</p></div>
+        <div class="myth-back"><span class="text-xs font-bold text-emerald-400 uppercase">Fact</span><p class="text-sm text-slate-200 mt-2">Only if the metal is MORE reactive than hydrogen. Cu²⁺ and Ag⁺ are reduced more readily than H⁺ — a metal deposit forms instead.</p></div>
+      </div>
+      <div class="myth-card glass rounded-xl p-4" onclick="this.classList.toggle('flipped')">
+        <div class="myth-front"><span class="text-xs font-bold text-rose-400 uppercase">Myth</span><p class="text-sm text-slate-200 mt-2">Dilute and concentrated NaCl contain different ions, so they must give different products for that reason.</p><p class="text-xs text-slate-500 mt-3">Tap to flip</p></div>
+        <div class="myth-back"><span class="text-xs font-bold text-emerald-400 uppercase">Fact</span><p class="text-sm text-slate-200 mt-2">The INVENTORY is identical (Na⁺, Cl⁻, H⁺, OH⁻). Concentration changes which species is oxidised MORE READILY: dilute → O₂, concentrated → Cl₂.</p></div>
+      </div>
+      <div class="myth-card glass rounded-xl p-4" onclick="this.classList.toggle('flipped')">
+        <div class="myth-front"><span class="text-xs font-bold text-rose-400 uppercase">Myth</span><p class="text-sm text-slate-200 mt-2">Solid NaCl can be electrolysed.</p><p class="text-xs text-slate-500 mt-3">Tap to flip</p></div>
+        <div class="myth-back"><span class="text-xs font-bold text-emerald-400 uppercase">Fact</span><p class="text-sm text-slate-200 mt-2">No — the ions are fixed in the lattice and cannot move. It must be molten or aqueous so ions are free to migrate to the electrodes.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ TABS ============ -->
+  <nav id="main-tabs" class="flex flex-wrap gap-2 mb-5">
+    <button type="button" id="tab-intro" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold border border-slate-700 bg-slate-900/60" data-tab="intro" onclick="setTab('intro')">1 · Introduction</button>
+    <button type="button" id="tab-sim"   class="tab-btn active px-4 py-2 rounded-xl text-sm font-semibold border border-slate-700 bg-slate-900/60" data-tab="sim"   onclick="setTab('sim')">2 · Simulation</button>
+    <button type="button" id="tab-calc"  class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold border border-slate-700 bg-slate-900/60" data-tab="calc"  onclick="setTab('calc')">3 · Calculations</button>
+    <button type="button" id="tab-mcq"   class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold border border-slate-700 bg-slate-900/60" data-tab="mcq"   onclick="setTab('mcq')">4 · Past-paper practice</button>
+    <button type="button" id="tab-recap" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold border border-slate-700 bg-slate-900/60" data-tab="recap" onclick="setTab('recap')">5 · Recap &amp; misconceptions</button>
+  </nav>
+
+  <!-- ============ PANEL: INTRODUCTION ============ -->
+  <section id="panel-intro" class="tab-panel mb-5">
+    <div class="glass p-6 space-y-5">
+      <h2 id="intro-h1" class="text-xl font-bold text-white"></h2>
+      <p id="intro-lead" class="text-sm md:text-base text-slate-300 leading-relaxed"></p>
+      <div id="intro-cards" class="grid md:grid-cols-2 gap-3"></div>
+    </div>
+  </section>
+
+  <!-- ============ PANEL: SIMULATION ============ -->
+  <section id="panel-sim" class="tab-panel active mb-5">
+    <div id="sim-dock" class="dock locked mb-3" aria-live="polite">
+      <div class="dock-head mb-2">
+        <span class="dock-step">Task 1</span>
+        <span class="text-sm font-bold text-white" id="dock-title">Predict before you energise</span>
+        <span class="dock-state st-lock" id="dock-state">Locked</span>
+      </div>
+      <p class="text-xs text-slate-300 mb-2">Commit to an answer and the cell controls below will unlock — then pick both products, energise, and see whether you were right.</p>
+      <p id="pr-q" class="text-sm font-semibold text-slate-100 leading-relaxed"></p>
+      <div id="pr-opts" class="flex flex-wrap gap-2 mt-3"></div>
+      <button type="button" id="pr-reveal" class="act-btn mt-3">Reveal · mark-scheme answer</button>
+      <p id="pr-why" class="hidden mt-3 text-xs text-emerald-200/95 bg-emerald-950/35 border border-emerald-800/40 rounded-xl p-3 leading-relaxed"></p>
+      <p class="text-xs text-amber-200 mt-2" id="dock-locknote">Locked — answer the prediction above correctly to unlock the apparatus controls.</p>
+    </div>
+    <div class="glass p-5 mb-3">
+      <div class="dock-head mb-2"><span class="dock-step">Task 2</span><span class="text-sm font-bold text-white">Break it on purpose</span></div>
+      <p class="text-xs text-slate-400 mb-3">Three classic wrong moves. Tap each one and see exactly why the mark scheme gives 0.</p>
+      <div class="flex flex-wrap gap-2">
+        <button type="button" class="act-btn" data-fail="a">Predict Na from brine</button>
+        <button type="button" class="act-btn" data-fail="b">Say Cl₂ from dilute NaCl(aq)</button>
+        <button type="button" class="act-btn" data-fail="c">Say CuSO₄(aq) stays neutral</button>
+        <button type="button" class="act-btn" id="fail-clear">Clear</button>
+      </div>
+      <div id="fail-panel" class="text-sm text-slate-300 mt-3"></div>
+    </div>
+    <div class="glass p-5 mb-3">
+      <div class="dock-head mb-2"><span class="dock-step">Task 3</span><span class="text-sm font-bold text-white">Explain the products — the 3-mark chain</span></div>
+      <p class="text-xs text-slate-400 mb-3">Try writing the explanation first, then climb down the hint ladder as far as you need. Each mark needs a named ion, a "more readily", and a balanced half-equation.</p>
+      <div class="flex flex-wrap gap-2">
+        <button type="button" class="act-btn" data-hint="1">Hint 1</button>
+        <button type="button" class="act-btn" data-hint="2">Hint 2</button>
+        <button type="button" class="act-btn" data-hint="3">Hint 3</button>
+      </div>
+      <p id="hint-text" class="text-sm text-amber-200 mt-3"></p>
+    </div>
+    <div class="glass p-5">
+      <div class="flex flex-wrap items-center gap-2 mb-3">
+        <span class="text-xs font-bold text-slate-400 uppercase tracking-wide mr-1">Electrolyte</span>
+        <div id="sim-modes" class="flex flex-wrap gap-2 flex-1"></div>
+        <span id="phase-chip" class="chip">AQUEOUS</span>
+      </div>
+      <div class="canvas-wrap rounded-xl border border-slate-700/70 bg-slate-950/70"><canvas id="sim-canvas" aria-label="Electrolytic cell animation: ions migrating, electrons in wires, gas bubbles and metal deposits, with a live ion-inventory panel"></canvas></div>
+      <p id="sim-caption" class="text-xs text-slate-400 mt-3 leading-relaxed"></p>
+      <div id="sim-readouts" class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-4"></div>
+    </div>
+
+    <!-- Predict checkpoint -->
+    <div class="glass p-5 mt-4">
+      <h3 class="font-bold text-white mb-1">Predict before you energise</h3>
+      <p id="pred-lead" class="text-xs text-slate-400 mb-3"></p>
+      <div class="grid md:grid-cols-3 gap-3 items-end">
+        <div>
+          <label class="block text-xs text-slate-400 mb-1" for="pred-cathode">Cathode product (− electrode, reduction)</label>
+          <select id="pred-cathode" class="ial" aria-label="Predict cathode product">
+            <option value="">— pick one —</option>
+            <option value="H2">H₂(g) — colourless gas</option>
+            <option value="Cu">Cu(s) — reddish-brown solid</option>
+            <option value="Ag">Ag(s) — silver deposit</option>
+            <option value="Na">Na(l) — silvery metal</option>
+            <option value="Al">Al(l) — silvery metal</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-xs text-slate-400 mb-1" for="pred-anode">Anode product (+ electrode, oxidation)</label>
+          <select id="pred-anode" class="ial" aria-label="Predict anode product">
+            <option value="">— pick one —</option>
+            <option value="O2">O₂(g) — colourless gas</option>
+            <option value="Cl2">Cl₂(g) — pale green gas</option>
+          </select>
+        </div>
+        <p id="pred-gate" class="text-xs text-amber-300/90"></p>
+      </div>
+      <div id="pred-feedback" class="hidden mt-3 text-xs leading-relaxed rounded-xl border border-slate-700 bg-slate-950/60 p-4"></div>
+    </div>
+
+    <!-- Live equations + observations -->
+    <div class="glass p-5 mt-4">
+      <h3 class="font-bold text-white mb-2">Live electrode equations <span class="text-xs font-normal text-slate-400">(state symbols included — 8.10)</span></h3>
+      <div class="grid md:grid-cols-3 gap-2 mb-3">
+        <div class="eqline" id="eq-cathode" style="border-left:3px solid #2dd4bf;"></div>
+        <div class="eqline" id="eq-anode" style="border-left:3px solid #f59e0b;"></div>
+        <div class="eqline" id="eq-overall" style="border-left:3px solid #818cf8;"></div>
+      </div>
+      <div class="grid md:grid-cols-3 gap-2">
+        <p id="obs-cathode" class="text-xs text-slate-300 bg-slate-950/50 border border-slate-800 rounded-lg p-2"></p>
+        <p id="obs-anode" class="text-xs text-slate-300 bg-slate-950/50 border border-slate-800 rounded-lg p-2"></p>
+        <p id="obs-drift" class="text-xs text-slate-300 bg-slate-950/50 border border-slate-800 rounded-lg p-2"></p>
+      </div>
+    </div>
+
+    <div class="glass p-5 mt-4">
+      <h3 class="font-bold text-white mb-3">Controls</h3>
+      <div id="ctrl-panel" class="grid md:grid-cols-2 gap-x-8 gap-y-4">
+        <div>
+          <label class="block text-xs text-slate-400 mb-1" for="sl-current">Current (A) — drives migration speed &amp; gas volume</label>
+          <input type="range" id="sl-current" class="w-full" min="0.5" max="3" step="0.1" value="2" aria-label="Current in amperes">
+          <p class="text-xs text-slate-500 mt-1" id="lbl-current">2.0 A</p>
+        </div>
+        <div>
+          <label class="block text-xs text-slate-400 mb-1" for="sl-conc">NaCl(aq) concentration (mol dm⁻³) — flips the anode product at ≈1 mol dm⁻³</label>
+          <input type="range" id="sl-conc" class="w-full" min="0.2" max="5" step="0.1" value="0.5" aria-label="Sodium chloride concentration">
+          <p class="text-xs text-slate-500 mt-1" id="lbl-conc">0.5 mol dm⁻³ — dilute</p>
+        </div>
+        <div class="flex flex-wrap gap-2 items-center md:col-span-2">
+          <button type="button" id="btn-energise" class="px-4 py-2 rounded-xl text-sm font-bold bg-teal-600 hover:bg-teal-500 text-white disabled:opacity-40 disabled:cursor-not-allowed">⚡ Energise</button>
+          <button type="button" id="btn-reset-sim" class="px-4 py-2 rounded-xl text-sm font-semibold bg-slate-800 hover:bg-slate-700 border border-slate-600">↺ Reset run</button>
+          <span class="text-xs text-slate-500">RED CAT: reduction at cathode · oxidation at anode, always (OIL RIG).</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PANEL: CALCULATIONS ============ -->
+  <section id="panel-calc" class="tab-panel mb-5">
+    <div class="glass p-6 space-y-5">
+      <h2 id="calc-title" class="text-xl font-bold text-white">Worked calculation</h2>
+      <p id="calc-sub" class="text-sm text-slate-400"></p>
+      <div id="calc-inputs" class="grid md:grid-cols-3 gap-4">
+        <div>
+          <label class="block text-xs text-slate-400 mb-1" for="calc-el">Worked-example electrolyte</label>
+          <select id="calc-el" class="ial" aria-label="Choose electrolyte for worked example">
+            <option value="nacl-conc">Concentrated NaCl(aq)</option>
+            <option value="nacl-dil">Dilute NaCl(aq)</option>
+            <option value="h2so4">Dilute H₂SO₄(aq)</option>
+            <option value="cuso4">CuSO₄(aq)</option>
+            <option value="agno3">AgNO₃(aq)</option>
+            <option value="naclm">Molten NaCl(l)</option>
+            <option value="alum">Molten Al₂O₃(l)</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-xs text-slate-400 mb-1" for="calc-i">Extension only — current I (A)</label>
+          <input type="number" id="calc-i" class="ial" value="2.0" min="0.1" step="0.1" aria-label="Current in amperes">
+        </div>
+        <div>
+          <label class="block text-xs text-slate-400 mb-1" for="calc-t">Extension only — time t (minutes)</label>
+          <input type="number" id="calc-t" class="ial" value="16.1" min="1" step="0.1" aria-label="Time in minutes">
+        </div>
+      </div>
+      <div>
+        <button type="button" class="px-4 py-2 rounded-xl text-sm font-semibold bg-indigo-600 hover:bg-indigo-500 text-white" onclick="runCalc()">Check working</button>
+      </div>
+      <div id="calc-working" class="text-sm font-mono bg-slate-950/70 border border-slate-700/60 rounded-xl p-4 whitespace-pre-wrap text-slate-300 hidden"></div>
+    </div>
+  </section>
+
+  <!-- ============ PANEL: PAST PAPER MCQs ============ -->
+  <section id="panel-mcq" class="tab-panel mb-5">
+    <div class="glass p-6">
+      <h2 id="pp-title" class="text-xl font-bold text-white mb-1">Past-paper practice</h2>
+      <p id="pp-sub" class="text-xs text-slate-400 mb-5"></p>
+      <div id="pp-questions" class="space-y-6"></div>
+    </div>
+  </section>
+
+  <!-- ============ PANEL: RECAP + MISCONCEPTION CARDS ============ -->
+  <section id="panel-recap" class="tab-panel mb-5">
+    <div class="glass rounded-2xl p-6 space-y-6">
+      <div>
+        <h2 id="recap-title" class="text-xl font-bold text-white">Recap checklist</h2>
+        <p id="recap-sub" class="text-sm text-slate-400 mt-1 mb-3">Tick each goal only when you can explain it without notes.</p>
+        <ul id="recap-list" class="space-y-2"></ul>
+        <p id="recap-progress" class="text-xs text-slate-500 mt-3"></p>
+      </div>
+      <div class="border-t border-white/10 pt-5">
+        <h3 class="text-sm font-bold text-rose-300 uppercase tracking-wide mb-2" id="myth-title">Common misconceptions</h3>
+        <p class="text-xs text-slate-400 mb-4" id="myth-lead">Tap a card to flip.</p>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3" id="myth-cards"></div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="text-center text-xs text-slate-600 pb-8">HKDSE Chemistry · Topic VII (e) electrolysis · interactive lab · enrichment that practises examinable half-equations</footer>
+</div>
+<div id="next-bar" class="max-w-6xl mx-auto px-5 pb-4">
+  <div class="glass rounded-xl px-4 py-2 flex flex-wrap items-center gap-3 text-sm">
+    <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Next step</span>
+    <span id="next-text" class="text-slate-200 font-semibold flex-1">Answer the Task 1 prediction above the cell controls</span>
+    <button type="button" id="next-go" class="act-btn" onclick="goNext()">Take me there</button>
+  </div>
+</div>
+
+<script>
+/* =====================================================================
+   STRINGS — flat English T. English only, no language toggle.
+   Content grounded in _build/briefs/electrolysis_cells.md.
+   NOTE: electrolysis has no explicit HKDSE syllabus code — this lab is
+   framed as enrichment that practises examinable half-equations
+   ; the E⦵ reason layer is labelled beyond this level
+   enrichment throughout.
+===================================================================== */
+const T = {
+  title: 'Electrolytic Cells — Molten vs Aqueous Products',
+  subtitle: 'Topic VII (e) — predict both products from the ion inventory, then justify with preferential discharge',
+  wch: 'HKDSE Chemistry',
+  introH1: 'Electrolysis: the ion inventory decides everything',
+  introLead: 'An electrolytic cell uses a DC supply to FORCE a non-spontaneous redox reaction. Electrolysis itself carries no separate HKDSE syllabus code — what IS examinable is the chemistry you use to describe it: oxidation/reduction as electron transfer and writing ionic half-equations and combining them into a full ionic equation, with state symbols. Molten Al₂O₃ is a genuine HKDSE context (a past paper; a past paper PEF(c)). Work through the five tabs; in the sim, list the ions, predict BOTH products, then energise and compare.',
+  concepts: [
+    { t: 'The cell & the signs', d: 'DC supply forces non-spontaneous redox. Anode connects to + (oxidation), cathode to − (reduction). Cations → cathode, anions → anode. Oxidation at the anode holds in EVERY electrochemical cell — only the signs flip in a fuel cell.' },
+    { t: 'The ion-inventory habit', d: 'Before predicting anything, list EVERY particle present. Molten salt: only its two ions, e.g. Na⁺(l) and Cl⁻(l). Aqueous: the salt ions PLUS H⁺(aq) and OH⁻(aq) from water — this extra step is what separates full marks from dropped marks.' },
+    { t: 'Molten vs aqueous', d: 'Molten NaCl → sodium at the cathode + chlorine at the anode (no competition). Aqueous NaCl → H₂ at the cathode (never Na), and Cl₂ (concentrated) or O₂ (dilute) at the anode, leaving alkaline solution. Sodium is extracted only from the MELT.' },
+    { t: 'The TWO-LAYER reason', d: 'EXAM-TRUE: the species that is reduced / oxidised MORE READILY is discharged. ENRICHMENT (beyond this level): the E⦵ numbers show why — more positive E⦵(2H₂O/H2) = −0.83 V ≫ E⦵(Na⁺/Na) = −2.71 V. Never write GCSE "lower in the ECS" wording at HKDSE.' },
+    { t: 'How to use the sim', d: 'Pick an electrolyte chip → read the ion-inventory panel on the canvas → choose both products in the Predict box (this unlocks the power) → Energise → compare your picks with the live half-equations, gas volumes and pH/colour drift.' },
+    { t: 'Out of scope / next unit', d: 'Faraday Q = It: not required by the syllabus — extension only (Calc tab, clearly tagged). E⦵ Nernst maths and E⦵cells: beyond this level. Electroplating / chlor-alkali membrane engineering: other syllabuses. Overvoltage: an accepted-level reason, not a memorised fact.' }
+  ],
+  simCaption: 'Simplified: ion drift speeds and bubble rates are exaggerated; the sim clock runs at ×300 (1 real s = 5 min cell time) while gas volumes use real relations Q = It, n = Q/F, Vm = 24 000 cm³ mol−1 at r.t.p. Aqueous discharge drawn at OH⁻/H⁺; the equivalent H₂O forms are shown in the equations. Molten NaCl cell ≈ 800 °C; Al₂O₃ is really dissolved in molten cryolite (~900 °C) and the GRAPHITE anodes burn away to CO₂ and need replacing — not modelled here. "Overvoltage" for Cl₂ from brine is reason accepted at this level, not a memorised syllabus fact.',
+  teacherTitle: 'Teacher notes',
+  teacher: [
+    'Placement: the redox week, after teaching electrode half-equations. Electrolysis has no separate HKDSE code — frame the whole lesson as examinable half-equation practice in an enrichment context. The molten Al₂O₃ case is genuinely HKDSE-seen (a past paper; a past paper PEF(c)).',
+    'Probe this misconception while students run the sim: "electrons swim through the electrolyte". Make them narrate the full circuit: e− move in wires/electrodes ONLY; ions carry charge in the melt/solution.',
+    '5-minute task: before energising each of the 7 electrolytes, students write the ion inventory and both half-equations (state symbols!) in their workbook, then self-mark against the sim feedback.',
+    'Classic examiner complaints: ADDING the two E⦵ values instead of subtracting; dropping the minus sign on a negative E⦵cell; writing "discharge" without stating WHICH species is reduced — mark schemes want "H⁺ ions are reduced to hydrogen gas because they are reduced more readily than Na⁺ ions".',
+    'Practical link: solid NaCl does not conduct; mark wording is "ions are not free to move" (must be molten or in solution, where IONS are free to move — for metals it is delocalised electrons that move).'
+  ],
+  calcTitle: 'Ion inventory → balanced half-equations → overall ionic equation',
+  calcSub: 'The half-equation scaffold: list every ion, write each electrode half-equation with state symbols, scale so electrons lost = electrons gained, then add. Faraday section at the bottom is extension only (not examinable in a past paper — n = Q/F sits with elective content).',
+  calcBtn: 'Check working',
+  ppTitle: 'Past-paper practice',
+  ppSub: 'exam-style wording from past-paper banks (see brief). Feedback uses mark-scheme keywords. The E⦵ questions are flagged as beyond this level — attempt them, then enjoy knowing WHY your product picks work.',
+  questions: [
+    {
+      q: 'Two half-cells are connected to make a cell: Cu²⁺(aq) + 2e− ⇌ Cu(s)  E⦵ = +0.34 V and Ag⁺(aq) + e− ⇌ Ag(s)  E⦵ = +0.80 V. What is the standard cell potential, E⦵cell?',
+      tag: 'Beyond this level',
+      o: ['+1.14 V — the two E⦵ values are added', '+0.46 V', '−0.46 V — subtracting the wrong way round', '−1.14 V'],
+      a: 1,
+      why: 'E⦵cell = E⦵(more positive electrode) − E⦵(less positive) = (+0.80) − (+0.34) = +0.46 V. You SUBTRACT — never add — and you keep the sign convention. A POSITIVE E⦵cell means the reaction is feasible (spontaneous) as written; a NEGATIVE value means it is not spontaneous and would have to be FORCED — that is exactly what electrolysis does.'
+    },
+    {
+      q: 'A student calculates E⦵cell = −1.63 V for a proposed reaction involving the Fe³⁺/Fe²⁺ half-cell. What does the negative value mean?',
+      tag: 'Beyond this level',
+      o: ['The reaction is not thermodynamically feasible as written', 'The voltmeter connections are reversed — the true value is +1.63 V', 'E⦵ values should have been added, not subtracted', 'The cell is not at 298 K'],
+      a: 0,
+      why: 'KEEP THE SIGN. A negative E⦵cell = not feasible (not spontaneous) as written; the reverse reaction would have E⦵cell = +1.63 V. It is not an equipment fault, and the trap of ADDING the two E⦵ values gives a wrong positive answer. If you want this reaction, you must force it — electrolysis.'
+    },
+    {
+      q: 'Which series allows a chemist to predict whether a redox reaction is feasible, using electrode potentials?',
+      tag: 'Beyond this level',
+      o: ['The reactivity series', 'The homologous series', 'The electrochemical series', 'The transition series'],
+      a: 2,
+      why: '"Electrochemical series" (or the E⦵/standard electrode potential data table). Mark schemes give NO CREDIT for "reactivity series" — it orders metals by displacement experiments, not by measured standard electrode potentials. Precise vocabulary is examinable.'
+    }
+  ],
+  recapTitle: 'Recap checklist',
+  recapGoals: [
+    'For ANY electrolyte I can list the full ion inventory — molten: salt ions only; aqueous: add H⁺(aq) and OH⁻(aq) from water — before predicting products. [3.1 migration + method habit]',
+    'Cathode = reduction, anode = oxidation, every time — RED CAT / OIL RIG; in an electrolytic cell the cathode is − and the anode is + (signs flip in a fuel cell, oxidation never moves). [8.5–8.6]',
+    'I can explain conduction: electrons move only in the wires and electrodes; IONS carry the current through the melt/solution; solid NaCl cannot conduct because its ions are not free to move. [3.1 · a past paper(e)]',
+    'I can predict and justify molten vs aqueous products, including the concentrated→Cl₂ / dilute→O₂ switch in NaCl(aq), using "reduced/oxidised more readily" wording (E⦵ numbers are enrichment). [half-equations + enrichment]',
+    'I can write balanced electrode half-equations with state symbols and combine them so electrons lost = electrons gained, e.g. for Al³⁺/Al and O²⁻/O₂. [8.10]',
+    'I know the classic observation wording: Cl₂ bleaches damp litmus; H₂ gives a pop; O₂ relights a glowing splint; Cu = reddish-brown coating; brine electrolysis turns the solution alkaline. [practical credibility]'
+  ],
+  mythTitle: 'Common misconceptions',
+  mythLead: 'Tap a card to flip. Check you would not write this in an exam.',
+  mythFlip: 'Tap to flip',
+  mythLabelMyth: 'Myth?',
+  mythLabelFact: 'Fact',
+  myths: [
+    { m: 'Electrons pass through the electrolyte from cathode to anode.', f: 'IONS carry the current through the melt/solution (cations → cathode, anions → anode). Electrons only travel through the wires and the electrodes — none swim in the liquid.' },
+    { m: 'Electrolysing aqueous NaCl deposits sodium metal.', f: 'H2(g) forms at the cathode — water/H⁺ is reduced FAR more readily than Na⁺ (E⦵: −0.83 V vs −2.71 V, enrichment). Sodium metal is made only by electrolysing MOLTEN NaCl.' },
+    { m: 'In aqueous electrolysis H⁺ is always discharged at the cathode.', f: 'Only when the metal cation is harder to reduce than water/H⁺ (Na⁺, K⁺, Ca²⁺...). With Cu²⁺ (+0.34 V) or Ag⁺ (+0.80 V) the metal ion is reduced MORE readily — copper or silver plates out instead.' },
+    { m: 'The anode is always the negative electrode.', f: 'In an ELECTROLYTIC cell the anode is + (it is pushed electrons-away by the supply); in a fuel cell the anode is −. Oxidation happens at the anode in EVERY cell — that is the definition, and the mark.' },
+    { m: 'Dilute and concentrated NaCl contain different ions, so they give different products.', f: 'The INVENTORY is identical (Na⁺, Cl⁻, H⁺, OH⁻). Concentration changes which species is oxidised MORE READILY at the anode: dilute → O₂, concentrated → Cl₂ (high [Cl⁻]; sluggish O₂ formation accepted at this level).' },
+    { m: 'Solid NaCl conducts electricity, and electrolysing CuSO4(aq) leaves the pH alone.', f: 'Solid NaCl does NOT conduct — ions are fixed in the lattice and are not free to move (must be molten or aqueous). And CuSO4(aq) electrolysis makes H2SO4: the blue fades and the pH DROPS while O₂ bubbles off the anode.' }
+  ]
+};
+function t() { return T; }
+document.documentElement.lang = 'en';
+
+/* =====================================================================
+   TAB PLUMBING
+===================================================================== */
+let activeTab = 'sim';
+function setTab(name) {
+  activeTab = name;
+  document.querySelectorAll('.tab-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.tab === name);
+  });
+  ['intro','sim','calc','mcq','recap'].forEach(p => {
+    const el = document.getElementById('panel-' + p);
+    el.classList.toggle('active', p === name);
+  });
+  scheduleResize();
+  if (name === 'sim') { resizeCanvas(); }
+}
+function toggleTeacher() {
+  document.getElementById('teacher-panel').classList.toggle('hidden');
+}
+
+/* =====================================================================
+   PRODUCT DEFINITIONS — data per brief (two-layer reasons, E⦵ tags)
+===================================================================== */
+const PROD = {
+  H2:  { nm: 'H₂(g)',            gas: 'H2',  e: 2, obs: 'Colourless bubbles at the cathode; a squeaky POP with a burning splint.' },
+  Cu:  { nm: 'Cu(s)',            dep: 'Cu',  e: 2, M: 63.5, obs: 'Reddish-brown coating builds up on the cathode.' },
+  Ag:  { nm: 'Ag(s)',            dep: 'Ag',  e: 1, M: 107.9, obs: 'Shiny silver-grey deposit (silver mirror) on the cathode.' },
+  Na:  { nm: 'Na(l)',            dep: 'Na',  e: 1, M: 23.0, obs: 'Silvery beads of molten sodium form (mp of Na ≈ 98 °C — well below the ~800 °C cell).' },
+  Al:  { nm: 'Al(l)',            dep: 'Al',  e: 3, M: 27.0, obs: 'Molten aluminium collects at the cathode base (cell ≈ 950 °C, Al₂O₃ dissolved in cryolite).' },
+  O2:  { nm: 'O₂(g)',            gas: 'O2',  e: 4, obs: 'Colourless bubbles; relights a glowing splint.' },
+  Cl2: { nm: 'Cl₂(g)',           gas: 'Cl2', e: 2, obs: 'Pale green gas with a choking smell; bleaches damp blue litmus.' }
+};
+const EQCAT = {
+  H2:  'Cathode: 2H⁺(aq) + 2e⁻ → H₂(g)   (accepted alternative: 2H₂O(l) + 2e⁻ → H₂(g) + 2OH⁻(aq))',
+  Cu:  'Cathode: Cu²⁺(aq) + 2e⁻ → Cu(s)',
+  Ag:  'Cathode: Ag⁺(aq) + e⁻ → Ag(s)',
+  Na:  'Cathode: Na⁺(l) + e⁻ → Na(l)',
+  Al:  'Cathode: Al³⁺(l) + 3e⁻ → Al(l)'
+};
+const EQAN_AQ = 'Anode: 2H₂O(l) → O₂(g) + 4H⁺(aq) + 4e⁻   (accepted alternative: 4OH⁻(aq) → O₂(g) + 2H₂O(l) + 4e⁻)';
+const EQAN = {
+  O2:  EQAN_AQ,
+  O2M: 'Anode: 2O²⁻(l) → O₂(g) + 4e⁻',
+  Cl2: 'Anode: 2Cl⁻(aq) → Cl₂(g) + 2e⁻',
+  Cl2M:'Anode: 2Cl⁻(l) → Cl₂(g) + 2e⁻'
+};
+function R(l1, l2) { return { l1: l1, l2: l2 }; }
+
+/* =====================================================================
+   ELECTROLYTE MODES — set from original per brief: dilute/conc NaCl,
+   dilute H2SO4, CuSO4, AgNO3, molten NaCl, molten Al2O3.
+===================================================================== */
+const M = {
+  nacl: {
+    label: 'NaCl(aq)', kind: 'aqueous',
+    inv: function (conc) {
+      return [
+        { sp: 'Na⁺(aq)', ch: +1, tag: 'spectator — stays in solution' },
+        { sp: 'Cl⁻(aq)', ch: -1, tag: conc >= 1.2 ? 'oxidised (concentrated)' : 'not oxidised (dilute)' },
+        { sp: 'H⁺(aq)', ch: +1, tag: 'from water — reduced to H₂' },
+        { sp: 'OH⁻(aq)', ch: -1, tag: 'from water' },
+        { sp: 'H₂O(l)', ch: 0, tag: 'solvent' }
+      ];
+    },
+    cat: 'H2',
+    an: function (conc) { return conc >= 1.2 ? 'Cl2' : 'O2'; },
+    anEq: function (conc) { return conc >= 1.2 ? EQAN.Cl2 : EQAN.O2; },
+    catR: R('H⁺ (from water) is reduced MORE READILY than Na⁺, so hydrogen forms and Na⁺ stays in solution — which is exactly why sodium metal can only be made from the molten salt.',
+            'E⦵ enrichment: E⦵(2H₂O/H₂ + 2OH⁻) = −0.83 V ≫ E⦵(Na⁺/Na) = −2.71 V — the more positive couple is reduced.'),
+    anR: function (conc) {
+      return conc >= 1.2
+        ? R('Chloride is oxidised more readily than water HERE because [Cl⁻] is very high (plus O₂ formation is sluggish at the electrode — overvoltage, a reason accepted at this level): pale green Cl₂.',
+            'E⦵ enrichment: on E⦵ alone water should win (O₂/H₂O = +1.23 V is LESS positive than Cl₂/Cl⁻ = +1.36 V, so easier to oxidise) — the concentration switch flips the product. Examiners love this switch.')
+        : R('In DILUTE solution OH⁻/H₂O is oxidised more readily than the scarce Cl⁻, so oxygen forms — same ions, different ease.',
+            'E⦵ enrichment: E⦵(O₂/H₂O) = +1.23 V < E⦵(Cl₂/Cl⁻) = +1.36 V, so water is the easier oxidation at low [Cl⁻].');
+    },
+    overall: function (conc) {
+      return conc >= 1.2
+        ? '2Cl⁻(aq) + 2H₂O(l) → Cl₂(g) + H₂(g) + 2OH⁻(aq)   (with Na⁺: 2NaCl(aq) + 2H₂O(l) → 2NaOH(aq) + H₂(g) + Cl₂(g))'
+        : '2H₂O(l) → 2H₂(g) + O₂(g)   (net = electrolysis of water — NaCl is left behind, so [NaCl] rises)';
+    },
+    drift: function (conc) {
+      return conc >= 1.2 ? 'Solution turns ALKALINE near the cathode (OH⁻/NaOH left): pH rises toward ~13; phenolphthalein would go pink.'
+                          : 'pH stays ≈ 7; water is used up, so the brine gradually concentrates.';
+    },
+    ph: function (conc) { return conc >= 1.2 ? { s: 7, e: 13 } : { s: 7, e: 6.9 }; },
+    liquid: 'rgba(150,205,255,0.16)',
+    note: 'Move the concentration slider while running — watch the anode product flip between O₂ and Cl₂.'
+  },
+  h2so4: {
+    label: 'H₂SO₄(aq) dilute', kind: 'aqueous',
+    inv: function () {
+      return [
+        { sp: 'H⁺(aq)', ch: +1, tag: 'reduced to H₂' },
+        { sp: 'SO₄²⁻(aq)', ch: -1, tag: 'spectator — S is already +6, cannot oxidise further' },
+        { sp: 'OH⁻(aq)', ch: -1, tag: 'from water — oxidised to O₂' },
+        { sp: 'H₂O(l)', ch: 0, tag: 'solvent' }
+      ];
+    },
+    cat: 'H2', an: function () { return 'O2'; }, anEq: function () { return EQAN.O2; },
+    catR: R('H⁺ is the ONLY cation present — it is reduced to hydrogen gas.',
+            'E⦵: H⁺/H₂ = 0.00 V.'),
+    anR: R('OH⁻/H₂O is oxidised more readily than SO₄²⁻ (sulfur is already at its maximum +6 oxidation state) — oxygen forms.',
+            'E⦵: O₂/H₂O = +1.23 V.'),
+    overall: function () { return '2H₂O(l) → 2H₂(g) + O₂(g)   (the acid only provides mobile ions — it is being concentrated)'; },
+    drift: function () { return 'Water is used up → the acid gets MORE concentrated (pH drifts slightly lower); gas volumes are H₂ : O₂ = 2 : 1.'; },
+    ph: function () { return { s: 1.3, e: 1.0 }; },
+    liquid: 'rgba(200,220,255,0.12)',
+    note: 'Hofmann-style water electrolysis: read the 2 : 1 gas ratio off the readouts.'
+  },
+  cuso4: {
+    label: 'CuSO₄(aq)', kind: 'aqueous',
+    inv: function () {
+      return [
+        { sp: 'Cu²⁺(aq)', ch: +2, tag: 'reduced MORE readily than H⁺' },
+        { sp: 'SO₄²⁻(aq)', ch: -1, tag: 'spectator' },
+        { sp: 'H⁺(aq)', ch: +1, tag: 'produced at the anode as electrolysis runs' },
+        { sp: 'OH⁻(aq)', ch: -1, tag: 'from water — oxidised to O₂' },
+        { sp: 'H₂O(l)', ch: 0, tag: 'solvent' }
+      ];
+    },
+    cat: 'Cu', an: function () { return 'O2'; }, anEq: function () { return EQAN.O2; },
+    catR: R('Cu²⁺ is reduced MORE READILY than H⁺ (or water), so copper plates onto the cathode — hydrogen does NOT form here.',
+            'E⦵ enrichment: E⦵(Cu²⁺/Cu) = +0.34 V > E⦵(H⁺/H₂) = 0.00 V → the more positive couple is reduced.'),
+    anR: R('OH⁻/H₂O is oxidised more readily than SO₄²⁻ (S already +6) → oxygen.',
+            'E⦵: O₂/H₂O = +1.23 V.'),
+    overall: function () { return '2Cu²⁺(aq) + 2H₂O(l) → 2Cu(s) + O₂(g) + 4H⁺(aq)   (SO₄²⁻ spectator ⇒ the solution becomes dilute H₂SO₄)'; },
+    drift: function () { return 'Blue FADES as Cu²⁺ is removed; pH DROPS (acid forms). "No pH change" is a myth — examiners note it.'; },
+    ph: function () { return { s: 4, e: 1.5 }; },
+    liquid: 'rgba(60,140,255,',   /* + alpha* + ')' */
+    note: 'Watch the blue fade and the reddish-brown coating thicken as charge passes.'
+  },
+  agno3: {
+    label: 'AgNO₃(aq)', kind: 'aqueous',
+    inv: function () {
+      return [
+        { sp: 'Ag⁺(aq)', ch: +1, tag: 'very easily reduced' },
+        { sp: 'NO₃⁻(aq)', ch: -1, tag: 'spectator — N is already +5' },
+        { sp: 'H⁺(aq)', ch: +1, tag: 'appears at the anode' },
+        { sp: 'OH⁻(aq)', ch: -1, tag: 'from water — oxidised to O₂' },
+        { sp: 'H₂O(l)', ch: 0, tag: 'solvent' }
+      ];
+    },
+    cat: 'Ag', an: function () { return 'O2'; }, anEq: function () { return EQAN.O2; },
+    catR: R('Ag⁺ is reduced far more readily than H⁺ — a silver mirror deposits on the cathode.',
+            'E⦵ enrichment: E⦵(Ag⁺/Ag) = +0.80 V ≫ 0.00 V.'),
+    anR: R('OH⁻/H₂O is oxidised more readily than NO₃⁻ (N is already at +5) → oxygen.',
+            'E⦵: O₂/H₂O = +1.23 V.'),
+    overall: function () { return '4Ag⁺(aq) + 2H₂O(l) → 4Ag(s) + O₂(g) + 4H⁺(aq)   (NO₃⁻ spectator ⇒ HNO₃ forms, pH drops)'; },
+    drift: function () { return 'Solution acidifies as H⁺ accumulates (HNO₃ forms); handle AgNO₃ in the real lab — it stains skin dark.'; },
+    ph: function () { return { s: 6, e: 2 }; },
+    liquid: 'rgba(210,225,240,0.10)',
+    note: 'Silver deposits at just 1 e⁻ per Ag⁺ — the deposit grows fastest per coulomb here.'
+  },
+  naclm: {
+    label: 'NaCl(l) MOLTEN', kind: 'molten',
+    inv: function () {
+      return [
+        { sp: 'Na⁺(l)', ch: +1, tag: 'the ONLY cation — must be reduced' },
+        { sp: 'Cl⁻(l)', ch: -1, tag: 'the ONLY anion — oxidised to Cl₂' }
+      ];
+    },
+    cat: 'Na', an: function () { return 'Cl2'; }, anEq: function () { return EQAN.Cl2M; },
+    catR: R('No water ⇒ no competition: Na⁺ is the only species that can be reduced, so molten sodium forms. (This is how Na and other Group 1/2 metals are extracted.)',
+            'E⦵ note: Na⁺/Na = −2.71 V is so negative that NO chemical reducing agent is strong enough — only electrolysis forces it.'),
+    anR: R('Cl⁻ is the only species that can be oxidised → chlorine gas.',
+            'E⦵: Cl₂/Cl⁻ = +1.36 V; nothing easier to oxidise exists in the melt.'),
+    overall: function () { return '2NaCl(l) → 2Na(l) + Cl₂(g)'; },
+    drift: function () { return 'No water ⇒ no pH. Keep air away: molten Na re-oxidises instantly if O₂ is present (product mixing is dangerous).'; },
+    ph: function () { return null; },
+    liquid: 'rgba(190,195,210,0.20)',
+    note: 'The same TWO ions at both electrodes — molten electrolysis has no "competition" step.'
+  },
+  alum: {
+    label: 'Al₂O₃(l) MOLTEN', kind: 'molten',
+    inv: function () {
+      return [
+        { sp: 'Al³⁺(l)', ch: +3, tag: 'reduced to molten aluminium' },
+        { sp: 'O²⁻(l)', ch: -2, tag: 'oxidised to O₂' }
+      ];
+    },
+    cat: 'Al', an: function () { return 'O2'; }, anEq: function () { return EQAN.O2M; },
+    catR: R('Al³⁺ is the only cation, so it is forced to accept electrons → molten Al. Aluminium is too reactive (too hard to reduce) to be extracted chemically.',
+            'E⦵ enrichment: E⦵(Al³⁺/Al) = −1.66 V — very negative ⇒ reduction must be driven electrolytically.'),
+    anR: R('O²⁻ is oxidised to O₂ — and the O₂ then BURNS AWAY the graphite anodes to CO₂, so they must be replaced regularly (real industrial point, a past paper).',
+            'E⦵: O²⁻/O₂ couple sits far below Al³⁺/Al in reduction terms; the supply forces both directions.'),
+    overall: function () { return '2Al₂O₃(l) → 4Al(l) + 3O₂(g)   (half-eqs need ×4 and ×3 to balance 12 electrons)'; },
+    drift: function () { return 'No water ⇒ no pH. Cryolite lowers the melting point so the cell runs near 900–950 °C, not 2050 °C.'; },
+    ph: function () { return null; },
+    liquid: 'rgba(225,205,160,0.16)',
+    note: 'This exact context appeared in a past paper — a genuinely HKDSE-seen electrolysis.'
+  }
+};
+const MODE_ORDER = [
+  { m: 'nacl',  preset: 0.5, label: 'NaCl(aq) dilute' },
+  { m: 'nacl',  preset: 4.0, label: 'NaCl(aq) concentrated' },
+  { m: 'h2so4', preset: null, label: 'H₂SO₄(aq) dilute' },
+  { m: 'cuso4', preset: null, label: 'CuSO₄(aq)' },
+  { m: 'agno3', preset: null, label: 'AgNO₃(aq)' },
+  { m: 'naclm', preset: null, label: 'NaCl(l) molten' },
+  { m: 'alum',  preset: null, label: 'Al₂O₃(l) molten' }
+];
+
+/* =====================================================================
+   SIM STATE
+===================================================================== */
+const sim = {
+  mode: 'nacl', conc: 0.5, A: 2.0,
+  energised: false, seen: false,
+  catPick: '', anPick: '',
+  charge: 0,                 /* coulombs this run */
+  gas: { H2: 0, O2: 0, Cl2: 0 },
+  dep: { key: null, g: 0 },  /* g = real deposit mass (mol e−/z × M) */
+  depVis: 0,                 /* visual growth 0..1, driven by discharge events */
+  ions: [], bubbles: [],
+  fade: 0.30,                /* CuSO4 blue alpha */
+  ph: 7,
+  prevAn: null
+};
+/* =====================================================================
+   v3 TEACHING KIT — Task-1 gate, predict bank, fail-it cards, hint ladder
+   (shape verbatim from verified pilot flame_test.html; content this lab)
+===================================================================== */
+const PREDICTS = [
+  {
+    q: 'CuSO\u2084(aq) is electrolysed with inert graphite electrodes. What forms at the cathode (\u2212 electrode), and why?',
+    o: [
+      'Copper \u2014 Cu\u00b2\u207a ions are reduced more readily than H\u207a ions, so a red-brown deposit forms.',
+      'Hydrogen \u2014 H\u207a ions are always discharged at the cathode of an aqueous solution.',
+      'Sulfur \u2014 SO\u2084\u00b2\u207b ions migrate to the cathode and gain electrons.',
+      'Copper(II) hydroxide \u2014 OH\u207b ions combine with Cu\u00b2\u207a at the cathode.'
+    ],
+    a: 0,
+    why: 'The ion inventory is Cu\u00b2\u207a, SO\u2084\u00b2\u207b, H\u207a, OH\u207b. Only cations travel to the cathode, so option C is 0 (anions go to the ANODE). Cu sits BELOW hydrogen in the reactivity series (E\u29f5 Cu\u00b2\u207a/Cu = +0.34 V vs H\u207a/H\u2082 = 0.00 V), so Cu\u00b2\u207a is reduced more readily: Cu\u00b2\u207a(aq) + 2e\u207b \u2192 Cu(s). Option B scores 0 \u2014 H\u2082 is the cathode product only when the metal is more reactive than hydrogen (Na\u207a, K\u207a, Ca\u00b2\u207a, Mg\u00b2\u207a, Al\u00b3\u207a). Option D scores 0 \u2014 discharge is an electron-transfer step, not ions pairing up into a precipitate.'
+  }
+];
+const labDock = { answered: false, prPick: null };
+function gateOpen() { return labDock.answered === true; }
+function applyGate() {
+  const locked = !gateOpen();
+  const dock = document.getElementById('sim-dock');
+  if (dock) { dock.classList.remove('locked', 'unlocked'); dock.classList.add(locked ? 'locked' : 'unlocked'); }
+  const st = document.getElementById('dock-state');
+  if (st) { st.classList.remove('st-lock', 'st-open'); st.classList.add(locked ? 'st-lock' : 'st-open'); st.textContent = locked ? '\ud83d\udd12 Locked' : '\u2713 Unlocked'; }
+  const ln = document.getElementById('dock-locknote');
+  if (ln) { ln.textContent = locked ? 'Locked — answer the prediction above correctly to unlock the apparatus controls.' : 'Unlocked — now pick an electrolyte, predict BOTH products in the Predict box, and press \u26a1 Energise.\nAfter the run, re-read the ion inventory: molten = salt ions only; aqueous = salt ions + H\u207a and OH\u207b from water.'; ln.style.color = locked ? '#fde68a' : '#6ee7b7'; }
+  const nt = document.getElementById('next-text');
+  if (nt) nt.textContent = locked ? 'Answer the Task 1 prediction above the cell controls' : 'Run the procedure: pick electrolyte \u2192 predict cathode + anode products \u2192 \u26a1 Energise \u2192 compare';
+  if (!locked) { try { localStorage.setItem('ial_electrolysis_v3_state', 'unlocked'); } catch (e) { } }
+}
+function lockedMsg() {
+  const p = document.getElementById('dock-locknote');
+  if (p) { p.textContent = 'Locked — answer the Task 1 prediction above (and press Reveal) first.'; p.style.color = '#fde68a'; }
+}
+function gate() { if (!gateOpen()) { lockedMsg(); return false; } return true; }
+function buildPredict() {
+  const p = PREDICTS[0];
+  document.getElementById('pr-q').textContent = p.q;
+  document.getElementById('pr-why').classList.add('hidden');
+  document.getElementById('pr-opts').innerHTML = p.o.map((o, i) =>
+    '<button type="button" class="pr-opt px-3 py-2 rounded-lg text-xs font-semibold text-left" data-p="' + i + '">' + 'ABCD'[i] + ' \u00b7 ' + o + '</button>').join('');
+  document.querySelectorAll('.pr-opt').forEach(b => {
+    b.onclick = () => { labDock.prPick = +b.dataset.p; document.querySelectorAll('.pr-opt').forEach(x => x.classList.toggle('picked', x === b)); };
+  });
+  document.getElementById('pr-reveal').onclick = () => {
+    const why = document.getElementById('pr-why');
+    const picked = labDock.prPick;
+    const right = (picked === p.a);
+    if (right) { labDock.answered = true; applyGate(); }
+    why.textContent = 'Answer ' + 'ABCD'[p.a] + '. ' +
+      (picked === null || picked === undefined ? 'No prediction made yet — pick an option above.' : (right ? 'Correct — controls unlocked. ' : 'Not correct — fix your pick and Reveal again. ')) + p.why;
+    why.classList.remove('hidden');
+  };
+}
+function goNext() {
+  const g = document.getElementById('next-go');
+  const tab = (g && g.dataset.go) ? g.dataset.go : 'sim';
+  setTab(tab);
+  const el = tab === 'sim' ? document.getElementById('sim-dock') : document.getElementById('panel-' + tab);
+  if (el && el.scrollIntoView) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+function bindTasks() {
+  const fails = {
+    a: { name: 'Predicting sodium metal at the cathode of brine (concentrated NaCl(aq))',
+      txt: 'The student writes "silvery sodium forms at the cathode" for aqueous NaCl, copying the molten-salt result.',
+      what: 'Na\u207a sits ABOVE hydrogen in the reactivity series, so in the presence of water H\u207a (from water) is reduced more readily: 2H\u207a(aq) + 2e\u207b \u2192 H\u2082(g). The Na\u207a stays in solution \u2014 that is exactly why brine electrolysis leaves NaOH(aq) behind (the chlor-alkali industry). Na(l) only forms from MOLTEN NaCl, where there is no H\u207a/OH\u207b to compete.',
+      fix: 'Check the metal against hydrogen FIRST. Aqueous NaCl: cathode H\u207a \u2192 H\u2082. Molten NaCl: Na\u207a \u2192 Na(l). Same cation, different answer — the water changes the inventory.',
+      ms: 'MS: "H\u207a/water is reduced in preference to Na\u207a". Claiming Na from brine contradicts the chlor-alkali products and scores 0.' },
+    b: { name: 'Saying Cl\u2082 forms at the anode of dilute NaCl(aq)',
+      txt: 'The student names the anode product from the salt alone: "chloride discharged \u2192 chlorine", ignoring concentration.',
+      what: 'The ion inventory (Na\u207a, Cl\u207b, H\u207a, OH\u207b) is identical at every concentration. What flips is readiness: at low [Cl\u207b] water/OH\u207b is oxidised more readily \u2192 O\u2082; only in CONCENTRATED brine is Cl\u207b oxidised in preference to OH\u207b \u2192 Cl\u2082 (pale-green gas, bleaches litmus). Run it: drag the concentration slider past \u22481 mol dm\u207b\u00b3 and watch the anode product switch.',
+      fix: 'Name the species AND the reason: "Cl\u207b is oxidised more readily than OH\u207b at this (high) concentration" — dilute gives O\u2082 with the opposite wording.',
+      ms: 'MS: concentrated \u2192 Cl\u2082, dilute \u2192 O\u2082, each needing "oxidised more readily" wording. Naming Cl\u2082 for the dilute cell scores 0.' },
+    c: { name: 'Saying the CuSO\u2084(aq) solution stays unchanged while it runs',
+      txt: 'The student predicts "blue solution, no change" after passing current through CuSO\u2084(aq) for a while.',
+      what: 'Cu\u00b2\u207a is plated out at the cathode (so the blue fades as [Cu\u00b2\u207a] falls) while water is oxidised at the anode, releasing H\u207a: 2H\u2082O(l) \u2192 O\u2082(g) + 4H\u207a(aq) + 4e\u207b. The solution ends up containing H\u2082SO\u2084 \u2014 the pH DROPS. Run it and watch the drift tile.',
+      fix: 'Predict the drift, not just the products: cathode red-brown deposit, anode colourless bubbles, blue fades, pH falls. AgNO\u2073(aq) behaves the same way (HNO\u2083 forms, pH drops).',
+      ms: 'MS asks for "blue colour fades" and "pH decreases / solution becomes acidic"; "no change" scores 0 even when the two electrode products are right.' }
+  };
+  document.querySelectorAll('[data-fail]').forEach(b => {
+    b.onclick = () => {
+      const f = fails[b.dataset.fail]; if (!f) return;
+      const p = document.getElementById('fail-panel');
+      p.innerHTML = '<div class="space-y-2">' +
+        '<div class="rounded-xl border border-amber-500/30 bg-amber-950/20 p-3"><p class="text-xs font-bold text-amber-200 uppercase tracking-wide mb-1">' + f.name + '</p><p class="text-sm text-slate-200">' + f.txt + '</p></div>' +
+        '<div class="border-l-[3px] border-rose-500 bg-rose-950/20 rounded-lg p-3"><p class="text-xs font-bold text-rose-200 uppercase tracking-wide mb-1">What is wrong with it</p><p class="text-sm text-slate-200">' + f.what + '</p></div>' +
+        '<div class="rounded-xl border border-emerald-600/30 bg-emerald-950/20 p-3"><p class="text-xs font-bold text-emerald-200 uppercase tracking-wide mb-1">Do it this way instead</p><p class="text-sm text-slate-200">' + f.fix + '</p></div>' +
+        '<p class="text-xs text-teal-300">' + f.ms + '</p></div>';
+    };
+  });
+  const cl = document.getElementById('fail-clear');
+  if (cl) cl.onclick = () => { document.getElementById('fail-panel').innerHTML = ''; };
+  const hints = {
+    1: 'Start with the inventory: write down EVERY ion in an aqueous electrolysis — the salt\u2019s ions PLUS H\u207a and OH\u207b from water. No list, no marks.',
+    2: 'Then decide readiness at each electrode. Cathode: metal below hydrogen (Cu, Ag) \u21d2 metal deposits; metal above hydrogen (Na, K, Ca, Mg, Al) \u21d2 H\u2082. Anode: concentrated halide \u21d2 halogen; anything else \u21d2 O\u2082 from water/OH\u207b. Molten: only the salt\u2019s ions exist, so the metal and the halogen (or O\u00b2\u207b \u21d2 O\u2082) must discharge.',
+    3: 'Full 3-mark chain: (1) name the ions and which electrode each travels to, (2) "is reduced / oxidised MORE READILY than \u2026" for each electrode, (3) the two half-equations with state symbols and electrons cancelled, then add them. E\u29f5 numbers only pay off as elective enrichment — the readiness wording is what scores at this level.'
+  };
+  document.querySelectorAll('[data-hint]').forEach(b => {
+    b.onclick = () => { document.getElementById('hint-text').textContent = hints[b.dataset.hint] || ''; };
+  });
+}
+const F = 96485, VM = 24000;  /* C mol⁻¹, cm³ mol⁻¹ at r.t.p. */
+
+function P() {
+  const m = M[sim.mode];
+  const anKey = (typeof m.an === 'function') ? m.an(sim.conc) : m.an;
+  const anEq  = (typeof m.anEq === 'function') ? m.anEq(sim.conc) : m.anEq;
+  const anR   = (typeof m.anR === 'function') ? m.anR(sim.conc) : m.anR;
+  const ov    = (typeof m.overall === 'function') ? m.overall(sim.conc) : m.overall;
+  const dr    = (typeof m.drift === 'function') ? m.drift(sim.conc) : m.drift;
+  const ph    = (typeof m.ph === 'function') ? m.ph(sim.conc) : m.ph;
+  return {
+    catKey: m.cat, anKey,
+    cat: PROD[m.cat], an: PROD[anKey],
+    catEq: EQCAT[m.cat], anEq,
+    catR: m.catR, anR,
+    overall: ov, drift: dr, ph,
+    kind: m.kind, inv: m.inv(sim.conc)
+  };
+}
+function catIonFor(k) { return k === 'H2' ? 'H⁺' : k === 'Cu' ? 'Cu²⁺' : k === 'Ag' ? 'Ag⁺' : k === 'Na' ? 'Na⁺' : 'Al³⁺'; }
+function anIonFor(k) { return k === 'Cl2' ? 'Cl⁻' : (M[sim.mode].kind === 'molten' ? 'O²⁻' : 'OH⁻'); }
+
+/* =====================================================================
+   CANVAS ENGINE
+===================================================================== */
+let ctx = null, canvasEl = null, W = 720, H = 430;
+let lastFrame = 0, lastRO = 0;
+
+function resizeCanvas() {
+  canvasEl = canvasEl || document.getElementById('sim-canvas');
+  const wrap = canvasEl.closest('.canvas-wrap');
+  const rect = wrap ? wrap.getBoundingClientRect() : { width: 0 };
+  const w = Math.max(rect.width, canvasEl.offsetWidth || 0);
+  if (!w || w < 50) return;              /* hidden tab guard */
+  const h = Math.max(430, w * 0.56);
+  canvasEl.width = W = Math.round(w);
+  canvasEl.height = H = Math.round(h);
+  ctx = canvasEl.getContext('2d');
+  /* no painting here — the RAF loop does all painting */
+}
+function scheduleResize() { resizeCanvas(); }
+
+function buildIons() {
+  const m = M[sim.mode];
+  const mix = { nacl: ['Na⁺', 'Na⁺', 'Na⁺', 'Cl⁻', 'Cl⁻', 'Cl⁻', 'H⁺', 'H⁺', 'OH⁻', 'OH⁻'],
+                h2so4: ['H⁺', 'H⁺', 'H⁺', 'H⁺', 'SO₄²⁻', 'SO₄²⁻', 'OH⁻', 'OH⁻'],
+                cuso4: ['Cu²⁺', 'Cu²⁺', 'Cu²⁺', 'SO₄²⁻', 'SO₄²⁻', 'H⁺', 'H⁺', 'OH⁻', 'OH⁻'],
+                agno3: ['Ag⁺', 'Ag⁺', 'Ag⁺', 'NO₃⁻', 'NO₃⁻', 'H⁺', 'H⁺', 'OH⁻', 'OH⁻'],
+                naclm: ['Na⁺', 'Na⁺', 'Na⁺', 'Cl⁻', 'Cl⁻', 'Cl⁻'],
+                alum:  ['Al³⁺', 'Al³⁺', 'Al³⁺', 'O²⁻', 'O²⁻', 'O²⁻'] }[sim.mode];
+  const chg = { 'Na⁺': 1, 'H⁺': 1, 'Cu²⁺': 2, 'Ag⁺': 1, 'Al³⁺': 3, 'Cl⁻': -1, 'OH⁻': -1, 'SO₄²⁻': -2, 'NO₃⁻': -1, 'O²⁻': -2 };
+  sim.ions = [];
+  for (let i = 0; i < 26; i++) {
+    const sp = mix[i % mix.length];
+    sim.ions.push({ sp: sp, ch: chg[sp], x: 0.15 + Math.random() * 0.7, y: 0.10 + Math.random() * 0.8, vx: 0, vy: 0 });
+  }
+}
+
+function spawnIon(p) { p.x = 0.25 + Math.random() * 0.5; p.y = 0.10 + Math.random() * 0.8; p.vx = 0; p.vy = 0; }
+
+function step(dt) {
+  const p = P();
+  const on = sim.energised;
+  const drift = 0.05 + sim.A * 0.03;           /* fraction of cell per second */
+  const catSp = catIonFor(p.catKey), anSp = anIonFor(p.anKey);
+  /* ions */
+  for (const q of sim.ions) {
+    if (on) {
+      const dir = q.ch > 0 ? 1 : -1;           /* cations → cathode (right), anions → anode (left) */
+      q.x += dir * drift * dt * (0.6 + 0.25 * Math.abs(q.ch));
+      q.y += (Math.random() - 0.5) * 0.02;
+      if (q.y < 0.06) q.y = 0.06; if (q.y > 0.94) q.y = 0.94;
+      const sp = q.sp;
+      if (dir > 0 && q.x > 0.92) {             /* reached cathode face */
+        q.x = 0.90;
+        if (sp === catSp) {
+          spawnIon(q);
+          if (p.cat.gas) sim.bubbles.push({ side: 1, g: p.cat.gas, y: 0.98, x: 0.90, r: 3 + Math.random() * 3, wob: Math.random() * 6 });
+          else { sim.depVis = Math.min(1, sim.depVis + 0.03); sim.dep.key = p.catKey; }
+        } else { q.vx = -0.02; q.x -= 0.05; }
+      } else if (dir < 0 && q.x < 0.08) {      /* reached anode face */
+        q.x = 0.10;
+        if (sp === anSp) {
+          spawnIon(q);
+          sim.bubbles.push({ side: 0, g: p.an.gas, y: 0.98, x: 0.10, r: 3 + Math.random() * 3, wob: Math.random() * 6 });
+        } else { q.x = 0.12; q.vx = 0.02; }
+      }
+    } else {
+      q.x += (Math.random() - 0.5) * 0.008;
+      q.y += (Math.random() - 0.5) * 0.008;
+      q.x = Math.min(0.9, Math.max(0.1, q.x));
+      q.y = Math.min(0.94, Math.max(0.06, q.y));
+    }
+  }
+  /* bubbles */
+  for (const b of sim.bubbles) b.y -= (0.25 + sim.A * 0.08) * dt;
+  sim.bubbles = sim.bubbles.filter(b => b.y > 0.02);
+  if (sim.bubbles.length > 70) sim.bubbles.splice(0, sim.bubbles.length - 70);
+  /* charge bookkeeping — REAL relations, ×300 sim clock */
+  if (on) {
+    const dQ = sim.A * dt * 300;
+    sim.charge += dQ;
+    const ne = dQ / F;                          /* mol e− */
+    if (p.cat.gas) sim.gas[p.cat.gas] += (ne / p.cat.e) * VM; else sim.dep.g += (ne / p.cat.e) * p.cat.M;
+    if (p.an.gas) sim.gas[p.an.gas] += (ne / p.an.e) * VM;
+    if (p.catKey === 'Cu') sim.fade = Math.max(0.03, 0.30 * Math.exp(-sim.charge / 9650));
+    const phr = p.ph;
+    if (phr) { const prog = Math.min(1, sim.charge / 1930); sim.ph = phr.s + (phr.e - phr.s) * prog; }
+  }
+  /* live concentration switch */
+  if (on && sim.prevAn && sim.prevAn !== p.anKey) {
+    flashSwitch(p);
+  }
+  sim.prevAn = p.anKey;
+}
+
+function polyPoint(pts, t) {
+  let total = 0; const segs = [];
+  for (let i = 1; i < pts.length; i++) { const L = Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]); segs.push(L); total += L; }
+  let d = t * total;
+  for (let i = 0; i < segs.length; i++) {
+    if (d <= segs[i] || i === segs.length - 1) {
+      const k = segs[i] ? d / segs[i] : 0;
+      return [pts[i][0] + (pts[i + 1][0] - pts[i][0]) * k, pts[i][1] + (pts[i + 1][1] - pts[i][1]) * k];
+    }
+    d -= segs[i];
+  }
+  return pts[pts.length - 1];
+}
+
+function draw() {
+  if (!ctx) return;
+  const m = M[sim.mode], p = P();
+  ctx.clearRect(0, 0, W, H);
+  const g = ctx.createLinearGradient(0, 0, 0, H);
+  g.addColorStop(0, '#0b1220'); g.addColorStop(1, '#0d1626');
+  ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+
+  /* ---- layout ---- */
+  const LW = Math.min(255, W * 0.33);                 /* inventory column */
+  const bw = Math.min((W - LW) * 0.62, 300);
+  const bx = LW + (W - LW - bw) / 2 + 10;
+  const by = H * 0.34, bh = H * 0.56;
+  const ax = bx + bw * 0.26, kx = bx + bw * 0.74;     /* anode(left), cathode(right) */
+  const et = by - 46, eb = by + bh * 0.94;
+  const sy = 12, sh = 34, sx = bx + bw / 2 - 70, swd = 140;
+  const liqTop = by + bh * 0.08;
+
+  /* ---- liquid & beaker ---- */
+  ctx.fillStyle = sim.mode === 'cuso4' ? 'rgba(60,140,255,' + sim.fade.toFixed(3) + ')' : m.liquid;
+  ctx.beginPath();
+  ctx.rect(bx + 4, liqTop, bw - 8, by + bh - liqTop - 4);
+  ctx.fill();
+  ctx.strokeStyle = 'rgba(180,200,225,0.55)'; ctx.lineWidth = 2.5;
+  ctx.beginPath(); ctx.moveTo(bx, by); ctx.lineTo(bx, by + bh); ctx.lineTo(bx + bw, by + bh); ctx.lineTo(bx + bw, by); ctx.stroke();
+  ctx.strokeStyle = 'rgba(180,200,225,0.35)'; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(bx - 6, by); ctx.lineTo(bx + 8, by); ctx.moveTo(bx + bw - 8, by); ctx.lineTo(bx + bw + 6, by); ctx.stroke();
+
+  /* ---- electrodes (inert graphite) ---- */
+  for (const e of [[ax, 'ANODE +', '#f59e0b'], [kx, 'CATHODE −', '#2dd4bf']]) {
+    ctx.fillStyle = '#39424f';
+    ctx.fillRect(e[0] - 5, et, 10, eb - et);
+    ctx.strokeStyle = 'rgba(255,255,255,0.15)'; ctx.strokeRect(e[0] - 5, et, 10, eb - et);
+    ctx.fillStyle = e[2]; ctx.font = 'bold 11px ui-sans-serif,system-ui'; ctx.textAlign = 'center';
+    ctx.fillText(e[1], e[0], et - 6);
+    ctx.fillStyle = 'rgba(148,163,184,0.75)'; ctx.font = '9px ui-sans-serif,system-ui';
+    ctx.fillText('inert graphite', e[0], et - 20);
+  }
+  /* deposit on cathode — growth driven by discharge events, mass by charge */
+  if (p.cat.dep && sim.depVis > 0) {
+    const grow = sim.depVis;
+    if (p.cat.dep === 'Na' || p.cat.dep === 'Al') {
+      const rg = ctx.createRadialGradient(kx, eb - 6, 2, kx, eb - 6, 8 + 14 * grow);
+      rg.addColorStop(0, '#eef2f8'); rg.addColorStop(1, 'rgba(120,130,150,0.05)');
+      ctx.fillStyle = rg;
+      ctx.beginPath(); ctx.ellipse(kx, eb - 5, 8 + 14 * grow, 5 + 6 * grow, 0, 0, Math.PI * 2); ctx.fill();
+    } else {
+      const col = p.cat.dep === 'Cu' ? '#b87333' : '#d7dbe0';
+      ctx.fillStyle = col;
+      ctx.globalAlpha = 0.35 + 0.6 * grow;
+      ctx.fillRect(kx - 5 - 4 * grow, liqTop + 8, 4 + 3 * grow, (eb - liqTop) * grow);
+      ctx.fillRect(kx + 6, liqTop + 8, 3 + 3 * grow, (eb - liqTop) * grow);
+      ctx.globalAlpha = 1;
+    }
+  }
+  /* ---- ions ---- */
+  ctx.font = 'bold 9px ui-sans-serif,system-ui'; ctx.textAlign = 'center';
+  for (const q of sim.ions) {
+    const px = bx + 8 + q.x * (bw - 16);
+    const py = liqTop + q.y * (by + bh - liqTop - 10);
+    ctx.fillStyle = q.ch > 0 ? 'rgba(61,214,198,0.16)' : 'rgba(245,158,11,0.16)';
+    ctx.beginPath(); ctx.arc(px, py, 9.5, 0, Math.PI * 2); ctx.fill();
+    ctx.strokeStyle = q.ch > 0 ? 'rgba(61,214,198,0.65)' : 'rgba(245,158,11,0.65)';
+    ctx.lineWidth = 1; ctx.stroke();
+    ctx.fillStyle = q.ch > 0 ? '#99f6e4' : '#fcd34d';
+    ctx.fillText(q.sp.replace('(aq)', '').replace('(l)', ''), px, py + 3);
+  }
+  /* migration arrows */
+  if (sim.energised) {
+    ctx.fillStyle = 'rgba(153,246,228,0.8)'; ctx.font = '10px ui-sans-serif,system-ui';
+    ctx.fillText('cations →', bx + bw * 0.62, liqTop - 6);
+    ctx.fillStyle = 'rgba(252,211,77,0.8)';
+    ctx.fillText('← anions', bx + bw * 0.38, liqTop - 6);
+  }
+  /* ---- bubbles ---- */
+  for (const b of sim.bubbles) {
+    const px = (b.side === 1 ? kx + 8 : ax - 8) + Math.sin(b.wob + b.y * 12) * 4;
+    const py = liqTop + b.y * (by + bh - liqTop - 8);
+    const col = b.g === 'Cl2' ? 'rgba(190,240,110,0.75)' : b.g === 'O2' ? 'rgba(190,225,255,0.7)' : 'rgba(235,240,245,0.7)';
+    ctx.fillStyle = col;
+    ctx.beginPath(); ctx.arc(px, py, b.r, 0, Math.PI * 2); ctx.fill();
+    ctx.strokeStyle = 'rgba(255,255,255,0.25)'; ctx.stroke();
+  }
+  /* ---- power supply ---- */
+  ctx.fillStyle = '#1c2634'; ctx.strokeStyle = 'rgba(61,214,198,0.4)';
+  ctx.fillRect(sx, sy, swd, sh); ctx.strokeRect(sx, sy, swd, sh);
+  ctx.fillStyle = '#d1faf5'; ctx.font = 'bold 11px ui-sans-serif,system-ui'; ctx.textAlign = 'center';
+  ctx.fillText('D.C. SUPPLY', sx + swd / 2, sy + 15);
+  ctx.fillStyle = sim.energised ? '#34d399' : '#64748b';
+  ctx.fillText(sim.energised ? 'ON' : 'OFF', sx + swd / 2, sy + 28);
+  ctx.fillStyle = '#f87171'; ctx.font = 'bold 13px ui-sans-serif,system-ui';
+  ctx.fillText('+', sx + 26, sy + sh + 12);
+  ctx.fillStyle = '#94a3b8';
+  ctx.fillText('−', sx + swd - 26, sy + sh + 12);
+
+  /* ---- wires + electron flow ---- */
+  const wy = sy + sh + 6;
+  const wA = [[ax, et], [ax, wy + 18], [sx + 26, wy + 18], [sx + 26, sy + sh]];   /* e⁻ anode → + */
+  const wK = [[sx + swd - 26, sy + sh], [sx + swd - 26, wy + 18], [kx, wy + 18], [kx, et]]; /* e⁻ − → cathode */
+  ctx.strokeStyle = sim.energised ? '#fb7185' : '#5b6472'; ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.moveTo(wA[0][0], wA[0][1]); wA.slice(1).forEach(pt => ctx.lineTo(pt[0], pt[1])); ctx.stroke();
+  ctx.strokeStyle = sim.energised ? '#818cf8' : '#5b6472';
+  ctx.beginPath(); ctx.moveTo(wK[0][0], wK[0][1]); wK.slice(1).forEach(pt => ctx.lineTo(pt[0], pt[1])); ctx.stroke();
+  if (sim.energised) {
+    const nowT = performance.now() / 1000;
+    const speed = 0.06 + sim.A * 0.03;
+    for (let k = 0; k < 3; k++) {
+      let tt = (nowT * speed + k / 3) % 1;
+      let pt = polyPoint(wA, tt);
+      ctx.fillStyle = '#a5b4fc'; ctx.beginPath(); ctx.arc(pt[0], pt[1], 3, 0, Math.PI * 2); ctx.fill();
+      pt = polyPoint(wK, tt);
+      ctx.beginPath(); ctx.arc(pt[0], pt[1], 3, 0, Math.PI * 2); ctx.fill();
+    }
+    ctx.fillStyle = '#a5b4fc'; ctx.font = '10px ui-sans-serif,system-ui';
+    ctx.fillText('e⁻', (ax + sx + 26) / 2, wy + 12);
+    ctx.fillText('e⁻', (kx + sx + swd - 26) / 2, wy + 12);
+  }
+  ctx.fillStyle = 'rgba(148,163,184,0.85)'; ctx.font = '9.5px ui-sans-serif,system-ui';
+  ctx.fillText('e⁻ travel in WIRES only', sx + swd / 2, wy + 34);
+  ctx.fillText('ions carry charge in the liquid', sx + swd / 2, wy + 46);
+
+  /* ---- product labels ---- */
+  if (sim.seen) {
+    ctx.font = 'bold 11px ui-sans-serif,system-ui';
+    ctx.fillStyle = '#2dd4bf'; ctx.fillText(p.cat.nm + (p.cat.gas ? ' · ' + fmtV(sim.gas[p.cat.gas]) + ' cm³' : ' · ' + fmtM(sim.dep.g)), kx, eb + 18);
+    ctx.fillStyle = '#f59e0b'; ctx.fillText(p.an.nm + ' · ' + fmtV(sim.gas[p.an.gas]) + ' cm³', ax, eb + 18);
+  }
+
+  /* ---- ion inventory panel ---- */
+  const iv = p.inv;
+  const ipW = LW - 16, ipX = 8, ipY = 8;
+  const ipH = 46 + iv.length * 16 + 26;
+  ctx.fillStyle = 'rgba(2,6,14,0.72)'; ctx.strokeStyle = 'rgba(61,214,198,0.35)'; ctx.lineWidth = 1;
+  ctx.fillRect(ipX, ipY, ipW, ipH); ctx.strokeRect(ipX, ipY, ipW, ipH);
+  ctx.textAlign = 'left';
+  ctx.fillStyle = '#d1faf5'; ctx.font = 'bold 11px ui-sans-serif,system-ui';
+  ctx.fillText('ION INVENTORY — list ALL particles', ipX + 10, ipY + 18);
+  ctx.fillStyle = m.kind === 'aqueous' ? 'rgba(61,214,198,.14)' : 'rgba(251,191,36,.14)';
+  ctx.font = 'bold 9.5px ui-sans-serif,system-ui';
+  const chipTxt = m.kind === 'aqueous' ? 'AQUEOUS · water adds H⁺ + OH⁻' : 'MOLTEN · the salt\'s ions ONLY';
+  ctx.fillRect(ipX + 10, ipY + 25, ctx.measureText(chipTxt).width + 10, 14);
+  ctx.fillStyle = m.kind === 'aqueous' ? '#5eead4' : '#fcd34d';
+  ctx.fillText(chipTxt, ipX + 15, ipY + 35);
+  ctx.font = '10px ui-monospace,Consolas,monospace';
+  iv.forEach((row, i) => {
+    const y = ipY + 56 + i * 16;
+    ctx.fillStyle = row.ch > 0 ? '#99f6e4' : row.ch < 0 ? '#fcd34d' : '#cbd5e1';
+    ctx.fillText(row.sp, ipX + 10, y);
+    ctx.fillStyle = 'rgba(148,163,184,0.75)'; ctx.font = '9px ui-sans-serif,system-ui';
+    ctx.fillText('— ' + row.tag, ipX + 74, y);
+    ctx.font = '10px ui-monospace,Consolas,monospace';
+  });
+  ctx.fillStyle = 'rgba(148,163,184,0.9)'; ctx.font = '9.5px ui-sans-serif,system-ui';
+  ctx.fillText('Exam habit: write this list down BEFORE you predict.', ipX + 10, ipY + ipH - 8);
+
+  /* ---- mode chip row (DOM-mirrored) + overlay ---- */
+  if (!sim.energised) {
+    ctx.fillStyle = 'rgba(3,7,12,0.5)'; ctx.fillRect(0, 0, W, H);
+    ctx.fillStyle = '#e2e8f0'; ctx.font = 'bold 14px ui-sans-serif,system-ui'; ctx.textAlign = 'center';
+    ctx.fillText(sim.catPick && sim.anPick ? 'Power OFF — predictions locked in: press ⚡ Energise to test them' : 'Power OFF — pick BOTH products in the Predict box to unlock the power supply', W / 2, H * 0.5);
+    ctx.font = '11px ui-sans-serif,system-ui'; ctx.fillStyle = '#94a3b8';
+    ctx.fillText('Study the ion inventory, pick cathode & anode products, then energise.', W / 2, H * 0.5 + 20);
+  }
+  ctx.textAlign = 'left';
+}
+
+/* =====================================================================
+   RAF LOOP
+===================================================================== */
+function loop(ts) {
+  requestAnimationFrame(loop);
+  if (activeTab !== 'sim') { lastFrame = 0; return; }
+  if (!lastFrame) lastFrame = ts || 0;
+  const dt = Math.min(0.05, ((ts || 0) - lastFrame) / 1000);
+  lastFrame = ts || 0;
+  step(dt);
+  draw();
+  const now = ts || 0;
+  if (now - lastRO > 180) { lastRO = now; renderReadouts(); }
+}
+requestAnimationFrame(loop);
+
+/* =====================================================================
+   FORMATTERS + DOM RENDERERS
+===================================================================== */
+function fmtV(v) { return v >= 100 ? v.toFixed(0) : v >= 10 ? v.toFixed(1) : v.toFixed(2); }
+function fmtM(v) { return v.toFixed(2) + ' g'; }
+
+function renderModes() {
+  const el = document.getElementById('sim-modes');
+  el.innerHTML = MODE_ORDER.map((x, i) =>
+    '<button type="button" class="chip-btn sim-mode-btn" id="mode-' + i + '" data-m="' + x.m + '" ' +
+    'onclick="setElectrolyte(\'' + x.m + '\',' + (x.preset === null ? 'null' : x.preset) + ',\'' + x.label + '\')">' + x.label + '</button>'
+  ).join('');
+}
+function setElectrolyte(mode, preset, label) {
+  if (!gate()) return;
+  sim.mode = mode;
+  if (preset !== null && preset !== undefined) sim.conc = preset;
+  sim.energised = false; sim.seen = false;
+  sim.catPick = ''; sim.anPick = '';
+  sim.charge = 0; sim.gas = { H2: 0, O2: 0, Cl2: 0 }; sim.dep = { key: null, g: 0 }; sim.depVis = 0;
+  sim.bubbles = []; sim.fade = 0.30; sim.prevAn = null;
+  const phr = M[mode].ph(sim.conc);
+  sim.ph = phr ? phr.s : 7;
+  buildIons();
+  document.getElementById('pred-cathode').value = '';
+  document.getElementById('pred-anode').value = '';
+  document.getElementById('pred-feedback').classList.add('hidden');
+  document.getElementById('pred-feedback').innerHTML = '';
+  document.querySelectorAll('.sim-mode-btn').forEach(b => b.classList.remove('active'));
+  const idx = MODE_ORDER.findIndex(x => x.m === mode && (x.preset === preset || (preset !== null && x.preset === sim.conc)));
+  if (idx >= 0 && document.getElementById('mode-' + idx)) document.getElementById('mode-' + idx).classList.add('active');
+  refresh(true);
+}
+function setLabelConc() {
+  const el = document.getElementById('lbl-conc');
+  el.textContent = sim.conc.toFixed(1) + ' mol dm⁻³ — ' + (sim.conc >= 1.2 ? 'CONCENTRATED (anode: Cl₂)' : 'dilute (anode: O₂)') + (sim.mode === 'nacl' ? '' : '  (only affects NaCl(aq) mode)');
+}
+function refresh(clearEq) {
+  const p = P();
+  const m = M[sim.mode];
+  const phase = document.getElementById('phase-chip');
+  phase.textContent = m.kind === 'aqueous' ? 'MODE: AQUEOUS · adds H⁺(aq) + OH⁻(aq) from water' : 'MODE: MOLTEN · salt ions only — no H⁺/OH⁻';
+  phase.className = 'chip' + (m.kind === 'aqueous' ? '' : ' chip-warn');
+  setLabelConc();
+  document.getElementById('lbl-current').textContent = sim.A.toFixed(1) + ' A';
+  const ready = sim.catPick && sim.anPick;
+  document.getElementById('btn-energise').disabled = !ready && !sim.energised;
+  document.getElementById('pred-gate').innerHTML = ready
+    ? (sim.energised ? 'Running — compare your picks with the feedback below.' : 'Both picks made — power unlocked. Press ⚡ Energise.')
+    : 'Pick BOTH products in the Predict box to unlock the power supply. (Invent first, energise second — exam habit.)';
+  if (clearEq || !sim.seen) {
+    document.getElementById('eq-cathode').textContent = sim.seen ? p.catEq : 'Cathode: — (energise after predicting)';
+    document.getElementById('eq-anode').textContent = sim.seen ? p.anEq : 'Anode: — (energise after predicting)';
+    document.getElementById('eq-overall').textContent = sim.seen ? p.overall : 'Overall: electrons lost = electrons gained, then add.';
+    document.getElementById('obs-cathode').textContent = sim.seen ? 'Cathode — ' + p.cat.obs : 'Cathode observation appears while running.';
+    document.getElementById('obs-anode').textContent = sim.seen ? 'Anode — ' + p.an.obs : 'Anode observation appears while running.';
+    document.getElementById('obs-drift').textContent = sim.seen ? 'Solution — ' + p.drift : 'Note: ' + m.note + ' — pH / colour drift appears while running.';
+  } else {
+    document.getElementById('eq-anode').textContent = p.anEq;
+    document.getElementById('eq-overall').textContent = p.overall;
+    document.getElementById('obs-anode').textContent = 'Anode — ' + p.an.obs;
+    document.getElementById('obs-drift').textContent = 'Solution — ' + p.drift;
+  }
+}
+function renderReadouts() {
+  const p = P();
+  const tiles = [];
+  tiles.push('<div class="tile"><h4>Electrolyte · state</h4><p class="text-sm font-bold text-white">' + M[sim.mode].label + '</p><p class="text-xs ' + (M[sim.mode].kind === 'aqueous' ? 'text-teal-300' : 'text-amber-300') + '">' + (M[sim.mode].kind === 'aqueous' ? 'aqueous: salt ions + H⁺ + OH⁻' : 'molten: only the salt\'s ions') + '</p></div>');
+  tiles.push('<div class="tile"><h4>Current · charge</h4><p class="text-sm font-bold text-white">' + sim.A.toFixed(1) + ' A <span class="text-xs font-normal text-slate-400">· ' + Math.round(sim.charge) + ' C passed</span></p><p class="text-xs text-slate-400">' + (sim.charge / F).toFixed(4) + ' mol e⁻ <span class="text-slate-500">(extension maths: Q = It, n = Q/F)</span></p></div>');
+  let gasTxt = '<p class="text-sm font-bold text-white">' + (p.cat.gas ? p.cat.nm + ' · ' + fmtV(sim.gas[p.cat.gas]) + ' cm³' : p.cat.nm + ' · ' + fmtM(sim.dep.g)) + '</p>';
+  gasTxt += '<p class="text-xs text-slate-400">H₂ ' + fmtV(sim.gas.H2) + ' · O₂ ' + fmtV(sim.gas.O2) + ' · Cl₂ ' + fmtV(sim.gas.Cl2) + ' cm³</p>';
+  tiles.push('<div class="tile"><h4>Products (cm³ at r.t.p.)</h4>' + gasTxt + '</div>');
+  const phr = p.ph;
+  tiles.push('<div class="tile"><h4>Solution drift</h4><p class="text-sm font-bold text-white">' + (phr ? 'pH ≈ ' + sim.ph.toFixed(1) : 'no water → no pH') + '</p><p class="text-xs text-slate-400">' + (sim.mode === 'cuso4' ? 'blue α ' + (sim.fade * 3 + 70).toFixed(0) + '% · ' : '') + (sim.seen ? p.drift.split(';')[0] : 'energise to watch drift') + '</p></div>');
+  document.getElementById('sim-readouts').innerHTML = tiles.join('');
+}
+
+function togglePower() {
+  if (!gate()) return;
+  if (!sim.energised && !(sim.catPick && sim.anPick)) return;
+  sim.energised = !sim.energised;
+  if (sim.energised) { sim.seen = true; renderFeedback(); }
+  document.getElementById('btn-energise').textContent = sim.energised ? '⏹ Stop' : '⚡ Energise';
+  refresh(false);
+  renderReadouts();
+}
+function renderFeedback() {
+  const p = P();
+  const fb = document.getElementById('pred-feedback');
+  const okC = sim.catPick === p.catKey, okA = sim.anPick === p.anKey;
+  fb.classList.remove('hidden');
+  fb.innerHTML =
+    '<p class="font-bold ' + (okC ? 'text-emerald-300' : 'text-rose-300') + '">Cathode: you said ' + (sim.catPick ? PROD[sim.catPick].nm : '—') + (okC ? ' ✓' : ' ✗ — it is ' + p.cat.nm) + '</p>' +
+    '<p class="text-slate-300 mt-1">' + p.catR.l1 + '</p>' +
+    '<p class="text-amber-200/80 mt-0.5">' + p.catR.l2 + '</p>' +
+    '<p class="font-bold mt-3 ' + (okA ? 'text-emerald-300' : 'text-rose-300') + '">Anode: you said ' + (sim.anPick ? PROD[sim.anPick].nm : '—') + (okA ? ' ✓' : ' ✗ — it is ' + p.an.nm) + '</p>' +
+    '<p class="text-slate-300 mt-1">' + p.anR.l1 + '</p>' +
+    '<p class="text-amber-200/80 mt-0.5">' + p.anR.l2 + '</p>' +
+    '<p class="text-slate-400 mt-3 border-t border-white/10 pt-2">Command-word tip: in an exam, "explain" = name the species AND write "is reduced/oxidised <b>more readily</b> than …". E⦵ numbers earn the explanation only in elective answers — at this level the readiness wording is what scores.</p>';
+}
+function flashSwitch(p) {
+  const fb = document.getElementById('pred-feedback');
+  fb.classList.remove('hidden');
+  fb.innerHTML = '<p class="font-bold text-teal-300">⚠ Concentration switch!</p><p class="text-slate-300">The anode product just flipped to ' + p.an.nm + '. ' + p.anR.l1 + '</p><p class="text-amber-200/80 mt-1">' + p.anR.l2 + '</p>';
+}
+
+/* =====================================================================
+   STATIC PANEL RENDERERS
+===================================================================== */
+function renderIntro() {
+  const s = t();
+  document.getElementById('hdr-title').textContent = s.title;
+  document.getElementById('hdr-sub').textContent = s.subtitle;
+  document.getElementById('intro-h1').textContent = s.introH1;
+  document.getElementById('intro-lead').textContent = s.introLead;
+  document.getElementById('sim-caption').textContent = s.simCaption;
+  document.getElementById('teacher-title').textContent = s.teacherTitle;
+  document.getElementById('teacher-content').innerHTML = s.teacher.map(x => '<p>• ' + x + '</p>').join('');
+  document.getElementById('intro-cards').innerHTML = s.concepts.map(c =>
+    '<div class="glass p-4"><h3 class="font-bold text-indigo-300 text-sm mb-1">' + c.t + '</h3><p class="text-sm text-slate-300">' + c.d + '</p></div>').join('');
+}
+function renderCalc() {
+  const s = t();
+  document.getElementById('calc-title').textContent = s.calcTitle;
+  document.getElementById('calc-sub').textContent = s.calcSub;
+}
+function runCalc() {
+  const key = (document.getElementById('calc-el').value || 'nacl-conc');
+  const I = parseFloat(document.getElementById('calc-i').value) || 2.0;
+  const tmin = parseFloat(document.getElementById('calc-t').value) || 16.1;
+  const w = document.getElementById('calc-working');
+  w.classList.remove('hidden');
+  w.textContent = calcText(key, I, tmin);
+}
+function calcText(key, I, tmin) {
+  const S = {
+    'nacl-conc': {
+      inv: 'Na⁺(aq)  Cl⁻(aq)  H⁺(aq)  OH⁻(aq)  H₂O(l)',
+      cat: '2H⁺(aq) + 2e⁻ → H₂(g)', cath: 2,
+      an: '2Cl⁻(aq) → Cl₂(g) + 2e⁻', anh: 2,
+      scale: 'cathode ×1, anode ×1 → 2 e⁻ each side',
+      overall: '2Cl⁻(aq) + 2H₂O(l) → Cl₂(g) + H₂(g) + 2OH⁻(aq)'
+    },
+    'nacl-dil': {
+      inv: 'Na⁺(aq)  Cl⁻(aq)  H⁺(aq)  OH⁻(aq)  H₂O(l)',
+      cat: '2H⁺(aq) + 2e⁻ → H₂(g)', cath: 2,
+      an: '2H₂O(l) → O₂(g) + 4H⁺(aq) + 4e⁻', anh: 4,
+      scale: 'cathode ×2 (4 e⁻), anode ×1 (4 e⁻)',
+      overall: '2H₂O(l) → 2H₂(g) + O₂(g)'
+    },
+    'h2so4': {
+      inv: 'H⁺(aq)  SO₄²⁻(aq)  OH⁻(aq)  H₂O(l)',
+      cat: '2H⁺(aq) + 2e⁻ → H₂(g)', cath: 2,
+      an: '2H₂O(l) → O₂(g) + 4H⁺(aq) + 4e⁻', anh: 4,
+      scale: 'cathode ×2, anode ×1 → 4 e⁻',
+      overall: '2H₂O(l) → 2H₂(g) + O₂(g)   (H₂SO₄ unchanged — just concentrated)'
+    },
+    'cuso4': {
+      inv: 'Cu²⁺(aq)  SO₄²⁻(aq)  H⁺(aq)  OH⁻(aq)  H₂O(l)',
+      cat: 'Cu²⁺(aq) + 2e⁻ → Cu(s)', cath: 2,
+      an: '2H₂O(l) → O₂(g) + 4H⁺(aq) + 4e⁻', anh: 4,
+      scale: 'cathode ×2 (4 e⁻), anode ×1 (4 e⁻)',
+      overall: '2Cu²⁺(aq) + 2H₂O(l) → 2Cu(s) + O₂(g) + 4H⁺(aq)'
+    },
+    'agno3': {
+      inv: 'Ag⁺(aq)  NO₃⁻(aq)  H⁺(aq)  OH⁻(aq)  H₂O(l)',
+      cat: 'Ag⁺(aq) + e⁻ → Ag(s)', cath: 1,
+      an: '2H₂O(l) → O₂(g) + 4H⁺(aq) + 4e⁻', anh: 4,
+      scale: 'cathode ×4 (4 e⁻), anode ×1 (4 e⁻)',
+      overall: '4Ag⁺(aq) + 2H₂O(l) → 4Ag(s) + O₂(g) + 4H⁺(aq)'
+    },
+    'naclm': {
+      inv: 'Na⁺(l)  Cl⁻(l)   ← only TWO ions: no competition',
+      cat: 'Na⁺(l) + e⁻ → Na(l)', cath: 1,
+      an: '2Cl⁻(l) → Cl₂(g) + 2e⁻', anh: 2,
+      scale: 'cathode ×2 (2 e⁻), anode ×1 (2 e⁻)',
+      overall: '2NaCl(l) → 2Na(l) + Cl₂(g)   · ionic: 2Na⁺(l) + 2Cl⁻(l) → 2Na(l) + Cl₂(g)'
+    },
+    'alum': {
+      inv: 'Al³⁺(l)  O²⁻(l)',
+      cat: 'Al³⁺(l) + 3e⁻ → Al(l)', cath: 3,
+      an: '2O²⁻(l) → O₂(g) + 4e⁻', anh: 4,
+      scale: 'cathode ×4 (12 e⁻), anode ×3 (12 e⁻)',
+      overall: '4Al³⁺(l) + 6O²⁻(l) → 4Al(l) + 3O₂(g)   i.e. 2Al₂O₃(l) → 4Al(l) + 3O₂(g)'
+    }
+  }[key];
+  const dep = { 'cuso4': 'Cu', 'agno3': 'Ag', 'naclm': 'Na', 'alum': 'Al' }[key];
+  let out = 'ELECTROLYTE: ' + S.inv.replace('  ', '') + '\n\n';
+  out += 'Step 1 — Ion inventory (list ALL particles before predicting anything):\n  ' + S.inv + '\n\n';
+  out += 'Step 2 — Which is reduced more readily at the cathode (−)? Write the half-equation:\n  ' + S.cat + '   (electrons: ' + S.cath + ' e⁻)\n\n';
+  out += 'Step 3 — Which is oxidised more readily at the anode (+)? Write the half-equation:\n  ' + S.an + '   (electrons: ' + S.anh + ' e⁻)\n\n';
+  out += 'Step 4 — Equalise electrons (LCM): ' + S.scale + '\n\n';
+  out += 'Step 5 — Add, cancel electrons → OVERALL (ionic) equation:\n  ' + S.overall + '\n';
+  out += '\n✓ Check: atoms AND charge balance; state symbols present — that is all 8.10 asks for.';
+  if (dep) {
+    out += '\n  Deposit note: ' + PROD[dep].obs;
+    if (key === 'cuso4' || key === 'alum') out += '\n  ⚠ Common slip (cathode): do NOT leave the charge unbalanced — check total charge each side.';
+  }
+  /* Faraday enrichment */
+  const Q = I * tmin * 60;
+  const ne = Q / F;
+  let ext = '\n\n──────────────────────────────────────────────\nENRICHMENT (extension only — NOT examinable in a past paper; Faraday counting sits with elective content)\n──────────────────────────────────────────────\n';
+  ext += 'Charge passed:   Q = I × t = ' + I.toFixed(2) + ' A × ' + (tmin * 60).toFixed(0) + ' s = ' + fmtV(Q) + ' C\n';
+  ext += 'Moles of e⁻:     n(e⁻) = Q / F = ' + fmtV(Q) + ' / 96485 = ' + ne.toExponential(2) + ' mol\n';
+  ext += 'mol e⁻ → mol product (from the half-equation):\n';
+  ['cuso4', 'agno3', 'naclm', 'alum'].forEach(k => {
+    const kk = { cuso4: 'Cu', agno3: 'Ag', naclm: 'Na', alum: 'Al' }[k];
+    ext += '  ' + PROD[kk].nm + ':  n = n(e⁻)/' + PROD[kk].e + ' = ' + (ne / PROD[kk].e).toExponential(2) + ' mol → m = n × ' + PROD[kk].M + ' g mol⁻¹ = ' + (ne / PROD[kk].e * PROD[kk].M).toFixed(3) + ' g\n';
+  });
+  ext += '  H₂(g):  n = n(e⁻)/2 = ' + (ne / 2).toExponential(2) + ' mol → V = n × 24 000 = ' + (ne / 2 * VM).toFixed(1) + ' cm³ at r.t.p.\n';
+  ext += '  O₂(g):  n = n(e⁻)/4 → V = ' + (ne / 4 * VM).toFixed(1) + ' cm³   (H₂:O₂ = 2:1 — matches the sim readouts)';
+  return out + ext;
+}
+function renderMcq() {
+  const s = t();
+  document.getElementById('pp-title').textContent = s.ppTitle;
+  document.getElementById('pp-sub').textContent = s.ppSub;
+  document.getElementById('pp-questions').innerHTML = s.questions.map((q, qi) =>
+    '<div class="space-y-2"><p class="font-semibold text-slate-100 text-sm">' + (qi + 1) + '. ' + q.q + ' ' +
+    '<span class="chip chip-warn ml-1 align-middle">' + q.tag + '</span></p>' +
+    q.o.map((o, oi) =>
+      '<button type="button" class="mcq-opt w-full text-left text-sm px-4 py-2 rounded-xl border border-slate-700 bg-slate-900/50" data-q="' + qi + '" data-o="' + oi + '">' + 'ABCD'[oi] + ' · ' + o + '</button>').join('') +
+    '<p class="mcq-why hidden text-xs text-emerald-300/90 bg-emerald-950/40 border border-emerald-800/40 rounded-xl p-3 leading-relaxed"></p></div>').join('');
+  document.querySelectorAll('.mcq-opt').forEach(btn => {
+    btn.onclick = () => {
+      const q = s.questions[+btn.dataset.q];
+      const opts = document.querySelectorAll('.mcq-opt[data-q="' + btn.dataset.q + '"]');
+      opts.forEach(o => o.classList.remove('correct', 'wrong'));
+      btn.classList.add(+btn.dataset.o === q.a ? 'correct' : 'wrong');
+      opts[q.a].classList.add('correct');
+      const why = btn.closest('.space-y-2').querySelector('.mcq-why');
+      why.textContent = q.why;
+      why.classList.remove('hidden');
+    };
+  });
+}
+function renderRecap() {
+  const s = t();
+  document.getElementById('recap-title').textContent = s.recapTitle;
+  document.getElementById('recap-list').innerHTML = s.recapGoals.map((g, i) =>
+    '<li class="flex items-start gap-2 text-sm"><input type="checkbox" class="goal-check mt-1" data-g="' + i + '"><span class="text-slate-300">' + g + '</span></li>').join('');
+  document.querySelectorAll('.goal-check').forEach(c => c.onchange = saveRecap);
+  updateRecapProgress();
+  renderMyths();
+}
+function saveRecap() {
+  const arr = [];
+  document.querySelectorAll('.goal-check').forEach((c, i) => { if (c.checked) arr.push(i); });
+  try { localStorage.setItem('ial-electrolysis-recap-v1', JSON.stringify(arr)); } catch (e) { }
+  updateRecapProgress();
+}
+function updateRecapProgress() {
+  const checks = document.querySelectorAll('.goal-check');
+  let n = 0;
+  checks.forEach(c => { if (c.checked) n++; });
+  document.getElementById('recap-progress').textContent = n + ' / ' + checks.length + ' goals confirmed.';
+}
+function renderMyths() {
+  const s = t();
+  document.getElementById('myth-title').textContent = s.mythTitle;
+  document.getElementById('myth-lead').textContent = s.mythLead;
+  document.getElementById('myth-cards').innerHTML = s.myths.map((m, i) =>
+    '<div class="myth-card glass rounded-xl p-4" data-myth="' + i + '">' +
+    '<div class="myth-front"><span class="text-xs font-bold text-rose-400 uppercase">' + s.mythLabelMyth + '</span>' +
+    '<p class="text-sm text-slate-200 mt-2">' + m.m + '</p>' +
+    '<p class="text-xs text-slate-500 mt-3">' + s.mythFlip + '</p></div>' +
+    '<div class="myth-back"><span class="text-xs font-bold text-emerald-400 uppercase">' + s.mythLabelFact + '</span>' +
+    '<p class="text-sm text-slate-200 mt-2">' + m.f + '</p></div></div>').join('');
+  document.querySelectorAll('.myth-card').forEach(c => c.onclick = () => c.classList.toggle('flipped'));
+}
+
+/* =====================================================================
+   HANDLER BINDING (assigned, never called at boot)
+===================================================================== */
+document.getElementById('btn-energise').onclick = togglePower;
+document.getElementById('btn-reset-sim').onclick = function () {
+  sim.energised = false; sim.seen = false;
+  sim.charge = 0; sim.gas = { H2: 0, O2: 0, Cl2: 0 }; sim.dep = { key: null, g: 0 }; sim.depVis = 0;
+  sim.bubbles = []; sim.fade = 0.30; sim.prevAn = null;
+  const phr = P().ph; sim.ph = phr ? phr.s : 7;
+  buildIons();
+  document.getElementById('btn-energise').textContent = '⚡ Energise';
+  document.getElementById('pred-feedback').classList.add('hidden');
+  refresh(true);
+  renderReadouts();
+};
+document.getElementById('sl-current').oninput = function () { sim.A = parseFloat(this.value) || 2.0; document.getElementById('lbl-current').textContent = sim.A.toFixed(1) + ' A'; };
+document.getElementById('sl-conc').oninput = function () { if (!gate()) return; sim.conc = parseFloat(this.value) || 0.5; setLabelConc(); refresh(false); renderReadouts(); };
+document.getElementById('pred-cathode').onchange = function () { sim.catPick = this.value; refresh(false); };
+document.getElementById('pred-anode').onchange = function () { sim.anPick = this.value; refresh(false); };
+document.getElementById('pred-lead').textContent = 'The exam-winning order: (1) list the IONS present, (2) state which is reduced / oxidised MORE READILY, (3) then write the half-equations. Pick both products before the power supply unlocks.';
+
+
+/* =====================================================================
+   BOOT — only text/innerHTML/classList + handler assignment above.
+===================================================================== */
+renderIntro();
+renderCalc();
+renderMcq();
+renderRecap();
+try {
+  const saved = JSON.parse(localStorage.getItem('ial-electrolysis-recap-v1') || '[]');
+  if (saved && saved.length) document.querySelectorAll('.goal-check').forEach((c, i) => { if (saved.indexOf(i) >= 0) c.checked = true; });
+  updateRecapProgress();
+} catch (e) { }
+buildIons();
+renderModes();
+document.getElementById('mode-0').classList.add('active');
+refresh(true);
+renderReadouts();
+resizeCanvas();
+buildPredict();
+bindTasks();
+applyGate();
+</script>
+<script id="lab-runtime">(function () {
+'use strict';
+var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function relayout() {
+if (typeof window.scheduleResize === 'function') window.scheduleResize();
+else if (typeof window.resizeCanvas === 'function') window.resizeCanvas();
+}
+var pending = 0;
+function onRequestRelayout() {
+if (pending) return;
+pending = requestAnimationFrame(function () { pending = 0; relayout(); });
+}
+if (window.ResizeObserver) {
+var ro = new ResizeObserver(onRequestRelayout);
+document.querySelectorAll('.canvas-wrap').forEach(function (el) { ro.observe(el); });
+}
+window.addEventListener('orientationchange', onRequestRelayout);
+window.addEventListener('resize', onRequestRelayout);
+var bar = document.getElementById('next-bar');
+if (bar) {
+var setBarPad = function () {
+var h = Math.round(bar.offsetHeight);
+if (h > 0) document.body.style.setProperty('--next-bar-h', h + 'px');
+};
+setBarPad();
+if (window.ResizeObserver) new ResizeObserver(setBarPad).observe(bar);
+window.addEventListener('load', setBarPad);
+}
+var rail = document.getElementById('main-tabs');
+if (rail) {
+rail.setAttribute('role', 'tablist');
+var pills = Array.prototype.slice.call(rail.querySelectorAll('.tab-btn'));
+pills.forEach(function (btn, i) {
+var panel = document.getElementById('panel-' + btn.dataset.tab);
+btn.setAttribute('role', 'tab');
+btn.setAttribute('aria-selected', btn.classList.contains('active') ? 'true' : 'false');
+if (panel) {
+panel.setAttribute('role', 'tabpanel');
+btn.setAttribute('aria-controls', panel.id);
+panel.setAttribute('aria-labelledby', btn.id);
+}
+btn.addEventListener('keydown', function (e) {
+var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+if (!d) return;
+e.preventDefault();
+var next = pills[(i + d + pills.length) % pills.length];
+next.focus();
+if (typeof window.setTab === 'function') window.setTab(next.dataset.tab);
+});
+});
+rail.addEventListener('click', function () {
+setTimeout(function () {
+pills.forEach(function (b) { b.setAttribute('aria-selected', b.classList.contains('active') ? 'true' : 'false'); });
+var on = rail.querySelector('.tab-btn.active');
+if (on) on.scrollIntoView({ block: 'nearest', inline: 'center', behavior: reduce ? 'auto' : 'smooth' });
+}, 0);
+});
+}
+var dock = document.getElementById('sim-dock');
+if (dock && window.MutationObserver && !reduce) {
+new MutationObserver(function (m) {
+m.forEach(function (change) {
+var el = change.target;
+if (el.classList.contains('unlocked') && change.oldValue && /(^|\s)locked(\s|$)/.test(change.oldValue)) {
+el.classList.add('just-unlocked');
+setTimeout(function () { el.classList.remove('just-unlocked'); }, 750);
+}
+});
+}).observe(dock, { attributes: true, attributeFilter: ['class'], attributeOldValue: true });
+}
+document.addEventListener('click', function (e) {
+if (!e.target || !e.target.closest) return;
+if (e.target.closest('input, label, button, a, select')) return;
+var li = e.target.closest('li');
+if (!li) return;
+var box = li.querySelector('input[type="checkbox"], input[type="radio"]');
+if (!box || box.disabled) return;
+box.checked = box.type === 'checkbox' ? !box.checked : true;
+box.dispatchEvent(new Event('change', { bubbles: true }));
+box.dispatchEvent(new Event('input', { bubbles: true }));
+});
+if (window.IntersectionObserver && !reduce) {
+var io = new IntersectionObserver(function (entries) {
+entries.forEach(function (en) {
+if (!en.isIntersecting) return;
+en.target.classList.add('shown');
+io.unobserve(en.target);
+});
+}, { rootMargin: '0px 0px -6% 0px', threshold: 0.01 });
+document.querySelectorAll('.tab-panel > *').forEach(function (el, i) {
+el.classList.add('reveal');
+el.style.setProperty('--i', String(i));
+io.observe(el);
+});
+setTimeout(function () {
+document.querySelectorAll('.reveal:not(.shown)').forEach(function (el) { el.classList.add('shown'); });
+}, 2500);
+}
+})();</script>
+</body>
+</html>

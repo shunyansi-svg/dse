@@ -1,0 +1,1440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Melting Points of Metals | HKDSE Chemistry Topic II (c) (d)</title>
+<meta name="theme-color" content="#000000">
+<style>
+  input[type=range]{accent-color:#3dd6c6;}
+.mode-btn,.metal-chip,.pred-btn,.ms-chip{border:1px solid rgba(148,163,184,.35);background:rgba(15,23,42,.6);border-radius:.75rem;padding:.35rem .8rem;font-size:.78rem;font-weight:600;color:#cbd5e1;cursor:pointer;transition:all .15s;}
+.mode-btn:hover,.metal-chip:hover,.pred-btn:hover,.ms-chip:hover{border-color:rgba(61,214,198,.7);}
+.mode-btn.active,.metal-chip.active{background:rgba(61,214,198,.18);color:#d1faf5;border-color:rgba(61,214,198,.65);}
+.pred-btn.sel{background:rgba(129,140,248,.2);color:#e0e7ff;border-color:rgba(129,140,248,.7);}
+.ms-chip.on{background:rgba(52,211,153,.16);color:#d1fae5;border-color:rgba(52,211,153,.6);}
+.ro-card .ro-l{font-size:.75rem;letter-spacing:.05em;text-transform:uppercase;color:#64748b;font-weight:700;}
+.ro-card .ro-v{font-size:.92rem;font-weight:700;color:#e2e8f0;margin-top:.15rem;line-height:1.3;}
+table.datatbl{width:100%;border-collapse:collapse;font-size:.8rem;}
+table.datatbl th{color:#5eead4;text-align:left;font-weight:700;padding:.35rem .5rem;border-bottom:1px solid rgba(255,255,255,.12);}
+table.datatbl td{padding:.32rem .5rem;border-bottom:1px solid rgba(255,255,255,.05);color:#cbd5e1;}
+table.datatbl td.num{font-variant-numeric:tabular-nums;}
+.dim{opacity:.4;pointer-events:none;}
+</style>
+<style id="lab-theme">/* Shared design system for the chemistry lab fleet. Source: _build/src/theme.css + tailwind.config.js. Edit the source, then run node _build/src/build.cjs. Do not hand-edit this block. */*,:after,:before{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(10,132,255,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(10,132,255,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }*,:after,:before{box-sizing:border-box;border:0 solid #d1d1d6}:after,:before{--tw-content:""}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;-o-tab-size:4;tab-size:4;font-family:-apple-system,BlinkMacSystemFont,SF Pro Text,SF Pro Display,Segoe UI Variable Text,Segoe UI,system-ui,Helvetica Neue,sans-serif;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:SF Mono,ui-monospace,Cascadia Mono,Segoe UI Mono,Consolas,monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0}fieldset,legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::-moz-placeholder,textarea::-moz-placeholder{opacity:1;color:#aeaeb2}input::placeholder,textarea::placeholder{opacity:1;color:#aeaeb2}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}.visible{visibility:visible}.invisible{visibility:hidden}.collapse{visibility:collapse}.static{position:static}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.sticky{position:sticky}.inset-0{inset:0}.z-10{z-index:10}.z-\[110\]{z-index:110}.col-span-1{grid-column:span 1/span 1}.col-span-2{grid-column:span 2/span 2}.mx-auto{margin-left:auto;margin-right:auto}.my-3{margin-top:.75rem;margin-bottom:.75rem}.mb-1{margin-bottom:.25rem}.mb-1\.5{margin-bottom:.375rem}.mb-10{margin-bottom:2.5rem}.mb-2{margin-bottom:.5rem}.mb-3{margin-bottom:.75rem}.mb-4{margin-bottom:1rem}.mb-5{margin-bottom:1.25rem}.mb-8{margin-bottom:2rem}.ml-1{margin-left:.25rem}.ml-auto{margin-left:auto}.mr-1{margin-right:.25rem}.mr-2{margin-right:.5rem}.ms-0{margin-inline-start:0}.ms-1{margin-inline-start:.25rem}.ms-2{margin-inline-start:.5rem}.mt-0{margin-top:0}.mt-0\.5{margin-top:.125rem}.mt-1{margin-top:.25rem}.mt-1\.5{margin-top:.375rem}.mt-2{margin-top:.5rem}.mt-3{margin-top:.75rem}.mt-4{margin-top:1rem}.mt-5{margin-top:1.25rem}.mt-6{margin-top:1.5rem}.block{display:block}.inline{display:inline}.flex{display:flex}.table{display:table}.grid{display:grid}.contents{display:contents}.hidden{display:none}.h-2{height:.5rem}.h-2\.5{height:.625rem}.h-3{height:.75rem}.h-auto{height:auto}.min-h-\[1\.25rem\]{min-height:1.25rem}.min-h-\[1rem\]{min-height:1rem}.min-h-\[24px\]{min-height:24px}.min-h-\[72px\]{min-height:72px}.w-14{width:3.5rem}.w-16{width:4rem}.w-20{width:5rem}.w-24{width:6rem}.w-28{width:7rem}.w-36{width:9rem}.w-6{width:1.5rem}.w-full{width:100%}.min-w-\[160px\]{min-width:160px}.max-w-3xl{max-width:48rem}.max-w-6xl{max-width:72rem}.max-w-sm{max-width:24rem}.max-w-xs{max-width:20rem}.flex-1{flex:1 1 0%}.shrink{flex-shrink:1}.grow{flex-grow:1}.border-collapse{border-collapse:collapse}.transform{transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.resize{resize:both}.list-inside{list-style-position:inside}.list-disc{list-style-type:disc}.grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}.grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid-cols-\[3rem_1fr\]{grid-template-columns:3rem 1fr}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-start{align-items:flex-start}.items-end{align-items:flex-end}.items-center{align-items:center}.items-baseline{align-items:baseline}.items-stretch{align-items:stretch}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-1{gap:.25rem}.gap-2{gap:.5rem}.gap-3{gap:.75rem}.gap-4{gap:1rem}.gap-5{gap:1.25rem}.gap-x-4{-moz-column-gap:1rem;column-gap:1rem}.gap-x-8{-moz-column-gap:2rem;column-gap:2rem}.gap-y-1{row-gap:.25rem}.gap-y-4{row-gap:1rem}.space-y-1>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.25rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.25rem*var(--tw-space-y-reverse))}.space-y-1\.5>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.375rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.375rem*var(--tw-space-y-reverse))}.space-y-2>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.5rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.5rem*var(--tw-space-y-reverse))}.space-y-3>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.75rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.75rem*var(--tw-space-y-reverse))}.space-y-4>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem*var(--tw-space-y-reverse))}.space-y-5>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.25rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.25rem*var(--tw-space-y-reverse))}.space-y-6>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.5rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.5rem*var(--tw-space-y-reverse))}.self-end{align-self:flex-end}.self-center{align-self:center}.overflow-hidden{overflow:hidden}.overflow-x-auto{overflow-x:auto}.whitespace-nowrap{white-space:nowrap}.whitespace-pre-line{white-space:pre-line}.whitespace-pre-wrap{white-space:pre-wrap}.text-wrap{text-wrap:wrap}.rounded{border-radius:.625rem}.rounded-2xl{border-radius:1.125rem}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:.75rem}.rounded-xl{border-radius:1rem}.border{border-width:1px}.border-l-\[3px\]{border-left-width:3px}.border-t{border-top-width:1px}.border-dashed{border-style:dashed}.\!border-indigo-500{--tw-border-opacity:1!important;border-color:rgb(10 132 255/var(--tw-border-opacity,1))!important}.border-amber-500{--tw-border-opacity:1;border-color:rgb(255 159 10/var(--tw-border-opacity,1))}.border-amber-500\/25{border-color:rgba(255,159,10,.25)}.border-amber-500\/30{border-color:rgba(255,159,10,.3)}.border-amber-500\/40{border-color:rgba(255,159,10,.4)}.border-amber-800{--tw-border-opacity:1;border-color:rgb(95 56 0/var(--tw-border-opacity,1))}.border-amber-800\/40{border-color:rgba(95,56,0,.4)}.border-emerald-500{--tw-border-opacity:1;border-color:rgb(48 209 88/var(--tw-border-opacity,1))}.border-emerald-500\/40{border-color:rgba(48,209,88,.4)}.border-emerald-600{--tw-border-opacity:1;border-color:rgb(36 168 63/var(--tw-border-opacity,1))}.border-emerald-600\/25{border-color:rgba(36,168,63,.25)}.border-emerald-600\/30{border-color:rgba(36,168,63,.3)}.border-emerald-600\/40{border-color:rgba(36,168,63,.4)}.border-emerald-700{--tw-border-opacity:1;border-color:rgb(27 122 46/var(--tw-border-opacity,1))}.border-emerald-700\/40{border-color:rgba(27,122,46,.4)}.border-emerald-800{--tw-border-opacity:1;border-color:rgb(18 84 31/var(--tw-border-opacity,1))}.border-emerald-800\/40{border-color:rgba(18,84,31,.4)}.border-indigo-500{--tw-border-opacity:1;border-color:rgb(10 132 255/var(--tw-border-opacity,1))}.border-indigo-500\/25{border-color:rgba(10,132,255,.25)}.border-indigo-500\/30{border-color:rgba(10,132,255,.3)}.border-orange-600{--tw-border-opacity:1;border-color:rgb(204 122 0/var(--tw-border-opacity,1))}.border-rose-500{--tw-border-opacity:1;border-color:rgb(255 69 63/var(--tw-border-opacity,1))}.border-rose-500\/25{border-color:rgba(255,69,63,.25)}.border-rose-500\/40{border-color:rgba(255,69,63,.4)}.border-rose-600{--tw-border-opacity:1;border-color:rgb(217 44 38/var(--tw-border-opacity,1))}.border-rose-600\/30{border-color:rgba(217,44,38,.3)}.border-rose-800{--tw-border-opacity:1;border-color:rgb(107 21 18/var(--tw-border-opacity,1))}.border-rose-800\/40{border-color:rgba(107,21,18,.4)}.border-sky-500{--tw-border-opacity:1;border-color:rgb(100 210 255/var(--tw-border-opacity,1))}.border-sky-500\/40{border-color:rgba(100,210,255,.4)}.border-sky-800{--tw-border-opacity:1;border-color:rgb(0 77 104/var(--tw-border-opacity,1))}.border-sky-800\/40{border-color:rgba(0,77,104,.4)}.border-slate-500{--tw-border-opacity:1;border-color:rgb(174 174 178/var(--tw-border-opacity,1))}.border-slate-600{--tw-border-opacity:1;border-color:rgb(161 161 166/var(--tw-border-opacity,1))}.border-slate-700{--tw-border-opacity:1;border-color:rgb(152 152 157/var(--tw-border-opacity,1))}.border-slate-700\/50{border-color:hsla(240,2%,61%,.5)}.border-slate-700\/60{border-color:hsla(240,2%,61%,.6)}.border-slate-700\/70{border-color:hsla(240,2%,61%,.7)}.border-slate-800{--tw-border-opacity:1;border-color:rgb(84 84 88/var(--tw-border-opacity,1))}.border-teal-500{--tw-border-opacity:1;border-color:rgb(100 210 255/var(--tw-border-opacity,1))}.border-teal-500\/25{border-color:rgba(100,210,255,.25)}.border-teal-500\/30{border-color:rgba(100,210,255,.3)}.border-teal-500\/40{border-color:rgba(100,210,255,.4)}.border-teal-500\/50{border-color:rgba(100,210,255,.5)}.border-teal-700{--tw-border-opacity:1;border-color:rgb(0 117 158/var(--tw-border-opacity,1))}.border-teal-700\/40{border-color:rgba(0,117,158,.4)}.border-teal-800{--tw-border-opacity:1;border-color:rgb(0 77 104/var(--tw-border-opacity,1))}.border-teal-800\/40{border-color:rgba(0,77,104,.4)}.border-white{--tw-border-opacity:1;border-color:rgb(245 245 247/var(--tw-border-opacity,1))}.border-white\/10{border-color:rgba(245,245,247,.1)}.\!bg-indigo-600{--tw-bg-opacity:1!important;background-color:rgb(0 96 223/var(--tw-bg-opacity,1))!important}.\!bg-teal-950{--tw-bg-opacity:1!important;background-color:rgb(0 23 31/var(--tw-bg-opacity,1))!important}.\!bg-teal-950\/40{background-color:rgba(0,23,31,.4)!important}.bg-amber-500{--tw-bg-opacity:1;background-color:rgb(255 159 10/var(--tw-bg-opacity,1))}.bg-amber-950{--tw-bg-opacity:1;background-color:rgb(29 17 0/var(--tw-bg-opacity,1))}.bg-amber-950\/10{background-color:rgba(29,17,0,.1)}.bg-amber-950\/20{background-color:rgba(29,17,0,.2)}.bg-amber-950\/30{background-color:rgba(29,17,0,.3)}.bg-emerald-600{--tw-bg-opacity:1;background-color:rgb(36 168 63/var(--tw-bg-opacity,1))}.bg-emerald-700{--tw-bg-opacity:1;background-color:rgb(27 122 46/var(--tw-bg-opacity,1))}.bg-emerald-950{--tw-bg-opacity:1;background-color:rgb(4 24 10/var(--tw-bg-opacity,1))}.bg-emerald-950\/10{background-color:rgba(4,24,10,.1)}.bg-emerald-950\/20{background-color:rgba(4,24,10,.2)}.bg-emerald-950\/35{background-color:rgba(4,24,10,.35)}.bg-emerald-950\/40{background-color:rgba(4,24,10,.4)}.bg-indigo-600{--tw-bg-opacity:1;background-color:rgb(0 96 223/var(--tw-bg-opacity,1))}.bg-indigo-950{--tw-bg-opacity:1;background-color:rgb(0 18 51/var(--tw-bg-opacity,1))}.bg-indigo-950\/10{background-color:rgba(0,18,51,.1)}.bg-indigo-950\/20{background-color:rgba(0,18,51,.2)}.bg-orange-700{--tw-bg-opacity:1;background-color:rgb(149 88 0/var(--tw-bg-opacity,1))}.bg-rose-950{--tw-bg-opacity:1;background-color:rgb(33 6 5/var(--tw-bg-opacity,1))}.bg-rose-950\/10{background-color:rgba(33,6,5,.1)}.bg-rose-950\/20{background-color:rgba(33,6,5,.2)}.bg-rose-950\/30{background-color:rgba(33,6,5,.3)}.bg-rose-950\/35{background-color:rgba(33,6,5,.35)}.bg-sky-950{--tw-bg-opacity:1;background-color:rgb(0 23 31/var(--tw-bg-opacity,1))}.bg-sky-950\/20{background-color:rgba(0,23,31,.2)}.bg-sky-950\/35{background-color:rgba(0,23,31,.35)}.bg-slate-700{--tw-bg-opacity:1;background-color:rgb(152 152 157/var(--tw-bg-opacity,1))}.bg-slate-800{--tw-bg-opacity:1;background-color:rgb(84 84 88/var(--tw-bg-opacity,1))}.bg-slate-800\/80{background-color:rgba(84,84,88,.8)}.bg-slate-900{--tw-bg-opacity:1;background-color:rgb(58 58 60/var(--tw-bg-opacity,1))}.bg-slate-900\/50{background-color:rgba(58,58,60,.5)}.bg-slate-900\/60{background-color:rgba(58,58,60,.6)}.bg-slate-950{--tw-bg-opacity:1;background-color:rgb(11 11 13/var(--tw-bg-opacity,1))}.bg-slate-950\/40{background-color:rgba(11,11,13,.4)}.bg-slate-950\/50{background-color:rgba(11,11,13,.5)}.bg-slate-950\/60{background-color:rgba(11,11,13,.6)}.bg-slate-950\/70{background-color:rgba(11,11,13,.7)}.bg-slate-950\/80{background-color:rgba(11,11,13,.8)}.bg-teal-600{--tw-bg-opacity:1;background-color:rgb(0 164 221/var(--tw-bg-opacity,1))}.bg-teal-700{--tw-bg-opacity:1;background-color:rgb(0 117 158/var(--tw-bg-opacity,1))}.bg-teal-950{--tw-bg-opacity:1;background-color:rgb(0 23 31/var(--tw-bg-opacity,1))}.bg-teal-950\/10{background-color:rgba(0,23,31,.1)}.bg-teal-950\/20{background-color:rgba(0,23,31,.2)}.bg-teal-950\/30{background-color:rgba(0,23,31,.3)}.bg-teal-950\/40{background-color:rgba(0,23,31,.4)}.p-2{padding:.5rem}.p-3{padding:.75rem}.p-4{padding:1rem}.p-5{padding:1.25rem}.p-6{padding:1.5rem}.p-8{padding:2rem}.px-2{padding-left:.5rem;padding-right:.5rem}.px-3{padding-left:.75rem;padding-right:.75rem}.px-4{padding-left:1rem;padding-right:1rem}.px-5{padding-left:1.25rem;padding-right:1.25rem}.py-1{padding-top:.25rem;padding-bottom:.25rem}.py-1\.5{padding-top:.375rem;padding-bottom:.375rem}.py-10{padding-top:2.5rem;padding-bottom:2.5rem}.py-2{padding-top:.5rem;padding-bottom:.5rem}.py-2\.5{padding-top:.625rem;padding-bottom:.625rem}.py-3{padding-top:.75rem;padding-bottom:.75rem}.py-6{padding-top:1.5rem;padding-bottom:1.5rem}.py-8{padding-top:2rem;padding-bottom:2rem}.pb-1{padding-bottom:.25rem}.pb-4{padding-bottom:1rem}.pb-8{padding-bottom:2rem}.pt-1{padding-top:.25rem}.pt-2{padding-top:.5rem}.pt-4{padding-top:1rem}.pt-5{padding-top:1.25rem}.text-left{text-align:left}.text-center{text-align:center}.text-right{text-align:right}.align-middle{vertical-align:middle}.font-mono{font-family:SF Mono,ui-monospace,Cascadia Mono,Segoe UI Mono,Consolas,monospace}.text-2xl{font-size:1.6rem;line-height:2.05rem}.text-3xl{font-size:1.95rem;line-height:2.3rem}.text-\[10px\]{font-size:10px}.text-\[11px\]{font-size:11px}.text-base{font-size:1rem;line-height:1.65rem}.text-lg{font-size:1.125rem;line-height:1.65rem}.text-sm{font-size:.9375rem;line-height:1.5rem}.text-xl{font-size:1.3125rem;line-height:1.8rem}.text-xs{font-size:.8125rem;line-height:1.35rem}.font-bold{font-weight:700}.font-extrabold{font-weight:800}.font-normal{font-weight:400}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.normal-case{text-transform:none}.italic{font-style:italic}.tabular-nums{--tw-numeric-spacing:tabular-nums;font-variant-numeric:var(--tw-ordinal) var(--tw-slashed-zero) var(--tw-numeric-figure) var(--tw-numeric-spacing) var(--tw-numeric-fraction)}.leading-relaxed{line-height:1.625}.leading-snug{line-height:1.375}.leading-tight{line-height:1.25}.tracking-wide{letter-spacing:.025em}.tracking-wider{letter-spacing:.05em}.tracking-widest{letter-spacing:.1em}.text-amber-200{--tw-text-opacity:1;color:rgb(255 214 168/var(--tw-text-opacity,1))}.text-amber-200\/80{color:rgba(255,214,168,.8)}.text-amber-200\/90{color:rgba(255,214,168,.9)}.text-amber-300{--tw-text-opacity:1;color:rgb(255 188 122/var(--tw-text-opacity,1))}.text-amber-300\/90{color:rgba(255,188,122,.9)}.text-cyan-200{--tw-text-opacity:1;color:rgb(174 228 255/var(--tw-text-opacity,1))}.text-emerald-100{--tw-text-opacity:1;color:rgb(217 242 225/var(--tw-text-opacity,1))}.text-emerald-200{--tw-text-opacity:1;color:rgb(168 230 189/var(--tw-text-opacity,1))}.text-emerald-200\/90{color:rgba(168,230,189,.9)}.text-emerald-200\/95{color:rgba(168,230,189,.95)}.text-emerald-300{--tw-text-opacity:1;color:rgb(108 224 143/var(--tw-text-opacity,1))}.text-emerald-300\/90{color:rgba(108,224,143,.9)}.text-emerald-400{--tw-text-opacity:1;color:rgb(76 212 111/var(--tw-text-opacity,1))}.text-indigo-200{--tw-text-opacity:1;color:rgb(191 220 255/var(--tw-text-opacity,1))}.text-indigo-300{--tw-text-opacity:1;color:rgb(115 177 255/var(--tw-text-opacity,1))}.text-orange-300{--tw-text-opacity:1;color:rgb(255 188 122/var(--tw-text-opacity,1))}.text-rose-100{--tw-text-opacity:1;color:rgb(255 220 217/var(--tw-text-opacity,1))}.text-rose-200{--tw-text-opacity:1;color:rgb(255 182 177/var(--tw-text-opacity,1))}.text-rose-200\/95{color:hsla(4,100%,85%,.95)}.text-rose-300{--tw-text-opacity:1;color:rgb(255 139 133/var(--tw-text-opacity,1))}.text-rose-300\/90{color:hsla(3,100%,76%,.9)}.text-rose-400{--tw-text-opacity:1;color:rgb(255 96 88/var(--tw-text-opacity,1))}.text-sky-200{--tw-text-opacity:1;color:rgb(174 228 255/var(--tw-text-opacity,1))}.text-sky-200\/95{color:rgba(174,228,255,.95)}.text-sky-300{--tw-text-opacity:1;color:rgb(131 214 255/var(--tw-text-opacity,1))}.text-slate-100{--tw-text-opacity:1;color:rgb(245 245 247/var(--tw-text-opacity,1))}.text-slate-200{--tw-text-opacity:1;color:rgb(229 229 234/var(--tw-text-opacity,1))}.text-slate-300{--tw-text-opacity:1;color:rgb(209 209 214/var(--tw-text-opacity,1))}.text-slate-400{--tw-text-opacity:1;color:rgb(199 199 204/var(--tw-text-opacity,1))}.text-slate-500{--tw-text-opacity:1;color:rgb(174 174 178/var(--tw-text-opacity,1))}.text-slate-600{--tw-text-opacity:1;color:rgb(161 161 166/var(--tw-text-opacity,1))}.text-slate-900{--tw-text-opacity:1;color:rgb(58 58 60/var(--tw-text-opacity,1))}.text-teal-100{--tw-text-opacity:1;color:rgb(217 242 255/var(--tw-text-opacity,1))}.text-teal-100\/90{color:rgba(217,242,255,.9)}.text-teal-200{--tw-text-opacity:1;color:rgb(174 228 255/var(--tw-text-opacity,1))}.text-teal-200\/80{color:rgba(174,228,255,.8)}.text-teal-300{--tw-text-opacity:1;color:rgb(131 214 255/var(--tw-text-opacity,1))}.text-teal-400{--tw-text-opacity:1;color:rgb(108 210 255/var(--tw-text-opacity,1))}.text-violet-300{--tw-text-opacity:1;color:rgb(212 155 255/var(--tw-text-opacity,1))}.text-white{--tw-text-opacity:1;color:rgb(245 245 247/var(--tw-text-opacity,1))}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.accent-teal-400{accent-color:#6cd2ff}.opacity-70{opacity:.7}.opacity-80{opacity:.8}.shadow{--tw-shadow:0 8px 24px rgba(0,0,0,.45);--tw-shadow-colored:0 8px 24px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}.outline-none{outline:2px solid transparent;outline-offset:2px}.outline{outline-style:solid}.ring-1{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color)}.ring-1,.ring-2{box-shadow:var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow,0 0 #0000)}.ring-2{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color)}.ring-teal-400{--tw-ring-opacity:1;--tw-ring-color:rgb(108 210 255/var(--tw-ring-opacity,1))}.ring-teal-400\/50{--tw-ring-color:rgba(108,210,255,.5)}.blur{--tw-blur:blur(8px)}.blur,.invert{filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.invert{--tw-invert:invert(100%)}.filter{filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.transition{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,-webkit-backdrop-filter;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter,-webkit-backdrop-filter;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.hover\:border-teal-400:hover{--tw-border-opacity:1;border-color:rgb(108 210 255/var(--tw-border-opacity,1))}.hover\:bg-amber-400:hover{--tw-bg-opacity:1;background-color:rgb(255 161 74/var(--tw-bg-opacity,1))}.hover\:bg-emerald-500:hover{--tw-bg-opacity:1;background-color:rgb(48 209 88/var(--tw-bg-opacity,1))}.hover\:bg-emerald-600:hover{--tw-bg-opacity:1;background-color:rgb(36 168 63/var(--tw-bg-opacity,1))}.hover\:bg-indigo-500:hover{--tw-bg-opacity:1;background-color:rgb(10 132 255/var(--tw-bg-opacity,1))}.hover\:bg-orange-600:hover{--tw-bg-opacity:1;background-color:rgb(204 122 0/var(--tw-bg-opacity,1))}.hover\:bg-slate-600:hover{--tw-bg-opacity:1;background-color:rgb(161 161 166/var(--tw-bg-opacity,1))}.hover\:bg-slate-700:hover{--tw-bg-opacity:1;background-color:rgb(152 152 157/var(--tw-bg-opacity,1))}.hover\:bg-teal-500:hover{--tw-bg-opacity:1;background-color:rgb(100 210 255/var(--tw-bg-opacity,1))}.hover\:bg-teal-600:hover{--tw-bg-opacity:1;background-color:rgb(0 164 221/var(--tw-bg-opacity,1))}.focus\:border-teal-400:focus{--tw-border-opacity:1;border-color:rgb(108 210 255/var(--tw-border-opacity,1))}.disabled\:cursor-not-allowed:disabled{cursor:not-allowed}.disabled\:opacity-40:disabled{opacity:.4}@media (min-width:640px){.sm\:col-span-2{grid-column:span 2/span 2}.sm\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.sm\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.sm\:grid-cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}}@media (min-width:768px){.md\:col-span-2{grid-column:span 2/span 2}.md\:col-span-5{grid-column:span 5/span 5}.md\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.md\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.md\:grid-cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}.md\:grid-cols-5{grid-template-columns:repeat(5,minmax(0,1fr))}.md\:text-3xl{font-size:1.95rem;line-height:2.3rem}.md\:text-4xl{font-size:2.35rem;line-height:2.6rem}.md\:text-base{font-size:1rem;line-height:1.65rem}.md\:text-sm{font-size:.9375rem;line-height:1.5rem}}@media (min-width:1024px){.lg\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.lg\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.lg\:grid-cols-6{grid-template-columns:repeat(6,minmax(0,1fr))}}:root {color-scheme: dark;--ink:        #000000;--panel:      #1c1c1e;--panel-2:    #2c2c2e;--panel-3:    #3a3a3c;--hairline:   rgba(84, 84, 88, .65);--hairline-2: rgba(84, 84, 88, .42);--label:      #f5f5f7;--label-2:    #a1a1a6;--label-3:    #6e6e73;--action:     #0a84ff;--action-hi:  #409cff;--action-dim: rgba(10, 132, 255, .14);--locked:     #ff9f0a;--locked-dim: rgba(255, 159, 10, .13);--correct:    #30d158;--correct-dim:rgba(48, 209, 88, .13);--wrong:      #ff453f;--wrong-dim:  rgba(255, 69, 63, .12);--font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display","Segoe UI Variable Text", "Segoe UI", system-ui, "Helvetica Neue", sans-serif;--font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display","Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif;--font-mono: "SF Mono", ui-monospace, "Cascadia Mono", "Segoe UI Mono", Consolas, monospace;--r-sm: 8px;--r-md: 12px;--r-lg: 18px;--r-xl: 24px;--ease-out:   cubic-bezier(.25, .1, .25, 1);--ease-spring:cubic-bezier(.32, .72, 0, 1);--dur-1: .18s;--dur-2: .32s;--dur-3: .55s;--shadow-1: 0 1px 2px rgba(0,0,0,.4);--shadow-2: 0 8px 24px rgba(0,0,0,.45);--shadow-3: 0 20px 60px rgba(0,0,0,.55);--gut: clamp(1rem, 4vw, 2rem);}*, *::before, *::after { box-sizing: border-box; }html {-webkit-text-size-adjust: 100%;text-size-adjust: 100%;scroll-behavior: smooth;scroll-padding-top: 5rem;}body {margin: 0;font-family: var(--font-sans);background: var(--ink);color: var(--label);min-height: 100dvh;-webkit-font-smoothing: antialiased;letter-spacing: 0;}body::before {content: "";position: fixed;inset: -20% -10% auto -10%;height: 60vh;background: radial-gradient(60% 100% at 50% 0%, rgba(10,132,255,.09), transparent 70%);pointer-events: none;z-index: 0;}main, body > div:first-of-type { position: relative; z-index: 1; }h1 { font-size: 1.9rem; }h2 { font-size: 1.35rem; }h3 { font-size: 1.125rem; }h4 { font-size: 1rem; }h1, h2, h3, h4 {font-family: var(--font-display);font-weight: 700;letter-spacing: -.003em;text-wrap: balance;}p { text-wrap: pretty; }b, strong { font-weight: 600; color: var(--label); }sub, sup { font-size: .8em; line-height: 0; }a { color: var(--action-hi); text-decoration: none; }::selection { background: rgba(10,132,255,.32); }:focus-visible {outline: 2px solid var(--action-hi);outline-offset: 2px;border-radius: 4px;}[class*="text-[10px]"], [class*="text-[11px]"] { font-size: .8125rem; }body {padding-top: env(safe-area-inset-top);padding-bottom: calc(var(--next-bar-h, 0px) + env(safe-area-inset-bottom));}.glass, .panel, .shell, .ro-card, .eqcard, .control-card, .guide-card,.method-card, .progress-card, .mixer-card, .heq-card, .map-box {background: var(--panel);border: 1px solid var(--hairline-2);border-radius: var(--r-lg);}.glass, .panel, .shell { box-shadow: var(--shadow-2); }header.glass { padding: clamp(1.1rem, 3vw, 1.75rem); }#hdr-title, .app-title {font-family: var(--font-display);font-weight: 700;font-size: clamp(1.5rem, 1.2rem + 1.1vw, 2.1rem);line-height: 1.15;letter-spacing: -.015em;}#hdr-sub, .app-subtitle { color: var(--label-2); font-size: 1rem; margin-top: .35rem; }.chip, .chip-dim, .chip-dse, .chip-warn, .ms-chip, .assume-chip, .badge,.dock-step, .dock-state, .ladder-tag, .section-kicker {display: inline-flex;align-items: center;gap: .3rem;padding: .2rem .6rem;border-radius: 999px;border: 1px solid var(--hairline);background: rgba(255,255,255,.05);color: var(--label-2);font-size: .75rem;font-weight: 600;letter-spacing: .01em;line-height: 1.5;}.chip, .chip-dim, .chip-dse, .chip-warn, .ms-chip, .assume-chip, .badge {max-width: 100%;align-self: flex-start;}.chip-dse, .chip:not(.chip-dim):not(.chip-warn) {border-color: rgba(10,132,255,.34);background: var(--action-dim);color: var(--action-hi);}.chip-dim, .assume-off { color: var(--label-3); background: rgba(255,255,255,.04); }.chip-warn { border-color: rgba(255,159,10,.38); background: var(--locked-dim); color: var(--locked); }.badge.ox  { border-color: rgba(255,159,10,.4); background: var(--locked-dim); color: var(--locked); }.badge.red { border-color: rgba(10,132,255,.4); background: var(--action-dim); color: var(--action-hi); }.section-kicker {background: none; border: 0; padding: 0;color: var(--label-3);font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;}.section-title { font-size: 1.35rem; }.section-lead  { color: var(--label-2); font-size: 1rem; line-height: 1.6; }#main-tabs, .main-tabs {display: flex;flex-wrap: nowrap;gap: .375rem;overflow-x: auto;scroll-snap-type: x proximity;scrollbar-width: none;-webkit-overflow-scrolling: touch;padding-block: .25rem;-webkit-mask-image: linear-gradient(90deg, transparent, #000 1.25rem, #000 calc(100% - 1.25rem), transparent);mask-image: linear-gradient(90deg, transparent, #000 1.25rem, #000 calc(100% - 1.25rem), transparent);}#main-tabs::-webkit-scrollbar, .main-tabs::-webkit-scrollbar { display: none; }.tab-btn, .view-btn, .mode-btn, .sim-mode-btn, .mbtn, .rbtn, .probe-btn,.pol-btn, .rp-btn, .ctrl-btn, .samp-btn, .sp-btn, .drill-btn, .sim-btn,.sub-btn, .mini-btn, .act-btn, .hint-btn, .btn, .btn-ghost, .btn-teal,.btn-primary, .route-btn, .guide-toggle, #next-go, .btn-run {font-family: inherit;font-size: .9375rem;font-weight: 600;color: var(--label);background: var(--panel-2);border: 1px solid transparent;border-radius: var(--r-md);padding: .55rem .95rem;cursor: pointer;display: inline-flex;align-items: center;gap: .45rem;flex: 0 1 auto;scroll-snap-align: center;transition: background var(--dur-1) var(--ease-out), color var(--dur-1) var(--ease-out),border-color var(--dur-1) var(--ease-out), transform var(--dur-1) var(--ease-spring);-webkit-tap-highlight-color: transparent;}.tab-btn { white-space: nowrap; flex: 0 0 auto; }.tab-btn { color: var(--label-2); background: transparent; }.tab-btn:hover { color: var(--label); background: rgba(255,255,255,.06); }.tab-btn.active {color: var(--label);background: var(--panel-2);box-shadow: var(--shadow-1), inset 0 1px 0 rgba(255,255,255,.07);}button:hover:not(:disabled) { background: var(--panel-3); }button:active:not(:disabled) { transform: scale(.97); }button:disabled, [aria-disabled="true"] { opacity: .38; cursor: not-allowed; }.btn-primary, .btn-run { background: var(--action); color: #fff; }.btn-primary:hover:not(:disabled), .btn-run:hover:not(:disabled) { background: var(--action-hi); }.sp-btn.on, .samp-btn.sel, .sub-btn.on, .mini-btn.on, .mode-btn.active,.mbtn.active, .rbtn.active, .drill-btn.on, .route-btn.on, .map-box.on,.view-btn.on, .pol-btn.on {background: var(--action-dim);border-color: rgba(10,132,255,.45);color: var(--action-hi);}.tab-panel { display: none; }.tab-panel.active {display: block;animation: panel-in var(--dur-3) var(--ease-spring) both;}@keyframes panel-in {from { opacity: 0; transform: translateY(10px) scale(.994); }to   { opacity: 1; transform: none; }}.dock {position: relative;border: 1px solid var(--hairline);border-radius: var(--r-lg);background: var(--panel);padding: clamp(.9rem, 2.5vw, 1.15rem);overflow: hidden;transition: border-color var(--dur-2) var(--ease-out), box-shadow var(--dur-2) var(--ease-out);}.dock::before {content: "";position: absolute;inset: 0 auto 0 0;width: 3px;background: var(--label-3);transition: background var(--dur-2) var(--ease-out);}.dock.locked   { border-color: rgba(255,159,10,.38); }.dock.locked::before   { background: var(--locked); }.dock.unlocked { border-color: rgba(48,209,88,.4); }.dock.unlocked::before { background: var(--correct); }.dock-head { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; }.dock-step {background: rgba(255,255,255,.06);border-color: var(--hairline);color: var(--label-2);font-size: .75rem;letter-spacing: .04em;text-transform: uppercase;border-radius: var(--r-sm);}.dock-state { margin-left: auto; font-weight: 700; }.st-lock { background: var(--locked-dim); border-color: rgba(255,159,10,.4); color: var(--locked); }.st-open { background: var(--correct-dim); border-color: rgba(48,209,88,.4);  color: var(--correct); }.dock-why, #dock-locknote { color: var(--label-2); font-size: .9375rem; line-height: 1.55; }@keyframes dock-unlock {0%   { box-shadow: 0 0 0 0 rgba(48,209,88,.55); }70%  { box-shadow: 0 0 0 10px rgba(48,209,88,0); }100% { box-shadow: 0 0 0 0 rgba(48,209,88,0); }}.dock.just-unlocked { animation: dock-unlock .7s var(--ease-out) 1; }@keyframes tick-in { from { opacity: 0; transform: scale(.4); } to { opacity: 1; transform: scale(1); } }.dock.just-unlocked .st-open { animation: tick-in .35s var(--ease-spring) both; }.pr-opt, .pred-opt {display: block;width: 100%;text-align: left;background: var(--panel-2);border: 1px solid var(--hairline-2);border-radius: var(--r-md);padding: .7rem .85rem;font-size: .9375rem;color: var(--label);cursor: pointer;white-space: normal;transition: border-color var(--dur-1) var(--ease-out), background var(--dur-1) var(--ease-out),transform var(--dur-1) var(--ease-spring);}.pr-opt:hover:not(:disabled), .pred-opt:hover:not(:disabled) { border-color: rgba(10,132,255,.5); background: var(--panel-3); }.pr-opt:active:not(:disabled), .pred-opt:active:not(:disabled) { transform: scale(.99); }.pr-opt.picked, .pred-opt.picked { border-color: var(--action); background: var(--action-dim); color: var(--label); }.pr-opt.correct, .pred-opt.correct, .route-btn.right, .mcq-opt.correct {border-color: rgba(48,209,88,.65);background: var(--correct-dim);}.pr-opt.wrong, .pred-opt.wrong, .route-btn.bad, .mcq-opt.wrong {border-color: rgba(255,69,63,.55);background: var(--wrong-dim);}.pred-opt:disabled { cursor: not-allowed; opacity: .45; }#next-bar {position: sticky;bottom: 0;z-index: 40;padding: .45rem var(--gut) max(.45rem, env(safe-area-inset-bottom));}#next-bar > .glass {max-width: 76rem;margin-inline: auto;display: flex;align-items: center;gap: .6rem;flex-wrap: wrap;padding: .4rem .4rem .4rem .85rem;border-radius: var(--r-lg);background: rgba(28,28,30,.82);border: 1px solid var(--hairline);box-shadow: var(--shadow-2);-webkit-backdrop-filter: saturate(180%) blur(20px);backdrop-filter: saturate(180%) blur(20px);}#next-text, .next-copy, #next-bar #next-text {color: var(--label);font-size: .9375rem;min-width: 0;flex: 1 1 15rem;}#next-go {flex: 0 0 auto;background: var(--action);color: #fff;border: 0;padding: .5rem .85rem;font-size: .875rem;}#next-go:hover:not(:disabled) { background: var(--action-hi); }.ico { width: 1.05em; height: 1.05em; flex: 0 0 auto; vertical-align: -.18em; }.canvas-wrap {position: relative;width: 100%;min-height: 0;background: var(--panel);border: 1px solid var(--hairline-2);border-radius: var(--r-lg);overflow: hidden;}.canvas-wrap canvas {position: static;display: block;width: 100%;height: auto;border-radius: 0;}.ro-k, .ro-l, .lbl, .map-lab, .field-l, .progress-label {color: var(--label-3);font-size: .75rem;font-weight: 700;letter-spacing: .05em;text-transform: uppercase;}.ro-v, .map-val, .stat, .mixer-readout { color: var(--label); font-variant-numeric: tabular-nums; }.ro-card, .map-box, .control-card {border: 1px solid var(--hairline-2);background: var(--panel-2);border-radius: var(--r-md);}.bar-track, .progress-track { background: var(--panel-3); border-radius: 999px; overflow: hidden; }.bar-fill, .progress-fill { background: var(--action); transition: width var(--dur-3) var(--ease-spring); }.work, .eqbox, .kbd, .eqline, code, pre { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }.work {background: var(--ink);border: 1px solid var(--hairline-2);border-radius: var(--r-md);color: var(--label-2);font-size: .9375rem;line-height: 1.7;padding: .9rem 1rem;overflow-x: auto;}.work .hl { color: var(--action-hi); }.work .dim { color: var(--label-3); }.step-h {color: var(--action-hi);font-size: .8125rem;font-weight: 700;letter-spacing: .05em;text-transform: uppercase;}input[type="text"], input[type="number"], input[type="search"], select, textarea,.field, .field-i, .calc-inp {width: 100%;font-family: inherit;font-size: 1rem;color: var(--label);background: var(--panel-2);border: 1px solid var(--hairline);border-radius: var(--r-md);padding: .55rem .7rem;transition: border-color var(--dur-1) var(--ease-out), background var(--dur-1) var(--ease-out);-webkit-appearance: none;appearance: none;}input:focus, select:focus, textarea:focus { outline: none; border-color: var(--action); background: var(--panel); }select {background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23a1a1a6' d='M1.4 0 6 4.6 10.6 0 12 1.4 6 8 0 1.4z'/%3E%3C/svg%3E");background-repeat: no-repeat;background-position: right .65rem center;padding-right: 1.9rem;}label, .calc-lbl, .field-l {color: var(--label-2); font-size: .8125rem; font-weight: 600; letter-spacing: 0; text-transform: none;}input[type="range"] {-webkit-appearance: none; appearance: none;width: 100%; height: 28px; background: transparent; cursor: pointer;accent-color: var(--action);}input[type="range"]::-webkit-slider-runnable-track { height: 4px; border-radius: 999px; background: var(--panel-3); }input[type="range"]::-webkit-slider-thumb {-webkit-appearance: none; appearance: none;width: 24px; height: 24px; margin-top: -10px;border-radius: 50%; background: #fff; border: 0;box-shadow: 0 1px 4px rgba(0,0,0,.5);transition: transform var(--dur-1) var(--ease-spring);}input[type="range"]:active::-webkit-slider-thumb { transform: scale(1.12); }input[type="range"]::-moz-range-track { height: 4px; border-radius: 999px; background: var(--panel-3); }input[type="range"]::-moz-range-thumb { width: 22px; height: 22px; border: 0; border-radius: 50%; background: #fff; }input[type="checkbox"], input[type="radio"] { width: 1.1rem; height: 1.1rem; accent-color: var(--action); }.mcq-opt, .myth-card, .ms-point, .evidence-grid > *, .concept-grid > *, .guide-card {border: 1px solid var(--hairline-2);border-radius: var(--r-md);background: var(--panel-2);}.mcq-opt { padding: .75rem .9rem; font-size: .9375rem; cursor: pointer; }.mcq-opt:hover { border-color: rgba(10,132,255,.5); }.myth-card { cursor: pointer; transition: border-color var(--dur-2) var(--ease-out); }.myth-card:hover { border-color: rgba(10,132,255,.45); }.myth-back { display: none; }.myth-card.flipped .myth-front { display: none; }.myth-card.flipped .myth-back { display: block; animation: flip-in var(--dur-2) var(--ease-spring) both; }@keyframes flip-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }.tag-w { background: var(--correct-dim); border-color: rgba(48,209,88,.4); color: var(--correct); }.tag-c { background: var(--locked-dim);  border-color: rgba(255,159,10,.4);  color: var(--locked); }.tag-i { background: var(--wrong-dim);   border-color: rgba(255,69,63,.4);   color: var(--wrong); }.hint-btn { border-color: rgba(255,159,10,.35); background: var(--locked-dim); color: var(--locked); font-size: .8125rem; }.fail-box { border-left: 3px solid var(--wrong); background: var(--wrong-dim); border-radius: var(--r-md); padding: .7rem .9rem; }table, .datatbl { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }th, td { padding: .55rem .7rem; text-align: left; border-bottom: 1px solid var(--hairline-2); font-size: .9375rem; }th { color: var(--label-3); font-size: .75rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; }tbody tr:last-child > td { border-bottom: 0; }tbody tr { transition: background var(--dur-1) var(--ease-out); }tbody tr:hover { background: rgba(255,255,255,.04); }.lab-card {display: block;border: 1px solid var(--hairline-2);border-radius: var(--r-lg);background: var(--panel);color: var(--label);transition: transform var(--dur-2) var(--ease-spring), border-color var(--dur-2) var(--ease-out),box-shadow var(--dur-2) var(--ease-out);}.lab-card:hover { transform: translateY(-3px); border-color: rgba(10,132,255,.5); box-shadow: var(--shadow-3); }.lab-card:active { transform: translateY(-1px) scale(.995); }.reveal { opacity: 0; transform: translateY(14px); }.reveal.shown {opacity: 1; transform: none;transition: opacity var(--dur-3) var(--ease-out), transform var(--dur-3) var(--ease-spring);transition-delay: calc(var(--i, 0) * 45ms);}@media (pointer: coarse) {button, summary, [role="button"], .tab-btn, .pr-opt, .pred-opt, .mcq-opt,.myth-card, .lab-card, select, .field, .field-i, .calc-inp, .ans,input:not([type="checkbox"]):not([type="radio"]):not([type="range"]) { min-height: 44px !important; }input[type="checkbox"], input[type="radio"] { min-width: 28px !important; min-height: 28px !important; }label:has(> input[type="checkbox"]), label:has(> input[type="radio"]),.ms-point { min-height: 44px; display: flex; align-items: center; }.pr-opt, .pred-opt, .mcq-opt { display: flex; align-items: center; }li:has(> input[type="checkbox"]), li:has(> input[type="radio"]),li:has(.goal-check), li:has(.mloss) {cursor: pointer;min-height: 44px;display: flex;align-items: flex-start;padding-block: .3rem;}}@media (max-width: 640px) {.chip, .chip-dim, .chip-dse, .chip-warn, .badge, .dock-step, .dock-state, .ladder-tag {padding: .1rem .45rem;}#hdr-sub, .app-subtitle { font-size: .9375rem; line-height: 1.5; }#next-bar > .glass > span:first-child { display: none; }header.glass { gap: .6rem; }}@media (max-width: 768px) {.flex { flex-wrap: wrap; }}@media (min-width: 1024px) {:root { --gut: 2rem; }#main-tabs, .main-tabs {gap: .25rem;background: var(--panel-2);border-radius: var(--r-md);padding: .25rem;margin-inline: 0;overflow: visible;width: fit-content;-webkit-mask-image: none;mask-image: none;}.tab-btn { border-radius: var(--r-sm); }}:root {--bg: #000000;--bg-2: #0b0b0d;--panel: #1c1c1e;--panel-2: #2c2c2e;--panel-3: #37373a;--line: rgba(84, 84, 88, .42);--line-strong: rgba(84, 84, 88, .65);--text: #f5f5f7;--muted: #a1a1a6;--faint: #6e6e73;--teal: #64d2ff;--blue: #0a84ff;--amber: #ff9f0a;--rose: #ff453f;--green: #30d158;--radius: 12px;--shadow: 0 8px 24px rgba(0,0,0,.45);}@media (prefers-reduced-motion: reduce) {html { scroll-behavior: auto; }*, *::before, *::after {animation-duration: .001ms !important;animation-iteration-count: 1 !important;transition-duration: .001ms !important;}.reveal { opacity: 1; transform: none; }}@media print {html, body { background: #fff !important; color: #111 !important; }body::before { display: none; }* {color: #111 !important;background-image: none !important;box-shadow: none !important;-webkit-backdrop-filter: none !important;backdrop-filter: none !important;}.glass, .panel, .shell, .dock, .canvas-wrap, .ro-card, .mcq-opt, .myth-card,.lab-card, .btn, button, table, th, td { border-color: #c7c7cc !important; background-color: #fff !important; }.tab-panel { display: block !important; break-inside: avoid; }#next-bar, #btn-teacher, #pr-reveal, #pr-why, .hint-btn { display: none !important; }.reveal { opacity: 1 !important; transform: none !important; }.myth-back { display: block !important; }.myth-front { display: none !important; }}</style>
+</head>
+<body class="text-slate-200">
+<div class="max-w-6xl mx-auto px-4 py-6">
+
+  <!-- ============ HEADER ============ -->
+  <header class="glass p-5 mb-5 flex flex-wrap items-start justify-between gap-3">
+    <div>
+      <div class="flex items-center gap-2 flex-wrap mb-1">
+        <span class="chip">HKDSE Chemistry</span>
+        <span class="chip">Topic II (c)</span>
+        <span class="chip">Topic II (d)</span>
+        <span class="chip">metallic bonding · properties</span>
+        <span class="chip">structure and properties of metals</span>
+</div>
+      <h1 id="hdr-title" class="text-2xl md:text-3xl font-extrabold text-white leading-tight">Melting Points of Metals</h1>
+      <p id="hdr-sub" class="text-sm text-slate-400 mt-1">Charge density, delocalised electrons and the electron sea.</p>
+    </div>
+    <button type="button" id="btn-teacher" onclick="toggleTeacher()" class="btn btn-ghost"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg><span>Teacher notes</span></button>
+  </header>
+  <div id="teacher-panel" class="glass p-5 mb-5 hidden">
+    <h2 id="teacher-title" class="font-bold text-amber-300 mb-2">Teacher notes</h2>
+    <div id="teacher-content" class="text-sm text-slate-300 space-y-2 leading-relaxed"></div>
+  </div>
+
+  <!-- ============ TABS ============ -->
+  <nav id="main-tabs" class="flex flex-wrap gap-2 mb-5">
+    <button type="button" id="tab-intro" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold border border-slate-700 bg-slate-900/60" data-tab="intro" onclick="setTab('intro')">1 · Introduction</button>
+    <button type="button" id="tab-sim"   class="tab-btn active px-4 py-2 rounded-xl text-sm font-semibold border border-slate-700 bg-slate-900/60" data-tab="sim"   onclick="setTab('sim')">2 · Simulation</button>
+    <button type="button" id="tab-calc"  class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold border border-slate-700 bg-slate-900/60" data-tab="calc"  onclick="setTab('calc')">3 · Calculations</button>
+    <button type="button" id="tab-mcq"   class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold border border-slate-700 bg-slate-900/60" data-tab="mcq"   onclick="setTab('mcq')">4 · Past-paper practice</button>
+    <button type="button" id="tab-recap" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold border border-slate-700 bg-slate-900/60" data-tab="recap" onclick="setTab('recap')">5 · Recap &amp; misconceptions</button>
+  </nav>
+
+  <!-- ============ PANEL: INTRODUCTION ============ -->
+  <section id="panel-intro" class="tab-panel mb-5">
+    <div class="glass p-6 space-y-5">
+      <h2 id="intro-h1" class="text-xl font-bold text-white"></h2>
+      <p id="intro-lead" class="text-sm md:text-base text-slate-300 leading-relaxed"></p>
+      <div id="intro-cards" class="grid md:grid-cols-2 gap-3"></div>
+      <div class="md:col-span-2">
+        <h3 class="text-sm font-bold text-teal-300 uppercase tracking-wide mb-2">Exam-true data (approx, °C at 1 atm) — note the IONIC radii, not atomic</h3>
+        <div class="overflow-x-auto rounded-xl border border-white/10">
+          <table class="datatbl">
+            <thead><tr><th>Element</th><th>Structure</th><th>m.p. / °C</th><th>Ion in lattice</th><th>Ionic radius / pm</th><th>Delocalised e⁻ per atom</th></tr></thead>
+            <tbody>
+              <tr><td>Li</td><td>metallic</td><td class="num">181</td><td>Li⁺</td><td class="num">76</td><td class="num">1</td></tr>
+              <tr><td>Na</td><td>metallic</td><td class="num">98</td><td>Na⁺</td><td class="num">102</td><td class="num">1</td></tr>
+              <tr><td>K</td><td>metallic</td><td class="num">64</td><td>K⁺</td><td class="num">138 (atom 227)</td><td class="num">1</td></tr>
+              <tr><td>Be</td><td>metallic</td><td class="num">1287</td><td>Be²⁺</td><td class="num">45</td><td class="num">2</td></tr>
+              <tr><td>Mg</td><td>metallic</td><td class="num">650</td><td>Mg²⁺</td><td class="num">72</td><td class="num">2</td></tr>
+              <tr><td>Ca</td><td>metallic</td><td class="num">842</td><td>Ca²⁺</td><td class="num">100</td><td class="num">2</td></tr>
+              <tr><td>Sr / Ba</td><td>metallic</td><td class="num">777 / 727</td><td>Sr²⁺ / Ba²⁺</td><td class="num">— / 135</td><td class="num">2</td></tr>
+              <tr><td>Al</td><td>metallic</td><td class="num">660</td><td>Al³⁺</td><td class="num">54</td><td class="num">3</td></tr>
+              <tr><td>Si</td><td>giant covalent</td><td class="num">1410</td><td>—</td><td>—</td><td>—</td></tr>
+              <tr><td>P₄ / S₈</td><td>simple molecular</td><td class="num">44 / 115</td><td>—</td><td>—</td><td>—</td></tr>
+              <tr><td>Fe</td><td>metallic</td><td class="num">1538</td><td>Fe (positive ion)</td><td>beyond 3D</td><td>beyond 3D</td></tr>
+              <tr><td>W</td><td>metallic</td><td class="num">3422 — highest of any metal</td><td>W (positive ion)</td><td>beyond 3D</td><td>beyond 3D</td></tr>
+              <tr><td>Hg</td><td>metallic</td><td class="num">−39 (liquid at room temperature)</td><td>Hg²⁺ (common ion)</td><td>—</td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-xs text-slate-500 mt-2">Down Group 2 the melting points are NOT monotonic (Be 1287 → Mg 650 → Ca 842 → Ba 727): how the atoms are arranged also matters. The examinable claim is Be²⁺ ≫ smaller and more highly charged than Ba²⁺ → higher charge density → stronger attraction.</p>
+      </div>
+      <div>
+        <h3 class="text-sm font-bold text-teal-300 uppercase tracking-wide mb-2">Key terms — tap one</h3>
+        <div class="flex flex-wrap gap-2">
+          <button type="button" class="ms-chip" id="vb-0" onclick="setVocab(0)">delocalised electrons</button>
+          <button type="button" class="ms-chip" id="vb-1" onclick="setVocab(1)">cation</button>
+          <button type="button" class="ms-chip" id="vb-2" onclick="setVocab(2)">charge density</button>
+          <button type="button" class="ms-chip" id="vb-3" onclick="setVocab(3)">ionic vs atomic radius</button>
+          <button type="button" class="ms-chip" id="vb-4" onclick="setVocab(4)">electrostatic attraction</button>
+        </div>
+        <p id="vocab-def" class="text-sm text-slate-300 mt-3 leading-relaxed">Tap a term above for the exam-grade definition.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PANEL: SIMULATION ============ -->
+  <section id="panel-sim" class="tab-panel active mb-5">
+    <div id="sim-dock" class="dock locked mb-3" aria-live="polite">
+      <div class="dock-head mb-2">
+        <span class="dock-step">Task 1</span>
+        <span class="text-sm font-bold text-white" id="dock-title">Predict before you heat</span>
+        <span class="dock-state st-lock" id="dock-state">Locked</span>
+      </div>
+      <div id="checkpoint-card"></div>
+    </div>
+    <div class="glass p-5">
+      <div class="flex flex-wrap gap-2 mb-3" id="sim-modes">
+        <button type="button" id="msb-single" class="mode-btn active" onclick="setMode('single')">🔥 Single metal — heat ramp</button>
+        <button type="button" id="msb-race" class="mode-btn" onclick="setMode('race')">🏁 Period 3 race — Na · Mg · Al (one shared heater)</button>
+        <button type="button" id="msb-trends" class="mode-btn" onclick="setMode('trends')">📊 Trends chart — Period 3 · Group 1 · Group 2</button>
+      </div>
+      <div id="wrap-sim" class="canvas-wrap rounded-xl border border-slate-700/70 bg-slate-950/70"><canvas id="sim-canvas" aria-label="Metallic lattice simulation canvas: positive metal ions vibrating in a sea of delocalised electrons"></canvas></div>
+      <div id="wrap-graph" class="canvas-wrap rounded-xl border border-slate-700/70 bg-slate-950/70 hidden"><canvas id="graph-canvas" aria-label="Bar chart of melting points across Period 3, Group 1 and Group 2"></canvas></div>
+      <p id="sim-mode-note" class="text-xs text-teal-200/80 mt-2"></p>
+      <p id="sim-caption" class="text-xs text-slate-400 mt-2 leading-relaxed"></p>
+      <div id="sim-readouts" class="grid grid-cols-2 md:grid-cols-5 gap-3 mt-4">
+        <div class="ro-card"><div class="ro-l">Focus</div><div class="ro-v" id="ro-focus">—</div></div>
+        <div class="ro-card"><div class="ro-l">Temperature</div><div class="ro-v text-orange-300" id="ro-temp">25 °C</div></div>
+        <div class="ro-card"><div class="ro-l">State</div><div class="ro-v" id="ro-state">—</div></div>
+        <div class="ro-card"><div class="ro-l">Bond strength (model)</div><div class="ro-v text-teal-300" id="ro-idx">—</div></div>
+        <div class="ro-card"><div class="ro-l">Notes / real lab</div><div class="ro-v" id="ro-note">—</div></div>
+      </div>
+    </div>
+    <div class="glass p-5 mt-4">
+      <h3 class="font-bold text-white mb-3">Controls</h3>
+      <div id="ctrl-panel" class="grid md:grid-cols-2 gap-x-8 gap-y-4">
+        <div>
+          <p class="text-xs font-bold text-slate-400 uppercase tracking-wide mb-2">Metal (single mode)</p>
+          <div id="metal-row" class="flex flex-wrap gap-2"></div>
+          <p id="metal-quick" class="text-xs text-slate-500 mt-2"></p>
+        </div>
+        <div>
+          <p class="text-xs font-bold text-slate-400 uppercase tracking-wide mb-2">Temperature — 0 to 4000 °C</p>
+          <div class="flex items-center gap-3">
+            <input type="range" id="sl-temp" min="0" max="4000" step="5" value="25" style="flex:1" oninput="setTemp(this.value)">
+            <span id="temp-val" class="text-lg font-extrabold text-orange-300 w-24 text-right tabular-nums">25 °C</span>
+          </div>
+          <div class="flex flex-wrap items-center gap-2 mt-2">
+            <button type="button" id="btn-ramp" class="btn-primary" onclick="rampToggle()">▶ Heat ramp</button>
+            <p id="ramp-note" class="hidden"></p>
+            <button type="button" id="btn-reset-sim" class="btn-ghost" onclick="resetSim()"> Reset to 25 °C</button>
+            <span class="text-xs text-slate-500">auto-heats ~450 °C per second (60 °C per second between 600 and 700 °C, and it pauses at every real m.p.)</span>
+          </div>
+          <p id="gate-note-2" class="hidden"></p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="glass p-5 mt-4">
+      <h3 class="font-bold text-white mb-1">Explain it the way the examiner wants <span class="text-xs font-normal text-slate-400">(structure-property style, 2 marks)</span></h3>
+      <p class="text-xs text-slate-400 mb-3">"Explain why magnesium has a higher melting point than sodium." Toggle the three reasoning blocks and watch M1/M2 build.</p>
+      <div id="ms-card" class="space-y-4">
+        <div class="flex flex-wrap gap-2">
+          <button type="button" id="ms-0" class="ms-chip" onclick="msToggle(0)">☐ Mg²⁺ has greater charge than Na⁺ (name both ions)</button>
+          <button type="button" id="ms-1" class="ms-chip" onclick="msToggle(1)">☐ each Mg atom supplies 2 delocalised e⁻, Na only 1</button>
+          <button type="button" id="ms-2" class="ms-chip" onclick="msToggle(2)">☐ stronger electrostatic attraction → more energy to melt</button>
+        </div>
+        <div id="ms-score" class="text-sm font-bold text-slate-400"></div>
+        <p id="ms-sentence" class="text-sm text-slate-300 leading-relaxed"></p>
+        <p class="text-xs text-rose-300/90 leading-relaxed">Rejected wording: "Mg has more electrons" (12 vs 11) → 0 · ion size / atomic radius alone → rejected · bare "higher charge" without naming Mg²⁺/Na⁺ → rejected · any covalent / "shared pairs" wording → 0.</p>
+      </div>
+    </div>
+  </section>
+
+  
+    <!-- Task 2: deliberate errors -->
+    <div class="glass p-5 mt-4">
+      <div class="dock-head mb-2">
+        <span class="dock-step">Task 2</span>
+        <span class="text-sm font-bold text-white">Break it on purpose</span>
+      </div>
+      <p class="text-xs text-slate-400 mb-3">Each is an error HKDSE candidates really make when explaining melting points. Break it, read the consequence, then never write it again.</p>
+      <div class="flex flex-wrap gap-2 mb-3">
+        <button type="button" class="mode-btn" data-fail="a">&#39;Mg melts higher because it has 12 electrons&#39;</button>
+        <button type="button" class="mode-btn" data-fail="b">&#39;Melting breaks the metallic bonds completely&#39;</button>
+        <button type="button" class="mode-btn" id="fail-clear">Clear</button>
+      </div>
+      <div id="fail-panel" class="text-sm text-slate-300"></div>
+    </div>
+    <!-- Task 3: hint ladder for the written explanation -->
+    <div class="glass p-5 mt-4">
+      <div class="dock-head mb-2">
+        <span class="dock-step">Task 3</span>
+        <span class="text-sm font-bold text-white">Write the explanation, with hints if you need them</span>
+      </div>
+      <p class="text-sm text-slate-200 mb-2"><i>Explain why magnesium has a much higher melting point than sodium. (2)</i></p>
+      <div class="flex flex-wrap gap-2 mb-2">
+        <button type="button" class="hint-btn" data-hint="1">Hint 1</button>
+        <button type="button" class="hint-btn" data-hint="2">Hint 2</button>
+        <button type="button" class="hint-btn" data-hint="3">Hint 3</button>
+      </div>
+      <p id="hint-text" class="text-sm text-amber-200 mb-3"></p>
+      <p class="text-xs font-bold text-teal-200 mb-2">Mark your own answer &mdash; tick each line you actually wrote</p>
+      <div id="selfmarks" class="space-y-2">
+        <label class="flex items-start gap-2 text-sm text-slate-300"><input type="checkbox" class="selfmk"><span>I said Mg<sup>2+</sup> has a HIGHER CHARGE than Na<sup>+</sup> (2+ versus 1+)</span></label>
+        <label class="flex items-start gap-2 text-sm text-slate-300"><input type="checkbox" class="selfmk"><span>I said each Mg atom also releases MORE DELOCALISED ELECTRONS (2 versus 1)</span></label>
+        <label class="flex items-start gap-2 text-sm text-slate-300"><input type="checkbox" class="selfmk"><span>I finished with the consequence: stronger electrostatic attraction, so MORE ENERGY is needed to melt it</span></label>
+        <label class="flex items-start gap-2 text-sm text-slate-300"><input type="checkbox" class="selfmk"><span>I did NOT write the total electron count of the atom (12 versus 11) &mdash; that scores 0</span></label>
+      </div>
+      <p id="selfmarks-total" class="text-xs text-slate-400 mt-2"></p>
+    </div>
+<!-- ============ PANEL: CALCULATIONS ============ -->
+  <section id="panel-calc" class="tab-panel mb-5">
+    <div class="glass p-6 space-y-5">
+      <h2 id="calc-title" class="text-xl font-bold text-white">Delocalised electrons from equal masses of Na, Mg and Al</h2>
+      <p id="calc-sub" class="text-sm text-slate-400">Stronger metallic bonding comes from more delocalised electrons per atom — but a sample of equal MASS does not contain equal moles of atoms. Work it out: n = m ÷ Mᵣ, keep units, give 3 significant figures.</p>
+      <div id="calc-inputs" class="grid md:grid-cols-3 gap-4">
+        <div class="ro-card">
+          <div class="ro-l">Mass of each metal sample</div>
+          <div class="flex items-center gap-2 mt-2">
+            <input type="number" id="calc-mass" value="10.0" min="0.1" step="0.5" class="w-28 bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white text-sm" aria-label="mass in grams">
+            <span class="text-sm text-slate-400">g</span>
+          </div>
+          <p class="text-xs text-slate-500 mt-2">Same mass of all three metals.</p>
+        </div>
+        <div class="ro-card">
+          <div class="ro-l">Mᵣ (g mol⁻¹)</div>
+          <div class="ro-v text-sm font-mono">Na 23.0<br>Mg 24.3<br>Al 27.0</div>
+        </div>
+        <div class="ro-card">
+          <div class="ro-l">Delocalised e⁻ per atom</div>
+          <div class="ro-v text-sm font-mono">Na → Na⁺ + 1 e⁻<br>Mg → Mg²⁺ + 2 e⁻<br>Al → Al³⁺ + 3 e⁻</div>
+        </div>
+      </div>
+      <div>
+        <p class="ro-l mb-2">Do it yourself first — two blanks, then check. This is the chain the examiner pays for.</p>
+        <div class="grid sm:grid-cols-3 gap-3">
+          <div>
+            <label for="lad-m1" class="text-xs text-slate-400 block mb-1">Blank 1 — n(Na) = m ÷ Mᵣ / mol &nbsp;(use the mass above)</label>
+            <input id="lad-m1" type="number" step="0.001" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white text-sm">
+          </div>
+          <div>
+            <label for="lad-m2" class="text-xs text-slate-400 block mb-1">Blank 2 — n(delocalised e⁻) from that Na / mol</label>
+            <input id="lad-m2" type="number" step="0.001" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white text-sm">
+          </div>
+          <div class="flex items-end gap-2">
+            <button type="button" class="px-4 py-2 rounded-xl text-sm font-semibold bg-indigo-600 hover:bg-indigo-500 text-white" onclick="checkMeltingLadder()">Check the two blanks</button>
+            <button type="button" class="px-3 py-2 rounded-lg text-xs font-semibold border border-slate-700 bg-slate-900/60" onclick="hintMeltingLadder()">Hint</button>
+          </div>
+        </div>
+        <p id="lad-m-hint" class="text-xs text-amber-200 mt-2"></p>
+        <div id="lad-m-fb" class="mt-3"></div>
+      </div>
+
+      <div class="border-t border-white/10 pt-4">
+        <p class="ro-l mb-2">Two radius bars — the trap this topic sets every year</p>
+        <p class="text-xs text-slate-400 mb-3">The metallic radius of an atom is always LARGER than the radius of the ion it forms when it loses its outer shell. Students who compare "K atom" values with "Na⁺ ion" values get the trend exactly backwards. The bars below are drawn to the same scale.</p>
+        <div id="radius-bars"></div>
+      </div>
+
+      <div>
+        <button type="button" class="px-4 py-2 rounded-xl text-sm font-semibold bg-indigo-600 hover:bg-indigo-500 text-white" onclick="runCalc()">Check working</button>
+      </div>
+      <div id="calc-working" class="text-sm font-mono bg-slate-950/70 border border-slate-700/60 rounded-xl p-4 whitespace-pre-wrap text-slate-300 hidden"></div>
+    </div>
+  
+      <div id="ladder-step" class="border-t border-white/10 pt-5 space-y-3">
+        <h3 class="text-sm font-bold text-emerald-200">Step 1 &mdash; Worked example: how the comparison is written</h3>
+        <p class="text-sm text-slate-200"><i>Explain why magnesium has a higher melting point than sodium. (2)</i></p>
+        <div class="work"><span class="hl">Line 1 &mdash; compare the IONS</span>
+  Mg forms Mg²⁺ while Na forms Na⁺. Mg²⁺ carries a higher charge (2+ against 1+), so the electrostatic
+  attraction between the ion and the delocalised electrons is stronger.
+<span class="hl">Line 2 &mdash; compare the ELECTRON COUNT</span>
+  Each Mg atom also releases TWO delocalised electrons while each Na atom releases only one, so there are
+  more delocalised electrons per atom to attract.
+<span class="hl">Line 3 &mdash; finish with the consequence</span>
+  Both effects make the metallic bonding stronger, so MORE ENERGY is needed to overcome the attraction
+  and the melting point is higher.
+<span class="dim">Rejected: "Mg has 12 electrons and Na has 11". The TOTAL number of electrons in the atom is never the
+answer \u2014 only the delocalised electrons count.</span></div>
+        <h3 class="text-sm font-bold text-amber-200 pt-2">Step 2 &mdash; Completion: your turn, with blanks</h3>
+        <p class="text-sm text-slate-200 mb-2"><i>Explain why the melting point of potassium is lower than that of sodium. (2)</i></p>
+        <div><label class="field-l" for="lad-g1">Gap 1 &mdash; compare the ion sizes (both are 1+ ions)</label><input id="lad-g1" class="field" placeholder="K+ is ... than Na+"></div>
+        <div class="mt-2"><label class="field-l" for="lad-g2">Gap 2 &mdash; the consequence for the attraction and the energy needed</label><input id="lad-g2" class="field" placeholder="so the attraction is ... and ... energy is needed"></div>
+        <div class="mt-2 flex flex-wrap gap-2"><button type="button" class="btn-primary" id="lad-check">Check the two gaps</button><button type="button" class="hint-btn" id="lad-hint">Hint</button></div>
+        <p id="lad-hinttext" class="text-xs text-amber-200 mt-2"></p><div id="lad-fb" class="mt-2"></div>
+        <h3 class="text-sm font-bold text-rose-200 pt-2">Step 3 &mdash; Independent, no help</h3>
+        <p class="text-xs text-slate-400 mb-2">Write this one on paper first. Both ions are 2+ here, so the argument must be about SIZE, not charge.</p>
+        <p class="text-sm text-slate-200"><i>Explain why the melting point of beryllium is much higher than that of barium. (2)</i></p>
+        <button type="button" class="btn-teal mt-2" id="ind-reveal">Reveal marking scheme</button>
+        <div id="ind-out" class="mt-2"></div>
+      </div>
+</section>
+
+  <!-- ============ PANEL: PAST PAPER MCQs ============ -->
+  <section id="panel-mcq" class="tab-panel mb-5">
+    <div class="glass p-6">
+      <h2 id="pp-title" class="text-xl font-bold text-white mb-1">Past-paper practice</h2>
+      <p id="pp-sub" class="text-xs text-slate-400 mb-5"></p>
+      <div id="pp-questions" class="space-y-6"></div>
+    </div>
+  </section>
+
+  <!-- ============ PANEL: RECAP + MISCONCEPTION CARDS ============ -->
+  <section id="panel-recap" class="tab-panel mb-5">
+    <div class="glass rounded-2xl p-6 space-y-6">
+      <div>
+        <h2 id="recap-title" class="text-xl font-bold text-white">Recap checklist</h2>
+        <p id="recap-sub" class="text-sm text-slate-400 mt-1 mb-3">Tick each goal only when you can explain it without notes.</p>
+        <ul id="recap-list" class="space-y-2"></ul>
+        <p id="recap-progress" class="text-xs text-slate-500 mt-3"></p>
+      </div>
+      <div class="border-t border-white/10 pt-5">
+        <h3 class="text-sm font-bold text-amber-300 uppercase tracking-wide mb-2" id="markloss-title">Where marks are lost on this topic</h3>
+        <p class="text-xs text-slate-400 mb-3" id="markloss-lead">Tick the ones you have actually done.</p>
+        <ul id="markloss-list" class="grid sm:grid-cols-2 gap-2">
+          <li><label class="flex items-start gap-2 text-sm text-slate-300"><input type="checkbox" class="mloss"><span>I used the TOTAL number of electrons in the atom instead of the delocalised electrons.</span></label></li>
+          <li><label class="flex items-start gap-2 text-sm text-slate-300"><input type="checkbox" class="mloss"><span>I compared two metals without naming both the ion charge and the number of delocalised electrons.</span></label></li>
+          <li><label class="flex items-start gap-2 text-sm text-slate-300"><input type="checkbox" class="mloss"><span>I said melting breaks the metallic bonding completely, instead of saying it only weakens it.</span></label></li>
+          <li><label class="flex items-start gap-2 text-sm text-slate-300"><input type="checkbox" class="mloss"><span>I forgot the consequence: stronger attraction means MORE ENERGY is needed.</span></label></li>
+          <li><label class="flex items-start gap-2 text-sm text-slate-300"><input type="checkbox" class="mloss"><span>I assumed bigger atoms always melt lower without checking the group trend.</span></label></li>
+          <li><label class="flex items-start gap-2 text-sm text-slate-300"><input type="checkbox" class="mloss"><span>I compared an atom radius with an ion radius instead of like with like.</span></label></li>
+        </ul>
+
+      </div>
+      <div class="border-t border-white/10 pt-5">
+        <h3 class="text-sm font-bold text-rose-300 uppercase tracking-wide mb-2" id="myth-title">Common misconceptions</h3>
+        <p class="text-xs text-slate-400 mb-4" id="myth-lead">Tap a card to flip.</p>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3" id="myth-cards"></div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="text-center text-xs text-slate-600 pb-8">HKDSE Chemistry · Topic II (c) metallic bonding · (d) structures and properties of metals · interactive lab · syllabus-aligned</footer>
+</div>
+
+
+<div id="next-bar" class="max-w-6xl mx-auto px-5 pb-4">
+  <div class="glass rounded-xl px-4 py-2 flex flex-wrap items-center gap-3 text-sm">
+    <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Next step</span>
+    <span id="next-text" class="text-slate-200 font-semibold flex-1">Commit to a prediction in the panel above the lattice — the heater is locked until you do</span>
+    <button type="button" id="next-go" class="btn btn-teal py-1.5" onclick="goNext()">Take me there</button>
+  </div>
+</div>
+<script>
+/* =====================================================================
+   STRINGS — flat English T object. No Chinese, no language toggle.
+   Data source: knowledge brief metal_melting_points.md (HKDSE Topic II (c) and (d)
+   3.20–3.22; 2.18(i) Period 3 m.p. trend; 3.7 radii). OUT of scope:
+   d-orbital reasoning for Fe/W, packing factors, hybridisation, VSEPR.
+===================================================================== */
+const T = {
+  title: 'Melting Points of Metals — Charge Density & the Electron Sea',
+  subtitle: 'HKDSE Chemistry Topic II (c) metallic bonding and (d) structures and properties of metals — Period 3 and Group melting-point trends.',
+  board: 'HKDSE Topic II (c) (d)',
+  introH1: 'Why does sodium melt in hot water while tungsten needs 3422 °C?',
+  introLead: 'A metal is a lattice of positive ions (cations) surrounded by a sea of delocalised electrons. The melting point measures how much energy you need to loosen the strong electrostatic attraction between the cations and that electron sea. In this lab you will drive a simulated lattice with a real 0–4000 °C heater, race the Period 3 metals Na, Mg and Al under one shared flame, and then write the explanation exactly the way the mark scheme awards it: name the ions with their charges, count the DELOCALISED electrons — not the total electrons — and finish with "stronger attraction → more energy needed to melt".',
+  concepts: [
+    { t: 'Metallic bonding — 3.21 (mark-scheme wording)', d: 'The strong electrostatic attraction between positive metal ions (cations) and delocalised electrons. Reference to shared pairs, molecules or intermolecular forces here scores 0.' },
+    { t: 'Model → properties — 3.20 / 3.22', d: 'High melting points: lots of energy needed to overcome the attraction between cations and delocalised electrons. Conducting: delocalised electrons move when a p.d. is applied. Malleable: layers slide, the non-directional attraction re-forms — metals do NOT shatter.' },
+    { t: 'Across Period 3 — 2.18(i)', d: 'Na 98 → Mg 650 → Al 660 °C. Mg²⁺/Al³⁺ carry greater charge than Na⁺, each atom releases more delocalised electrons (1 → 2 → 3), and the ions are smaller → stronger attraction. Then Si 1410 °C peaks (giant covalent) and P₄ 44 / S₈ 115 collapse (weak van der Waals between simple molecules).' },
+    { t: 'Down the groups — 3.7', d: 'Group 1 falls: Li 181 > Na 98 > K 64 °C — same 1+ charge and 1 electron, but ionic radius rises (Li⁺ 76 → K⁺ 138 pm, more shells) so charge density falls. Quote IONIC radii for ions: K⁺ = 138 pm; 227 pm is the radius of the K ATOM.' },
+    { t: 'How to use this lab', d: 'Tab 1: data + vocab. Tab 2: predict BEFORE every run, then reveal; switch modes with the chips. Tab 3: calculate delocalised electrons per gram with full units. Tab 4: three exam questions. Tab 5: tick the checklist, flip every myth card.' },
+    { t: 'Out of scope / next unit', d: 'WHY Fe (1538 °C) and W (3422 °C) are so strong needs d-electrons — beyond Topic II; just know W has the highest m.p. of any metal. Crystal-packing detail, lattice enthalpy and hybridisation are also excluded. Contrast for later: MgO 2852 > NaCl 801 is about ION–ION charge, a different question.' }
+  ],
+  simCaption: 'Simplified model: real melting begins at defects and involves entropy, and the latent heat is absorbed at roughly constant temperature — the lattice loosens, the metallic bonding is not broken down chemically (molten metal still conducts). The bond "index" bar is a teaching model (ion charge × delocalised e⁻ ÷ ionic radius): it reproduces Na < Mg < Al and Li > Na > K BUT it is not a mark-scheme formula and it FAILS for Group 2 — it puts Mg (33 % of Al) above Ca (24 %) while the real melting points run the other way (Mg 650 °C < Ca 842 °C), because Mg and Ca differ in arrangement and orbital size as well as in radius. Never use the index to rank Mg against Ca; for Group 2 quote charge density plus structure. Ion sizes, speeds and magnification (×10⁷) are schematic.',
+  teacherTitle: 'Teacher notes',
+  teacher: [
+    'Placement: HKDSE Topic II (c) and (d), with the Period 3 and Group trends used to link structure to properties; revision anchor for Jan 2026 Q21.',
+    'Misconception to probe: the total-electron-count trap — students write "Mg has more electrons (12 vs 11)". Insist on DELOCALISED electrons per atom (2 vs 1) plus named ion charges.',
+    '5-minute task: Period 3 race mode — students predict the melting order before moving the shared slider, then write the Q21(b) answer using the "Explain it the way the examiner wants" builder and peer-mark against M1/M2.',
+    'Classic examiner complaints: attraction link omitted; "higher charge" without naming Mg²⁺/Na⁺; ion SIZE used alone; any covalent / intermolecular wording in a metallic-bonding answer = 0.',
+    'Data hygiene: the original sim listed K at "227 pm" — that is the ATOMIC radius; K⁺ is 138 pm. Also avoid teaching a monotonic Group 2 fall: the examinable claim is Be ≫ Ba via charge density, with arrangement mentioned only. The bond index FAILS for Group 2 (it ranks Mg above Ca, but Ca melts 192 °C higher) — do not let students rank Mg against Ca with it. It also OVERSTATES Group 1: K⁺ is 1.8× the radius of Li⁺, so the index predicts K far weaker than Li, yet K melts only ~1.4× lower in kelvin (64 °C vs 181 °C) — orbital size matters as well as radius, which is why the index is a teaching aid and not an examinable formula.'
+  ],
+  calcTitle: 'Delocalised electrons from equal masses',
+  calcSub: 'n = m ÷ Mᵣ, then × delocalised electrons per atom. Units and 3 s.f. are where marks live.',
+  calcBtn: 'Check working',
+  ppTitle: 'Past-paper practice',
+  ppSub: 'HKDSE-style items on the Topic II (c) and (d) outcomes, with feedback in HKDSE marking language (accept / not accept).',
+  questions: [
+    {
+      q: 'Why does magnesium have a higher melting point than sodium? (structure-property style)',
+      o: ['Mg atoms have more electrons overall than Na atoms.', 'Mg²⁺ ions have a greater charge than Na⁺ ions and each Mg atom supplies more delocalised electrons, so the electrostatic attraction is stronger.', 'Mg has a larger atomic radius than Na.', 'The metallic bonds in Mg are directional, so they hold harder.'],
+      a: 1,
+      why: 'MS (2 marks): M1 must see Mg²⁺ and Na⁺ named — greater charge / higher charge density; M2 more delocalised electrons per atom → stronger attraction between cations and delocalised electrons → more energy needed to melt. A: total electron count is REJECTED. C: size alone is REJECTED. D: metallic bonding is non-directional — wrong model.'
+    },
+    {
+      q: 'Beryllium (m.p. 1287 °C) melts far above barium (m.p. 727 °C). Which explanation is correct? (modelled on Summer 2023 MC)',
+      o: ['Be²⁺ ions are smaller than Ba²⁺ ions, so they have a higher charge density and attract the delocalised electrons more strongly.', 'Be atoms have fewer electrons to lose, so less energy is needed.', 'Beryllium is more electronegative than barium.', 'Be atoms pack in more layers than Ba atoms.'],
+      a: 0,
+      why: 'MS: both ions are 2+ and release the same number of delocalised electrons, so the difference is ION SIZE → charge density: smaller Be²⁺ → stronger attraction → higher m.p. "Fewer electrons" and "more electronegative" are the recorded distractors and score 0. Packing layers (D) is not Topic II reasoning.'
+    },
+    {
+      q: 'Which Period 3 element has the highest melting point? (syllabus 2.18(i))',
+      o: ['Na', 'Al', 'Si', 'S'],
+      a: 2,
+      why: 'Si (1410 °C): giant covalent — many strong covalent bonds between Si atoms must be broken, unlike the metals. Na (98) < Mg (650) < Al (660) rise with ion charge + delocalised e⁻ count + smaller ion, but stay below Si. S₈ (115 °C) is simple molecular: only weak van der Waals forces between molecules.'
+    }
+  ],
+  recapTitle: 'Recap checklist',
+  recapGoals: [
+    '3.20 · State the bulk properties metals show (conduct electricity as solid and liquid, malleable, generally high m.p.) and tie each to the electron-sea model with a "due to" clause.',
+    '3.21 · Define metallic bonding as the strong electrostatic attraction between positive metal ions (cations) and delocalised electrons — with no shared-pair, molecular or intermolecular wording.',
+    '3.22 · Explain high melting points using the model: energy is needed to overcome the attraction between cations and delocalised electrons — melting loosens the lattice, it does not chemically break the bonding.',
+    '2.18(i) · Explain the Period 3 melting-temperature trend: Na 98 < Mg 650 < Al 660 < Si 1410 then P₄ 44 / S₈ 115, naming structures (metallic, giant covalent, simple molecular) and bonding.',
+    '3.7 · Explain the Group 1 fall Li 181 > Na 98 > K 64 using IONIC radii (Li⁺ 76, Na⁺ 102, K⁺ 138 pm): larger cation with the same 1+ charge → lower charge density → weaker attraction; and state Be > Ba on the same logic.'
+  ],
+  mythTitle: 'Common misconceptions',
+  mythLead: 'Tap a card to flip. Check you would not write the myth side in an exam.',
+  mythFlip: 'Tap to flip',
+  mythLabelMyth: 'Myth?',
+  mythLabelFact: 'Fact',
+  myths: [
+    { m: '"Magnesium melts higher than sodium because Mg has more electrons (12 vs 11)."', f: 'Total electron count is irrelevant. Count only DELOCALISED electrons per atom — 2 for Mg, 1 for Na — AND name the ions: Mg²⁺ has greater charge than Na⁺. Then finish the chain: stronger attraction → more energy to melt.' },
+    { m: '"Just write: bigger charge, so higher m.p." — or: "bigger atom, so lower m.p." and stop there.', f: 'Half-true, so half-marks. The MS wants the ions named (Mg²⁺ vs Na⁺) AND the link: stronger electrostatic attraction between cations and delocalised electrons → more energy needed. Ion size used ALONE is rejected; bare "higher charge" without naming the ion is rejected.' },
+    { m: '"All metals have high melting points."', f: 'Mercury is a liquid at room temperature (m.p. −39 °C); potassium melts at 64 °C, below a hot-water bath. The electron-sea model explains these LOW m.p.s too: large 1+ cations with one delocalised electron attract weakly.' },
+    { m: '"Tungsten melts at 3422 °C because it has lots of d-electrons."', f: 'That explanation needs transition-metal d-orbital theory — beyond Topic II, so never write it here. At this level you need only the fact: W has the highest m.p. of any metal; the examinable reasoning covers Group 1, Group 2 and Period 3 metals.' },
+    { m: '"Metallic bonds are directional, like covalent bonds — so metals should be brittle."', f: 'The attraction between cations and the delocalised electrons acts in all directions (non-directional). Layers of ions can slide while the electron sea keeps holding — that is why metals are malleable and ductile rather than brittle.' },
+    { m: '"The ionic radius of potassium is 227 pm."', f: '227 pm is the radius of the K ATOM. K⁺ = 138 pm: cations are always smaller than their parent atoms because the whole outer shell is lost. Quote ionic radii when discussing ions — Li⁺ 76 < Na⁺ 102 < K⁺ 138 pm.' }
+  ]
+};
+function t() { return T; }
+document.documentElement.lang = 'en';
+
+/* =====================================================================
+   TOPICAL DATA (brief: Li 181, Na 98, K 64, Be 1287, Mg 650, Ca 842,
+   Sr 777, Ba 727, Al 660, Si 1410, W 3422, Fe 1538, Hg −39).
+   Fe/W carry NO charge/radius claims — transition-metal reasoning is
+   out of scope for Topic II (no d-orbital talk).
+   Bond index (model aid only): charge × delocalised e⁻ × 100 ÷ (pm).
+   Normalised so Al³⁺ = 100.
+===================================================================== */
+function bi(charge, n, pm) { return charge * n / pm; }
+/* Model bond index = (ion charge × delocalised e⁻ per atom) ÷ ionic radius in pm.
+   Values: Li 0.0132 · Na 0.0098 · K 0.0072 · Mg 0.0556 · Al 0.0556 · Ca 0.0200.
+   NOTE: an earlier build divided by 16.667 here, which shrank every value so that
+   Math.round(idx) printed "0 / 100" for Na, Mg, K and Ca and "1 / 100" for Al —
+   the bar was drawn from the un-rounded number, so the picture was right while the
+   printed figure was meaningless. Never scale a teaching quantity so far that the
+   display rounds it to zero. */
+function idxPct(m) { return Math.round(100 * m.idx / METALS.Al.idx); }
+const METALS = {
+  Li: { el:'Lithium', sym:'Li', ion:'Li⁺',  ch:1, nd:1, mp:181,  rIon:76,  color:'#f0abfc', idx:bi(1,1,76) },
+  Na: { el:'Sodium',  sym:'Na', ion:'Na⁺',  ch:1, nd:1, mp:98,   rIon:102, color:'#a5b4fc', idx:bi(1,1,102) },
+  K:  { el:'Potassium', sym:'K', ion:'K⁺',  ch:1, nd:1, mp:64,   rIon:138, color:'#c4b5fd', idx:bi(1,1,138) },
+  Mg: { el:'Magnesium', sym:'Mg', ion:'Mg²⁺', ch:2, nd:2, mp:650, rIon:72,  color:'#7dd3fc', idx:bi(2,2,72) },
+  Al: { el:'Aluminium', sym:'Al', ion:'Al³⁺', ch:3, nd:3, mp:660, rIon:54,  color:'#5eead4', idx:bi(3,3,54) },
+  Ca: { el:'Calcium', sym:'Ca', ion:'Ca²⁺', ch:2, nd:2, mp:842, rIon:100, color:'#86efac', idx:bi(2,2,100) },
+  Fe: { el:'Iron', sym:'Fe', ion:'Fe', ch:null, nd:null, mp:1538, rIon:null, color:'#94a3b8', idx:null },
+  W:  { el:'Tungsten', sym:'W', ion:'W', ch:null, nd:null, mp:3422, rIon:null, color:'#a8b3bd', idx:null }
+};
+const METAL_KEYS = ['Li','Na','K','Mg','Al','Ca','Fe','W'];
+const LAB_NOTE = {
+  Li:'Soft, cut with a knife, stored under oil.',
+  Na:'Cut with a knife; stored under oil — low m.p. 98 °C.',
+  K:'A hot-water bath would melt it (m.p. 64 °C) — but K reacts violently with water, never do it.',
+  Mg:'Burns in air with a brilliant white flame — classic demo.',
+  Al:'Foil crumples easily: layers slide, bonding is non-directional.',
+  Ca:'Soft grey metal; far too reactive for structural use.',
+  Fe:'Forged red-hot — layers of ions slide without breaking the bonding.',
+  W:'Filament of incandescent bulbs: the only metal that stays solid white-hot. Highest m.p. of any metal — the WHY needs d-electrons, beyond Topic 3D.'
+};
+const RACE = ['Na','Mg','Al'];
+const CP = {
+  race: {
+    q:'The shared slider will run 0 → 4000 °C for Na, Mg and Al side by side. Predict: which melts FIRST, and what happens to the other two?',
+    opts:['Na first; Mg (650 °C) and Al (660 °C) melt almost together at the end','Mg first — it has the biggest charge jump','Al first — it supplies 3 delocalised electrons'],
+    a:0,
+    why:'Na melts almost immediately (98 °C). Mg and Al hold on until 650 and 660 °C — nearly TIED: even though Al³⁺ has charge 3+ and 3 delocalised electrons (vs 2+ and 2 for Mg), the model index says Al is stronger yet the melting points barely differ, because how the atoms are arranged also matters. Bond-strength order for the exam: Na < Mg < Al — name the ions, the delocalised-e⁻ count, and the attraction link.'
+  },
+  trends: {
+    q:'Look at the Period 3 row. Predict: which has the highest melting point — Al (660 °C) or Si (1410 °C)?',
+    opts:['Al — 3 delocalised electrons per atom is unbeatable','Si — it is giant covalent, not a metal','They are close — both are Period 3'],
+    a:1,
+    why:'Si (1410 °C): every atom is joined to its neighbours by strong covalent bonds in a giant covalent lattice, so many covalent bonds must be broken. Na→Al still climb (charge 1+→3+, 1→3 delocalised electrons, shrinking ion), but Si peaks, then P₄ (44 °C) and S₈ (115 °C) collapse — simple molecules held together only by weak van der Waals forces. That is the full 2.18(i) story. W at 3422 °C is the overall record-holder (metal) — reasoning beyond Topic 3D.'
+  }
+};
+
+/* =====================================================================
+   TAB PLUMBING
+===================================================================== */
+let activeTab = 'sim';
+function setTab(name) {
+  activeTab = name;
+  document.querySelectorAll('.tab-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.tab === name);
+  });
+  ['intro','sim','calc','mcq','recap'].forEach(p => {
+    const el = document.getElementById('panel-' + p);
+    el.classList.toggle('active', p === name);
+  });
+  scheduleResize();
+  if (name === 'sim') { resizeCanvas(); resizeGraph(); }
+}
+function toggleTeacher() {
+  document.getElementById('teacher-panel').classList.toggle('hidden');
+}
+
+/* =====================================================================
+   SIM CORE — state-driven lattice in a sea of delocalised electrons
+===================================================================== */
+const sim = {
+  mode: 'single', metal: 'Na', temp: 25, ramp: false,
+  ions: [], electrons: [], cols: 6, rows: 4, rPx: 14,
+  t: 0, last: 0, pred: {}, show: false, ms: [false, false, false]
+};
+let ctx = null, canvasEl = null, W = 700, H = 340;
+let gctx = null, gCanvasEl = null, GW = 700, GH = 340;
+
+function resizeCanvas() {
+  canvasEl = canvasEl || document.getElementById('sim-canvas');
+  const wrap = canvasEl.closest('.canvas-wrap');
+  const rect = wrap ? wrap.getBoundingClientRect() : { width: 0 };
+  const w = Math.max(rect.width, canvasEl.offsetWidth || 0);
+  if (!w || w < 50) return;              // hidden tab guard
+  const h = Math.max(360, w * 0.46);
+  if (wrap && ctx && canvasEl.width === Math.round(w) && canvasEl.height === Math.round(h)) return;
+  canvasEl.width = W = Math.round(w);
+  canvasEl.height = H = Math.round(h);
+  ctx = canvasEl.getContext('2d');
+  // NOTE: no drawing during boot/resize — the RAF loop paints every frame.
+}
+function resizeGraph() {
+  gCanvasEl = gCanvasEl || document.getElementById('graph-canvas');
+  const wrap = gCanvasEl.closest('.canvas-wrap');
+  const rect = wrap ? wrap.getBoundingClientRect() : { width: 0 };
+  const w = Math.max(rect.width, gCanvasEl.offsetWidth || 0);
+  if (!w || w < 50) return;              // hidden wrap guard
+  const h = Math.max(360, w * 0.46);
+  if (ctx && gCanvasEl.width === Math.round(w) && gCanvasEl.height === Math.round(h)) return;
+  gCanvasEl.width = GW = Math.round(w);
+  gCanvasEl.height = GH = Math.round(h);
+  gctx = gCanvasEl.getContext('2d');
+}
+function scheduleResize() { resizeCanvas(); resizeGraph(); }
+
+function curM() { return METALS[sim.metal]; }
+function supCh(c) { return c === 1 ? '⁺' : c === 2 ? '²⁺' : c === 3 ? '³⁺' : '⁺'; }
+function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
+function panelRect(pid) {
+  if (sim.mode === 'single') return { x0: 62, y0: 40, x1: W - 18, y1: H - 18 };
+  const pw = (W - 16) / 3;
+  return { x0: 8 + pid * pw + 10, y0: 52, x1: 8 + (pid + 1) * pw - 10, y1: H - 66 };
+}
+function mpSpan(m) { return Math.max(50, m.mp * 0.06); }
+
+function makeGrid(pid, count) {
+  const list = [];
+  let i = 0;
+  for (let r = 0; r < sim.rows; r++) {
+    for (let c = 0; c < sim.cols; c++) {
+      if (i >= count) break;
+      list.push({ pid: pid, col: c, row: r, n: count, idx: i, liq: false, x: 0, y: 0, vx: 0, vy: 0, ph: Math.random() * 6.28, pf: 0.85 + Math.random() * 0.3 });
+      i++;
+    }
+  }
+  return list;
+}
+function ionGridPos(ion, rPx) {
+  const b = panelRect(ion.pid);
+  const n = ion.n;
+  const cols = Math.ceil(Math.sqrt(n * (b.x1 - b.x0) / Math.max(60, b.y1 - b.y0)));
+  const rowsN = Math.ceil(n / cols);
+  const sx = (b.x1 - b.x0 - 2 * rPx) / Math.max(1, cols - 1);
+  const sy = (b.y1 - b.y0 - 2 * rPx) / Math.max(1, rowsN - 1);
+  const col = ion.col, row = ion.row;
+  const off = (row % 2) ? sx / 2 : 0;   // staggered rows = close packing feel
+  return { x: b.x0 + rPx + col * sx + off, y: b.y0 + rPx + row * sy };
+}
+function buildElectrons(pid, count) {
+  const b = panelRect(pid);
+  const out = [];
+  for (let i = 0; i < count; i++) {
+    out.push({ pid: pid, x: b.x0 + Math.random() * (b.x1 - b.x0), y: b.y0 + Math.random() * (b.y1 - b.y0), vx: (Math.random() - 0.5) * 2, vy: (Math.random() - 0.5) * 2 });
+  }
+  return out;
+}
+function buildScene() {
+  sim.ions = []; sim.electrons = [];
+  if (sim.mode === 'single') {
+    const m = curM();
+    sim.cols = m.mp < 300 ? 6 : 7;
+    sim.rows = 4;
+    sim.rPx = m.rIon ? 9 + m.rIon * 0.052 : 13;
+    const n = sim.cols * sim.rows;
+    sim.ions = makeGrid(0, n);
+    sim.electrons = buildElectrons(0, Math.min(100, n * 2));
+    for (const io of sim.ions) { const p = ionGridPos(io, sim.rPx); io.x = p.x; io.y = p.y; }
+  } else if (sim.mode === 'race') {
+    sim.cols = 4; sim.rows = 3; sim.rPx = 11;
+    for (let pid = 0; pid < 3; pid++) {
+      const g = makeGrid(pid, 12);
+      for (const io of g) { const p = ionGridPos(io, sim.rPx); io.x = p.x; io.y = p.y; }
+      sim.ions = sim.ions.concat(g);
+      sim.electrons = sim.electrons.concat(buildElectrons(pid, 14));
+    }
+  }
+}
+
+function stepSim(dt) {
+  sim.t += dt * 1.6 * 2 * Math.PI / 2;
+  if (sim.ramp && sim.mode !== 'trends') {
+    const slow = (sim.temp >= 600 && sim.temp <= 700) ? 60 : 450;   // slow zone round the Mg/Al near-tie
+    let next = sim.temp + dt * slow;
+    /* auto-pause at the next milestone so the key temperatures are actually observable */
+    for (let i = 0; i < RAMP_MILESTONES.length; i++) {
+      const ms = RAMP_MILESTONES[i];
+      if (sim.temp < ms && next >= ms) {
+        next = ms;
+        sim.ramp = false;
+        const btn = document.getElementById('btn-ramp');
+        if (btn) btn.textContent = '▶ Heat ramp';
+        const hit = METAL_KEYS.filter(k => METALS[k].mp === ms);
+        rampNote(' Auto-paused at ' + ms + ' °C — ' +
+          (hit.length ? hit.map(k => METALS[k].el + ' (' + METALS[k].ion + ') melts here') .join(' and ') : 'a reference temperature') +
+          '. Look at the lattice NOW, then press ▶ Heat ramp to continue. ' +
+          (ms === 660 ? 'Compare this frame with 650 °C: magnesium and aluminium melt within 10 °C of each other, so the bond index alone cannot separate them.' : ''),
+          'warn');
+        break;
+      }
+    }
+    sim.temp = Math.min(4000, next);
+    const sl = document.getElementById('sl-temp');
+    if (sl) sl.value = String(Math.round(sim.temp));
+    syncTempUI();
+    if (sim.temp >= 4000) rampToggle();
+  }
+  if (sim.mode === 'trends') return;
+  const dtf = clamp(dt * 60, 0.2, 3);
+  const temps = sim.mode === 'single' ? [curM().mp] : [METALS.Na.mp, METALS.Mg.mp, METALS.Al.mp];
+  for (let pid = 0; pid < temps.length; pid++) {
+    const mp = temps[pid];
+    const fm = clamp((sim.temp - mp) / mpSpan({ mp: mp }), 0, 1);   // fraction molten
+    const q = clamp(sim.temp / mp, 0, 1);
+    const vib = 0.6 + q * q * 12;
+    const liqN = Math.floor(sim.ions.filter(i2 => i2.pid === pid).length * fm);
+    let seen = 0;
+    const rP = sim.rPx;
+    for (const io of sim.ions) {
+      if (io.pid !== pid) continue;
+      const wantLiq = seen < liqN; seen++;
+      if (wantLiq && !io.liq) { io.liq = true; io.vx = (Math.random() - 0.5) * 2.2; io.vy = (Math.random() - 0.5) * 2.2; }
+      if (!wantLiq && io.liq) { io.liq = false; }
+      const b = panelRect(pid);
+      if (io.liq) {
+        io.vx = io.vx * 0.96 + (Math.random() - 0.5) * 0.5 * dtf;
+        io.vy = io.vy * 0.96 + (Math.random() - 0.5) * 0.5 * dtf;
+        io.x += io.vx * dtf; io.y += io.vy * dtf;
+        if (io.x < b.x0 + rP) { io.x = b.x0 + rP; io.vx = Math.abs(io.vx); }
+        if (io.x > b.x1 - rP) { io.x = b.x1 - rP; io.vx = -Math.abs(io.vx); }
+        if (io.y < b.y0 + rP) { io.y = b.y0 + rP; io.vy = Math.abs(io.vy); }
+        if (io.y > b.y1 - rP) { io.y = b.y1 - rP; io.vy = -Math.abs(io.vy); }
+      } else {
+        const g = ionGridPos(io, rP);
+        io.x = g.x + Math.sin(sim.t * io.pf + io.ph) * vib + (Math.random() - 0.5) * vib * 0.5;
+        io.y = g.y + Math.cos(sim.t * io.pf * 1.13 + io.ph) * vib + (Math.random() - 0.5) * vib * 0.5;
+      }
+    }
+  }
+  const es = clamp(0.5 + sim.temp / 500, 0.5, 7);
+  for (const e of sim.electrons) {
+    e.x += e.vx * es * dtf * 0.55;
+    e.y += e.vy * es * dtf * 0.55;
+    if (Math.random() < 0.03) { e.vx = (Math.random() - 0.5) * 2.4; e.vy = (Math.random() - 0.5) * 2.4; }
+    const b = panelRect(e.pid);
+    if (e.x < b.x0 || e.x > b.x1) { e.vx = -e.vx; e.x = clamp(e.x, b.x0, b.x1); }
+    if (e.y < b.y0 || e.y > b.y1) { e.vy = -e.vy; e.y = clamp(e.y, b.y0, b.y1); }
+  }
+}
+
+function drawCation(x, y, r, color, label, badge) {
+  const g = ctx.createRadialGradient(x - r * 0.35, y - r * 0.4, r * 0.2, x, y, r);
+  g.addColorStop(0, '#ffffff');
+  g.addColorStop(0.25, color);
+  g.addColorStop(1, 'rgba(10,15,25,.9)');
+  ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2);
+  ctx.fillStyle = g; ctx.fill();
+  ctx.strokeStyle = 'rgba(255,255,255,.35)'; ctx.lineWidth = 1; ctx.stroke();
+  ctx.fillStyle = '#0b1220';
+  ctx.font = '700 ' + Math.max(9, Math.round(r * 0.95)) + 'px system-ui';
+  ctx.textAlign = 'center';
+  ctx.fillText(label, x, y + r * 0.34);
+  if (badge) {
+    ctx.fillStyle = '#fde68a';
+    ctx.font = '700 11px system-ui';
+    ctx.fillText('+', x + r * 0.62, y - r * 0.62);
+  }
+}
+function drawTempRuler(m) {
+  const x = 30, top = 14, bot = H - 14;
+  ctx.fillStyle = 'rgba(2,6,12,.6)'; ctx.fillRect(x - 7, top, 14, bot - top);
+  const ty = bot - (sim.temp / 4000) * (bot - top);
+  const hg = ctx.createLinearGradient(0, bot, 0, ty);
+  hg.addColorStop(0, '#f87171'); hg.addColorStop(1, '#fbbf24');
+  ctx.fillStyle = hg; ctx.fillRect(x - 4, ty, 8, bot - ty);
+  ctx.strokeStyle = 'rgba(148,163,184,.4)'; ctx.lineWidth = 1; ctx.strokeRect(x - 7, top, 14, bot - top);
+  const my = bot - (m.mp / 4000) * (bot - top);
+  ctx.strokeStyle = '#fbbf24'; ctx.setLineDash([4, 3]);
+  ctx.beginPath(); ctx.moveTo(x - 12, my); ctx.lineTo(x + 12, my); ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.fillStyle = '#fbbf24'; ctx.font = '700 10px system-ui'; ctx.textAlign = 'left';
+  ctx.fillText('m.p. ' + m.mp + ' °C', x + 14, my + 3);
+}
+function drawSingle() {
+  const m = curM();
+  const bg = ctx.createLinearGradient(0, 0, 0, H);
+  bg.addColorStop(0, '#0b1220'); bg.addColorStop(1, '#060a12');
+  ctx.fillStyle = bg; ctx.fillRect(0, 0, W, H);
+  const heat = clamp(sim.temp / 4000, 0, 1);
+  ctx.fillStyle = 'rgba(255,110,60,' + (heat * 0.16).toFixed(3) + ')';
+  ctx.fillRect(0, 0, W, H);
+  drawTempRuler(m);
+  for (const e of sim.electrons) {
+    ctx.fillStyle = 'rgba(253,224,71,.16)';
+    ctx.beginPath(); ctx.arc(e.x, e.y, 5, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = '#fde047';
+    ctx.beginPath(); ctx.arc(e.x, e.y, 2.1, 0, Math.PI * 2); ctx.fill();
+  }
+  const badge = m.ch === null;
+  const label = badge ? m.sym : m.sym + supCh(m.ch);
+  for (const io of sim.ions) drawCation(io.x, io.y, sim.rPx, m.color, label, badge);
+  ctx.textAlign = 'left'; ctx.fillStyle = '#e2e8f0'; ctx.font = '700 13px system-ui';
+  ctx.fillText(m.el + ' — ' + (m.ch ? m.ion + ' cations' : 'positive ions') + ' in a sea of delocalised electrons', 62, 24);
+  ctx.textAlign = 'right'; ctx.fillStyle = '#475569'; ctx.font = '10px system-ui';
+  ctx.fillText('schematic · ×10⁷', W - 10, 16);
+  const fm = clamp((sim.temp - m.mp) / mpSpan(m), 0, 1);
+  if (fm > 0 && fm < 1) {
+    ctx.textAlign = 'center';
+    ctx.fillStyle = 'rgba(251,191,36,.14)'; ctx.fillRect(W / 2 - 230, H - 46, 460, 26);
+    ctx.fillStyle = '#fde68a'; ctx.font = '700 12px system-ui';
+    ctx.fillText('MELTING ' + Math.round(fm * 100) + '% — extra heat absorbed at ~constant T; the lattice loosens, bonding is NOT broken chemically', W / 2, H - 29);
+  }
+}
+function drawRace() {
+  ctx.fillStyle = '#070c15'; ctx.fillRect(0, 0, W, H);
+  const pw = (W - 16) / 3;
+  for (let pid = 0; pid < 3; pid++) {
+    const m = METALS[RACE[pid]];
+    const b = panelRect(pid);
+    ctx.strokeStyle = 'rgba(148,163,184,.25)'; ctx.lineWidth = 1;
+    ctx.strokeRect(b.x0 - 8, b.y0 - 30, (b.x1 - b.x0) + 16, (b.y1 - b.y0) + 40);
+    const fm = clamp((sim.temp - m.mp) / mpSpan(m), 0, 1);
+    ctx.textAlign = 'left'; ctx.font = '700 12px system-ui';
+    ctx.fillStyle = m.ch ? m.sym + supCh(m.ch) : m.sym;
+    ctx.fillText(m.ion + ' · m.p. ' + m.mp + ' °C', b.x0, b.y0 - 12);
+    ctx.textAlign = 'right';
+    ctx.fillStyle = fm >= 1 ? '#f87171' : (fm > 0 ? '#fbbf24' : '#38bdf8');
+    ctx.fillText(fm >= 1 ? 'LIQUID' : (fm > 0 ? 'MELTING' : 'SOLID'), b.x1, b.y0 - 12);
+    for (const e of sim.electrons) {
+      if (e.pid !== pid) continue;
+      ctx.fillStyle = '#fde047';
+      ctx.beginPath(); ctx.arc(e.x, e.y, 1.9, 0, Math.PI * 2); ctx.fill();
+    }
+    for (const io of sim.ions) {
+      if (io.pid !== pid) continue;
+      drawCation(io.x, io.y, sim.rPx, m.color, m.sym + supCh(m.ch), false);
+    }
+    // model bond-strength bar, normalised to Al = 100
+    const frac = clamp(m.idx / METALS.Al.idx, 0, 1);
+    const byy = b.y1 + 16;
+    ctx.fillStyle = 'rgba(148,163,184,.18)'; ctx.fillRect(b.x0, byy, b.x1 - b.x0, 9);
+    const barG = ctx.createLinearGradient(b.x0, 0, b.x1, 0);
+    barG.addColorStop(0, '#0ea5e9'); barG.addColorStop(1, '#3dd6c6');
+    ctx.fillStyle = barG; ctx.fillRect(b.x0, byy, (b.x1 - b.x0) * frac, 9);
+    ctx.fillStyle = '#94a3b8'; ctx.font = '10px system-ui'; ctx.textAlign = 'left';
+    ctx.fillText('bond index ' + idxPct(m) + '% of Al  (' + m.ch + '\u207A × ' + m.nd + ' e\u207B ÷ ' + m.rIon + ' pm)', b.x0, byy + 24);
+  }
+  ctx.textAlign = 'left'; ctx.fillStyle = '#e2e8f0'; ctx.font = '700 13px system-ui';
+  ctx.fillText('Period 3 race — one shared heater · ' + Math.round(sim.temp) + ' °C', 14, 18);
+}
+function drawTrends() {
+  gctx.fillStyle = '#070c15'; gctx.fillRect(0, 0, GW, GH);
+  const L = 46, R = GW - 14, TP = 42, BM = GH - 48;
+  const groups = [
+    { name: 'Period 3', bars: [['Na', 98, 'M'], ['Mg', 650, 'M'], ['Al', 660, 'M'], ['Si', 1410, 'C'], ['P₄', 44, 'S'], ['S₈', 115, 'S']] },
+    { name: 'Group 1', bars: [['Li', 181, 'M'], ['Na', 98, 'M'], ['K', 64, 'M']] },
+    { name: 'Group 2 — not monotonic (arrangement matters)', bars: [['Be', 1287, 'M'], ['Mg', 650, 'M'], ['Ca', 842, 'M'], ['Sr', 777, 'M'], ['Ba', 727, 'M']] }
+  ];
+  const COL = { M: '#3dd6c6', C: '#fbbf24', S: '#fb7185' };
+  const maxY = 1500;
+  // axes + gridlines
+  gctx.strokeStyle = 'rgba(148,163,184,.35)'; gctx.lineWidth = 1;
+  gctx.beginPath(); gctx.moveTo(L, BM); gctx.lineTo(R, BM); gctx.stroke();
+  gctx.textAlign = 'right'; gctx.font = '10px system-ui';
+  for (let v = 0; v <= maxY; v += 500) {
+    const y = BM - (v / maxY) * (BM - TP);
+    gctx.strokeStyle = 'rgba(148,163,184,.12)';
+    gctx.beginPath(); gctx.moveTo(L, y); gctx.lineTo(R, y); gctx.stroke();
+    gctx.fillStyle = '#64748b'; gctx.fillText(String(v), L - 5, y + 3);
+  }
+  gctx.save(); gctx.translate(12, (TP + BM) / 2); gctx.rotate(-Math.PI / 2);
+  gctx.textAlign = 'center'; gctx.fillStyle = '#94a3b8'; gctx.font = '700 10px system-ui';
+  gctx.fillText('m.p. / °C', 0, 0); gctx.restore();
+  let total = 0; groups.forEach(g => total += g.bars.length);
+  const span = (R - L) / (total + groups.length);
+  let cursor = L + span * 0.5;
+  groups.forEach(g => {
+    g.bars.forEach(b => {
+      const hgt = (b[1] / maxY) * (BM - TP);
+      gctx.fillStyle = COL[b[2]];
+      gctx.fillRect(cursor - span * 0.32, BM - hgt, span * 0.64, hgt);
+      gctx.fillStyle = '#cbd5e1'; gctx.font = '9px system-ui'; gctx.textAlign = 'center';
+      gctx.fillText(String(b[1]), cursor, BM - hgt - 4);
+      gctx.fillStyle = '#e2e8f0'; gctx.font = '700 11px system-ui';
+      gctx.fillText(b[0], cursor, BM + 13);
+      cursor += span;
+    });
+    gctx.fillStyle = '#94a3b8'; gctx.font = '700 10px system-ui'; gctx.textAlign = 'left';
+    const gw = g.bars.length * span;
+    gctx.fillText(g.name, cursor - gw, BM + 28);
+    cursor += span * 0.9;
+  });
+  // legend (right-aligned, width estimated from string length — no measureText)
+  gctx.font = '10px system-ui'; gctx.textAlign = 'right';
+  const lg = [['M', 'metallic'], ['C', 'giant covalent'], ['S', 'simple molecular']];
+  let lx = R - 8;
+  for (let i = 2; i >= 0; i--) {
+    gctx.fillStyle = '#94a3b8';
+    gctx.fillText(lg[i][1], lx, 16);
+    lx -= 12 + lg[i][1].length * 5.6;
+    gctx.fillStyle = COL[lg[i][0]];
+    gctx.fillRect(lx, 8, 9, 9);
+    lx -= 14;
+  }
+  if (GW > 620) {
+    gctx.textAlign = 'left'; gctx.fillStyle = '#fcd34d'; gctx.font = '700 10px system-ui';
+    gctx.fillText('Si peak: giant covalent — many strong covalent bonds to break', L + 8, TP + 8);
+    gctx.fillStyle = '#fda4af';
+    gctx.fillText('P₄ / S₈ collapse: weak van der Waals between molecules', L + 8, TP + 22);
+    gctx.fillStyle = '#7dd3fc';
+    gctx.fillText('Na→Al rise: greater ion charge + more delocalised e⁻ + smaller ion', L + 8, TP + 36);
+    gctx.fillStyle = '#94a3b8';
+    gctx.fillText('Li→K fall: ionic radius ↑ → charge density ↓ → weaker attraction', L + 8, TP + 50);
+    gctx.fillStyle = '#e2e8f0';
+    gctx.fillText('W: 3422 °C — highest m.p. of any metal, off this chart (reason beyond Topic 3D)', L + 8, TP + 64);
+  }
+}
+function draw() {
+  if (sim.mode === 'trends') { if (gctx) drawTrends(); return; }
+  if (!ctx) return;
+  if (sim.mode === 'single') drawSingle();
+  else drawRace();
+}
+function loop(ts) {
+  requestAnimationFrame(loop);
+  if (activeTab !== 'sim') { sim.last = 0; return; }
+  const now = (typeof performance !== 'undefined' && performance.now) ? performance.now() : 0;
+  let dt = sim.last ? (now - sim.last) / 1000 : 0.016;
+  sim.last = now;
+  if (!isFinite(dt) || dt <= 0 || dt > 0.2) dt = 0.016;
+  stepSim(dt);
+  draw();
+}
+requestAnimationFrame(loop);
+
+/* =====================================================================
+   SIM UI — readouts, checkpoint, controls sync (inline handlers)
+===================================================================== */
+function stateText(m, temp) {
+  const fm = clamp((temp - m.mp) / mpSpan(m), 0, 1);
+  if (temp < m.mp) return { k: 'SOLID — cations vibrate on fixed lattice sites', c: '#38bdf8' };
+  if (fm < 1) return { k: 'MELTING — extra heat at ~constant T, lattice loosening', c: '#fbbf24' };
+  return { k: 'LIQUID — cations flow; delocalised e⁻ still bind (molten metal conducts)', c: '#f87171' };
+}
+function syncTempUI() {
+  document.getElementById('temp-val').textContent = Math.round(sim.temp) + ' °C';
+  if (sim.mode === 'single') {
+    const st = stateText(curM(), sim.temp);
+    const r = document.getElementById('ro-state');
+    if (r) { r.textContent = st.k; r.style.color = st.c; }
+    const rt = document.getElementById('ro-temp');
+    if (rt) rt.textContent = Math.round(sim.temp) + ' °C';
+  }
+}
+function updateReadouts() {
+  const box = document.getElementById('sim-readouts');
+  let cards = [];
+  if (sim.mode === 'single') {
+    const m = curM();
+    const st = stateText(m, sim.temp);
+    cards = [
+      ['Metal / ion in lattice', m.el + ' → ' + m.ion + (m.ch ? '' : ' (charge beyond 3D)'), '#e2e8f0'],
+      ['Temperature', Math.round(sim.temp) + ' °C', '#fdba74', 'ro-temp'],
+      ['State', st.k, st.c, 'ro-state'],
+      ['Bond index (charge × e⁻ ÷ radius)', m.idx === null ? 'n/a — beyond Topic II' : idxPct(m) + ' % of Al', '#5eead4'],
+      ['In the real lab…', LAB_NOTE[m.sym] || '', '#cbd5e1']
+    ];
+  } else if (sim.mode === 'race') {
+    let molten = 0;
+    RACE.forEach(k => { if (sim.temp >= METALS[k].mp) molten++; });
+    cards = [
+      ['Shared heater', Math.round(sim.temp) + ' °C', '#fdba74'],
+      ['Melting points', 'Na 98 · Mg 650 · Al 660 °C', '#e2e8f0'],
+      ['Molten now', molten + ' / 3 — ' + RACE.filter(k => sim.temp >= METALS[k].mp).join(', '), '#5eead4'],
+      ['Bond-strength order', 'Na ≪ Mg < Al (model) — Mg & Al nearly tied on m.p.', '#99f6e4'],
+      ['Why', 'greater ion charge + more delocalised e⁻ per atom + smaller ion → stronger attraction', '#cbd5e1']
+    ];
+  } else {
+    cards = [
+      ['Chart', 'Melting points by structure — bar heights are real data (°C)', '#e2e8f0'],
+      ['Period 3', 'Na 98 < Mg 650 < Al 660 < Si 1410, then P₄ 44 / S₈ 115', '#5eead4'],
+      ['Group 1', 'Li 181 > Na 98 > K 64 — charge density falls as radius rises', '#7dd3fc'],
+      ['Group 2 caveat', 'Be 1287 > Ba 727 (charge density) — but NOT monotonic; arrangement also matters', '#fcd34d'],
+      ['Structure colours', 'teal = metallic · amber = giant covalent · rose = simple molecular', '#cbd5e1']
+    ];
+  }
+  box.innerHTML = cards.map(c =>
+    '<div class="ro-card"><div class="ro-l">' + c[0] + '</div><div class="ro-v"' + (c[3] ? ' id="' + c[3] + '"' : '') + ' style="color:' + c[2] + '">' + c[1] + '</div></div>').join('');
+}
+function renderMetalChips() {
+  const row = document.getElementById('metal-row');
+  row.innerHTML = METAL_KEYS.map((k, i) =>
+    '<button type="button" class="metal-chip" id="mc-' + k + '" onclick="setMetal(' + i + ')">' + METALS[k].sym + ' · ' + METALS[k].mp + ' °C</button>').join('');
+  document.getElementById('metal-quick').textContent = 'Quick picks: Li·Na·K show the Group 1 fall; Mg·Al the Period 3 climb; Fe·W just record data — their extra strength needs d-electrons, beyond Topic 3D.';
+  METAL_KEYS.forEach(k => document.getElementById('mc-' + k).classList.toggle('active', k === sim.metal));
+}
+function currentCP() {
+  if (sim.mode === 'race') return CP.race;
+  if (sim.mode === 'trends') return CP.trends;
+  const m = curM();
+  const probe = m.mp < 200 ? m.mp + 250 : Math.round(m.mp * 0.6 / 10) * 10;
+  const liquid = probe > m.mp;
+  return {
+    q: m.el + ' has m.p. ' + m.mp + ' °C. You heat a sample from 25 °C to ' + probe + ' °C and hold. Predict: what happens to the lattice?',
+    opts: ['Fixed lattice — ions keep vibrating in place (solid)', 'Ions break free and flow (liquid)', 'The metal chemically decomposes into other substances'],
+    a: liquid ? 1 : 0,
+    why: probe + ' °C is ' + (liquid ? 'ABOVE' : 'BELOW') + ' the m.p. of ' + m.el.toLowerCase() + ' (' + m.mp + ' °C), so the sample is ' + (liquid ? 'liquid' : 'solid') + '. Melting only WEAKENS the electrostatic attraction between ' + m.ion + ' cations and the delocalised electrons — the metal is not broken down chemically. ' + (m.ch ? 'To go further: more energy is needed the greater the ion charge and the more delocalised electrons per atom.' : 'For ' + m.el + ', why the bonding is so strong involves d-electrons — beyond Topic II.')
+  };
+}
+function renderCheckpoint() {
+  const cp = currentCP();
+  const sel = sim.pred[sim.mode];
+  const card = document.getElementById('checkpoint-card');
+  let html = '<h3 class="font-bold text-white mb-1">🔮 Predict before you run <span class="text-xs font-normal text-slate-400">(' + (sim.mode === 'single' ? 'single metal: ' + sim.metal : sim.mode === 'race' ? 'Period 3 race' : 'trends chart') + ')</span></h3>'
+    + '<p class="text-sm text-slate-300 mb-3">' + cp.q + '</p><div class="flex flex-wrap gap-2">'
+    + cp.opts.map((o, i) => '<button type="button" class="pred-btn' + (sel === i ? ' sel' : '') + '" onclick="setPred(' + i + ')">' + 'ABC'[i] + ' · ' + o + '</button>').join('')
+    + '<button type="button" class="btn-primary" onclick="revealPred()">Reveal &amp; verify</button></div>'
+    + '<p id="cp-fb" class="text-sm mt-3 leading-relaxed"></p>';
+  if (!card) return;
+  card.innerHTML = html;
+  renderPredFeedback();
+  syncHeatGate();
+}
+function renderPredFeedback() {
+  const fb = document.getElementById('cp-fb');
+  if (!fb) return;
+  const cp = currentCP();
+  const sel = sim.pred[sim.mode];
+  if (!sim.show) {
+    fb.textContent = sel === undefined ? 'Make a prediction first, then press Reveal & verify.' : '✓ Prediction locked in — press Reveal & verify.';
+    fb.style.color = sel === undefined ? '#64748b' : '#99f6e4';
+    return;
+  }
+  const ok = sel === cp.a;
+  fb.textContent = (ok ? '✔ Correct. ' : '✘ Not quite — the answer is ' + 'ABC'[cp.a] + '. ') + cp.why;
+  fb.style.color = ok ? '#6ee7b7' : '#fca5a5';
+}
+function setPred(i) { sim.pred[sim.mode] = i; sim.show = false; renderCheckpoint(); syncHeatGate(); }
+function revealPred() { sim.show = true; renderCheckpoint(); syncHeatGate(); }
+/* v2 gate: the heater stays cold until the student has committed to a prediction for the
+   current mode. Without it the ramp is just an animation running before you have thought. */
+function setDockState(locked){
+  const dock = document.getElementById('sim-dock');
+  if (dock){ dock.classList.remove('locked','unlocked'); dock.classList.add(locked ? 'locked' : 'unlocked'); }
+  const st = document.getElementById('dock-state');
+  if (st){ st.className = 'dock-state ' + (locked ? 'st-lock' : 'st-open'); st.textContent = locked ? '\ud83d\udd12 Locked' : '\u2713 Unlocked'; }
+  const nt = document.getElementById('next-text');
+  if (nt) nt.textContent = locked
+    ? 'Commit to a prediction in the panel above the lattice \u2014 the heater is locked until you do'
+    : 'Now press Heat ramp and watch the lattice until the real m.p. is reached';
+}
+function goNext(){
+  const g = document.getElementById('next-go');
+  const tab = (g && g.dataset.go) ? g.dataset.go : 'sim';
+  setTab(tab);
+  const t = tab === 'sim' ? document.getElementById('sim-dock') : document.getElementById('panel-' + tab);
+  if (t && t.scrollIntoView) t.scrollIntoView({ behavior:'smooth', block:'start' });
+}
+function bindNewTasks(){
+  var fails = {
+    a: { name:'"Mg melts higher because it has 12 electrons"', txt:'A student writes: "Magnesium has 12 electrons and sodium has 11, so magnesium has stronger bonding."',
+         what:'That is the TOTAL number of electrons in the atom, and 10 of them are inner-shell electrons that are not involved in metallic bonding at all. Comparing total electron counts is a recorded distractor and scores 0.',
+         fix:'Count only the DELOCALISED electrons: each Mg atom releases 2 and each Na atom releases 1. Then add the charge argument: Mg forms Mg²⁺ and Na forms Na⁺, so the Mg ion has the higher charge. Finish with the consequence \u2014 stronger attraction, so more energy is needed.',
+         ms:'HKDSE marking: "more delocalised electrons" and "higher charge on the ion" are credited; "more electrons in the atom" is not.' },
+    b: { name:'"Melting breaks the metallic bonds completely"', txt:'A student writes: "When magnesium melts, the metallic bonds are broken so the ions and electrons separate."',
+         what:'Melting a metal does not destroy the metallic bonding \u2014 it only weakens it enough for the ions to slide past one another. The molten metal still contains positive ions and delocalised electrons, which is exactly why molten sodium still conducts electricity.',
+         fix:'Say the energy supplied overcomes (or weakens) the electrostatic attraction between the cations and the delocalised electrons, so the lattice can no longer hold the ions in fixed positions. The bonding is not broken chemically.',
+         ms:'HKDSE marking: "overcome the attraction" is credited. "Bonds broken / broken down chemically" is rejected, and it contradicts the conductivity you already know molten metals show.' }
+  };
+  var bs = document.querySelectorAll('[data-fail]');
+  for (var i = 0; i < bs.length; i++){
+    bs[i].onclick = function(){
+      var f = fails[this.dataset.fail]; if (!f) return;
+      var p = document.getElementById('fail-panel');
+      if (p) p.innerHTML = '<div class="space-y-2">' +
+        '<div class="rounded-xl border border-amber-500/30 bg-amber-950/20 p-3"><p class="text-xs font-bold text-amber-200 uppercase tracking-wide mb-1">' + f.name + '</p><p class="text-sm text-slate-200">' + f.txt + '</p></div>' +
+        '<div class="border-l-[3px] border-rose-500 bg-rose-950/20 rounded-lg p-3"><p class="text-xs font-bold text-rose-200 uppercase tracking-wide mb-1">What is wrong with it</p><p class="text-sm text-slate-200">' + f.what + '</p></div>' +
+        '<div class="rounded-xl border border-emerald-600/30 bg-emerald-950/20 p-3"><p class="text-xs font-bold text-emerald-200 uppercase tracking-wide mb-1">Write it this way instead</p><p class="text-sm text-slate-200">' + f.fix + '</p></div>' +
+        '<p class="text-xs text-teal-300">' + f.ms + '</p></div>';
+    };
+  }
+  var cl = document.getElementById('fail-clear');
+  if (cl) cl.onclick = function(){ var p = document.getElementById('fail-panel'); if (p) p.innerHTML = ''; };
+
+  var hints = {
+    1: 'Start by naming the ions: Na forms Na⁺ and Mg forms Mg²⁺. Which one carries the higher charge?',
+    2: 'Now count the delocalised electrons each atom releases \u2014 Na releases 1, Mg releases 2. Do NOT use the total electron count of the atom.',
+    3: 'Finish with the consequence. Stronger attraction means MORE ENERGY is needed to overcome it, so the melting point is higher.'
+  };
+  var hs = document.querySelectorAll('[data-hint]');
+  for (var k = 0; k < hs.length; k++){
+    hs[k].onclick = function(){ var t = document.getElementById('hint-text'); if (t) t.textContent = hints[this.dataset.hint] || ''; };
+  }
+  var sm = document.querySelectorAll('.selfmk');
+  for (var m = 0; m < sm.length; m++){ sm[m].onchange = updateSelfMarkTotal; }
+  updateSelfMarkTotal();
+
+  var lc = document.getElementById('lad-check');
+  if (lc) lc.onclick = function(){
+    var a1 = String((document.getElementById('lad-g1') || {}).value || '').toLowerCase();
+    var a2 = String((document.getElementById('lad-g2') || {}).value || '').toLowerCase();
+    var ok1 = /(bigger|larger|greater)/.test(a1) && /k/.test(a1);
+    var ok2 = /(weak|weaker|less)/.test(a2) && /(more|greater|larger)/.test(a2);
+    var fb = document.getElementById('lad-fb');
+    if (fb) fb.innerHTML = '<div class="rounded-xl border border-slate-700/60 bg-slate-950/50 p-3 space-y-1 text-xs">' +
+      '<div class="' + (ok1 ? 'text-emerald-300' : 'text-rose-300') + '">' + (ok1 ? '\u2713' : '\u2717') +
+      ' Gap 1: K⁺ is LARGER than Na⁺ (both carry 1+). A larger ion means the outer electrons are further from the nucleus, so the attraction is weaker.</div>' +
+      '<div class="' + (ok2 ? 'text-emerald-300' : 'text-rose-300') + '">' + (ok2 ? '\u2713' : '\u2717') +
+      ' Gap 2: so the electrostatic attraction between the ion and the delocalised electrons is WEAKER, and LESS energy is needed to melt it \u2014 which is why potassium melts at 64 \u00b0C against sodium\u2019s 98 \u00b0C.</div>' +
+      '<div class="text-slate-400 pt-1">Both ions are 1+, so charge cannot be the reason here. When the charges are equal, the argument must be about SIZE.</div></div>';
+  };
+  var lh = document.getElementById('lad-hint');
+  if (lh) lh.onclick = function(){ var t = document.getElementById('lad-hinttext'); if (t) t.textContent = 'Both ions carry the same charge (1+), so you cannot use charge. Compare the ionic radii: K⁺ is bigger than Na⁺. Then say what a bigger size does to the attraction, and therefore to the energy needed.'; };
+
+  var ir = document.getElementById('ind-reveal');
+  if (ir) ir.onclick = function(){
+    var o = document.getElementById('ind-out');
+    if (o) o.innerHTML = '<div class="work"><span class="hl">Marking scheme (2 marks)</span>\n' +
+      '  Be²⁺ is much SMALLER than Ba²⁺ (they carry the same 2+ charge), so the attraction between the ion\n' +
+      '  and the delocalised electrons is stronger in beryllium                       (1)\n' +
+      '  Therefore more energy is needed to overcome the attraction, so beryllium has the higher melting\n' +
+      '  point (Be 1287 \u00b0C against Ba 727 \u00b0C)                                        (1)\n\n' +
+      '<span class="hl">Do NOT write for this question</span>\n' +
+      '  \u2022 charge \u2014 both ions are 2+, so charge cannot explain the difference\n' +
+      '  \u2022 the number of electrons in the atom \u2014 only delocalised electrons matter\n' +
+      '  \u2022 "beryllium is heavier" \u2014 mass is not the reason; ionic size is</div>';
+  };
+}
+function updateSelfMarkTotal(){
+  var bs = document.querySelectorAll('.selfmk');
+  var n = 0;
+  for (var i = 0; i < bs.length; i++) if (bs[i].checked) n++;
+  var el = document.getElementById('selfmarks-total');
+  if (el && bs.length) el.textContent = n + ' / ' + bs.length + ' lines ticked. ' +
+    (n === bs.length ? 'That is a full-mark answer.' : 'The unticked lines are the marks you did not write.');
+}
+function syncHeatGate() {
+  const locked = sim.pred[sim.mode] === undefined;
+  ['sl-temp', 'btn-ramp'].forEach(function (id) {
+    const el = document.getElementById(id);
+    if (el) el.disabled = locked;
+  });
+  setDockState(locked);
+  const note = document.getElementById('gate-note-2');
+  if (note) {
+    if (locked) {
+      note.textContent = '🔒 Heater locked — commit to a prediction in the panel ABOVE the lattice first. (The metal chips and the mode buttons still work, so you can look at any lattice.)';
+      note.className = 'mt-2 text-[11px] font-semibold rounded-lg border border-amber-500/40 bg-amber-950/20 text-amber-200 px-2 py-1.5';
+    } else {
+      note.textContent = '🔥 Heater unlocked for this mode — now press Heat ramp and watch the lattice.';
+      note.className = 'mt-2 text-[11px] font-semibold rounded-lg border border-emerald-600/40 bg-emerald-950/20 text-emerald-200 px-2 py-1.5';
+    }
+  }
+}
+function updateMs() {
+  const s = sim.ms;
+  for (let i = 0; i < 3; i++) {
+    const el = document.getElementById('ms-' + i);
+    el.classList.toggle('on', s[i]);
+    el.textContent = (s[i] ? '☑ ' : '☐ ') + MS_TEXT[i];
+  }
+  const m1 = s[0], m2 = s[1] && s[2];
+  const score = document.getElementById('ms-score');
+  score.textContent = 'M1 (name Mg²⁺ & Na⁺, greater charge): ' + (m1 ? '✓ awarded' : '— not yet') + '   ·   M2 (more delocalised e⁻ → stronger attraction → more energy): ' + (m2 ? '✓ awarded' : '— not yet');
+  score.style.color = (m1 && m2) ? '#6ee7b7' : '#94a3b8';
+  const sent = document.getElementById('ms-sentence');
+  let parts = [];
+  if (s[0]) parts.push('Mg²⁺ ions have a greater charge than Na⁺ ions,');
+  if (s[1]) parts.push('each Mg atom supplies two delocalised electrons (sodium supplies only one),');
+  if (s[2]) parts.push('so there is stronger electrostatic attraction between the positive ions and the delocalised electrons — more energy is needed to melt magnesium, so its melting point is higher.');
+  sent.textContent = parts.length ? '“' + parts.join(' ') + '”' : 'Build the sentence: a full 2-mark answer names both ions WITH charge, counts delocalised electrons, and links to stronger attraction and more energy.';
+  sent.style.color = parts.length === 3 ? '#d1faf5' : '#94a3b8';
+}
+const MS_TEXT = [
+  'Mg²⁺ has greater charge than Na⁺ (name both ions)',
+  'each Mg atom supplies 2 delocalised e⁻, Na only 1',
+  'stronger electrostatic attraction → more energy to melt'
+];
+function msToggle(i) { sim.ms[i] = !sim.ms[i]; updateMs(); }
+function setMode(m) {
+  sim.mode = m; sim.ramp = false;
+  document.getElementById('btn-ramp').textContent = '▶ Heat ramp';
+  ['single', 'race', 'trends'].forEach(k => document.getElementById('msb-' + k).classList.toggle('active', k === m));
+  document.getElementById('metal-row').parentElement.classList.toggle('dim', m !== 'single');
+  document.getElementById('sl-temp').parentElement.classList.toggle('dim', m === 'trends');
+  document.getElementById('wrap-sim').classList.toggle('hidden', m === 'trends');
+  document.getElementById('wrap-graph').classList.toggle('hidden', m !== 'trends');
+  resizeGraph(); resizeCanvas();
+  const note = document.getElementById('sim-mode-note');
+  note.textContent = m === 'single' ? 'Drag the heater (0–4000 °C) or run the auto ramp — watch the vibration amplitude grow until the lattice breaks at the real m.p.'
+    : m === 'race' ? 'One shared slider heats Na, Mg and Al together. Na dies at 98 °C; then hunt for the near-tie at 650 vs 660 °C.'
+    : 'This chart is data: teal = metallic, amber = giant covalent (Si peak), rose = simple molecular. Heater is switched off here.';
+  buildScene(); renderCheckpoint(); updateReadouts(); syncTempUI();
+}
+function setMetal(i) {
+  sim.metal = METAL_KEYS[i];
+  if (sim.mode !== 'single') setMode('single');
+  METAL_KEYS.forEach(k => document.getElementById('mc-' + k).classList.toggle('active', k === sim.metal));
+  buildScene(); renderCheckpoint(); updateReadouts(); syncTempUI();
+}
+function setTemp(v) {
+  sim.temp = +v; sim.ramp = false;
+  document.getElementById('btn-ramp').textContent = '▶ Heat ramp';
+  syncTempUI(); updateReadouts();
+}
+function rampToggle() {
+  sim.ramp = !sim.ramp;
+  if (sim.ramp && sim.temp >= 4000) sim.temp = 25;
+  sim.paused = null;
+  document.getElementById('btn-ramp').textContent = sim.ramp ? '⏸ Pause heating' : '▶ Heat ramp';
+  paintRampNote();
+}
+/* The auto ramp used to cross the Mg 650 / Al 660 window in about 20 ms, so the near-tie the
+   lab asks students to find was physically unobservable. Two fixes:
+     (1) the ramp slows to 60 °C/s inside 600–700 °C, and
+     (2) it auto-pauses at every milestone melting point and says which one it stopped at. */
+const RAMP_MILESTONES = [64, 98, 181, 650, 660, 842, 1538, 3422];
+function rampNote(text, cls) {
+  sim.paused = text;
+  paintRampNote(cls);
+}
+function paintRampNote(cls) {
+  const el = document.getElementById('ramp-note');
+  if (!el) return;
+  if (!sim.paused) { el.textContent = ''; el.className = 'hidden'; return; }
+  el.textContent = sim.paused;
+  el.className = 'mt-2 text-[11px] font-semibold rounded-lg border px-2 py-1.5 ' +
+    (cls === 'warn' ? 'border-amber-500/40 bg-amber-950/20 text-amber-200'
+                    : 'border-teal-500/40 bg-teal-950/20 text-teal-200');
+}
+function resetSim() {
+  sim.temp = 25; sim.ramp = false;
+  document.getElementById('btn-ramp').textContent = '▶ Heat ramp';
+  document.getElementById('sl-temp').value = '25';
+  buildScene(); syncTempUI(); updateReadouts();
+}
+function setVocab(i) {
+  document.getElementById('vocab-def').textContent = VOCAB[i][1];
+  for (let k = 0; k < VOCAB.length; k++) document.getElementById('vb-' + k).classList.toggle('on', k === i);
+}
+const VOCAB = [
+  ['delocalised electrons', 'Delocalised electrons: the electrons each metal atom releases into a shared sea that flows through the whole lattice. This is the ONLY electron count the mark scheme wants — never the total electrons in the atom (12 vs 11 is not an explanation).'],
+  ['cation', 'Cation: a positive metal ion (e.g. Mg²⁺, Na⁺) fixed at a lattice site in the solid. Always name ions with their charge: "Mg²⁺", not "magnesium particles".'],
+  ['charge density', 'Charge density: ionic charge relative to ionic size. Greater charge (Mg²⁺ vs Na⁺) and smaller radius → higher charge density → stronger attraction to the electron sea → higher m.p. (this is the Be vs Ba logic).'],
+  ['ionic vs atomic radius', 'Ionic vs atomic radius: cations are SMALLER than their atoms because the outer shell is lost — K⁺ = 138 pm but the K atom is 227 pm. When an ion is discussed, quote the IONIC radius.'],
+  ['electrostatic attraction', 'Electrostatic attraction: the examinable force in metallic bonding — "(strong) electrostatic attraction between positive/metal ions and delocalised electrons". Writing only "the bonds are stronger" without naming the two partners earns nothing.']
+];
+
+/* =====================================================================
+   RENDERERS
+===================================================================== */
+function renderIntro() {
+  const s = t();
+  document.getElementById('hdr-title').textContent = s.title;
+  document.getElementById('hdr-sub').textContent = s.subtitle;
+  document.getElementById('intro-h1').textContent = s.introH1;
+  document.getElementById('intro-lead').textContent = s.introLead;
+  document.getElementById('sim-caption').textContent = s.simCaption;
+  document.getElementById('teacher-title').textContent = s.teacherTitle;
+  document.getElementById('teacher-content').innerHTML = s.teacher.map(x => '<p>• ' + x + '</p>').join('');
+  document.getElementById('intro-cards').innerHTML = s.concepts.map(c =>
+    '<div class="glass p-4"><h3 class="font-bold text-indigo-300 text-sm mb-1">' + c.t + '</h3><p class="text-sm text-slate-300">' + c.d + '</p></div>').join('');
+}
+function renderCalc() {
+  const s = t();
+  document.getElementById('calc-title').textContent = s.calcTitle;
+  document.getElementById('calc-sub').textContent = s.calcSub;
+  renderRadiusBars();
+}
+/* Atomic vs ionic radius, drawn to one scale. Data / pm:
+   Li atom 152 / Li+ 76 · Na atom 186 / Na+ 102 · K atom 227 / K+ 138.
+   The ion is smaller because the whole outer shell is lost — not because it has
+   "fewer electrons so it is emptier". K+ (138) is still bigger than Na+ (102) and
+   Li+ (76), so the Group 1 trend Li+ < Na+ < K+ survives, while the ATOM values
+   run the same way. Mixing an atom value with an ion value is the standard error. */
+const RADIUS_DATA = [
+  { sym: 'Li', atom: 152, ion: 76 },
+  { sym: 'Na', atom: 186, ion: 102 },
+  { sym: 'K',  atom: 227, ion: 138 }
+];
+function renderRadiusBars() {
+  const host = document.getElementById('radius-bars');
+  if (!host) return;
+  const MAX = 240;
+  let html = '<div class="space-y-2">';
+  RADIUS_DATA.forEach(function (d) {
+    html += '<div class="grid grid-cols-[3rem_1fr] items-center gap-2">' +
+      '<span class="text-xs font-bold text-slate-300">' + d.sym + '</span>' +
+      '<div class="space-y-1">' +
+        '<div class="flex items-center gap-2"><span class="text-xs text-slate-500 w-14">atom</span>' +
+          '<div class="h-3 rounded" style="width:' + Math.round(100 * d.atom / MAX) + '%;background:linear-gradient(90deg,#38bdf8,#0ea5e9)"></div>' +
+          '<span class="text-xs text-slate-400">' + d.atom + ' pm</span></div>' +
+        '<div class="flex items-center gap-2"><span class="text-xs text-slate-500 w-14">ion</span>' +
+          '<div class="h-3 rounded" style="width:' + Math.round(100 * d.ion / MAX) + '%;background:linear-gradient(90deg,#3dd6c6,#14b8a6)"></div>' +
+          '<span class="text-xs text-slate-400">' + d.ion + ' pm (' + d.sym + '\u207A)</span></div>' +
+      '</div></div>';
+  });
+  html += '</div><p class="text-xs text-slate-400 mt-3">Read it two ways. (1) Down each metal: the ion is much smaller than its atom, because forming the cation loses a whole outer shell. (2) Across the group for LIKE species: ' +
+    'atom radii Li &lt; Na &lt; K AND ion radii Li\u207A &lt; Na\u207A &lt; K\u207A — so the metallic bond gets weaker and the melting point falls down Group 1, because the positive charge is the same but the ion is bigger. ' +
+    'The rejected answer is to compare K (atom, 227 pm) with Na\u207A (ion, 102 pm) and conclude that bigger ions bond more strongly: always compare an ion with an ion.</p>';
+  host.innerHTML = html;
+}
+function hintMeltingLadder() {
+  const el = document.getElementById('lad-m-hint');
+  if (el) el.textContent = 'Blank 1: n = m ÷ Mᵣ, using Mᵣ(Na) = 23.0 g mol⁻¹ and the mass from the box above. Blank 2: sodium is in Group 1, so each atom releases exactly ONE delocalised electron — n(e⁻) = n(Na) × 1. Write the unit mol on both answers.';
+}
+function checkMeltingLadder() {
+  const fb = document.getElementById('lad-m-fb');
+  if (!fb) return;
+  const m = parseFloat((document.getElementById('calc-mass') || {}).value);
+  const a1 = parseFloat(document.getElementById('lad-m1').value);
+  const a2 = parseFloat(document.getElementById('lad-m2').value);
+  const n = (isFinite(m) && m > 0) ? m / 23.0 : NaN;
+  const ok1 = isFinite(a1) && isFinite(n) && Math.abs(a1 - n) < Math.max(0.001, n * 0.01);
+  const ok2 = isFinite(a2) && isFinite(n) && Math.abs(a2 - n) < Math.max(0.001, n * 0.01);
+  fb.innerHTML = '<div class="text-xs space-y-1 rounded-xl border border-slate-700/60 bg-slate-950/50 p-3">' +
+    '<div class="' + (ok1 ? 'text-emerald-300' : 'text-rose-300') + '">' + (ok1 ? '\u2713' : '\u2717') +
+      ' Blank 1: n(Na) = ' + fx(m, 1) + ' g ÷ 23.0 g mol⁻¹ = <b>' + fx(n, 4) + ' mol</b>' +
+      (ok1 ? '' : ' — this ÷ Mᵣ line is a method mark in its own right.') + '</div>' +
+    '<div class="' + (ok2 ? 'text-emerald-300' : 'text-rose-300') + '">' + (ok2 ? '\u2713' : '\u2717') +
+      ' Blank 2: n(e⁻) = ' + fx(n, 4) + ' mol × 1 = <b>' + fx(n, 4) + ' mol of delocalised electrons</b>' +
+      (ok2 ? '' : ' — sodium releases ONE electron per atom (Na → Na\u207A + e\u207B). If you answered the same as blank 1, you are right; if you multiplied by 11 (its total electrons) that answer is refused.') + '</div>' +
+    '<div class="text-slate-400 pt-1">Now swap the metal to Mg and Al on the simulator and repeat in your head: the moles of atoms change because Mᵣ changes, and the electrons per atom change because the group changes. Both factors matter, and that is why the melting-point comparison needs BOTH the ion charge and the radius.</div></div>';
+}
+function sf3(x) { return x.toPrecision(3); }
+/* This file has no shared number formatter — it formats inline everywhere. The two-blank
+   task needs one, so define it here rather than calling fmt(), which only exists in the
+   OTHER labs. (That missing function was a real broken code path: the button threw and
+   the feedback panel stayed empty. The verifier only exercises boot, so it did not catch it.) */
+function fx(x, d) { return (typeof x === 'number' && isFinite(x)) ? x.toFixed(d) : '—'; }
+function runCalc() {
+  const w = document.getElementById('calc-working');
+  w.classList.remove('hidden');
+  const m = parseFloat((document.getElementById('calc-mass') || {}).value);
+  if (!isFinite(m) || m <= 0) { w.textContent = 'Enter a mass greater than 0 g (try 10.0).'; return; }
+  const MR = { Na: 23.0, Mg: 24.3, Al: 27.0 };
+  const ND = { Na: 1, Mg: 2, Al: 3 };
+  const ION = { Na: 'Na⁺', Mg: 'Mg²⁺', Al: 'Al³⁺' };
+  const lines = [];
+  lines.push('For equal masses of ' + m + ' g of each metal  (Mᵣ: Na 23.0 · Mg 24.3 · Al 27.0 g mol⁻¹)');
+  const ne = {};
+  ['Na', 'Mg', 'Al'].forEach(function (k) {
+    const n = m / MR[k];
+    ne[k] = n * ND[k];
+    lines.push('');
+    lines.push('—— ' + ({ Na: 'Sodium', Mg: 'Magnesium', Al: 'Aluminium' })[k] + ' ——');
+    lines.push('n(' + k + ') = m / Mᵣ = ' + m + ' g / ' + MR[k] + ' g mol⁻¹ = ' + sf3(n) + ' mol');
+    lines.push('each ' + k + ' atom supplies ' + ND[k] + ' delocalised electron(s) (M → ' + ION[k] + ' + ' + ND[k] + 'e⁻)');
+    lines.push('n(delocalised e⁻) = ' + sf3(n) + ' mol × ' + ND[k] + ' = ' + sf3(ne[k]) + ' mol');
+  });
+  lines.push('');
+  lines.push('Per gram: delocalised e⁻  Na ' + sf3(ne.Na / m) + ' · Mg ' + sf3(ne.Mg / m) + ' · Al ' + sf3(ne.Al / m) + ' mol g⁻¹');
+  lines.push('Ratio n(e⁻)  Na : Mg : Al = 1.00 : ' + sf3(ne.Mg / ne.Na) + ' : ' + sf3(ne.Al / ne.Na));
+  lines.push('');
+  lines.push('Interpretation: Al has the LARGEST Mᵣ, so ' + m + ' g of Al contains the FEWEST moles of atoms (' + sf3(m / 27.0) + ' mol < ' + sf3(m / 23.0) + ' mol for Na) — yet per equal mass it supplies the MOST delocalised electrons (' + sf3(ne.Al) + ' mol), because each Al atom releases 3.');
+  lines.push('Exam link: count only DELOCALISED electrons per atom × the ion charge — never the total electron count of the atom (Na 11 / Mg 12 / Al 13 electrons is a rejected answer).');
+  w.textContent = lines.join('\n');
+}
+function renderMcq() {
+  const s = t();
+  document.getElementById('pp-title').textContent = s.ppTitle;
+  document.getElementById('pp-sub').textContent = s.ppSub;
+  document.getElementById('pp-questions').innerHTML = s.questions.map((q, qi) =>
+    '<div class="space-y-2"><p class="font-semibold text-slate-100 text-sm">' + (qi + 1) + '. ' + q.q + '</p>' +
+    q.o.map((o, oi) =>
+      '<button type="button" class="mcq-opt w-full text-left text-sm px-4 py-2 rounded-xl border border-slate-700 bg-slate-900/50" data-q="' + qi + '" data-o="' + oi + '">' + 'ABCD'[oi] + ' · ' + o + '</button>').join('') +
+    '<p class="mcq-why hidden text-xs text-emerald-300/90 bg-emerald-950/40 border border-emerald-800/40 rounded-xl p-3 leading-relaxed"></p></div>').join('');
+  document.querySelectorAll('.mcq-opt').forEach(btn => {
+    btn.onclick = () => {
+      const q = s.questions[+btn.dataset.q];
+      const opts = document.querySelectorAll('.mcq-opt[data-q="' + btn.dataset.q + '"]');
+      opts.forEach(o => o.classList.remove('correct', 'wrong'));
+      btn.classList.add(+btn.dataset.o === q.a ? 'correct' : 'wrong');
+      opts[q.a].classList.add('correct');
+      const why = btn.closest('.space-y-2').querySelector('.mcq-why');
+      why.textContent = q.why;
+      why.classList.remove('hidden');
+    };
+  });
+}
+function renderRecap() {
+  const s = t();
+  document.getElementById('recap-title').textContent = s.recapTitle;
+  document.getElementById('recap-list').innerHTML = s.recapGoals.map((g, i) =>
+    '<li class="flex items-start gap-2 text-sm"><input type="checkbox" class="goal-check mt-1" data-g="' + i + '"><span class="text-slate-300">' + g + '</span></li>').join('');
+  document.querySelectorAll('.goal-check').forEach(c => c.onchange = updateRecapProgress);
+  updateRecapProgress();
+  renderMyths();
+}
+function updateRecapProgress() {
+  const checks = document.querySelectorAll('.goal-check');
+  let n = 0;
+  checks.forEach(c => { if (c.checked) n++; });
+  document.getElementById('recap-progress').textContent = n + ' / ' + (checks.length || 5) + ' goals confirmed — every goal maps to an examinable code (3.20–3.22, 2.18(i), 3.7).';
+}
+function renderMyths() {
+  const s = t();
+  document.getElementById('myth-title').textContent = s.mythTitle;
+  document.getElementById('myth-lead').textContent = s.mythLead;
+  document.getElementById('myth-cards').innerHTML = s.myths.map((m, i) =>
+    '<div class="myth-card glass rounded-xl p-4" data-myth="' + i + '">' +
+    '<div class="myth-front"><span class="text-xs font-bold text-rose-400 uppercase">' + s.mythLabelMyth + '</span>' +
+    '<p class="text-sm text-slate-200 mt-2">' + m.m + '</p>' +
+    '<p class="text-xs text-slate-500 mt-3">' + s.mythFlip + '</p></div>' +
+    '<div class="myth-back"><span class="text-xs font-bold text-emerald-400 uppercase">' + s.mythLabelFact + '</span>' +
+    '<p class="text-sm text-slate-200 mt-2">' + m.f + '</p></div></div>').join('');
+  document.querySelectorAll('.myth-card').forEach(c => c.onclick = () => c.classList.toggle('flipped'));
+}
+function renderSimExtras() {
+  renderMetalChips();
+  renderCheckpoint();
+  bindNewTasks();
+  updateMs();
+  updateReadouts();
+}
+
+renderIntro();
+renderCalc();
+renderMcq();
+renderRecap();
+buildScene();
+renderSimExtras();
+resizeCanvas();
+</script>
+<script id="lab-runtime">(function () {
+'use strict';
+var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function relayout() {
+if (typeof window.scheduleResize === 'function') window.scheduleResize();
+else if (typeof window.resizeCanvas === 'function') window.resizeCanvas();
+}
+var pending = 0;
+function onRequestRelayout() {
+if (pending) return;
+pending = requestAnimationFrame(function () { pending = 0; relayout(); });
+}
+if (window.ResizeObserver) {
+var ro = new ResizeObserver(onRequestRelayout);
+document.querySelectorAll('.canvas-wrap').forEach(function (el) { ro.observe(el); });
+}
+window.addEventListener('orientationchange', onRequestRelayout);
+window.addEventListener('resize', onRequestRelayout);
+var bar = document.getElementById('next-bar');
+if (bar) {
+var setBarPad = function () {
+var h = Math.round(bar.offsetHeight);
+if (h > 0) document.body.style.setProperty('--next-bar-h', h + 'px');
+};
+setBarPad();
+if (window.ResizeObserver) new ResizeObserver(setBarPad).observe(bar);
+window.addEventListener('load', setBarPad);
+}
+var rail = document.getElementById('main-tabs');
+if (rail) {
+rail.setAttribute('role', 'tablist');
+var pills = Array.prototype.slice.call(rail.querySelectorAll('.tab-btn'));
+pills.forEach(function (btn, i) {
+var panel = document.getElementById('panel-' + btn.dataset.tab);
+btn.setAttribute('role', 'tab');
+btn.setAttribute('aria-selected', btn.classList.contains('active') ? 'true' : 'false');
+if (panel) {
+panel.setAttribute('role', 'tabpanel');
+btn.setAttribute('aria-controls', panel.id);
+panel.setAttribute('aria-labelledby', btn.id);
+}
+btn.addEventListener('keydown', function (e) {
+var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+if (!d) return;
+e.preventDefault();
+var next = pills[(i + d + pills.length) % pills.length];
+next.focus();
+if (typeof window.setTab === 'function') window.setTab(next.dataset.tab);
+});
+});
+rail.addEventListener('click', function () {
+setTimeout(function () {
+pills.forEach(function (b) { b.setAttribute('aria-selected', b.classList.contains('active') ? 'true' : 'false'); });
+var on = rail.querySelector('.tab-btn.active');
+if (on) on.scrollIntoView({ block: 'nearest', inline: 'center', behavior: reduce ? 'auto' : 'smooth' });
+}, 0);
+});
+}
+var dock = document.getElementById('sim-dock');
+if (dock && window.MutationObserver && !reduce) {
+new MutationObserver(function (m) {
+m.forEach(function (change) {
+var el = change.target;
+if (el.classList.contains('unlocked') && change.oldValue && /(^|\s)locked(\s|$)/.test(change.oldValue)) {
+el.classList.add('just-unlocked');
+setTimeout(function () { el.classList.remove('just-unlocked'); }, 750);
+}
+});
+}).observe(dock, { attributes: true, attributeFilter: ['class'], attributeOldValue: true });
+}
+document.addEventListener('click', function (e) {
+if (!e.target || !e.target.closest) return;
+if (e.target.closest('input, label, button, a, select')) return;
+var li = e.target.closest('li');
+if (!li) return;
+var box = li.querySelector('input[type="checkbox"], input[type="radio"]');
+if (!box || box.disabled) return;
+box.checked = box.type === 'checkbox' ? !box.checked : true;
+box.dispatchEvent(new Event('change', { bubbles: true }));
+box.dispatchEvent(new Event('input', { bubbles: true }));
+});
+if (window.IntersectionObserver && !reduce) {
+var io = new IntersectionObserver(function (entries) {
+entries.forEach(function (en) {
+if (!en.isIntersecting) return;
+en.target.classList.add('shown');
+io.unobserve(en.target);
+});
+}, { rootMargin: '0px 0px -6% 0px', threshold: 0.01 });
+document.querySelectorAll('.tab-panel > *').forEach(function (el, i) {
+el.classList.add('reveal');
+el.style.setProperty('--i', String(i));
+io.observe(el);
+});
+setTimeout(function () {
+document.querySelectorAll('.reveal:not(.shown)').forEach(function (el) { el.classList.add('shown'); });
+}, 2500);
+}
+})();</script>
+</body>
+</html>

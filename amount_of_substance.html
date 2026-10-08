@@ -1,0 +1,1428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="syllabus" content="HKDSE Chemistry C&A Guide (S4-S6) 2018 - Topic III(c) reacting masses; Topic IX(c) molar volume; no WCH/HKDSE codes apply">
+<title>Reacting Masses &amp; the Mole — HKDSE Chemistry Topic III(c) &amp; IX(c)</title>
+<meta name="theme-color" content="#000000">
+<style>
+  input[type=range]{accent-color:#3dd6c6;}
+.map-box.mole{background:rgba(99,102,241,.14);border-color:rgba(129,140,248,.6);}
+</style>
+<style id="lab-theme">/* Shared design system for the chemistry lab fleet. Source: _build/src/theme.css + tailwind.config.js. Edit the source, then run node _build/src/build.cjs. Do not hand-edit this block. */*,:after,:before{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(10,132,255,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(10,132,255,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }*,:after,:before{box-sizing:border-box;border:0 solid #d1d1d6}:after,:before{--tw-content:""}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;-o-tab-size:4;tab-size:4;font-family:-apple-system,BlinkMacSystemFont,SF Pro Text,SF Pro Display,Segoe UI Variable Text,Segoe UI,system-ui,Helvetica Neue,sans-serif;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:SF Mono,ui-monospace,Cascadia Mono,Segoe UI Mono,Consolas,monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0}fieldset,legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::-moz-placeholder,textarea::-moz-placeholder{opacity:1;color:#aeaeb2}input::placeholder,textarea::placeholder{opacity:1;color:#aeaeb2}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}.visible{visibility:visible}.invisible{visibility:hidden}.collapse{visibility:collapse}.static{position:static}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.sticky{position:sticky}.inset-0{inset:0}.z-10{z-index:10}.z-\[110\]{z-index:110}.col-span-1{grid-column:span 1/span 1}.col-span-2{grid-column:span 2/span 2}.mx-auto{margin-left:auto;margin-right:auto}.my-3{margin-top:.75rem;margin-bottom:.75rem}.mb-1{margin-bottom:.25rem}.mb-1\.5{margin-bottom:.375rem}.mb-10{margin-bottom:2.5rem}.mb-2{margin-bottom:.5rem}.mb-3{margin-bottom:.75rem}.mb-4{margin-bottom:1rem}.mb-5{margin-bottom:1.25rem}.mb-8{margin-bottom:2rem}.ml-1{margin-left:.25rem}.ml-auto{margin-left:auto}.mr-1{margin-right:.25rem}.mr-2{margin-right:.5rem}.ms-0{margin-inline-start:0}.ms-1{margin-inline-start:.25rem}.ms-2{margin-inline-start:.5rem}.mt-0{margin-top:0}.mt-0\.5{margin-top:.125rem}.mt-1{margin-top:.25rem}.mt-1\.5{margin-top:.375rem}.mt-2{margin-top:.5rem}.mt-3{margin-top:.75rem}.mt-4{margin-top:1rem}.mt-5{margin-top:1.25rem}.mt-6{margin-top:1.5rem}.block{display:block}.inline{display:inline}.flex{display:flex}.table{display:table}.grid{display:grid}.contents{display:contents}.hidden{display:none}.h-2{height:.5rem}.h-2\.5{height:.625rem}.h-3{height:.75rem}.h-auto{height:auto}.min-h-\[1\.25rem\]{min-height:1.25rem}.min-h-\[1rem\]{min-height:1rem}.min-h-\[24px\]{min-height:24px}.min-h-\[72px\]{min-height:72px}.w-14{width:3.5rem}.w-16{width:4rem}.w-20{width:5rem}.w-24{width:6rem}.w-28{width:7rem}.w-36{width:9rem}.w-6{width:1.5rem}.w-full{width:100%}.min-w-\[160px\]{min-width:160px}.max-w-3xl{max-width:48rem}.max-w-6xl{max-width:72rem}.max-w-sm{max-width:24rem}.max-w-xs{max-width:20rem}.flex-1{flex:1 1 0%}.shrink{flex-shrink:1}.grow{flex-grow:1}.border-collapse{border-collapse:collapse}.transform{transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.resize{resize:both}.list-inside{list-style-position:inside}.list-disc{list-style-type:disc}.grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}.grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid-cols-\[3rem_1fr\]{grid-template-columns:3rem 1fr}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-start{align-items:flex-start}.items-end{align-items:flex-end}.items-center{align-items:center}.items-baseline{align-items:baseline}.items-stretch{align-items:stretch}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-1{gap:.25rem}.gap-2{gap:.5rem}.gap-3{gap:.75rem}.gap-4{gap:1rem}.gap-5{gap:1.25rem}.gap-x-4{-moz-column-gap:1rem;column-gap:1rem}.gap-x-8{-moz-column-gap:2rem;column-gap:2rem}.gap-y-1{row-gap:.25rem}.gap-y-4{row-gap:1rem}.space-y-1>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.25rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.25rem*var(--tw-space-y-reverse))}.space-y-1\.5>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.375rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.375rem*var(--tw-space-y-reverse))}.space-y-2>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.5rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.5rem*var(--tw-space-y-reverse))}.space-y-3>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.75rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.75rem*var(--tw-space-y-reverse))}.space-y-4>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem*var(--tw-space-y-reverse))}.space-y-5>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.25rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.25rem*var(--tw-space-y-reverse))}.space-y-6>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.5rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.5rem*var(--tw-space-y-reverse))}.self-end{align-self:flex-end}.self-center{align-self:center}.overflow-hidden{overflow:hidden}.overflow-x-auto{overflow-x:auto}.whitespace-nowrap{white-space:nowrap}.whitespace-pre-line{white-space:pre-line}.whitespace-pre-wrap{white-space:pre-wrap}.text-wrap{text-wrap:wrap}.rounded{border-radius:.625rem}.rounded-2xl{border-radius:1.125rem}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:.75rem}.rounded-xl{border-radius:1rem}.border{border-width:1px}.border-l-\[3px\]{border-left-width:3px}.border-t{border-top-width:1px}.border-dashed{border-style:dashed}.\!border-indigo-500{--tw-border-opacity:1!important;border-color:rgb(10 132 255/var(--tw-border-opacity,1))!important}.border-amber-500{--tw-border-opacity:1;border-color:rgb(255 159 10/var(--tw-border-opacity,1))}.border-amber-500\/25{border-color:rgba(255,159,10,.25)}.border-amber-500\/30{border-color:rgba(255,159,10,.3)}.border-amber-500\/40{border-color:rgba(255,159,10,.4)}.border-amber-800{--tw-border-opacity:1;border-color:rgb(95 56 0/var(--tw-border-opacity,1))}.border-amber-800\/40{border-color:rgba(95,56,0,.4)}.border-emerald-500{--tw-border-opacity:1;border-color:rgb(48 209 88/var(--tw-border-opacity,1))}.border-emerald-500\/40{border-color:rgba(48,209,88,.4)}.border-emerald-600{--tw-border-opacity:1;border-color:rgb(36 168 63/var(--tw-border-opacity,1))}.border-emerald-600\/25{border-color:rgba(36,168,63,.25)}.border-emerald-600\/30{border-color:rgba(36,168,63,.3)}.border-emerald-600\/40{border-color:rgba(36,168,63,.4)}.border-emerald-700{--tw-border-opacity:1;border-color:rgb(27 122 46/var(--tw-border-opacity,1))}.border-emerald-700\/40{border-color:rgba(27,122,46,.4)}.border-emerald-800{--tw-border-opacity:1;border-color:rgb(18 84 31/var(--tw-border-opacity,1))}.border-emerald-800\/40{border-color:rgba(18,84,31,.4)}.border-indigo-500{--tw-border-opacity:1;border-color:rgb(10 132 255/var(--tw-border-opacity,1))}.border-indigo-500\/25{border-color:rgba(10,132,255,.25)}.border-indigo-500\/30{border-color:rgba(10,132,255,.3)}.border-orange-600{--tw-border-opacity:1;border-color:rgb(204 122 0/var(--tw-border-opacity,1))}.border-rose-500{--tw-border-opacity:1;border-color:rgb(255 69 63/var(--tw-border-opacity,1))}.border-rose-500\/25{border-color:rgba(255,69,63,.25)}.border-rose-500\/40{border-color:rgba(255,69,63,.4)}.border-rose-600{--tw-border-opacity:1;border-color:rgb(217 44 38/var(--tw-border-opacity,1))}.border-rose-600\/30{border-color:rgba(217,44,38,.3)}.border-rose-800{--tw-border-opacity:1;border-color:rgb(107 21 18/var(--tw-border-opacity,1))}.border-rose-800\/40{border-color:rgba(107,21,18,.4)}.border-sky-500{--tw-border-opacity:1;border-color:rgb(100 210 255/var(--tw-border-opacity,1))}.border-sky-500\/40{border-color:rgba(100,210,255,.4)}.border-sky-800{--tw-border-opacity:1;border-color:rgb(0 77 104/var(--tw-border-opacity,1))}.border-sky-800\/40{border-color:rgba(0,77,104,.4)}.border-slate-500{--tw-border-opacity:1;border-color:rgb(174 174 178/var(--tw-border-opacity,1))}.border-slate-600{--tw-border-opacity:1;border-color:rgb(161 161 166/var(--tw-border-opacity,1))}.border-slate-700{--tw-border-opacity:1;border-color:rgb(152 152 157/var(--tw-border-opacity,1))}.border-slate-700\/50{border-color:hsla(240,2%,61%,.5)}.border-slate-700\/60{border-color:hsla(240,2%,61%,.6)}.border-slate-700\/70{border-color:hsla(240,2%,61%,.7)}.border-slate-800{--tw-border-opacity:1;border-color:rgb(84 84 88/var(--tw-border-opacity,1))}.border-teal-500{--tw-border-opacity:1;border-color:rgb(100 210 255/var(--tw-border-opacity,1))}.border-teal-500\/25{border-color:rgba(100,210,255,.25)}.border-teal-500\/30{border-color:rgba(100,210,255,.3)}.border-teal-500\/40{border-color:rgba(100,210,255,.4)}.border-teal-500\/50{border-color:rgba(100,210,255,.5)}.border-teal-700{--tw-border-opacity:1;border-color:rgb(0 117 158/var(--tw-border-opacity,1))}.border-teal-700\/40{border-color:rgba(0,117,158,.4)}.border-teal-800{--tw-border-opacity:1;border-color:rgb(0 77 104/var(--tw-border-opacity,1))}.border-teal-800\/40{border-color:rgba(0,77,104,.4)}.border-white{--tw-border-opacity:1;border-color:rgb(245 245 247/var(--tw-border-opacity,1))}.border-white\/10{border-color:rgba(245,245,247,.1)}.\!bg-indigo-600{--tw-bg-opacity:1!important;background-color:rgb(0 96 223/var(--tw-bg-opacity,1))!important}.\!bg-teal-950{--tw-bg-opacity:1!important;background-color:rgb(0 23 31/var(--tw-bg-opacity,1))!important}.\!bg-teal-950\/40{background-color:rgba(0,23,31,.4)!important}.bg-amber-500{--tw-bg-opacity:1;background-color:rgb(255 159 10/var(--tw-bg-opacity,1))}.bg-amber-950{--tw-bg-opacity:1;background-color:rgb(29 17 0/var(--tw-bg-opacity,1))}.bg-amber-950\/10{background-color:rgba(29,17,0,.1)}.bg-amber-950\/20{background-color:rgba(29,17,0,.2)}.bg-amber-950\/30{background-color:rgba(29,17,0,.3)}.bg-emerald-600{--tw-bg-opacity:1;background-color:rgb(36 168 63/var(--tw-bg-opacity,1))}.bg-emerald-700{--tw-bg-opacity:1;background-color:rgb(27 122 46/var(--tw-bg-opacity,1))}.bg-emerald-950{--tw-bg-opacity:1;background-color:rgb(4 24 10/var(--tw-bg-opacity,1))}.bg-emerald-950\/10{background-color:rgba(4,24,10,.1)}.bg-emerald-950\/20{background-color:rgba(4,24,10,.2)}.bg-emerald-950\/35{background-color:rgba(4,24,10,.35)}.bg-emerald-950\/40{background-color:rgba(4,24,10,.4)}.bg-indigo-600{--tw-bg-opacity:1;background-color:rgb(0 96 223/var(--tw-bg-opacity,1))}.bg-indigo-950{--tw-bg-opacity:1;background-color:rgb(0 18 51/var(--tw-bg-opacity,1))}.bg-indigo-950\/10{background-color:rgba(0,18,51,.1)}.bg-indigo-950\/20{background-color:rgba(0,18,51,.2)}.bg-orange-700{--tw-bg-opacity:1;background-color:rgb(149 88 0/var(--tw-bg-opacity,1))}.bg-rose-950{--tw-bg-opacity:1;background-color:rgb(33 6 5/var(--tw-bg-opacity,1))}.bg-rose-950\/10{background-color:rgba(33,6,5,.1)}.bg-rose-950\/20{background-color:rgba(33,6,5,.2)}.bg-rose-950\/30{background-color:rgba(33,6,5,.3)}.bg-rose-950\/35{background-color:rgba(33,6,5,.35)}.bg-sky-950{--tw-bg-opacity:1;background-color:rgb(0 23 31/var(--tw-bg-opacity,1))}.bg-sky-950\/20{background-color:rgba(0,23,31,.2)}.bg-sky-950\/35{background-color:rgba(0,23,31,.35)}.bg-slate-700{--tw-bg-opacity:1;background-color:rgb(152 152 157/var(--tw-bg-opacity,1))}.bg-slate-800{--tw-bg-opacity:1;background-color:rgb(84 84 88/var(--tw-bg-opacity,1))}.bg-slate-800\/80{background-color:rgba(84,84,88,.8)}.bg-slate-900{--tw-bg-opacity:1;background-color:rgb(58 58 60/var(--tw-bg-opacity,1))}.bg-slate-900\/50{background-color:rgba(58,58,60,.5)}.bg-slate-900\/60{background-color:rgba(58,58,60,.6)}.bg-slate-950{--tw-bg-opacity:1;background-color:rgb(11 11 13/var(--tw-bg-opacity,1))}.bg-slate-950\/40{background-color:rgba(11,11,13,.4)}.bg-slate-950\/50{background-color:rgba(11,11,13,.5)}.bg-slate-950\/60{background-color:rgba(11,11,13,.6)}.bg-slate-950\/70{background-color:rgba(11,11,13,.7)}.bg-slate-950\/80{background-color:rgba(11,11,13,.8)}.bg-teal-600{--tw-bg-opacity:1;background-color:rgb(0 164 221/var(--tw-bg-opacity,1))}.bg-teal-700{--tw-bg-opacity:1;background-color:rgb(0 117 158/var(--tw-bg-opacity,1))}.bg-teal-950{--tw-bg-opacity:1;background-color:rgb(0 23 31/var(--tw-bg-opacity,1))}.bg-teal-950\/10{background-color:rgba(0,23,31,.1)}.bg-teal-950\/20{background-color:rgba(0,23,31,.2)}.bg-teal-950\/30{background-color:rgba(0,23,31,.3)}.bg-teal-950\/40{background-color:rgba(0,23,31,.4)}.p-2{padding:.5rem}.p-3{padding:.75rem}.p-4{padding:1rem}.p-5{padding:1.25rem}.p-6{padding:1.5rem}.p-8{padding:2rem}.px-2{padding-left:.5rem;padding-right:.5rem}.px-3{padding-left:.75rem;padding-right:.75rem}.px-4{padding-left:1rem;padding-right:1rem}.px-5{padding-left:1.25rem;padding-right:1.25rem}.py-1{padding-top:.25rem;padding-bottom:.25rem}.py-1\.5{padding-top:.375rem;padding-bottom:.375rem}.py-10{padding-top:2.5rem;padding-bottom:2.5rem}.py-2{padding-top:.5rem;padding-bottom:.5rem}.py-2\.5{padding-top:.625rem;padding-bottom:.625rem}.py-3{padding-top:.75rem;padding-bottom:.75rem}.py-6{padding-top:1.5rem;padding-bottom:1.5rem}.py-8{padding-top:2rem;padding-bottom:2rem}.pb-1{padding-bottom:.25rem}.pb-4{padding-bottom:1rem}.pb-8{padding-bottom:2rem}.pt-1{padding-top:.25rem}.pt-2{padding-top:.5rem}.pt-4{padding-top:1rem}.pt-5{padding-top:1.25rem}.text-left{text-align:left}.text-center{text-align:center}.text-right{text-align:right}.align-middle{vertical-align:middle}.font-mono{font-family:SF Mono,ui-monospace,Cascadia Mono,Segoe UI Mono,Consolas,monospace}.text-2xl{font-size:1.6rem;line-height:2.05rem}.text-3xl{font-size:1.95rem;line-height:2.3rem}.text-\[10px\]{font-size:10px}.text-\[11px\]{font-size:11px}.text-base{font-size:1rem;line-height:1.65rem}.text-lg{font-size:1.125rem;line-height:1.65rem}.text-sm{font-size:.9375rem;line-height:1.5rem}.text-xl{font-size:1.3125rem;line-height:1.8rem}.text-xs{font-size:.8125rem;line-height:1.35rem}.font-bold{font-weight:700}.font-extrabold{font-weight:800}.font-normal{font-weight:400}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.normal-case{text-transform:none}.italic{font-style:italic}.tabular-nums{--tw-numeric-spacing:tabular-nums;font-variant-numeric:var(--tw-ordinal) var(--tw-slashed-zero) var(--tw-numeric-figure) var(--tw-numeric-spacing) var(--tw-numeric-fraction)}.leading-relaxed{line-height:1.625}.leading-snug{line-height:1.375}.leading-tight{line-height:1.25}.tracking-wide{letter-spacing:.025em}.tracking-wider{letter-spacing:.05em}.tracking-widest{letter-spacing:.1em}.text-amber-200{--tw-text-opacity:1;color:rgb(255 214 168/var(--tw-text-opacity,1))}.text-amber-200\/80{color:rgba(255,214,168,.8)}.text-amber-200\/90{color:rgba(255,214,168,.9)}.text-amber-300{--tw-text-opacity:1;color:rgb(255 188 122/var(--tw-text-opacity,1))}.text-amber-300\/90{color:rgba(255,188,122,.9)}.text-cyan-200{--tw-text-opacity:1;color:rgb(174 228 255/var(--tw-text-opacity,1))}.text-emerald-100{--tw-text-opacity:1;color:rgb(217 242 225/var(--tw-text-opacity,1))}.text-emerald-200{--tw-text-opacity:1;color:rgb(168 230 189/var(--tw-text-opacity,1))}.text-emerald-200\/90{color:rgba(168,230,189,.9)}.text-emerald-200\/95{color:rgba(168,230,189,.95)}.text-emerald-300{--tw-text-opacity:1;color:rgb(108 224 143/var(--tw-text-opacity,1))}.text-emerald-300\/90{color:rgba(108,224,143,.9)}.text-emerald-400{--tw-text-opacity:1;color:rgb(76 212 111/var(--tw-text-opacity,1))}.text-indigo-200{--tw-text-opacity:1;color:rgb(191 220 255/var(--tw-text-opacity,1))}.text-indigo-300{--tw-text-opacity:1;color:rgb(115 177 255/var(--tw-text-opacity,1))}.text-orange-300{--tw-text-opacity:1;color:rgb(255 188 122/var(--tw-text-opacity,1))}.text-rose-100{--tw-text-opacity:1;color:rgb(255 220 217/var(--tw-text-opacity,1))}.text-rose-200{--tw-text-opacity:1;color:rgb(255 182 177/var(--tw-text-opacity,1))}.text-rose-200\/95{color:hsla(4,100%,85%,.95)}.text-rose-300{--tw-text-opacity:1;color:rgb(255 139 133/var(--tw-text-opacity,1))}.text-rose-300\/90{color:hsla(3,100%,76%,.9)}.text-rose-400{--tw-text-opacity:1;color:rgb(255 96 88/var(--tw-text-opacity,1))}.text-sky-200{--tw-text-opacity:1;color:rgb(174 228 255/var(--tw-text-opacity,1))}.text-sky-200\/95{color:rgba(174,228,255,.95)}.text-sky-300{--tw-text-opacity:1;color:rgb(131 214 255/var(--tw-text-opacity,1))}.text-slate-100{--tw-text-opacity:1;color:rgb(245 245 247/var(--tw-text-opacity,1))}.text-slate-200{--tw-text-opacity:1;color:rgb(229 229 234/var(--tw-text-opacity,1))}.text-slate-300{--tw-text-opacity:1;color:rgb(209 209 214/var(--tw-text-opacity,1))}.text-slate-400{--tw-text-opacity:1;color:rgb(199 199 204/var(--tw-text-opacity,1))}.text-slate-500{--tw-text-opacity:1;color:rgb(174 174 178/var(--tw-text-opacity,1))}.text-slate-600{--tw-text-opacity:1;color:rgb(161 161 166/var(--tw-text-opacity,1))}.text-slate-900{--tw-text-opacity:1;color:rgb(58 58 60/var(--tw-text-opacity,1))}.text-teal-100{--tw-text-opacity:1;color:rgb(217 242 255/var(--tw-text-opacity,1))}.text-teal-100\/90{color:rgba(217,242,255,.9)}.text-teal-200{--tw-text-opacity:1;color:rgb(174 228 255/var(--tw-text-opacity,1))}.text-teal-200\/80{color:rgba(174,228,255,.8)}.text-teal-300{--tw-text-opacity:1;color:rgb(131 214 255/var(--tw-text-opacity,1))}.text-teal-400{--tw-text-opacity:1;color:rgb(108 210 255/var(--tw-text-opacity,1))}.text-violet-300{--tw-text-opacity:1;color:rgb(212 155 255/var(--tw-text-opacity,1))}.text-white{--tw-text-opacity:1;color:rgb(245 245 247/var(--tw-text-opacity,1))}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.accent-teal-400{accent-color:#6cd2ff}.opacity-70{opacity:.7}.opacity-80{opacity:.8}.shadow{--tw-shadow:0 8px 24px rgba(0,0,0,.45);--tw-shadow-colored:0 8px 24px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}.outline-none{outline:2px solid transparent;outline-offset:2px}.outline{outline-style:solid}.ring-1{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color)}.ring-1,.ring-2{box-shadow:var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow,0 0 #0000)}.ring-2{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color)}.ring-teal-400{--tw-ring-opacity:1;--tw-ring-color:rgb(108 210 255/var(--tw-ring-opacity,1))}.ring-teal-400\/50{--tw-ring-color:rgba(108,210,255,.5)}.blur{--tw-blur:blur(8px)}.blur,.invert{filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.invert{--tw-invert:invert(100%)}.filter{filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.transition{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,-webkit-backdrop-filter;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter,-webkit-backdrop-filter;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.hover\:border-teal-400:hover{--tw-border-opacity:1;border-color:rgb(108 210 255/var(--tw-border-opacity,1))}.hover\:bg-amber-400:hover{--tw-bg-opacity:1;background-color:rgb(255 161 74/var(--tw-bg-opacity,1))}.hover\:bg-emerald-500:hover{--tw-bg-opacity:1;background-color:rgb(48 209 88/var(--tw-bg-opacity,1))}.hover\:bg-emerald-600:hover{--tw-bg-opacity:1;background-color:rgb(36 168 63/var(--tw-bg-opacity,1))}.hover\:bg-indigo-500:hover{--tw-bg-opacity:1;background-color:rgb(10 132 255/var(--tw-bg-opacity,1))}.hover\:bg-orange-600:hover{--tw-bg-opacity:1;background-color:rgb(204 122 0/var(--tw-bg-opacity,1))}.hover\:bg-slate-600:hover{--tw-bg-opacity:1;background-color:rgb(161 161 166/var(--tw-bg-opacity,1))}.hover\:bg-slate-700:hover{--tw-bg-opacity:1;background-color:rgb(152 152 157/var(--tw-bg-opacity,1))}.hover\:bg-teal-500:hover{--tw-bg-opacity:1;background-color:rgb(100 210 255/var(--tw-bg-opacity,1))}.hover\:bg-teal-600:hover{--tw-bg-opacity:1;background-color:rgb(0 164 221/var(--tw-bg-opacity,1))}.focus\:border-teal-400:focus{--tw-border-opacity:1;border-color:rgb(108 210 255/var(--tw-border-opacity,1))}.disabled\:cursor-not-allowed:disabled{cursor:not-allowed}.disabled\:opacity-40:disabled{opacity:.4}@media (min-width:640px){.sm\:col-span-2{grid-column:span 2/span 2}.sm\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.sm\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.sm\:grid-cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}}@media (min-width:768px){.md\:col-span-2{grid-column:span 2/span 2}.md\:col-span-5{grid-column:span 5/span 5}.md\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.md\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.md\:grid-cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}.md\:grid-cols-5{grid-template-columns:repeat(5,minmax(0,1fr))}.md\:text-3xl{font-size:1.95rem;line-height:2.3rem}.md\:text-4xl{font-size:2.35rem;line-height:2.6rem}.md\:text-base{font-size:1rem;line-height:1.65rem}.md\:text-sm{font-size:.9375rem;line-height:1.5rem}}@media (min-width:1024px){.lg\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.lg\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.lg\:grid-cols-6{grid-template-columns:repeat(6,minmax(0,1fr))}}:root {color-scheme: dark;--ink:        #000000;--panel:      #1c1c1e;--panel-2:    #2c2c2e;--panel-3:    #3a3a3c;--hairline:   rgba(84, 84, 88, .65);--hairline-2: rgba(84, 84, 88, .42);--label:      #f5f5f7;--label-2:    #a1a1a6;--label-3:    #6e6e73;--action:     #0a84ff;--action-hi:  #409cff;--action-dim: rgba(10, 132, 255, .14);--locked:     #ff9f0a;--locked-dim: rgba(255, 159, 10, .13);--correct:    #30d158;--correct-dim:rgba(48, 209, 88, .13);--wrong:      #ff453f;--wrong-dim:  rgba(255, 69, 63, .12);--font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display","Segoe UI Variable Text", "Segoe UI", system-ui, "Helvetica Neue", sans-serif;--font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display","Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif;--font-mono: "SF Mono", ui-monospace, "Cascadia Mono", "Segoe UI Mono", Consolas, monospace;--r-sm: 8px;--r-md: 12px;--r-lg: 18px;--r-xl: 24px;--ease-out:   cubic-bezier(.25, .1, .25, 1);--ease-spring:cubic-bezier(.32, .72, 0, 1);--dur-1: .18s;--dur-2: .32s;--dur-3: .55s;--shadow-1: 0 1px 2px rgba(0,0,0,.4);--shadow-2: 0 8px 24px rgba(0,0,0,.45);--shadow-3: 0 20px 60px rgba(0,0,0,.55);--gut: clamp(1rem, 4vw, 2rem);}*, *::before, *::after { box-sizing: border-box; }html {-webkit-text-size-adjust: 100%;text-size-adjust: 100%;scroll-behavior: smooth;scroll-padding-top: 5rem;}body {margin: 0;font-family: var(--font-sans);background: var(--ink);color: var(--label);min-height: 100dvh;-webkit-font-smoothing: antialiased;letter-spacing: 0;}body::before {content: "";position: fixed;inset: -20% -10% auto -10%;height: 60vh;background: radial-gradient(60% 100% at 50% 0%, rgba(10,132,255,.09), transparent 70%);pointer-events: none;z-index: 0;}main, body > div:first-of-type { position: relative; z-index: 1; }h1 { font-size: 1.9rem; }h2 { font-size: 1.35rem; }h3 { font-size: 1.125rem; }h4 { font-size: 1rem; }h1, h2, h3, h4 {font-family: var(--font-display);font-weight: 700;letter-spacing: -.003em;text-wrap: balance;}p { text-wrap: pretty; }b, strong { font-weight: 600; color: var(--label); }sub, sup { font-size: .8em; line-height: 0; }a { color: var(--action-hi); text-decoration: none; }::selection { background: rgba(10,132,255,.32); }:focus-visible {outline: 2px solid var(--action-hi);outline-offset: 2px;border-radius: 4px;}[class*="text-[10px]"], [class*="text-[11px]"] { font-size: .8125rem; }body {padding-top: env(safe-area-inset-top);padding-bottom: calc(var(--next-bar-h, 0px) + env(safe-area-inset-bottom));}.glass, .panel, .shell, .ro-card, .eqcard, .control-card, .guide-card,.method-card, .progress-card, .mixer-card, .heq-card, .map-box {background: var(--panel);border: 1px solid var(--hairline-2);border-radius: var(--r-lg);}.glass, .panel, .shell { box-shadow: var(--shadow-2); }header.glass { padding: clamp(1.1rem, 3vw, 1.75rem); }#hdr-title, .app-title {font-family: var(--font-display);font-weight: 700;font-size: clamp(1.5rem, 1.2rem + 1.1vw, 2.1rem);line-height: 1.15;letter-spacing: -.015em;}#hdr-sub, .app-subtitle { color: var(--label-2); font-size: 1rem; margin-top: .35rem; }.chip, .chip-dim, .chip-dse, .chip-warn, .ms-chip, .assume-chip, .badge,.dock-step, .dock-state, .ladder-tag, .section-kicker {display: inline-flex;align-items: center;gap: .3rem;padding: .2rem .6rem;border-radius: 999px;border: 1px solid var(--hairline);background: rgba(255,255,255,.05);color: var(--label-2);font-size: .75rem;font-weight: 600;letter-spacing: .01em;line-height: 1.5;}.chip, .chip-dim, .chip-dse, .chip-warn, .ms-chip, .assume-chip, .badge {max-width: 100%;align-self: flex-start;}.chip-dse, .chip:not(.chip-dim):not(.chip-warn) {border-color: rgba(10,132,255,.34);background: var(--action-dim);color: var(--action-hi);}.chip-dim, .assume-off { color: var(--label-3); background: rgba(255,255,255,.04); }.chip-warn { border-color: rgba(255,159,10,.38); background: var(--locked-dim); color: var(--locked); }.badge.ox  { border-color: rgba(255,159,10,.4); background: var(--locked-dim); color: var(--locked); }.badge.red { border-color: rgba(10,132,255,.4); background: var(--action-dim); color: var(--action-hi); }.section-kicker {background: none; border: 0; padding: 0;color: var(--label-3);font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;}.section-title { font-size: 1.35rem; }.section-lead  { color: var(--label-2); font-size: 1rem; line-height: 1.6; }#main-tabs, .main-tabs {display: flex;flex-wrap: nowrap;gap: .375rem;overflow-x: auto;scroll-snap-type: x proximity;scrollbar-width: none;-webkit-overflow-scrolling: touch;padding-block: .25rem;-webkit-mask-image: linear-gradient(90deg, transparent, #000 1.25rem, #000 calc(100% - 1.25rem), transparent);mask-image: linear-gradient(90deg, transparent, #000 1.25rem, #000 calc(100% - 1.25rem), transparent);}#main-tabs::-webkit-scrollbar, .main-tabs::-webkit-scrollbar { display: none; }.tab-btn, .view-btn, .mode-btn, .sim-mode-btn, .mbtn, .rbtn, .probe-btn,.pol-btn, .rp-btn, .ctrl-btn, .samp-btn, .sp-btn, .drill-btn, .sim-btn,.sub-btn, .mini-btn, .act-btn, .hint-btn, .btn, .btn-ghost, .btn-teal,.btn-primary, .route-btn, .guide-toggle, #next-go, .btn-run {font-family: inherit;font-size: .9375rem;font-weight: 600;color: var(--label);background: var(--panel-2);border: 1px solid transparent;border-radius: var(--r-md);padding: .55rem .95rem;cursor: pointer;display: inline-flex;align-items: center;gap: .45rem;flex: 0 1 auto;scroll-snap-align: center;transition: background var(--dur-1) var(--ease-out), color var(--dur-1) var(--ease-out),border-color var(--dur-1) var(--ease-out), transform var(--dur-1) var(--ease-spring);-webkit-tap-highlight-color: transparent;}.tab-btn { white-space: nowrap; flex: 0 0 auto; }.tab-btn { color: var(--label-2); background: transparent; }.tab-btn:hover { color: var(--label); background: rgba(255,255,255,.06); }.tab-btn.active {color: var(--label);background: var(--panel-2);box-shadow: var(--shadow-1), inset 0 1px 0 rgba(255,255,255,.07);}button:hover:not(:disabled) { background: var(--panel-3); }button:active:not(:disabled) { transform: scale(.97); }button:disabled, [aria-disabled="true"] { opacity: .38; cursor: not-allowed; }.btn-primary, .btn-run { background: var(--action); color: #fff; }.btn-primary:hover:not(:disabled), .btn-run:hover:not(:disabled) { background: var(--action-hi); }.sp-btn.on, .samp-btn.sel, .sub-btn.on, .mini-btn.on, .mode-btn.active,.mbtn.active, .rbtn.active, .drill-btn.on, .route-btn.on, .map-box.on,.view-btn.on, .pol-btn.on {background: var(--action-dim);border-color: rgba(10,132,255,.45);color: var(--action-hi);}.tab-panel { display: none; }.tab-panel.active {display: block;animation: panel-in var(--dur-3) var(--ease-spring) both;}@keyframes panel-in {from { opacity: 0; transform: translateY(10px) scale(.994); }to   { opacity: 1; transform: none; }}.dock {position: relative;border: 1px solid var(--hairline);border-radius: var(--r-lg);background: var(--panel);padding: clamp(.9rem, 2.5vw, 1.15rem);overflow: hidden;transition: border-color var(--dur-2) var(--ease-out), box-shadow var(--dur-2) var(--ease-out);}.dock::before {content: "";position: absolute;inset: 0 auto 0 0;width: 3px;background: var(--label-3);transition: background var(--dur-2) var(--ease-out);}.dock.locked   { border-color: rgba(255,159,10,.38); }.dock.locked::before   { background: var(--locked); }.dock.unlocked { border-color: rgba(48,209,88,.4); }.dock.unlocked::before { background: var(--correct); }.dock-head { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; }.dock-step {background: rgba(255,255,255,.06);border-color: var(--hairline);color: var(--label-2);font-size: .75rem;letter-spacing: .04em;text-transform: uppercase;border-radius: var(--r-sm);}.dock-state { margin-left: auto; font-weight: 700; }.st-lock { background: var(--locked-dim); border-color: rgba(255,159,10,.4); color: var(--locked); }.st-open { background: var(--correct-dim); border-color: rgba(48,209,88,.4);  color: var(--correct); }.dock-why, #dock-locknote { color: var(--label-2); font-size: .9375rem; line-height: 1.55; }@keyframes dock-unlock {0%   { box-shadow: 0 0 0 0 rgba(48,209,88,.55); }70%  { box-shadow: 0 0 0 10px rgba(48,209,88,0); }100% { box-shadow: 0 0 0 0 rgba(48,209,88,0); }}.dock.just-unlocked { animation: dock-unlock .7s var(--ease-out) 1; }@keyframes tick-in { from { opacity: 0; transform: scale(.4); } to { opacity: 1; transform: scale(1); } }.dock.just-unlocked .st-open { animation: tick-in .35s var(--ease-spring) both; }.pr-opt, .pred-opt {display: block;width: 100%;text-align: left;background: var(--panel-2);border: 1px solid var(--hairline-2);border-radius: var(--r-md);padding: .7rem .85rem;font-size: .9375rem;color: var(--label);cursor: pointer;white-space: normal;transition: border-color var(--dur-1) var(--ease-out), background var(--dur-1) var(--ease-out),transform var(--dur-1) var(--ease-spring);}.pr-opt:hover:not(:disabled), .pred-opt:hover:not(:disabled) { border-color: rgba(10,132,255,.5); background: var(--panel-3); }.pr-opt:active:not(:disabled), .pred-opt:active:not(:disabled) { transform: scale(.99); }.pr-opt.picked, .pred-opt.picked { border-color: var(--action); background: var(--action-dim); color: var(--label); }.pr-opt.correct, .pred-opt.correct, .route-btn.right, .mcq-opt.correct {border-color: rgba(48,209,88,.65);background: var(--correct-dim);}.pr-opt.wrong, .pred-opt.wrong, .route-btn.bad, .mcq-opt.wrong {border-color: rgba(255,69,63,.55);background: var(--wrong-dim);}.pred-opt:disabled { cursor: not-allowed; opacity: .45; }#next-bar {position: sticky;bottom: 0;z-index: 40;padding: .45rem var(--gut) max(.45rem, env(safe-area-inset-bottom));}#next-bar > .glass {max-width: 76rem;margin-inline: auto;display: flex;align-items: center;gap: .6rem;flex-wrap: wrap;padding: .4rem .4rem .4rem .85rem;border-radius: var(--r-lg);background: rgba(28,28,30,.82);border: 1px solid var(--hairline);box-shadow: var(--shadow-2);-webkit-backdrop-filter: saturate(180%) blur(20px);backdrop-filter: saturate(180%) blur(20px);}#next-text, .next-copy, #next-bar #next-text {color: var(--label);font-size: .9375rem;min-width: 0;flex: 1 1 15rem;}#next-go {flex: 0 0 auto;background: var(--action);color: #fff;border: 0;padding: .5rem .85rem;font-size: .875rem;}#next-go:hover:not(:disabled) { background: var(--action-hi); }.ico { width: 1.05em; height: 1.05em; flex: 0 0 auto; vertical-align: -.18em; }.canvas-wrap {position: relative;width: 100%;min-height: 0;background: var(--panel);border: 1px solid var(--hairline-2);border-radius: var(--r-lg);overflow: hidden;}.canvas-wrap canvas {position: static;display: block;width: 100%;height: auto;border-radius: 0;}.ro-k, .ro-l, .lbl, .map-lab, .field-l, .progress-label {color: var(--label-3);font-size: .75rem;font-weight: 700;letter-spacing: .05em;text-transform: uppercase;}.ro-v, .map-val, .stat, .mixer-readout { color: var(--label); font-variant-numeric: tabular-nums; }.ro-card, .map-box, .control-card {border: 1px solid var(--hairline-2);background: var(--panel-2);border-radius: var(--r-md);}.bar-track, .progress-track { background: var(--panel-3); border-radius: 999px; overflow: hidden; }.bar-fill, .progress-fill { background: var(--action); transition: width var(--dur-3) var(--ease-spring); }.work, .eqbox, .kbd, .eqline, code, pre { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }.work {background: var(--ink);border: 1px solid var(--hairline-2);border-radius: var(--r-md);color: var(--label-2);font-size: .9375rem;line-height: 1.7;padding: .9rem 1rem;overflow-x: auto;}.work .hl { color: var(--action-hi); }.work .dim { color: var(--label-3); }.step-h {color: var(--action-hi);font-size: .8125rem;font-weight: 700;letter-spacing: .05em;text-transform: uppercase;}input[type="text"], input[type="number"], input[type="search"], select, textarea,.field, .field-i, .calc-inp {width: 100%;font-family: inherit;font-size: 1rem;color: var(--label);background: var(--panel-2);border: 1px solid var(--hairline);border-radius: var(--r-md);padding: .55rem .7rem;transition: border-color var(--dur-1) var(--ease-out), background var(--dur-1) var(--ease-out);-webkit-appearance: none;appearance: none;}input:focus, select:focus, textarea:focus { outline: none; border-color: var(--action); background: var(--panel); }select {background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23a1a1a6' d='M1.4 0 6 4.6 10.6 0 12 1.4 6 8 0 1.4z'/%3E%3C/svg%3E");background-repeat: no-repeat;background-position: right .65rem center;padding-right: 1.9rem;}label, .calc-lbl, .field-l {color: var(--label-2); font-size: .8125rem; font-weight: 600; letter-spacing: 0; text-transform: none;}input[type="range"] {-webkit-appearance: none; appearance: none;width: 100%; height: 28px; background: transparent; cursor: pointer;accent-color: var(--action);}input[type="range"]::-webkit-slider-runnable-track { height: 4px; border-radius: 999px; background: var(--panel-3); }input[type="range"]::-webkit-slider-thumb {-webkit-appearance: none; appearance: none;width: 24px; height: 24px; margin-top: -10px;border-radius: 50%; background: #fff; border: 0;box-shadow: 0 1px 4px rgba(0,0,0,.5);transition: transform var(--dur-1) var(--ease-spring);}input[type="range"]:active::-webkit-slider-thumb { transform: scale(1.12); }input[type="range"]::-moz-range-track { height: 4px; border-radius: 999px; background: var(--panel-3); }input[type="range"]::-moz-range-thumb { width: 22px; height: 22px; border: 0; border-radius: 50%; background: #fff; }input[type="checkbox"], input[type="radio"] { width: 1.1rem; height: 1.1rem; accent-color: var(--action); }.mcq-opt, .myth-card, .ms-point, .evidence-grid > *, .concept-grid > *, .guide-card {border: 1px solid var(--hairline-2);border-radius: var(--r-md);background: var(--panel-2);}.mcq-opt { padding: .75rem .9rem; font-size: .9375rem; cursor: pointer; }.mcq-opt:hover { border-color: rgba(10,132,255,.5); }.myth-card { cursor: pointer; transition: border-color var(--dur-2) var(--ease-out); }.myth-card:hover { border-color: rgba(10,132,255,.45); }.myth-back { display: none; }.myth-card.flipped .myth-front { display: none; }.myth-card.flipped .myth-back { display: block; animation: flip-in var(--dur-2) var(--ease-spring) both; }@keyframes flip-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }.tag-w { background: var(--correct-dim); border-color: rgba(48,209,88,.4); color: var(--correct); }.tag-c { background: var(--locked-dim);  border-color: rgba(255,159,10,.4);  color: var(--locked); }.tag-i { background: var(--wrong-dim);   border-color: rgba(255,69,63,.4);   color: var(--wrong); }.hint-btn { border-color: rgba(255,159,10,.35); background: var(--locked-dim); color: var(--locked); font-size: .8125rem; }.fail-box { border-left: 3px solid var(--wrong); background: var(--wrong-dim); border-radius: var(--r-md); padding: .7rem .9rem; }table, .datatbl { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }th, td { padding: .55rem .7rem; text-align: left; border-bottom: 1px solid var(--hairline-2); font-size: .9375rem; }th { color: var(--label-3); font-size: .75rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; }tbody tr:last-child > td { border-bottom: 0; }tbody tr { transition: background var(--dur-1) var(--ease-out); }tbody tr:hover { background: rgba(255,255,255,.04); }.lab-card {display: block;border: 1px solid var(--hairline-2);border-radius: var(--r-lg);background: var(--panel);color: var(--label);transition: transform var(--dur-2) var(--ease-spring), border-color var(--dur-2) var(--ease-out),box-shadow var(--dur-2) var(--ease-out);}.lab-card:hover { transform: translateY(-3px); border-color: rgba(10,132,255,.5); box-shadow: var(--shadow-3); }.lab-card:active { transform: translateY(-1px) scale(.995); }.reveal { opacity: 0; transform: translateY(14px); }.reveal.shown {opacity: 1; transform: none;transition: opacity var(--dur-3) var(--ease-out), transform var(--dur-3) var(--ease-spring);transition-delay: calc(var(--i, 0) * 45ms);}@media (pointer: coarse) {button, summary, [role="button"], .tab-btn, .pr-opt, .pred-opt, .mcq-opt,.myth-card, .lab-card, select, .field, .field-i, .calc-inp, .ans,input:not([type="checkbox"]):not([type="radio"]):not([type="range"]) { min-height: 44px !important; }input[type="checkbox"], input[type="radio"] { min-width: 28px !important; min-height: 28px !important; }label:has(> input[type="checkbox"]), label:has(> input[type="radio"]),.ms-point { min-height: 44px; display: flex; align-items: center; }.pr-opt, .pred-opt, .mcq-opt { display: flex; align-items: center; }li:has(> input[type="checkbox"]), li:has(> input[type="radio"]),li:has(.goal-check), li:has(.mloss) {cursor: pointer;min-height: 44px;display: flex;align-items: flex-start;padding-block: .3rem;}}@media (max-width: 640px) {.chip, .chip-dim, .chip-dse, .chip-warn, .badge, .dock-step, .dock-state, .ladder-tag {padding: .1rem .45rem;}#hdr-sub, .app-subtitle { font-size: .9375rem; line-height: 1.5; }#next-bar > .glass > span:first-child { display: none; }header.glass { gap: .6rem; }}@media (max-width: 768px) {.flex { flex-wrap: wrap; }}@media (min-width: 1024px) {:root { --gut: 2rem; }#main-tabs, .main-tabs {gap: .25rem;background: var(--panel-2);border-radius: var(--r-md);padding: .25rem;margin-inline: 0;overflow: visible;width: fit-content;-webkit-mask-image: none;mask-image: none;}.tab-btn { border-radius: var(--r-sm); }}:root {--bg: #000000;--bg-2: #0b0b0d;--panel: #1c1c1e;--panel-2: #2c2c2e;--panel-3: #37373a;--line: rgba(84, 84, 88, .42);--line-strong: rgba(84, 84, 88, .65);--text: #f5f5f7;--muted: #a1a1a6;--faint: #6e6e73;--teal: #64d2ff;--blue: #0a84ff;--amber: #ff9f0a;--rose: #ff453f;--green: #30d158;--radius: 12px;--shadow: 0 8px 24px rgba(0,0,0,.45);}@media (prefers-reduced-motion: reduce) {html { scroll-behavior: auto; }*, *::before, *::after {animation-duration: .001ms !important;animation-iteration-count: 1 !important;transition-duration: .001ms !important;}.reveal { opacity: 1; transform: none; }}@media print {html, body { background: #fff !important; color: #111 !important; }body::before { display: none; }* {color: #111 !important;background-image: none !important;box-shadow: none !important;-webkit-backdrop-filter: none !important;backdrop-filter: none !important;}.glass, .panel, .shell, .dock, .canvas-wrap, .ro-card, .mcq-opt, .myth-card,.lab-card, .btn, button, table, th, td { border-color: #c7c7cc !important; background-color: #fff !important; }.tab-panel { display: block !important; break-inside: avoid; }#next-bar, #btn-teacher, #pr-reveal, #pr-why, .hint-btn { display: none !important; }.reveal { opacity: 1 !important; transform: none !important; }.myth-back { display: block !important; }.myth-front { display: none !important; }}</style>
+</head>
+<body class="text-slate-200">
+<main class="max-w-6xl mx-auto px-5 py-6 relative z-10">
+
+  <header class="glass p-5 mb-4">
+    <div class="flex flex-wrap items-start justify-between gap-4">
+      <div>
+        <div class="flex flex-wrap items-center gap-2 mb-2">
+        <span class="chip">HKDSE Chemistry</span>
+        <span class="chip">Topic III (c)</span>
+        <span class="chip">Topic IX (c)</span>
+        <span class="chip">Reacting masses · the mole</span>
+</div>
+        <h1 id="hdr-title" class="text-2xl md:text-3xl font-extrabold text-white leading-tight">Reacting Masses &amp; the Mole</h1>
+        <p id="hdr-sub" class="text-sm text-slate-400 mt-1">Topic III (c) — the mole, Avogadro's constant, molar mass, percentage by mass, formulae from experiment, reacting masses. Topic IX (c) — molar volume 24 dm³ at r.t.p.</p>
+      </div>
+      <button type="button" id="btn-teacher" onclick="toggleTeacher()" class="btn btn-ghost"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg><span>Teacher notes</span></button>
+    </div>
+  </header>
+
+  <div id="teacher-panel" class="glass p-5 mb-4 hidden">
+    <h2 id="teacher-title" class="font-bold text-amber-300 mb-2">Teacher notes</h2>
+    <div id="teacher-content" class="text-sm text-slate-300 space-y-2 leading-relaxed"></div>
+  </div>
+
+  <nav id="main-tabs" class="flex flex-wrap gap-2 mb-4">
+    <button type="button" id="tab-sim"   class="tab-btn active px-4 py-2 rounded-xl text-sm font-semibold border border-slate-700 bg-slate-900/60" data-tab="sim"   onclick="setTab('sim')">1 · Investigate</button>
+    <button type="button" id="tab-intro" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold border border-slate-700 bg-slate-900/60" data-tab="intro" onclick="setTab('intro')">2 · Learn</button>
+    <button type="button" id="tab-calc"  class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold border border-slate-700 bg-slate-900/60" data-tab="calc"  onclick="setTab('calc')">3 · Practise calculations</button>
+    <button type="button" id="tab-mcq"   class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold border border-slate-700 bg-slate-900/60" data-tab="mcq"   onclick="setTab('mcq')">4 · Exam practice</button>
+    <button type="button" id="tab-recap" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold border border-slate-700 bg-slate-900/60" data-tab="recap" onclick="setTab('recap')">5 · Recap</button>
+  </nav>
+
+  <!-- ================= 1 · INVESTIGATE ================= -->
+  <section id="panel-sim" class="tab-panel active mb-5">
+
+    <!-- TASK DOCK: the task sits ON the simulator, above the canvas -->
+    <div id="sim-dock" class="dock locked mb-3" aria-live="polite">
+      <div class="dock-head mb-2">
+        <span class="dock-step" id="dock-steps">Task 1 of 3</span>
+        <span class="text-sm font-bold text-white" id="dock-title">Predict</span>
+        <span class="dock-state st-lock" id="dock-state">Locked</span>
+      </div>
+      <p id="predict-q" class="text-sm text-slate-200 mb-3"></p>
+      <div id="predict-opts" class="grid sm:grid-cols-2 gap-2"></div>
+      <p id="predict-why" class="hidden text-xs text-emerald-200 bg-emerald-950/40 border border-emerald-700/40 rounded-xl p-3 leading-relaxed mt-3"></p>
+      <p class="mt-2 text-xs text-amber-200" id="dock-locknote"></p>
+    </div>
+
+    <div class="glass p-4">
+      <div class="canvas-wrap rounded-xl border border-slate-700/70 bg-slate-950/70">
+        <canvas id="sim-canvas" aria-label="Two boxes holding equal masses of hydrogen and lead, drawn with equal dot counts, showing that equal mass does not mean equal numbers of particles"></canvas>
+      </div>
+      <p id="sim-caption" class="text-xs text-slate-400 mt-3 leading-relaxed"></p>
+
+      <div id="ctrl-panel" class="mt-3 rounded-xl border border-slate-700/60 bg-slate-950/50 p-3">
+        <p class="ro-k mb-2" id="ctrl-heading">Controls</p>
+        <div class="grid md:grid-cols-2 gap-3">
+          <div>
+            <p class="ro-k mb-2">Compare two substances at the same mass</p>
+            <div class="flex flex-wrap gap-2" id="sim-species"></div>
+            <div class="mt-3">
+              <label for="rng-mass" class="ro-k">Mass of each sample</label>
+              <div class="flex items-center gap-3">
+                <input type="range" id="rng-mass" min="1" max="100" step="1" value="1" class="flex-1">
+                <span id="lbl-mass" class="text-sm text-teal-300 font-mono w-16">1 g</span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="flex flex-wrap items-end gap-2">
+              <button type="button" id="btn-run" class="btn btn-primary">Show the counts</button>
+              <button type="button" id="btn-reset-sim" class="btn btn-ghost">Reset</button>
+            </div>
+            <div id="fail-notes" class="mt-3 space-y-2"></div>
+          </div>
+        </div>
+        <p class="text-xs text-slate-500 mt-3">
+          The dots drawn are <b>not</b> the real count: 1 g of hydrogen holds about 3.0 × 10²³
+          molecules, which would fill the screen. The digits are the honest number; the picture
+          shows relative size only.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-4 mt-4">
+        <div id="sim-readouts" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
+        <div class="glass p-4 rounded-xl">
+          <p class="ro-k mb-2">What the picture is telling you</p>
+          <p id="sim-explain" class="text-sm text-slate-300 leading-relaxed"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Task 2 -->
+    <div class="glass p-5 mt-4">
+      <div class="dock-head mb-2">
+        <span class="dock-step">Task 2 of 3</span>
+        <span class="text-sm font-bold text-white">Break it on purpose</span>
+      </div>
+      <p class="text-xs text-slate-400 mb-3">Seeing the failure is how you stop making it. Each one is a mistake HKDSE candidates really make.</p>
+      <div class="flex flex-wrap gap-2 mb-3">
+        <button type="button" class="drill-btn" id="fail-btn-a" data-fail="a">cm³ left as dm³</button>
+        <button type="button" class="drill-btn" id="fail-btn-b" data-fail="b">Mass ratio instead of mole ratio</button>
+        <button type="button" class="drill-btn" id="fail-btn-c" data-fail="c">Mass lost on heating ignored</button>
+        <button type="button" class="btn btn-ghost" id="fail-clear">Clear</button>
+      </div>
+      <div id="fail-panel" class="text-sm text-slate-300"></div>
+    </div>
+
+    <!-- Task 3 -->
+    <div class="glass p-5 mt-4">
+      <div class="dock-head mb-2">
+        <span class="dock-step">Task 3 of 3</span>
+        <span class="text-sm font-bold text-white">Choose the relationship, then do the arithmetic</span>
+      </div>
+      <p class="text-xs text-slate-400 mb-3">This is the skill the topic really tests. Picking the wrong relationship loses every mark after it, so pick first — then calculate.</p>
+
+      <div id="mm-scenarios" class="flex flex-wrap gap-2 mb-4"></div>
+      <p id="mm-question" class="text-sm text-slate-200 mb-3 leading-relaxed"></p>
+
+      <div class="grid lg:grid-cols-2 gap-4">
+        <div>
+          <p class="ro-k mb-2">Which relationship do you need? <span class="text-slate-500 normal-case">(pick the route, not the answer)</span></p>
+          <div id="mm-routes" class="space-y-2"></div>
+        </div>
+        <div>
+          <p class="ro-k mb-2">Mole road map <span class="text-slate-500 normal-case">— every route passes through n</span></p>
+          <div class="flex items-stretch gap-2">
+            <div class="map-box mole" style="flex:0 0 22%">
+              <p class="map-lab">the hub</p>
+              <p class="map-val">n / mol</p>
+            </div>
+            <div class="flex-1 grid grid-cols-2 gap-2" id="mm-map">
+              <div class="map-box" data-map="mass"><p class="map-lab">mass</p><p class="map-val">m / g</p></div>
+              <div class="map-box" data-map="particles"><p class="map-lab">particles</p><p class="map-val">N</p></div>
+              <div class="map-box" data-map="conc"><p class="map-lab">solution</p><p class="map-val">c / mol dm⁻³</p></div>
+              <div class="map-box" data-map="gas"><p class="map-lab">gas at r.t.p.</p><p class="map-val">V / dm³</p></div>
+              <div class="map-box" data-map="rfs"><p class="map-lab">formula</p><p class="map-val">empirical ratio</p></div>
+              <div class="map-box" data-map="massadd"><p class="map-lab">gas from a solid</p><p class="map-val">m → n → V</p></div>
+            </div>
+          </div>
+          <p class="text-xs text-slate-500 mt-2">A valid route always <b>enters and leaves through n</b>. If your route never touches the hub, it cannot work.</p>
+        </div>
+      </div>
+
+      <div class="grid sm:grid-cols-3 gap-3 mt-4">
+        <div class="sm:col-span-2">
+          <label for="mm-answer" class="field-l">Your answer — number only, then press Check</label>
+          <div class="flex items-center gap-2">
+            <input id="mm-answer" type="text" inputmode="decimal" class="field" placeholder="e.g. 0.250" autocomplete="off">
+            <span id="mm-unit" class="text-xs text-slate-400 font-mono whitespace-nowrap"></span>
+          </div>
+        </div>
+        <div class="flex items-end gap-2">
+          <button type="button" id="btn-mm-check" class="btn btn-primary" onclick="checkMoleMachine()">Check route &amp; answer</button>
+          <button type="button" class="btn btn-ghost" onclick="revealMoleMachine()">Show working</button>
+        </div>
+      </div>
+      <div id="mm-feedback" class="mt-4"></div>
+      <div id="mm-working" class="mt-3"></div>
+    </div>
+  </section>
+
+  <!-- ================= 2 · LEARN ================= -->
+  <section id="panel-intro" class="tab-panel mb-5">
+    <div class="glass p-6 space-y-5">
+      <div>
+        <h2 id="intro-h1" class="text-xl font-bold text-white"></h2>
+        <p id="intro-lead" class="text-sm md:text-base text-slate-300 leading-relaxed mt-2"></p>
+      </div>
+      <div>
+        <h3 class="text-sm font-bold text-teal-300 uppercase tracking-wide mb-2">The six relationships of Topic III (c)</h3>
+        <div id="intro-cards" class="grid md:grid-cols-2 gap-3"></div>
+      </div>
+      <div>
+        <h3 class="text-sm font-bold text-teal-300 uppercase tracking-wide mb-2">What HKDSE expects, and what is out of scope</h3>
+        <div id="scope-cards" class="grid md:grid-cols-2 gap-3"></div>
+      </div>
+      <div class="rounded-xl border border-teal-500/30 bg-teal-950/10 p-4">
+        <h3 class="text-sm font-bold text-teal-200 uppercase tracking-wide mb-2">Molar volume at r.t.p. — the Topic IX (c) value</h3>
+        <p class="text-sm text-slate-300 leading-relaxed">One mole of <b>any</b> gas occupies <b>24 dm³</b> at room temperature and pressure. This value belongs to Topic IX (c); Topic III (c) prepares you for it by giving you the mole. Use it in both directions:
+        <span class="kbd">V = n × 24</span> and <span class="kbd">n = V ÷ 24</span>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 3 · CALC ================= -->
+  <section id="panel-calc" class="tab-panel mb-5">
+    <div class="glass p-6 space-y-6">
+      <div>
+        <h2 id="calc-title" class="text-xl font-bold text-white">Practice that fades</h2>
+        <p id="calc-sub" class="text-sm text-slate-400 mt-1"></p>
+      </div>
+      <div>
+        <div class="flex flex-wrap gap-2 mb-3" id="ladder-tabs"></div>
+        <div id="ladder-body"></div>
+      </div>
+      <div class="border-t border-white/10 pt-5">
+        <h3 class="font-bold text-white text-sm mb-1">Quick-fire traps <span class="text-slate-500 font-normal">(this is where marks actually disappear)</span></h3>
+        <p class="text-xs text-slate-400 mb-3">One-line items. Get three in a row before moving on.</p>
+        <div class="flex flex-wrap gap-2 mb-3" id="drill-tabs"></div>
+        <div id="drill-body"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 4 · MCQ ================= -->
+  <section id="panel-mcq" class="tab-panel mb-5">
+    <div class="glass p-6">
+      <h2 id="pp-title" class="text-xl font-bold text-white mb-1">Exam practice</h2>
+      <p id="pp-sub" class="text-xs text-slate-400 mb-5"></p>
+      <div id="pp-questions" class="space-y-6"></div>
+      <div class="mt-6 pt-5 border-t border-white/10">
+        <h3 class="font-bold text-white text-sm mb-1">Paper 1B style — write it out, then mark yourself</h3>
+        <p class="text-xs text-slate-400 mb-3">Do this on paper with units on every line, then tick only the marking points you actually wrote.</p>
+        <div id="pp-structured"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 5 · RECAP ================= -->
+  <section id="panel-recap" class="tab-panel mb-5">
+    <div class="glass rounded-2xl p-6 space-y-6">
+      <div>
+        <h2 id="recap-title" class="text-xl font-bold text-white">Recap — "I can…"</h2>
+        <p id="recap-sub" class="text-sm text-slate-400 mt-1 mb-3">Tick each one only when you can do it without notes, on paper, with units.</p>
+        <ul id="recap-list" class="space-y-2"></ul>
+        <p id="recap-progress" class="text-xs text-slate-500 mt-3"></p>
+        <div class="border-t border-white/10 pt-5 mt-4">
+          <h3 class="text-sm font-bold text-rose-300 uppercase tracking-wide mb-2" id="myth-title">Common misconceptions</h3>
+          <p class="text-xs text-slate-400 mb-4" id="myth-lead">Tap a card to flip.</p>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3" id="myth-cards"></div>
+        </div>
+      </div>
+      <div class="border-t border-white/10 pt-5">
+        <h3 class="text-sm font-bold text-amber-300 uppercase tracking-wide mb-2" id="markloss-title"></h3>
+        <p class="text-xs text-slate-400 mb-3" id="markloss-lead"></p>
+        <ul id="markloss-list" class="grid sm:grid-cols-2 gap-2"></ul>
+      </div>
+    </div>
+  </section>
+
+  <footer class="text-center text-xs text-slate-600 pb-4">HKDSE Chemistry · Topic III (c) reacting masses + Topic IX (c) molar volume · interactive lab · English</footer>
+</main>
+
+<div id="next-bar" class="max-w-6xl mx-auto px-5 pb-4">
+  <div class="glass rounded-xl px-4 py-2 flex flex-wrap items-center gap-3 text-sm">
+    <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Next step</span>
+    <span id="next-text" class="text-slate-200 font-semibold flex-1">Answer Task 1 in the panel above the simulator</span>
+    <button type="button" id="next-go" class="btn btn-teal py-1.5" onclick="goNext()">Take me there</button>
+  </div>
+</div>
+
+<script>
+/* =====================================================================
+   STRINGS — flat English T only.
+   SCOPE: HKDSE Chemistry Topic III (c) reacting masses + Topic IX (c) molar volume.
+   Authority: C&A Guide (S4-6) Notes for Teachers supplement, 18/08/2018.
+   Deliberately NOT included (outside DSE III/IX): pV = nRT; percentage yield and
+   atom economy (both Topic XIII); bond polarity and shapes (Topic VI).
+===================================================================== */
+const T = {
+  title: 'Reacting Masses & the Mole',
+  teacherTitle: 'Teacher notes',
+  introH1: 'A mole is a counting word, not a mass',
+  introLead: 'Chemists cannot count atoms one at a time, so they count them in groups of 6.02 × 10²³. That group is one mole. Because a mole is a fixed NUMBER of particles, one mole of a heavy substance weighs far more than one mole of a light one — and that is exactly why you can never compare reactants by mass. Work through the simulator first, then the theory, then the calculations.',
+  concepts: [
+    { t: 'The mole and Avogadro\u2019s constant (III c)', d: 'One mole contains 6.02 × 10²³ particles. That number is Avogadro\u2019s constant. A mole converts a countable number of particles into something you can weigh.' },
+    { t: 'Molar mass (III c)', d: 'The mass of one mole, in g mol⁻¹. For an element it is the relative atomic mass in grams; for a compound it is the sum of the relative atomic masses in the formula. So n = m ÷ molar mass.' },
+    { t: 'Percentage by mass of an element (III c)', d: 'Percentage by mass = (total mass of that element in the formula ÷ formula mass) × 100. Example: in Fe₂O₃, % Fe = (2 × 55.8) ÷ 159.6 × 100 = 69.9 %.' },
+    { t: 'Empirical and molecular formulae from experiment (III c)', d: 'Convert each mass to moles (÷ relative atomic mass), divide every value by the smallest, then scale to whole numbers. The molecular formula is the empirical formula multiplied by a whole number found from the formula mass.' },
+    { t: 'Reacting masses from equations (III c)', d: 'mass A → ÷ molar mass → mol A → × the ratio in the balanced equation → mol B → × molar mass → mass B. The ratio comes from the equation, never from the masses.' },
+    { t: 'Molar volume of a gas at r.t.p. (IX c)', d: 'One mole of any gas occupies 24 dm³ at room temperature and pressure. So V = n × 24 and n = V ÷ 24, with the volume in dm³ (cm³ ÷ 1000).' }
+  ],
+  scope: [
+    { t: 'In scope and examined', d: 'The mole; Avogadro\u2019s constant; molar mass; percentage by mass of an element; empirical and molecular formulae from experimental data; reacting masses from equations (Topic III c). Molar volume of gases at r.t.p. = 24 dm³ (Topic IX c). The set experiment is the empirical formula of magnesium oxide or copper(II) oxide.' },
+    { t: 'Out of scope — do not use it as a Topic III answer', d: 'The ideal gas equation pV = nRT is <b>not</b> in the HKDSE syllabus. Percentage yield and atom economy belong to <b>Topic XIII</b> (Industrial Chemistry), not Topic III. Bond polarity, shapes of molecules and intermolecular forces belong to <b>Topic VI</b>. Stating bond angles is "not expected".' },
+    { t: 'Naming that matters', d: 'HKDSE says <b>Avogadro\u2019s constant</b>, <b>formula mass</b>, and <b>molar volume at r.t.p.</b> — use the syllabus wording.' },
+    { t: 'How to use this lab', d: 'Tab 1: answer Task 1 in the panel above the simulator before the controls unlock, then break each of the three deliberate mistakes and do the mole machine. Tab 2: the six relationships and the scope limits. Tab 3: worked example, then completion, then independent. Tabs 4\u20135: exam practice and the honest mark-loss list.' }
+  ],
+  teacher: [
+    'Placement: HKDSE Topic III (c) after the reactivity series work, before Topic IV titration calculations. The mole concepts here are assumed by Topic IV and Topic IX.',
+    'The three losses this lab targets, in order of frequency: (1) cm³ not converted before a concentration or volume step; (2) mass ratio used where the equation ratio is wanted; (3) the mass lost on heating not subtracted before finding the moles of the anhydrous substance.',
+    'The set experiment for III (c) is the empirical formula of magnesium oxide (or copper(II) oxide). Run it, then have students redo the calculation in Task 3 scenario A with their own masses.',
+    'Do not let students use pV = nRT here. If a student raises it, say plainly that it is not in the HKDSE syllabus and that gas questions at this level use 24 dm³ at r.t.p.',
+    'Diagnostic to run on paper: 0.240 g of magnesium with excess dilute hydrochloric acid, asking for the volume of hydrogen at r.t.p. A student who writes 0.240 × 24 without a moles step, or answers 480 cm³, needs the mole-ratio line drilled.',
+    'Collect the tick-lists from the Paper 1B style question, not the answers — the tick-list shows which marking point they did not know existed.'
+  ],
+  simCaption: 'What this models: the SAME number of dots is drawn in each box, so the comparison of particle mass is fair — the real counts are given as digits, because 6.02 × 10²³ dots cannot be drawn. What it does not model: the actual size or speed of the particles, which is not what Topic III (c) is about. The lesson is the mismatch between the two columns: equal mass does not mean equal number of particles.',
+  species: [
+    { k: 'H2', name: 'hydrogen, H₂', mr: 2.02, note: 'simple molecular' },
+    { k: 'H2O', name: 'water, H₂O', mr: 18.0, note: 'simple molecular' },
+    { k: 'NaCl', name: 'sodium chloride, NaCl', mr: 58.5, note: 'giant ionic — use formula mass' },
+    { k: 'Pb', name: 'lead, Pb', mr: 207, note: 'giant metallic' }
+  ],
+  predictQ: 'Each box contains exactly 1.00 g of a different substance. Which box holds the GREATEST number of particles?',
+  predicts: [
+    { t: 'The same — both boxes weigh 1.00 g.' },
+    { t: 'The hydrogen box. 1.00 g of H₂ is about 0.50 mol, while 1.00 g of lead is only about 0.005 mol.' },
+    { t: 'The lead box, because lead particles are heavier.' }
+  ],
+  predictA: 1,
+  predictWhy: 'The hydrogen box holds roughly 100 times as many particles. 1.00 g of H₂ ÷ 2.02 g mol⁻¹ = 0.495 mol ≈ 3.0 × 10²³ particles; 1.00 g of Pb ÷ 207 g mol⁻¹ = 0.00483 mol ≈ 2.9 × 10²¹ atoms. Equal mass NEVER means equal number of particles, and equal number of particles never means equal mass — that single idea is why the mole exists. Option C has the reasoning backwards: heavier particles mean FEWER of them in the same mass.',
+  fails: {
+    a: {
+      name: 'cm³ left as dm³',
+      tryTxt: 'A student needs the moles in 250 cm³ of 0.100 mol dm⁻³ sodium hydroxide solution and writes n = 0.100 × 250 = 25.0 mol.',
+      what: '25.0 mol instead of 0.0250 mol — an answer 1000 times too big. It also fails common sense: 25 mol of NaOH weighs about 1000 g, which will not fit in a 250 cm³ flask.',
+      fix: 'Convert before substituting: 250 cm³ ÷ 1000 = 0.250 dm³. Then n = 0.100 × 0.250 = 0.0250 mol. Concentration is mol per dm³, so the volume must be in dm³.',
+      ms: 'HKDSE marking: the conversion line is a marking point on its own. Leaving the volume in cm³ usually loses every mark after it.'
+    },
+    b: {
+      name: 'Mass ratio instead of mole ratio',
+      tryTxt: 'A student reacting 4.00 g of calcium carbonate writes the mass of calcium oxide as 4.00 × (56.1 ÷ 100.1), putting masses straight into the ratio.',
+      what: 'Here the arithmetic happens to be right only because CaCO₃ → CaO is 1:1. Change to a reaction where the ratio is not 1:1 — for example 2Mg + O₂ → 2MgO — and the mass shortcut gives a wrong answer with no method marks.',
+      fix: 'Always pass through moles: mass A ÷ molar mass = mol A, then × the ratio from the balanced equation, then × molar mass = mass B. Write the ratio line out — it is a marking point.',
+      ms: 'HKDSE marking: the correct mole ratio taken from the equation is credited separately from the arithmetic.'
+    },
+    c: {
+      name: 'Mass lost on heating ignored',
+      tryTxt: 'A student finds the empirical formula of a copper oxide by heating 2.50 g of the oxide, is left with 2.00 g of copper, and divides 2.00 by 63.5 to get the moles of oxygen as well as the moles of copper.',
+      what: 'That forces a 1:1 ratio in every experiment, which cannot be right. The mass of the oxygen is what was LOST — it left as a gas — so it is not in the final weighing.',
+      fix: 'mass of oxygen = original mass − final mass = 2.50 − 2.00 = 0.50 g. Then n(O) = 0.50 ÷ 16.0 = 0.0313 mol and n(Cu) = 2.00 ÷ 63.5 = 0.0315 mol, giving CuO here — but you must show the subtraction, because in the magnesium oxide experiment that same subtraction is what produces the correct answer.',
+      ms: 'HKDSE marking: the subtraction line is required. A ratio computed from two masses that were never separated earns nothing.'
+    }
+  },
+  calcSub: 'A fully worked example, then a completion problem with blanks, then one you do alone and mark yourself against the scheme. Do them in order — the support is supposed to disappear.',
+  mmRoutes: [
+    { k: 'mass', txt: 'n = m ÷ molar mass — I have a mass and want moles' },
+    { k: 'massgas', txt: 'n = m ÷ molar mass, then V = n × 24 — I have a mass and want a gas volume at r.t.p.' },
+    { k: 'conc', txt: 'n = c × V — I have a concentration and a volume' },
+    { k: 'gas', txt: 'n = V ÷ 24 — I have a gas volume at r.t.p. and want moles' },
+    { k: 'particles', txt: 'N = n × 6.02 × 10²³ — I want the number of particles' },
+    { k: 'rfs', txt: 'convert each mass to moles, then divide by the smaller — I want a formula ratio' },
+    { k: 'massadd', txt: 'subtract to find the mass that was lost, then convert both masses to moles' }
+  ],
+  mmScenarios: [
+    {
+      k: 'sA',
+      title: 'A · Empirical formula from the MgO experiment',
+      q: '2.40 g of magnesium is heated in air until it is completely converted to magnesium oxide. The oxide formed weighs 4.00 g. (Aᵣ: Mg 24.0, O 16.0) Find the empirical formula. [Topic III (c) set experiment]',
+      route: 'massadd',
+      given: 'mass of Mg = 2.40 g, mass of oxide = 4.00 g',
+      want: 'the ratio n(Mg) : n(O)',
+      unit: 'n(O) / mol',
+      answer: 0.100,
+      tol: 0.004,
+      steps: [
+        ['Why this route', 'Two masses are given and a whole-number ratio is wanted, so both masses must become moles. The oxygen mass is not given — it must be found by subtraction first, because the oxygen came from the air.'],
+        ['Find the mass of oxygen', 'mass of O = mass of oxide − mass of Mg = 4.00 − 2.40 = 1.60 g'],
+        ['Moles of magnesium', 'n(Mg) = 2.40 g ÷ 24.0 g mol⁻¹ = 0.100 mol'],
+        ['Moles of oxygen', 'n(O) = 1.60 g ÷ 16.0 g mol⁻¹ = 0.100 mol'],
+        ['Divide by the smaller', '0.100 ÷ 0.100 = 1 for both, so the ratio is Mg : O = 1 : 1'],
+        ['Empirical formula', 'MgO — and the check is that the oxide mass is bigger than the metal mass, which is what adding oxygen from the air does'],
+        ['Unit check', 'g ÷ (g mol⁻¹) = mol ✓ on both lines']
+      ],
+      then: 'The subtraction is the whole experiment: 1.60 g of oxygen was pulled out of the air. If your apparatus let magnesium oxide smoke escape, the oxide mass would be low and the ratio would come out wrong — that is why the lid is left slightly ajar and the crucible is reheated to constant mass.'
+    },
+    {
+      k: 'sB',
+      title: 'B · Percentage by mass of an element',
+      q: 'Calculate the percentage by mass of nitrogen in ammonium nitrate, NH₄NO. (Aᵣ: N 14.0, H 1.0, O 16.0) Give your answer to 3 significant figures.',
+      route: 'rfs',
+      given: 'formula NH₄NO₃',
+      want: 'percentage by mass of N',
+      unit: '%',
+      answer: 35.0,
+      tol: 0.4,
+      steps: [
+        ['Why this route', 'Percentage by mass compares the mass of the element in the formula with the whole formula mass, so you need the formula mass and the number of atoms of that element. It is a ratio of masses within one formula unit, not a reacting-mass calculation.'],
+        ['Formula mass', 'NH₄NO = 14.0 + (4 × 1.0) + 14.0 + (3 × 16.0) = 80.0'],
+        ['Count the atoms of the element asked for', 'There are TWO nitrogen atoms in NH₄NO₃ — one in NH₄⁺ and one in NO₃⁻. Missing the second is the standard error.'],
+        ['Set up the fraction', '% N = (2 × 14.0) ÷ 80.0 × 100'],
+        ['Evaluate', '= 28.0 ÷ 80.0 × 100 = 35.0 %'],
+        ['Sense check', 'The three elements are N 35.0 %, H 5.0 % and O 60.0 %, and 35.0 + 5.0 + 60.0 = 100 % ✓']
+      ],
+      then: 'This is why ammonium nitrate is used as a fertiliser: 35 % of its mass is nitrogen, a high proportion for a solid. The same calculation for urea, CO(NH₂)₂, gives 46.7 % — a good comparison question.'
+    },
+    {
+      k: 'sC',
+      title: 'C · Gas volume at r.t.p. from a reacting mass',
+      q: 'What volume of carbon dioxide, measured at room temperature and pressure, is produced when 10.0 g of calcium carbonate is completely decomposed? CaCO₃(s) → CaO(s) + CO₂(g). [Formula mass CaCO₃ = 100.0]',
+      route: 'massgas',
+      given: 'm(CaCO₃) = 10.0 g',
+      want: 'V(CO₂) at r.t.p.',
+      unit: 'dm³',
+      answer: 2.40,
+      tol: 0.05,
+      steps: [
+        ['Why this route', 'A mass is given and a GAS VOLUME at r.t.p. is wanted, so the route is mass → moles → ratio → moles → volume using 24 dm³ mol⁻¹. Two conversions, in that order.'],
+        ['Moles of calcium carbonate', 'n(CaCO₃) = 10.0 g ÷ 100.0 g mol⁻¹ = 0.100 mol'],
+        ['Ratio from the equation', 'CaCO₃ : CO₂ = 1 : 1, so n(CO₂) = 0.100 mol'],
+        ['Molar volume at r.t.p.', 'V = n × 24 dm³ mol⁻¹ = 0.100 mol × 24 = 2.40 dm³'],
+        ['Unit check', 'mol × dm³ mol⁻¹ = dm³ ✓'],
+        ['Sense check', 'A tenth of a mole of gas is a tenth of 24 dm³, about two and a half litres — believable from 10 g of chalk.']
+      ],
+      then: 'Notice what is NOT used: no pressure, no temperature, no ideal gas equation. In the HKDSE syllabus gas volumes at r.t.p. come from the constant molar volume of 24 dm³, which belongs to Topic IX (c).'
+    },
+    {
+      k: 'sD',
+      title: 'D · Molecular formula from formula mass',
+      q: 'A compound of C, H and O contains 40.0 % C and 6.70 % H by mass, and has a formula mass of 90.0. (Aᵣ: C 12.0, H 1.0, O 16.0) Find its molecular formula.',
+      route: 'rfs',
+      given: '% C = 40.0, % H = 6.70, formula mass = 90.0',
+      want: 'the molecular formula',
+      unit: 'n(C) in 100 g / mol',
+      answer: 3.33,
+      tol: 0.06,
+      steps: [
+        ['Why this route', 'Percentages by mass convert to a formula by assuming 100 g of the compound, so the percentages become masses in grams. Then each mass becomes moles.'],
+        ['Percentages become masses', 'In 100 g: C = 40.0 g, H = 6.70 g, O = 100 − 40.0 − 6.70 = 53.3 g'],
+        ['Moles of each element', 'n(C) = 40.0 ÷ 12.0 = 3.33 mol · n(H) = 6.70 ÷ 1.0 = 6.70 mol · n(O) = 53.3 ÷ 16.0 = 3.33 mol'],
+        ['Divide by the smallest', 'C : H : O = 1 : 2.01 : 1 → empirical formula CH₂O'],
+        ['Empirical formula mass', 'CH₂O = 12.0 + 2.0 + 16.0 = 30.0'],
+        ['Find the multiplier', 'n = formula mass ÷ empirical formula mass = 90.0 ÷ 30.0 = 3'],
+        ['Molecular formula', '(CH₂O)₃ = C₃H₆O₃'],
+        ['Sense check', 'Check the % C in C₃H₆O₃: (3 × 12.0) ÷ 90.0 × 100 = 40.0 % ✓']
+      ],
+      then: 'Two answers are wanted and both must be given: the empirical formula CH₂O and then the molecular formula C₃H₆O₃. Stopping at the empirical formula loses the second marking point, which is why the multiplier step must be shown.'
+    }
+  ],
+  ladderTabs: [
+    { k: 'W', label: 'Worked example', cls: 'tag-w' },
+    { k: 'C', label: 'Completion (blanks)', cls: 'tag-c' },
+    { k: 'I', label: 'Independent (self-mark)', cls: 'tag-i' }
+  ],
+  drillTabs: [
+    { k: 'units', label: 'Unit conversions' },
+    { k: 'rel', label: 'Which relationship?' },
+    { k: 'mass', label: 'Percentage by mass' },
+    { k: 'form', label: 'Formulae' }
+  ],
+  ppTitle: 'Exam practice',
+  ppSub: 'HKDSE-style items built on Topic III (c) and Topic IX (c) outcomes. Feedback uses HKDSE marking language (accept / not accept).',
+  questions: [
+    {
+      q: 'Which sample contains the greatest number of atoms?',
+      o: ['1.0 mol of neon, Ne', '1.0 mol of oxygen, O₂', '1.0 mol of carbon dioxide, CO₂', '0.50 mol of glucose, C₆H₁₂O₆'],
+      a: 3,
+      why: '<b>Accept D.</b> Count ATOMS, not molecules: 1.0 mol Ne = 1 mol of atoms; 1.0 mol O₂ = 2 mol; 1.0 mol CO₂ = 3 mol; 0.50 mol C₆H₁₂O₆ = 0.50 × 24 = 12 mol of atoms. <b>Not accept</b> an answer based on "more moles means more atoms" — here the smallest amount of substance wins because its formula contains the most atoms.'
+    },
+    {
+      q: '0.240 g of magnesium (Aᵣ 24.0) reacts completely with excess dilute hydrochloric acid. What volume of hydrogen, measured at room temperature and pressure, is produced? Mg(s) + 2HCl(aq) → MgCl₂(aq) + H₂(g)',
+      o: ['240 cm³', '480 cm³', '120 cm³', '24.0 cm³'],
+      a: 0,
+      why: '<b>Accept A.</b> n(Mg) = 0.240 ÷ 24.0 = 0.0100 mol. The equation gives n(H₂) = 0.0100 mol (1:1). V = 0.0100 × 24 = 0.240 dm³ = 240 cm³. <b>Not accept</b> B, which doubles the answer by misreading the 2HCl coefficient as applying to H₂; C halves it; D omits the moles step.'
+    },
+    {
+      q: 'What is the percentage by mass of iron in iron(III) oxide, Fe₂O₃? (Aᵣ: Fe 55.8, O 16.0)',
+      o: ['69.9 %', '55.8 %', '30.1 %', '83.7 %'],
+      a: 0,
+      why: '<b>Accept A.</b> Formula mass = (2 × 55.8) + (3 × 16.0) = 159.6. % Fe = (2 × 55.8) ÷ 159.6 × 100 = 69.9 %. C is the percentage of oxygen — the complement — a common slip when the formula is read the wrong way round.'
+    },
+    {
+      q: '2.50 g of a copper oxide is heated in a stream of hydrogen until the mass is constant. 2.00 g of copper remains. What is the empirical formula of the oxide? (Aᵣ: Cu 63.5, O 16.0)',
+      o: ['CuO', 'Cu₂O', 'CuO₂', 'CuO₄'],
+      a: 0,
+      why: '<b>Accept A.</b> mass of oxygen lost = 2.50 − 2.00 = 0.50 g. n(Cu) = 2.00 ÷ 63.5 = 0.0315 mol; n(O) = 0.50 ÷ 16.0 = 0.0313 mol. Ratio ≈ 1 : 1, so CuO. <b>Not accept</b> any answer where the oxygen mass was not found by subtraction — without that line the ratio is invented.'
+    }
+  ],
+  structured: {
+    q: 'A student heats 2.40 g of magnesium ribbon in a crucible until it is completely converted into magnesium oxide. The crucible and contents are cooled and weighed, then reheated to constant mass. The final mass of magnesium oxide is 4.00 g. (Aᵣ: Mg 24.0, O 16.0)\n(a) State why the crucible is reheated to constant mass. (1)\n(b) Calculate the mass of oxygen that combined with the magnesium. (1)\n(c) Calculate the number of moles of magnesium and of oxygen in the product. (2)\n(d) Deduce the empirical formula of magnesium oxide. (1)\n(e) The student notices some white smoke escaping during heating. State and explain the effect this would have on the calculated value of the ratio n(Mg) : n(O). (2)',
+    ms: [
+      '(a) To ensure all the magnesium has reacted / that the reaction is complete — a constant mass means no further change on heating',
+      '(b) mass of O = 4.00 − 2.40 = 1.60 g',
+      '(c) n(Mg) = 2.40 ÷ 24.0 = 0.100 mol',
+      '(c) n(O) = 1.60 ÷ 16.0 = 0.100 mol',
+      '(d) ratio Mg : O = 0.100 : 0.100 = 1 : 1, so empirical formula MgO',
+      '(e) The calculated mass of oxygen would be TOO SMALL, because some magnesium oxide was lost as smoke so the final mass is too low',
+      '(e) Therefore n(O) is too small while n(Mg) stays the same, so the ratio n(Mg) : n(O) comes out TOO LARGE',
+      'Quality of written communication: the explanation must link the lost smoke to a mass that is too low and then to the direction of the ratio error — a bare "it would be wrong" earns nothing'
+    ],
+    note: 'Part (e) is the kind of "state and explain" item HKDSE uses to separate candidates who can calculate from candidates who understand the experiment. Answer the direction of the error, not just that there is one.'
+  },
+  recapTitle: 'Recap — "I can…"',
+  recapGoals: [
+    'State that one mole contains 6.02 × 10²³ particles and that this is Avogadro\u2019s constant (III c).',
+    'Calculate the number of moles from a mass using n = m ÷ molar mass, with the molar mass in g mol⁻¹ (III c).',
+    'Calculate the percentage by mass of an element in a compound from the formula (III c).',
+    'Determine the empirical formula from experimental masses, including subtracting to find the mass of oxygen gained or water lost (III c).',
+    'Find the molecular formula from the empirical formula and the formula mass (III c).',
+    'Calculate reacting masses and gas volumes using the mole ratio from a balanced equation and 24 dm³ at r.t.p. (III c, IX c).'
+  ],
+  marklossTitle: 'Where marks are lost on this topic',
+  marklossLead: 'Tick the ones you have actually done. Each is a real error in HKDSE scripts.',
+  markloss: [
+    'I multiplied by 1000 instead of dividing when converting cm³ to dm³.',
+    'I put the volume in cm³ straight into n = c × V.',
+    'I used the masses directly in the ratio instead of converting to moles first.',
+    'I did not write the mole ratio line from the balanced equation.',
+    'I forgot to subtract to find the mass of oxygen gained (or water lost).',
+    'I stopped at the empirical formula when the molecular formula was asked for, or missed the multiplier step.',
+    'I missed a second atom of the element in the formula when finding percentage by mass (e.g. the second N in NH₄NO₃).',
+    'I used 22.4 dm³ instead of 24 dm³ for the molar volume at r.t.p.',
+    'I rounded too early or gave the wrong number of significant figures.',
+    'I wrote a number with no unit.'
+  ],
+  mythTitle: 'Common misconceptions',
+  mythLead: 'Tap a card to flip. Check you would never write the front side in an exam.',
+  mythFlip: 'Tap to flip',
+  mythLabelMyth: 'Myth?',
+  mythLabelFact: 'Fact',
+  myths: [
+    { m: 'One mole of any substance has the same mass.', f: 'A mole fixes the NUMBER of particles (6.02 × 10²³), not the mass. 1 mol H₂ = 2.02 g, 1 mol H₂O = 18.0 g, 1 mol Pb = 207 g — the mass depends on the molar mass.' },
+    { m: 'To change cm³ into dm³ you multiply by 1000.', f: 'You DIVIDE by 1000: 250 cm³ = 0.250 dm³. Multiplying makes the answer 10⁶ times too large and loses the conversion mark.' },
+    { m: 'You can use the masses in a reacting ratio directly.', f: 'The ratio in an equation is a ratio of MOLES. Convert mass → moles, apply the equation ratio, then convert back to mass. Using masses directly is only accidentally right when the ratio is 1:1.' },
+    { m: 'The molar volume of any gas is 22.4 dm³.', f: 'At room temperature and pressure HKDSE uses <b>24 dm³</b> (Topic IX c). 22.4 dm³ is the value at 0 °C, which is not the r.t.p. value.' },
+    { m: 'You can use pV = nRT to find the moles of a gas at r.t.p.', f: 'The ideal gas equation is <b>not in the HKDSE syllabus</b>. Gas calculations at this level use the constant molar volume, 24 dm³ at r.t.p.' },
+    { m: 'In NH₄NO₃ there is only one nitrogen atom.', f: 'There are TWO: one in the ammonium ion NH₄⁺ and one in the nitrate ion NO₃⁻. So % N = (2 × 14.0) ÷ 80.0 × 100 = 35.0 %.' },
+    { m: 'The empirical formula is always the same as the molecular formula.', f: 'The molecular formula is a whole-number multiple of the empirical formula. CH₂O is the empirical formula of C₃H₆O₃ (multiplier 3), found from the formula mass.' },
+    { m: 'A 100 % yield means a 100 % atom economy, and both belong to this topic.', f: 'Both belong to <b>Topic XIII</b> (Industrial Chemistry), not Topic III — and they are independent: atom economy comes from the equation, yield from the practical result.' }
+  ]
+};
+function t() { return T; }
+document.documentElement.lang = 'en';
+
+/* =====================================================================
+   HELPERS (sandbox-safe)
+===================================================================== */
+function $(id){ return document.getElementById(id); }
+function qsa(el, sel){ if (!el || typeof el.querySelectorAll !== 'function') return []; try { return el.querySelectorAll(sel); } catch (e) { return []; } }
+function qs(el, sel){ if (!el || typeof el.querySelector !== 'function') return null; try { return el.querySelector(sel); } catch (e) { return null; } }
+function setTxt(id, s){ const el = $(id); if (el) el.textContent = s; }
+function setHTML(id, s){ const el = $(id); if (el) el.innerHTML = s; }
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function fmt(x, d){ if (!isFinite(x)) return '\u2014'; return x.toFixed(d); }
+function num(v){ const x = parseFloat(String(v == null ? '' : v).replace(/[^0-9eE+\-.]/g,'')); return isNaN(x) ? NaN : x; }
+function close(a, b, tol){ return isFinite(a) && Math.abs(a - b) <= tol; }
+/* Magnitude check: an absolute tolerance alone would accept 250 as "close to" 0.250.
+   A factor-of-10 error is a units or structure error, never rounding. */
+function plausible(a, b){
+  if (!isFinite(a) || !isFinite(b)) return false;
+  if (a === 0 || b === 0) return a === b;
+  const r = Math.abs(a / b);
+  return r <= 10 && r >= 0.1;
+}
+function answerOK(a, b, tol){ return close(a, b, tol) && plausible(a, b); }
+function sci(x, n){
+  if (!isFinite(x)) return '\u2014';
+  if (x === 0) return '0';
+  const e = Math.floor(Math.log10(Math.abs(x)));
+  const m = x / Math.pow(10, e);
+  return fmt(m, n) + ' \u00d7 10' + sup(String(e));
+}
+function sup(s){
+  return String(s).replace(/[0-9]/g, function(d){
+    const n = d.charCodeAt(0) - 48;
+    return n >= 4 ? String.fromCharCode(0x2074 + (n - 4)) : (n === 0 ? '\u2070' : (n === 1 ? '\u00b9' : (n === 2 ? '\u00b2' : '\u00b3')));
+  }).replace(/-/g, '\u207b');
+}
+
+/* =====================================================================
+   v3 DOCK + STICKY NEXT-STEP BAR
+===================================================================== */
+let failDone = false;
+function setDock(state){
+  const dock = $('sim-dock');
+  if (dock){
+    dock.classList.remove('locked','unlocked');
+    dock.classList.add(state === 'locked' ? 'locked' : 'unlocked');
+  }
+  const st = $('dock-state');
+  if (st){
+    st.className = 'dock-state ' + (state === 'locked' ? 'st-lock' : 'st-open');
+    st.textContent = state === 'locked' ? '\ud83d\udd12 Locked' : '\u2713 Unlocked';
+  }
+  setTxt('dock-title', state === 'locked' ? 'Predict' : 'Prediction locked in');
+  setTxt('dock-locknote', state === 'locked'
+    ? 'The controls under the canvas stay locked until you answer this — so you cannot skip the thinking.'
+    : 'Good. Now run it and check whether you were right.');
+  let txt = '', go = 'sim';
+  if (state === 'locked') txt = 'Answer Task 1 in the panel above the simulator';
+  else if (!sim.done) txt = 'Now press "Show the counts" under the canvas';
+  else if (!failDone) txt = 'Task 2 — break one of the three mistakes on purpose';
+  else if (!mm.route) txt = 'Task 3 — pick the relationship in the mole machine';
+  else { txt = 'Go to "Practise calculations" and do the worked example'; go = 'calc'; }
+  setTxt('next-text', txt);
+  const g = $('next-go'); if (g) g.dataset.go = go;
+}
+function syncSimDisabled(){
+  const locked = !sim.predLocked;
+  ['rng-mass','btn-run','btn-reset-sim','fail-btn-a','fail-btn-b','fail-btn-c'].forEach(function(id){
+    const el = $(id); if (el) el.disabled = locked;
+  });
+  const sp = qsa(document, '[data-sp]');
+  for (let i = 0; i < sp.length; i++) sp[i].disabled = locked;
+  setTxt('ctrl-heading', locked ? 'Controls — locked until you answer Task 1' : 'Controls — ready');
+}
+function goNext(){
+  const g = $('next-go');
+  const tab = (g && g.dataset.go) ? g.dataset.go : 'sim';
+  setTab(tab);
+  const target = tab === 'sim' ? $('sim-dock') : $('panel-' + tab);
+  if (target && target.scrollIntoView) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+function toggleTeacher(){ const p = $('teacher-panel'); if (p) p.classList.toggle('hidden'); }
+
+/* =====================================================================
+   TABS — the simulator is the landing tab in v3
+===================================================================== */
+let activeTab = 'sim';
+function setTab(name){
+  activeTab = name;
+  const btns = qsa(document, '.tab-btn');
+  for (let i = 0; i < btns.length; i++) btns[i].classList.toggle('active', btns[i].dataset.tab === name);
+  ['intro','sim','calc','mcq','recap'].forEach(function(p){
+    const el = $('panel-' + p);
+    if (el) el.classList.toggle('active', p === name);
+  });
+  scheduleResize();
+  if (name === 'sim') resizeCanvas();
+}
+
+/* =====================================================================
+   SIM
+===================================================================== */
+const sim = { sp: 'H2', mass: 1, parts: [], predLocked: false, done: false, t: 0, last: 0 };
+let ctx = null, canvasEl = null, W = 900, H = 440;
+
+function resizeCanvas(){
+  if (!canvasEl) return;
+  const wrap = canvasEl.closest ? canvasEl.closest('.canvas-wrap') : null;
+  let w = 0;
+  if (wrap && wrap.getBoundingClientRect) w = wrap.getBoundingClientRect().width || 0;
+  if (!w) w = canvasEl.offsetWidth || 0;
+  if (!w || w < 80) w = 720;
+  W = Math.max(560, Math.round(w));
+  H = Math.max(420, Math.round(W * 0.42));
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  canvasEl.width = Math.round(W * dpr);
+  canvasEl.height = Math.round(H * dpr);
+  if (ctx && ctx.setTransform) ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  buildParticles();
+  drawSim();
+}
+function scheduleResize(){ if (activeTab === 'sim') resizeCanvas(); }
+function spByKey(k){ const a = t().species; for (let i = 0; i < a.length; i++) if (a[i].k === k) return a[i]; return a[0]; }
+function buildParticles(){
+  if (!canvasEl) return;
+  sim.parts = [];
+  const n = 22;
+  for (let i = 0; i < n; i++){
+    sim.parts.push({ x: 40 + Math.random() * Math.max(60, W - 80), y: 80 + Math.random() * Math.max(50, H - 150),
+                     vx: (Math.random() * 2 - 1) * 24, vy: (Math.random() * 2 - 1) * 24 });
+  }
+}
+function drawSim(){
+  if (!ctx || !canvasEl) return;
+  ctx.clearRect(0, 0, W, H);
+  ctx.fillStyle = 'rgba(2,6,12,0.55)';
+  ctx.fillRect(0, 0, W, H);
+  const bw = (W - 60) / 2;
+  function box(x, label, sub){
+    ctx.save();
+    ctx.strokeStyle = 'rgba(148,163,184,0.5)'; ctx.lineWidth = 2;
+    ctx.strokeRect(x, 54, bw, H - 120);
+    ctx.fillStyle = '#99f6e4'; ctx.font = '600 13px -apple-system, Segoe UI, sans-serif';
+    ctx.fillText(label, x + 8, 44);
+    ctx.fillStyle = '#94a3b8'; ctx.font = '500 11px -apple-system, Segoe UI, sans-serif';
+    ctx.fillText(sub, x + 8, H - 52);
+    ctx.restore();
+  }
+  box(20, 'Box A — ' + fmt(sim.mass, 0) + ' g of H\u2082', 'molar mass 2.02 g mol\u207b\u00b9');
+  box(40 + bw, 'Box B — ' + fmt(sim.mass, 0) + ' g of Pb', 'molar mass 207 g mol\u207b\u00b9');
+  const half = Math.ceil(sim.parts.length / 2);
+  for (let i = 0; i < sim.parts.length; i++){
+    const p = sim.parts[i];
+    const inA = i < half;
+    const localX = ((p.x - 20) % bw + bw) % bw;
+    const cx = (inA ? 20 : 40 + bw) + localX;
+    const cy = Math.min(Math.max(p.y, 70), H - 70);
+    const r = inA ? 6 : 16;
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, 0, Math.PI * 2);
+    ctx.fillStyle = inA ? 'rgba(125,211,252,0.85)' : 'rgba(148,163,184,0.85)';
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(255,255,255,0.3)'; ctx.lineWidth = 1; ctx.stroke();
+  }
+  ctx.save();
+  ctx.font = '600 12px -apple-system, Segoe UI, sans-serif';
+  ctx.fillStyle = '#fbbf24';
+  ctx.fillText('The same number of dots is drawn in each box — read the real counts in the cards below, not the picture.', 20, 20);
+  ctx.restore();
+}
+function stepSim(ts){
+  const dt = Math.min(0.05, (ts - (sim.last || ts)) / 1000);
+  sim.last = ts;
+  if (activeTab === 'sim' && canvasEl){
+    for (let i = 0; i < sim.parts.length; i++){
+      const p = sim.parts[i];
+      p.x += p.vx * dt; p.y += p.vy * dt;
+      if (p.x < 30) { p.x = 30; p.vx = Math.abs(p.vx); }
+      if (p.x > W - 30){ p.x = W - 30; p.vx = -Math.abs(p.vx); }
+      if (p.y < 70) { p.y = 70; p.vy = Math.abs(p.vy); }
+      if (p.y > H - 72){ p.y = H - 72; p.vy = -Math.abs(p.vy); }
+    }
+    drawSim();
+  }
+}
+function loop(ts){ stepSim(ts); requestAnimationFrame(loop); }
+
+/* =====================================================================
+   TASK 1 — prediction gate, inside the dock
+===================================================================== */
+function renderPredict(){
+  const s = t();
+  setTxt('predict-q', s.predictQ);
+  const box = $('predict-opts');
+  if (!box) return;
+  box.innerHTML = s.predicts.map(function(p, i){
+    return '<button type="button" class="pred-opt text-left px-3 py-2 rounded-xl text-sm border border-slate-700 bg-slate-900/60" data-pred="' + i + '">' + esc(p.t) + '</button>';
+  }).join('');
+  const bs = qsa(box, '[data-pred]');
+  for (let i = 0; i < bs.length; i++) bs[i].onclick = function(){ answerPredict(i); };
+  setDock('locked');
+}
+function answerPredict(i){
+  const s = t();
+  const bs = qsa(document, '[data-pred]');
+  for (let k = 0; k < bs.length; k++){
+    bs[k].classList.remove('picked','correct','wrong');
+    bs[k].disabled = true;
+    if (k === i) bs[k].classList.add('picked', i === s.predictA ? 'correct' : 'wrong');
+    if (k === s.predictA) bs[k].classList.add('correct');
+  }
+  const w = $('predict-why');
+  if (w){ w.classList.remove('hidden'); w.textContent = (i === s.predictA ? '' : 'Not the right one — the correct choice is marked in green. ') + s.predictWhy; }
+  sim.predLocked = true;
+  syncSimDisabled();
+  setDock('unlocked');
+  const b = $('btn-run'); if (b && b.focus) b.focus();
+}
+
+/* =====================================================================
+   SIM UI
+===================================================================== */
+function renderSim(){
+  const s = t();
+  setTxt('sim-caption', s.simCaption);
+  const sc = $('sim-species');
+  if (sc && !sc.dataset.built){
+    sc.innerHTML = s.species.map(function(x){
+      return '<button type="button" class="sp-btn" data-sp="' + x.k + '">' + esc(x.name) + '</button>';
+    }).join('');
+    const bs = qsa(sc, '[data-sp]');
+    for (let i = 0; i < bs.length; i++) bs[i].onclick = function(){ sim.sp = bs[i].dataset.sp; renderSim(); };
+    sc.dataset.built = '1';
+  }
+  const chips = qsa(sc, '[data-sp]');
+  for (let i = 0; i < chips.length; i++) chips[i].classList.toggle('on', chips[i].dataset.sp === sim.sp);
+  const rm = $('rng-mass');
+  if (rm) rm.oninput = function(){ sim.mass = parseFloat(rm.value) || 1; setTxt('lbl-mass', fmt(sim.mass, 0) + ' g'); renderReadouts(); drawSim(); };
+  const br = $('btn-run');
+  if (br) br.onclick = function(){ sim.done = true; renderReadouts(); setDock('unlocked'); };
+  const bs2 = $('btn-reset-sim');
+  if (bs2) bs2.onclick = function(){ sim.mass = 1; if (rm) rm.value = '1'; setTxt('lbl-mass', '1 g'); sim.done = false; buildParticles(); renderReadouts(); drawSim(); setDock('unlocked'); };
+  const fb = qsa(document, '[data-fail]');
+  for (let i = 0; i < fb.length; i++) fb[i].onclick = function(){ runFailure(fb[i].dataset.fail); };
+  const fc = $('fail-clear'); if (fc) fc.onclick = clearFailure;
+  syncSimDisabled();
+  renderReadouts();
+}
+function renderReadouts(){
+  const box = $('sim-readouts');
+  if (!box) return;
+  const h = spByKey('H2'), pb = spByKey('Pb');
+  const nh = sim.mass / h.mr, npb = sim.mass / pb.mr;
+  const cards = [
+    ['Moles of H\u2082', fmt(nh, 4), 'mol'],
+    ['Moles of Pb', fmt(npb, 5), 'mol'],
+    ['Particles of H\u2082', sci(nh * 6.02e23, 2), ''],
+    ['Particles of Pb', sci(npb * 6.02e23, 2), ''],
+    ['Particle numbers compared', fmt(nh / npb, 0) + ' : 1', 'H\u2082 : Pb'],
+    ['Mass of one mole of each', '2.02 g vs 207 g', 'H\u2082 vs Pb']
+  ];
+  box.innerHTML = cards.map(function(c){
+    return '<div class="ro-card"><p class="ro-k">' + esc(c[0]) + '</p><p class="ro-v">' + esc(c[1]) + ' <span class="ro-u">' + esc(c[2]) + '</span></p></div>';
+  }).join('');
+  const ex = $('sim-explain');
+  if (ex){
+    ex.innerHTML = 'Both boxes hold ' + fmt(sim.mass, 0) + ' g, but H\u2082 is ' + fmt(h.mr, 2) +
+      ' g mol\u207b\u00b9 and Pb is ' + fmt(pb.mr, 0) + ' g mol\u207b\u00b9, so the hydrogen box holds about ' +
+      fmt(nh / npb, 0) + ' times as many particles. <b>That is why you can never compare reactants by mass.</b> ' +
+      'The counting relationship is <span class="kbd">N = n \u00d7 6.02 \u00d7 10\u00b2\u00b3</span>, and the weighing relationship is <span class="kbd">n = m \u00f7 molar mass</span> \u2014 the mole is the only bridge between them.';
+  }
+}
+function runFailure(k){
+  const s = t();
+  failDone = true;
+  const f = s.fails[k];
+  const p = $('fail-panel');
+  if (p){
+    p.innerHTML = '<div class="space-y-3">' +
+      '<div class="rounded-xl border border-amber-500/30 bg-amber-950/20 p-3"><p class="text-xs font-bold text-amber-200 uppercase tracking-wide mb-1">' + esc(f.name) + '</p><p class="text-sm text-slate-200">' + esc(f.tryTxt) + '</p></div>' +
+      '<div class="fail-box"><p class="text-xs font-bold text-rose-200 uppercase tracking-wide mb-1">What goes wrong</p><p class="text-sm text-slate-200">' + esc(f.what) + '</p></div>' +
+      '<div class="rounded-xl border border-emerald-600/30 bg-emerald-950/20 p-3"><p class="text-xs font-bold text-emerald-200 uppercase tracking-wide mb-1">The fix</p><p class="text-sm text-slate-200">' + esc(f.fix) + '</p></div>' +
+      '<p class="text-xs text-teal-300">' + esc(f.ms) + '</p></div>';
+  }
+  const bs = qsa(document, '[data-fail]');
+  for (let i = 0; i < bs.length; i++) bs[i].classList.toggle('on', bs[i].dataset.fail === k);
+  setDock('unlocked');
+}
+function clearFailure(){
+  failDone = false;
+  setHTML('fail-panel','');
+  const bs = qsa(document, '[data-fail]');
+  for (let i = 0; i < bs.length; i++) bs[i].classList.remove('on');
+  setDock('unlocked');
+}
+
+/* =====================================================================
+   TASK 3 — the mole machine
+===================================================================== */
+const mm = { k: 'sA', route: null };
+function mmCurrent(){
+  const a = t().mmScenarios;
+  for (let i = 0; i < a.length; i++) if (a[i].k === mm.k) return a[i];
+  return a[0];
+}
+function renderMoleMachine(){
+  const s = t();
+  const sc = $('mm-scenarios');
+  if (sc){
+    sc.innerHTML = s.mmScenarios.map(function(x){
+      return '<button type="button" class="sp-btn' + (mm.k === x.k ? ' on' : '') + '" data-mm="' + x.k + '">' + esc(x.title) + '</button>';
+    }).join('');
+    const bs = qsa(sc, '[data-mm]');
+    for (let i = 0; i < bs.length; i++) bs[i].onclick = function(){ mm.k = bs[i].dataset.mm; mm.route = null; renderMoleMachine(); };
+  }
+  const cur = mmCurrent();
+  setTxt('mm-question', cur.q);
+  setTxt('mm-unit', cur.unit);
+  const rt = $('mm-routes');
+  if (rt){
+    rt.innerHTML = s.mmRoutes.map(function(r){
+      return '<button type="button" class="route-btn" data-route="' + r.k + '">' + esc(r.txt) + '</button>';
+    }).join('');
+    const bs = qsa(rt, '[data-route]');
+    for (let i = 0; i < bs.length; i++) bs[i].onclick = function(){ mm.route = bs[i].dataset.route; renderMoleMachine(); };
+  }
+  const mb = $('mm-map');
+  if (mb){
+    const bs = qsa(mb, '[data-map]');
+    for (let i = 0; i < bs.length; i++) bs[i].classList.toggle('on', bs[i].dataset.map === cur.route);
+  }
+  const rbtns = qsa(document, '[data-route]');
+  for (let i = 0; i < rbtns.length; i++){ rbtns[i].classList.remove('on','right','bad'); }
+  const chosen = qs(document, '[data-route="' + mm.route + '"]');
+  if (chosen) chosen.classList.add('on');
+  setHTML('mm-feedback','');
+  setHTML('mm-working','');
+  const aa = $('mm-answer'); if (aa) aa.value = '';
+  setDock(sim.predLocked ? 'unlocked' : 'locked');
+}
+function routeWhy(cur, wrong){
+  const s = t();
+  const right = s.mmRoutes.filter(function(r){ return r.k === cur.route; })[0];
+  const got = s.mmRoutes.filter(function(r){ return r.k === wrong; })[0];
+  return '<div class="fail-box"><p class="text-xs font-bold text-rose-200 uppercase tracking-wide mb-1">That route cannot work</p>' +
+    '<p class="text-sm text-slate-200">You chose <b>' + esc(got ? got.txt : wrong) + '</b>. This question gives <b>' + esc(cur.given) + '</b> and asks for <b>' + esc(cur.want) + '</b>.</p>' +
+    '<p class="text-sm text-slate-200 mt-1">The route that connects them is <b>' + esc(right.txt) + '</b>. ' + esc(cur.steps[0][1]) + '</p>' +
+    '<p class="text-xs text-teal-300 mt-1">Every valid route enters and leaves through n. If your route never touches the mole, it is not connected to the question.</p></div>';
+}
+function checkMoleMachine(){
+  const cur = mmCurrent();
+  const fb = $('mm-feedback');
+  const ans = num(($('mm-answer') || {}).value);
+  if (!mm.route){
+    if (fb) fb.innerHTML = '<p class="text-sm text-amber-300">Choose a relationship first — that is the skill this topic is testing. Then do the arithmetic.</p>';
+    return;
+  }
+  const rbtns = qsa(document, '[data-route]');
+  for (let i = 0; i < rbtns.length; i++){
+    rbtns[i].classList.remove('right','bad','on');
+    if (rbtns[i].dataset.route === cur.route) rbtns[i].classList.add('right');
+    else if (rbtns[i].dataset.route === mm.route) rbtns[i].classList.add('bad');
+  }
+  let html = '';
+  if (mm.route !== cur.route){
+    html = routeWhy(cur, mm.route);
+  } else {
+    html = '<div class="rounded-xl border border-emerald-600/30 bg-emerald-950/20 p-3"><p class="text-xs font-bold text-emerald-200 uppercase tracking-wide mb-1">Route correct \u2713</p><p class="text-sm text-slate-200">' + esc(cur.steps[0][1]) + '</p></div>';
+  }
+  if (isFinite(ans)){
+    if (answerOK(ans, cur.answer, cur.tol)){
+      html += '<p class="text-sm text-emerald-300 mt-2">\u2713 Your answer ' + fmt(ans, 4) + ' ' + esc(cur.unit) + ' is right. Now check your working line by line against the reveal — a right number is not the same as a right method.</p>';
+    } else {
+      html += '<div class="fail-box mt-2"><p class="text-xs font-bold text-rose-200 uppercase tracking-wide mb-1">Answer does not match</p><p class="text-sm text-slate-200">' +
+        'Your value: <b>' + fmt(ans, 4) + '</b>. Expected: <b>' + fmt(cur.answer, 4) + ' ' + esc(cur.unit) + '</b>. ' + diagnose(cur, ans) + '</p></div>';
+    }
+  }
+  if (fb) fb.innerHTML = html;
+  if (mm.route === cur.route) revealMoleMachine();
+}
+function diagnose(cur, ans){
+  const r = cur.answer;
+  const ratio = Math.abs(ans / r);
+  function near(target, tol){ return Math.abs(ratio - target) <= target * tol; }
+  if (near(1000, 0.02)) return 'You are out by exactly 1000 — that is the cm³ ↔ dm³ conversion. 250 cm³ is 0.250 dm³, so DIVIDE cm³ by 1000 before substituting.';
+  if (near(1/1000, 0.02)) return 'Your answer is 1000 times too small — the cm³ ↔ dm³ conversion went the wrong way. 250 cm³ = 0.250 dm³ (divide by 1000).';
+  if (near(24, 0.05) || near(1/24, 0.05)) return 'You are out by about 24 — that is the molar volume. At r.t.p. multiply MOLES by 24 dm³ mol⁻¹ to get a volume; divide a gas VOLUME by 24 to get moles.';
+  if (near(100, 0.03) || near(0.01, 0.03)) return 'Out by 100 — a percentage that should have been divided by 100, or a unit step applied the wrong way.';
+  if (near(2, 0.05)) return 'Exactly twice the expected value — check the ratio in the balanced equation, or whether you counted an element twice when it appears twice in the formula.';
+  if (near(0.5, 0.05)) return 'Half the expected value — check whether the equation ratio is 2:1 and you used 1:1.';
+  if (near(1.5, 0.06)) return 'Out by a factor of 1.5 — in a formula ratio this is the 2 : 3 case, so scale both numbers by 2.';
+  if (near(10, 0.05) || near(0.1, 0.05)) return 'Out by a factor of 10 — check one line very carefully, especially a decimal point moved by hand.';
+  return 'Your answer is off by a factor of about ' + (ratio > 1 ? Math.round(ratio) : '1/' + Math.round(1 / ratio)) +
+    ', which is not one of the standard traps (×1000 units, ×24 molar volume, a 2:1 ratio, or a percentage not divided by 100). Work through the reveal below and find the first line where your number differs — that is the mark you lost.';
+}
+function revealMoleMachine(){
+  const cur = mmCurrent();
+  const wk = $('mm-working');
+  if (!wk) return;
+  wk.innerHTML = '<p class="step-h mb-2">Full working — ' + esc(cur.title) + '</p><div class="work">' +
+    cur.steps.map(function(st){ return '<span class="hl">' + esc(st[0]) + '</span>\n  ' + esc(st[1]); }).join('\n\n') +
+    '\n\n<span class="hl">What comes next</span>\n  ' + esc(cur.then) + '</div>';
+}
+
+/* =====================================================================
+   LEARN TAB
+===================================================================== */
+function renderIntro(){
+  const s = t();
+  setTxt('intro-h1', s.introH1);
+  setTxt('intro-lead', s.introLead);
+  setHTML('intro-cards', s.concepts.map(function(c){
+    return '<div class="rounded-xl border border-slate-700/60 bg-slate-950/50 p-3"><p class="text-sm font-bold text-teal-200">' + esc(c.t) + '</p><p class="text-xs text-slate-300 mt-1 leading-relaxed">' + c.d + '</p></div>';
+  }).join(''));
+  setHTML('scope-cards', s.scope.map(function(c){
+    return '<div class="rounded-xl border border-slate-700/60 bg-slate-950/50 p-3"><p class="text-sm font-bold text-indigo-200">' + esc(c.t) + '</p><p class="text-xs text-slate-300 mt-1 leading-relaxed">' + c.d + '</p></div>';
+  }).join(''));
+  setHTML('teacher-content', '<p class="font-bold text-slate-200">' + esc(s.teacherTitle) + '</p>' + s.teacher.map(function(x){ return '<p>\u2022 ' + esc(x) + '</p>'; }).join(''));
+}
+
+/* =====================================================================
+   LADDER
+===================================================================== */
+const ladder = { k: 'W' };
+function renderLadderTabs(){
+  const s = t();
+  const box = $('ladder-tabs');
+  if (!box) return;
+  box.innerHTML = s.ladderTabs.map(function(x){
+    return '<button type="button" class="drill-btn ' + (ladder.k === x.k ? 'on' : '') + '" data-lad="' + x.k + '"><span class="ladder-tag ' + x.cls + '">' + esc(x.k) + '</span> ' + esc(x.label) + '</button>';
+  }).join('');
+  const bs = qsa(box, '[data-lad]');
+  for (let i = 0; i < bs.length; i++) bs[i].onclick = function(){ ladder.k = bs[i].dataset.lad; renderLadder(); };
+}
+function renderLadder(){
+  renderLadderTabs();
+  const b = $('ladder-body');
+  if (!b) return;
+  let h = '';
+  if (ladder.k === 'W'){
+    h = '<div class="rounded-2xl border border-emerald-600/25 bg-emerald-950/10 p-4">' +
+      '<p class="text-sm font-bold text-emerald-200 mb-1">Worked example — read the REASONING before the arithmetic</p>' +
+      '<p class="text-sm text-slate-200 mb-3">13.0 g of zinc reacts completely with excess dilute hydrochloric acid:<br>' +
+      '<span class="kbd">Zn(s) + 2HCl(aq) \u2192 ZnCl\u2082(aq) + H\u2082(g)</span> &nbsp; Aᵣ(Zn) = 65.0<br>Calculate the volume of hydrogen produced at room temperature and pressure.</p>' +
+      '<div class="work"><span class="hl">Step 1 \u2014 read what is given and what is wanted</span>\n' +
+      '  Given: a MASS of zinc. Wanted: a GAS VOLUME at r.t.p.\n' +
+      '  So the route is mass \u2192 moles \u2192 ratio \u2192 moles \u2192 volume. Two conversions.\n\n' +
+      '<span class="hl">Step 2 \u2014 moles of zinc</span>\n' +
+      '  n(Zn) = m \u00f7 molar mass = 13.0 g \u00f7 65.0 g mol\u207b\u00b9 = 0.200 mol\n\n' +
+      '<span class="hl">Step 3 \u2014 the ratio, from the BALANCED equation</span>\n' +
+      '  Zn : H\u2082 = 1 : 1, so n(H\u2082) = 0.200 mol   <span class="dim">(write this line \u2014 it is marked)</span>\n\n' +
+      '<span class="hl">Step 4 \u2014 volume at r.t.p.</span>\n' +
+      '  V = n \u00d7 24 dm\u00b3 mol\u207b\u00b9 = 0.200 mol \u00d7 24 = 4.80 dm\u00b3\n\n' +
+      '<span class="hl">Step 5 \u2014 sense check</span>\n' +
+      '  A fifth of a mole is a fifth of 24 dm\u00b3, just under 5 dm\u00b3 \u2713 and 13.0 g is 0.200 mol because 65.0 \u00d7 0.200 = 13.0 \u2713' +
+      '</div>' +
+      '<div class="mt-3 rounded-xl border border-slate-700/60 bg-slate-950/50 p-3"><p class="text-xs font-bold text-teal-200 mb-1">What would have lost marks here</p>' +
+      '<p class="text-xs text-slate-300">Writing 13.0 \u00d7 24 \u00f7 65.0 and jumping to 4.80 dm\u00b3 leaves out the two marked lines: the moles of zinc and the mole ratio. The number is right, the method is not shown.</p></div></div>';
+  } else if (ladder.k === 'C'){
+    h = '<div class="rounded-2xl border border-amber-500/25 bg-amber-950/10 p-4">' +
+      '<p class="text-sm font-bold text-amber-200 mb-1">Completion \u2014 the support is partly removed</p>' +
+      '<p class="text-xs text-slate-400 mb-3">Fill the three blanks, using the hints only after you have tried. Then press Check.</p>' +
+      '<p class="text-sm text-slate-200 mb-3">4.00 g of magnesium burns completely in oxygen:<br><span class="kbd">2Mg(s) + O\u2082(g) \u2192 2MgO(s)</span> &nbsp; Aᵣ(Mg) = 24.0, formula mass MgO = 40.0<br>Calculate the mass of magnesium oxide formed.</p>' +
+      '<div class="space-y-3">' +
+      '<div><label class="field-l" for="lad-c1">Blank 1 \u2014 n(Mg) = 4.00 g \u00f7 24.0 g mol\u207b\u00b9 = ? mol</label>' +
+        '<div class="flex gap-2 items-center"><input id="lad-c1" class="field" style="max-width:200px" inputmode="decimal" placeholder="moles of Mg">' +
+        '<button type="button" class="hint-btn" data-hc="1">Hint 1</button></div><p class="text-xs text-amber-200 mt-1" id="hint-c1"></p></div>' +
+      '<div><label class="field-l" for="lad-c2">Blank 2 \u2014 the ratio Mg : MgO from the equation (write like 1:1)</label>' +
+        '<div class="flex gap-2 items-center"><input id="lad-c2" class="field" style="max-width:200px" placeholder="e.g. 2:2">' +
+        '<button type="button" class="hint-btn" data-hc="2">Hint 2</button></div><p class="text-xs text-amber-200 mt-1" id="hint-c2"></p></div>' +
+      '<div><label class="field-l" for="lad-c3">Blank 3 \u2014 mass of MgO = ? g</label>' +
+        '<div class="flex gap-2 items-center"><input id="lad-c3" class="field" style="max-width:200px" inputmode="decimal" placeholder="mass of MgO">' +
+        '<button type="button" class="hint-btn" data-hc="3">Hint 3</button></div><p class="text-xs text-amber-200 mt-1" id="hint-c3"></p></div>' +
+      '<div><button type="button" class="btn btn-primary" id="lad-c-check">Check the three blanks</button></div>' +
+      '</div><div id="lad-c-fb" class="mt-3"></div></div>';
+  } else {
+    h = '<div class="rounded-2xl border border-rose-500/25 bg-rose-950/10 p-4">' +
+      '<p class="text-sm font-bold text-rose-200 mb-1">Independent \u2014 no support, and you mark yourself</p>' +
+      '<p class="text-xs text-slate-400 mb-3">Write the full working on paper first. Then type only the final value, check it, and mark your written working against the scheme.</p>' +
+      '<p class="text-sm text-slate-200 mb-3">A 3.00 g sample of a copper oxide is reduced completely in a stream of hydrogen. 2.40 g of copper remains. (Aᵣ: Cu 63.5, O 16.0)<br>' +
+      '(a) Calculate the mass of oxygen lost.<br>(b) Deduce the empirical formula of the oxide.</p>' +
+      '<div class="grid sm:grid-cols-3 gap-3">' +
+      '<div><label class="field-l" for="lad-i1">(a) mass of oxygen / g</label><input id="lad-i1" class="field" inputmode="decimal" placeholder="e.g. 0.60"></div>' +
+      '<div><label class="field-l" for="lad-i2">(b) empirical formula</label><input id="lad-i2" class="field" placeholder="e.g. CuO"></div>' +
+      '<div class="flex items-end"><button type="button" class="btn btn-primary" id="lad-i-check">Check answers</button></div>' +
+      '</div><div id="lad-i-fb" class="mt-3"></div>' +
+      '<div class="mt-4"><p class="text-xs font-bold text-teal-200 mb-2">Mark your own working \u2014 tick each point you actually wrote</p>' +
+      '<div id="selfmarks-i" class="space-y-2"></div><p id="selfmarks-total" class="text-xs text-slate-400 mt-2"></p></div></div>';
+  }
+  b.innerHTML = h;
+  const hs = qsa(b, '[data-hc]');
+  for (let i = 0; i < hs.length; i++) hs[i].onclick = function(){ showHint(parseInt(hs[i].dataset.hc, 10)); };
+  const cc = $('lad-c-check'); if (cc) cc.onclick = checkCompletion;
+  const ic = $('lad-i-check'); if (ic) ic.onclick = checkIndependent;
+  if (ladder.k === 'I') buildSelfMarks();
+}
+function showHint(n){
+  const hints = {
+    1: 'You have a mass and want moles of the SAME substance, so the only relationship is n = m \u00f7 molar mass. Do not involve the equation yet \u2014 the ratio comes in blank 2.',
+    2: 'The ratio comes from the coefficients in the balanced equation, and only from there. 2Mg : 2MgO simplifies to 1 : 1.',
+    3: 'You now have moles of MgO. Moles to mass is m = n \u00d7 formula mass, with formula mass MgO = 40.0 g mol\u207b\u00b9. Unit check: mol \u00d7 g mol\u207b\u00b9 = g.'
+  };
+  setTxt('hint-c' + n, hints[n]);
+}
+function checkCompletion(){
+  const fb = $('lad-c-fb');
+  const a1 = num(($('lad-c1') || {}).value);
+  const a2 = (($('lad-c2') || {}).value || '').replace(/\s/g, '');
+  const a3 = num(($('lad-c3') || {}).value);
+  let score = 0, rows = '';
+  function row(ok, txt){ rows += '<div class="ms-point"><span class="' + (ok ? 'text-emerald-400' : 'text-rose-400') + ' font-bold">' + (ok ? '\u2713' : '\u2717') + '</span><span>' + txt + '</span></div>'; }
+  const ok1 = answerOK(a1, 0.1667, 0.005);
+  if (ok1) score++;
+  row(ok1, 'Blank 1 \u2014 n(Mg) = 4.00 \u00f7 24.0 = <b>0.167 mol</b> (accept 0.1667). ' + (ok1 ? 'Correct.' : 'Divide the mass by the relative atomic mass of MAGNESIUM (24.0), not of MgO.'));
+  const ok2 = (a2 === '1:1' || a2 === '2:2');
+  if (ok2) score++;
+  row(ok2, 'Blank 2 \u2014 ratio Mg : MgO = <b>1 : 1</b> (the equation gives 2 : 2, which simplifies). ' + (ok2 ? 'Correct.' : 'You wrote "' + esc(a2 || 'nothing') + '". Read the coefficients of Mg and MgO only \u2014 the O\u2082 coefficient is a decoy.'));
+  const ok3 = answerOK(a3, 6.67, 0.08);
+  if (ok3) score++;
+  row(ok3, 'Blank 3 \u2014 m(MgO) = 0.1667 \u00d7 40.0 = <b>6.67 g</b>. ' + (ok3 ? 'Correct.' : 'Chain: moles of Mg \u00d7 ratio \u00d7 formula mass of MgO.'));
+  if (fb) fb.innerHTML = '<div class="rounded-xl border border-slate-700/60 bg-slate-950/50 p-3 space-y-2"><p class="text-sm font-bold text-white">' + score + ' / 3 blanks correct</p>' + rows +
+    '<p class="text-xs text-slate-400 mt-2">Notice the answer is bigger than the starting mass: 4.00 g of magnesium picks up oxygen from the air to give 6.67 g of oxide. That mass gain is exactly what Task 3 scenario A used to find the formula.</p></div>';
+}
+function checkIndependent(){
+  const stripSub = function(s){ return String(s).replace(/\s/g, '').replace(/[\u2080-\u2089]/g, function(d){ return String(d.charCodeAt(0) - 0x2080); }); };
+  const v1 = num(($('lad-i1') || {}).value);
+  const v2 = stripSub(($('lad-i2') || {}).value);
+  const ok1 = answerOK(v1, 0.600, 0.02);
+  const ok2 = /^cu2o$/i.test(v2);
+  const fb = $('lad-i-fb');
+  if (fb) fb.innerHTML = '<div class="rounded-xl border border-slate-700/60 bg-slate-950/50 p-3 space-y-2">' +
+    '<div class="ms-point"><span class="' + (ok1 ? 'text-emerald-400' : 'text-rose-400') + ' font-bold">' + (ok1 ? '\u2713' : '\u2717') + '</span><span>(a) mass of oxygen = 3.00 \u2212 2.40 = <b>0.600 g</b>' + (ok1 ? '' : ' \u2014 you wrote ' + (isFinite(v1) ? fmt(v1, 3) : 'nothing') + '. The oxygen is the mass LOST, so it must be found by subtraction.') + '</span></div>' +
+    '<div class="ms-point"><span class="' + (ok2 ? 'text-emerald-400' : 'text-rose-400') + ' font-bold">' + (ok2 ? '\u2713' : '\u2717') + '</span><span>(b) empirical formula = <b>CuO</b>' + (ok2 ? '' : ' \u2014 you wrote "' + esc(v2 || 'nothing') + '"') + '</span></div>' +
+    '<div class="work mt-2"><span class="hl">Marking scheme</span>\n' +
+    '  (a) mass of O = 3.00 \u2212 2.40 = 0.600 g\n' +
+    '  (b) n(Cu) = 2.40 \u00f7 63.5 = 0.0378 mol\n' +
+    '      n(O)  = 0.600 \u00f7 16.0 = 0.0375 mol\n' +
+    '      divide by the smaller \u2192 ratio Cu : O = 1 : 1 \u2192 empirical formula CuO\n' +
+    '  <span class="dim">One mark for the subtraction, one for each mole value, one for the ratio in whole numbers. The numbers are only as good as the subtraction line.</span></div>' +
+    '<p class="text-xs text-slate-400">Now tick the self-mark list above. A correct final formula with no subtraction line is worth much less than the available marks.</p></div>';
+}
+function buildSelfMarks(){
+  const pts = [
+    'I wrote the subtraction 3.00 \u2212 2.40 = 0.600 g to find the mass of oxygen',
+    'I divided the copper mass by Aᵣ(Cu) = 63.5 and showed the value 0.0378 mol',
+    'I divided the oxygen mass by Aᵣ(O) = 16.0 and showed the value 0.0375 mol',
+    'I divided both by the smaller number before rounding to whole numbers',
+    'I stated the ratio Cu : O clearly as its own line',
+    'I gave the empirical formula with the correct symbols and subscripts',
+    'I wrote the unit g on the mass and mol on each mole value',
+    'I gave answers to 3 significant figures, matching the data'
+  ];
+  const sm = $('selfmarks-i');
+  if (!sm) return;
+  sm.innerHTML = pts.map(function(p, i){
+    return '<label class="ms-point"><input type="checkbox" class="selfmk" data-i="' + i + '"> <span>' + esc(p) + '</span></label>';
+  }).join('');
+  const bs = qsa(sm, '.selfmk');
+  for (let i = 0; i < bs.length; i++) bs[i].onchange = updateSelfMarkTotal;
+  updateSelfMarkTotal();
+}
+function updateSelfMarkTotal(){
+  const bs = qsa(document, '.selfmk');
+  let n = 0;
+  for (let i = 0; i < bs.length; i++) if (bs[i].checked) n++;
+  const el = $('selfmarks-total');
+  if (el && bs.length){
+    const pct = Math.round(n / bs.length * 100);
+    el.textContent = n + ' / ' + bs.length + ' marking points (' + pct + '%). ' +
+      (pct >= 85 ? 'Strong \u2014 that is the working a marker can credit.' : pct >= 60 ? 'Workable, but the missing lines are where the marks hide.' : 'Weak method. Redo it writing every step on its own line with its unit.');
+  }
+}
+
+/* =====================================================================
+   DRILLS
+===================================================================== */
+const drill = { k: 'units', qi: 0, streak: 0 };
+const DRILLS = {
+  units: [
+    { q: 'Convert 250 cm\u00b3 into dm\u00b3.', o: ['0.250 dm\u00b3', '250 000 dm\u00b3', '2.50 dm\u00b3'], a: 0, why: 'Divide by 1000: 250 \u00f7 1000 = 0.250 dm\u00b3. Multiplying is the most common unit error in this topic.' },
+    { q: 'Convert 0.0500 dm\u00b3 into cm\u00b3.', o: ['50.0 cm\u00b3', '0.0000500 cm\u00b3', '500 cm\u00b3'], a: 0, why: 'Multiply by 1000: 0.0500 \u00d7 1000 = 50.0 cm\u00b3. Check the size of the answer makes sense.' },
+    { q: 'Convert 1.20 dm\u00b3 of gas at r.t.p. into moles.', o: ['0.0500 mol', '28.8 mol', '0.0120 mol'], a: 0, why: 'n = V \u00f7 24 = 1.20 \u00f7 24 = 0.0500 mol. The molar volume at r.t.p. is 24 dm\u00b3 mol\u207b\u00b9.' },
+    { q: 'Convert 0.750 mol of gas at r.t.p. into a volume.', o: ['18.0 dm\u00b3', '0.0313 dm\u00b3', '75.0 dm\u00b3'], a: 0, why: 'V = n \u00d7 24 = 0.750 \u00d7 24 = 18.0 dm\u00b3. Multiply when going from moles to volume.' },
+    { q: 'What is the molar volume of any gas at room temperature and pressure?', o: ['24 dm\u00b3 mol\u207b\u00b9', '22.4 dm\u00b3 mol\u207b\u00b9', '24 cm\u00b3 mol\u207b\u00b9'], a: 0, why: 'HKDSE uses 24 dm\u00b3 mol\u207b\u00b9 at r.t.p. (Topic IX c). 22.4 dm\u00b3 mol\u207b\u00b9 is the value at 0 \u00b0C, which is not the r.t.p. value.' },
+    { q: 'Which of these is NOT part of the HKDSE syllabus for this topic?', o: ['pV = nRT', 'the mole and Avogadro\u2019s constant', 'molar volume at r.t.p. = 24 dm\u00b3'], a: 0, why: 'The ideal gas equation pV = nRT is not in the HKDSE syllabus. Gas calculations use the constant molar volume, 24 dm\u00b3 at r.t.p.' }
+  ],
+  rel: [
+    { q: 'You are given a mass of a solid and asked for the number of moles. Which relationship?', o: ['n = m \u00f7 molar mass', 'n = c \u00d7 V', 'N = n \u00d7 6.02 \u00d7 10\u00b2\u00b3'], a: 0, why: 'Mass to moles is always n = m \u00f7 molar mass. It is the only relationship containing both a mass and an amount of substance.' },
+    { q: 'You are given a gas volume at r.t.p. and asked for the mass. Which route?', o: ['V \u00f7 24 = n, then n \u00d7 molar mass = m', 'm \u00f7 24 = n', 'n = c \u00d7 V then \u00d7 molar mass'], a: 0, why: 'A gas volume at r.t.p. becomes moles by dividing by 24, then moles become mass by multiplying by the molar mass. Two steps, in that order.' },
+    { q: 'You have the masses of two elements in a compound and want the empirical formula. Which route?', o: ['Convert each mass to moles, then divide by the smaller', 'Divide the two masses by each other', 'Divide each mass by the total mass'], a: 0, why: 'Formulae are ratios of MOLES. Dividing masses gives a mass ratio, which differs whenever the two elements have different relative atomic masses.' },
+    { q: 'You have the percentage by mass of each element and the formula mass. Which two steps give the molecular formula?', o: ['Moles of each element \u2192 empirical formula, then formula mass \u00f7 empirical formula mass', 'Divide the percentages by the formula mass', 'Multiply the percentages by the formula mass'], a: 0, why: 'Percentages give masses in 100 g, which give moles, which give the empirical formula. The multiplier comes from the formula mass divided by the empirical formula mass.' },
+    { q: 'A mass of copper oxide is heated and a smaller mass of copper remains. What must you do first?', o: ['Subtract to find the mass of oxygen lost', 'Divide the final mass by 16.0', 'Assume the oxygen mass equals the copper mass'], a: 0, why: 'The oxygen left as a gas, so its mass is the mass LOST: original \u2212 final. Without that subtraction line the ratio is invented.' },
+    { q: 'You want the mass of product from a mass of reactant. Which is the correct chain?', o: ['m \u00f7 molar mass \u2192 n, \u00d7 equation ratio, \u00d7 molar mass \u2192 m', 'm \u00d7 molar mass \u2192 n, \u00f7 equation ratio \u2192 m', 'm \u00f7 molar mass \u00f7 molar mass \u2192 m'], a: 0, why: 'Mass \u2192 moles \u2192 apply the ratio from the balanced equation \u2192 moles \u2192 mass. The marking points sit on the two middle steps.' }
+  ],
+  mass: [
+    { q: 'What is the percentage by mass of nitrogen in NH\u2084NO\u2083? (Aᵣ: N 14.0, H 1.0, O 16.0)', o: ['35.0 %', '17.5 %', '28.0 %'], a: 0, why: 'There are TWO nitrogen atoms. Formula mass = 80.0, so % N = (2 \u00d7 14.0) \u00f7 80.0 \u00d7 100 = 35.0 %. Choosing 17.5 % means you counted only one nitrogen.' },
+    { q: 'What is the percentage by mass of iron in Fe\u2082O\u2083? (Aᵣ: Fe 55.8, O 16.0)', o: ['69.9 %', '30.1 %', '55.8 %'], a: 0, why: 'Formula mass = 159.6 and % Fe = (2 \u00d7 55.8) \u00f7 159.6 \u00d7 100 = 69.9 %. 30.1 % is the percentage of oxygen \u2014 the complement.' },
+    { q: 'In which compound is the percentage by mass of oxygen the greatest? (Aᵣ: H 1.0, C 12.0, O 16.0, Mg 24.0)', o: ['H\u2082O', 'CO\u2082', 'MgO'], a: 0, why: 'H\u2082O: 16.0 \u00f7 18.0 = 88.9 %. CO\u2082: 32.0 \u00f7 44.0 = 72.7 %. MgO: 16.0 \u00f7 40.0 = 40.0 %. A small formula mass containing one oxygen gives the highest percentage.' },
+    { q: 'How many moles of carbon atoms are there in 24.0 g of carbon? (Aᵣ: C 12.0)', o: ['2.00 mol', '0.500 mol', '24.0 mol'], a: 0, why: 'n = m \u00f7 Aᵣ = 24.0 \u00f7 12.0 = 2.00 mol, which is 2 \u00d7 6.02 \u00d7 10\u00b2\u00b3 = 1.20 \u00d7 10\u00b2\u2074 atoms.' }
+  ],
+  form: [
+    { q: '2.40 g of magnesium forms 4.00 g of magnesium oxide. What is the empirical formula? (Aᵣ: Mg 24.0, O 16.0)', o: ['MgO', 'MgO\u2082', 'Mg\u2082O'], a: 0, why: 'mass of O = 4.00 \u2212 2.40 = 1.60 g. n(Mg) = 0.100 mol and n(O) = 0.100 mol, so the ratio is 1 : 1 and the formula is MgO.' },
+    { q: 'A compound contains 70.0 % Fe and 30.0 % O by mass. What is its empirical formula? (Aᵣ: Fe 56.0, O 16.0)', o: ['Fe\u2082O\u2083', 'FeO', 'FeO\u2084'], a: 0, why: 'n(Fe) = 70.0 \u00f7 56.0 = 1.25 mol and n(O) = 30.0 \u00f7 16.0 = 1.875 mol. Divide both by the smaller: Fe 1, O 1.5, then scale \u00d72 to get Fe\u2082O\u2083. A ratio ending in .5 always means multiply by 2.' },
+    { q: 'An empirical formula is CH\u2082O and the formula mass is 90.0. What is the molecular formula? (Aᵣ: C 12.0, H 1.0, O 16.0)', o: ['C\u2083H\u2086O\u2083', 'C\u2082H\u2084O\u2082', 'C\u2086H\u2081\u2082O\u2086'], a: 0, why: 'Empirical formula mass = 30.0, so the multiplier is 90.0 \u00f7 30.0 = 3, giving (CH\u2082O)\u2083 = C\u2083H\u2086O\u2083. C\u2082H\u2084O\u2082 would need a formula mass of 60.0.' },
+    { q: 'You calculate a mole ratio of 1 : 1.5. What ratio should you write?', o: ['2 : 3', '1 : 1.5', '1 : 2'], a: 0, why: 'Empirical formulae use whole numbers, so multiply both by 2 to get 2 : 3. A ratio of .33 is scaled by 3, and .5 by 2.' }
+  ]
+};
+function renderDrills(){
+  const s = t();
+  const box = $('drill-tabs');
+  if (box){
+    box.innerHTML = s.drillTabs.map(function(x){
+      return '<button type="button" class="drill-btn ' + (drill.k === x.k ? 'on' : '') + '" data-drill="' + x.k + '">' + esc(x.label) + '</button>';
+    }).join('');
+    const bs = qsa(box, '[data-drill]');
+    for (let i = 0; i < bs.length; i++) bs[i].onclick = function(){ drill.k = bs[i].dataset.drill; drill.qi = 0; drill.streak = 0; renderDrillBody(); };
+  }
+  renderDrillBody();
+}
+function renderDrillBody(){
+  const b = $('drill-body');
+  if (!b) return;
+  const list = DRILLS[drill.k];
+  const item = list[drill.qi % list.length];
+  b.innerHTML = '<div class="rounded-xl border border-slate-700/60 bg-slate-950/50 p-4">' +
+    '<div class="flex flex-wrap items-center justify-between gap-2 mb-2">' +
+    '<p class="text-sm text-slate-200 font-semibold">' + esc(item.q) + '</p>' +
+    '<span class="chip chip-dim">streak: ' + drill.streak + ' \u00b7 card ' + ((drill.qi % list.length) + 1) + ' of ' + list.length + '</span></div>' +
+    '<div class="grid sm:grid-cols-3 gap-2" id="drill-opts">' +
+    item.o.map(function(o, i){ return '<button type="button" class="route-btn" data-do="' + i + '">' + esc(o) + '</button>'; }).join('') +
+    '</div><div id="drill-fb" class="mt-3"></div>' +
+    '<p id="drill-streak" class="text-xs text-slate-500 mt-2">Get three in a row before you move on.</p>' +
+    '<div class="flex gap-2 mt-2"><button type="button" class="btn btn-ghost" id="drill-next">Next card \u2192</button></div></div>';
+  const bs = qsa(b, '[data-do]');
+  for (let i = 0; i < bs.length; i++) bs[i].onclick = function(){ answerDrill(item, i); };
+  const nx = $('drill-next'); if (nx) nx.onclick = function(){ drill.qi++; renderDrillBody(); };
+}
+function answerDrill(item, i){
+  const bs = qsa(document, '[data-do]');
+  for (let k = 0; k < bs.length; k++){
+    bs[k].classList.remove('on');
+    if (k === i) bs[k].classList.add(i === item.a ? 'right' : 'bad');
+    if (k === item.a) bs[k].classList.add('right');
+  }
+  if (i === item.a) drill.streak++; else drill.streak = 0;
+  const fb = $('drill-fb');
+  if (fb) fb.innerHTML = '<div class="rounded-xl border ' + (i === item.a ? 'border-emerald-600/30 bg-emerald-950/20' : 'border-rose-600/30 bg-rose-950/20') + ' p-3">' +
+    '<p class="text-xs font-bold ' + (i === item.a ? 'text-emerald-200' : 'text-rose-200') + ' uppercase tracking-wide mb-1">' + (i === item.a ? '\u2713 Correct' : '\u2717 Not right yet') + '</p>' +
+    '<p class="text-sm text-slate-200">' + esc(item.why) + '</p></div>';
+  setTxt('drill-streak', 'Streak: ' + drill.streak + (drill.streak >= 3 ? ' \u2014 three in a row, move on.' : ' \u2014 get three in a row before you move on.'));
+}
+
+/* =====================================================================
+   MCQ + STRUCTURED
+===================================================================== */
+function renderMcq(){
+  const s = t();
+  setTxt('pp-title', s.ppTitle);
+  setTxt('pp-sub', s.ppSub);
+  const box = $('pp-questions');
+  if (box){
+    box.innerHTML = s.questions.map(function(q, qi){
+      return '<div class="rounded-2xl border border-slate-700/60 bg-slate-950/40 p-4">' +
+        '<p class="text-sm font-semibold text-slate-100 mb-3">' + (qi + 1) + '. ' + esc(q.q) + '</p><div class="space-y-2">' +
+        q.o.map(function(o, oi){
+          return '<button type="button" class="mcq-opt w-full text-left px-4 py-2 rounded-xl text-sm border border-slate-700 bg-slate-900/60" data-q="' + qi + '" data-o="' + oi + '">' + String.fromCharCode(65 + oi) + '. ' + esc(o) + '</button>';
+        }).join('') +
+        '</div><p class="mcq-why hidden text-xs text-emerald-200 bg-emerald-950/40 border border-emerald-800/40 rounded-xl p-3 leading-relaxed mt-3"></p></div>';
+    }).join('');
+    const bs = qsa(box, '.mcq-opt');
+    for (let i = 0; i < bs.length; i++) bs[i].onclick = function(){ answerMcq(bs[i]); };
+  }
+  const st = $('pp-structured');
+  if (st){
+    const q = s.structured;
+    st.innerHTML = '<div class="rounded-2xl border border-slate-700/60 bg-slate-950/40 p-4">' +
+      '<p class="text-sm text-slate-100 mb-3 leading-relaxed whitespace-pre-line">' + esc(q.q) + '</p>' +
+      '<p class="text-xs text-slate-400 mb-2">Write it on paper first. Then reveal the scheme and tick every point you actually wrote.</p>' +
+      '<button type="button" class="btn btn-teal" id="btn-ms-reveal" onclick="revealStructured()">Reveal marking scheme</button>' +
+      '<div id="ms-points" class="mt-3 space-y-2"></div><p id="ms-total" class="text-xs text-slate-400 mt-2"></p>' +
+      '<p class="text-xs text-slate-500 mt-2">' + esc(q.note) + '</p></div>';
+  }
+}
+function answerMcq(btn){
+  const s = t();
+  const qi = parseInt(btn.dataset.q, 10), oi = parseInt(btn.dataset.o, 10);
+  const q = s.questions[qi];
+  const group = btn.parentElement;
+  const opts = qsa(group, '.mcq-opt');
+  for (let i = 0; i < opts.length; i++){
+    opts[i].classList.remove('correct','wrong');
+    if (i === oi) opts[i].classList.add(oi === q.a ? 'correct' : 'wrong');
+    if (i === q.a) opts[i].classList.add('correct');
+  }
+  const why = group && group.parentElement ? qs(group.parentElement, '.mcq-why') : null;
+  if (why){ why.classList.remove('hidden'); why.innerHTML = q.why; }
+}
+function revealStructured(){
+  const s = t();
+  const box = $('ms-points');
+  if (!box) return;
+  box.innerHTML = s.structured.ms.map(function(m, i){
+    return '<label class="ms-point"><input type="checkbox" class="mspt" data-i="' + i + '"> <span>' + esc(m) + '</span></label>';
+  }).join('');
+  const bs = qsa(box, '.mspt');
+  for (let i = 0; i < bs.length; i++) bs[i].onchange = updateMsTotal;
+  updateMsTotal();
+}
+function updateMsTotal(){
+  const bs = qsa(document, '.mspt');
+  let n = 0;
+  for (let i = 0; i < bs.length; i++) if (bs[i].checked) n++;
+  const el = $('ms-total');
+  if (el) el.textContent = n + ' / ' + bs.length + ' marking points ticked. ' +
+    (n === bs.length ? 'Full marks \u2014 and you can prove it, because you wrote every line.' : 'The unticked points are the marks you did not know were available. Reread them and rewrite the answer.');
+}
+
+/* =====================================================================
+   RECAP
+===================================================================== */
+function renderRecap(){
+  const s = t();
+  setTxt('recap-title', s.recapTitle);
+  setTxt('recap-sub', 'Tick each one only when you can do it without notes, on paper, with units.');
+  const ul = $('recap-list');
+  if (ul){
+    ul.innerHTML = s.recapGoals.map(function(g, i){
+      return '<li class="flex items-start gap-3 rounded-xl border border-slate-700/50 bg-slate-950/40 p-3">' +
+        '<input type="checkbox" class="goal-check mt-0.5" data-g="' + i + '" id="goal-' + i + '">' +
+        '<label for="goal-' + i + '" class="text-sm text-slate-300 leading-relaxed">' + esc(g) + '</label></li>';
+    }).join('');
+    const bs = qsa(ul, '.goal-check');
+    for (let i = 0; i < bs.length; i++) bs[i].onchange = updateRecapProgress;
+  }
+  updateRecapProgress();
+  setTxt('markloss-title', s.marklossTitle);
+  setTxt('markloss-lead', s.marklossLead);
+  const ml = $('markloss-list');
+  if (ml){
+    ml.innerHTML = s.markloss.map(function(m, i){
+      return '<li><label class="ms-point"><input type="checkbox" class="mloss" data-i="' + i + '"> <span>' + esc(m) + '</span></label></li>';
+    }).join('');
+  }
+  renderMyths();
+}
+function updateRecapProgress(){
+  const bs = qsa(document, '.goal-check');
+  let n = 0, arr = [];
+  for (let i = 0; i < bs.length; i++){ if (bs[i].checked){ n++; arr.push(i); } }
+  try { localStorage.setItem('dse_mole_recap', JSON.stringify(arr)); } catch (e) {}
+  const el = $('recap-progress');
+  if (el && bs.length){
+    el.textContent = n + ' / ' + bs.length + ' goals ticked. ' +
+      (n === bs.length ? 'All ticked \u2014 now do one past-paper question cold, with no notes.' : 'Untick anything you cannot explain out loud.');
+  }
+}
+function renderMyths(){
+  const s = t();
+  setTxt('myth-title', s.mythTitle);
+  setTxt('myth-lead', s.mythLead);
+  const box = $('myth-cards');
+  if (!box) return;
+  box.innerHTML = s.myths.map(function(m, i){
+    return '<div class="myth-card glass rounded-xl p-4" data-myth="' + i + '">' +
+      '<div class="myth-front"><span class="text-xs font-bold text-rose-400 uppercase">' + esc(s.mythLabelMyth) + '</span>' +
+      '<p class="text-sm text-slate-200 mt-2">' + esc(m.m) + '</p><p class="text-xs text-slate-500 mt-3">' + esc(s.mythFlip) + '</p></div>' +
+      '<div class="myth-back"><span class="text-xs font-bold text-emerald-400 uppercase">' + esc(s.mythLabelFact) + '</span>' +
+      '<p class="text-sm text-slate-200 mt-2">' + m.f + '</p></div></div>';
+  }).join('');
+  const cs = qsa(box, '.myth-card');
+  for (let i = 0; i < cs.length; i++) cs[i].onclick = function(){ cs[i].classList.toggle('flipped'); };
+}
+
+/* =====================================================================
+   BOOT
+===================================================================== */
+function boot(){
+  canvasEl = $('sim-canvas');
+  if (canvasEl && canvasEl.getContext) ctx = canvasEl.getContext('2d');
+  renderPredict();
+  renderSim();
+  renderMoleMachine();
+  renderIntro();
+  renderLadder();
+  renderDrills();
+  renderMcq();
+  renderRecap();
+  try {
+    const raw = localStorage.getItem('dse_mole_recap');
+    if (raw){
+      const arr = JSON.parse(raw);
+      for (let i = 0; i < arr.length; i++){ const el = $('goal-' + arr[i]); if (el) el.checked = true; }
+      updateRecapProgress();
+    }
+  } catch (e) {}
+  resizeCanvas();
+  requestAnimationFrame(loop);
+}
+try { boot(); } catch (e) { if (typeof console !== 'undefined') console.warn('boot', e); }
+</script>
+<script id="lab-runtime">(function () {
+'use strict';
+var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function relayout() {
+if (typeof window.scheduleResize === 'function') window.scheduleResize();
+else if (typeof window.resizeCanvas === 'function') window.resizeCanvas();
+}
+var pending = 0;
+function onRequestRelayout() {
+if (pending) return;
+pending = requestAnimationFrame(function () { pending = 0; relayout(); });
+}
+if (window.ResizeObserver) {
+var ro = new ResizeObserver(onRequestRelayout);
+document.querySelectorAll('.canvas-wrap').forEach(function (el) { ro.observe(el); });
+}
+window.addEventListener('orientationchange', onRequestRelayout);
+window.addEventListener('resize', onRequestRelayout);
+var bar = document.getElementById('next-bar');
+if (bar) {
+var setBarPad = function () {
+var h = Math.round(bar.offsetHeight);
+if (h > 0) document.body.style.setProperty('--next-bar-h', h + 'px');
+};
+setBarPad();
+if (window.ResizeObserver) new ResizeObserver(setBarPad).observe(bar);
+window.addEventListener('load', setBarPad);
+}
+var rail = document.getElementById('main-tabs');
+if (rail) {
+rail.setAttribute('role', 'tablist');
+var pills = Array.prototype.slice.call(rail.querySelectorAll('.tab-btn'));
+pills.forEach(function (btn, i) {
+var panel = document.getElementById('panel-' + btn.dataset.tab);
+btn.setAttribute('role', 'tab');
+btn.setAttribute('aria-selected', btn.classList.contains('active') ? 'true' : 'false');
+if (panel) {
+panel.setAttribute('role', 'tabpanel');
+btn.setAttribute('aria-controls', panel.id);
+panel.setAttribute('aria-labelledby', btn.id);
+}
+btn.addEventListener('keydown', function (e) {
+var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+if (!d) return;
+e.preventDefault();
+var next = pills[(i + d + pills.length) % pills.length];
+next.focus();
+if (typeof window.setTab === 'function') window.setTab(next.dataset.tab);
+});
+});
+rail.addEventListener('click', function () {
+setTimeout(function () {
+pills.forEach(function (b) { b.setAttribute('aria-selected', b.classList.contains('active') ? 'true' : 'false'); });
+var on = rail.querySelector('.tab-btn.active');
+if (on) on.scrollIntoView({ block: 'nearest', inline: 'center', behavior: reduce ? 'auto' : 'smooth' });
+}, 0);
+});
+}
+var dock = document.getElementById('sim-dock');
+if (dock && window.MutationObserver && !reduce) {
+new MutationObserver(function (m) {
+m.forEach(function (change) {
+var el = change.target;
+if (el.classList.contains('unlocked') && change.oldValue && /(^|\s)locked(\s|$)/.test(change.oldValue)) {
+el.classList.add('just-unlocked');
+setTimeout(function () { el.classList.remove('just-unlocked'); }, 750);
+}
+});
+}).observe(dock, { attributes: true, attributeFilter: ['class'], attributeOldValue: true });
+}
+document.addEventListener('click', function (e) {
+if (!e.target || !e.target.closest) return;
+if (e.target.closest('input, label, button, a, select')) return;
+var li = e.target.closest('li');
+if (!li) return;
+var box = li.querySelector('input[type="checkbox"], input[type="radio"]');
+if (!box || box.disabled) return;
+box.checked = box.type === 'checkbox' ? !box.checked : true;
+box.dispatchEvent(new Event('change', { bubbles: true }));
+box.dispatchEvent(new Event('input', { bubbles: true }));
+});
+if (window.IntersectionObserver && !reduce) {
+var io = new IntersectionObserver(function (entries) {
+entries.forEach(function (en) {
+if (!en.isIntersecting) return;
+en.target.classList.add('shown');
+io.unobserve(en.target);
+});
+}, { rootMargin: '0px 0px -6% 0px', threshold: 0.01 });
+document.querySelectorAll('.tab-panel > *').forEach(function (el, i) {
+el.classList.add('reveal');
+el.style.setProperty('--i', String(i));
+io.observe(el);
+});
+setTimeout(function () {
+document.querySelectorAll('.reveal:not(.shown)').forEach(function (el) { el.classList.add('shown'); });
+}, 2500);
+}
+})();</script>
+</body>
+</html>

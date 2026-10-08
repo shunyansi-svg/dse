@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Electrolysis of Water | HKDSE Chemistry Topic VII (e)</title>
+<meta name="theme-color" content="#000000">
+<style>
+  input[type=range]{accent-color:#3dd6c6;}
+.step-chip{display:inline-block;padding:.2rem .6rem;border-radius:.6rem;font-size:.75rem;font-weight:700;border:1px solid rgba(148,163,184,.3);color:#94a3b8;background:rgba(15,23,42,.6);}
+.step-chip.cur{border-color:rgba(61,214,198,.7);color:#d1faf5;background:rgba(61,214,198,.15);}
+.step-chip.done{border-color:rgba(52,211,153,.5);color:#6ee7b7;background:rgba(16,185,129,.08);}
+.heq-card.locked{opacity:.55;filter:grayscale(.7);}
+</style>
+<style id="lab-theme">/* Shared design system for the chemistry lab fleet. Source: _build/src/theme.css + tailwind.config.js. Edit the source, then run node _build/src/build.cjs. Do not hand-edit this block. */*,:after,:before{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(10,132,255,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(10,132,255,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }*,:after,:before{box-sizing:border-box;border:0 solid #d1d1d6}:after,:before{--tw-content:""}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;-o-tab-size:4;tab-size:4;font-family:-apple-system,BlinkMacSystemFont,SF Pro Text,SF Pro Display,Segoe UI Variable Text,Segoe UI,system-ui,Helvetica Neue,sans-serif;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:SF Mono,ui-monospace,Cascadia Mono,Segoe UI Mono,Consolas,monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0}fieldset,legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::-moz-placeholder,textarea::-moz-placeholder{opacity:1;color:#aeaeb2}input::placeholder,textarea::placeholder{opacity:1;color:#aeaeb2}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}.visible{visibility:visible}.invisible{visibility:hidden}.collapse{visibility:collapse}.static{position:static}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.sticky{position:sticky}.inset-0{inset:0}.z-10{z-index:10}.z-\[110\]{z-index:110}.col-span-1{grid-column:span 1/span 1}.col-span-2{grid-column:span 2/span 2}.mx-auto{margin-left:auto;margin-right:auto}.my-3{margin-top:.75rem;margin-bottom:.75rem}.mb-1{margin-bottom:.25rem}.mb-1\.5{margin-bottom:.375rem}.mb-10{margin-bottom:2.5rem}.mb-2{margin-bottom:.5rem}.mb-3{margin-bottom:.75rem}.mb-4{margin-bottom:1rem}.mb-5{margin-bottom:1.25rem}.mb-8{margin-bottom:2rem}.ml-1{margin-left:.25rem}.ml-auto{margin-left:auto}.mr-1{margin-right:.25rem}.mr-2{margin-right:.5rem}.ms-0{margin-inline-start:0}.ms-1{margin-inline-start:.25rem}.ms-2{margin-inline-start:.5rem}.mt-0{margin-top:0}.mt-0\.5{margin-top:.125rem}.mt-1{margin-top:.25rem}.mt-1\.5{margin-top:.375rem}.mt-2{margin-top:.5rem}.mt-3{margin-top:.75rem}.mt-4{margin-top:1rem}.mt-5{margin-top:1.25rem}.mt-6{margin-top:1.5rem}.block{display:block}.inline{display:inline}.flex{display:flex}.table{display:table}.grid{display:grid}.contents{display:contents}.hidden{display:none}.h-2{height:.5rem}.h-2\.5{height:.625rem}.h-3{height:.75rem}.h-auto{height:auto}.min-h-\[1\.25rem\]{min-height:1.25rem}.min-h-\[1rem\]{min-height:1rem}.min-h-\[24px\]{min-height:24px}.min-h-\[72px\]{min-height:72px}.w-14{width:3.5rem}.w-16{width:4rem}.w-20{width:5rem}.w-24{width:6rem}.w-28{width:7rem}.w-36{width:9rem}.w-6{width:1.5rem}.w-full{width:100%}.min-w-\[160px\]{min-width:160px}.max-w-3xl{max-width:48rem}.max-w-6xl{max-width:72rem}.max-w-sm{max-width:24rem}.max-w-xs{max-width:20rem}.flex-1{flex:1 1 0%}.shrink{flex-shrink:1}.grow{flex-grow:1}.border-collapse{border-collapse:collapse}.transform{transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.resize{resize:both}.list-inside{list-style-position:inside}.list-disc{list-style-type:disc}.grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}.grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid-cols-\[3rem_1fr\]{grid-template-columns:3rem 1fr}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-start{align-items:flex-start}.items-end{align-items:flex-end}.items-center{align-items:center}.items-baseline{align-items:baseline}.items-stretch{align-items:stretch}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-1{gap:.25rem}.gap-2{gap:.5rem}.gap-3{gap:.75rem}.gap-4{gap:1rem}.gap-5{gap:1.25rem}.gap-x-4{-moz-column-gap:1rem;column-gap:1rem}.gap-x-8{-moz-column-gap:2rem;column-gap:2rem}.gap-y-1{row-gap:.25rem}.gap-y-4{row-gap:1rem}.space-y-1>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.25rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.25rem*var(--tw-space-y-reverse))}.space-y-1\.5>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.375rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.375rem*var(--tw-space-y-reverse))}.space-y-2>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.5rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.5rem*var(--tw-space-y-reverse))}.space-y-3>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.75rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.75rem*var(--tw-space-y-reverse))}.space-y-4>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem*var(--tw-space-y-reverse))}.space-y-5>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.25rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.25rem*var(--tw-space-y-reverse))}.space-y-6>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.5rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.5rem*var(--tw-space-y-reverse))}.self-end{align-self:flex-end}.self-center{align-self:center}.overflow-hidden{overflow:hidden}.overflow-x-auto{overflow-x:auto}.whitespace-nowrap{white-space:nowrap}.whitespace-pre-line{white-space:pre-line}.whitespace-pre-wrap{white-space:pre-wrap}.text-wrap{text-wrap:wrap}.rounded{border-radius:.625rem}.rounded-2xl{border-radius:1.125rem}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:.75rem}.rounded-xl{border-radius:1rem}.border{border-width:1px}.border-l-\[3px\]{border-left-width:3px}.border-t{border-top-width:1px}.border-dashed{border-style:dashed}.\!border-indigo-500{--tw-border-opacity:1!important;border-color:rgb(10 132 255/var(--tw-border-opacity,1))!important}.border-amber-500{--tw-border-opacity:1;border-color:rgb(255 159 10/var(--tw-border-opacity,1))}.border-amber-500\/25{border-color:rgba(255,159,10,.25)}.border-amber-500\/30{border-color:rgba(255,159,10,.3)}.border-amber-500\/40{border-color:rgba(255,159,10,.4)}.border-amber-800{--tw-border-opacity:1;border-color:rgb(95 56 0/var(--tw-border-opacity,1))}.border-amber-800\/40{border-color:rgba(95,56,0,.4)}.border-emerald-500{--tw-border-opacity:1;border-color:rgb(48 209 88/var(--tw-border-opacity,1))}.border-emerald-500\/40{border-color:rgba(48,209,88,.4)}.border-emerald-600{--tw-border-opacity:1;border-color:rgb(36 168 63/var(--tw-border-opacity,1))}.border-emerald-600\/25{border-color:rgba(36,168,63,.25)}.border-emerald-600\/30{border-color:rgba(36,168,63,.3)}.border-emerald-600\/40{border-color:rgba(36,168,63,.4)}.border-emerald-700{--tw-border-opacity:1;border-color:rgb(27 122 46/var(--tw-border-opacity,1))}.border-emerald-700\/40{border-color:rgba(27,122,46,.4)}.border-emerald-800{--tw-border-opacity:1;border-color:rgb(18 84 31/var(--tw-border-opacity,1))}.border-emerald-800\/40{border-color:rgba(18,84,31,.4)}.border-indigo-500{--tw-border-opacity:1;border-color:rgb(10 132 255/var(--tw-border-opacity,1))}.border-indigo-500\/25{border-color:rgba(10,132,255,.25)}.border-indigo-500\/30{border-color:rgba(10,132,255,.3)}.border-orange-600{--tw-border-opacity:1;border-color:rgb(204 122 0/var(--tw-border-opacity,1))}.border-rose-500{--tw-border-opacity:1;border-color:rgb(255 69 63/var(--tw-border-opacity,1))}.border-rose-500\/25{border-color:rgba(255,69,63,.25)}.border-rose-500\/40{border-color:rgba(255,69,63,.4)}.border-rose-600{--tw-border-opacity:1;border-color:rgb(217 44 38/var(--tw-border-opacity,1))}.border-rose-600\/30{border-color:rgba(217,44,38,.3)}.border-rose-800{--tw-border-opacity:1;border-color:rgb(107 21 18/var(--tw-border-opacity,1))}.border-rose-800\/40{border-color:rgba(107,21,18,.4)}.border-sky-500{--tw-border-opacity:1;border-color:rgb(100 210 255/var(--tw-border-opacity,1))}.border-sky-500\/40{border-color:rgba(100,210,255,.4)}.border-sky-800{--tw-border-opacity:1;border-color:rgb(0 77 104/var(--tw-border-opacity,1))}.border-sky-800\/40{border-color:rgba(0,77,104,.4)}.border-slate-500{--tw-border-opacity:1;border-color:rgb(174 174 178/var(--tw-border-opacity,1))}.border-slate-600{--tw-border-opacity:1;border-color:rgb(161 161 166/var(--tw-border-opacity,1))}.border-slate-700{--tw-border-opacity:1;border-color:rgb(152 152 157/var(--tw-border-opacity,1))}.border-slate-700\/50{border-color:hsla(240,2%,61%,.5)}.border-slate-700\/60{border-color:hsla(240,2%,61%,.6)}.border-slate-700\/70{border-color:hsla(240,2%,61%,.7)}.border-slate-800{--tw-border-opacity:1;border-color:rgb(84 84 88/var(--tw-border-opacity,1))}.border-teal-500{--tw-border-opacity:1;border-color:rgb(100 210 255/var(--tw-border-opacity,1))}.border-teal-500\/25{border-color:rgba(100,210,255,.25)}.border-teal-500\/30{border-color:rgba(100,210,255,.3)}.border-teal-500\/40{border-color:rgba(100,210,255,.4)}.border-teal-500\/50{border-color:rgba(100,210,255,.5)}.border-teal-700{--tw-border-opacity:1;border-color:rgb(0 117 158/var(--tw-border-opacity,1))}.border-teal-700\/40{border-color:rgba(0,117,158,.4)}.border-teal-800{--tw-border-opacity:1;border-color:rgb(0 77 104/var(--tw-border-opacity,1))}.border-teal-800\/40{border-color:rgba(0,77,104,.4)}.border-white{--tw-border-opacity:1;border-color:rgb(245 245 247/var(--tw-border-opacity,1))}.border-white\/10{border-color:rgba(245,245,247,.1)}.\!bg-indigo-600{--tw-bg-opacity:1!important;background-color:rgb(0 96 223/var(--tw-bg-opacity,1))!important}.\!bg-teal-950{--tw-bg-opacity:1!important;background-color:rgb(0 23 31/var(--tw-bg-opacity,1))!important}.\!bg-teal-950\/40{background-color:rgba(0,23,31,.4)!important}.bg-amber-500{--tw-bg-opacity:1;background-color:rgb(255 159 10/var(--tw-bg-opacity,1))}.bg-amber-950{--tw-bg-opacity:1;background-color:rgb(29 17 0/var(--tw-bg-opacity,1))}.bg-amber-950\/10{background-color:rgba(29,17,0,.1)}.bg-amber-950\/20{background-color:rgba(29,17,0,.2)}.bg-amber-950\/30{background-color:rgba(29,17,0,.3)}.bg-emerald-600{--tw-bg-opacity:1;background-color:rgb(36 168 63/var(--tw-bg-opacity,1))}.bg-emerald-700{--tw-bg-opacity:1;background-color:rgb(27 122 46/var(--tw-bg-opacity,1))}.bg-emerald-950{--tw-bg-opacity:1;background-color:rgb(4 24 10/var(--tw-bg-opacity,1))}.bg-emerald-950\/10{background-color:rgba(4,24,10,.1)}.bg-emerald-950\/20{background-color:rgba(4,24,10,.2)}.bg-emerald-950\/35{background-color:rgba(4,24,10,.35)}.bg-emerald-950\/40{background-color:rgba(4,24,10,.4)}.bg-indigo-600{--tw-bg-opacity:1;background-color:rgb(0 96 223/var(--tw-bg-opacity,1))}.bg-indigo-950{--tw-bg-opacity:1;background-color:rgb(0 18 51/var(--tw-bg-opacity,1))}.bg-indigo-950\/10{background-color:rgba(0,18,51,.1)}.bg-indigo-950\/20{background-color:rgba(0,18,51,.2)}.bg-orange-700{--tw-bg-opacity:1;background-color:rgb(149 88 0/var(--tw-bg-opacity,1))}.bg-rose-950{--tw-bg-opacity:1;background-color:rgb(33 6 5/var(--tw-bg-opacity,1))}.bg-rose-950\/10{background-color:rgba(33,6,5,.1)}.bg-rose-950\/20{background-color:rgba(33,6,5,.2)}.bg-rose-950\/30{background-color:rgba(33,6,5,.3)}.bg-rose-950\/35{background-color:rgba(33,6,5,.35)}.bg-sky-950{--tw-bg-opacity:1;background-color:rgb(0 23 31/var(--tw-bg-opacity,1))}.bg-sky-950\/20{background-color:rgba(0,23,31,.2)}.bg-sky-950\/35{background-color:rgba(0,23,31,.35)}.bg-slate-700{--tw-bg-opacity:1;background-color:rgb(152 152 157/var(--tw-bg-opacity,1))}.bg-slate-800{--tw-bg-opacity:1;background-color:rgb(84 84 88/var(--tw-bg-opacity,1))}.bg-slate-800\/80{background-color:rgba(84,84,88,.8)}.bg-slate-900{--tw-bg-opacity:1;background-color:rgb(58 58 60/var(--tw-bg-opacity,1))}.bg-slate-900\/50{background-color:rgba(58,58,60,.5)}.bg-slate-900\/60{background-color:rgba(58,58,60,.6)}.bg-slate-950{--tw-bg-opacity:1;background-color:rgb(11 11 13/var(--tw-bg-opacity,1))}.bg-slate-950\/40{background-color:rgba(11,11,13,.4)}.bg-slate-950\/50{background-color:rgba(11,11,13,.5)}.bg-slate-950\/60{background-color:rgba(11,11,13,.6)}.bg-slate-950\/70{background-color:rgba(11,11,13,.7)}.bg-slate-950\/80{background-color:rgba(11,11,13,.8)}.bg-teal-600{--tw-bg-opacity:1;background-color:rgb(0 164 221/var(--tw-bg-opacity,1))}.bg-teal-700{--tw-bg-opacity:1;background-color:rgb(0 117 158/var(--tw-bg-opacity,1))}.bg-teal-950{--tw-bg-opacity:1;background-color:rgb(0 23 31/var(--tw-bg-opacity,1))}.bg-teal-950\/10{background-color:rgba(0,23,31,.1)}.bg-teal-950\/20{background-color:rgba(0,23,31,.2)}.bg-teal-950\/30{background-color:rgba(0,23,31,.3)}.bg-teal-950\/40{background-color:rgba(0,23,31,.4)}.p-2{padding:.5rem}.p-3{padding:.75rem}.p-4{padding:1rem}.p-5{padding:1.25rem}.p-6{padding:1.5rem}.p-8{padding:2rem}.px-2{padding-left:.5rem;padding-right:.5rem}.px-3{padding-left:.75rem;padding-right:.75rem}.px-4{padding-left:1rem;padding-right:1rem}.px-5{padding-left:1.25rem;padding-right:1.25rem}.py-1{padding-top:.25rem;padding-bottom:.25rem}.py-1\.5{padding-top:.375rem;padding-bottom:.375rem}.py-10{padding-top:2.5rem;padding-bottom:2.5rem}.py-2{padding-top:.5rem;padding-bottom:.5rem}.py-2\.5{padding-top:.625rem;padding-bottom:.625rem}.py-3{padding-top:.75rem;padding-bottom:.75rem}.py-6{padding-top:1.5rem;padding-bottom:1.5rem}.py-8{padding-top:2rem;padding-bottom:2rem}.pb-1{padding-bottom:.25rem}.pb-4{padding-bottom:1rem}.pb-8{padding-bottom:2rem}.pt-1{padding-top:.25rem}.pt-2{padding-top:.5rem}.pt-4{padding-top:1rem}.pt-5{padding-top:1.25rem}.text-left{text-align:left}.text-center{text-align:center}.text-right{text-align:right}.align-middle{vertical-align:middle}.font-mono{font-family:SF Mono,ui-monospace,Cascadia Mono,Segoe UI Mono,Consolas,monospace}.text-2xl{font-size:1.6rem;line-height:2.05rem}.text-3xl{font-size:1.95rem;line-height:2.3rem}.text-\[10px\]{font-size:10px}.text-\[11px\]{font-size:11px}.text-base{font-size:1rem;line-height:1.65rem}.text-lg{font-size:1.125rem;line-height:1.65rem}.text-sm{font-size:.9375rem;line-height:1.5rem}.text-xl{font-size:1.3125rem;line-height:1.8rem}.text-xs{font-size:.8125rem;line-height:1.35rem}.font-bold{font-weight:700}.font-extrabold{font-weight:800}.font-normal{font-weight:400}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.normal-case{text-transform:none}.italic{font-style:italic}.tabular-nums{--tw-numeric-spacing:tabular-nums;font-variant-numeric:var(--tw-ordinal) var(--tw-slashed-zero) var(--tw-numeric-figure) var(--tw-numeric-spacing) var(--tw-numeric-fraction)}.leading-relaxed{line-height:1.625}.leading-snug{line-height:1.375}.leading-tight{line-height:1.25}.tracking-wide{letter-spacing:.025em}.tracking-wider{letter-spacing:.05em}.tracking-widest{letter-spacing:.1em}.text-amber-200{--tw-text-opacity:1;color:rgb(255 214 168/var(--tw-text-opacity,1))}.text-amber-200\/80{color:rgba(255,214,168,.8)}.text-amber-200\/90{color:rgba(255,214,168,.9)}.text-amber-300{--tw-text-opacity:1;color:rgb(255 188 122/var(--tw-text-opacity,1))}.text-amber-300\/90{color:rgba(255,188,122,.9)}.text-cyan-200{--tw-text-opacity:1;color:rgb(174 228 255/var(--tw-text-opacity,1))}.text-emerald-100{--tw-text-opacity:1;color:rgb(217 242 225/var(--tw-text-opacity,1))}.text-emerald-200{--tw-text-opacity:1;color:rgb(168 230 189/var(--tw-text-opacity,1))}.text-emerald-200\/90{color:rgba(168,230,189,.9)}.text-emerald-200\/95{color:rgba(168,230,189,.95)}.text-emerald-300{--tw-text-opacity:1;color:rgb(108 224 143/var(--tw-text-opacity,1))}.text-emerald-300\/90{color:rgba(108,224,143,.9)}.text-emerald-400{--tw-text-opacity:1;color:rgb(76 212 111/var(--tw-text-opacity,1))}.text-indigo-200{--tw-text-opacity:1;color:rgb(191 220 255/var(--tw-text-opacity,1))}.text-indigo-300{--tw-text-opacity:1;color:rgb(115 177 255/var(--tw-text-opacity,1))}.text-orange-300{--tw-text-opacity:1;color:rgb(255 188 122/var(--tw-text-opacity,1))}.text-rose-100{--tw-text-opacity:1;color:rgb(255 220 217/var(--tw-text-opacity,1))}.text-rose-200{--tw-text-opacity:1;color:rgb(255 182 177/var(--tw-text-opacity,1))}.text-rose-200\/95{color:hsla(4,100%,85%,.95)}.text-rose-300{--tw-text-opacity:1;color:rgb(255 139 133/var(--tw-text-opacity,1))}.text-rose-300\/90{color:hsla(3,100%,76%,.9)}.text-rose-400{--tw-text-opacity:1;color:rgb(255 96 88/var(--tw-text-opacity,1))}.text-sky-200{--tw-text-opacity:1;color:rgb(174 228 255/var(--tw-text-opacity,1))}.text-sky-200\/95{color:rgba(174,228,255,.95)}.text-sky-300{--tw-text-opacity:1;color:rgb(131 214 255/var(--tw-text-opacity,1))}.text-slate-100{--tw-text-opacity:1;color:rgb(245 245 247/var(--tw-text-opacity,1))}.text-slate-200{--tw-text-opacity:1;color:rgb(229 229 234/var(--tw-text-opacity,1))}.text-slate-300{--tw-text-opacity:1;color:rgb(209 209 214/var(--tw-text-opacity,1))}.text-slate-400{--tw-text-opacity:1;color:rgb(199 199 204/var(--tw-text-opacity,1))}.text-slate-500{--tw-text-opacity:1;color:rgb(174 174 178/var(--tw-text-opacity,1))}.text-slate-600{--tw-text-opacity:1;color:rgb(161 161 166/var(--tw-text-opacity,1))}.text-slate-900{--tw-text-opacity:1;color:rgb(58 58 60/var(--tw-text-opacity,1))}.text-teal-100{--tw-text-opacity:1;color:rgb(217 242 255/var(--tw-text-opacity,1))}.text-teal-100\/90{color:rgba(217,242,255,.9)}.text-teal-200{--tw-text-opacity:1;color:rgb(174 228 255/var(--tw-text-opacity,1))}.text-teal-200\/80{color:rgba(174,228,255,.8)}.text-teal-300{--tw-text-opacity:1;color:rgb(131 214 255/var(--tw-text-opacity,1))}.text-teal-400{--tw-text-opacity:1;color:rgb(108 210 255/var(--tw-text-opacity,1))}.text-violet-300{--tw-text-opacity:1;color:rgb(212 155 255/var(--tw-text-opacity,1))}.text-white{--tw-text-opacity:1;color:rgb(245 245 247/var(--tw-text-opacity,1))}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.accent-teal-400{accent-color:#6cd2ff}.opacity-70{opacity:.7}.opacity-80{opacity:.8}.shadow{--tw-shadow:0 8px 24px rgba(0,0,0,.45);--tw-shadow-colored:0 8px 24px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}.outline-none{outline:2px solid transparent;outline-offset:2px}.outline{outline-style:solid}.ring-1{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color)}.ring-1,.ring-2{box-shadow:var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow,0 0 #0000)}.ring-2{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color)}.ring-teal-400{--tw-ring-opacity:1;--tw-ring-color:rgb(108 210 255/var(--tw-ring-opacity,1))}.ring-teal-400\/50{--tw-ring-color:rgba(108,210,255,.5)}.blur{--tw-blur:blur(8px)}.blur,.invert{filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.invert{--tw-invert:invert(100%)}.filter{filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.transition{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,-webkit-backdrop-filter;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter,-webkit-backdrop-filter;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.hover\:border-teal-400:hover{--tw-border-opacity:1;border-color:rgb(108 210 255/var(--tw-border-opacity,1))}.hover\:bg-amber-400:hover{--tw-bg-opacity:1;background-color:rgb(255 161 74/var(--tw-bg-opacity,1))}.hover\:bg-emerald-500:hover{--tw-bg-opacity:1;background-color:rgb(48 209 88/var(--tw-bg-opacity,1))}.hover\:bg-emerald-600:hover{--tw-bg-opacity:1;background-color:rgb(36 168 63/var(--tw-bg-opacity,1))}.hover\:bg-indigo-500:hover{--tw-bg-opacity:1;background-color:rgb(10 132 255/var(--tw-bg-opacity,1))}.hover\:bg-orange-600:hover{--tw-bg-opacity:1;background-color:rgb(204 122 0/var(--tw-bg-opacity,1))}.hover\:bg-slate-600:hover{--tw-bg-opacity:1;background-color:rgb(161 161 166/var(--tw-bg-opacity,1))}.hover\:bg-slate-700:hover{--tw-bg-opacity:1;background-color:rgb(152 152 157/var(--tw-bg-opacity,1))}.hover\:bg-teal-500:hover{--tw-bg-opacity:1;background-color:rgb(100 210 255/var(--tw-bg-opacity,1))}.hover\:bg-teal-600:hover{--tw-bg-opacity:1;background-color:rgb(0 164 221/var(--tw-bg-opacity,1))}.focus\:border-teal-400:focus{--tw-border-opacity:1;border-color:rgb(108 210 255/var(--tw-border-opacity,1))}.disabled\:cursor-not-allowed:disabled{cursor:not-allowed}.disabled\:opacity-40:disabled{opacity:.4}@media (min-width:640px){.sm\:col-span-2{grid-column:span 2/span 2}.sm\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.sm\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.sm\:grid-cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}}@media (min-width:768px){.md\:col-span-2{grid-column:span 2/span 2}.md\:col-span-5{grid-column:span 5/span 5}.md\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.md\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.md\:grid-cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}.md\:grid-cols-5{grid-template-columns:repeat(5,minmax(0,1fr))}.md\:text-3xl{font-size:1.95rem;line-height:2.3rem}.md\:text-4xl{font-size:2.35rem;line-height:2.6rem}.md\:text-base{font-size:1rem;line-height:1.65rem}.md\:text-sm{font-size:.9375rem;line-height:1.5rem}}@media (min-width:1024px){.lg\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.lg\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.lg\:grid-cols-6{grid-template-columns:repeat(6,minmax(0,1fr))}}:root {color-scheme: dark;--ink:        #000000;--panel:      #1c1c1e;--panel-2:    #2c2c2e;--panel-3:    #3a3a3c;--hairline:   rgba(84, 84, 88, .65);--hairline-2: rgba(84, 84, 88, .42);--label:      #f5f5f7;--label-2:    #a1a1a6;--label-3:    #6e6e73;--action:     #0a84ff;--action-hi:  #409cff;--action-dim: rgba(10, 132, 255, .14);--locked:     #ff9f0a;--locked-dim: rgba(255, 159, 10, .13);--correct:    #30d158;--correct-dim:rgba(48, 209, 88, .13);--wrong:      #ff453f;--wrong-dim:  rgba(255, 69, 63, .12);--font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display","Segoe UI Variable Text", "Segoe UI", system-ui, "Helvetica Neue", sans-serif;--font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display","Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif;--font-mono: "SF Mono", ui-monospace, "Cascadia Mono", "Segoe UI Mono", Consolas, monospace;--r-sm: 8px;--r-md: 12px;--r-lg: 18px;--r-xl: 24px;--ease-out:   cubic-bezier(.25, .1, .25, 1);--ease-spring:cubic-bezier(.32, .72, 0, 1);--dur-1: .18s;--dur-2: .32s;--dur-3: .55s;--shadow-1: 0 1px 2px rgba(0,0,0,.4);--shadow-2: 0 8px 24px rgba(0,0,0,.45);--shadow-3: 0 20px 60px rgba(0,0,0,.55);--gut: clamp(1rem, 4vw, 2rem);}*, *::before, *::after { box-sizing: border-box; }html {-webkit-text-size-adjust: 100%;text-size-adjust: 100%;scroll-behavior: smooth;scroll-padding-top: 5rem;}body {margin: 0;font-family: var(--font-sans);background: var(--ink);color: var(--label);min-height: 100dvh;-webkit-font-smoothing: antialiased;letter-spacing: 0;}body::before {content: "";position: fixed;inset: -20% -10% auto -10%;height: 60vh;background: radial-gradient(60% 100% at 50% 0%, rgba(10,132,255,.09), transparent 70%);pointer-events: none;z-index: 0;}main, body > div:first-of-type { position: relative; z-index: 1; }h1 { font-size: 1.9rem; }h2 { font-size: 1.35rem; }h3 { font-size: 1.125rem; }h4 { font-size: 1rem; }h1, h2, h3, h4 {font-family: var(--font-display);font-weight: 700;letter-spacing: -.003em;text-wrap: balance;}p { text-wrap: pretty; }b, strong { font-weight: 600; color: var(--label); }sub, sup { font-size: .8em; line-height: 0; }a { color: var(--action-hi); text-decoration: none; }::selection { background: rgba(10,132,255,.32); }:focus-visible {outline: 2px solid var(--action-hi);outline-offset: 2px;border-radius: 4px;}[class*="text-[10px]"], [class*="text-[11px]"] { font-size: .8125rem; }body {padding-top: env(safe-area-inset-top);padding-bottom: calc(var(--next-bar-h, 0px) + env(safe-area-inset-bottom));}.glass, .panel, .shell, .ro-card, .eqcard, .control-card, .guide-card,.method-card, .progress-card, .mixer-card, .heq-card, .map-box {background: var(--panel);border: 1px solid var(--hairline-2);border-radius: var(--r-lg);}.glass, .panel, .shell { box-shadow: var(--shadow-2); }header.glass { padding: clamp(1.1rem, 3vw, 1.75rem); }#hdr-title, .app-title {font-family: var(--font-display);font-weight: 700;font-size: clamp(1.5rem, 1.2rem + 1.1vw, 2.1rem);line-height: 1.15;letter-spacing: -.015em;}#hdr-sub, .app-subtitle { color: var(--label-2); font-size: 1rem; margin-top: .35rem; }.chip, .chip-dim, .chip-dse, .chip-warn, .ms-chip, .assume-chip, .badge,.dock-step, .dock-state, .ladder-tag, .section-kicker {display: inline-flex;align-items: center;gap: .3rem;padding: .2rem .6rem;border-radius: 999px;border: 1px solid var(--hairline);background: rgba(255,255,255,.05);color: var(--label-2);font-size: .75rem;font-weight: 600;letter-spacing: .01em;line-height: 1.5;}.chip, .chip-dim, .chip-dse, .chip-warn, .ms-chip, .assume-chip, .badge {max-width: 100%;align-self: flex-start;}.chip-dse, .chip:not(.chip-dim):not(.chip-warn) {border-color: rgba(10,132,255,.34);background: var(--action-dim);color: var(--action-hi);}.chip-dim, .assume-off { color: var(--label-3); background: rgba(255,255,255,.04); }.chip-warn { border-color: rgba(255,159,10,.38); background: var(--locked-dim); color: var(--locked); }.badge.ox  { border-color: rgba(255,159,10,.4); background: var(--locked-dim); color: var(--locked); }.badge.red { border-color: rgba(10,132,255,.4); background: var(--action-dim); color: var(--action-hi); }.section-kicker {background: none; border: 0; padding: 0;color: var(--label-3);font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;}.section-title { font-size: 1.35rem; }.section-lead  { color: var(--label-2); font-size: 1rem; line-height: 1.6; }#main-tabs, .main-tabs {display: flex;flex-wrap: nowrap;gap: .375rem;overflow-x: auto;scroll-snap-type: x proximity;scrollbar-width: none;-webkit-overflow-scrolling: touch;padding-block: .25rem;-webkit-mask-image: linear-gradient(90deg, transparent, #000 1.25rem, #000 calc(100% - 1.25rem), transparent);mask-image: linear-gradient(90deg, transparent, #000 1.25rem, #000 calc(100% - 1.25rem), transparent);}#main-tabs::-webkit-scrollbar, .main-tabs::-webkit-scrollbar { display: none; }.tab-btn, .view-btn, .mode-btn, .sim-mode-btn, .mbtn, .rbtn, .probe-btn,.pol-btn, .rp-btn, .ctrl-btn, .samp-btn, .sp-btn, .drill-btn, .sim-btn,.sub-btn, .mini-btn, .act-btn, .hint-btn, .btn, .btn-ghost, .btn-teal,.btn-primary, .route-btn, .guide-toggle, #next-go, .btn-run {font-family: inherit;font-size: .9375rem;font-weight: 600;color: var(--label);background: var(--panel-2);border: 1px solid transparent;border-radius: var(--r-md);padding: .55rem .95rem;cursor: pointer;display: inline-flex;align-items: center;gap: .45rem;flex: 0 1 auto;scroll-snap-align: center;transition: background var(--dur-1) var(--ease-out), color var(--dur-1) var(--ease-out),border-color var(--dur-1) var(--ease-out), transform var(--dur-1) var(--ease-spring);-webkit-tap-highlight-color: transparent;}.tab-btn { white-space: nowrap; flex: 0 0 auto; }.tab-btn { color: var(--label-2); background: transparent; }.tab-btn:hover { color: var(--label); background: rgba(255,255,255,.06); }.tab-btn.active {color: var(--label);background: var(--panel-2);box-shadow: var(--shadow-1), inset 0 1px 0 rgba(255,255,255,.07);}button:hover:not(:disabled) { background: var(--panel-3); }button:active:not(:disabled) { transform: scale(.97); }button:disabled, [aria-disabled="true"] { opacity: .38; cursor: not-allowed; }.btn-primary, .btn-run { background: var(--action); color: #fff; }.btn-primary:hover:not(:disabled), .btn-run:hover:not(:disabled) { background: var(--action-hi); }.sp-btn.on, .samp-btn.sel, .sub-btn.on, .mini-btn.on, .mode-btn.active,.mbtn.active, .rbtn.active, .drill-btn.on, .route-btn.on, .map-box.on,.view-btn.on, .pol-btn.on {background: var(--action-dim);border-color: rgba(10,132,255,.45);color: var(--action-hi);}.tab-panel { display: none; }.tab-panel.active {display: block;animation: panel-in var(--dur-3) var(--ease-spring) both;}@keyframes panel-in {from { opacity: 0; transform: translateY(10px) scale(.994); }to   { opacity: 1; transform: none; }}.dock {position: relative;border: 1px solid var(--hairline);border-radius: var(--r-lg);background: var(--panel);padding: clamp(.9rem, 2.5vw, 1.15rem);overflow: hidden;transition: border-color var(--dur-2) var(--ease-out), box-shadow var(--dur-2) var(--ease-out);}.dock::before {content: "";position: absolute;inset: 0 auto 0 0;width: 3px;background: var(--label-3);transition: background var(--dur-2) var(--ease-out);}.dock.locked   { border-color: rgba(255,159,10,.38); }.dock.locked::before   { background: var(--locked); }.dock.unlocked { border-color: rgba(48,209,88,.4); }.dock.unlocked::before { background: var(--correct); }.dock-head { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; }.dock-step {background: rgba(255,255,255,.06);border-color: var(--hairline);color: var(--label-2);font-size: .75rem;letter-spacing: .04em;text-transform: uppercase;border-radius: var(--r-sm);}.dock-state { margin-left: auto; font-weight: 700; }.st-lock { background: var(--locked-dim); border-color: rgba(255,159,10,.4); color: var(--locked); }.st-open { background: var(--correct-dim); border-color: rgba(48,209,88,.4);  color: var(--correct); }.dock-why, #dock-locknote { color: var(--label-2); font-size: .9375rem; line-height: 1.55; }@keyframes dock-unlock {0%   { box-shadow: 0 0 0 0 rgba(48,209,88,.55); }70%  { box-shadow: 0 0 0 10px rgba(48,209,88,0); }100% { box-shadow: 0 0 0 0 rgba(48,209,88,0); }}.dock.just-unlocked { animation: dock-unlock .7s var(--ease-out) 1; }@keyframes tick-in { from { opacity: 0; transform: scale(.4); } to { opacity: 1; transform: scale(1); } }.dock.just-unlocked .st-open { animation: tick-in .35s var(--ease-spring) both; }.pr-opt, .pred-opt {display: block;width: 100%;text-align: left;background: var(--panel-2);border: 1px solid var(--hairline-2);border-radius: var(--r-md);padding: .7rem .85rem;font-size: .9375rem;color: var(--label);cursor: pointer;white-space: normal;transition: border-color var(--dur-1) var(--ease-out), background var(--dur-1) var(--ease-out),transform var(--dur-1) var(--ease-spring);}.pr-opt:hover:not(:disabled), .pred-opt:hover:not(:disabled) { border-color: rgba(10,132,255,.5); background: var(--panel-3); }.pr-opt:active:not(:disabled), .pred-opt:active:not(:disabled) { transform: scale(.99); }.pr-opt.picked, .pred-opt.picked { border-color: var(--action); background: var(--action-dim); color: var(--label); }.pr-opt.correct, .pred-opt.correct, .route-btn.right, .mcq-opt.correct {border-color: rgba(48,209,88,.65);background: var(--correct-dim);}.pr-opt.wrong, .pred-opt.wrong, .route-btn.bad, .mcq-opt.wrong {border-color: rgba(255,69,63,.55);background: var(--wrong-dim);}.pred-opt:disabled { cursor: not-allowed; opacity: .45; }#next-bar {position: sticky;bottom: 0;z-index: 40;padding: .45rem var(--gut) max(.45rem, env(safe-area-inset-bottom));}#next-bar > .glass {max-width: 76rem;margin-inline: auto;display: flex;align-items: center;gap: .6rem;flex-wrap: wrap;padding: .4rem .4rem .4rem .85rem;border-radius: var(--r-lg);background: rgba(28,28,30,.82);border: 1px solid var(--hairline);box-shadow: var(--shadow-2);-webkit-backdrop-filter: saturate(180%) blur(20px);backdrop-filter: saturate(180%) blur(20px);}#next-text, .next-copy, #next-bar #next-text {color: var(--label);font-size: .9375rem;min-width: 0;flex: 1 1 15rem;}#next-go {flex: 0 0 auto;background: var(--action);color: #fff;border: 0;padding: .5rem .85rem;font-size: .875rem;}#next-go:hover:not(:disabled) { background: var(--action-hi); }.ico { width: 1.05em; height: 1.05em; flex: 0 0 auto; vertical-align: -.18em; }.canvas-wrap {position: relative;width: 100%;min-height: 0;background: var(--panel);border: 1px solid var(--hairline-2);border-radius: var(--r-lg);overflow: hidden;}.canvas-wrap canvas {position: static;display: block;width: 100%;height: auto;border-radius: 0;}.ro-k, .ro-l, .lbl, .map-lab, .field-l, .progress-label {color: var(--label-3);font-size: .75rem;font-weight: 700;letter-spacing: .05em;text-transform: uppercase;}.ro-v, .map-val, .stat, .mixer-readout { color: var(--label); font-variant-numeric: tabular-nums; }.ro-card, .map-box, .control-card {border: 1px solid var(--hairline-2);background: var(--panel-2);border-radius: var(--r-md);}.bar-track, .progress-track { background: var(--panel-3); border-radius: 999px; overflow: hidden; }.bar-fill, .progress-fill { background: var(--action); transition: width var(--dur-3) var(--ease-spring); }.work, .eqbox, .kbd, .eqline, code, pre { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }.work {background: var(--ink);border: 1px solid var(--hairline-2);border-radius: var(--r-md);color: var(--label-2);font-size: .9375rem;line-height: 1.7;padding: .9rem 1rem;overflow-x: auto;}.work .hl { color: var(--action-hi); }.work .dim { color: var(--label-3); }.step-h {color: var(--action-hi);font-size: .8125rem;font-weight: 700;letter-spacing: .05em;text-transform: uppercase;}input[type="text"], input[type="number"], input[type="search"], select, textarea,.field, .field-i, .calc-inp {width: 100%;font-family: inherit;font-size: 1rem;color: var(--label);background: var(--panel-2);border: 1px solid var(--hairline);border-radius: var(--r-md);padding: .55rem .7rem;transition: border-color var(--dur-1) var(--ease-out), background var(--dur-1) var(--ease-out);-webkit-appearance: none;appearance: none;}input:focus, select:focus, textarea:focus { outline: none; border-color: var(--action); background: var(--panel); }select {background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23a1a1a6' d='M1.4 0 6 4.6 10.6 0 12 1.4 6 8 0 1.4z'/%3E%3C/svg%3E");background-repeat: no-repeat;background-position: right .65rem center;padding-right: 1.9rem;}label, .calc-lbl, .field-l {color: var(--label-2); font-size: .8125rem; font-weight: 600; letter-spacing: 0; text-transform: none;}input[type="range"] {-webkit-appearance: none; appearance: none;width: 100%; height: 28px; background: transparent; cursor: pointer;accent-color: var(--action);}input[type="range"]::-webkit-slider-runnable-track { height: 4px; border-radius: 999px; background: var(--panel-3); }input[type="range"]::-webkit-slider-thumb {-webkit-appearance: none; appearance: none;width: 24px; height: 24px; margin-top: -10px;border-radius: 50%; background: #fff; border: 0;box-shadow: 0 1px 4px rgba(0,0,0,.5);transition: transform var(--dur-1) var(--ease-spring);}input[type="range"]:active::-webkit-slider-thumb { transform: scale(1.12); }input[type="range"]::-moz-range-track { height: 4px; border-radius: 999px; background: var(--panel-3); }input[type="range"]::-moz-range-thumb { width: 22px; height: 22px; border: 0; border-radius: 50%; background: #fff; }input[type="checkbox"], input[type="radio"] { width: 1.1rem; height: 1.1rem; accent-color: var(--action); }.mcq-opt, .myth-card, .ms-point, .evidence-grid > *, .concept-grid > *, .guide-card {border: 1px solid var(--hairline-2);border-radius: var(--r-md);background: var(--panel-2);}.mcq-opt { padding: .75rem .9rem; font-size: .9375rem; cursor: pointer; }.mcq-opt:hover { border-color: rgba(10,132,255,.5); }.myth-card { cursor: pointer; transition: border-color var(--dur-2) var(--ease-out); }.myth-card:hover { border-color: rgba(10,132,255,.45); }.myth-back { display: none; }.myth-card.flipped .myth-front { display: none; }.myth-card.flipped .myth-back { display: block; animation: flip-in var(--dur-2) var(--ease-spring) both; }@keyframes flip-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }.tag-w { background: var(--correct-dim); border-color: rgba(48,209,88,.4); color: var(--correct); }.tag-c { background: var(--locked-dim);  border-color: rgba(255,159,10,.4);  color: var(--locked); }.tag-i { background: var(--wrong-dim);   border-color: rgba(255,69,63,.4);   color: var(--wrong); }.hint-btn { border-color: rgba(255,159,10,.35); background: var(--locked-dim); color: var(--locked); font-size: .8125rem; }.fail-box { border-left: 3px solid var(--wrong); background: var(--wrong-dim); border-radius: var(--r-md); padding: .7rem .9rem; }table, .datatbl { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }th, td { padding: .55rem .7rem; text-align: left; border-bottom: 1px solid var(--hairline-2); font-size: .9375rem; }th { color: var(--label-3); font-size: .75rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; }tbody tr:last-child > td { border-bottom: 0; }tbody tr { transition: background var(--dur-1) var(--ease-out); }tbody tr:hover { background: rgba(255,255,255,.04); }.lab-card {display: block;border: 1px solid var(--hairline-2);border-radius: var(--r-lg);background: var(--panel);color: var(--label);transition: transform var(--dur-2) var(--ease-spring), border-color var(--dur-2) var(--ease-out),box-shadow var(--dur-2) var(--ease-out);}.lab-card:hover { transform: translateY(-3px); border-color: rgba(10,132,255,.5); box-shadow: var(--shadow-3); }.lab-card:active { transform: translateY(-1px) scale(.995); }.reveal { opacity: 0; transform: translateY(14px); }.reveal.shown {opacity: 1; transform: none;transition: opacity var(--dur-3) var(--ease-out), transform var(--dur-3) var(--ease-spring);transition-delay: calc(var(--i, 0) * 45ms);}@media (pointer: coarse) {button, summary, [role="button"], .tab-btn, .pr-opt, .pred-opt, .mcq-opt,.myth-card, .lab-card, select, .field, .field-i, .calc-inp, .ans,input:not([type="checkbox"]):not([type="radio"]):not([type="range"]) { min-height: 44px !important; }input[type="checkbox"], input[type="radio"] { min-width: 28px !important; min-height: 28px !important; }label:has(> input[type="checkbox"]), label:has(> input[type="radio"]),.ms-point { min-height: 44px; display: flex; align-items: center; }.pr-opt, .pred-opt, .mcq-opt { display: flex; align-items: center; }li:has(> input[type="checkbox"]), li:has(> input[type="radio"]),li:has(.goal-check), li:has(.mloss) {cursor: pointer;min-height: 44px;display: flex;align-items: flex-start;padding-block: .3rem;}}@media (max-width: 640px) {.chip, .chip-dim, .chip-dse, .chip-warn, .badge, .dock-step, .dock-state, .ladder-tag {padding: .1rem .45rem;}#hdr-sub, .app-subtitle { font-size: .9375rem; line-height: 1.5; }#next-bar > .glass > span:first-child { display: none; }header.glass { gap: .6rem; }}@media (max-width: 768px) {.flex { flex-wrap: wrap; }}@media (min-width: 1024px) {:root { --gut: 2rem; }#main-tabs, .main-tabs {gap: .25rem;background: var(--panel-2);border-radius: var(--r-md);padding: .25rem;margin-inline: 0;overflow: visible;width: fit-content;-webkit-mask-image: none;mask-image: none;}.tab-btn { border-radius: var(--r-sm); }}:root {--bg: #000000;--bg-2: #0b0b0d;--panel: #1c1c1e;--panel-2: #2c2c2e;--panel-3: #37373a;--line: rgba(84, 84, 88, .42);--line-strong: rgba(84, 84, 88, .65);--text: #f5f5f7;--muted: #a1a1a6;--faint: #6e6e73;--teal: #64d2ff;--blue: #0a84ff;--amber: #ff9f0a;--rose: #ff453f;--green: #30d158;--radius: 12px;--shadow: 0 8px 24px rgba(0,0,0,.45);}@media (prefers-reduced-motion: reduce) {html { scroll-behavior: auto; }*, *::before, *::after {animation-duration: .001ms !important;animation-iteration-count: 1 !important;transition-duration: .001ms !important;}.reveal { opacity: 1; transform: none; }}@media print {html, body { background: #fff !important; color: #111 !important; }body::before { display: none; }* {color: #111 !important;background-image: none !important;box-shadow: none !important;-webkit-backdrop-filter: none !important;backdrop-filter: none !important;}.glass, .panel, .shell, .dock, .canvas-wrap, .ro-card, .mcq-opt, .myth-card,.lab-card, .btn, button, table, th, td { border-color: #c7c7cc !important; background-color: #fff !important; }.tab-panel { display: block !important; break-inside: avoid; }#next-bar, #btn-teacher, #pr-reveal, #pr-why, .hint-btn { display: none !important; }.reveal { opacity: 1 !important; transform: none !important; }.myth-back { display: block !important; }.myth-front { display: none !important; }}</style>
+</head>
+<body class="text-slate-200">
+<div class="max-w-6xl mx-auto px-4 py-6">
+
+  <!-- ============ HEADER ============ -->
+  <header class="glass p-5 mb-5 flex flex-wrap items-start justify-between gap-3">
+    <div>
+      <div class="flex items-center gap-2 flex-wrap mb-1">
+        <span class="chip">HKDSE Chemistry</span>
+        <span class="chip">Topic VII (e)</span>
+        <span class="chip">+ Topic I (a) tests for gases</span>
+        <span class="chip">redox by experiment</span>
+</div>
+      <h1 id="hdr-title" class="text-2xl md:text-3xl font-extrabold text-white leading-tight">Interactive Lab</h1>
+      <p id="hdr-sub" class="text-sm text-slate-400 mt-1">Subtitle</p>
+    </div>
+    <button type="button" id="btn-teacher" onclick="toggleTeacher()" class="btn btn-ghost"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg><span>Teacher notes</span></button>
+  </header>
+  <div id="teacher-panel" class="glass p-5 mb-5 hidden">
+    <h2 id="teacher-title" class="font-bold text-amber-300 mb-2">Teacher notes</h2>
+    <div id="teacher-content" class="text-sm text-slate-300 space-y-2 leading-relaxed"></div>
+    <div class="grid sm:grid-cols-3 gap-3 mt-4">
+      <div class="myth-card glass rounded-xl p-4" onclick="this.classList.toggle('flipped')">
+        <div class="myth-front"><span class="text-xs font-bold text-rose-400 uppercase">Myth?</span><p class="text-sm text-slate-200 mt-2">Electrons flow through the water from anode to cathode.</p></div>
+        <div class="myth-back"><span class="text-xs font-bold text-emerald-400 uppercase">Fact</span><p class="text-sm text-slate-200 mt-2">Electrons travel only in the metal wires and electrodes. In solution the charge is carried by IONS: H⁺ migrates to the cathode, SO₄²⁻/OH⁻ to the anode. (Switch on both overlays in the sim and watch.)</p></div>
+      </div>
+      <div class="myth-card glass rounded-xl p-4" onclick="this.classList.toggle('flipped')">
+        <div class="myth-front"><span class="text-xs font-bold text-rose-400 uppercase">Myth?</span><p class="text-sm text-slate-200 mt-2">Because water is H₂O, the gases must come off 1 : 1.</p></div>
+        <div class="myth-back"><span class="text-xs font-bold text-emerald-400 uppercase">Fact</span><p class="text-sm text-slate-200 mt-2">The formula is not the stoichiometry of discharge. Balancing electrons across the two half-equations gives 2H₂O(l) → 2H₂(g) + O₂(g): a 2 : 1 volume ratio, not 1 : 1.</p></div>
+      </div>
+      <div class="myth-card glass rounded-xl p-4" onclick="this.classList.toggle('flipped')">
+        <div class="myth-front"><span class="text-xs font-bold text-rose-400 uppercase">Myth?</span><p class="text-sm text-slate-200 mt-2">The sulfuric acid is used up as electrolysis proceeds.</p></div>
+        <div class="myth-back"><span class="text-xs font-bold text-emerald-400 uppercase">Fact</span><p class="text-sm text-slate-200 mt-2">The H⁺ discharged at the cathode is fully regenerated at the anode — the acid is a spectator electrolyte. Only water is consumed, so the acid slowly becomes more concentrated.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ TABS ============ -->
+  <nav id="main-tabs" class="flex flex-wrap gap-2 mb-5">
+    <button type="button" id="tab-intro" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold border border-slate-700 bg-slate-900/60" data-tab="intro" onclick="setTab('intro')">1 · Introduction</button>
+    <button type="button" id="tab-sim"   class="tab-btn active px-4 py-2 rounded-xl text-sm font-semibold border border-slate-700 bg-slate-900/60" data-tab="sim"   onclick="setTab('sim')">2 · Simulation</button>
+    <button type="button" id="tab-calc"  class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold border border-slate-700 bg-slate-900/60" data-tab="calc"  onclick="setTab('calc')">3 · Calculations</button>
+    <button type="button" id="tab-mcq"   class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold border border-slate-700 bg-slate-900/60" data-tab="mcq"   onclick="setTab('mcq')">4 · Past-paper practice</button>
+    <button type="button" id="tab-recap" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold border border-slate-700 bg-slate-900/60" data-tab="recap" onclick="setTab('recap')">5 · Recap &amp; misconceptions</button>
+  </nav>
+
+  <!-- ============ PANEL: INTRODUCTION ============ -->
+  <section id="panel-intro" class="tab-panel mb-5">
+    <div class="glass p-6 space-y-5">
+      <h2 id="intro-h1" class="text-xl font-bold text-white"></h2>
+      <p id="intro-lead" class="text-sm md:text-base text-slate-300 leading-relaxed"></p>
+      <div id="intro-cards" class="grid md:grid-cols-2 gap-3"></div>
+    </div>
+  </section>
+
+  <!-- ============ PANEL: SIMULATION ============ -->
+  <section id="panel-sim" class="tab-panel active mb-5">
+      <div id="sim-dock" class="dock locked mb-3" aria-live="polite">
+        <div class="dock-head mb-2">
+          <span class="dock-step">Task 1</span>
+          <span class="text-sm font-bold text-white" id="dock-title">Predict before you switch on</span>
+          <span class="dock-state st-lock" id="dock-state">Locked</span>
+        </div>
+        <p class="text-xs text-slate-300 mb-2">Commit to an answer and the apparatus controls below will unlock — then run the procedure and see whether you were right.</p>
+        <p id="pr-q" class="text-sm font-semibold text-slate-100 leading-relaxed"></p>
+        <div id="pr-opts" class="flex flex-wrap gap-2 mt-3"></div>
+        <button type="button" id="pr-reveal" class="act-btn mt-3">Reveal · mark-scheme answer</button>
+        <p id="pr-why" class="hidden mt-3 text-xs text-emerald-200/95 bg-emerald-950/35 border border-emerald-800/40 rounded-xl p-3 leading-relaxed"></p>
+        <p class="text-xs text-amber-200 mt-2" id="dock-locknote">Locked — answer the prediction above correctly to unlock the apparatus controls.</p>
+      </div>
+    <div class="glass p-5">
+      <div class="flex flex-wrap gap-2 mb-3" id="sim-modes"></div>
+      <div class="canvas-wrap rounded-xl border border-slate-700/70 bg-slate-950/70"><canvas id="sim-canvas" aria-label="Electrolysis of water apparatus: trough of acidified water, two electrodes with inverted measuring tubes, DC supply, ammeter and switch. Bubbles grow and gas volumes are measured."></canvas></div>
+      <p id="sim-caption" class="text-xs text-slate-400 mt-3 leading-relaxed"></p>
+      <div id="sim-readouts" class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-4"></div>
+    </div>
+
+    <div class="glass p-5 mt-4">
+      <h3 class="font-bold text-white mb-1">Guided journey — follow the steps in order</h3>
+      <div class="flex flex-wrap gap-2 mb-3" id="guide-chips"></div>
+      <p id="guide-text" class="text-sm text-slate-300 leading-relaxed"></p>
+      <div id="guide-actions" class="flex flex-wrap gap-2 mt-3"></div>
+      <p id="guide-feedback" class="text-xs mt-3 leading-relaxed hidden"></p>
+    </div>
+
+    <div class="glass p-5 mt-4">
+      <h3 class="font-bold text-white mb-1">Controls</h3>
+      <div id="ctrl-panel" class="grid md:grid-cols-2 gap-x-8 gap-y-4"></div>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-3 mt-4">
+      <div id="heq-cathode" class="heq-card glass rounded-xl p-4 locked"></div>
+      <div id="heq-anode" class="heq-card glass rounded-xl p-4 locked"></div>
+      <div id="heq-overall" class="heq-card glass rounded-xl p-4 locked"></div>
+    </div>
+
+    <div class="glass p-5 mt-4">
+      <h3 class="font-bold text-white mb-2">Observations — what you would record in the real lab</h3>
+      <ul id="obs-list" class="text-sm text-slate-300 space-y-1 list-disc list-inside"></ul>
+    </div>
+
+    <div class="glass p-5 mt-4">
+      <div class="dock-head mb-2"><span class="dock-step">Task 2</span><span class="text-sm font-bold text-white">Break it on purpose</span></div>
+      <p class="text-xs text-slate-400 mb-3">Three classic wrong moves. Tap each one and see exactly why the mark scheme gives 0.</p>
+      <div class="flex flex-wrap gap-2">
+        <button type="button" class="act-btn" data-fail="a">Test the cathode gas with a glowing splint</button>
+        <button type="button" class="act-btn" data-fail="b">Electrolyse brine instead of acidified water</button>
+        <button type="button" class="act-btn" data-fail="c">Quote the first reading as exactly 2 : 1</button>
+        <button type="button" class="act-btn" id="fail-clear">Clear</button>
+      </div>
+      <div id="fail-panel" class="text-sm text-slate-300 mt-3"></div>
+    </div>
+
+    <div class="glass p-5 mt-4">
+      <div class="dock-head mb-2"><span class="dock-step">Task 3</span><span class="text-sm font-bold text-white">Explain the 2 : 1 volume ratio — the 3-mark chain</span></div>
+      <p class="text-xs text-slate-400 mb-3">Try writing the explanation first, then climb down the hint ladder as far as you need. Each rung is one mark.</p>
+      <div class="flex flex-wrap gap-2">
+        <button type="button" class="act-btn" data-hint="1">Hint 1</button>
+        <button type="button" class="act-btn" data-hint="2">Hint 2</button>
+        <button type="button" class="act-btn" data-hint="3">Hint 3</button>
+      </div>
+      <p id="hint-text" class="text-sm text-amber-200 mt-3"></p>
+    </div>
+  </section>
+
+  <!-- ============ PANEL: CALCULATIONS ============ -->
+  <section id="panel-calc" class="tab-panel mb-5">
+    <div class="glass p-6 space-y-5">
+      <h2 id="calc-title" class="text-xl font-bold text-white">Worked calculation</h2>
+      <p id="calc-sub" class="text-sm text-slate-400"></p>
+      <div id="calc-inputs" class="grid md:grid-cols-3 gap-4"></div>
+      <div class="flex flex-wrap gap-2">
+        <button type="button" class="px-4 py-2 rounded-xl text-sm font-semibold bg-indigo-600 hover:bg-indigo-500 text-white" onclick="runCalc()">Check working</button>
+        <button type="button" id="btn-import-sim" class="px-4 py-2 rounded-xl text-sm font-semibold bg-slate-700 hover:bg-slate-600 border border-slate-500 text-slate-200">⤓ Import volumes from the simulation</button>
+      </div>
+      <div id="calc-working" class="text-sm font-mono bg-slate-950/70 border border-slate-700/60 rounded-xl p-4 whitespace-pre-wrap text-slate-300 hidden"></div>
+    </div>
+  </section>
+
+  <!-- ============ PANEL: PAST PAPER MCQs ============ -->
+  <section id="panel-mcq" class="tab-panel mb-5">
+    <div class="glass p-6">
+      <h2 id="pp-title" class="text-xl font-bold text-white mb-1">Past-paper practice</h2>
+      <p id="pp-sub" class="text-xs text-slate-400 mb-5"></p>
+      <div id="pp-questions" class="space-y-6"></div>
+    </div>
+  </section>
+
+  <!-- ============ PANEL: RECAP + MISCONCEPTION CARDS ============ -->
+  <section id="panel-recap" class="tab-panel mb-5">
+    <div class="glass rounded-2xl p-6 space-y-6">
+      <div>
+        <h2 id="recap-title" class="text-xl font-bold text-white">Recap checklist</h2>
+        <p id="recap-sub" class="text-sm text-slate-400 mt-1 mb-3">Tick each goal only when you can explain it without notes.</p>
+        <ul id="recap-list" class="space-y-2"></ul>
+        <p id="recap-progress" class="text-xs text-slate-500 mt-3"></p>
+      </div>
+      <div class="border-t border-white/10 pt-5">
+        <h3 class="text-sm font-bold text-rose-300 uppercase tracking-wide mb-2" id="myth-title">Common misconceptions</h3>
+        <p class="text-xs text-slate-400 mb-4" id="myth-lead">Tap a card to flip.</p>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3" id="myth-cards"></div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="text-center text-xs text-slate-600 pb-8">HKDSE Chemistry · Topic VII (e) electrolysis · interactive lab · a context for half-equations, oxidation numbers and ionic conduction</footer>
+</div>
+
+<div id="next-bar" class="max-w-6xl mx-auto px-5 pb-4">
+  <div class="glass rounded-xl px-4 py-2 flex flex-wrap items-center gap-3 text-sm">
+    <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Next step</span>
+    <span id="next-text" class="text-slate-200 font-semibold flex-1">Answer the Task 1 prediction above the apparatus</span>
+    <button type="button" id="next-go" class="act-btn" onclick="goNext()">Take me there</button>
+  </div>
+</div>
+
+
+<script>
+/* =====================================================================
+   STRINGS — flat English-only T. Electrolysis has NO explicit HKDSE
+   syllabus code (0 hits in the 2018 spec); this lab is framed as a
+   bridging/enrichment practical training a past paper 8.5–8.10 redox and
+   a past paper 3.1 ion migration. Never claimed as a syllabus item.
+===================================================================== */
+const T = {
+  title: 'Electrolysis of Water — Forced Redox in Acidified Water',
+  subtitle: 'Topic VII (e) — the 2:1 gas ratio, the tests for hydrogen and oxygen, and the half-equations that explain it',
+  wch: 'HKDSE Chemistry',
+  introH1: 'One apparatus, three examinable skills',
+  introLead: 'Electrolysis itself is not assessed at HKDSE — the 2018 specification never names it. This apparatus is a context for practising half-equations, oxidation numbers and ionic conduction — all examinable. Electrolysis means forced, non-spontaneous decomposition by a direct current: electrical energy is converted into chemical energy (the exact reverse of the Topic VII (d) fuel cell). You will decompose acidified water, collect the gases over the electrodes, test them, and explain the 2:1 volume ratio with balanced ionic half-equations.',
+  concepts: [
+    { t: 'The forced redox reaction', d: 'Overall: 2H₂O(l) → 2H₂(g) + O₂(g). It does NOT happen by itself — a DC supply drives the electrons "uphill". Energy is stored in H₂ and O₂ (which is why hydrogen can be a fuel).' },
+    { t: 'Half-equations at each electrode', d: 'Cathode (−, reduction, "RED CAT"): 2H⁺(aq) + 2e⁻ → H₂(g). Anode (+, oxidation, "AN OX"): 2H₂O(l) → O₂(g) + 4H⁺(aq) + 4e⁻ (in alkali: 4OH⁻(aq) → 2H₂O(l) + O₂(g) + 4e⁻). State symbols are expected.' },
+    { t: 'Oxidation-number bookkeeping', d: 'H: +1 → 0 (oxidation number decreases = reduced = gains electrons). O: −2 (in H₂O) → 0 (in O₂) (increases = oxidised = loses electrons). Track both languages every time.' },
+    { t: 'Why an electrolyte — and what carries the current', d: 'Pure water has far too few mobile ions to conduct, so add dilute H₂SO₄ (or Na₂SO₄): spectator ions H⁺ and SO₄²⁻ that are not consumed overall. Electrons flow ONLY in the wires and electrodes; ions migrate through the solution. (Do not use NaCl — chloride gives Cl₂ at the anode instead; that is a separate lab.)' },
+    { t: 'The 2:1 ratio and the gas tests', d: 'Balance first: never read the ratio off H₂O. Moles H₂:O₂ = 2:1, and at the same temperature and pressure volume is proportional to moles, so 2:1 by VOLUME (at RTP, V = n × 24.0 dm³ mol⁻¹). By MASS it is 1:8. Tests — cathode gas H₂: lighted splint, squeaky pop. Anode gas O₂: glowing splint relights.' },
+    { t: 'How to use this lab', d: 'Go to the Simulation tab and follow the 6-step guided journey: pour water → choose the electrolyte (sucrose and ethanol will fail the conductivity quiz) → assemble → predict, then close the switch → collect gas (drag the current slider, watch the running ratio converge on 2:1) → test each tube to UNLOCK its half-equation card. Use the overlay buttons to separate electron flow in the wires from ion flow in the solution.' },
+    { t: 'Out of scope / next unit', d: 'Selective discharge rules, E⦵ and the Nernst story belong to beyond this level. Faraday charge calculations (Q = It, F = 96 500 C mol⁻¹) are NOT in the HKDSE syllabus at all — they appear in this lab only as a clearly labelled extension. Chlor-alkali membranes and electroplating are out too. Real lab caveat (approx): decomposition needs ~1.5–2 V (theoretical 1.23 V) because of overvoltage.' }
+  ],
+  simCaption: 'What is modelled: gas grows in direct proportion to the current (more charge per second → more electrons at the electrodes → more gas particles). Rates use the real RTP molar volume, so at 2.0 A a genuine Hoffman apparatus needs a few minutes to collect ~15 cm³ of H₂ — the speed buttons compress viewing time, not chemistry. Simplified vs the real lab: 100% current efficiency, no electrode side reactions, and O₂ solubility is only lightly modelled (a small dissolved-O₂ lag makes the early ratio read slightly above 2:1, exactly as in practice). Inert Pt/graphite electrodes; the electrolyte is not consumed, so the acid slowly concentrates.',
+  teacherTitle: 'Teacher notes',
+  teacher: [
+    'Lesson placement: Topic VII (e), immediately after introducing electron transfer, oxidation numbers and ionic half-equations (ionic half-equations); doubles as a visual revision of a past paper 3.1 migration of ions. State openly that electrolysis has no explicit examinable HKDSE code — the half-equations, oxidation-number tracking and ionic conduction do. Molten Al₂O₃ electrolysis HAS appeared in papers , so the electrode language transfers.',
+    'Misconception to probe: "ions flow through the wire". Turn on BOTH overlay buttons and make every pair explain, in one sentence, what moves in the metal and what moves in the solution. Also police "delocalised ions" — delocalised is reserved for electrons in metals; ions are free/mobile.',
+    '5-minute task: set the current to maximum, collect ≥20 cm³ of H₂, then write both half-equations with state symbols, combine to the overall equation, and use 24.0 dm³ mol⁻¹ to convert the collected H₂ volume into moles and predict the O₂ volume.',
+    'Classic examiner complaints: no state symbols; calling the cathode reaction oxidation; claiming a 1:1 ratio "because H₂O" without balancing; saying the 2:1 ratio is by mass (it is by volume — by mass H₂:O₂ is 1:8); describing electrolysis as spontaneous.',
+    'Fast-finisher prompt: why does the ratio often start visibly above 2:1 and drift down? (O₂ is slightly more soluble in water — the sim models this lag. Link to the "approx" caveat in real results.)'
+  ],
+  calcTitle: 'Gas stoichiometry — and a labelled extension',
+  calcSub: 'Core (examinable): volumes → moles at RTP (24.0 dm³ mol⁻¹), 2:1 mole ratio, mass check (H₂:O₂ = 1:8 by mass). Extension — NOT in the HKDSE syllabus (the 2018 spec never mentions Faraday): charge passed, n(e⁻) = 2·n(H₂), Q = nF with F = 96 500 C mol⁻¹, Q = It.',
+  calcBtn: 'Check working',
+  ppTitle: 'Past-paper practice',
+  ppSub: 'exam-style wording from past-paper banks (Jan 2022 oxidising-agent trap; Jun 2023 Q18(c) and Jun 2024 Q18(b) styles). Feedback uses mark-scheme keywords. These test the examinable redox language this apparatus practises.',
+  questions: [
+    {
+      q: 'Which statement about an oxidising agent is correct?',
+      o: ['It loses electrons and its oxidation number increases', 'It gains electrons and its oxidation number decreases', 'It gains protons and its oxidation number decreases', 'It is itself oxidised in the reaction'],
+      a: 1,
+      why: 'Mark scheme : an oxidising agent GAINS electrons, so it is reduced and its oxidation number DECREASES. In this cell the H⁺ ions are the oxidising agent at the cathode: 2H⁺(aq) + 2e⁻ → H₂(g), oxidation number of H falls +1 → 0. Options A and D describe a reducing agent; C confuses redox with proton (acid–base) transfer.'
+    },
+    {
+      q: 'Chlorine reacts with water: Cl₂(aq) + H₂O(l) ⇌ HClO(aq) + HCl(aq). Which type of redox reaction occurs?',
+      o: ['Substitution', 'Disproportionation', 'Neutralisation', 'Precipitation'],
+      a: 1,
+      why: 'Chlorine goes from 0 in Cl₂ to +1 in HClO (oxidised) AND to −1 in HCl (reduced) — the same element is simultaneously oxidised and reduced, so this is disproportionation. Examiner note (a past paper(c) style): writing only "redox" scores 0 — name the type and the element. C and D are not redox classifications at all.'
+    },
+    {
+      q: 'What is the oxidation number of chlorine in chlorine dioxide, ClO₂?',
+      o: ['+2', '−4', '+4', '+7'],
+      a: 2,
+      why: 'Oxygen is −2, so two oxygens contribute −4; the molecule is neutral so the sum of oxidation numbers is 0, giving Cl = +4 (a past paper(b) style). "−4" is the trap — that is the total charge on the oxygens, not chlorine. "+7" would need seven oxygens (as in ClO₄⁻).'
+    }
+  ],
+  recapTitle: 'Recap checklist',
+  recapGoals: [
+    '8.5 — Define oxidation and reduction in BOTH languages (electron transfer and oxidation-number change) and label the cathode reaction here as reduction (gain of electrons, H goes +1 → 0): RED CAT, AN OX.',
+    '8.10 — Write both ionic half-equations with state symbols and add them (electrons cancel) to give 2H₂O(l) → 2H₂(g) + O₂(g).',
+    'a past paper 3.1 — Explain conduction: the solution carries charge by migration of mobile ions (H⁺, SO₄²⁻, OH⁻) while electrons flow only in the wires and electrodes; charge crosses each interface by electrode redox.',
+    'Lab skill — Describe the gas tests (lighted splint → squeaky pop for H₂ at the cathode; glowing splint relights for O₂ at the anode) and state the practical observations that evidence electrolysis.',
+    'Stoichiometry (Topic IX (c)) — Convert a collected gas volume at RTP using V = n × 24.0 dm³ mol⁻¹, deduce V(O₂) = V(H₂)/2 from the balanced equation, and explain why 2:1 is a volume ratio while the mass ratio is 1:8.'
+  ],
+  mythTitle: 'Common misconceptions',
+  mythLead: 'Tap a card to flip. Check you would not write the myth side in an exam.',
+  mythFlip: 'Tap to flip',
+  mythLabelMyth: 'Myth?',
+  mythLabelFact: 'Fact',
+  myths: [
+    { m: 'Pure water is a good conductor of electricity.', f: 'Pure water has far too few mobile ions to carry current — that is why dilute H₂SO₄ or Na₂SO₄ is added. Covalent solutes such as sucrose or ethanol produce no ions, so their solutions do not conduct.' },
+    { m: 'Ions flow through the metal wires / electrons swim through the solution.', f: 'Electrons flow ONLY in the wires and electrodes; ions (H⁺, SO₄²⁻, OH⁻) migrate through the solution. Charge crosses each electrode surface only by a redox reaction.' },
+    { m: 'Hydrogen forms at the anode (or oxygen at the cathode).', f: 'Cathode = reduction = H₂ (2H⁺(aq) + 2e⁻ → H₂(g)); anode = oxidation = O₂ (2H₂O(l) → O₂(g) + 4H⁺(aq) + 4e⁻). RED CAT, AN OX.' },
+    { m: 'The ratio is 1:1 "because water is H₂O" — or "2:1 is by mass".', f: 'Balance first: 2H₂O → 2H₂ + O₂. Equal conditions give volume ∝ moles, so 2:1 by VOLUME. By mass it is 1:8 (0.002 mol × 2.0 vs 0.001 mol × 32.0).' },
+    { m: 'Water decomposes by itself into hydrogen and oxygen.', f: 'The decomposition is non-spontaneous; only a direct current forces it (electrical → chemical energy, the reverse of the fuel cell). Real cells also need about 1.5–2 V, more than the theoretical 1.23 V, because of overvoltage.' },
+    { m: 'Metals and electrolytes conduct by "delocalised ions".', f: 'Examiner wording : reserve delocalised for electrons in metals; in molten or aqueous ionic compounds the IONS are free/mobile. In the solid, ions are fixed in position, so it does not conduct.' }
+  ]
+};
+function t() { return T; }
+document.documentElement.lang = 'en';
+
+/* =====================================================================
+   TAB PLUMBING
+===================================================================== */
+let activeTab = 'sim';
+function setTab(name) {
+  activeTab = name;
+  document.querySelectorAll('.tab-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.tab === name);
+  });
+  ['intro','sim','calc','mcq','recap'].forEach(p => {
+    const el = document.getElementById('panel-' + p);
+    el.classList.toggle('active', p === name);
+  });
+  scheduleResize();
+  if (name === 'sim') { resizeCanvas(); }
+}
+function toggleTeacher() {
+  document.getElementById('teacher-panel').classList.toggle('hidden');
+}
+
+/* =====================================================================
+   SIM CORE — electrolysis apparatus, RAF-driven (no setInterval)
+===================================================================== */
+const CAP_H2 = 25;            // cm³ collectable per cathode tube
+const CAP_O2 = 12.5;          // cm³ per anode tube (same physical height)
+const K_H2 = 0.124;           // cm³ s⁻¹ per amp — real rate: (I/96500/2)·24000
+const O2_LAG = 1.4;           // cm³ dissolved-O₂ lag → early ratio reads >2:1
+const STEP_NAMES = ['Pour water', 'Electrolyte quiz', 'Assemble', 'Predict + switch on', 'Collect gas', 'Test the gases'];
+
+const state = {
+  step: 0, electrolyte: null, closed: false, running: false,
+  I: 2.0, speed: 5, h2: 0, o2: 0, o2diss: 0, labTime: 0,
+  pick: null, pickChecked: false, pickResult: '',
+  testedH2: false, testedO2: false,
+  eFlow: false, ionFlow: false, phenol: false,
+  bubbles: [], fx: [], ions: [], eDots: [],
+  accH: 0, accO: 0
+};
+function o2shown() { return state.o2; }
+
+/* ===== v3 kit: Task-1 prediction gate, dock, tasks ===== */
+const PREDICTS = [{
+  q: 'Before you close the switch: dilute H\u2082SO\u2084(aq) with inert electrodes and current flowing. What forms at each electrode, and how do the gas volumes compare?',
+  o: [
+    'H\u2082 at the anode (+) and O\u2082 at the cathode (\u2212) \u2014 V(O\u2082) : V(H\u2082) = 2 : 1',
+    'H\u2082 at the cathode (\u2212) and O\u2082 at the anode (+) \u2014 V(H\u2082) : V(O\u2082) = 2 : 1',
+    'Equal volumes of H\u2082 and O\u2082 (1 : 1) \u2014 the formula H\u2082O already gives the ratio',
+    'CO\u2082 at the anode and H\u2082 at the cathode \u2014 the sulfate ion discharges first'
+  ],
+  a: 1,
+  why: 'MS: hydrogen at the cathode (\u2212), oxygen at the anode (+), volumes in a 2 : 1 ratio. Cathode: 2H\u2082O(l) + 2e\u207b \u2192 H\u2082(g) + 2OH\u207b(aq), written in acid as 2H\u207a(aq) + 2e\u207b \u2192 H\u2082(g); anode: 2H\u2082O(l) \u2192 O\u2082(g) + 4H\u207a(aq) + 4e\u207b. Balance electrons (doubling the cathode) and add: 2H\u2082O(l) \u2192 2H\u2082(g) + O\u2082(g) \u2014 same T and p \u21d2 same volume ratio as moles (Avogadro). Option C is the tempting distractor that scores 0: it counts atoms in the formula instead of balancing the electron transfer \u2014 1 mol O\u2082 needs 4 mol e\u207b, twice the 2 mol e\u207b that makes 1 mol H\u2082. Option A has the electrodes the wrong way round (cations travel to the cathode \u2014 RED CAT). Option D scores 0: sulfate is not discharged in dilute aqueous solution \u2014 it is a spectator that only carries charge, and there is no carbon in the apparatus at all.'
+}];
+const labDock = { answered: false, prPick: null };
+function gateOpen() { return labDock.answered === true; }
+function applyGate() {
+  const locked = !gateOpen();
+  const dock = document.getElementById('sim-dock');
+  if (dock) { dock.classList.remove('locked', 'unlocked'); dock.classList.add(locked ? 'locked' : 'unlocked'); }
+  const st = document.getElementById('dock-state');
+  if (st) { st.classList.remove('st-lock', 'st-open'); st.classList.add(locked ? 'st-lock' : 'st-open'); st.textContent = locked ? '\ud83d\udd12 Locked' : '\u2713 Unlocked'; }
+  const ln = document.getElementById('dock-locknote');
+  if (ln) { ln.textContent = locked ? 'Locked \u2014 answer the prediction above correctly to unlock the apparatus controls.' : 'Unlocked \u2014 now run the procedure: pour \u2192 acidify \u2192 assemble \u2192 switch on \u2192 test the gases (pop / relight).'; ln.style.color = locked ? '#fde68a' : '#6ee7b7'; }
+  const nt = document.getElementById('next-text');
+  if (nt) nt.textContent = locked ? 'Answer the Task 1 prediction above the apparatus' : 'Run the procedure: water \u2192 dilute H\u2082SO\u2084 \u2192 assemble \u2192 close the switch \u2192 test both gases';
+  if (!locked) { try { localStorage.setItem('ial_electrolysis_water_v3_state', 'unlocked'); } catch (e) { } }
+}
+function lockedMsg() {
+  const p = document.getElementById('dock-locknote');
+  if (p) { p.textContent = 'Locked \u2014 answer the Task 1 prediction above (and press Reveal) first.'; p.style.color = '#fde68a'; }
+}
+function gate() { if (!gateOpen()) { lockedMsg(); return false; } return true; }
+function buildPredict() {
+  const p = PREDICTS[0];
+  document.getElementById('pr-q').textContent = p.q;
+  document.getElementById('pr-why').classList.add('hidden');
+  document.getElementById('pr-opts').innerHTML = p.o.map((o, i) =>
+    '<button type="button" class="pr-opt px-3 py-2 rounded-lg text-xs font-semibold text-left" data-p="' + i + '">' + 'ABCD'[i] + ' \u00b7 ' + o + '</button>').join('');
+  document.querySelectorAll('.pr-opt').forEach(b => {
+    b.onclick = () => { labDock.prPick = +b.dataset.p; document.querySelectorAll('.pr-opt').forEach(x => x.classList.toggle('picked', x === b)); };
+  });
+  document.getElementById('pr-reveal').onclick = () => {
+    const why = document.getElementById('pr-why');
+    const picked = labDock.prPick;
+    const right = (picked === p.a);
+    if (right) { labDock.answered = true; applyGate(); }
+    why.textContent = 'Answer ' + 'ABCD'[p.a] + '. ' +
+      (picked === null || picked === undefined ? 'No prediction made yet \u2014 pick an option above.' : (right ? 'Correct \u2014 controls unlocked. ' : 'Not correct \u2014 fix your pick and Reveal again. ')) + p.why;
+    why.classList.remove('hidden');
+  };
+}
+function goNext() {
+  const g = document.getElementById('next-go');
+  const tab = (g && g.dataset.go) ? g.dataset.go : 'sim';
+  setTab(tab);
+  const dockEl = tab === 'sim' ? document.getElementById('sim-dock') : document.getElementById('panel-' + tab);
+  if (dockEl && dockEl.scrollIntoView) dockEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+function bindLabTasks() {
+  const fails = {
+    a: { name: 'Testing the cathode gas with a GLOWING splint',
+      txt: 'A student holds a glowing splint at the cathode tube to \u201cprove hydrogen\u201d.',
+      what: 'A glowing splint is the test for OXYGEN \u2014 in hydrogen it simply goes out (or ignites the gas without a pop being observed). Swapping the splints misidentifies BOTH gases: wrong test, 0 marks.',
+      fix: 'Cathode gas: LIGHTED splint \u2192 squeaky POP (H\u2082). Anode gas: GLOWING splint \u2192 RELIGHTS (O\u2082). Run the sim in that order and watch each half-equation card unlock.',
+      ms: 'MS wording: \u201cLighted splint \u2192 pops / squeaky pop \u21d2 hydrogen\u201d; \u201cglowing splint relights \u21d2 oxygen\u201d. The splint and conclusion must match.' },
+    b: { name: 'Electrolysing concentrated sodium chloride solution instead',
+      txt: 'A student swaps the dilute H\u2082SO\u2084 for brine (NaCl(aq)) to save time.',
+      what: 'Cl\u207b competes at the anode: in concentrated NaCl, CHLORINE (not oxygen) is preferentially discharged, and NaOH builds up near the cathode \u2014 no 2 : 1 H\u2082 : O\u2082, so every downstream reading and conclusion is wrong.',
+      fix: 'Use dilute sulfuric acid: SO\u2084\u00b2\u207b is very hard to discharge, so H\u207a reduces to H\u2082 at the cathode and water oxidises to O\u2082 at the anode \u2014 the acid itself is not consumed.',
+      ms: 'MS: products depend on relative ease of discharge (concentration matters). Naming the wrong anode product voids the ratio marks.' },
+    c: { name: 'Quoting the first reading as exactly 2 : 1',
+      txt: 'At the first reading, 4 cm\u00b3 of H\u2082 has collected, and the student writes V(H\u2082) : V(O\u2082) = exactly 2 : 1.',
+      what: 'O\u2082 is more soluble than H\u2082 (and a little early O\u2082 oxidises electrode surfaces), so early readings run ABOVE 2 : 1 \u2014 the simulation shows this lag. A quoted \u201cexact\u201d ratio the data do not support is a chemistry error.',
+      fix: 'Collect decent volumes (\u2273 20 cm\u00b3 H\u2082) before measuring, report \u201capproximately twice the volume\u201d, and be ready to justify the small deviation.',
+      ms: 'MS accepts \u201ctwice the volume\u201d / \u201cratio tends to 2 : 1\u201d; figures quoted must match the student\u2019s own readings.' }
+  };
+  document.querySelectorAll('[data-fail]').forEach(b => {
+    b.onclick = () => {
+      const f = fails[b.dataset.fail]; if (!f) return;
+      const p = document.getElementById('fail-panel');
+      p.innerHTML = '<div class="space-y-2">' +
+        '<div class="rounded-xl border border-amber-500/30 bg-amber-950/20 p-3"><p class="text-xs font-bold text-amber-200 uppercase tracking-wide mb-1">' + f.name + '</p><p class="text-sm text-slate-200">' + f.txt + '</p></div>' +
+        '<div class="border-l-[3px] border-rose-500 bg-rose-950/20 rounded-lg p-3"><p class="text-xs font-bold text-rose-200 uppercase tracking-wide mb-1">What is wrong with it</p><p class="text-sm text-slate-200">' + f.what + '</p></div>' +
+        '<div class="rounded-xl border border-emerald-600/30 bg-emerald-950/20 p-3"><p class="text-xs font-bold text-emerald-200 uppercase tracking-wide mb-1">Do it this way instead</p><p class="text-sm text-slate-200">' + f.fix + '</p></div>' +
+        '<p class="text-xs text-teal-300">' + f.ms + '</p></div>';
+    };
+  });
+  const cl = document.getElementById('fail-clear');
+  if (cl) cl.onclick = () => { document.getElementById('fail-panel').innerHTML = ''; };
+  const hints = {
+    1: 'Start with the two half-equations: cathode 2H\u207a(aq) + 2e\u207b \u2192 H\u2082(g); anode 2H\u2082O(l) \u2192 O\u2082(g) + 4H\u207a(aq) + 4e\u207b. How many electrons does each gas need or release per molecule?',
+    2: 'The same current flows through both electrodes, so equal electrons arrive and leave \u2014 DOUBLE the cathode equation to match the anode\u2019s 4e\u207b and add: 2H\u2082O(l) \u2192 2H\u2082(g) + O\u2082(g).',
+    3: 'Third mark: the mole ratio n(H\u2082) : n(O\u2082) = 2 : 1, and equal moles of ANY gas occupy equal volumes at the same T and p (Avogadro) \u21d2 V(H\u2082) : V(O\u2082) = 2 : 1. Full chain: balance e\u207b \u21d2 moles \u21d2 volume.'
+  };
+  document.querySelectorAll('[data-hint]').forEach(b => {
+    b.onclick = () => { document.getElementById('hint-text').textContent = hints[b.dataset.hint] || ''; };
+  });
+}
+
+
+let ctx = null, canvasEl = null, W = 700, H = 400;
+function resizeCanvas() {
+  canvasEl = canvasEl || document.getElementById('sim-canvas');
+  const wrap = canvasEl.closest('.canvas-wrap');
+  const rect = wrap ? wrap.getBoundingClientRect() : { width: 0 };
+  const w = Math.max(rect.width, canvasEl.offsetWidth || 0);
+  if (!w || w < 50) return;              // hidden tab guard
+  const h = Math.max(400, w * 0.52);
+  canvasEl.width = W = Math.round(w);
+  canvasEl.height = H = Math.round(h);
+  ctx = canvasEl.getContext('2d');
+  // NOTE: do NOT draw() here — boot must not paint. RAF loop paints.
+}
+function scheduleResize() { resizeCanvas(); }
+
+/* ---------- geometry ---------- */
+function layout() {
+  const L = {};
+  L.troughX0 = W * 0.14; L.troughX1 = W * 0.86;
+  L.liquidY = H * 0.47; L.troughY1 = H * 0.93;
+  L.cx0 = W * 0.355; L.cx1 = W * 0.645;
+  L.tubeW = Math.max(46, W * 0.075);
+  L.tubeTop = H * 0.15; L.tubeBot = H * 0.80;
+  L.elecBot = H * 0.755;
+  L.packX = W / 2; L.packY = 14; L.packW = 132; L.packH = 30;
+  L.wireY = 62;
+  return L;
+}
+function gasBottomY(side) {
+  const L = layout();
+  const usable = L.tubeBot - L.tubeTop - 14;
+  const vol = side === 0 ? state.h2 : o2shown();
+  const cap = side === 0 ? CAP_H2 : CAP_O2;
+  return L.tubeTop + Math.min(1, vol / cap) * usable;
+}
+
+/* ---------- particles ---------- */
+function spawnBubble(side) {
+  const L = layout();
+  if (state.bubbles.length > 150) return;
+  const cx = side === 0 ? L.cx0 : L.cx1;
+  state.bubbles.push({
+    side: side,
+    x: cx + (Math.random() - 0.5) * (L.tubeW * 0.5),
+    y: L.elecBot - 2,
+    r: 1.4 + Math.random() * 2.2,
+    vy: H * (0.10 + Math.random() * 0.07)
+  });
+}
+function initIons() {
+  state.ions = [];
+  const L = layout();
+  for (let i = 0; i < 10; i++) state.ions.push({ sp: 'H⁺',  col: '#fbbf24', side: -1, x: L.troughX0 + Math.random() * (L.troughX1 - L.troughX0), y: L.liquidY + 24 + Math.random() * (L.troughY1 - L.liquidY - 44) });
+  for (let i = 0; i < 6; i++) state.ions.push({ sp: 'SO₄²⁻', col: '#f472b6', side: +1, x: L.troughX0 + Math.random() * (L.troughX1 - L.troughX0), y: L.liquidY + 24 + Math.random() * (L.troughY1 - L.liquidY - 44) });
+  for (let i = 0; i < 4; i++) state.ions.push({ sp: 'OH⁻', col: '#a78bfa', side: +1, x: L.troughX0 + Math.random() * (L.troughX1 - L.troughX0), y: L.liquidY + 24 + Math.random() * (L.troughY1 - L.liquidY - 44) });
+}
+function initEdots() {
+  state.eDots = [];
+  for (let i = 0; i < 12; i++) state.eDots.push({ path: i % 2, u: (i / 12) });
+}
+function initParticles() {
+  state.bubbles = [];
+  initIons();
+  initEdots();
+}
+function wirePaths() {
+  const L = layout();
+  return {
+    // electrons leave the − terminal (left) and travel to the cathode
+    a: [ [L.packX - L.packW / 2, L.packY + L.packH / 2], [L.cx0 - 0.35 * (L.cx0 - L.packX) * 0, L.packY + L.packH / 2 - 0], [L.cx0, L.wireY], [L.cx0, L.tubeTop - 6] ],
+    b: [ [L.cx1, L.tubeTop - 6], [L.cx1, L.wireY], [L.packX + L.packW / 2, L.wireY], [L.packX + L.packW / 2, L.packY + L.packH / 2] ]
+  };
+}
+function pathAt(pts, u) {
+  let total = 0; const segs = [];
+  for (let i = 1; i < pts.length; i++) {
+    const d = Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]);
+    segs.push(d); total += d;
+  }
+  let target = u * total, acc = 0;
+  for (let i = 0; i < segs.length; i++) {
+    if (acc + segs[i] >= target) {
+      const f = (target - acc) / (segs[i] || 1);
+      return [ pts[i][0] + (pts[i + 1][0] - pts[i][0]) * f, pts[i][1] + (pts[i + 1][1] - pts[i][1]) * f ];
+    }
+    acc += segs[i];
+  }
+  return pts[pts.length - 1];
+}
+
+/* ---------- physics step (RAF-driven, performance.now deltas) ---------- */
+function step(dt) {
+  const L = layout();
+  // fx timers always decay (RAF time, never setTimeout)
+  for (let i = state.fx.length - 1; i >= 0; i--) {
+    state.fx[i].t -= dt;
+    if (state.fx[i].t <= 0) state.fx.splice(i, 1);
+  }
+  if (state.running && state.electrolyte === 'acid') {
+    const sdt = dt * state.speed;
+    state.labTime += sdt;
+    state.h2 = Math.min(CAP_H2, state.h2 + K_H2 * state.I * sdt);
+    let dO2 = K_H2 / 2 * state.I * sdt;
+    if (state.o2diss < O2_LAG) {
+      const soak = Math.min(dO2, O2_LAG - state.o2diss);
+      state.o2diss += soak; dO2 -= soak;
+    }
+    state.o2 = Math.min(CAP_O2, state.o2 + dO2);
+    state.accH += sdt * state.I * 2.6;
+    while (state.accH >= 1) { state.accH--; spawnBubble(0); }
+    state.accO += sdt * state.I * 1.3;
+    while (state.accO >= 1) { state.accO--; spawnBubble(1); }
+    if (state.h2 >= 23.5 && state.step === 4) fullStop();
+    checkPrediction();
+  }
+  for (let i = state.bubbles.length - 1; i >= 0; i--) {
+    const b = state.bubbles[i];
+    b.y -= b.vy * dt;
+    b.x += Math.sin(b.y / 18) * 6 * dt;
+    if (b.y < gasBottomY(b.side) + 3) state.bubbles.splice(i, 1);
+  }
+  if (state.ionFlow) {
+    for (const io of state.ions) {
+      const tx = io.side === -1 ? L.cx0 : L.cx1;
+      io.x += (tx > io.x ? 1 : -1) * (state.running ? 26 : 8) * dt;
+      io.y += Math.sin(state.labTime * 1.7 + io.x) * 7 * dt;
+      io.y = Math.max(L.liquidY + 20, Math.min(L.troughY1 - 18, io.y));
+      if (Math.abs(io.x - tx) < 10) {
+        io.x = io.side === -1 ? L.troughX1 - 14 : L.troughX0 + 14;
+        io.y = L.liquidY + 24 + Math.random() * (L.troughY1 - L.liquidY - 44);
+      }
+    }
+  }
+  if (state.eFlow && state.running) {
+    for (const d of state.eDots) { d.u += dt * (0.06 + 0.03 * state.I); if (d.u > 1) d.u -= 1; }
+  }
+}
+function fullStop() {
+  state.running = false; state.closed = false;
+  state.step = 5;
+  addObs('Both tubes nearly full — the supply was switched off automatically.');
+  renderGuide(); updateSwitchBtn();
+}
+function checkPrediction() {
+  if (state.pickChecked || state.pick === null) return;
+  if (o2shown() >= 1.6) {
+    state.pickChecked = true;
+    state.pickResult = state.pick === 1
+      ? 'Prediction CONFIRMED by the running ratio readout: twice the volume collects at the cathode (−) — V(H₂) : V(O₂) = 2 : 1.'
+      : 'Prediction CHECKED against the data: look at the ratio tile — more gas is at the cathode (−), the ratio climbs toward 2 : 1, never 1 : 1.';
+    fb(state.pickResult + ' (Mark-scheme wording: volume of hydrogen collected is twice the volume of oxygen.)', state.pick === 1);
+    renderGuide();
+  }
+}
+
+/* ---------- painting (only ever reached from RAF draw) ---------- */
+function rr(x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.lineTo(x + w - r, y);
+  ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+  ctx.lineTo(x + w, y + h - r);
+  ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  ctx.lineTo(x + r, y + h);
+  ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+  ctx.lineTo(x, y + r);
+  ctx.quadraticCurveTo(x, y, x + r, y);
+  ctx.closePath();
+}
+function tubeShape(L, cx, cap) {
+  const w = L.tubeW, x = cx - w / 2, y = L.tubeTop;
+  ctx.beginPath();
+  ctx.moveTo(x, L.tubeBot);
+  ctx.lineTo(x, y + w / 2);
+  ctx.arc(cx, y + w / 2, w / 2, Math.PI, 0);
+  ctx.lineTo(x + w, L.tubeBot);
+  ctx.closePath();
+}
+function draw() {
+  if (!ctx) { resizeCanvas(); if (!ctx) return; }
+  const L = layout();
+  ctx.clearRect(0, 0, W, H);
+  ctx.fillStyle = '#0b1220'; ctx.fillRect(0, 0, W, H);
+
+  // trough
+  ctx.save();
+  ctx.beginPath();
+  ctx.moveTo(L.troughX0, L.troughY1 - 18);
+  ctx.quadraticCurveTo(L.troughX0, L.troughY1, L.troughX0 + 18, L.troughY1);
+  ctx.lineTo(L.troughX1 - 18, L.troughY1);
+  ctx.quadraticCurveTo(L.troughX1, L.troughY1, L.troughX1, L.troughY1 - 18);
+  ctx.lineTo(L.troughX1, L.liquidY - 26);
+  ctx.lineTo(L.troughX0, L.liquidY - 26);
+  ctx.closePath();
+  ctx.strokeStyle = 'rgba(148,197,255,.5)'; ctx.lineWidth = 2.5; ctx.stroke();
+  // liquid
+  ctx.save(); ctx.clip();
+  const lc = state.electrolyte === 'acid' ? 'rgba(56,132,190,.45)' : (state.electrolyte ? 'rgba(80,110,140,.32)' : 'rgba(30,64,110,.35)');
+  ctx.fillStyle = lc;
+  ctx.fillRect(L.troughX0, L.liquidY, L.troughX1 - L.troughX0, L.troughY1 - L.liquidY);
+  if (state.phenol && state.labTime > 6 && state.electrolyte === 'acid') {
+    const g = ctx.createRadialGradient(L.cx0, L.liquidY + 60, 6, L.cx0, L.liquidY + 60, W * 0.16);
+    g.addColorStop(0, 'rgba(244,114,182,.42)'); g.addColorStop(1, 'transparent');
+    ctx.fillStyle = g; ctx.fillRect(L.troughX0, L.liquidY, L.troughX1 - L.troughX0, L.troughY1 - L.liquidY);
+  }
+  ctx.restore(); ctx.restore();
+
+  // electrodes (inert Pt/graphite)
+  const eTop = L.tubeTop + 14;
+  ctx.fillStyle = '#9aa7b8';
+  ctx.fillRect(L.cx0 - 4, eTop, 8, L.elecBot - eTop);
+  ctx.fillRect(L.cx1 - 4, eTop, 8, L.elecBot - eTop);
+
+  // tubes (drawn only once assembled)
+  if (state.step >= 2) {
+    drawTube(L, L.cx0, 0);
+    drawTube(L, L.cx1, 1);
+  }
+
+  // bubbles (clamped inside the tubes by construction; removed at the gas interface)
+  for (const b of state.bubbles) {
+    ctx.beginPath(); ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(226,242,255,.75)'; ctx.fill();
+  }
+
+  // wires + power pack + switch + ammeter (from step 2)
+  if (state.step >= 2) {
+    const paths = wirePaths();
+    const wl = state.closed ? '#fb923c' : '#64748b';
+    ctx.lineWidth = 3; ctx.strokeStyle = wl; ctx.lineCap = 'round';
+    ctx.beginPath(); ctx.moveTo(paths.a[0][0], paths.a[0][1]);
+    ctx.lineTo(L.cx0, L.packY + L.packH / 2);
+    ctx.lineTo(L.cx0, L.tubeTop - 6); ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(L.packX + L.packW / 2, L.packY + L.packH / 2);
+    ctx.lineTo(L.cx1, L.packY + L.packH / 2);
+    ctx.lineTo(L.cx1, L.wireY + 8); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(L.cx1, L.wireY - 8); ctx.lineTo(L.cx1, L.tubeTop - 6); ctx.stroke();
+    // pack
+    ctx.fillStyle = '#1e293b'; rr(L.packX - L.packW / 2, L.packY, L.packW, L.packH, 7); ctx.fill();
+    ctx.strokeStyle = 'rgba(255,255,255,.25)'; ctx.lineWidth = 1.5; ctx.stroke();
+    ctx.fillStyle = '#e2e8f0'; ctx.font = 'bold 11px system-ui'; ctx.textAlign = 'center';
+    ctx.fillText('DC supply', L.packX, L.packY + 13);
+    ctx.font = '10px system-ui'; ctx.fillText('− cathode · anode +', L.packX, L.packY + 25);
+    // switch on right wire
+    ctx.strokeStyle = '#94a3b8'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(L.cx1 - 9, L.wireY); ctx.lineTo(L.cx1 + 9, L.wireY); ctx.stroke();
+    ctx.beginPath(); ctx.arc(L.cx1 - 9, L.wireY, 2.5, 0, Math.PI * 2); ctx.fill();
+    ctx.beginPath(); ctx.arc(L.cx1 + 9, L.wireY, 2.5, 0, Math.PI * 2); ctx.fill();
+    ctx.beginPath();
+    if (state.closed) { ctx.moveTo(L.cx1 - 9, L.wireY); ctx.lineTo(L.cx1 + 9, L.wireY); }
+    else { ctx.moveTo(L.cx1 - 9, L.wireY); ctx.lineTo(L.cx1 + 6, L.wireY - 12); }
+    ctx.strokeStyle = state.closed ? '#fb923c' : '#e2e8f0'; ctx.lineWidth = 2.5; ctx.stroke();
+    // ammeter on left wire
+    const ax = L.cx0 - 0.5 * (L.cx0 - L.packX), ay = L.packY + L.packH / 2;
+    ctx.beginPath(); ctx.arc(ax, ay - 26, 13, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(15,23,42,.9)'; ctx.fill();
+    ctx.strokeStyle = '#94a3b8'; ctx.lineWidth = 1.6; ctx.stroke();
+    ctx.fillStyle = state.closed ? '#fbbf24' : '#64748b'; ctx.font = 'bold 10px system-ui';
+    ctx.fillText('A', ax, ay - 22);
+    ctx.font = '9px system-ui'; ctx.fillText(state.closed ? state.I.toFixed(1) + ' A' : '0 A', ax, ay - 34);
+    // e⁻ overlay (wires ONLY)
+    if (state.eFlow) {
+      ctx.fillStyle = '#38bdf8';
+      for (const d of state.eDots) {
+        const p = d.path === 0 ? pathAt([[L.packX - L.packW / 2, L.packY + L.packH / 2], [L.cx0, L.packY + L.packH / 2], [L.cx0, L.tubeTop - 6]], d.u)
+                               : pathAt([[L.cx1, L.tubeTop - 6], [L.cx1, L.packY + L.packH / 2], [L.packX + L.packW / 2, L.packY + L.packH / 2]], d.u);
+        ctx.beginPath(); ctx.arc(p[0], p[1], 3, 0, Math.PI * 2); ctx.fill();
+      }
+      ctx.fillStyle = '#7dd3fc'; ctx.font = 'bold 11px system-ui'; ctx.textAlign = 'left';
+      ctx.fillText('e⁻ flow — wires & electrodes ONLY', L.troughX0, L.tubeTop - 16);
+      ctx.fillStyle = '#94a3b8'; ctx.font = '9px system-ui';
+      ctx.fillText('− →', L.packX - L.packW / 2 - 22, L.packY + 8);
+      ctx.textAlign = 'right';
+      ctx.fillText('→ +', L.packX + L.packW / 2 + 24, L.packY + 8);
+      ctx.textAlign = 'center';
+    }
+  }
+
+  // ion overlay (solution only)
+  if (state.step >= 2 && state.ionFlow) {
+    ctx.font = 'bold 9px system-ui';
+    for (const io of state.ions) {
+      ctx.beginPath(); ctx.arc(io.x, io.y, 7, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(15,23,42,.85)'; ctx.fill();
+      ctx.strokeStyle = io.col; ctx.lineWidth = 1.4; ctx.stroke();
+      ctx.fillStyle = io.col;
+      ctx.fillText(io.sp, io.x, io.y + 3);
+    }
+    ctx.fillStyle = '#f0abfc'; ctx.font = 'bold 11px system-ui'; ctx.textAlign = 'left';
+    ctx.fillText('ion migration — solution ONLY (H⁺ → cathode, SO₄²⁻/OH⁻ → anode)', L.troughX0 + 6, L.troughY1 + 0);
+    ctx.textAlign = 'center';
+  }
+
+  // electrode labels
+  ctx.font = 'bold 11px system-ui';
+  ctx.fillStyle = state.step >= 2 ? '#6ee7b7' : '#64748b';
+  ctx.fillText('Cathode (−)', L.cx0, L.troughY1 + 16);
+  ctx.fillStyle = state.step >= 2 ? '#fda4af' : '#64748b';
+  ctx.fillText('Anode (+)', L.cx1, L.troughY1 + 16);
+  ctx.fillStyle = '#94a3b8'; ctx.font = '9px system-ui';
+  if (state.step >= 2) {
+    ctx.fillText('reduction · H₂', L.cx0, L.troughY1 + 29);
+    ctx.fillText('oxidation · O₂', L.cx1, L.troughY1 + 29);
+  } else {
+    ctx.fillText('inert Pt/graphite electrodes', (L.cx0 + L.cx1) / 2, L.troughY1 + 26);
+  }
+
+  // status text top-left
+  ctx.textAlign = 'left'; ctx.fillStyle = '#cbd5e1'; ctx.font = '11px system-ui';
+  const ratioTxt = (o2shown() >= 0.8) ? (state.h2 / o2shown()).toFixed(2) + ' : 1' : '—';
+  ctx.fillText('V(H₂) ' + state.h2.toFixed(1) + ' cm³   V(O₂) ' + o2shown().toFixed(1) + ' cm³   ratio ' + ratioTxt, 10, 18);
+  ctx.textAlign = 'center';
+
+  // gas-test fx
+  for (const f of state.fx) {
+    const cx = f.side === 0 ? L.cx0 : L.cx1;
+    const y = L.tubeTop + 6;
+    const a = Math.max(0, Math.min(1, f.t));
+    ctx.globalAlpha = a;
+    ctx.strokeStyle = '#d6c3a3'; ctx.lineWidth = 4;
+    ctx.beginPath(); ctx.moveTo(cx + 16, y + 34); ctx.lineTo(cx + 52, y + 6); ctx.stroke();
+    if (f.kind === 'pop') {
+      ctx.fillStyle = '#fb923c';
+      ctx.beginPath(); ctx.arc(cx + 54, y + 4, 7 + 4 * Math.sin(f.t * 20), 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = '#fecaca'; ctx.font = 'bold 15px system-ui';
+      ctx.fillText('POP!  H₂', cx, y + 62);
+    } else {
+      ctx.fillStyle = '#fde68a';
+      ctx.beginPath(); ctx.arc(cx + 54, y + 4, 8 + 3 * Math.sin(f.t * 14), 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = '#fef3c7'; ctx.font = 'bold 15px system-ui';
+      ctx.fillText('glowing splint RELIGHTS — O₂', cx, y + 62);
+    }
+    ctx.globalAlpha = 1;
+  }
+}
+function drawTube(L, cx, side) {
+  const cap = side === 0 ? CAP_H2 : CAP_O2;
+  tubeShape(L, cx, cap);
+  ctx.save();
+  ctx.fillStyle = 'rgba(180,215,245,.07)'; ctx.fill();
+  ctx.strokeStyle = 'rgba(180,215,245,.55)'; ctx.lineWidth = 2; ctx.stroke();
+  ctx.clip();
+  const gb = gasBottomY(side);
+  // gas pocket
+  ctx.fillStyle = side === 0 ? 'rgba(214,240,253,.9)' : 'rgba(255,237,213,.88)';
+  ctx.fillRect(cx - L.tubeW / 2, L.tubeTop, L.tubeW, gb - L.tubeTop);
+  // liquid column inside tube
+  ctx.fillStyle = state.electrolyte === 'acid' ? 'rgba(56,132,190,.6)' : 'rgba(30,64,110,.6)';
+  ctx.fillRect(cx - L.tubeW / 2, gb, L.tubeW, L.tubeBot - gb);
+  // graduations
+  ctx.strokeStyle = 'rgba(226,232,240,.5)'; ctx.lineWidth = 1;
+  ctx.font = '9px system-ui'; ctx.fillStyle = 'rgba(203,213,225,.85)';
+  const usable = L.tubeBot - L.tubeTop - 14;
+  for (let g = 0; g <= cap; g += 5) {
+    const y = L.tubeBot - (g / cap) * usable;
+    ctx.beginPath(); ctx.moveTo(cx - L.tubeW / 2 + 2, y); ctx.lineTo(cx - L.tubeW / 2 + 10, y); ctx.stroke();
+    ctx.textAlign = 'left';
+    if (g > 0) ctx.fillText(g + '', cx - L.tubeW / 2 + 12, y + 3);
+    ctx.textAlign = 'center';
+  }
+  ctx.restore();
+  // labels
+  const vol = side === 0 ? state.h2 : o2shown();
+  ctx.font = 'bold 12px system-ui';
+  ctx.fillStyle = side === 0 ? '#bae6fd' : '#fed7aa';
+  ctx.fillText(side === 0 ? 'H₂' : 'O₂', cx, L.tubeTop - 8);
+  ctx.font = '10px system-ui'; ctx.fillStyle = '#94a3b8';
+  ctx.fillText(vol.toFixed(1) + ' cm³', cx, L.tubeBot + 14);
+}
+
+/* ---------- RAF loop: the only animation driver ---------- */
+let lastFrame = performance.now();
+let frameN = 0;
+function loop() {
+  requestAnimationFrame(loop);
+  if (activeTab !== 'sim') return;
+  const now = performance.now();
+  let dt = (now - lastFrame) / 1000;
+  lastFrame = now;
+  if (dt > 0.05) dt = 0.05;
+  if (dt < 0) dt = 0;
+  step(dt);
+  draw();
+  frameN++;
+  if (frameN % 6 === 0) updateReadouts();
+}
+requestAnimationFrame(loop);
+
+/* =====================================================================
+   SIM UI — guide journey, readouts, controls, half-eq cards, overlays
+===================================================================== */
+function B(id, fn) { const el = document.getElementById(id); if (el) el.onclick = fn; }
+function BI(id, fn) { const el = document.getElementById(id); if (el) el.oninput = fn; }
+function el(id) { return document.getElementById(id); }
+function fb(msg, ok) {
+  const f = el('guide-feedback');
+  if (!f) return;
+  f.textContent = msg;
+  f.className = 'text-xs mt-3 leading-relaxed ' + (ok === false ? 'text-rose-300' : ok === true ? 'text-emerald-300' : 'text-slate-300');
+}
+function addObs(x) {
+  state.obs = state.obs || [];
+  if (state.obs.indexOf(x) === -1) state.obs.push(x);
+  const ul = el('obs-list');
+  if (ul) ul.innerHTML = state.obs.map(o => '<li>' + o + '</li>').join('');
+}
+function renderReadouts() {
+  // literal ids so every getElementById target also exists as a literal id= in this file
+  el('sim-readouts').innerHTML =
+    '<div class="glass rounded-xl p-3"><p class="text-xs uppercase tracking-wide text-slate-400">Step</p><p id="ro-step" class="text-lg font-bold text-teal-200 tabular-nums">1/6</p></div>' +
+    '<div class="glass rounded-xl p-3"><p class="text-xs uppercase tracking-wide text-slate-400">Electrolyte</p><p id="ro-el" class="text-lg font-bold text-teal-200 tabular-nums">pure H₂O</p></div>' +
+    '<div class="glass rounded-xl p-3"><p class="text-xs uppercase tracking-wide text-slate-400">Current (ammeter)</p><p id="ro-current" class="text-lg font-bold text-teal-200 tabular-nums">0 A</p></div>' +
+    '<div class="glass rounded-xl p-3"><p class="text-xs uppercase tracking-wide text-slate-400">V(H₂) cathode</p><p id="ro-h2" class="text-lg font-bold text-teal-200 tabular-nums">0.0 cm³</p></div>' +
+    '<div class="glass rounded-xl p-3"><p class="text-xs uppercase tracking-wide text-slate-400">V(O₂) anode</p><p id="ro-o2" class="text-lg font-bold text-teal-200 tabular-nums">0.0 cm³</p></div>' +
+    '<div class="glass rounded-xl p-3"><p class="text-xs uppercase tracking-wide text-slate-400">Running ratio H₂:O₂</p><p id="ro-ratio" class="text-lg font-bold text-teal-200 tabular-nums">—</p></div>';
+}
+function updateReadouts() {
+  if (!el('ro-h2')) return;
+  el('ro-step').textContent = (state.step + 1) + '/6 · ' + STEP_NAMES[state.step];
+  el('ro-el').textContent = state.electrolyte === 'acid' ? 'dilute H₂SO₄' : (state.electrolyte ? 'none (no ions!)' : 'pure H₂O');
+  el('ro-current').textContent = state.closed && state.electrolyte === 'acid' ? state.I.toFixed(1) + ' A' : '0 A';
+  el('ro-h2').textContent = state.h2.toFixed(1) + ' cm³';
+  el('ro-o2').textContent = o2shown().toFixed(1) + ' cm³';
+  el('ro-ratio').textContent = o2shown() >= 0.8 ? (state.h2 / o2shown()).toFixed(2) + ' : 1' : '—';
+}
+function renderModes() {
+  el('sim-modes').innerHTML =
+    '<span class="text-xs uppercase tracking-wide text-slate-500 self-center mr-1">Overlays</span>' +
+    '<button type="button" id="btn-ov-e" class="mode-btn px-3 py-1.5 rounded-lg text-xs font-semibold border border-slate-700 bg-slate-900/50">e⁻ flow (wires)</button>' +
+    '<button type="button" id="btn-ov-ion" class="mode-btn px-3 py-1.5 rounded-lg text-xs font-semibold border border-slate-700 bg-slate-900/50">ion flow (solution)</button>' +
+    '<button type="button" id="btn-ov-phen" class="mode-btn px-3 py-1.5 rounded-lg text-xs font-semibold border border-slate-700 bg-slate-900/50">phenolphthalein</button>' +
+    '<span class="text-xs text-slate-500 self-center">— turn BOTH first two ON to fix the #1 myth: electrons in wires, ions in solution</span>';
+  B('btn-ov-e', () => { state.eFlow = !state.eFlow; el('btn-ov-e').classList.toggle('active', state.eFlow); });
+  B('btn-ov-ion', () => { state.ionFlow = !state.ionFlow; el('btn-ov-ion').classList.toggle('active', state.ionFlow); });
+  B('btn-ov-phen', () => { state.phenol = !state.phenol; el('btn-ov-phen').classList.toggle('active', state.phenol);
+    if (state.phenol) addObs('With phenolphthalein: a faint pink appears near the cathode as H⁺ is discharged and OH⁻ is left behind (real-lab effect from K₂SO₄ mark-scheme pattern).'); });
+}
+function renderControls() {
+  el('ctrl-panel').innerHTML =
+    '<div>' +
+      '<label id="lbl-current" class="text-xs text-slate-400">Current I (set on the power pack): <span id="cur-val" class="font-bold text-teal-300">2.0 A</span></label>' +
+      '<input type="range" id="sl-current" min="0.5" max="4" step="0.1" value="2.0" class="w-full mt-1" aria-label="Current in amperes">' +
+      '<p class="text-xs text-slate-500 mt-1">Bubbles scale with I — more charge per second, more electrons, more gas particles.</p>' +
+    '</div>' +
+    '<div>' +
+      '<label class="text-xs text-slate-400">Playback speed (viewing only — real rates use 24.0 dm³ mol⁻¹ at RTP)</label>' +
+      '<div class="flex gap-2 mt-1">' +
+        '<button type="button" id="btn-spd-1" class="mode-btn px-3 py-1.5 rounded-lg text-xs font-semibold border border-slate-700 bg-slate-900/50">×1 real</button>' +
+        '<button type="button" id="btn-spd-5" class="mode-btn active px-3 py-1.5 rounded-lg text-xs font-semibold border border-slate-700 bg-slate-900/50">×5</button>' +
+        '<button type="button" id="btn-spd-20" class="mode-btn px-3 py-1.5 rounded-lg text-xs font-semibold border border-slate-700 bg-slate-900/50">×20</button>' +
+      '</div>' +
+    '</div>' +
+    '<div class="flex items-end gap-2">' +
+      '<button type="button" id="btn-switch" class="px-4 py-2 rounded-xl text-sm font-semibold bg-slate-800 hover:bg-slate-700 border border-slate-600 disabled:opacity-40" disabled>⏻ Switch: OPEN</button>' +
+    '</div>' +
+    '<div class="flex items-end gap-2">' +
+      '<button type="button" id="btn-reset-sim" class="px-4 py-2 rounded-xl text-sm font-semibold bg-slate-700 hover:bg-slate-600 border border-slate-500">⟲ Reset the experiment</button>' +
+    '</div>';
+  BI('sl-current', function () { state.I = parseFloat(el('sl-current').value) || 2; el('cur-val').textContent = state.I.toFixed(1) + ' A'; });
+  B('btn-spd-1', () => setSpeed(1)); B('btn-spd-5', () => setSpeed(5)); B('btn-spd-20', () => setSpeed(20));
+  B('btn-switch', () => {
+    if (!gate()) return;
+    if (state.step < 3 || state.electrolyte !== 'acid') { fb('Nothing happens — first pour the water and add a real electrolyte.', false); return; }
+    if (state.step >= 5) return;
+    if (state.closed) { state.closed = false; state.running = false; addObs('Switch opened — bubbling stops immediately. Electrolysis is forced: no current, no reaction.'); }
+    else { state.closed = true; state.running = true; addObs('Switch closed: the ammeter shows a steady current and bubbles stream from BOTH electrodes.'); if (state.step === 3) { state.step = 4; } }
+    renderGuide(); updateSwitchBtn();
+  });
+  B('btn-reset-sim', resetAll);
+  updateSwitchBtn();
+}
+function setSpeed(s) {
+  state.speed = s;
+  el('btn-spd-1').classList.toggle('active', s === 1);
+  el('btn-spd-5').classList.toggle('active', s === 5);
+  el('btn-spd-20').classList.toggle('active', s === 20);
+}
+function updateSwitchBtn() {
+  const b = el('btn-switch'); if (!b) return;
+  b.textContent = state.closed ? '⏻ Switch: CLOSED (electrolysing)' : '⏻ Switch: OPEN';
+  b.disabled = state.step < 3 || state.step >= 5;
+}
+function renderChips() {
+  el('guide-chips').innerHTML = STEP_NAMES.map((n, i) =>
+    '<span class="step-chip ' + (i === state.step ? 'cur' : i < state.step ? 'done' : '') + '">' + (i + 1) + ' · ' + n + '</span>').join('');
+}
+function renderGuide() {
+  if (!el('guide-chips')) return;
+  renderChips();
+  const g = el('guide-text'), a = el('guide-actions');
+  let txt = '', html = '';
+  if (state.step === 0) {
+    txt = 'Step 1 — Fill the trough with pure water. Pure H₂O is a covalent liquid with too few mobile ions to carry a current. Watch what the ammeter says when we later close the switch.';
+    html = '<button type="button" id="btn-pour" class="px-4 py-2 rounded-xl text-sm font-semibold bg-teal-600 hover:bg-teal-500 text-white">💧 Pour pure water into the trough</button>';
+  } else if (state.step === 1) {
+    txt = 'Step 2 — Electrolyte quiz: the water must conduct. Which substance do we dissolve in? (Predict first, then click.)';
+    html = '<button type="button" id="btn-el-sucrose" class="px-4 py-2 rounded-xl text-sm font-semibold bg-slate-800 hover:bg-slate-700 border border-slate-600">🍬 Sucrose (sugar)</button>' +
+           '<button type="button" id="btn-el-acid" class="px-4 py-2 rounded-xl text-sm font-semibold bg-slate-800 hover:bg-slate-700 border border-slate-600">🧪 Dilute sulfuric acid, H₂SO₄(aq)</button>' +
+           '<button type="button" id="btn-el-ethanol" class="px-4 py-2 rounded-xl text-sm font-semibold bg-slate-800 hover:bg-slate-700 border border-slate-600">🍶 Ethanol</button>';
+  } else if (state.step === 2) {
+    txt = 'Step 3 — Assemble the apparatus: two inert platinum (or graphite) electrodes under inverted measuring tubes, wired to a DC supply with an ammeter and a switch.';
+    html = '<button type="button" id="btn-setup" class="px-4 py-2 rounded-xl text-sm font-semibold bg-teal-600 hover:bg-teal-500 text-white">🔧 Fit electrodes + inverted tubes + circuit</button>';
+  } else if (state.step === 3) {
+    txt = 'Step 4 — PREDICT before you switch on: with current flowing, how will the two gas volumes compare? Then close the switch (or press the ⏻ button in Controls).';
+    html = '<button type="button" id="btn-p-0" class="px-3 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 border border-slate-600">1 : 1 — equal volumes</button>' +
+           '<button type="button" id="btn-p-1" class="px-3 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 border border-slate-600">2 : 1 — twice as much at the cathode (−)</button>' +
+           '<button type="button" id="btn-p-2" class="px-3 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 border border-slate-600">1 : 2 — twice as much at the anode (+)</button>' +
+           '<button type="button" id="btn-close" class="px-4 py-2 rounded-xl text-sm font-semibold bg-amber-500 hover:bg-amber-400 text-slate-900">⏻ Close the switch</button>';
+  } else if (state.step === 4) {
+    txt = 'Step 5 — Collecting. Bubbles rise and the water levels fall inside the tubes; the gas pocket at the cathode (−) grows about twice as fast. Try the current slider, then the e⁻ / ion overlays to see WHAT moves WHERE. Tubes auto-stop at ≈24 cm³ of H₂.';
+    html = '<button type="button" id="btn-fast" class="px-4 py-2 rounded-xl text-sm font-semibold bg-slate-800 hover:bg-slate-700 border border-slate-600">⏩ Speed up to ×20</button>';
+  } else if (state.step === 5) {
+    txt = 'Step 6 — Test both gases. Test the cathode tube with a LIGHTED splint and the anode tube with a GLOWING splint. Each correct test unlocks that electrode\u2019s half-equation card.';
+    html = '<button type="button" id="btn-test-h2" class="px-4 py-2 rounded-xl text-sm font-semibold bg-emerald-700 hover:bg-emerald-600 border border-emerald-600 text-white">🔥 Cathode tube — lighted splint</button>' +
+           '<button type="button" id="btn-test-o2" class="px-4 py-2 rounded-xl text-sm font-semibold bg-orange-700 hover:bg-orange-600 border border-orange-600 text-white">✨ Anode tube — glowing splint</button>';
+  } else {
+    txt = 'Experiment complete. You decomposed acidified water, proved the products and unlocked both half-equations. Read the unlocked cards, then move to the Calculations tab and the recap.';
+    html = '<button type="button" id="btn-again" class="px-4 py-2 rounded-xl text-sm font-semibold bg-slate-800 hover:bg-slate-700 border border-slate-600">⟲ Run it again</button>';
+  }
+  g.textContent = txt;
+  a.innerHTML = html;
+  B('btn-pour', () => { if (!gate()) return; state.step = 1; addObs('Pure water poured — it looks like a promising liquid, but it is almost an insulator.'); renderGuide(); fb('Water in. Now: what must dissolve in it for the current to flow?'); });
+  B('btn-el-sucrose', () => { if (!gate()) return; quizWrong('sucrose'); });
+  B('btn-el-ethanol', () => { if (!gate()) return; quizWrong('ethanol'); });
+  B('btn-el-acid', () => {
+    if (!gate()) return;
+    state.electrolyte = 'acid'; state.step = 2;
+    fb('Correct. Dilute H₂SO₄ is a strong electrolyte — it supplies mobile ions: H₂SO₄(aq) → 2H⁺(aq) + SO₄²⁻(aq). These are spectator ions here: they carry charge but the net reaction is still water decomposing.', true);
+    addObs('Dilute H₂SO₄ added — solution now contains mobile H⁺ and SO₄²⁻ ions (it conducts).');
+    renderGuide();
+  });
+  B('btn-setup', () => { if (!gate()) return; state.step = 3; addObs('Circuit set: DC supply − → cathode | anode → supply + (ammeter in series).'); renderGuide(); updateSwitchBtn(); fb('Ready. Make your prediction BEFORE you close the switch.'); });
+  B('btn-p-0', () => { state.pick = 0; markPick(); });
+  B('btn-p-1', () => { state.pick = 1; markPick(); });
+  B('btn-p-2', () => { state.pick = 2; markPick(); });
+  B('btn-close', () => { const b = el('btn-switch'); if (b) b.onclick(); });
+  B('btn-fast', () => { setSpeed(20); fb('Playback ×20 — the chemistry clock still accumulates real seconds (see lab time in the working).'); });
+  B('btn-test-h2', () => testGas(0));
+  B('btn-test-o2', () => testGas(1));
+  B('btn-again', resetAll);
+}
+function quizWrong(which) {
+  fb((which === 'sucrose'
+    ? 'No. Sucrose is a covalent molecular compound: it dissolves as whole molecules — no ions, no charge carriers, the bulb stays dark.'
+    : 'No. Ethanol is also a non-electrolyte: neutral molecules only, so no mobile ions and no conduction.') + ' Try again.', false);
+  addObs(which === 'sucrose' ? 'Sucrose solution: no ions → no conduction (negative control).' : 'Ethanol solution: no ions → no conduction (negative control).');
+}
+function markPick() {
+  ['btn-p-0', 'btn-p-1', 'btn-p-2'].forEach((id, i) => {
+    const b = el(id); if (!b) return;
+    b.classList.toggle('bg-teal-700', i === state.pick);
+    b.classList.toggle('bg-slate-800', i !== state.pick);
+  });
+  fb('Prediction locked. Now close the switch and watch the running ratio tile.');
+}
+function testGas(side) {
+  if (!gate()) { lockedMsg(); return; }
+  if (side === 0) {
+    if (state.testedH2) return;
+    if (state.h2 < 6) { fb('Not enough gas in the cathode tube yet — let it collect (need ≳6 cm³).', false); return; }
+    state.testedH2 = true;
+    state.fx.push({ kind: 'pop', side: 0, t: 1.6 });
+    addObs('Cathode gas + lighted splint → a squeaky POP: the gas is hydrogen, H₂ (it burns in oxygen).');
+    unlockCard('heq-cathode',
+      'CATHODE (−) · unlocked by the pop test',
+      '2H⁺(aq) + 2e⁻ → H₂(g)',
+      'Reduction — gain of electrons. Oxidation number of H falls +1 → 0, so H⁺ is the OXIDISING AGENT. RED CAT.',
+      '#6ee7b7');
+    fb('Pop! That half-equation card just unlocked →', true);
+  } else {
+    if (state.testedO2) return;
+    if (o2shown() < 3) { fb('Not enough gas in the anode tube yet — wait for more O₂ (need ≳3 cm³).', false); return; }
+    state.testedO2 = true;
+    state.fx.push({ kind: 'relight', side: 1, t: 1.8 });
+    addObs('Anode gas + glowing splint → the splint RELIGHTS: the gas is oxygen, O₂ (it supports combustion).');
+    unlockCard('heq-anode',
+      'ANODE (+) · unlocked by the relight test',
+      '2H₂O(l) → O₂(g) + 4H⁺(aq) + 4e⁻',
+      'Oxidation — loss of electrons. Oxidation number of O rises −2 → 0. (In alkaline solution: 4OH⁻(aq) → 2H₂O(l) + O₂(g) + 4e⁻.) AN OX.',
+      '#fda4af');
+    fb('Relit! The anode half-equation is unlocked →', true);
+  }
+  if (state.testedH2 && state.testedO2) {
+    if (state.step === 5) state.step = 6;
+    unlockCard('heq-overall',
+      'OVERALL · both cards combined',
+      '2 × cathode + anode: H⁺ and e⁻ cancel → 2H₂O(l) → 2H₂(g) + O₂(g)',
+      'Forced, non-spontaneous decomposition (energy stored in the products — the fuel cell runs it backwards). Mole ratio 2:1 → volume ratio 2:1 at the same T and p; mass ratio 1:8.',
+      '#99f6e4');
+    addObs('Overall equation confirmed: 2H₂O(l) → 2H₂(g) + O₂(g). The acid is not consumed — its solution simply becomes more concentrated.');
+    renderGuide(); updateSwitchBtn();
+  }
+  renderGuide();
+}
+function unlockCard(id, tag, eq, note, col) {
+  const c = el(id); if (!c) return;
+  c.classList.remove('locked');
+  c.innerHTML = '<p class="text-xs font-bold uppercase tracking-wide" style="color:' + col + '">' + tag + '</p>' +
+    '<p class="text-sm font-mono font-bold text-white mt-1 leading-snug">' + eq + '</p>' +
+    '<p class="text-xs text-slate-400 mt-2 leading-relaxed">' + note + '</p>';
+}
+function lockCards() {
+  [['heq-cathode', 'Cathode half-equation', '2H⁺(aq) + 2e⁻ → H₂(g)', '🔒 Locked — pass the cathode gas test (lighted splint → squeaky pop) to unlock.'],
+   ['heq-anode', 'Anode half-equation', '2H₂O(l) → O₂(g) + 4H⁺(aq) + 4e⁻', '🔒 Locked — pass the anode gas test (glowing splint relights) to unlock.'],
+   ['heq-overall', 'Overall equation', '2H₂O(l) → 2H₂(g) + O₂(g)', '🔒 Locked — unlock both electrodes first, then electrons and H⁺ cancel.']]
+  .forEach(x => {
+    const c = el(x[0]); if (!c) return;
+    c.classList.add('locked');
+    c.innerHTML = '<p class="text-xs font-bold uppercase tracking-wide text-slate-500">' + x[1] + '</p>' +
+      '<p class="text-sm font-mono text-slate-400 mt-1 leading-snug">' + x[2] + '</p>' +
+      '<p class="text-xs text-slate-500 mt-2 leading-relaxed">' + x[3] + '</p>';
+  });
+}
+function renderCardsBoot() {
+  el('heq-cathode').innerHTML = '<p class="text-xs font-bold uppercase tracking-wide text-slate-500">Cathode half-equation</p><p class="text-sm font-mono text-slate-400 mt-1 leading-snug">2H⁺(aq) + 2e⁻ → H₂(g)</p><p class="text-xs text-slate-500 mt-2 leading-relaxed">🔒 Locked — pass the cathode gas test (lighted splint → squeaky pop) to unlock.</p>';
+  el('heq-anode').innerHTML = '<p class="text-xs font-bold uppercase tracking-wide text-slate-500">Anode half-equation</p><p class="text-sm font-mono text-slate-400 mt-1 leading-snug">2H₂O(l) → O₂(g) + 4H⁺(aq) + 4e⁻</p><p class="text-xs text-slate-500 mt-2 leading-relaxed">🔒 Locked — pass the anode gas test (glowing splint relights) to unlock.</p>';
+  el('heq-overall').innerHTML = '<p class="text-xs font-bold uppercase tracking-wide text-slate-500">Overall equation</p><p class="text-sm font-mono text-slate-400 mt-1 leading-snug">2H₂O(l) → 2H₂(g) + O₂(g)</p><p class="text-xs text-slate-500 mt-2 leading-relaxed">🔒 Locked — unlock both electrode cards first.</p>';
+}
+function resetAll() {
+  state.step = 0; state.electrolyte = null; state.closed = false; state.running = false;
+  state.h2 = 0; state.o2 = 0; state.o2diss = 0; state.labTime = 0;
+  state.pick = null; state.pickChecked = false; state.pickResult = '';
+  state.testedH2 = false; state.testedO2 = false;
+  state.bubbles = []; state.fx = []; state.accH = 0; state.accO = 0;
+  initParticles();
+  state.obs = [];
+  addObs('A fresh trough of water awaits. Record observations as you go — colourless gases, not "smoke".');
+  lockCards();
+  renderGuide(); updateSwitchBtn(); updateReadouts();
+  fb('Reset. Start at Step 1: pour the pure water.');
+}
+
+/* =====================================================================
+   RENDERERS — static panels from T
+===================================================================== */
+function renderIntro() {
+  const s = t();
+  el('hdr-title').textContent = s.title;
+  el('hdr-sub').textContent = s.subtitle;
+  el('intro-h1').textContent = s.introH1;
+  el('intro-lead').textContent = s.introLead;
+  el('sim-caption').textContent = s.simCaption;
+  el('teacher-title').textContent = s.teacherTitle;
+  el('teacher-content').innerHTML = s.teacher.map(x => '<p>• ' + x + '</p>').join('');
+  el('intro-cards').innerHTML = s.concepts.map(c =>
+    '<div class="glass p-4"><h3 class="font-bold text-indigo-300 text-sm mb-1">' + c.t + '</h3><p class="text-sm text-slate-300 leading-relaxed">' + c.d + '</p></div>').join('');
+}
+function renderCalc() {
+  const s = t();
+  el('calc-title').textContent = s.calcTitle;
+  el('calc-sub').textContent = s.calcSub;
+  el('calc-inputs').innerHTML =
+    '<div><label id="lbl-vh" class="text-xs text-slate-400" for="calc-vh">Collected V(H₂) at the cathode / cm³</label>' +
+    '<input type="number" id="calc-vh" value="48.0" step="0.1" min="0" class="mt-1 w-full rounded-lg bg-slate-950/70 border border-slate-700 px-3 py-2 text-sm font-mono text-teal-200"></div>' +
+    '<div><label id="lbl-cur2" class="text-xs text-slate-400" for="calc-i">Current used (extension part only) / A</label>' +
+    '<input type="number" id="calc-i" value="2.0" step="0.1" min="0.1" class="mt-1 w-full rounded-lg bg-slate-950/70 border border-slate-700 px-3 py-2 text-sm font-mono text-teal-200"></div>' +
+    '<div class="flex items-end"><p class="text-xs text-slate-500 leading-relaxed">Gas collected over water, measured at RTP: M(V) = 24.0 dm³ mol⁻¹. M(H₂)=2.0, M(O₂)=32.0 g mol⁻¹.</p></div>';
+  B('btn-import-sim', () => {
+    el('calc-vh').value = state.h2 > 0.5 ? state.h2.toFixed(1) : '48.0';
+    el('calc-i').value = state.I.toFixed(1);
+    runCalc();
+  });
+}
+function runCalc() {
+  const w = el('calc-working');
+  w.classList.remove('hidden');
+  const vH2 = parseFloat(el('calc-vh').value), I = parseFloat(el('calc-i').value);
+  if (!isFinite(vH2) || vH2 <= 0 || !isFinite(I) || I <= 0) { w.textContent = 'Enter a positive gas volume in cm³ and a positive current in A.'; return; }
+  const L = [];
+  L.push('== CORE (examinable: stoichiometry and ionic half-equations) ==');
+  L.push('V(H₂) = ' + vH2.toFixed(1) + ' cm³ at RTP (24.0 dm³ mol⁻¹ = 24 000 cm³ mol⁻¹)');
+  const nH2 = vH2 / 24000;
+  L.push('Step 1   n(H₂) = V / 24 000 = ' + vH2.toFixed(1) + ' / 24 000 = ' + nH2.toExponential(2) + ' mol');
+  L.push('Step 2   From 2H₂O(l) → 2H₂(g) + O₂(g):  n(O₂) = n(H₂) / 2');
+  const nO2 = nH2 / 2;
+  L.push('         n(O₂) = ' + nH2.toExponential(2) + ' / 2 = ' + nO2.toExponential(2) + ' mol');
+  const vO2 = nO2 * 24000;
+  L.push('Step 3   V(O₂) = n × 24 000 = ' + nO2.toExponential(2) + ' × 24 000 = ' + vO2.toFixed(1) + ' cm³   → ratio ' + (vH2 / vO2).toFixed(2) + ' : 1 (always 2:1 — volume ∝ moles)');
+  L.push('Step 4   Also n(H₂O decomposed) = n(H₂) = ' + nH2.toExponential(2) + ' mol (2:2 in the equation)');
+  const mH = nH2 * 2.0, mO = nO2 * 32.0;
+  L.push('Step 5   Mass check: m(H₂) = n×M = ' + nH2.toExponential(2) + ' × 2.0 = ' + (mH * 1000).toFixed(1) + ' mg');
+  L.push('                  m(O₂) = ' + nO2.toExponential(2) + ' × 32.0 = ' + (mO * 1000).toFixed(1) + ' mg');
+  L.push('                  m(H₂) : m(O₂) = 1 : ' + (mO / mH).toFixed(1) + '  → BY MASS it is 1:8 — the 2:1 ratio is by VOLUME, not mass. (Classic trap.)');
+  L.push('');
+  L.push('== EXTENSION — clearly NOT in the HKDSE syllabus (2018 spec is silent on Faraday) ==');
+  L.push('Half-equation 2H⁺(aq) + 2e⁻ → H₂(g) shows 2 mol electrons per 1 mol H₂.');
+  const ne = 2 * nH2;
+  L.push('Step 6   n(e⁻) = 2 × n(H₂) = 2 × ' + nH2.toExponential(2) + ' = ' + ne.toExponential(2) + ' mol');
+  const Q = ne * 96500;
+  L.push('Step 7   Q = n(e⁻) × F = ' + ne.toExponential(2) + ' × 96 500 C mol⁻¹ = ' + Q.toFixed(0) + ' C');
+  L.push('Step 8   Q = I t  →  t = Q / I = ' + Q.toFixed(0) + ' / ' + I.toFixed(1) + ' = ' + (Q / I).toFixed(0) + ' s ≈ ' + (Q / I / 60).toFixed(1) + ' min at ' + I.toFixed(1) + ' A');
+  L.push('(Consistency check with the sim: at ' + I.toFixed(1) + ' A, H₂ forms at ≈ ' + (K_H2 * I).toFixed(2) + ' cm³ s⁻¹, so ' + vH2.toFixed(1) + ' cm³ needs ≈ ' + (vH2 / (K_H2 * I) / 60).toFixed(1) + ' min.)');
+  w.textContent = L.join('\n');
+}
+function renderMcq() {
+  const s = t();
+  el('pp-title').textContent = s.ppTitle;
+  el('pp-sub').textContent = s.ppSub;
+  el('pp-questions').innerHTML = s.questions.map((q, qi) =>
+    '<div class="space-y-2"><p class="font-semibold text-slate-100 text-sm">' + (qi + 1) + '. ' + q.q + '</p>' +
+    q.o.map((o, oi) =>
+      '<button type="button" class="mcq-opt w-full text-left text-sm px-4 py-2 rounded-xl border border-slate-700 bg-slate-900/50" data-q="' + qi + '" data-o="' + oi + '">' + 'ABCD'[oi] + ' · ' + o + '</button>').join('') +
+    '<p class="mcq-why hidden text-xs text-emerald-300/90 bg-emerald-950/40 border border-emerald-800/40 rounded-xl p-3 leading-relaxed"></p></div>').join('');
+  document.querySelectorAll('.mcq-opt').forEach(btn => {
+    btn.onclick = () => {
+      const q = s.questions[+btn.dataset.q];
+      const opts = document.querySelectorAll('.mcq-opt[data-q="' + btn.dataset.q + '"]');
+      opts.forEach(o => o.classList.remove('correct', 'wrong'));
+      btn.classList.add(+btn.dataset.o === q.a ? 'correct' : 'wrong');
+      opts[q.a].classList.add('correct');
+      const why = btn.closest('.space-y-2').querySelector('.mcq-why');
+      why.textContent = q.why;
+      why.classList.remove('hidden');
+    };
+  });
+}
+function renderRecap() {
+  const s = t();
+  el('recap-title').textContent = s.recapTitle;
+  let saved = [];
+  try { saved = JSON.parse(localStorage.getItem('ial-eow-recap') || '[]') || []; } catch (e) { saved = []; }
+  el('recap-list').innerHTML = s.recapGoals.map((g, i) =>
+    '<li class="flex items-start gap-2 text-sm"><input type="checkbox" class="goal-check mt-1" data-g="' + i + '"' + (saved[i] ? ' checked' : '') + '><span class="text-slate-300">' + g + '</span></li>').join('');
+  document.querySelectorAll('.goal-check').forEach(c => c.onchange = updateRecapProgress);
+  updateRecapProgress();
+  renderMyths();
+}
+function updateRecapProgress() {
+  const checks = document.querySelectorAll('.goal-check');
+  let n = 0; const arr = [];
+  checks.forEach((c, i) => { if (c.checked) n++; arr[i] = !!c.checked; });
+  el('recap-progress').textContent = n + ' / ' + checks.length + ' goals confirmed.';
+  try { localStorage.setItem('ial-eow-recap', JSON.stringify(arr)); } catch (e) { }
+}
+function renderMyths() {
+  const s = t();
+  el('myth-title').textContent = s.mythTitle;
+  el('myth-lead').textContent = s.mythLead;
+  el('myth-cards').innerHTML = s.myths.map((m, i) =>
+    '<div class="myth-card glass rounded-xl p-4" data-myth="' + i + '">' +
+    '<div class="myth-front"><span class="text-xs font-bold text-rose-400 uppercase">' + s.mythLabelMyth + '</span>' +
+    '<p class="text-sm text-slate-200 mt-2">' + m.m + '</p>' +
+    '<p class="text-xs text-slate-500 mt-3">' + s.mythFlip + '</p></div>' +
+    '<div class="myth-back"><span class="text-xs font-bold text-emerald-400 uppercase">' + s.mythLabelFact + '</span>' +
+    '<p class="text-sm text-slate-200 mt-2">' + m.f + '</p></div></div>').join('');
+  document.querySelectorAll('.myth-card').forEach(c => c.onclick = () => c.classList.toggle('flipped'));
+}
+
+/* =====================================================================
+   BOOT — only DOM text/innerHTML/classList, .onclick/.oninput binds,
+   resizeCanvas (no painting). All timers live inside the RAF loop.
+===================================================================== */
+renderIntro();
+renderReadouts();
+renderModes();
+renderControls();
+renderCardsBoot();
+renderGuide();
+addObs('A fresh trough of water awaits. Record observations as you go — colourless gases, not "smoke".');
+renderCalc();
+renderMcq();
+renderRecap();
+initParticles();
+resizeCanvas();
+updateReadouts();
+buildPredict();
+applyGate();
+bindLabTasks();
+</script>
+<script id="lab-runtime">(function () {
+'use strict';
+var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function relayout() {
+if (typeof window.scheduleResize === 'function') window.scheduleResize();
+else if (typeof window.resizeCanvas === 'function') window.resizeCanvas();
+}
+var pending = 0;
+function onRequestRelayout() {
+if (pending) return;
+pending = requestAnimationFrame(function () { pending = 0; relayout(); });
+}
+if (window.ResizeObserver) {
+var ro = new ResizeObserver(onRequestRelayout);
+document.querySelectorAll('.canvas-wrap').forEach(function (el) { ro.observe(el); });
+}
+window.addEventListener('orientationchange', onRequestRelayout);
+window.addEventListener('resize', onRequestRelayout);
+var bar = document.getElementById('next-bar');
+if (bar) {
+var setBarPad = function () {
+var h = Math.round(bar.offsetHeight);
+if (h > 0) document.body.style.setProperty('--next-bar-h', h + 'px');
+};
+setBarPad();
+if (window.ResizeObserver) new ResizeObserver(setBarPad).observe(bar);
+window.addEventListener('load', setBarPad);
+}
+var rail = document.getElementById('main-tabs');
+if (rail) {
+rail.setAttribute('role', 'tablist');
+var pills = Array.prototype.slice.call(rail.querySelectorAll('.tab-btn'));
+pills.forEach(function (btn, i) {
+var panel = document.getElementById('panel-' + btn.dataset.tab);
+btn.setAttribute('role', 'tab');
+btn.setAttribute('aria-selected', btn.classList.contains('active') ? 'true' : 'false');
+if (panel) {
+panel.setAttribute('role', 'tabpanel');
+btn.setAttribute('aria-controls', panel.id);
+panel.setAttribute('aria-labelledby', btn.id);
+}
+btn.addEventListener('keydown', function (e) {
+var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+if (!d) return;
+e.preventDefault();
+var next = pills[(i + d + pills.length) % pills.length];
+next.focus();
+if (typeof window.setTab === 'function') window.setTab(next.dataset.tab);
+});
+});
+rail.addEventListener('click', function () {
+setTimeout(function () {
+pills.forEach(function (b) { b.setAttribute('aria-selected', b.classList.contains('active') ? 'true' : 'false'); });
+var on = rail.querySelector('.tab-btn.active');
+if (on) on.scrollIntoView({ block: 'nearest', inline: 'center', behavior: reduce ? 'auto' : 'smooth' });
+}, 0);
+});
+}
+var dock = document.getElementById('sim-dock');
+if (dock && window.MutationObserver && !reduce) {
+new MutationObserver(function (m) {
+m.forEach(function (change) {
+var el = change.target;
+if (el.classList.contains('unlocked') && change.oldValue && /(^|\s)locked(\s|$)/.test(change.oldValue)) {
+el.classList.add('just-unlocked');
+setTimeout(function () { el.classList.remove('just-unlocked'); }, 750);
+}
+});
+}).observe(dock, { attributes: true, attributeFilter: ['class'], attributeOldValue: true });
+}
+document.addEventListener('click', function (e) {
+if (!e.target || !e.target.closest) return;
+if (e.target.closest('input, label, button, a, select')) return;
+var li = e.target.closest('li');
+if (!li) return;
+var box = li.querySelector('input[type="checkbox"], input[type="radio"]');
+if (!box || box.disabled) return;
+box.checked = box.type === 'checkbox' ? !box.checked : true;
+box.dispatchEvent(new Event('change', { bubbles: true }));
+box.dispatchEvent(new Event('input', { bubbles: true }));
+});
+if (window.IntersectionObserver && !reduce) {
+var io = new IntersectionObserver(function (entries) {
+entries.forEach(function (en) {
+if (!en.isIntersecting) return;
+en.target.classList.add('shown');
+io.unobserve(en.target);
+});
+}, { rootMargin: '0px 0px -6% 0px', threshold: 0.01 });
+document.querySelectorAll('.tab-panel > *').forEach(function (el, i) {
+el.classList.add('reveal');
+el.style.setProperty('--i', String(i));
+io.observe(el);
+});
+setTimeout(function () {
+document.querySelectorAll('.reveal:not(.shown)').forEach(function (el) { el.classList.add('shown'); });
+}, 2500);
+}
+})();</script>
+</body>
+</html>

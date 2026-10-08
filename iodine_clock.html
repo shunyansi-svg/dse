@@ -1,0 +1,1533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Iodine Clock Reaction | HKDSE Chemistry Topic IX (a)–(b)</title>
+<meta name="theme-color" content="#000000">
+<style>
+  input[type=range]{accent-color:#3dd6c6;}
+input[type=range]:disabled{accent-color:#475569;opacity:.55;}
+.ro-label{font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;color:#64748b;font-weight:700;}
+.ro-val{font-size:.95rem;color:#e2e8f0;font-weight:600;font-variant-numeric:tabular-nums;}
+table.dtab{border-collapse:collapse;width:100%;font-size:.78rem;}
+table.dtab th{background:rgba(2,6,23,.8);color:#99f6e4;font-weight:700;padding:.4rem .5rem;text-align:center;border:1px solid rgba(148,163,184,.15);font-size:.75rem;}
+table.dtab td{padding:.35rem .5rem;text-align:center;color:#cbd5e1;border:1px solid rgba(148,163,184,.12);font-variant-numeric:tabular-nums;}
+table.dtab tbody tr:nth-child(even) td{background:rgba(148,163,184,.04);}
+select.ans, input.ans{background:rgba(2,6,23,.85);border:1px solid rgba(148,163,184,.3);border-radius:.6rem;color:#e2e8f0;padding:.35rem .6rem;font-size:.82rem;}
+select.ans{accent-color:#3dd6c6;}
+input.ans:focus,select.ans:focus{outline:none;border-color:rgba(61,214,198,.7);}
+.calc-inp:focus{outline:none;border-color:rgba(61,214,198,.7);}
+.ctrl-btn:disabled{opacity:.45;cursor:not-allowed;}
+</style>
+<style id="lab-theme">/* Shared design system for the chemistry lab fleet. Source: _build/src/theme.css + tailwind.config.js. Edit the source, then run node _build/src/build.cjs. Do not hand-edit this block. */*,:after,:before{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(10,132,255,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(10,132,255,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }*,:after,:before{box-sizing:border-box;border:0 solid #d1d1d6}:after,:before{--tw-content:""}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;-o-tab-size:4;tab-size:4;font-family:-apple-system,BlinkMacSystemFont,SF Pro Text,SF Pro Display,Segoe UI Variable Text,Segoe UI,system-ui,Helvetica Neue,sans-serif;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:SF Mono,ui-monospace,Cascadia Mono,Segoe UI Mono,Consolas,monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0}fieldset,legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::-moz-placeholder,textarea::-moz-placeholder{opacity:1;color:#aeaeb2}input::placeholder,textarea::placeholder{opacity:1;color:#aeaeb2}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}.visible{visibility:visible}.invisible{visibility:hidden}.collapse{visibility:collapse}.static{position:static}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.sticky{position:sticky}.inset-0{inset:0}.z-10{z-index:10}.z-\[110\]{z-index:110}.col-span-1{grid-column:span 1/span 1}.col-span-2{grid-column:span 2/span 2}.mx-auto{margin-left:auto;margin-right:auto}.my-3{margin-top:.75rem;margin-bottom:.75rem}.mb-1{margin-bottom:.25rem}.mb-1\.5{margin-bottom:.375rem}.mb-10{margin-bottom:2.5rem}.mb-2{margin-bottom:.5rem}.mb-3{margin-bottom:.75rem}.mb-4{margin-bottom:1rem}.mb-5{margin-bottom:1.25rem}.mb-8{margin-bottom:2rem}.ml-1{margin-left:.25rem}.ml-auto{margin-left:auto}.mr-1{margin-right:.25rem}.mr-2{margin-right:.5rem}.ms-0{margin-inline-start:0}.ms-1{margin-inline-start:.25rem}.ms-2{margin-inline-start:.5rem}.mt-0{margin-top:0}.mt-0\.5{margin-top:.125rem}.mt-1{margin-top:.25rem}.mt-1\.5{margin-top:.375rem}.mt-2{margin-top:.5rem}.mt-3{margin-top:.75rem}.mt-4{margin-top:1rem}.mt-5{margin-top:1.25rem}.mt-6{margin-top:1.5rem}.block{display:block}.inline{display:inline}.flex{display:flex}.table{display:table}.grid{display:grid}.contents{display:contents}.hidden{display:none}.h-2{height:.5rem}.h-2\.5{height:.625rem}.h-3{height:.75rem}.h-auto{height:auto}.min-h-\[1\.25rem\]{min-height:1.25rem}.min-h-\[1rem\]{min-height:1rem}.min-h-\[24px\]{min-height:24px}.min-h-\[72px\]{min-height:72px}.w-14{width:3.5rem}.w-16{width:4rem}.w-20{width:5rem}.w-24{width:6rem}.w-28{width:7rem}.w-36{width:9rem}.w-6{width:1.5rem}.w-full{width:100%}.min-w-\[160px\]{min-width:160px}.max-w-3xl{max-width:48rem}.max-w-6xl{max-width:72rem}.max-w-sm{max-width:24rem}.max-w-xs{max-width:20rem}.flex-1{flex:1 1 0%}.shrink{flex-shrink:1}.grow{flex-grow:1}.border-collapse{border-collapse:collapse}.transform{transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.resize{resize:both}.list-inside{list-style-position:inside}.list-disc{list-style-type:disc}.grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}.grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid-cols-\[3rem_1fr\]{grid-template-columns:3rem 1fr}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-start{align-items:flex-start}.items-end{align-items:flex-end}.items-center{align-items:center}.items-baseline{align-items:baseline}.items-stretch{align-items:stretch}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-1{gap:.25rem}.gap-2{gap:.5rem}.gap-3{gap:.75rem}.gap-4{gap:1rem}.gap-5{gap:1.25rem}.gap-x-4{-moz-column-gap:1rem;column-gap:1rem}.gap-x-8{-moz-column-gap:2rem;column-gap:2rem}.gap-y-1{row-gap:.25rem}.gap-y-4{row-gap:1rem}.space-y-1>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.25rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.25rem*var(--tw-space-y-reverse))}.space-y-1\.5>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.375rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.375rem*var(--tw-space-y-reverse))}.space-y-2>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.5rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.5rem*var(--tw-space-y-reverse))}.space-y-3>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.75rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.75rem*var(--tw-space-y-reverse))}.space-y-4>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem*var(--tw-space-y-reverse))}.space-y-5>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.25rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.25rem*var(--tw-space-y-reverse))}.space-y-6>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.5rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.5rem*var(--tw-space-y-reverse))}.self-end{align-self:flex-end}.self-center{align-self:center}.overflow-hidden{overflow:hidden}.overflow-x-auto{overflow-x:auto}.whitespace-nowrap{white-space:nowrap}.whitespace-pre-line{white-space:pre-line}.whitespace-pre-wrap{white-space:pre-wrap}.text-wrap{text-wrap:wrap}.rounded{border-radius:.625rem}.rounded-2xl{border-radius:1.125rem}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:.75rem}.rounded-xl{border-radius:1rem}.border{border-width:1px}.border-l-\[3px\]{border-left-width:3px}.border-t{border-top-width:1px}.border-dashed{border-style:dashed}.\!border-indigo-500{--tw-border-opacity:1!important;border-color:rgb(10 132 255/var(--tw-border-opacity,1))!important}.border-amber-500{--tw-border-opacity:1;border-color:rgb(255 159 10/var(--tw-border-opacity,1))}.border-amber-500\/25{border-color:rgba(255,159,10,.25)}.border-amber-500\/30{border-color:rgba(255,159,10,.3)}.border-amber-500\/40{border-color:rgba(255,159,10,.4)}.border-amber-800{--tw-border-opacity:1;border-color:rgb(95 56 0/var(--tw-border-opacity,1))}.border-amber-800\/40{border-color:rgba(95,56,0,.4)}.border-emerald-500{--tw-border-opacity:1;border-color:rgb(48 209 88/var(--tw-border-opacity,1))}.border-emerald-500\/40{border-color:rgba(48,209,88,.4)}.border-emerald-600{--tw-border-opacity:1;border-color:rgb(36 168 63/var(--tw-border-opacity,1))}.border-emerald-600\/25{border-color:rgba(36,168,63,.25)}.border-emerald-600\/30{border-color:rgba(36,168,63,.3)}.border-emerald-600\/40{border-color:rgba(36,168,63,.4)}.border-emerald-700{--tw-border-opacity:1;border-color:rgb(27 122 46/var(--tw-border-opacity,1))}.border-emerald-700\/40{border-color:rgba(27,122,46,.4)}.border-emerald-800{--tw-border-opacity:1;border-color:rgb(18 84 31/var(--tw-border-opacity,1))}.border-emerald-800\/40{border-color:rgba(18,84,31,.4)}.border-indigo-500{--tw-border-opacity:1;border-color:rgb(10 132 255/var(--tw-border-opacity,1))}.border-indigo-500\/25{border-color:rgba(10,132,255,.25)}.border-indigo-500\/30{border-color:rgba(10,132,255,.3)}.border-orange-600{--tw-border-opacity:1;border-color:rgb(204 122 0/var(--tw-border-opacity,1))}.border-rose-500{--tw-border-opacity:1;border-color:rgb(255 69 63/var(--tw-border-opacity,1))}.border-rose-500\/25{border-color:rgba(255,69,63,.25)}.border-rose-500\/40{border-color:rgba(255,69,63,.4)}.border-rose-600{--tw-border-opacity:1;border-color:rgb(217 44 38/var(--tw-border-opacity,1))}.border-rose-600\/30{border-color:rgba(217,44,38,.3)}.border-rose-800{--tw-border-opacity:1;border-color:rgb(107 21 18/var(--tw-border-opacity,1))}.border-rose-800\/40{border-color:rgba(107,21,18,.4)}.border-sky-500{--tw-border-opacity:1;border-color:rgb(100 210 255/var(--tw-border-opacity,1))}.border-sky-500\/40{border-color:rgba(100,210,255,.4)}.border-sky-800{--tw-border-opacity:1;border-color:rgb(0 77 104/var(--tw-border-opacity,1))}.border-sky-800\/40{border-color:rgba(0,77,104,.4)}.border-slate-500{--tw-border-opacity:1;border-color:rgb(174 174 178/var(--tw-border-opacity,1))}.border-slate-600{--tw-border-opacity:1;border-color:rgb(161 161 166/var(--tw-border-opacity,1))}.border-slate-700{--tw-border-opacity:1;border-color:rgb(152 152 157/var(--tw-border-opacity,1))}.border-slate-700\/50{border-color:hsla(240,2%,61%,.5)}.border-slate-700\/60{border-color:hsla(240,2%,61%,.6)}.border-slate-700\/70{border-color:hsla(240,2%,61%,.7)}.border-slate-800{--tw-border-opacity:1;border-color:rgb(84 84 88/var(--tw-border-opacity,1))}.border-teal-500{--tw-border-opacity:1;border-color:rgb(100 210 255/var(--tw-border-opacity,1))}.border-teal-500\/25{border-color:rgba(100,210,255,.25)}.border-teal-500\/30{border-color:rgba(100,210,255,.3)}.border-teal-500\/40{border-color:rgba(100,210,255,.4)}.border-teal-500\/50{border-color:rgba(100,210,255,.5)}.border-teal-700{--tw-border-opacity:1;border-color:rgb(0 117 158/var(--tw-border-opacity,1))}.border-teal-700\/40{border-color:rgba(0,117,158,.4)}.border-teal-800{--tw-border-opacity:1;border-color:rgb(0 77 104/var(--tw-border-opacity,1))}.border-teal-800\/40{border-color:rgba(0,77,104,.4)}.border-white{--tw-border-opacity:1;border-color:rgb(245 245 247/var(--tw-border-opacity,1))}.border-white\/10{border-color:rgba(245,245,247,.1)}.\!bg-indigo-600{--tw-bg-opacity:1!important;background-color:rgb(0 96 223/var(--tw-bg-opacity,1))!important}.\!bg-teal-950{--tw-bg-opacity:1!important;background-color:rgb(0 23 31/var(--tw-bg-opacity,1))!important}.\!bg-teal-950\/40{background-color:rgba(0,23,31,.4)!important}.bg-amber-500{--tw-bg-opacity:1;background-color:rgb(255 159 10/var(--tw-bg-opacity,1))}.bg-amber-950{--tw-bg-opacity:1;background-color:rgb(29 17 0/var(--tw-bg-opacity,1))}.bg-amber-950\/10{background-color:rgba(29,17,0,.1)}.bg-amber-950\/20{background-color:rgba(29,17,0,.2)}.bg-amber-950\/30{background-color:rgba(29,17,0,.3)}.bg-emerald-600{--tw-bg-opacity:1;background-color:rgb(36 168 63/var(--tw-bg-opacity,1))}.bg-emerald-700{--tw-bg-opacity:1;background-color:rgb(27 122 46/var(--tw-bg-opacity,1))}.bg-emerald-950{--tw-bg-opacity:1;background-color:rgb(4 24 10/var(--tw-bg-opacity,1))}.bg-emerald-950\/10{background-color:rgba(4,24,10,.1)}.bg-emerald-950\/20{background-color:rgba(4,24,10,.2)}.bg-emerald-950\/35{background-color:rgba(4,24,10,.35)}.bg-emerald-950\/40{background-color:rgba(4,24,10,.4)}.bg-indigo-600{--tw-bg-opacity:1;background-color:rgb(0 96 223/var(--tw-bg-opacity,1))}.bg-indigo-950{--tw-bg-opacity:1;background-color:rgb(0 18 51/var(--tw-bg-opacity,1))}.bg-indigo-950\/10{background-color:rgba(0,18,51,.1)}.bg-indigo-950\/20{background-color:rgba(0,18,51,.2)}.bg-orange-700{--tw-bg-opacity:1;background-color:rgb(149 88 0/var(--tw-bg-opacity,1))}.bg-rose-950{--tw-bg-opacity:1;background-color:rgb(33 6 5/var(--tw-bg-opacity,1))}.bg-rose-950\/10{background-color:rgba(33,6,5,.1)}.bg-rose-950\/20{background-color:rgba(33,6,5,.2)}.bg-rose-950\/30{background-color:rgba(33,6,5,.3)}.bg-rose-950\/35{background-color:rgba(33,6,5,.35)}.bg-sky-950{--tw-bg-opacity:1;background-color:rgb(0 23 31/var(--tw-bg-opacity,1))}.bg-sky-950\/20{background-color:rgba(0,23,31,.2)}.bg-sky-950\/35{background-color:rgba(0,23,31,.35)}.bg-slate-700{--tw-bg-opacity:1;background-color:rgb(152 152 157/var(--tw-bg-opacity,1))}.bg-slate-800{--tw-bg-opacity:1;background-color:rgb(84 84 88/var(--tw-bg-opacity,1))}.bg-slate-800\/80{background-color:rgba(84,84,88,.8)}.bg-slate-900{--tw-bg-opacity:1;background-color:rgb(58 58 60/var(--tw-bg-opacity,1))}.bg-slate-900\/50{background-color:rgba(58,58,60,.5)}.bg-slate-900\/60{background-color:rgba(58,58,60,.6)}.bg-slate-950{--tw-bg-opacity:1;background-color:rgb(11 11 13/var(--tw-bg-opacity,1))}.bg-slate-950\/40{background-color:rgba(11,11,13,.4)}.bg-slate-950\/50{background-color:rgba(11,11,13,.5)}.bg-slate-950\/60{background-color:rgba(11,11,13,.6)}.bg-slate-950\/70{background-color:rgba(11,11,13,.7)}.bg-slate-950\/80{background-color:rgba(11,11,13,.8)}.bg-teal-600{--tw-bg-opacity:1;background-color:rgb(0 164 221/var(--tw-bg-opacity,1))}.bg-teal-700{--tw-bg-opacity:1;background-color:rgb(0 117 158/var(--tw-bg-opacity,1))}.bg-teal-950{--tw-bg-opacity:1;background-color:rgb(0 23 31/var(--tw-bg-opacity,1))}.bg-teal-950\/10{background-color:rgba(0,23,31,.1)}.bg-teal-950\/20{background-color:rgba(0,23,31,.2)}.bg-teal-950\/30{background-color:rgba(0,23,31,.3)}.bg-teal-950\/40{background-color:rgba(0,23,31,.4)}.p-2{padding:.5rem}.p-3{padding:.75rem}.p-4{padding:1rem}.p-5{padding:1.25rem}.p-6{padding:1.5rem}.p-8{padding:2rem}.px-2{padding-left:.5rem;padding-right:.5rem}.px-3{padding-left:.75rem;padding-right:.75rem}.px-4{padding-left:1rem;padding-right:1rem}.px-5{padding-left:1.25rem;padding-right:1.25rem}.py-1{padding-top:.25rem;padding-bottom:.25rem}.py-1\.5{padding-top:.375rem;padding-bottom:.375rem}.py-10{padding-top:2.5rem;padding-bottom:2.5rem}.py-2{padding-top:.5rem;padding-bottom:.5rem}.py-2\.5{padding-top:.625rem;padding-bottom:.625rem}.py-3{padding-top:.75rem;padding-bottom:.75rem}.py-6{padding-top:1.5rem;padding-bottom:1.5rem}.py-8{padding-top:2rem;padding-bottom:2rem}.pb-1{padding-bottom:.25rem}.pb-4{padding-bottom:1rem}.pb-8{padding-bottom:2rem}.pt-1{padding-top:.25rem}.pt-2{padding-top:.5rem}.pt-4{padding-top:1rem}.pt-5{padding-top:1.25rem}.text-left{text-align:left}.text-center{text-align:center}.text-right{text-align:right}.align-middle{vertical-align:middle}.font-mono{font-family:SF Mono,ui-monospace,Cascadia Mono,Segoe UI Mono,Consolas,monospace}.text-2xl{font-size:1.6rem;line-height:2.05rem}.text-3xl{font-size:1.95rem;line-height:2.3rem}.text-\[10px\]{font-size:10px}.text-\[11px\]{font-size:11px}.text-base{font-size:1rem;line-height:1.65rem}.text-lg{font-size:1.125rem;line-height:1.65rem}.text-sm{font-size:.9375rem;line-height:1.5rem}.text-xl{font-size:1.3125rem;line-height:1.8rem}.text-xs{font-size:.8125rem;line-height:1.35rem}.font-bold{font-weight:700}.font-extrabold{font-weight:800}.font-normal{font-weight:400}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.normal-case{text-transform:none}.italic{font-style:italic}.tabular-nums{--tw-numeric-spacing:tabular-nums;font-variant-numeric:var(--tw-ordinal) var(--tw-slashed-zero) var(--tw-numeric-figure) var(--tw-numeric-spacing) var(--tw-numeric-fraction)}.leading-relaxed{line-height:1.625}.leading-snug{line-height:1.375}.leading-tight{line-height:1.25}.tracking-wide{letter-spacing:.025em}.tracking-wider{letter-spacing:.05em}.tracking-widest{letter-spacing:.1em}.text-amber-200{--tw-text-opacity:1;color:rgb(255 214 168/var(--tw-text-opacity,1))}.text-amber-200\/80{color:rgba(255,214,168,.8)}.text-amber-200\/90{color:rgba(255,214,168,.9)}.text-amber-300{--tw-text-opacity:1;color:rgb(255 188 122/var(--tw-text-opacity,1))}.text-amber-300\/90{color:rgba(255,188,122,.9)}.text-cyan-200{--tw-text-opacity:1;color:rgb(174 228 255/var(--tw-text-opacity,1))}.text-emerald-100{--tw-text-opacity:1;color:rgb(217 242 225/var(--tw-text-opacity,1))}.text-emerald-200{--tw-text-opacity:1;color:rgb(168 230 189/var(--tw-text-opacity,1))}.text-emerald-200\/90{color:rgba(168,230,189,.9)}.text-emerald-200\/95{color:rgba(168,230,189,.95)}.text-emerald-300{--tw-text-opacity:1;color:rgb(108 224 143/var(--tw-text-opacity,1))}.text-emerald-300\/90{color:rgba(108,224,143,.9)}.text-emerald-400{--tw-text-opacity:1;color:rgb(76 212 111/var(--tw-text-opacity,1))}.text-indigo-200{--tw-text-opacity:1;color:rgb(191 220 255/var(--tw-text-opacity,1))}.text-indigo-300{--tw-text-opacity:1;color:rgb(115 177 255/var(--tw-text-opacity,1))}.text-orange-300{--tw-text-opacity:1;color:rgb(255 188 122/var(--tw-text-opacity,1))}.text-rose-100{--tw-text-opacity:1;color:rgb(255 220 217/var(--tw-text-opacity,1))}.text-rose-200{--tw-text-opacity:1;color:rgb(255 182 177/var(--tw-text-opacity,1))}.text-rose-200\/95{color:hsla(4,100%,85%,.95)}.text-rose-300{--tw-text-opacity:1;color:rgb(255 139 133/var(--tw-text-opacity,1))}.text-rose-300\/90{color:hsla(3,100%,76%,.9)}.text-rose-400{--tw-text-opacity:1;color:rgb(255 96 88/var(--tw-text-opacity,1))}.text-sky-200{--tw-text-opacity:1;color:rgb(174 228 255/var(--tw-text-opacity,1))}.text-sky-200\/95{color:rgba(174,228,255,.95)}.text-sky-300{--tw-text-opacity:1;color:rgb(131 214 255/var(--tw-text-opacity,1))}.text-slate-100{--tw-text-opacity:1;color:rgb(245 245 247/var(--tw-text-opacity,1))}.text-slate-200{--tw-text-opacity:1;color:rgb(229 229 234/var(--tw-text-opacity,1))}.text-slate-300{--tw-text-opacity:1;color:rgb(209 209 214/var(--tw-text-opacity,1))}.text-slate-400{--tw-text-opacity:1;color:rgb(199 199 204/var(--tw-text-opacity,1))}.text-slate-500{--tw-text-opacity:1;color:rgb(174 174 178/var(--tw-text-opacity,1))}.text-slate-600{--tw-text-opacity:1;color:rgb(161 161 166/var(--tw-text-opacity,1))}.text-slate-900{--tw-text-opacity:1;color:rgb(58 58 60/var(--tw-text-opacity,1))}.text-teal-100{--tw-text-opacity:1;color:rgb(217 242 255/var(--tw-text-opacity,1))}.text-teal-100\/90{color:rgba(217,242,255,.9)}.text-teal-200{--tw-text-opacity:1;color:rgb(174 228 255/var(--tw-text-opacity,1))}.text-teal-200\/80{color:rgba(174,228,255,.8)}.text-teal-300{--tw-text-opacity:1;color:rgb(131 214 255/var(--tw-text-opacity,1))}.text-teal-400{--tw-text-opacity:1;color:rgb(108 210 255/var(--tw-text-opacity,1))}.text-violet-300{--tw-text-opacity:1;color:rgb(212 155 255/var(--tw-text-opacity,1))}.text-white{--tw-text-opacity:1;color:rgb(245 245 247/var(--tw-text-opacity,1))}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.accent-teal-400{accent-color:#6cd2ff}.opacity-70{opacity:.7}.opacity-80{opacity:.8}.shadow{--tw-shadow:0 8px 24px rgba(0,0,0,.45);--tw-shadow-colored:0 8px 24px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}.outline-none{outline:2px solid transparent;outline-offset:2px}.outline{outline-style:solid}.ring-1{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color)}.ring-1,.ring-2{box-shadow:var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow,0 0 #0000)}.ring-2{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color)}.ring-teal-400{--tw-ring-opacity:1;--tw-ring-color:rgb(108 210 255/var(--tw-ring-opacity,1))}.ring-teal-400\/50{--tw-ring-color:rgba(108,210,255,.5)}.blur{--tw-blur:blur(8px)}.blur,.invert{filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.invert{--tw-invert:invert(100%)}.filter{filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.transition{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,-webkit-backdrop-filter;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter,-webkit-backdrop-filter;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.hover\:border-teal-400:hover{--tw-border-opacity:1;border-color:rgb(108 210 255/var(--tw-border-opacity,1))}.hover\:bg-amber-400:hover{--tw-bg-opacity:1;background-color:rgb(255 161 74/var(--tw-bg-opacity,1))}.hover\:bg-emerald-500:hover{--tw-bg-opacity:1;background-color:rgb(48 209 88/var(--tw-bg-opacity,1))}.hover\:bg-emerald-600:hover{--tw-bg-opacity:1;background-color:rgb(36 168 63/var(--tw-bg-opacity,1))}.hover\:bg-indigo-500:hover{--tw-bg-opacity:1;background-color:rgb(10 132 255/var(--tw-bg-opacity,1))}.hover\:bg-orange-600:hover{--tw-bg-opacity:1;background-color:rgb(204 122 0/var(--tw-bg-opacity,1))}.hover\:bg-slate-600:hover{--tw-bg-opacity:1;background-color:rgb(161 161 166/var(--tw-bg-opacity,1))}.hover\:bg-slate-700:hover{--tw-bg-opacity:1;background-color:rgb(152 152 157/var(--tw-bg-opacity,1))}.hover\:bg-teal-500:hover{--tw-bg-opacity:1;background-color:rgb(100 210 255/var(--tw-bg-opacity,1))}.hover\:bg-teal-600:hover{--tw-bg-opacity:1;background-color:rgb(0 164 221/var(--tw-bg-opacity,1))}.focus\:border-teal-400:focus{--tw-border-opacity:1;border-color:rgb(108 210 255/var(--tw-border-opacity,1))}.disabled\:cursor-not-allowed:disabled{cursor:not-allowed}.disabled\:opacity-40:disabled{opacity:.4}@media (min-width:640px){.sm\:col-span-2{grid-column:span 2/span 2}.sm\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.sm\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.sm\:grid-cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}}@media (min-width:768px){.md\:col-span-2{grid-column:span 2/span 2}.md\:col-span-5{grid-column:span 5/span 5}.md\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.md\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.md\:grid-cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}.md\:grid-cols-5{grid-template-columns:repeat(5,minmax(0,1fr))}.md\:text-3xl{font-size:1.95rem;line-height:2.3rem}.md\:text-4xl{font-size:2.35rem;line-height:2.6rem}.md\:text-base{font-size:1rem;line-height:1.65rem}.md\:text-sm{font-size:.9375rem;line-height:1.5rem}}@media (min-width:1024px){.lg\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.lg\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.lg\:grid-cols-6{grid-template-columns:repeat(6,minmax(0,1fr))}}:root {color-scheme: dark;--ink:        #000000;--panel:      #1c1c1e;--panel-2:    #2c2c2e;--panel-3:    #3a3a3c;--hairline:   rgba(84, 84, 88, .65);--hairline-2: rgba(84, 84, 88, .42);--label:      #f5f5f7;--label-2:    #a1a1a6;--label-3:    #6e6e73;--action:     #0a84ff;--action-hi:  #409cff;--action-dim: rgba(10, 132, 255, .14);--locked:     #ff9f0a;--locked-dim: rgba(255, 159, 10, .13);--correct:    #30d158;--correct-dim:rgba(48, 209, 88, .13);--wrong:      #ff453f;--wrong-dim:  rgba(255, 69, 63, .12);--font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display","Segoe UI Variable Text", "Segoe UI", system-ui, "Helvetica Neue", sans-serif;--font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display","Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif;--font-mono: "SF Mono", ui-monospace, "Cascadia Mono", "Segoe UI Mono", Consolas, monospace;--r-sm: 8px;--r-md: 12px;--r-lg: 18px;--r-xl: 24px;--ease-out:   cubic-bezier(.25, .1, .25, 1);--ease-spring:cubic-bezier(.32, .72, 0, 1);--dur-1: .18s;--dur-2: .32s;--dur-3: .55s;--shadow-1: 0 1px 2px rgba(0,0,0,.4);--shadow-2: 0 8px 24px rgba(0,0,0,.45);--shadow-3: 0 20px 60px rgba(0,0,0,.55);--gut: clamp(1rem, 4vw, 2rem);}*, *::before, *::after { box-sizing: border-box; }html {-webkit-text-size-adjust: 100%;text-size-adjust: 100%;scroll-behavior: smooth;scroll-padding-top: 5rem;}body {margin: 0;font-family: var(--font-sans);background: var(--ink);color: var(--label);min-height: 100dvh;-webkit-font-smoothing: antialiased;letter-spacing: 0;}body::before {content: "";position: fixed;inset: -20% -10% auto -10%;height: 60vh;background: radial-gradient(60% 100% at 50% 0%, rgba(10,132,255,.09), transparent 70%);pointer-events: none;z-index: 0;}main, body > div:first-of-type { position: relative; z-index: 1; }h1 { font-size: 1.9rem; }h2 { font-size: 1.35rem; }h3 { font-size: 1.125rem; }h4 { font-size: 1rem; }h1, h2, h3, h4 {font-family: var(--font-display);font-weight: 700;letter-spacing: -.003em;text-wrap: balance;}p { text-wrap: pretty; }b, strong { font-weight: 600; color: var(--label); }sub, sup { font-size: .8em; line-height: 0; }a { color: var(--action-hi); text-decoration: none; }::selection { background: rgba(10,132,255,.32); }:focus-visible {outline: 2px solid var(--action-hi);outline-offset: 2px;border-radius: 4px;}[class*="text-[10px]"], [class*="text-[11px]"] { font-size: .8125rem; }body {padding-top: env(safe-area-inset-top);padding-bottom: calc(var(--next-bar-h, 0px) + env(safe-area-inset-bottom));}.glass, .panel, .shell, .ro-card, .eqcard, .control-card, .guide-card,.method-card, .progress-card, .mixer-card, .heq-card, .map-box {background: var(--panel);border: 1px solid var(--hairline-2);border-radius: var(--r-lg);}.glass, .panel, .shell { box-shadow: var(--shadow-2); }header.glass { padding: clamp(1.1rem, 3vw, 1.75rem); }#hdr-title, .app-title {font-family: var(--font-display);font-weight: 700;font-size: clamp(1.5rem, 1.2rem + 1.1vw, 2.1rem);line-height: 1.15;letter-spacing: -.015em;}#hdr-sub, .app-subtitle { color: var(--label-2); font-size: 1rem; margin-top: .35rem; }.chip, .chip-dim, .chip-dse, .chip-warn, .ms-chip, .assume-chip, .badge,.dock-step, .dock-state, .ladder-tag, .section-kicker {display: inline-flex;align-items: center;gap: .3rem;padding: .2rem .6rem;border-radius: 999px;border: 1px solid var(--hairline);background: rgba(255,255,255,.05);color: var(--label-2);font-size: .75rem;font-weight: 600;letter-spacing: .01em;line-height: 1.5;}.chip, .chip-dim, .chip-dse, .chip-warn, .ms-chip, .assume-chip, .badge {max-width: 100%;align-self: flex-start;}.chip-dse, .chip:not(.chip-dim):not(.chip-warn) {border-color: rgba(10,132,255,.34);background: var(--action-dim);color: var(--action-hi);}.chip-dim, .assume-off { color: var(--label-3); background: rgba(255,255,255,.04); }.chip-warn { border-color: rgba(255,159,10,.38); background: var(--locked-dim); color: var(--locked); }.badge.ox  { border-color: rgba(255,159,10,.4); background: var(--locked-dim); color: var(--locked); }.badge.red { border-color: rgba(10,132,255,.4); background: var(--action-dim); color: var(--action-hi); }.section-kicker {background: none; border: 0; padding: 0;color: var(--label-3);font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;}.section-title { font-size: 1.35rem; }.section-lead  { color: var(--label-2); font-size: 1rem; line-height: 1.6; }#main-tabs, .main-tabs {display: flex;flex-wrap: nowrap;gap: .375rem;overflow-x: auto;scroll-snap-type: x proximity;scrollbar-width: none;-webkit-overflow-scrolling: touch;padding-block: .25rem;-webkit-mask-image: linear-gradient(90deg, transparent, #000 1.25rem, #000 calc(100% - 1.25rem), transparent);mask-image: linear-gradient(90deg, transparent, #000 1.25rem, #000 calc(100% - 1.25rem), transparent);}#main-tabs::-webkit-scrollbar, .main-tabs::-webkit-scrollbar { display: none; }.tab-btn, .view-btn, .mode-btn, .sim-mode-btn, .mbtn, .rbtn, .probe-btn,.pol-btn, .rp-btn, .ctrl-btn, .samp-btn, .sp-btn, .drill-btn, .sim-btn,.sub-btn, .mini-btn, .act-btn, .hint-btn, .btn, .btn-ghost, .btn-teal,.btn-primary, .route-btn, .guide-toggle, #next-go, .btn-run {font-family: inherit;font-size: .9375rem;font-weight: 600;color: var(--label);background: var(--panel-2);border: 1px solid transparent;border-radius: var(--r-md);padding: .55rem .95rem;cursor: pointer;display: inline-flex;align-items: center;gap: .45rem;flex: 0 1 auto;scroll-snap-align: center;transition: background var(--dur-1) var(--ease-out), color var(--dur-1) var(--ease-out),border-color var(--dur-1) var(--ease-out), transform var(--dur-1) var(--ease-spring);-webkit-tap-highlight-color: transparent;}.tab-btn { white-space: nowrap; flex: 0 0 auto; }.tab-btn { color: var(--label-2); background: transparent; }.tab-btn:hover { color: var(--label); background: rgba(255,255,255,.06); }.tab-btn.active {color: var(--label);background: var(--panel-2);box-shadow: var(--shadow-1), inset 0 1px 0 rgba(255,255,255,.07);}button:hover:not(:disabled) { background: var(--panel-3); }button:active:not(:disabled) { transform: scale(.97); }button:disabled, [aria-disabled="true"] { opacity: .38; cursor: not-allowed; }.btn-primary, .btn-run { background: var(--action); color: #fff; }.btn-primary:hover:not(:disabled), .btn-run:hover:not(:disabled) { background: var(--action-hi); }.sp-btn.on, .samp-btn.sel, .sub-btn.on, .mini-btn.on, .mode-btn.active,.mbtn.active, .rbtn.active, .drill-btn.on, .route-btn.on, .map-box.on,.view-btn.on, .pol-btn.on {background: var(--action-dim);border-color: rgba(10,132,255,.45);color: var(--action-hi);}.tab-panel { display: none; }.tab-panel.active {display: block;animation: panel-in var(--dur-3) var(--ease-spring) both;}@keyframes panel-in {from { opacity: 0; transform: translateY(10px) scale(.994); }to   { opacity: 1; transform: none; }}.dock {position: relative;border: 1px solid var(--hairline);border-radius: var(--r-lg);background: var(--panel);padding: clamp(.9rem, 2.5vw, 1.15rem);overflow: hidden;transition: border-color var(--dur-2) var(--ease-out), box-shadow var(--dur-2) var(--ease-out);}.dock::before {content: "";position: absolute;inset: 0 auto 0 0;width: 3px;background: var(--label-3);transition: background var(--dur-2) var(--ease-out);}.dock.locked   { border-color: rgba(255,159,10,.38); }.dock.locked::before   { background: var(--locked); }.dock.unlocked { border-color: rgba(48,209,88,.4); }.dock.unlocked::before { background: var(--correct); }.dock-head { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; }.dock-step {background: rgba(255,255,255,.06);border-color: var(--hairline);color: var(--label-2);font-size: .75rem;letter-spacing: .04em;text-transform: uppercase;border-radius: var(--r-sm);}.dock-state { margin-left: auto; font-weight: 700; }.st-lock { background: var(--locked-dim); border-color: rgba(255,159,10,.4); color: var(--locked); }.st-open { background: var(--correct-dim); border-color: rgba(48,209,88,.4);  color: var(--correct); }.dock-why, #dock-locknote { color: var(--label-2); font-size: .9375rem; line-height: 1.55; }@keyframes dock-unlock {0%   { box-shadow: 0 0 0 0 rgba(48,209,88,.55); }70%  { box-shadow: 0 0 0 10px rgba(48,209,88,0); }100% { box-shadow: 0 0 0 0 rgba(48,209,88,0); }}.dock.just-unlocked { animation: dock-unlock .7s var(--ease-out) 1; }@keyframes tick-in { from { opacity: 0; transform: scale(.4); } to { opacity: 1; transform: scale(1); } }.dock.just-unlocked .st-open { animation: tick-in .35s var(--ease-spring) both; }.pr-opt, .pred-opt {display: block;width: 100%;text-align: left;background: var(--panel-2);border: 1px solid var(--hairline-2);border-radius: var(--r-md);padding: .7rem .85rem;font-size: .9375rem;color: var(--label);cursor: pointer;white-space: normal;transition: border-color var(--dur-1) var(--ease-out), background var(--dur-1) var(--ease-out),transform var(--dur-1) var(--ease-spring);}.pr-opt:hover:not(:disabled), .pred-opt:hover:not(:disabled) { border-color: rgba(10,132,255,.5); background: var(--panel-3); }.pr-opt:active:not(:disabled), .pred-opt:active:not(:disabled) { transform: scale(.99); }.pr-opt.picked, .pred-opt.picked { border-color: var(--action); background: var(--action-dim); color: var(--label); }.pr-opt.correct, .pred-opt.correct, .route-btn.right, .mcq-opt.correct {border-color: rgba(48,209,88,.65);background: var(--correct-dim);}.pr-opt.wrong, .pred-opt.wrong, .route-btn.bad, .mcq-opt.wrong {border-color: rgba(255,69,63,.55);background: var(--wrong-dim);}.pred-opt:disabled { cursor: not-allowed; opacity: .45; }#next-bar {position: sticky;bottom: 0;z-index: 40;padding: .45rem var(--gut) max(.45rem, env(safe-area-inset-bottom));}#next-bar > .glass {max-width: 76rem;margin-inline: auto;display: flex;align-items: center;gap: .6rem;flex-wrap: wrap;padding: .4rem .4rem .4rem .85rem;border-radius: var(--r-lg);background: rgba(28,28,30,.82);border: 1px solid var(--hairline);box-shadow: var(--shadow-2);-webkit-backdrop-filter: saturate(180%) blur(20px);backdrop-filter: saturate(180%) blur(20px);}#next-text, .next-copy, #next-bar #next-text {color: var(--label);font-size: .9375rem;min-width: 0;flex: 1 1 15rem;}#next-go {flex: 0 0 auto;background: var(--action);color: #fff;border: 0;padding: .5rem .85rem;font-size: .875rem;}#next-go:hover:not(:disabled) { background: var(--action-hi); }.ico { width: 1.05em; height: 1.05em; flex: 0 0 auto; vertical-align: -.18em; }.canvas-wrap {position: relative;width: 100%;min-height: 0;background: var(--panel);border: 1px solid var(--hairline-2);border-radius: var(--r-lg);overflow: hidden;}.canvas-wrap canvas {position: static;display: block;width: 100%;height: auto;border-radius: 0;}.ro-k, .ro-l, .lbl, .map-lab, .field-l, .progress-label {color: var(--label-3);font-size: .75rem;font-weight: 700;letter-spacing: .05em;text-transform: uppercase;}.ro-v, .map-val, .stat, .mixer-readout { color: var(--label); font-variant-numeric: tabular-nums; }.ro-card, .map-box, .control-card {border: 1px solid var(--hairline-2);background: var(--panel-2);border-radius: var(--r-md);}.bar-track, .progress-track { background: var(--panel-3); border-radius: 999px; overflow: hidden; }.bar-fill, .progress-fill { background: var(--action); transition: width var(--dur-3) var(--ease-spring); }.work, .eqbox, .kbd, .eqline, code, pre { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }.work {background: var(--ink);border: 1px solid var(--hairline-2);border-radius: var(--r-md);color: var(--label-2);font-size: .9375rem;line-height: 1.7;padding: .9rem 1rem;overflow-x: auto;}.work .hl { color: var(--action-hi); }.work .dim { color: var(--label-3); }.step-h {color: var(--action-hi);font-size: .8125rem;font-weight: 700;letter-spacing: .05em;text-transform: uppercase;}input[type="text"], input[type="number"], input[type="search"], select, textarea,.field, .field-i, .calc-inp {width: 100%;font-family: inherit;font-size: 1rem;color: var(--label);background: var(--panel-2);border: 1px solid var(--hairline);border-radius: var(--r-md);padding: .55rem .7rem;transition: border-color var(--dur-1) var(--ease-out), background var(--dur-1) var(--ease-out);-webkit-appearance: none;appearance: none;}input:focus, select:focus, textarea:focus { outline: none; border-color: var(--action); background: var(--panel); }select {background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23a1a1a6' d='M1.4 0 6 4.6 10.6 0 12 1.4 6 8 0 1.4z'/%3E%3C/svg%3E");background-repeat: no-repeat;background-position: right .65rem center;padding-right: 1.9rem;}label, .calc-lbl, .field-l {color: var(--label-2); font-size: .8125rem; font-weight: 600; letter-spacing: 0; text-transform: none;}input[type="range"] {-webkit-appearance: none; appearance: none;width: 100%; height: 28px; background: transparent; cursor: pointer;accent-color: var(--action);}input[type="range"]::-webkit-slider-runnable-track { height: 4px; border-radius: 999px; background: var(--panel-3); }input[type="range"]::-webkit-slider-thumb {-webkit-appearance: none; appearance: none;width: 24px; height: 24px; margin-top: -10px;border-radius: 50%; background: #fff; border: 0;box-shadow: 0 1px 4px rgba(0,0,0,.5);transition: transform var(--dur-1) var(--ease-spring);}input[type="range"]:active::-webkit-slider-thumb { transform: scale(1.12); }input[type="range"]::-moz-range-track { height: 4px; border-radius: 999px; background: var(--panel-3); }input[type="range"]::-moz-range-thumb { width: 22px; height: 22px; border: 0; border-radius: 50%; background: #fff; }input[type="checkbox"], input[type="radio"] { width: 1.1rem; height: 1.1rem; accent-color: var(--action); }.mcq-opt, .myth-card, .ms-point, .evidence-grid > *, .concept-grid > *, .guide-card {border: 1px solid var(--hairline-2);border-radius: var(--r-md);background: var(--panel-2);}.mcq-opt { padding: .75rem .9rem; font-size: .9375rem; cursor: pointer; }.mcq-opt:hover { border-color: rgba(10,132,255,.5); }.myth-card { cursor: pointer; transition: border-color var(--dur-2) var(--ease-out); }.myth-card:hover { border-color: rgba(10,132,255,.45); }.myth-back { display: none; }.myth-card.flipped .myth-front { display: none; }.myth-card.flipped .myth-back { display: block; animation: flip-in var(--dur-2) var(--ease-spring) both; }@keyframes flip-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }.tag-w { background: var(--correct-dim); border-color: rgba(48,209,88,.4); color: var(--correct); }.tag-c { background: var(--locked-dim);  border-color: rgba(255,159,10,.4);  color: var(--locked); }.tag-i { background: var(--wrong-dim);   border-color: rgba(255,69,63,.4);   color: var(--wrong); }.hint-btn { border-color: rgba(255,159,10,.35); background: var(--locked-dim); color: var(--locked); font-size: .8125rem; }.fail-box { border-left: 3px solid var(--wrong); background: var(--wrong-dim); border-radius: var(--r-md); padding: .7rem .9rem; }table, .datatbl { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }th, td { padding: .55rem .7rem; text-align: left; border-bottom: 1px solid var(--hairline-2); font-size: .9375rem; }th { color: var(--label-3); font-size: .75rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; }tbody tr:last-child > td { border-bottom: 0; }tbody tr { transition: background var(--dur-1) var(--ease-out); }tbody tr:hover { background: rgba(255,255,255,.04); }.lab-card {display: block;border: 1px solid var(--hairline-2);border-radius: var(--r-lg);background: var(--panel);color: var(--label);transition: transform var(--dur-2) var(--ease-spring), border-color var(--dur-2) var(--ease-out),box-shadow var(--dur-2) var(--ease-out);}.lab-card:hover { transform: translateY(-3px); border-color: rgba(10,132,255,.5); box-shadow: var(--shadow-3); }.lab-card:active { transform: translateY(-1px) scale(.995); }.reveal { opacity: 0; transform: translateY(14px); }.reveal.shown {opacity: 1; transform: none;transition: opacity var(--dur-3) var(--ease-out), transform var(--dur-3) var(--ease-spring);transition-delay: calc(var(--i, 0) * 45ms);}@media (pointer: coarse) {button, summary, [role="button"], .tab-btn, .pr-opt, .pred-opt, .mcq-opt,.myth-card, .lab-card, select, .field, .field-i, .calc-inp, .ans,input:not([type="checkbox"]):not([type="radio"]):not([type="range"]) { min-height: 44px !important; }input[type="checkbox"], input[type="radio"] { min-width: 28px !important; min-height: 28px !important; }label:has(> input[type="checkbox"]), label:has(> input[type="radio"]),.ms-point { min-height: 44px; display: flex; align-items: center; }.pr-opt, .pred-opt, .mcq-opt { display: flex; align-items: center; }li:has(> input[type="checkbox"]), li:has(> input[type="radio"]),li:has(.goal-check), li:has(.mloss) {cursor: pointer;min-height: 44px;display: flex;align-items: flex-start;padding-block: .3rem;}}@media (max-width: 640px) {.chip, .chip-dim, .chip-dse, .chip-warn, .badge, .dock-step, .dock-state, .ladder-tag {padding: .1rem .45rem;}#hdr-sub, .app-subtitle { font-size: .9375rem; line-height: 1.5; }#next-bar > .glass > span:first-child { display: none; }header.glass { gap: .6rem; }}@media (max-width: 768px) {.flex { flex-wrap: wrap; }}@media (min-width: 1024px) {:root { --gut: 2rem; }#main-tabs, .main-tabs {gap: .25rem;background: var(--panel-2);border-radius: var(--r-md);padding: .25rem;margin-inline: 0;overflow: visible;width: fit-content;-webkit-mask-image: none;mask-image: none;}.tab-btn { border-radius: var(--r-sm); }}:root {--bg: #000000;--bg-2: #0b0b0d;--panel: #1c1c1e;--panel-2: #2c2c2e;--panel-3: #37373a;--line: rgba(84, 84, 88, .42);--line-strong: rgba(84, 84, 88, .65);--text: #f5f5f7;--muted: #a1a1a6;--faint: #6e6e73;--teal: #64d2ff;--blue: #0a84ff;--amber: #ff9f0a;--rose: #ff453f;--green: #30d158;--radius: 12px;--shadow: 0 8px 24px rgba(0,0,0,.45);}@media (prefers-reduced-motion: reduce) {html { scroll-behavior: auto; }*, *::before, *::after {animation-duration: .001ms !important;animation-iteration-count: 1 !important;transition-duration: .001ms !important;}.reveal { opacity: 1; transform: none; }}@media print {html, body { background: #fff !important; color: #111 !important; }body::before { display: none; }* {color: #111 !important;background-image: none !important;box-shadow: none !important;-webkit-backdrop-filter: none !important;backdrop-filter: none !important;}.glass, .panel, .shell, .dock, .canvas-wrap, .ro-card, .mcq-opt, .myth-card,.lab-card, .btn, button, table, th, td { border-color: #c7c7cc !important; background-color: #fff !important; }.tab-panel { display: block !important; break-inside: avoid; }#next-bar, #btn-teacher, #pr-reveal, #pr-why, .hint-btn { display: none !important; }.reveal { opacity: 1 !important; transform: none !important; }.myth-back { display: block !important; }.myth-front { display: none !important; }}</style>
+</head>
+<body class="text-slate-200">
+<div class="max-w-6xl mx-auto px-4 py-6">
+
+  <!-- ============ HEADER ============ -->
+  <header class="glass p-5 mb-5 flex flex-wrap items-start justify-between gap-3">
+    <div>
+      <div class="flex items-center gap-2 flex-wrap mb-1">
+        <span class="chip">HKDSE Chemistry</span>
+        <span class="chip">Topic IX (a)–(b)</span>
+        <span class="chip">+ Topic XIII (b)–(c) elective</span>
+        <span class="chip">following progress</span>
+</div>
+      <h1 id="hdr-title" class="text-2xl md:text-3xl font-extrabold text-white leading-tight">The Iodine Clock Reaction</h1>
+      <p id="hdr-sub" class="text-sm text-slate-400 mt-1">Peroxodisulfate–iodide clock: measure initial rates with the blue-black flash, deduce orders, k and Ea.</p>
+    </div>
+    <button type="button" id="btn-teacher" onclick="toggleTeacher()" class="btn btn-ghost"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg><span>Teacher notes</span></button>
+  </header>
+  <div id="teacher-panel" class="glass p-5 mb-5 hidden">
+    <h2 id="teacher-title" class="font-bold text-amber-300 mb-2">Teacher notes</h2>
+    <div id="teacher-content" class="text-sm text-slate-300 space-y-2 leading-relaxed">
+      <p><span class="font-bold text-white">Syllabus:</span> HKDSE Topic IX (a)–(b), with the rate equation and activation energy of Topic XIII (b)–(c). Rate = 1/t (s⁻¹) because the fixed thiosulfate dose means a fixed amount of I₂ is produced at the flash. Running notes: peroxodisulfate is an oxidiser / skin–eye irritant — dilute solutions, goggles.</p>
+      <p class="font-bold text-amber-300 pt-1">Tap a card to flip — the myth side is what candidates write; the fact side is what the MS wants.</p>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 pt-1">
+        <div class="myth-card glass rounded-xl p-4" onclick="this.classList.toggle('flipped')"><div class="myth-front"><span class="text-xs font-bold text-rose-400 uppercase">Myth</span><p class="text-sm text-slate-200 mt-2 leading-relaxed">The “2” in front of 2I⁻ means the reaction is second order in iodide.</p></div><div class="myth-back"><span class="text-xs font-bold text-emerald-400 uppercase">Fact</span><p class="text-sm text-slate-200 mt-2 leading-relaxed">Orders are EXPERIMENTAL, never from coefficients. Here rate = k[S₂O₈²⁻][I⁻] — first order in each, total order 2.</p></div></div>
+        <div class="myth-card glass rounded-xl p-4" onclick="this.classList.toggle('flipped')"><div class="myth-front"><span class="text-xs font-bold text-rose-400 uppercase">Myth</span><p class="text-sm text-slate-200 mt-2 leading-relaxed">Heating speeds the clock up by lowering the activation energy.</p></div><div class="myth-back"><span class="text-xs font-bold text-emerald-400 uppercase">Fact</span><p class="text-sm text-slate-200 mt-2 leading-relaxed">Ea is FIXED. Heating raises the proportion of collisions with E ≥ Ea, so k = A·e^(−Ea/RT) rises — Ea only falls when a catalyst opens a new route.</p></div></div>
+        <div class="myth-card glass rounded-xl p-4" onclick="this.classList.toggle('flipped')"><div class="myth-front"><span class="text-xs font-bold text-rose-400 uppercase">Myth</span><p class="text-sm text-slate-200 mt-2 leading-relaxed">The blue-black flash means the peroxodisulfate has all reacted.</p></div><div class="myth-back"><span class="text-xs font-bold text-emerald-400 uppercase">Fact</span><p class="text-sm text-slate-200 mt-2 leading-relaxed">It marks the instant the tiny fixed dose of S₂O₃²⁻ is used up — only a small % of the main reactants have gone, so t measures the initial rate.</p></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ TABS ============ -->
+  <nav id="main-tabs" class="flex flex-wrap gap-2 mb-5">
+    <button type="button" id="tab-intro" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold border border-slate-700 bg-slate-900/60" data-tab="intro" onclick="setTab('intro')">1 · Introduction</button>
+    <button type="button" id="tab-sim"   class="tab-btn active px-4 py-2 rounded-xl text-sm font-semibold border border-slate-700 bg-slate-900/60" data-tab="sim"   onclick="setTab('sim')">2 · Simulation</button>
+    <button type="button" id="tab-calc"  class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold border border-slate-700 bg-slate-900/60" data-tab="calc"  onclick="setTab('calc')">3 · Calculations</button>
+    <button type="button" id="tab-mcq"   class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold border border-slate-700 bg-slate-900/60" data-tab="mcq"   onclick="setTab('mcq')">4 · Past-paper practice</button>
+    <button type="button" id="tab-recap" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold border border-slate-700 bg-slate-900/60" data-tab="recap" onclick="setTab('recap')">5 · Recap &amp; misconceptions</button>
+  </nav>
+
+  <!-- ============ PANEL: INTRODUCTION ============ -->
+  <section id="panel-intro" class="tab-panel mb-5">
+    <div class="glass p-6 space-y-5">
+      <h2 id="intro-h1" class="text-xl font-bold text-white"></h2>
+      <p id="intro-lead" class="text-sm md:text-base text-slate-300 leading-relaxed"></p>
+      <div id="intro-cards" class="grid md:grid-cols-2 gap-3"></div>
+    </div>
+  </section>
+
+  <!-- ============ PANEL: SIMULATION ============ -->
+  <section id="panel-sim" class="tab-panel active mb-5">
+    <div class="glass p-5">
+    <div id="sim-dock" class="dock locked mb-3" aria-live="polite">
+      <div class="dock-head mb-2">
+        <span class="dock-step">Task 1</span>
+        <span class="text-sm font-bold text-white" id="dock-title">Predict before you mix anything</span>
+        <span class="dock-state st-lock" id="dock-state">Locked</span>
+      </div>
+      <p class="text-xs text-slate-300 mb-2">Commit to an answer and the stopwatch controls below will unlock — then run the clock and see whether you were right.</p>
+      <p id="pr-q" class="text-sm font-semibold text-slate-100 leading-relaxed"></p>
+      <div id="pr-opts" class="flex flex-wrap gap-2 mt-3"></div>
+      <button type="button" id="pr-reveal" class="act-btn mt-3">Reveal · mark-scheme answer</button>
+      <p id="pr-why" class="hidden mt-3 text-xs text-emerald-200/95 bg-emerald-950/35 border border-emerald-800/40 rounded-xl p-3 leading-relaxed"></p>
+      <p class="text-xs text-amber-200 mt-2" id="dock-locknote">Locked — answer the prediction above correctly to unlock the apparatus controls.</p>
+    </div>
+      <div class="flex flex-wrap gap-2 mb-3" id="sim-modes"></div>
+      <div class="grid lg:grid-cols-2 gap-5">
+        <div>
+          <div class="canvas-wrap rounded-xl border border-slate-700/70 bg-slate-950/70"><canvas id="sim-canvas" aria-label="Beaker simulation: colourless solution flashes blue-black at the clock time, with a digital stopwatch"></canvas></div>
+          <p id="sim-caption" class="text-xs text-slate-400 mt-3 leading-relaxed"></p>
+          <div id="sim-readouts" class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-4"></div>
+          <p id="msg-line" class="text-xs text-amber-300 mt-3 min-h-[1rem]"></p>
+        </div>
+        <div class="space-y-4">
+          <div class="glass p-4">
+            <h3 class="text-sm font-bold text-teal-300 mb-2">The two reactions running in the beaker</h3>
+            <div class="text-sm text-slate-300 font-mono leading-relaxed space-y-1">
+              <p>① slow (clocked): 2I⁻(aq) + S₂O₈²⁻(aq) → I₂(aq) + 2SO₄²⁻(aq)</p>
+              <p>② fast (timer): I₂(aq) + 2S₂O₃²⁻(aq) → 2I⁻(aq) + S₄O₆²⁻(aq)</p>
+            </div>
+            <div id="cat-eq" class="hidden text-sm font-mono text-emerald-300/90 leading-relaxed mt-2 pt-2 border-t border-white/10">
+              <p>Fe²⁺ route ①: S₂O₈²⁻(aq) + 2Fe²⁺(aq) → 2SO₄²⁻(aq) + 2Fe³⁺(aq)</p>
+              <p>Fe²⁺ route ②: 2Fe³⁺(aq) + 2I⁻(aq) → I₂(aq) + 2Fe²⁺(aq) — catalyst regenerated</p>
+            </div>
+            <p id="clock-logic" class="text-xs text-slate-400 mt-2 leading-relaxed"></p>
+            <p id="species-panel" class="text-xs text-slate-400 mt-3 pt-2 border-t border-white/10 leading-relaxed"></p>
+          </div>
+          <div id="fair-test" class="glass p-4 text-xs leading-relaxed text-slate-300"></div>
+          <div class="glass p-4">
+            <div class="flex items-center justify-between gap-2 mb-2 flex-wrap">
+              <h3 class="text-sm font-bold text-white">Results — your measurements</h3>
+              <div class="flex gap-2">
+                <button type="button" id="btn-record" onclick="openRecord()" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-teal-600 hover:bg-teal-500 text-white disabled:opacity-40" disabled>Record run (calculate 1/t)</button>
+                <button type="button" id="btn-clear-data" onclick="clearData()" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-800 hover:bg-slate-700 border border-slate-600">Clear</button>
+              </div>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="dtab">
+                <thead id="data-thead"></thead>
+                <tbody id="data-tbody"></tbody>
+              </table>
+            </div>
+            <p class="text-xs text-slate-500 mt-2">t is measured by the on-screen stopwatch; you must compute the rate yourself — the flash only gives you the induction time.</p>
+          </div>
+        </div>
+      </div>
+      <div class="glass p-4 mt-4">
+        <h3 class="text-sm font-bold text-white mb-2">Controls</h3>
+        <p id="ctrl-note" class="text-xs text-amber-200/90 mb-3"></p>
+        <div id="ctrl-panel" class="grid md:grid-cols-2 gap-x-8 gap-y-4"></div>
+      </div>
+      <div class="flex flex-wrap items-center gap-3 mt-4">
+        <button type="button" id="btn-start" onclick="startRun()" class="ctrl-btn bg-emerald-600 hover:bg-emerald-500 text-white">▶ Start reaction (mix solutions)</button>
+        <button type="button" id="btn-reset" onclick="resetRun()" class="ctrl-btn bg-slate-700 hover:bg-slate-600 text-white border border-slate-600">⟲ Reset beaker</button>
+        <div class="flex items-center gap-1 ml-auto">
+          <span class="text-xs text-slate-500 font-bold uppercase tracking-wide mr-1">Clock speed</span>
+          <button type="button" id="btn-sp1" onclick="setSpeed(1)" class="mini-btn on">×1</button>
+          <button type="button" id="btn-sp2" onclick="setSpeed(2)" class="mini-btn">×2</button>
+          <button type="button" id="btn-sp4" onclick="setSpeed(4)" class="mini-btn">×4</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="glass p-5 mt-4">
+      <div class="flex items-center justify-between flex-wrap gap-2 mb-2">
+        <h3 class="font-bold text-white" id="chart-title">Plot — drawn from your recorded runs</h3>
+        <div id="x-toggle" class="flex gap-1">
+          <button type="button" id="x-btn-S" onclick="setXVar('S')" class="mini-btn on">x = [S₂O₈²⁻]</button>
+          <button type="button" id="x-btn-I" onclick="setXVar('I')" class="mini-btn">x = [I⁻]</button>
+        </div>
+      </div>
+      <div class="canvas-wrap rounded-xl border border-slate-700/70 bg-slate-950/70"><canvas id="chart-canvas" aria-label="Hand-drawn graph of the recorded kinetic data with line of best fit"></canvas></div>
+      <p id="chart-hint" class="text-xs text-slate-400 mt-2 leading-relaxed"></p>
+    </div>
+
+    <div class="glass p-5 mt-4">
+      <div class="dock-head mb-2"><span class="dock-step">Task 2</span><span class="text-sm font-bold text-white">Break it on purpose</span></div>
+      <p class="text-xs text-slate-400 mb-3">Three classic wrong moves in the iodine clock. Tap each one and see exactly why the mark scheme gives 0.</p>
+      <div class="flex flex-wrap gap-2">
+        <button type="button" class="act-btn" data-fail="a">Start the watch after mixing</button>
+        <button type="button" class="act-btn" data-fail="b">Stop only when the whole beaker is deep blue</button>
+        <button type="button" class="act-btn" data-fail="c">Let total volume drift between runs</button>
+        <button type="button" class="act-btn" id="fail-clear">Clear</button>
+      </div>
+      <div id="fail-panel" class="text-sm text-slate-300 mt-3"></div>
+    </div>
+    <div class="glass p-5 mt-4">
+      <div class="dock-head mb-2"><span class="dock-step">Task 3</span><span class="text-sm font-bold text-white">Explain why doubling [S₂O₈²⁻] halves t — the 3-mark chain</span></div>
+      <p class="text-xs text-slate-400 mb-3">Try writing the explanation first, then climb down the hint ladder as far as you need. Each mark needs the rate definition, the order, and the graph evidence.</p>
+      <div class="flex flex-wrap gap-2">
+        <button type="button" class="act-btn" data-hint="1">Hint 1</button>
+        <button type="button" class="act-btn" data-hint="2">Hint 2</button>
+        <button type="button" class="act-btn" data-hint="3">Hint 3</button>
+      </div>
+      <p id="hint-text" class="text-sm text-amber-200 mt-3"></p>
+    </div>
+    <div class="glass p-5 mt-4">
+      <h3 class="font-bold text-white mb-1">Predict → check</h3>
+      <p id="predict-q" class="text-sm text-slate-300 mb-3"></p>
+      <div id="predict-opts" class="flex flex-wrap gap-2 mb-3"></div>
+      <button type="button" id="btn-predict-reveal" onclick="revealPredict()" class="px-4 py-2 rounded-xl text-sm font-semibold bg-indigo-600 hover:bg-indigo-500 text-white">Reveal mark-scheme answer</button>
+      <p id="predict-fb" class="text-xs leading-relaxed mt-3 hidden"></p>
+    </div>
+
+    <div class="glass p-5 mt-4">
+      <h3 class="font-bold text-white mb-1">Your conclusion — decide <em>before</em> you look it up</h3>
+      <p class="text-xs text-slate-400 mb-3">Use the straight line through the origin on your plot: gradient logic ⇒ order. The coefficients in the equation tell you nothing.</p>
+      <div class="grid md:grid-cols-2 gap-4 items-start">
+        <div class="grid grid-cols-2 gap-4">
+          <label class="text-xs font-bold text-slate-400">Order w.r.t. S₂O₈²⁻
+            <select id="sel-order-s" class="ans w-full mt-1"><option value="">—</option><option value="0">0</option><option value="1">1</option><option value="2">2</option></select>
+          </label>
+          <label class="text-xs font-bold text-slate-400">Order w.r.t. I⁻
+            <select id="sel-order-i" class="ans w-full mt-1"><option value="">—</option><option value="0">0</option><option value="1">1</option><option value="2">2</option></select>
+          </label>
+          <label class="text-xs font-bold text-slate-400">Overall order
+            <select id="sel-order-tot" class="ans w-full mt-1"><option value="">—</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select>
+          </label>
+        </div>
+        <div class="space-y-1.5 text-xs text-slate-300">
+          <p class="font-bold text-slate-400">Units of the rate constant k:</p>
+          <label class="flex items-center gap-2"><input type="radio" name="kunits" id="ku-a" class="accent-teal-400"> s⁻¹</label>
+          <label class="flex items-center gap-2"><input type="radio" name="kunits" id="ku-b" class="accent-teal-400"> mol dm⁻³ s⁻¹</label>
+          <label class="flex items-center gap-2"><input type="radio" name="kunits" id="ku-c" class="accent-teal-400"> mol⁻¹ dm³ s⁻¹</label>
+          <label class="flex items-center gap-2"><input type="radio" name="kunits" id="ku-d" class="accent-teal-400"> mol⁻² dm⁶ s⁻¹</label>
+        </div>
+      </div>
+      <button type="button" id="btn-reveal-concl" onclick="revealConclusion()" class="px-4 py-2 rounded-xl text-sm font-semibold bg-teal-600 hover:bg-teal-500 text-white mt-4">Check my conclusion</button>
+      <div id="conclusion-text" class="text-sm leading-relaxed mt-4 hidden"></div>
+    </div>
+
+    <!-- Record-run verification modal (kept from the original sim) -->
+    <div id="modal-rate" class="fixed inset-0 z-[110] hidden items-center justify-center px-4" style="background:rgba(2,6,23,.75)">
+      <div class="glass p-6 max-w-sm w-full" style="border-top:4px solid #0d9488">
+        <h3 class="text-lg font-bold text-white mb-2">Calculate the rate yourself</h3>
+        <p class="text-sm text-slate-300 leading-relaxed">Flash time t = <span id="modal-time" class="font-bold text-teal-300 text-lg font-mono"></span> s<br>Rate ∝ 1/t. Enter 1/t (s⁻¹, 4 d.p.):</p>
+        <input type="number" step="0.0001" id="rate-input" class="ans w-full mt-3 text-center text-lg font-mono" placeholder="e.g. 0.0400">
+        <p id="rate-err" class="text-xs text-rose-300 mt-2 hidden"></p>
+        <div class="flex gap-3 mt-4">
+          <button type="button" id="btn-rate-cancel" onclick="closeRecord()" class="flex-1 py-2.5 rounded-xl font-bold text-sm bg-slate-700 hover:bg-slate-600 text-white">Cancel</button>
+          <button type="button" id="btn-rate-ok" onclick="verifyRate()" class="flex-1 py-2.5 rounded-xl font-bold text-sm bg-teal-600 hover:bg-teal-500 text-white">Verify &amp; record</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PANEL: CALCULATIONS ============ -->
+  <section id="panel-calc" class="tab-panel mb-5">
+    <div class="glass p-6 space-y-5">
+      <h2 id="calc-title" class="text-xl font-bold text-white">Deduce the order and k — with full working</h2>
+      <p id="calc-sub" class="text-sm text-slate-400"></p>
+      <div class="grid md:grid-cols-2 gap-4">
+        <select id="sel-kept" class="ans"><option value="I">[I⁻] kept constant (vary [S₂O₈²⁻])</option><option value="S">[S₂O₈²⁻] kept constant (vary [I⁻])</option></select>
+        <div class="text-xs text-slate-500 leading-relaxed pt-1">Initial-rate method: vary ONE reagent, keep the other and the total volume fixed.</div>
+      </div>
+      <div id="calc-inputs" class="grid md:grid-cols-5 gap-4"></div>
+      <div>
+        <button type="button" id="btn-calc" class="px-4 py-2 rounded-xl text-sm font-semibold bg-indigo-600 hover:bg-indigo-500 text-white" onclick="runCalc()">Check working</button>
+      </div>
+      <div id="calc-working" class="text-sm font-mono bg-slate-950/70 border border-slate-700/60 rounded-xl p-4 whitespace-pre-wrap text-slate-300 hidden"></div>
+    </div>
+    <div class="glass p-6 mt-4 space-y-4">
+      <h3 class="text-lg font-bold text-white">n = cV check — concentration AFTER mixing</h3>
+      <p class="text-xs text-slate-400 leading-relaxed">The Jun 2025 marker complaints: students use the <strong>stock</strong> concentration in the rate equation. You must use the concentration in the 50.0 cm³ <strong> mixture</strong>: n = cV, then c(new) = n / V(total).</p>
+      <div class="grid md:grid-cols-3 gap-4">
+        <label><span class="calc-lbl">Stock c / mol dm⁻³</span><input type="number" step="0.001" id="cs" class="calc-inp" value="0.100"></label>
+        <label><span class="calc-lbl">Volume pipetted / cm³</span><input type="number" step="0.5" id="vs" class="calc-inp" value="10.0"></label>
+        <label><span class="calc-lbl">Total mixture volume / cm³</span><input type="number" step="0.5" id="vt" class="calc-inp" value="50.0"></label>
+      </div>
+      <button type="button" id="btn-calc-dil" class="px-4 py-2 rounded-xl text-sm font-semibold bg-indigo-600 hover:bg-indigo-500 text-white" onclick="runCalcDil()">Check dilution working</button>
+      <div id="calc-dil" class="text-sm font-mono bg-slate-950/70 border border-slate-700/60 rounded-xl p-4 whitespace-pre-wrap text-slate-300 hidden"></div>
+    </div>
+  </section>
+
+  <!-- ============ PANEL: PAST PAPER MCQs ============ -->
+  <section id="panel-mcq" class="tab-panel mb-5">
+    <div class="glass p-6">
+      <h2 id="pp-title" class="text-xl font-bold text-white mb-1">Past-paper practice</h2>
+      <p id="pp-sub" class="text-xs text-slate-400 mb-5"></p>
+      <div id="pp-questions" class="space-y-6"></div>
+    </div>
+  </section>
+
+  <!-- ============ PANEL: RECAP ============ -->
+  <section id="panel-recap" class="tab-panel mb-5">
+    <div class="glass rounded-2xl p-6 space-y-6">
+      <div>
+        <h2 id="recap-title" class="text-xl font-bold text-white">Recap checklist</h2>
+        <p id="recap-sub" class="text-sm text-slate-400 mt-1 mb-3">Tick each goal only when you can explain it without notes.</p>
+        <ul id="recap-list" class="space-y-2"></ul>
+        <p id="recap-progress" class="text-xs text-slate-500 mt-3"></p>
+      </div>
+      <div class="border-t border-white/10 pt-5">
+        <h3 class="text-sm font-bold text-rose-300 uppercase tracking-wide mb-2" id="myth-title">Common misconceptions</h3>
+        <p class="text-xs text-slate-400 mb-4" id="myth-lead">Tap a card to flip.</p>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3" id="myth-cards"></div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="text-center text-xs text-slate-600 pb-8">HKDSE Chemistry · Topic IX (a)–(b) rate of reaction, with the elective rate work of Topic XIII · interactive lab</footer>
+</div>
+
+<div id="next-bar" class="max-w-6xl mx-auto px-5 pb-4">
+  <div class="glass rounded-xl px-4 py-2 flex flex-wrap items-center gap-3 text-sm">
+    <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Next step</span>
+    <span id="next-text" class="text-slate-200 font-semibold flex-1">Answer the Task 1 prediction above the beaker controls</span>
+    <button type="button" id="next-go" class="act-btn" onclick="goNext()">Take me there</button>
+  </div>
+</div>
+
+<script>
+/* =====================================================================
+   STRINGS — flat English T. No Chinese. No language toggle.
+===================================================================== */
+const T = {
+  title: 'The Iodine Clock Reaction',
+  subtitle: 'Topic IX (a)–(b) — follow the rate by the clock, then read the order off the data',
+  introH1: 'One flash, three numbers: t, rate ∝ 1/t, and the order',
+  introLead: 'The reaction between S₂O₈²⁻(aq) and I⁻(aq) is colourless and invisible — until a hidden timer runs out and the whole solution flashes blue-black in an instant. That flash is a clock: it tells you how long a fixed, tiny amount of S₂O₃²⁻ took to be consumed, so 1/t is proportional to the INITIAL rate (syllabus 11.4i allows clock reactions for the initial-rate method). In this lab you will vary [S₂O₈²⁻] and [I⁻] under a fair test (constant total volume), deduce the orders and k, then use temperature runs to estimate Ea from an Arrhenius plot.',
+  concepts: [
+    { t: 'The clock chemistry', d: '① slow, clocked: 2I⁻(aq) + S₂O₈²⁻(aq) → I₂(aq) + 2SO₄²⁻(aq). ② fast: I₂(aq) + 2S₂O₃²⁻(aq) → 2I⁻(aq) + S₄O₆²⁻(aq). Thiosulfate destroys every I₂ made — no colour — until it is exhausted; then free I₂ + starch gives the blue-black complex. Starch is present FROM THE START: colourless → blue-black, never reversed.' },
+    { t: 'Rate equation', d: 'rate = k[A]ᵐ[B]ⁿ. Order with respect to A is m; overall order = m + n. k (the rate constant) is the only thing that depends on temperature; the concentrations in the equation are the current ones.' },
+    { t: 'Half-life link (11.1v, 11.2)', d: 't½ is the time for [reactant] to halve; calculate it from a concentration–time graph. For a FIRST-order reaction t½ is CONSTANT — each halving takes the same time whatever the starting concentration, so "constant t½" is exam evidence for first order. The clock measures the initial rate; a full rate–time curve (your next lab: iodination of propanone, 11.6/CP9a) is what you use to read t½ off. Half-life IS examinable at a past paper.' },
+    { t: 'Why rate ∝ 1/t', d: 'Because [S₂O₃²⁻]₀ ≪ [S₂O₈²⁻], [I⁻], the reactants barely change before the flash — "the rate does not change significantly / is constant at the start" (Oct 2024 Q2). Exactly: t = [S₂O₃²⁻]₀ / (2 × rate₁), so 1/t is proportional to rate, not equal to it — valid only with the same small thiosulfate dose and the same total volume.' },
+    { t: 'The clock hand: S₂O₃²⁻', d: 'The thiosulfate dose sets how long the clock ticks: doubling [S₂O₃²⁻]₀ doubles t WITHOUT changing rate₁. Thiosulfate is not a catalyst and does not "slow" anything — it removes iodine as it forms. Keep its volume fixed when comparing rates; vary it only to watch the induction time stretch.' },
+    { t: 'Fair test — constant TOTAL volume', d: 'The Jun 2025 PEF worst-answered control: every run must end at the same total volume (here 50.0 cm³), topping up with water. Otherwise every concentration changes at once and the "one variable" test is meaningless. Concentrations in the rate equation are AFTER mixing: c = c(stock)·V(stock)/V(total) — never the stock value.' },
+    { t: 'Temperature, Ea, Arrhenius', d: 'k = A·e^(−Ea/RT), so ln(1/t) vs 1/T is a straight line with gradient = −Ea/R (the Arrhenius equation is given; R = 8.31 J mol⁻¹ K⁻¹; T in kelvin). This reaction has a high Ea ≈ 57.5 kJ mol⁻¹ — compare YOUR fitted value against that benchmark — because BOTH reacting ions are negative: S₂O₈²⁻ and I⁻ repel on approach (Oct 2024). A positive E⦵ makes it feasible, never fast.' },
+    { t: 'How to use this lab', d: 'Tab 2: run the clock in three modes (concentration / temperature / Fe²⁺ catalyst), record each flash time by computing 1/t yourself, watch the hand-drawn plot build, and state your conclusion. Tab 3: stepwise order + k working and the n = cV mixing trap. Tab 4: real exam-style questions. Tab 5: flip the myth cards.' },
+    { t: 'Out of scope / next unit', d: 'Iodination of propanone with sampling + titration is the OTHER clock-type investigation (11.6 / CP9a) — your next lab. Sₙ1/Sₙ2, quantitative Maxwell–Boltzmann integrations, and confusing k with the equilibrium constant Kc (a classic PEF trap) are all OUT. Half-life is IN (11.1v, 11.2).' }
+  ],
+  simCaption: 'What the animation models: a 50.0 cm³ mixture of 0.100 mol dm⁻³ Na₂S₂O₈ + 0.200 mol dm⁻³ KI + 0.0100 mol dm⁻³ Na₂S₂O₃ + starch, topped up with water; the stopwatch is driven by the animation clock (performance.now). Chemistry: t = [S₂O₃²⁻]₀/(2·k[S₂O₈²⁻][I⁻]) with k = A·e^(−Ea/RT), Ea = 57.5 kJ mol⁻¹ calibrated to k = 0.0500 dm³ mol⁻¹ s⁻¹ at 298 K (default run: flash at 25.0 s). Simplified vs reality: ion dots are symbolic and count-scaled, the flash is modelled as near-instantaneous (in a real beaker it develops over a couple of seconds), and Fe²⁺ catalysis is modelled as k × 10 at 25 °C — the real effect is an alternative Fe²⁺/Fe³⁺ pathway of lower Ea that avoids the anion–anion repulsion.',
+  clockLogic: 'Clock logic: the flash happens when ALL the thiosulfate is used up, i.e. after exactly [S₂O₃²⁻]₀/2 of S₂O₈²⁻ has reacted. Small fixed thiosulfate dose ⇒ reactants ≈ unchanged ⇒ rate ≈ [S₂O₃²⁻]₀/(2t) ⇒ rate ∝ 1/t.',
+  species: 'In the beaker before the flash: Na⁺(aq), K⁺(aq), S₂O₈²⁻(aq), I⁻(aq), S₂O₃²⁻(aq), starch, H₂O(l) — all colourless. At the flash: I₂·starch (blue-black), S₄O₆²⁻(aq), SO₄²⁻(aq). With catalyst add: Fe²⁺(aq)/Fe³⁺(aq) (pale green/yellow).',
+  teacherTitle: 'Teacher notes',
+  teacher: [
+    'Placement: the rate-of-reaction week, with the practical. Assumes the collision theory of Topic IX (b). The rate equation, Arrhenius and half-life belong to the elective treatment of Topic XIII (b)\u2013(c), and are examinable — link the constant-t½ signature back from this initial-rate lab.',
+    'Probe the misconception while students run: "orders come from the coefficient 2 in front of I⁻". Make them record two runs doubling [I⁻] — the data say first order, and data beat equations.',
+    'Five-minute task: set [S₂O₈²⁻] to 0.020, 0.040, 0.080 mol dm⁻³ keeping [I⁻] and thiosulfate fixed, note the halving of t each time, and state the order with the line-through-origin justification from the plot.',
+    'Classic examiner complaints (PEF Jun 2025): total volume not held constant across runs; starch treated as a back-titration indicator added near the end-point (it is in from the start; colourless → blue-black); units of k given as mol dm⁻³ s⁻¹ for a second-order reaction.',
+    'Safety for the real the practical practical: dilute solutions only; aqueous peroxodisulfate is an OXIDISER and skin/eye IRRITANT (H315/H319/H335) — splashproof goggles, gloves, immediate rinse of spills; starch must be freshly prepared.'
+  ],
+  calcTitle: 'Deduce the order and k — with full working',
+  calcSub: 'Two experiments, one varied reagent (initial-rate method 11.4i). The solver shows order-by-ratio, then k = rate / ([S₂O₈²⁻]¹[I⁻]¹) with units — marks are awarded for units and significant figures.',
+  ppTitle: 'Past-paper practice',
+  ppSub: 'Questions modelled on HKDSE wording (a past paper(a) method; a past paper(c)(ii) rate equation; a past paper Sec A Q4a; PEF Jun 2025). Feedback uses mark-scheme keywords.',
+  questions: [
+    {
+      q: 'Initial rates were measured for the reaction S₂O₈²⁻(aq) + 2I⁻(aq) → I₂(aq) + 2SO₄²⁻(aq): exp 1, [S₂O₈²⁻] = 0.040, [I⁻] = 0.10 mol dm⁻³, rate = 2.4 × 10⁻⁴ mol dm⁻³ s⁻¹; exp 2, [S₂O₈²⁻] = 0.080, [I⁻] = 0.10, rate = 4.8 × 10⁻⁴; exp 3, [S₂O₈²⁻] = 0.040, [I⁻] = 0.20, rate = 4.8 × 10⁻⁴ mol dm⁻³ s⁻¹. Which rate equation, and which units for k, are correct?',
+      o: [
+        'rate = k[S₂O₈²⁻][I⁻], k has units mol⁻¹ dm³ s⁻¹',
+        'rate = k[S₂O₈²⁻]², k has units mol⁻¹ dm³ s⁻¹',
+        'rate = k[I⁻], k has units s⁻¹',
+        'rate = k[S₂O₈²⁻][I⁻]², k has units mol⁻² dm⁶ s⁻¹'
+      ],
+      a: 0,
+      why: 'Exp 1 → 2: [S₂O₈²⁻] doubles while [I⁻] is constant and the rate doubles ⇒ first order in S₂O₈²⁻. Exp 1 → 3: [I⁻] doubles and the rate doubles ⇒ first order in I⁻ — despite the coefficient 2. Overall order 2, so k = rate/([S₂O₈²⁻][I⁻]) = 2.4 × 10⁻⁴/(0.040 × 0.10) = 0.060 mol⁻¹ dm³ s⁻¹. Option D is the classic trap of reading orders from the equation; B and C ignore the controlled comparisons. (Method: a past paper(a); equation: a past paper(c)(ii).)'
+    },
+    {
+      q: 'The reaction between S₂O₈²⁻(aq) and I⁻(aq) is feasible yet slow at room temperature. Which explanation of the high activation energy is correct?',
+      o: [
+        'S₂O₈²⁻ is a weak oxidising agent',
+        'iodide ions are very easily oxidised',
+        'both reacting ions carry a negative charge, so they repel each other on approach',
+        'the stoichiometric ratio 1 : 2 makes simultaneous collisions unlikely'
+      ],
+      a: 2,
+      why: 'Mark scheme: the two reactant ions (S₂O₈²⁻ and I⁻) are both negatively charged — electrostatic repulsion between them raises the energy barrier to reaction, hence the low rate constant despite a feasible E⦵. Option D (the "orientation/simultaneous collision" argument) is the distractor; stoichiometry does not set Ea. '
+    },
+    {
+      q: 'In the iodine clock experiment, a small fixed volume of sodium thiosulfate solution is added at the start, together with starch. What is the role of the thiosulfate?',
+      o: [
+        'it catalyses the formation of iodine',
+        'it oxidises I⁻ to I₂',
+        'it reacts with (removes) iodine as it forms, so no colour appears until it is used up',
+        'it provides the blue-black colour with starch'
+      ],
+      a: 2,
+      why: 'Thiosulfate reduces back every I₂ produced: I₂ + 2S₂O₃²⁻ → 2I⁻ + S₄O₆²⁻, so the solution stays colourless until [S₂O₃²⁻]₀ is exhausted — it is the clock\'s "hand", not a catalyst (it does not change rate₁) and not the indicator (starch gives the blue-black, and it is present from the start). It is a REDUCING agent, so B reverses the chemistry. (PEF Jun 2025; wch16 examiner insights.)'
+    }
+  ],
+  recapTitle: 'Recap checklist',
+  recapGoals: [
+    '11.1 — Define rate, order with respect to a substance, overall order, rate constant, half-life, rate-determining step, Ea and homogeneous catalysis; write rate = k[A]ᵐ[B]ⁿ.',
+    '11.2 — Read a half-life from a concentration–time graph and use constant t½ as the signature of first order.',
+    '11.4i / the practical — Explain why a clock reaction is an acceptable initial-rate method: rate ∝ 1/t needs small fixed thiosulfate, ~constant [reactants] before the flash, and the SAME total volume every run.',
+    '11.5 — Deduce orders 0/1/2 from initial-rate data and recognise the straight line through the origin on the 1/t vs [S₂O₈²⁻] plot; state the units of k from the OVERALL order.',
+    '11.10 — Read Ea from a graph of ln(1/t) against 1/T: gradient = −Ea/R (k = A·e^(−Ea/RT) is given; T in K; mind the negative sign; benchmark ≈ 57.5 kJ mol⁻¹).',
+    '11.12 — Describe the practical safely and critically: peroxodisulfate is a dilute-only oxidiser/irritant — goggles; freshly prepared starch; risks of reading the endpoint (subjective colour change, reaction heats on mixing).'
+  ],
+  mythTitle: 'Common misconceptions',
+  mythLead: 'Tap a card to flip. Check you would not write the myth in an exam.',
+  mythFlip: 'Tap to flip',
+  mythLabelMyth: 'Myth?',
+  mythLabelFact: 'Fact',
+  myths: [
+    { m: 'The orders come from the equation, so it is second order in I⁻ (coefficient 2).', f: 'Orders are EXPERIMENTAL quantities. Initial-rate data give first order in I⁻ even though the coefficient is 2 — the coefficient only belongs to the stoichiometric equation, never to the rate equation without evidence.' },
+    { m: 'Starch is added near the end-point, like in an iodine–thiosulfate titration; the blue goes to colourless.', f: 'In a clock reaction the starch is present FROM THE START. The colour change is colourless → BLUE-BLACK (starch–iodine complex) at the instant thiosulfate runs out — never reversed. (PEF Jun 2025, weakest question.)' },
+    { m: 'Thiosulfate is a catalyst that slows the reaction down.', f: 'Thiosulfate does not change rate₁ at all. It simply removes each mole of I₂ as it forms; the delay equals the time to consume the fixed dose [S₂O₃²⁻]₀. It is the clock hand, not a brake.' },
+    { m: '1/t IS the rate.', f: '1/t is only PROPORTIONAL to the initial rate, and the proportionality holds while [S₂O₈²⁻] and [I⁻] are ≈ constant before the flash: same small thiosulfate dose, same total volume. The true initial rate is [S₂O₃²⁻]₀/(2t) in mol dm⁻³ s⁻¹.' },
+    { m: 'Heating the mixture lowers the activation energy.', f: 'Ea is a fixed property of the pathway. Raising T increases the FRACTION of collisions with E ≥ Ea, so k rises: ln k vs 1/T has gradient −Ea/R. "Particles have more Ea" scores zero.' },
+    { m: 'The blue colour comes from S₂O₈²⁻ (or from iodine solution) being coloured.', f: 'S₂O₈²⁻(aq), I⁻(aq), S₂O₃²⁻(aq), SO₄²⁻(aq) and S₄O₆²⁻(aq) are all colourless. The blue-black is the starch–iodine (I₂·starch) complex appearing only once free I₂ survives the thiosulfate.' },
+    { m: 'A feasible reaction must be fast, so Ea here is small.', f: 'Feasibility (E⦵, ΔG) and rate are INDEPENDENT ideas. This reaction is feasible yet slow because Ea ≈ +57.5 kJ mol⁻¹ is high — both reactant ions S₂O₈²⁻ and I⁻ are NEGATIVE and repel on approach . That same repulsion is why the Fe²⁺/Fe³⁺ route (opposite charges pairing up) catalyses it so well.' }
+  ]
+};
+function t() { return T; }
+document.documentElement.lang = 'en';
+
+/* =====================================================================
+   TAB PLUMBING
+===================================================================== */
+let activeTab = 'sim';
+function setTab(name) {
+  activeTab = name;
+  document.querySelectorAll('.tab-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.tab === name);
+  });
+  ['intro','sim','calc','mcq','recap'].forEach(p => {
+    const el = document.getElementById('panel-' + p);
+    el.classList.toggle('active', p === name);
+  });
+  scheduleResize();
+  if (name === 'sim') { resizeCanvas(); }
+}
+function toggleTeacher() {
+  document.getElementById('teacher-panel').classList.toggle('hidden');
+}
+
+/* =====================================================================
+   SIM STATE — chemistry per the knowledge brief
+===================================================================== */
+const R_GAS = 8.314;            // J mol-1 K-1
+const EA = 57500;               // J mol-1 (benchmark +57.5 kJ mol-1, a past paper)
+const K25 = 0.0500;             // dm3 mol-1 s-1 at 298 K (brief calibration)
+const T25 = 298;                // K
+const STOCK = { ps: 0.100, pi: 0.200, pt: 0.0100 };   // mol dm-3 stocks
+const V_TOTAL = 50.0;           // cm3, constant every run — fair test
+const CAT_FACTOR = 10;          // modelled: k x 10 at 25 C via Fe2+/Fe3+ route
+
+const S = {
+  mode: 'conc', xVar: 'S',
+  Vp: 10.0, Vi: 10.0, Vs: 10.0, temp: 25, cat: false, speed: 1,
+  phase: 'idle',            // idle | running | flashed
+  startPerf: 0, elapsed: 0, tTarget: 0,
+  flashProg: 0,
+  data: { conc: [], temp: [], cat: [] },
+  particles: [], stirA: 0
+};
+/* =====================================================================
+   V3 GATE + PREDICT BANK + TASKS (playbook kit, adapted for iodine clock)
+===================================================================== */
+const PREDICTS = [
+  { q: 'Predict: you double ONLY [I⁻] (double the volume of 0.200 mol dm⁻³ KI + starch, take water off the make-up so the total stays 50.0 cm³; [S₂O₈²⁻], thiosulfate and temperature fixed). What happens to the clock time t?',
+    o: ['t is roughly halved', 't roughly doubles', 't is unchanged', 't drops to about a quarter of t'],
+    a: 0,
+    why: 'MARK SCHEME: the reaction is first order in I⁻, so rate = k[S₂O₈²⁻][I⁻] — doubling [I⁻] doubles the rate. The fixed thiosulfate dose means rate = 1/t (s⁻¹), so 1/t doubles and t halves — the straight line through origin of 1/t vs [I⁻]. Distractor D scores 0: it reads the coefficient “2” in front of 2I⁻ as the order — orders are experimental, NEVER from the equation.' },
+  { q: 'Predict: you repeat the SAME mixture at 35 °C instead of 25 °C and the blue-black flash appears much sooner. Why?',
+    o: ['Heating lowers Ea, so more collisions succeed', 'A much larger fraction of collisions now have E ≥ Ea, so k rises steeply', 'Heating increases [I⁻] in the mixture', 'Heating destroys the thiosulfate clock hand early'],
+    a: 1,
+    why: 'MARK SCHEME: Ea is FIXED — heating never changes it (option A = 0 marks). Raising the temperature raises the average kinetic energy so a far larger PROPORTION of collisions exceed Ea; k = A·e^(−Ea/RT) rises steeply (for Ea = 57.5 kJ mol⁻¹, k(35)/k(25) ≈ 3.4), so rate rises and t = 1/rate shrinks. Record 4+ temperatures: ln(1/t) vs 1/T is a line of gradient −Ea/R.' }
+];
+const clockDock = { answered: false, prPick: null };
+function gateOpen() { return clockDock.answered === true; }
+function applyGate() {
+  const locked = !gateOpen();
+  const dock = document.getElementById('sim-dock');
+  if (dock) { dock.classList.remove('locked', 'unlocked'); dock.classList.add(locked ? 'locked' : 'unlocked'); }
+  const st = document.getElementById('dock-state');
+  if (st) { st.classList.remove('st-lock', 'st-open'); st.classList.add(locked ? 'st-lock' : 'st-open'); st.textContent = locked ? 'Locked' : 'Unlocked'; }
+  const ln = document.getElementById('dock-locknote');
+  if (ln) { ln.textContent = locked ? 'Locked — answer the prediction above correctly to unlock the apparatus controls.' : 'Unlocked — now run the clock: set the volumes, press ▶ (the stopwatch starts at the instant of mixing) and stop at the FIRST permanent blue-black.'; ln.style.color = locked ? '#fde68a' : '#6ee7b7'; }
+  const nt = document.getElementById('next-text');
+  if (nt) nt.textContent = locked ? 'Answer the Task 1 prediction above the beaker controls' : 'Run the procedure: set volumes → ▶ Start reaction → record t and 1/t → plot';
+  if (!locked) { try { localStorage.setItem('ial_iodine_clock_v3_state', 'unlocked'); } catch (e) { } }
+}
+function lockedMsg() {
+  const p = document.getElementById('dock-locknote');
+  if (p) { p.textContent = 'Locked — answer the Task 1 prediction above (and press Reveal) first.'; p.style.color = '#fde68a'; }
+}
+function gate() { if (!gateOpen()) { lockedMsg(); return false; } return true; }
+function buildPredict() {
+  const p = PREDICTS[0];
+  document.getElementById('pr-q').textContent = p.q;
+  document.getElementById('pr-why').classList.add('hidden');
+  document.getElementById('pr-opts').innerHTML = p.o.map((o, i) =>
+    '<button type="button" class="pr-opt px-3 py-2 rounded-lg text-xs font-semibold text-left" data-p="' + i + '">' + 'ABCD'[i] + ' · ' + o + '</button>').join('');
+  document.querySelectorAll('.pr-opt').forEach(b => {
+    b.onclick = () => { clockDock.prPick = +b.dataset.p; document.querySelectorAll('.pr-opt').forEach(x => x.classList.toggle('picked', x === b)); };
+  });
+  document.getElementById('pr-reveal').onclick = () => {
+    const why = document.getElementById('pr-why');
+    const picked = clockDock.prPick;
+    const right = (picked === p.a);
+    if (right) { clockDock.answered = true; applyGate(); }
+    why.textContent = 'Answer ' + 'ABCD'[p.a] + '. ' +
+      (picked === null || picked === undefined ? 'No prediction made yet — pick an option above.' : (right ? 'Correct — controls unlocked. ' : 'Not correct — fix your pick and Reveal again. ')) + p.why;
+    why.classList.remove('hidden');
+  };
+}
+function goNext() {
+  const g = document.getElementById('next-go');
+  const tab = (g && g.dataset.go) ? g.dataset.go : 'sim';
+  setTab(tab);
+  const el = tab === 'sim' ? document.getElementById('sim-dock') : document.getElementById('panel-' + tab);
+  if (el && el.scrollIntoView) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+function bindClockTasks() {
+  const fails = {
+    a: { name: 'Starting the stopwatch after the solutions are already mixed',
+      txt: 'The student pours, stirs, finds the stopwatch — and only then presses start.',
+      what: 'The delay is real time the reaction spent running uncounted, so every t you record is TOO SHORT and rate = 1/t is too big — a systematic error that no line of best fit can rescue.',
+      fix: 'Set the watch running BEFORE you combine the solutions and time from the instant of mixing (press ▶ at pouring in the sim). Practise a fixed pouring routine so the delay is zero.',
+      ms: 'MS: “time from the moment of mixing”. Same reasoning for a late meniscus read — measure t between two defined events, not two convenient ones.' },
+    b: { name: 'Waiting for the whole beaker to go deep blue-black',
+      txt: 'The first trace of blue appears — the student keeps watching until the mix is dark navy, then stops the watch.',
+      what: 'You overshoot the endpoint: extra S₂O₈²⁻ and I⁻ keep reacting while you wait, so t is too LONG and 1/t too small — the point of the clock is the exact moment the fixed thiosulfate dose runs out.',
+      fix: 'Stop at the FIRST permanent blue-black, viewing the beaker against white paper with the same marked reference sample for comparison.',
+      ms: 'MS: “first appearance of the blue-black colour” defines the end of the timing interval.' },
+    c: { name: 'Letting the total volume drift from run to run',
+      txt: 'Run 3 uses 45 cm³ in the beaker where runs 1–2 used 50.0 cm³ — “it’s the same concentrations anyway”.',
+      what: 'Changing the total changes [S₂O₃²⁻] too, so the amount of I₂ needed to trigger the flash is no longer fixed — rate ∝ 1/t stops being true and your 1/t plot is comparing different clocks (the Jun 2025 control-variable trap).',
+      fix: 'Water make-up keeps the total at exactly 50.0 cm³ every run, so the clock dose is constant and 1/t is comparable across runs.',
+      ms: 'MS: “total volume kept constant” as a control variable for a fair test of the order.' }
+  };
+  document.querySelectorAll('[data-fail]').forEach(b => {
+    b.onclick = () => {
+      const f = fails[b.dataset.fail]; if (!f) return;
+      const p = document.getElementById('fail-panel');
+      p.innerHTML = '<div class="space-y-2">' +
+        '<div class="rounded-xl border border-amber-500/30 bg-amber-950/20 p-3"><p class="text-xs font-bold text-amber-200 uppercase tracking-wide mb-1">' + f.name + '</p><p class="text-sm text-slate-200">' + f.txt + '</p></div>' +
+        '<div class="border-l-[3px] border-rose-500 bg-rose-950/20 rounded-lg p-3"><p class="text-xs font-bold text-rose-200 uppercase tracking-wide mb-1">What is wrong with it</p><p class="text-sm text-slate-200">' + f.what + '</p></div>' +
+        '<div class="rounded-xl border border-emerald-600/30 bg-emerald-950/20 p-3"><p class="text-xs font-bold text-emerald-200 uppercase tracking-wide mb-1">Do it this way instead</p><p class="text-sm text-slate-200">' + f.fix + '</p></div>' +
+        '<p class="text-xs text-teal-300">' + f.ms + '</p></div>';
+    };
+  });
+  const cl = document.getElementById('fail-clear');
+  if (cl) cl.onclick = () => { document.getElementById('fail-panel').innerHTML = ''; };
+  const hints = {
+    1: 'Start with the rate you are actually measuring: the flash happens when the fixed dose of S₂O₃²⁻ is used up, i.e. when a FIXED small amount of I₂ has formed ⇒ rate of the clocked reaction = amount/time ∝ 1/t (units s⁻¹).',
+    2: 'Second link: the rate law is rate = k[S₂O₈²⁻][I⁻] — first order in S₂O₈²⁻, found from the EXPERIMENT (the slope), not from the equation. So doubling [S₂O₈²⁻] with [I⁻] and T fixed doubles the rate.',
+    3: 'Chain it: rate × 2 ⇒ (1/t) × 2 ⇒ t ÷ 2. Evidence: the 1/t vs [S₂O₈²⁻] plot is a straight line through the origin ⇒ direct proportion ⇒ order 1. Full 3-mark chain: rate = 1/t (fixed I₂ dose) → doubling [S₂O₈²⁻] doubles rate (1st order) → so t halves; line through origin = the evidence.'
+  };
+  document.querySelectorAll('[data-hint]').forEach(b => {
+    b.onclick = () => { document.getElementById('hint-text').textContent = hints[b.dataset.hint] || ''; };
+  });
+}
+
+
+function kOf(tempC, cat) {
+  const TK = 273 + tempC;
+  const k = K25 * Math.exp(-(EA / R_GAS) * (1 / TK - 1 / T25));
+  return cat ? k * CAT_FACTOR : k;
+}
+function concAfterMix() {
+  return {
+    s: STOCK.ps * S.Vp / V_TOTAL,
+    i: STOCK.pi * S.Vi / V_TOTAL,
+    th: STOCK.pt * S.Vs / V_TOTAL
+  };
+}
+function predictT() {
+  const c = concAfterMix();
+  const k = kOf(S.temp, S.mode === 'cat' ? S.cat : false);
+  return c.th / (2 * k * c.s * c.i);
+}
+function waterV() { return V_TOTAL - S.Vp - S.Vi - S.Vs; }
+function fmt(x, d) { return x.toFixed(d); }
+function msg(sTxt) { document.getElementById('msg-line').textContent = sTxt || ''; }
+
+/* ---- persistence (recap ticks + recorded runs) ---- */
+function saveState() {
+  try {
+    localStorage.setItem('ial-iodine-clock-runs', JSON.stringify(S.data));
+    const ticks = [];
+    document.querySelectorAll('.goal-check').forEach((c, i) => { ticks[i] = c.checked ? 1 : 0; });
+    localStorage.setItem('ial-iodine-clock-goals', JSON.stringify(ticks));
+  } catch (e) { }
+}
+function loadState() {
+  try {
+    const raw = localStorage.getItem('ial-iodine-clock-runs');
+    if (raw) {
+      const d = JSON.parse(raw);
+      if (d && d.conc && d.temp && d.cat) S.data = d;
+    }
+  } catch (e) { }
+}
+function restoreTicks() {
+  try {
+    const raw = localStorage.getItem('ial-iodine-clock-goals');
+    if (!raw) return;
+    const ticks = JSON.parse(raw);
+    const boxes = document.querySelectorAll('.goal-check');
+    for (let i = 0; i < boxes.length; i++) { if (ticks[i]) boxes[i].checked = true; }
+  } catch (e) { }
+  updateRecapProgress();
+}
+
+/* =====================================================================
+   CANVAS PLUMBING — two canvases, sized here (no painting); painted in RAF loop
+===================================================================== */
+let ctx1 = null, W1 = 700, H1 = 340;
+let ctx2 = null, W2 = 700, H2 = 300;
+let canvasEl1 = null, canvasEl2 = null;
+
+function fitCanvas(el, isChart, ratio) {
+  const wrap = el.closest('.canvas-wrap');
+  const rect = wrap ? wrap.getBoundingClientRect() : { width: 0 };
+  const w = Math.max(rect.width, el.offsetWidth || 0);
+  if (!w || w < 50) return null;                    // hidden-tab guard
+  const h = Math.max(isChart ? 300 : 340, Math.round(w * ratio));
+  el.width = Math.round(w);
+  el.height = Math.round(h);
+  return { ctx: el.getContext('2d'), w: el.width, h: el.height };
+}
+function resizeCanvas() {
+  canvasEl1 = canvasEl1 || document.getElementById('sim-canvas');
+  canvasEl2 = canvasEl2 || document.getElementById('chart-canvas');
+  const a = fitCanvas(canvasEl1, false, 0.66);
+  if (a) { ctx1 = a.ctx; W1 = a.w; H1 = a.h; }
+  const b = fitCanvas(canvasEl2, true, 0.6);
+  if (b) { ctx2 = b.ctx; W2 = b.w; H2 = b.h; }
+  // NOTE: nothing is painted here — the RAF loop draws every frame while tab 2 is open.
+}
+function scheduleResize() { resizeCanvas(); }
+
+/* ---- tiny canvas helpers: only fillRect/beginPath/arc/moveTo/lineTo/fill/stroke/fillText ---- */
+function rectP(c, x, y, w, h) {
+  c.beginPath(); c.moveTo(x, y); c.lineTo(x + w, y); c.lineTo(x + w, y + h); c.lineTo(x, y + h); c.lineTo(x, y);
+}
+function ctext(c, str, x, y, size, col, bold, centered) {
+  c.font = (bold ? '700 ' : '') + size + 'px "Segoe UI", Arial, sans-serif';
+  c.fillStyle = col;
+  c.fillText(str, centered ? x - str.length * size * 0.28 : x, y);
+}
+
+/* =====================================================================
+   PARTICLES — built once per setup, mutated in stepSim (state-driven)
+===================================================================== */
+function buildParticles() {
+  const nS = Math.max(4, Math.round(S.Vp / 3));
+  const nI = Math.max(6, Math.round(S.Vi / 2.2));
+  const nT = Math.max(3, Math.round(S.Vs / 2.5));
+  const arr = [];
+  function add(type, n, r) {
+    for (let i = 0; i < n; i++) arr.push({ type: type, x: Math.random(), y: Math.random(), vx: (Math.random() - .5) * r, vy: (Math.random() - .5) * r });
+  }
+  add('P', nS, 1); add('I', nI, 1.4); add('T', nT, 1);
+  if (S.mode === 'cat' && S.cat) add('F', 6, 1.2);
+  S.particles = arr;
+}
+
+/* =====================================================================
+   STEP + DRAW (sim canvas) — all 2D calls live inside draw()
+===================================================================== */
+function stepSim(dt) {
+  S.stirA += dt * (S.phase === 'running' ? 9 : 2.5);
+  const vScale = 0.35 + 0.55 * Math.sqrt((273 + S.temp) / 298);
+  for (const p of S.particles) {
+    p.x += p.vx * dt * vScale * 0.25;
+    p.y += p.vy * dt * vScale * 0.25;
+    if (p.x < 0 || p.x > 1) p.vx = -p.vx;
+    if (p.y < 0 || p.y > 1) p.vy = -p.vy;
+    p.x = Math.min(1, Math.max(0, p.x));
+    p.y = Math.min(1, Math.max(0, p.y));
+  }
+  if (S.phase === 'flashed') S.flashProg = Math.min(1, S.flashProg + dt / 0.12);
+}
+function beakerGeom() {
+  const bw = Math.min(250, W1 * 0.42);
+  const bx = W1 * 0.30 - bw * 0.2;
+  const by = 92, bh = Math.max(120, H1 - 130);
+  return { bx: bx, by: by, bw: bw, bh: bh, lx: bx + 7, lw: bw - 14, ly: by + bh * 0.26, lh: bh * 0.70 };
+}
+function draw() {
+  if (!ctx1) return;
+  const g = beakerGeom();
+  ctx1.clearRect(0, 0, W1, H1);
+  ctx1.fillStyle = '#0b1220'; ctx1.fillRect(0, 0, W1, H1);
+
+  // header row
+  ctext(ctx1, 'IODINE CLOCK — the practical', 14, 22, 12, 'rgba(148,163,184,.75)', true, false);
+  const modeName = S.mode === 'conc' ? 'MODE: concentration / initial rates' : (S.mode === 'temp' ? 'MODE: temperature / Arrhenius' : 'MODE: Fe²⁺ catalyst');
+  ctext(ctx1, modeName, 14, 40, 10, 'rgba(61,214,198,.8)', true, false);
+
+  // stopwatch LCD
+  const lcdW = Math.min(230, W1 * 0.4), lcdX = W1 - lcdW - 14;
+  ctx1.fillStyle = '#020408'; ctx1.fillRect(lcdX, 12, lcdW, 56);
+  ctx1.strokeStyle = 'rgba(61,214,198,.4)'; ctx1.lineWidth = 1.5;
+  rectP(ctx1, lcdX, 12, lcdW, 56); ctx1.stroke();
+  ctext(ctx1, fmt(S.elapsed, 3) + ' s', lcdX + 12, 44, 28, S.phase === 'flashed' ? '#5eead4' : '#4ade80', true, false);
+  ctext(ctx1, 'STOPWATCH', lcdX + 12, 60, 9, 'rgba(100,116,139,.9)', true, false);
+  ctext(ctx1, S.phase === 'idle' ? 'READY - press Start' : (S.phase === 'running' ? 'colourless - clock ticking' : 'FLASH! blue-black'), lcdX + 12, 80, 10,
+    S.phase === 'idle' ? 'rgba(148,163,184,.8)' : (S.phase === 'running' ? 'rgba(250,204,21,.9)' : 'rgba(94,234,212,1)'), true, false);
+
+  // liquid: colourless -> blue-black at the flash (starch-iodine complex)
+  const p = S.phase === 'flashed' ? S.flashProg : 0;
+  const rC = Math.round(168 + (21 - 168) * p), gC = Math.round(200 + (26 - 200) * p), bC = Math.round(228 + (58 - 228) * p);
+  ctx1.fillStyle = 'rgba(' + rC + ',' + gC + ',' + bC + ',' + (0.16 + 0.62 * p) + ')';
+  ctx1.fillRect(g.lx, g.ly, g.lw, g.lh);
+
+  // flash rings
+  if (S.phase === 'flashed' && S.flashProg < 1) {
+    ctx1.strokeStyle = 'rgba(30,58,138,' + (1 - S.flashProg) + ')'; ctx1.lineWidth = 3;
+    ctx1.beginPath();
+    ctx1.arc(g.bx + g.bw / 2, g.ly + g.lh * 0.6, g.bw * S.flashProg * 0.9, 0, Math.PI * 2);
+    ctx1.stroke();
+  }
+
+  // ion dots (state-driven positions)
+  const dotCol = { P: 'rgba(45,212,191,.85)', I: 'rgba(251,191,36,.9)', T: 'rgba(167,139,250,.9)', F: 'rgba(74,222,128,.95)' };
+  for (const pt of S.particles) {
+    const x = g.lx + 8 + pt.x * (g.lw - 16);
+    const y = g.ly + 10 + pt.y * (g.lh - 20);
+    ctx1.fillStyle = S.phase === 'flashed' ? 'rgba(15,23,42,.55)' : dotCol[pt.type];
+    ctx1.beginPath(); ctx1.arc(x, y, pt.type === 'P' ? 5 : 3.6, 0, Math.PI * 2); ctx1.fill();
+    if (!S.flashProg && (pt.type === 'P' || pt.type === 'I' || pt.type === 'F') && pt.x < 0.3) {
+      ctext(ctx1, pt.type === 'P' ? 'S₂O₈²⁻' : (pt.type === 'I' ? 'I⁻' : 'Fe²⁺'), x + 7, y + 3, 9, 'rgba(226,232,240,.75)', false, false);
+    }
+  }
+
+  // liquid surface line + vortex while stirring
+  ctx1.strokeStyle = 'rgba(203,213,225,.45)'; ctx1.lineWidth = 1.5;
+  ctx1.beginPath(); ctx1.moveTo(g.lx, g.ly); ctx1.lineTo(g.lx + g.lw, g.ly); ctx1.stroke();
+  if (S.phase === 'running') {
+    ctx1.strokeStyle = 'rgba(148,163,184,.35)';
+    ctx1.beginPath();
+    ctx1.arc(g.bx + g.bw / 2, g.ly + 3, g.lw * 0.3, 0.6 + (S.stirA % 3), 2.6 + (S.stirA % 3));
+    ctx1.stroke();
+  }
+
+  // beaker glassware (chamfered bottom) + graduations
+  ctx1.strokeStyle = 'rgba(203,213,225,.85)'; ctx1.lineWidth = 3;
+  ctx1.beginPath();
+  ctx1.moveTo(g.bx + 4, g.by - 14);
+  ctx1.lineTo(g.bx + 4, g.by + g.bh);
+  ctx1.lineTo(g.bx + 16, g.by + g.bh + 12);
+  ctx1.lineTo(g.bx + g.bw - 16, g.by + g.bh + 12);
+  ctx1.lineTo(g.bx + g.bw - 4, g.by + g.bh);
+  ctx1.lineTo(g.bx + g.bw - 4, g.by - 14);
+  ctx1.stroke();
+  ctx1.lineWidth = 1; ctx1.strokeStyle = 'rgba(148,163,184,.45)';
+  for (let v = 10; v <= 50; v += 10) {
+    const y = g.by + g.bh + 8 - (g.bh * (v / 52));
+    ctx1.beginPath(); ctx1.moveTo(g.bx + 8, y); ctx1.lineTo(g.bx + 22, y); ctx1.stroke();
+    ctext(ctx1, v + ' cm³', g.bx + 26, y + 3, 9, 'rgba(148,163,184,.6)', false, false);
+  }
+
+  // rotating magnetic stir bar (drawn as a rotating thick segment, no transforms)
+  const cx = g.bx + g.bw / 2, cy = g.by + g.bh + 4;
+  const ang = Math.sin(S.stirA) * 1.15, ux = Math.cos(ang) * 17, uy = Math.sin(ang) * 4;
+  ctx1.strokeStyle = '#e2e8f0'; ctx1.lineWidth = 7;
+  ctx1.beginPath(); ctx1.moveTo(cx - ux, cy - uy); ctx1.lineTo(cx + ux, cy + uy); ctx1.stroke();
+  ctx1.lineWidth = 1;
+
+  // thermometer column (temp mode)
+  if (S.mode === 'temp') {
+    const tx = 18, ty = H1 * 0.34, th = H1 * 0.42;
+    ctx1.fillStyle = 'rgba(239,68,68,.22)'; ctx1.fillRect(tx, ty, 10, th);
+    const fh = th * S.temp / 60;
+    ctx1.fillStyle = 'rgba(248,113,113,.9)'; ctx1.fillRect(tx, ty + th - fh, 10, fh);
+    ctx1.strokeStyle = 'rgba(148,163,184,.5)'; ctx1.lineWidth = 1;
+    rectP(ctx1, tx, ty, 10, th); ctx1.stroke();
+    ctext(ctx1, fmt(S.temp, 0) + ' °C', tx - 4, ty + th + 18, 11, 'rgba(226,232,240,.85)', true, false);
+  }
+
+  // mixture bar under the beaker: volumes summing to 50.0
+  const mx = g.bx, mw = g.bw, myy = g.by + g.bh + 30;
+  if (myy + 26 < H1) {
+    const segs = [['#2dd4bf', S.Vp], ['#fbbf24', S.Vi], ['#a78bfa', S.Vs], ['#475569', Math.max(0, waterV())]];
+    let xx = mx;
+    for (const sgm of segs) {
+      const wSeg = mw * sgm[1] / V_TOTAL;
+      ctx1.fillStyle = sgm[0]; ctx1.fillRect(xx, myy, Math.max(0, wSeg - 1), 10);
+      xx += wSeg;
+    }
+    ctext(ctx1, 'S₂O₈²⁻ soln | KI+starch | thiosulfate | water — total 50.0 cm³', mx, myy + 24, 9, 'rgba(148,163,184,.75)', false, false);
+  }
+}
+
+/* =====================================================================
+   HAND-DRAWN CHART (second canvas) — axes, ticks, points, best-fit line
+===================================================================== */
+function niceStep(raw) {
+  const p = Math.pow(10, Math.floor(Math.log10(raw || 1)));
+  const r = raw / p;
+  return (r < 1.6 ? 1 : r < 3.5 ? 2 : r < 7.5 ? 5 : 10) * p;
+}
+function linFit(pts) {
+  const n = pts.length; let sx = 0, sy = 0, sxx = 0, sxy = 0;
+  for (const p of pts) { sx += p[0]; sy += p[1]; sxx += p[0] * p[0]; sxy += p[0] * p[1]; }
+  const den = n * sxx - sx * sx;
+  const b = Math.abs(den) < 1e-12 ? 0 : (n * sxy - sx * sy) / den;
+  const a = (sy - b * sx) / n;
+  return { a: a, b: b };
+}
+function chartData() {
+  if (S.mode === 'temp') return S.data.temp.map(d => [1 / (273 + d.temp), Math.log(1 / d.t)]);
+  return S.data.conc.map(d => [S.xVar === 'S' ? d.s : d.i, 1 / d.t]);
+}
+function axisFrame(c, g, pw, ph) {
+  c.strokeStyle = 'rgba(148,163,184,.6)'; c.lineWidth = 1.4;
+  c.beginPath(); c.moveTo(g.l, g.t - 8); c.lineTo(g.l, g.t + ph); c.lineTo(g.l + pw + 8, g.t + ph); c.stroke();
+}
+function drawChart() {
+  if (!ctx2) return;
+  const g = { l: 66, r: 18, t: 26, b: 52 };
+  ctx2.clearRect(0, 0, W2, H2);
+  ctx2.fillStyle = '#0a101a'; ctx2.fillRect(0, 0, W2, H2);
+  const pw = W2 - g.l - g.r, ph = H2 - g.t - g.b;
+
+  if (S.mode === 'cat') { drawCatBars(g, pw, ph); return; }
+  if (S.mode === 'temp') { drawTempPlot(g, pw, ph); return; }
+
+  const pts = chartData();
+  axisFrame(ctx2, g, pw, ph);
+  let maxX = 0.023, maxY = 0.02;
+  for (const p of pts) { maxX = Math.max(maxX, p[0]); maxY = Math.max(maxY, p[1]); }
+  maxX *= 1.15; maxY *= 1.2;
+  const xTitle = 'x-axis: ' + (S.xVar === 'S' ? '[S₂O₈²⁻] / mol dm⁻³' : '[I⁻] / mol dm⁻³') + ' (in the 50.0 cm³ mixture)';
+  const yTitle = 'y: rate ∝ 1/t (s⁻¹)';
+
+  const stepX = niceStep(maxX / 5), stepY = niceStep(maxY / 5);
+  ctx2.strokeStyle = 'rgba(148,163,184,.5)'; ctx2.lineWidth = 1.4;
+  for (let v = stepX; v <= maxX; v += stepX) {
+    const x = g.l + pw * v / maxX;
+    ctx2.beginPath(); ctx2.moveTo(x, g.t + ph); ctx2.lineTo(x, g.t + ph - 5); ctx2.stroke();
+    ctext(ctx2, v.toFixed(3), x, g.t + ph + 16, 10, 'rgba(148,163,184,.8)', false, true);
+  }
+  for (let v = stepY; v <= maxY; v += stepY) {
+    const y = g.t + ph - ph * v / maxY;
+    ctx2.beginPath(); ctx2.moveTo(g.l, y); ctx2.lineTo(g.l + 5, y); ctx2.stroke();
+    const lbl = v.toFixed(3);
+    ctext(ctx2, lbl, g.l - 8 - lbl.length * 5.6, y + 3, 10, 'rgba(148,163,184,.8)', false, false);
+  }
+  ctext(ctx2, '0', g.l - 14, g.t + ph + 16, 10, 'rgba(148,163,184,.6)', false, false);
+  ctext(ctx2, yTitle, 8, 14, 10, 'rgba(148,163,184,.9)', true, false);
+  ctext(ctx2, xTitle, g.l + pw / 2, H2 - 8, 10, 'rgba(148,163,184,.9)', true, true);
+
+  ctx2.fillStyle = 'rgba(61,214,198,.95)'; ctx2.strokeStyle = 'rgba(13,20,32,.9)'; ctx2.lineWidth = 1.5;
+  for (const p of pts) {
+    const x = g.l + pw * p[0] / maxX, y = g.t + ph - ph * p[1] / maxY;
+    ctx2.beginPath(); ctx2.arc(x, y, 5, 0, Math.PI * 2); ctx2.fill(); ctx2.stroke();
+  }
+  if (pts.length < 2) {
+    ctext(ctx2, 'Flash and record 2+ runs in concentration mode to fit the line', g.l + pw * 0.15, g.t + ph * 0.45, 12, 'rgba(100,116,139,.9)', false, false);
+    ctx2.textAlign = 'left'; return;
+  }
+  // straight line of best fit THROUGH THE ORIGIN: y = m x
+  let sxy = 0, sxx = 0;
+  for (const p of pts) { sxy += p[0] * p[1]; sxx += p[0] * p[0]; }
+  const m = sxx > 0 ? sxy / sxx : 0;
+  ctx2.strokeStyle = 'rgba(245,158,11,.95)'; ctx2.lineWidth = 2;
+  ctx2.beginPath();
+  ctx2.moveTo(g.l, g.t + ph);
+  ctx2.lineTo(g.l + pw, g.t + ph - ph * (m * maxX) / maxY);
+  ctx2.stroke();
+  ctext(ctx2, 'gradient = ' + m.toFixed(4) + ' dm³ mol⁻¹ s⁻¹', g.l + 12, g.t + 14, 11, 'rgba(251,191,36,.95)', true, false);
+  ctext(ctx2, 'straight line through (0,0) ⇒ rate ∝ [ ]¹ ⇒ FIRST order in ' + (S.xVar === 'S' ? 'S₂O₈²⁻' : 'I⁻'), g.l + 12, g.t + 30, 10, 'rgba(148,163,184,.85)', false, false);
+  const rows = S.data.conc;
+  const fixed = S.xVar === 'S' ? rows.map(d => d.i) : rows.map(d => d.s);
+  const allSame = fixed.every(v => Math.abs(v - fixed[0]) < fixed[0] * 0.02 + 1e-9);
+  if (allSame && fixed[0] > 0) {
+    ctext(ctx2, 'gradient = k × fixed [ ] ⇒ k ≈ ' + fmt(m / fixed[0], 4) + ' dm³ mol⁻¹ s⁻¹ (model k = ' + fmt(kOf(S.temp, S.cat), 4) + ')', g.l + 12, g.t + 46, 10, 'rgba(94,234,212,.9)', false, false);
+  }
+}
+function drawTempPlot(g, pw, ph) {
+  axisFrame(ctx2, g, pw, ph);
+  const pts = chartData();
+  ctext(ctx2, 'y: ln(1/t)      x: 1/T (×10⁻³ K⁻¹)', 8, 14, 10, 'rgba(148,163,184,.9)', true, false);
+  if (pts.length < 2) {
+    ctext(ctx2, 'Record runs at 2+ temperatures to fit the Arrhenius line', g.l + pw * 0.15, g.t + ph * 0.45, 12, 'rgba(100,116,139,.9)', false, false);
+    ctext(ctx2, 'ln(1/t) vs 1/T: gradient = −Ea/R', g.l + pw * 0.15, g.t + ph * 0.45 + 18, 10, 'rgba(100,116,139,.75)', false, false);
+    return;
+  }
+  let lo = Infinity, hi = -Infinity, ylo = Infinity, yhi = -Infinity;
+  for (const p of pts) { lo = Math.min(lo, p[0]); hi = Math.max(hi, p[0]); ylo = Math.min(ylo, p[1]); yhi = Math.max(yhi, p[1]); }
+  const x0 = lo - (hi - lo) * 0.06 - 1e-9, x1 = hi + (hi - lo) * 0.06 + 1e-9;
+  const yMin = ylo - 0.4, yMax = yhi + 0.4;
+  const X = v => g.l + pw * (v - x0) / (x1 - x0);
+  const Y = v => g.t + ph - ph * (v - yMin) / (yMax - yMin);
+  const stepX = niceStep((x1 - x0) / 4 || 1e-4), stepY = niceStep((yMax - yMin) / 4 || 1);
+  ctx2.strokeStyle = 'rgba(148,163,184,.5)'; ctx2.lineWidth = 1.4;
+  for (let v = Math.ceil(x0 / stepX) * stepX; v <= x1; v += stepX) {
+    const x = X(v);
+    ctx2.beginPath(); ctx2.moveTo(x, g.t + ph); ctx2.lineTo(x, g.t + ph - 5); ctx2.stroke();
+    ctext(ctx2, (v * 1000).toFixed(2), x, g.t + ph + 16, 10, 'rgba(148,163,184,.8)', false, true);
+  }
+  for (let v = Math.ceil(yMin / stepY) * stepY; v <= yMax; v += stepY) {
+    const y = Y(v);
+    ctx2.beginPath(); ctx2.moveTo(g.l, y); ctx2.lineTo(g.l + 5, y); ctx2.stroke();
+    const lbl = v.toFixed(1);
+    ctext(ctx2, lbl, g.l - 8 - lbl.length * 5.6, y + 3, 10, 'rgba(148,163,184,.8)', false, false);
+  }
+  ctext(ctx2, 'x-axis: 1/T (×10⁻³ K⁻¹)', g.l + pw / 2, H2 - 8, 10, 'rgba(148,163,184,.9)', true, true);
+  ctx2.fillStyle = 'rgba(61,214,198,.95)'; ctx2.strokeStyle = 'rgba(13,20,32,.9)'; ctx2.lineWidth = 1.5;
+  for (const p of pts) {
+    ctx2.beginPath(); ctx2.arc(X(p[0]), Y(p[1]), 5, 0, Math.PI * 2); ctx2.fill(); ctx2.stroke();
+  }
+  const fit = linFit(pts);
+  ctx2.strokeStyle = 'rgba(245,158,11,.95)'; ctx2.lineWidth = 2;
+  ctx2.beginPath(); ctx2.moveTo(X(x0), Y(fit.a + fit.b * x0)); ctx2.lineTo(X(x1), Y(fit.a + fit.b * x1)); ctx2.stroke();
+  const ea = -fit.b * R_GAS / 1000;
+  ctext(ctx2, 'gradient = ' + fmt(fit.b, 0) + ' K  ( = −Ea/R )', g.l + 12, g.t + 14, 11, 'rgba(251,191,36,.95)', true, false);
+  ctext(ctx2, '⇒ Ea ≈ ' + fmt(ea, 1) + ' kJ mol⁻¹   (benchmark ≈ +57.5)', g.l + 12, g.t + 30, 10, 'rgba(94,234,212,.9)', false, false);
+  ctext(ctx2, 'R = 8.314 J mol⁻¹ K⁻¹; T in kelvin; sign: gradient is NEGATIVE', g.l + 12, g.t + 46, 10, 'rgba(148,163,184,.85)', false, false);
+}
+function drawCatBars(g, pw, ph) {
+  const off = S.data.cat.find(d => !d.cat), on = S.data.cat.find(d => d.cat);
+  const v1 = off ? 1 / off.t : 0, v2 = on ? 1 / on.t : 0;
+  const maxY = Math.max(v1, v2, 0.02) * 1.25;
+  const bw = Math.min(90, pw * 0.22);
+  const xs = [g.l + pw * 0.25 - bw / 2, g.l + pw * 0.7 - bw / 2];
+  const vals = [v1, v2]; const cols = ['rgba(148,163,184,.8)', 'rgba(61,214,198,.9)'];
+  const names = ['no catalyst', 'Fe²⁺(aq) added'];
+  for (let i = 0; i < 2; i++) {
+    const h = ph * vals[i] / maxY;
+    ctx2.fillStyle = cols[i]; ctx2.fillRect(xs[i], g.t + ph - h, bw, h);
+    ctx2.strokeStyle = 'rgba(13,20,32,.8)'; ctx2.lineWidth = 1;
+    rectP(ctx2, xs[i], g.t + ph - h, bw, h); ctx2.stroke();
+    ctext(ctx2, names[i], xs[i] + bw / 2, g.t + ph + 16, 10, 'rgba(226,232,240,.9)', true, true);
+    if (vals[i] > 0) ctext(ctx2, '1/t = ' + vals[i].toFixed(4), xs[i] + bw / 2, g.t + ph - h - 6, 10, 'rgba(94,234,212,.95)', true, true);
+  }
+  axisFrame(ctx2, g, pw, ph);
+  ctext(ctx2, 'y: rate ∝ 1/t (s⁻¹)', 8, 14, 10, 'rgba(148,163,184,.9)', true, false);
+  ctext(ctx2, 'all concentrations + 50.0 cm³ total held constant — only the catalyst differs', g.l + pw / 2, H2 - 8, 10, 'rgba(148,163,184,.9)', false, true);
+}
+
+/* =====================================================================
+   RAF LOOP — stopwatch via performance.now deltas; NEVER setInterval/setTimeout
+===================================================================== */
+let lastRAF = 0;
+function loop(now) {
+  requestAnimationFrame(loop);
+  if (activeTab !== 'sim') { lastRAF = 0; return; }
+  const nowMs = (typeof now === 'number') ? now : performance.now();
+  const dt = lastRAF ? Math.min(0.1, (nowMs - lastRAF) / 1000) : 0;
+  lastRAF = nowMs;
+  if (S.phase === 'running') {
+    S.elapsed = Math.min(S.tTarget, S.elapsed + dt * S.speed);
+    if (S.elapsed >= S.tTarget) {
+      S.elapsed = S.tTarget;
+      S.phase = 'flashed'; S.flashProg = 0;
+      document.getElementById('btn-record').disabled = false;
+      msg('Blue-black flash! Record the run: calculate rate = 1/t for t = ' + fmt(S.tTarget, 3) + ' s.');
+    }
+    document.getElementById('ro-time').textContent = fmt(S.elapsed, 3) + ' s';
+  }
+  stepSim(dt);
+  draw();
+  drawChart();
+}
+requestAnimationFrame(loop);
+
+/* =====================================================================
+   SIM ACTIONS
+===================================================================== */
+function startRun() {
+  if (!gateOpen()) { lockedMsg(); return; }
+  if (S.phase === 'running') return;
+  if (waterV() < 0) { msg('Fix the mixture: volumes exceed 50.0 cm³.'); return; }
+  S.phase = 'running';
+  S.elapsed = 0;
+  S.flashProg = 0;
+  S.tTarget = predictT();
+  S.startPerf = performance.now();
+  document.getElementById('btn-record').disabled = true;
+  document.getElementById('btn-start').disabled = true;
+  buildParticles();
+  msg('');
+}
+function resetRun() {
+  S.phase = 'idle'; S.elapsed = 0; S.flashProg = 0;
+  document.getElementById('btn-record').disabled = true;
+  document.getElementById('btn-start').disabled = false;
+  document.getElementById('ro-time').textContent = '0.000 s';
+  msg('');
+}
+function setSpeed(n) {
+  if (!gateOpen()) { lockedMsg(); return; }
+  S.speed = n;
+  ['btn-sp1', 'btn-sp2', 'btn-sp4'].forEach((id, i) => {
+    document.getElementById(id).classList.toggle('on', i + 1 === n);
+  });
+}
+function setMode(m) {
+  if (!gateOpen()) { lockedMsg(); return; }
+  S.mode = m;
+  S.Vp = 10; S.Vi = 10; S.Vs = 10; S.temp = 25; S.cat = false;
+  resetRun();
+  syncControls();
+  updateReadouts(); updateFairTest(); renderPredict(); renderTable(); renderChartHint();
+  document.getElementById('x-toggle').style.display = m === 'conc' ? 'flex' : 'none';
+  document.getElementById('cat-eq').classList.toggle('hidden', !(m === 'cat' && S.cat));
+  ['conc', 'temp', 'cat'].forEach(x => {
+    document.getElementById('mode-' + x).classList.toggle('on', x === m);
+  });
+  buildParticles();
+  msg('');
+}
+function setXVar(xv) {
+  S.xVar = xv;
+  document.getElementById('x-btn-S').classList.toggle('on', xv === 'S');
+  document.getElementById('x-btn-I').classList.toggle('on', xv === 'I');
+  renderTable(); renderChartHint();
+}
+
+/* ---- slider clamping: water make-up keeps TOTAL = 50.0 cm3 ---- */
+function applySlider(which, v) {
+  v = +v;
+  const others = (S.Vp + S.Vi + S.Vs) - S[which];
+  if (others + v > V_TOTAL) {
+    v = Math.max(2, V_TOTAL - others);
+    msg('Total volume capped at 50.0 cm³ — water make-up cannot go below 0. Slider reduced.');
+  } else {
+    msg('');
+  }
+  S[which] = Math.round(v * 2) / 2;
+}
+function onSlVp(v) {
+  if (!gateOpen()) { lockedMsg(); return; } applySlider('Vp', v); syncControls(); afterParam(); }
+function onSlVi(v) {
+  if (!gateOpen()) { lockedMsg(); return; } applySlider('Vi', v); syncControls(); afterParam(); }
+function onSlVs(v) {
+  if (!gateOpen()) { lockedMsg(); return; } applySlider('Vs', v); syncControls(); afterParam(); }
+function onSlT(v) {
+  if (!gateOpen()) { lockedMsg(); return; } S.temp = +v; syncControls(); afterParam(); }
+function onCat() {
+  if (!gateOpen()) { lockedMsg(); return; }
+  S.cat = !S.cat;
+  syncControls();
+  document.getElementById('cat-eq').classList.toggle('hidden', !(S.mode === 'cat' && S.cat));
+  afterParam();
+  buildParticles();
+}
+function afterParam() {
+  resetRun();
+  updateReadouts(); updateFairTest();
+}
+function syncControls() {
+  document.getElementById('sl-Vp').value = S.Vp;
+  document.getElementById('sl-Vi').value = S.Vi;
+  document.getElementById('sl-Vs').value = S.Vs;
+  document.getElementById('sl-temp').value = S.temp;
+  document.getElementById('lbl-Vp').textContent = fmt(S.Vp, 1) + ' cm³';
+  document.getElementById('lbl-Vi').textContent = fmt(S.Vi, 1) + ' cm³';
+  document.getElementById('lbl-Vs').textContent = fmt(S.Vs, 1) + ' cm³';
+  document.getElementById('lbl-temp').textContent = fmt(S.temp, 0) + ' °C';
+  const cb = document.getElementById('btn-cat');
+  cb.textContent = S.cat ? '✓ Fe²⁺(aq) catalyst ON' : '✕ No catalyst (Fe²⁺ OFF)';
+  cb.classList.toggle('on', S.cat);
+}
+
+/* =====================================================================
+   READOUTS / FAIR TEST / CAPTIONS
+===================================================================== */
+function updateReadouts() {
+  const c = concAfterMix();
+  const k = kOf(S.temp, S.mode === 'cat' ? S.cat : false);
+  const set = (id, v) => { document.getElementById(id).textContent = v; };
+  set('ro-S', fmt(c.s, 3) + ' mol dm⁻³');
+  set('ro-I', fmt(c.i, 3) + ' mol dm⁻³');
+  set('ro-th', (c.th * 1000).toFixed(1) + ' × 10⁻³ mol dm⁻³');
+  set('ro-water', fmt(waterV(), 1) + ' cm³');
+  set('ro-total', '50.0 cm³ ✓');
+  set('ro-k', fmt(k, 4) + ' dm³ mol⁻¹ s⁻¹');
+  set('ro-time', fmt(S.elapsed, 3) + ' s');
+  set('ro-rate', S.phase === 'flashed' ? fmt(1 / S.tTarget, 4) + ' s⁻¹' : '— press Start');
+}
+function updateFairTest() {
+  const iv = S.mode === 'conc' ? 'the chosen concentration: ' + (S.xVar === 'S' ? '[S₂O₈²⁻]' : '[I⁻]') + ' (pipette volumes — water makes up the rest)' : (S.mode === 'temp' ? 'temperature θ (slider)' : 'Fe²⁺(aq) catalyst: off vs on');
+  const cv = S.mode === 'conc' ? 'temperature ' + fmt(S.temp, 0) + ' °C, ' + (S.xVar === 'S' ? '[I⁻]' : '[S₂O₈²⁻]') + ', thiosulfate ' + fmt(S.Vs, 1) + ' cm³, starch, TOTAL VOLUME 50.0 cm³' : (S.mode === 'temp' ? '[S₂O₈²⁻] = ' + fmt(concAfterMix().s, 3) + ', [I⁻] = ' + fmt(concAfterMix().i, 3) + ' mol dm⁻³, S₂O₃²⁻ ' + fmt(S.Vs, 1) + ' cm³, total 50.0 cm³ — do NOT move the volume sliders between temp runs' : 'T = ' + fmt(S.temp, 0) + ' °C, both concentrations, S₂O₃²⁻ ' + fmt(S.Vs, 1) + ' cm³, total 50.0 cm³');
+  document.getElementById('fair-test').innerHTML =
+    '<span class="font-bold text-teal-300 uppercase text-xs tracking-wider">Fair test (11.4i · the practical)</span><br>' +
+    '<span class="font-bold text-slate-200">Independent:</span> ' + iv + '<br>' +
+    '<span class="font-bold text-slate-200">Dependent:</span> flash time t → rate ∝ 1/t<br>' +
+    '<span class="font-bold text-slate-200">Controlled:</span> ' + cv + '<br>' +
+    '<span class="text-xs text-slate-500">Real lab: mix in a water bath at θ; judge the flash against white paper; repeat and average — this model is deterministic, real clock runs scatter (subjective endpoint).</span>';
+}
+function renderChartHint() {
+  let h;
+  if (S.mode === 'conc') h = 'Plot: 1/t vs ' + (S.xVar === 'S' ? '[S₂O₈²⁻]' : '[I⁻]') + '. If YOUR points give a straight line THROUGH THE ORIGIN, rate ∝ [ ]¹ for that species (order 1) — gradient = k × fixed [ ]. Vary ONLY that reagent and hold the other + temperature + total volume fixed.';
+  else if (S.mode === 'temp') h = 'Plot: ln(1/t) vs 1/T (T in kelvin). Since rate ∝ k and k = A·e^(−Ea/RT), the gradient = −Ea/R ⇒ Ea = −gradient × 8.314 J mol⁻¹ (benchmark ≈ 57.5 kJ mol⁻¹). (11.10 — the Arrhenius equation is given in the exam.)';
+  else h = 'Compare the two bars: same recipe, same temperature, only Fe²⁺ present or absent. Faster 1/t with Fe²⁺ ⇒ the catalyst provides an alternative Fe²⁺/Fe³⁺ pathway of lower Ea — regenerated, and it avoids the S₂O₈²⁻/I⁻ anion–anion repulsion.';
+  document.getElementById('chart-hint').textContent = h;
+  document.getElementById('chart-title').textContent = S.mode === 'temp' ? 'Arrhenius plot — ln(1/t) vs 1/T (hand-drawn, 11.10)' : (S.mode === 'cat' ? 'Catalyst comparison — bars from your runs' : 'Initial-rate plot — 1/t vs concentration (hand-drawn, 11.5)');
+}
+
+/* =====================================================================
+   DATA TABLE + RECORD MODAL
+===================================================================== */
+function renderTable() {
+  const rows = S.data[S.mode];
+  let head, body = '';
+  if (S.mode === 'conc') {
+    head = '<tr><th>#</th><th>[S₂O₈²⁻] / mol dm⁻³</th><th>[I⁻] / mol dm⁻³</th><th>t / s</th><th>1/t / s⁻¹</th></tr>';
+    body = rows.map((d, i) => '<tr><td>' + (i + 1) + '</td><td>' + fmt(d.s, 3) + '</td><td>' + fmt(d.i, 3) + '</td><td>' + fmt(d.t, 3) + '</td><td class="text-teal-300 font-bold">' + fmt(d.rate, 4) + '</td></tr>').join('');
+  } else if (S.mode === 'temp') {
+    head = '<tr><th>#</th><th>θ / °C</th><th>T / K</th><th>1/T /10⁻³K⁻¹</th><th>t / s</th><th>1/t / s⁻¹</th><th>ln(1/t)</th></tr>';
+    body = rows.map(d => '<tr><td>' + d.n + '</td><td>' + fmt(d.temp, 0) + '</td><td>' + (273 + d.temp) + '</td><td>' + fmt(1000 / (273 + d.temp), 2) + '</td><td>' + fmt(d.t, 3) + '</td><td>' + fmt(d.rate, 4) + '</td><td class="text-teal-300 font-bold">' + fmt(Math.log(d.rate), 3) + '</td></tr>').join('');
+  } else {
+    head = '<tr><th>#</th><th>Catalyst</th><th>t / s</th><th>1/t / s⁻¹</th></tr>';
+    body = rows.map((d, i) => '<tr><td>' + (i + 1) + '</td><td>' + (d.cat ? 'Fe²⁺(aq)' : 'none') + '</td><td>' + fmt(d.t, 3) + '</td><td class="text-teal-300 font-bold">' + fmt(d.rate, 4) + '</td></tr>').join('');
+  }
+  document.getElementById('data-thead').innerHTML = head;
+  document.getElementById('data-tbody').innerHTML = body || '<tr><td colspan="7" style="color:#64748b;padding:.8rem">No runs recorded yet — flash the clock, then record it.</td></tr>';
+}
+function openRecord() {
+  if (!gateOpen()) { lockedMsg(); return; }
+  if (S.phase !== 'flashed') return;
+  document.getElementById('modal-time').textContent = fmt(S.tTarget, 3);
+  document.getElementById('rate-input').value = '';
+  document.getElementById('rate-err').classList.add('hidden');
+  const m = document.getElementById('modal-rate');
+  m.classList.remove('hidden'); m.classList.add('flex');
+  const f = document.getElementById('rate-input');
+  if (f && f.focus) f.focus();
+}
+function closeRecord() {
+  const m = document.getElementById('modal-rate');
+  m.classList.add('hidden'); m.classList.remove('flex');
+}
+function verifyRate() {
+  const inp = parseFloat(document.getElementById('rate-input').value);
+  const err = document.getElementById('rate-err');
+  const actual = 1 / S.tTarget;
+  if (isNaN(inp)) {
+    err.textContent = 'Enter a number — the rate you calculated is 1 ÷ t.';
+    err.classList.remove('hidden'); return;
+  }
+  if (Math.abs(inp - actual) > Math.max(actual * 0.05, 0.005)) {
+    err.textContent = 'Not quite: the flash only gives t. Compute rate = 1/t and keep 3–4 d.p. (check your calculator brackets).';
+    err.classList.remove('hidden'); return;
+  }
+  closeRecord();
+  const c = concAfterMix();
+  const store = S.data[S.mode];
+  if (S.mode === 'conc' && store.some(d => Math.abs(d.s - c.s) < 1e-6 && Math.abs(d.i - c.i) < 1e-6)) {
+    msg('A run with these concentrations is already recorded — change a slider first.'); return;
+  }
+  if (S.mode === 'temp' && store.some(d => d.temp === S.temp)) {
+    msg('Already recorded at ' + S.temp + ' °C — pick a different temperature.'); return;
+  }
+  if (S.mode === 'cat' && store.some(d => d.cat === S.cat)) {
+    msg('Already recorded for the catalyst ' + (S.cat ? 'ON' : 'OFF') + ' — flip the toggle.'); return;
+  }
+  store.push({ s: c.s, i: c.i, th: c.th, temp: S.temp, cat: S.cat, t: S.tTarget, rate: actual, n: store.length + 1 });
+  store.sort((a, b) => (S.mode === 'conc' ? (S.xVar === 'S' ? a.s - b.s : a.i - b.i) : (S.mode === 'temp' ? b.temp - a.temp : a.n - b.n)));
+  document.getElementById('btn-record').disabled = true;
+  renderTable();
+  saveState();
+  msg('Recorded ✓ Run ' + store.length + ' in the ' + S.mode + ' data set. Add points to build the graph.');
+}
+function clearData() {
+  S.data[S.mode] = [];
+  renderTable(); saveState();
+  document.getElementById('conclusion-text').classList.add('hidden');
+  msg('Data cleared for this mode.');
+}
+
+/* =====================================================================
+   PREDICT -> CHECK
+===================================================================== */
+const MODE_PREDICT = {
+  conc: {
+    q: 'Predict: you double [S₂O₈²⁻] (keeping [I⁻], thiosulfate, temperature and the 50.0 cm³ total volume constant). What happens to the clock time t?',
+    opts: ['t is roughly halved', 't roughly doubles', 't is unchanged'],
+    a: 0,
+    fb: 'MARK SCHEME WORDING: first order in S₂O₈²⁻ ⇒ rate ∝ [S₂O₈²⁻]. Doubling the concentration doubles the particles per unit volume and the frequency of successful collisions, so the rate doubles; the fixed thiosulfate dose is "covered" in half the time ⇒ t halves and 1/t doubles — the straight line through the origin on your plot. rate = k[S₂O₈²⁻][I⁻], NOT built from the coefficient 2 in front of I⁻: orders are experimental.'
+  },
+  temp: {
+    q: 'Predict: you raise the temperature from 25 °C to 35 °C (everything else fixed). Why does t shrink so much?',
+    opts: ['Ea falls, so the reaction needs less energy', 'A much larger fraction of collisions now have E ≥ Ea, so k rises', 'The particles merely collide more often with the same energy'],
+    a: 1,
+    fb: 'MARK SCHEME WORDING: Ea is FIXED — heating never changes it. Raising temperature raises the average kinetic energy so a far larger PROPORTION of collisions exceed Ea; rate ∝ k and k = A·e^(−Ea/RT) rises steeply. For Ea = 57.5 kJ mol⁻¹ the model gives k(35)/k(25) ≈ 3.4. Record 4+ temperatures: the ln(1/t) vs 1/T line has gradient −Ea/R.'
+  },
+  cat: {
+    q: 'Predict: you add a few drops of Fe²⁺(aq) (everything else fixed). How does it speed up the clock?',
+    opts: ['It lowers the activation energy of the original one-step route', 'It provides an alternative Fe²⁺/Fe³⁺ pathway of lower Ea and is regenerated', 'It increases the concentration of I⁻ in the mixture'],
+    a: 1,
+    fb: 'MARK SCHEME WORDING: homogeneous catalysis. Step 1: S₂O₈²⁻(aq) + 2Fe²⁺(aq) → 2SO₄²⁻(aq) + 2Fe³⁺(aq); step 2: 2Fe³⁺(aq) + 2I⁻(aq) → I₂(aq) + 2Fe²⁺(aq). The catalyst is REGENERATED, and each step pairs opposite charges — avoiding the strongly repulsive S₂O₈²⁻···I⁻ anion–anion collision that makes the uncatalysed Ea high (≈57.5 kJ mol⁻¹). Option A is the trap: a catalyst opens a DIFFERENT route, it does not lower the Ea of the same one.'
+  }
+};
+let predictPick = null;
+function renderPredict() {
+  const p = MODE_PREDICT[S.mode];
+  predictPick = null;
+  document.getElementById('predict-q').textContent = p.q;
+  document.getElementById('predict-opts').innerHTML = p.opts.map((o, i) =>
+    '<button type="button" class="mini-btn predict-btn" data-p="' + i + '">' + o + '</button>').join('');
+  document.querySelectorAll('.predict-btn').forEach(b => {
+    b.onclick = () => {
+      predictPick = +b.dataset.p;
+      document.querySelectorAll('.predict-btn').forEach(x => x.classList.remove('on'));
+      b.classList.add('on');
+    };
+  });
+  const fb = document.getElementById('predict-fb');
+  fb.classList.add('hidden'); fb.textContent = '';
+}
+function revealPredict() {
+  const p = MODE_PREDICT[S.mode];
+  const fb = document.getElementById('predict-fb');
+  fb.classList.remove('hidden');
+  fb.innerHTML = (predictPick === p.a ? '<span class="text-emerald-300 font-bold">✓ Correct. </span>' : '<span class="text-amber-300 font-bold">Not yet — the answer is "' + p.opts[p.a] + '". </span>') +
+    '<span class="text-slate-300">' + p.fb + '</span>';
+}
+
+/* =====================================================================
+   CONCLUSION (interactive verify-modal logic from the original, upgraded)
+===================================================================== */
+function revealConclusion() {
+  const oS = document.getElementById('sel-order-s').value;
+  const oI = document.getElementById('sel-order-i').value;
+  const oT = document.getElementById('sel-order-tot').value;
+  const u = document.getElementById('ku-a').checked ? 's⁻¹' :
+            (document.getElementById('ku-b').checked ? 'mol dm⁻³ s⁻¹' :
+            (document.getElementById('ku-c').checked ? 'mol⁻¹ dm³ s⁻¹' :
+            (document.getElementById('ku-d').checked ? 'mol⁻² dm⁶ s⁻¹' : null)));
+  const box = document.getElementById('conclusion-text');
+  box.classList.remove('hidden');
+  if (oS === '' || oI === '' || oT === '' || !u) {
+    box.className = 'text-sm leading-relaxed mt-4 text-amber-300';
+    box.textContent = 'Pick both orders, the overall order and the units of k first — that is the whole exam skill.';
+    return;
+  }
+  let dataNote = '';
+  const rows = S.data.conc;
+  for (let i = 0; i < rows.length; i++) {
+    for (let j = i + 1; j < rows.length; j++) {
+      const a = rows[i], b = rows[j];
+      if (Math.abs(a.i - b.i) < 1e-6 && a.s > 1e-9 && Math.abs(b.s / a.s - 2) < 0.15) {
+        const ratio = a.t / b.t;
+        dataNote = ' From YOUR runs: [S₂O₈²⁻] ×' + fmt(b.s / a.s, 1) + ' (other reagent fixed) ⇒ 1/t ×' + fmt(ratio, 1) + ' ⇒ order ≈ ' + fmt(Math.log(ratio) / Math.log(b.s / a.s), 1) + '.';
+      } else if (Math.abs(a.s - b.s) < 1e-6 && a.i > 1e-9 && Math.abs(b.i / a.i - 2) < 0.15) {
+        const ratio = a.t / b.t;
+        dataNote = ' From YOUR runs: [I⁻] ×' + fmt(b.i / a.i, 1) + ' (other reagent fixed) ⇒ 1/t ×' + fmt(ratio, 1) + ' ⇒ order ≈ ' + fmt(Math.log(ratio) / Math.log(b.i / a.i), 1) + '.';
+      }
+    }
+  }
+  const correct = (oS === '1' && oI === '1' && oT === '2' && u === 'mol⁻¹ dm³ s⁻¹');
+  box.className = 'text-sm leading-relaxed mt-4 rounded-xl p-4 border ' + (correct ? 'bg-emerald-950/40 border-emerald-800/40 text-emerald-100' : 'bg-rose-950/30 border-rose-800/40 text-rose-100');
+  const truth = 'the examiner-confirmed rate equation (a past paper(c)(ii)): rate = k[S₂O₈²⁻][I⁻] — first order in EACH reactant, overall second order, k in mol⁻¹ dm³ s⁻¹. In this model k = ' + fmt(kOf(25, false), 4) + ' dm³ mol⁻¹ s⁻¹ at 298 K.' + (dataNote || ' (Record two concentration runs with one reagent doubled and this space fills with your own ratio test.)');
+  const myth = 'MYTH WATCH: the coefficient of I⁻ is 2, yet the order in I⁻ is 1 — orders come from EXPERIMENT, and the units of k follow the OVERALL order, never the equation.';
+  box.innerHTML = (correct
+    ? '<span class="font-bold text-emerald-300">✓ Exam-ready.</span> '
+    : '<span class="font-bold text-amber-300">Review your plot: </span>') + truth + '<p class="text-xs text-slate-400 mt-2">' + myth + '</p>';
+}
+
+/* =====================================================================
+   CALC TAB
+===================================================================== */
+function runCalc() {
+  const kept = document.getElementById('sel-kept').value;
+  const s1 = parseFloat(document.getElementById('inp-s1').value);
+  const i1 = parseFloat(document.getElementById('inp-i1').value);
+  const r1 = parseFloat(document.getElementById('inp-r1').value);
+  const s2 = parseFloat(document.getElementById('inp-s2').value);
+  const i2 = parseFloat(document.getElementById('inp-i2').value);
+  const r2 = parseFloat(document.getElementById('inp-r2').value);
+  const out = document.getElementById('calc-working');
+  out.classList.remove('hidden');
+  if ([s1, i1, r1, s2, i2, r2].some(x => isNaN(x) || x <= 0)) {
+    out.textContent = 'Fill all six boxes with positive numbers (concentrations in mol dm⁻³, rates in mol dm⁻³ s⁻¹).';
+    return;
+  }
+  const varied = kept === 'I' ? 'S₂O₈²⁻' : 'I⁻';
+  const v1 = kept === 'I' ? s1 : i1, v2 = kept === 'I' ? s2 : i2;
+  const cvr = v2 / v1;
+  let L = 'STEP 1 — the initial-rate method\n';
+  L += 'Exp 2 vs exp 1: [' + varied + '] ' + fmt(v1, 3) + ' → ' + fmt(v2, 3) + ' mol dm⁻³ (×' + fmt(cvr, 2) + '),\nwhile ' + (kept === 'I' ? '[I⁻]' : '[S₂O₈²⁻]') + ' is HELD CONSTANT and the total volume stays 50.0 cm³,\nso only ' + varied + ' can be changing the rate.\n\n';
+  L += 'STEP 2 — deduce the order\n';
+  L += 'rate ratio = ' + fmt(r1, 3) + ' → ' + fmt(r2, 3) + ' = ×' + fmt(r2 / r1, 2) + '\n';
+  if (Math.abs(cvr - 1) < 1e-9) { out.textContent = L + 'Problem: nothing was varied — vary ONE reagent and try again.'; return; }
+  const order = Math.log(r2 / r1) / Math.log(cvr);
+  const oR = Math.round(order);
+  L += 'order = log(rate ratio) / log(concentration ratio) = log(' + fmt(r2 / r1, 3) + ') / log(' + fmt(cvr, 3) + ') = ' + fmt(order, 2) + ' → ' + oR;
+  L += (oR === 1 ? ' (first order: rate ∝ [' + varied + ']¹ — 1/t plot is a straight line through the origin)' : (oR === 2 ? ' (second order: rate ∝ [' + varied + ']²)' : ' (zero order: changing [' + varied + '] does not affect the rate)')) + '\n';
+  L += 'NOTE: the OTHER order cannot come from these two runs — repeat the test varying the other reagent. (the examiner data for this clock: 1st in each.)\n\n';
+  L += 'STEP 3 — the rate constant k, WITH UNITS\n';
+  const oS = kept === 'I' ? oR : 1, oI = kept === 'I' ? 1 : oR;
+  const tot = oS + oI;
+  L += 'rate = k[S₂O₈²⁻]^' + oS + '[I⁻]^' + oI + '   (overall order ' + tot + ')\n';
+  L += 'k = rate / ([S₂O₈²⁻]^' + oS + ' × [I⁻]^' + oI + ')\n';
+  L += 'k = ' + fmt(r1, 3) + ' / (' + fmt(s1, 3) + (oS === 2 ? '²' : '') + ' × ' + fmt(i1, 3) + (oI === 2 ? '²' : '') + ')  =  ' + fmt(r1 / (Math.pow(s1, oS) * Math.pow(i1, oI)), 4) + '\n';
+  const k = r1 / (Math.pow(s1, oS) * Math.pow(i1, oI));
+  const un = tot === 1 ? 's⁻¹' : tot === 2 ? 'mol⁻¹ dm³ s⁻¹' : 'mol⁻² dm⁶ s⁻¹';
+  L += 'k = ' + k.toPrecision(2) + ' ' + un + '\n';
+  L += 'Units check: (mol dm⁻³ s⁻¹) ÷ (mol dm⁻³)^' + tot + ' = ' + un + '. The units of k follow the OVERALL ORDER — memorise that, not a pattern.\n';
+  L += 'k is UNCHANGED by concentration; only temperature (and a catalyst) change it. Half-life check: if the order you just deduced is 1, a concentration–time curve for that reactant has a CONSTANT t½.';
+  out.textContent = L;
+}
+function runCalcDil() {
+  const c = parseFloat(document.getElementById('cs').value);
+  const v = parseFloat(document.getElementById('vs').value);
+  const vt = parseFloat(document.getElementById('vt').value);
+  const out = document.getElementById('calc-dil');
+  out.classList.remove('hidden');
+  if (isNaN(c) || isNaN(v) || isNaN(vt) || vt <= 0) { out.textContent = 'Enter all three numbers.'; return; }
+  const n = c * v / 1000;
+  const cn = n / (vt / 1000);
+  let L = 'n = cV (V in dm³):   n = ' + c + ' × ' + v + '/1000 = ' + n.toExponential(2) + ' mol of S₂O₈²⁻\n';
+  L += 'c(mixture) = n ÷ V(total) = ' + n.toExponential(2) + ' ÷ ' + (vt / 1000) + ' = ' + fmt(cn, 4) + ' mol dm⁻³\n';
+  L += 'shortcut: c₂ = c₁V₁/V₂ = ' + c + ' × ' + v + ' ÷ ' + vt + ' = ' + fmt(cn, 4) + ' mol dm⁻³\n';
+  L += 'TRAP (Jun 2025 PEF): the rate equation uses ' + fmt(cn, 4) + ' — the concentration AFTER mixing. Plugging the stock ' + c + ' mol dm⁻³ into rate = k[S₂O₈²⁻][I⁻] loses every method mark. Compare with the sim: the same pipette volume shows this value in the "in mixture" readout.';
+  out.textContent = L;
+}
+
+/* =====================================================================
+   RENDERERS
+===================================================================== */
+function renderIntro() {
+  const s = t();
+  document.getElementById('hdr-title').textContent = s.title;
+  document.getElementById('hdr-sub').textContent = s.subtitle;
+  document.getElementById('intro-h1').textContent = s.introH1;
+  document.getElementById('intro-lead').textContent = s.introLead;
+  document.getElementById('sim-caption').textContent = s.simCaption;
+  document.getElementById('clock-logic').textContent = s.clockLogic;
+  document.getElementById('species-panel').textContent = s.species;
+  document.getElementById('teacher-title').textContent = s.teacherTitle;
+  document.getElementById('teacher-content').innerHTML = s.teacher.map(x => '<p>• ' + x + '</p>').join('');
+  document.getElementById('intro-cards').innerHTML = s.concepts.map(c =>
+    '<div class="glass p-4"><h3 class="font-bold text-indigo-300 text-sm mb-1">' + c.t + '</h3><p class="text-sm text-slate-300 leading-relaxed">' + c.d + '</p></div>').join('');
+}
+function renderCalc() {
+  const s = t();
+  document.getElementById('calc-title').textContent = s.calcTitle;
+  document.getElementById('calc-sub').textContent = s.calcSub;
+  document.getElementById('calc-inputs').innerHTML = [
+    ['inp-s1', '[S₂O₈²⁻]₁ / mol dm⁻³', '0.020'],
+    ['inp-i1', '[I⁻]₁ / mol dm⁻³', '0.020'],
+    ['inp-r1', 'rate₁ / mol dm⁻³ s⁻¹', '0.000020'],
+    ['inp-s2', '[S₂O₈²⁻]₂ / mol dm⁻³', '0.040'],
+    ['inp-i2', '[I⁻]₂ / mol dm⁻³', '0.020'],
+    ['inp-r2', 'rate₂ / mol dm⁻³ s⁻¹', '0.000040']
+  ].map(x => '<label><span class="calc-lbl">' + x[1] + '</span><input type="number" step="0.000001" id="' + x[0] + '" class="calc-inp" value="' + x[2] + '"></label>').join('');
+}
+function renderMcq() {
+  const s = t();
+  document.getElementById('pp-title').textContent = s.ppTitle;
+  document.getElementById('pp-sub').textContent = s.ppSub;
+  document.getElementById('pp-questions').innerHTML = s.questions.map((q, qi) =>
+    '<div class="space-y-2"><p class="font-semibold text-slate-100 text-sm leading-relaxed">' + (qi + 1) + '. ' + q.q + '</p>' +
+    q.o.map((o, oi) =>
+      '<button type="button" class="mcq-opt w-full text-left text-sm px-4 py-2 rounded-xl border border-slate-700 bg-slate-900/50" data-q="' + qi + '" data-o="' + oi + '">' + 'ABCD'[oi] + ' · ' + o + '</button>').join('') +
+    '<p class="mcq-why hidden text-xs text-emerald-300/90 bg-emerald-950/40 border border-emerald-800/40 rounded-xl p-3 leading-relaxed"></p></div>').join('');
+  document.querySelectorAll('.mcq-opt').forEach(btn => {
+    btn.onclick = () => {
+      const q = s.questions[+btn.dataset.q];
+      const opts = document.querySelectorAll('.mcq-opt[data-q="' + btn.dataset.q + '"]');
+      opts.forEach(o => o.classList.remove('correct', 'wrong'));
+      btn.classList.add(+btn.dataset.o === q.a ? 'correct' : 'wrong');
+      opts[q.a].classList.add('correct');
+      const why = btn.closest('.space-y-2').querySelector('.mcq-why');
+      why.textContent = q.why;
+      why.classList.remove('hidden');
+    };
+  });
+}
+function renderRecap() {
+  const s = t();
+  document.getElementById('recap-title').textContent = s.recapTitle;
+  document.getElementById('recap-list').innerHTML = s.recapGoals.map((g, i) =>
+    '<li class="flex items-start gap-2 text-sm"><input type="checkbox" class="goal-check mt-1" data-g="' + i + '"><span class="text-slate-300 leading-relaxed">' + g + '</span></li>').join('');
+  document.querySelectorAll('.goal-check').forEach(c => c.onchange = () => { updateRecapProgress(); saveState(); });
+  updateRecapProgress();
+  renderMyths();
+}
+function updateRecapProgress() {
+  const checks = document.querySelectorAll('.goal-check');
+  let n = 0;
+  checks.forEach(c => { if (c.checked) n++; });
+  document.getElementById('recap-progress').textContent = n + ' / ' + checks.length + ' goals confirmed.';
+}
+function renderMyths() {
+  const s = t();
+  document.getElementById('myth-title').textContent = s.mythTitle;
+  document.getElementById('myth-lead').textContent = s.mythLead;
+  document.getElementById('myth-cards').innerHTML = s.myths.map((m, i) =>
+    '<div class="myth-card glass rounded-xl p-4" data-myth="' + i + '">' +
+    '<div class="myth-front"><span class="text-xs font-bold text-rose-400 uppercase">' + s.mythLabelMyth + '</span>' +
+    '<p class="text-sm text-slate-200 mt-2 leading-relaxed">' + m.m + '</p>' +
+    '<p class="text-xs text-slate-500 mt-3">' + s.mythFlip + '</p></div>' +
+    '<div class="myth-back"><span class="text-xs font-bold text-emerald-400 uppercase">' + s.mythLabelFact + '</span>' +
+    '<p class="text-sm text-slate-200 mt-2 leading-relaxed">' + m.f + '</p></div></div>').join('');
+  document.querySelectorAll('.myth-card').forEach(c => c.onclick = () => c.classList.toggle('flipped'));
+}
+function renderModes() {
+  const labels = { conc: 'Concentration — initial rates', temp: 'Temperature — Arrhenius', cat: 'Catalyst — Fe²⁺(aq)' };
+  document.getElementById('sim-modes').innerHTML = ['conc', 'temp', 'cat'].map(m =>
+    '<button type="button" id="mode-' + m + '" class="px-4 py-2 rounded-xl text-sm font-bold border border-slate-700 bg-slate-900/60 mini-btn' + (m === S.mode ? ' on' : '') + '" onclick="setMode(\'' + m + '\')">' + labels[m] + '</button>').join('');
+}
+function renderReadouts() {
+  const cells = [
+    ['ro-S', 'in mixture: [S₂O₈²⁻]'],
+    ['ro-I', 'in mixture: [I⁻]'],
+    ['ro-th', 'thiosulfate dose'],
+    ['ro-water', 'water make-up'],
+    ['ro-total', 'total volume (fair test)'],
+    ['ro-k', 'k at this T (model)'],
+    ['ro-time', 'stopwatch t'],
+    ['ro-rate', 'rate ∝ 1/t']
+  ];
+  document.getElementById('sim-readouts').innerHTML = cells.map(c =>
+    '<div class="bg-slate-950/60 border border-slate-700/60 rounded-xl px-3 py-2"><p class="ro-label">' + c[1] + '</p><p id="' + c[0] + '" class="ro-val">' + (c[0] === 'ro-total' ? '50.0 cm³ ✓' : '—') + '</p></div>').join('');
+}
+function renderControls() {
+  const sl = (id, lbl, min, max, step, key) =>
+    '<div><label class="text-xs font-bold text-slate-400 flex justify-between"><span>' + lbl + '</span><span id="lbl-' + key + '" class="text-slate-200">—</span></label>' +
+    '<input type="range" id="' + id + '" min="' + min + '" max="' + max + '" step="' + step + '" aria-label="' + lbl + '"></div>';
+  document.getElementById('ctrl-panel').innerHTML =
+    sl('sl-Vp', 'V [Na₂S₂O₈(aq), 0.100 mol dm⁻³]', 2, 40, 0.5, 'Vp') +
+    sl('sl-Vi', 'V [KI(aq) + starch, 0.200 mol dm⁻³]', 2, 40, 0.5, 'Vi') +
+    sl('sl-Vs', 'V [Na₂S₂O₃(aq), 0.0100 mol dm⁻³] — the clock hand', 2, 15, 0.5, 'Vs') +
+    sl('sl-temp', 'Temperature θ (water bath)', 10, 50, 1, 'temp') +
+    '<div class="md:col-span-2 flex flex-wrap items-center gap-4"><button type="button" id="btn-cat" class="mini-btn px-4 py-2.5 text-sm" onclick="onCat()">✕ No catalyst (Fe²⁺ OFF)</button>' +
+    '<p class="text-xs text-slate-500 max-w-sm leading-relaxed">Water make-up is automatic (see readouts): TOTAL volume stays 50.0 cm³ every run — the Jun 2025 control-variable trap. Real lab: peroxodisulfate is an oxidiser / skin-eye irritant — dilute solutions, goggles.</p></div>';
+  document.getElementById('sl-Vp').oninput = e => onSlVp(e.target.value);
+  document.getElementById('sl-Vi').oninput = e => onSlVi(e.target.value);
+  document.getElementById('sl-Vs').oninput = e => onSlVs(e.target.value);
+  document.getElementById('sl-temp').oninput = e => onSlT(e.target.value);
+  document.getElementById('ctrl-note').textContent = 'Vary anything you like; press ▶ and the stopwatch starts at the instant of mixing. Change a parameter and the beaker resets — every run must start colourless.';
+}
+
+/* =====================================================================
+   BOOT
+===================================================================== */
+loadState();
+renderIntro();
+renderCalc();
+renderMcq();
+renderRecap();
+renderModes();
+renderReadouts();
+renderControls();
+syncControls();
+updateReadouts();
+updateFairTest();
+renderPredict();
+renderTable();
+renderChartHint();
+buildParticles();
+resizeCanvas();
+restoreTicks();
+buildPredict();
+applyGate();
+bindClockTasks();
+</script>
+<script id="lab-runtime">(function () {
+'use strict';
+var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function relayout() {
+if (typeof window.scheduleResize === 'function') window.scheduleResize();
+else if (typeof window.resizeCanvas === 'function') window.resizeCanvas();
+}
+var pending = 0;
+function onRequestRelayout() {
+if (pending) return;
+pending = requestAnimationFrame(function () { pending = 0; relayout(); });
+}
+if (window.ResizeObserver) {
+var ro = new ResizeObserver(onRequestRelayout);
+document.querySelectorAll('.canvas-wrap').forEach(function (el) { ro.observe(el); });
+}
+window.addEventListener('orientationchange', onRequestRelayout);
+window.addEventListener('resize', onRequestRelayout);
+var bar = document.getElementById('next-bar');
+if (bar) {
+var setBarPad = function () {
+var h = Math.round(bar.offsetHeight);
+if (h > 0) document.body.style.setProperty('--next-bar-h', h + 'px');
+};
+setBarPad();
+if (window.ResizeObserver) new ResizeObserver(setBarPad).observe(bar);
+window.addEventListener('load', setBarPad);
+}
+var rail = document.getElementById('main-tabs');
+if (rail) {
+rail.setAttribute('role', 'tablist');
+var pills = Array.prototype.slice.call(rail.querySelectorAll('.tab-btn'));
+pills.forEach(function (btn, i) {
+var panel = document.getElementById('panel-' + btn.dataset.tab);
+btn.setAttribute('role', 'tab');
+btn.setAttribute('aria-selected', btn.classList.contains('active') ? 'true' : 'false');
+if (panel) {
+panel.setAttribute('role', 'tabpanel');
+btn.setAttribute('aria-controls', panel.id);
+panel.setAttribute('aria-labelledby', btn.id);
+}
+btn.addEventListener('keydown', function (e) {
+var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+if (!d) return;
+e.preventDefault();
+var next = pills[(i + d + pills.length) % pills.length];
+next.focus();
+if (typeof window.setTab === 'function') window.setTab(next.dataset.tab);
+});
+});
+rail.addEventListener('click', function () {
+setTimeout(function () {
+pills.forEach(function (b) { b.setAttribute('aria-selected', b.classList.contains('active') ? 'true' : 'false'); });
+var on = rail.querySelector('.tab-btn.active');
+if (on) on.scrollIntoView({ block: 'nearest', inline: 'center', behavior: reduce ? 'auto' : 'smooth' });
+}, 0);
+});
+}
+var dock = document.getElementById('sim-dock');
+if (dock && window.MutationObserver && !reduce) {
+new MutationObserver(function (m) {
+m.forEach(function (change) {
+var el = change.target;
+if (el.classList.contains('unlocked') && change.oldValue && /(^|\s)locked(\s|$)/.test(change.oldValue)) {
+el.classList.add('just-unlocked');
+setTimeout(function () { el.classList.remove('just-unlocked'); }, 750);
+}
+});
+}).observe(dock, { attributes: true, attributeFilter: ['class'], attributeOldValue: true });
+}
+document.addEventListener('click', function (e) {
+if (!e.target || !e.target.closest) return;
+if (e.target.closest('input, label, button, a, select')) return;
+var li = e.target.closest('li');
+if (!li) return;
+var box = li.querySelector('input[type="checkbox"], input[type="radio"]');
+if (!box || box.disabled) return;
+box.checked = box.type === 'checkbox' ? !box.checked : true;
+box.dispatchEvent(new Event('change', { bubbles: true }));
+box.dispatchEvent(new Event('input', { bubbles: true }));
+});
+if (window.IntersectionObserver && !reduce) {
+var io = new IntersectionObserver(function (entries) {
+entries.forEach(function (en) {
+if (!en.isIntersecting) return;
+en.target.classList.add('shown');
+io.unobserve(en.target);
+});
+}, { rootMargin: '0px 0px -6% 0px', threshold: 0.01 });
+document.querySelectorAll('.tab-panel > *').forEach(function (el, i) {
+el.classList.add('reveal');
+el.style.setProperty('--i', String(i));
+io.observe(el);
+});
+setTimeout(function () {
+document.querySelectorAll('.reveal:not(.shown)').forEach(function (el) { el.classList.add('shown'); });
+}, 2500);
+}
+})();</script>
+</body>
+</html>
