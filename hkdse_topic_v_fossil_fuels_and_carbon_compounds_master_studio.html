@@ -9,48 +9,375 @@
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
 <style>
-  :root { color-scheme: dark; }
-  body { background:#020617; font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
-  .tab-panel { display:none; }
-  .tab-panel.active { display:block; }
-  .blur-answer { filter: blur(6px); cursor:pointer; transition: filter .25s ease; user-select:none; }
-  .blur-answer.revealed { filter: blur(0); cursor:default; user-select:text; }
-  .engine-module { display:none; }
-  .engine-module.active { display:block; }
-  .mode-pill { cursor:pointer; }
-  .mode-pill.active { background:rgba(56,189,248,.15); color:#7dd3fc; border-color:#38bdf8; }
-  details > summary { cursor:pointer; list-style:none; }
-  details > summary::-webkit-details-marker { display:none; }
-  .chip { display:inline-block; padding:2px 10px; border-radius:9999px; font-size:11px; font-weight:600; }
-  .katex { font-size:1.05em; }
-  .num-card { font-variant-numeric: tabular-nums; }
-  input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner-spin-button { -webkit-appearance:none; margin:0; }
-  input[type=number] { -moz-appearance:textfield; }
-  .katex-block{overflow-x:auto;overflow-y:hidden}
-  .katex-block .katex-display{text-align:left;margin:.35em 0}
-  /* ══ MOBILE UX LAYER (chrome-only) ══ */
-  :root{--hdr:120px}
-  html{scroll-padding-top:calc(var(--hdr) + 10px)}
-  .toc-strip{display:none;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:2px 0 6px;margin-bottom:2px}
-  .toc-strip::-webkit-scrollbar{display:none}
-  .toc-chip{flex-shrink:0;font-size:10px;line-height:1;padding:7px 11px;border-radius:9999px;border:1px solid rgba(51,65,85,.9);background:rgba(15,23,42,.85);color:#94a3b8;font-weight:600;white-space:nowrap;cursor:pointer}
-  #backTop{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:70;width:44px;height:44px;border-radius:9999px;border:1px solid rgba(56,189,248,.35);background:rgba(8,14,26,.92);color:#7dd3fc;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transform:translateY(8px);transition:opacity .25s,transform .25s}
-  #backTop.show{opacity:1;pointer-events:auto;transform:none}
-  #scrollProg{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,#0ea5e9,#38bdf8);z-index:80;pointer-events:none}
-  @media (max-width:1023.98px){
-    header{background-color:rgba(2,6,23,.97)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;padding-top:env(safe-area-inset-top)}
-    #mainNav{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:4px}
-    #mainNav::-webkit-scrollbar{display:none}
-    #mainNav button{flex-shrink:0}
-    select,input[type="number"],input[type="text"]{font-size:16px!important}
-    #mainNav button{padding-top:10px;padding-bottom:10px}
-    .mode-pill{padding:8px 14px}
-    .toc-chip{padding:10px 12px}
-    .katex{font-size:1em}
-    .toc-strip{display:flex}
+  :root {
+    color-scheme: dark;
+    --hdr: 118px;
+    --bg-canvas: #000000;
+    --bg-elevated: rgba(22, 22, 29, 0.72);
+    --bg-card: rgba(28, 28, 36, 0.68);
+    --bg-card-solid: #16161d;
+    --bg-subcard: rgba(38, 38, 48, 0.55);
+    --bg-glass-nav: rgba(14, 14, 20, 0.76);
+    --border-hairline: rgba(255, 255, 255, 0.09);
+    --border-highlight: rgba(255, 255, 255, 0.16);
+    --text-primary: #f5f5f7;
+    --text-secondary: #a1a1aa;
+    --text-tertiary: #6e6e77;
+    --accent-blue: #0a84ff;
+    --accent-teal: #64d2ff;
+    --accent-purple: #bf5af2;
+    --accent-emerald: #30d158;
+    --accent-amber: #ff9f0a;
+    --accent-rose: #ff453a;
+    --shadow-card: 0 20px 44px -12px rgba(0, 0, 0, 0.65), inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+    --shadow-hover: 0 24px 52px -10px rgba(0, 0, 0, 0.75), inset 0 1px 0 0 rgba(255, 255, 255, 0.18);
+    --spring: cubic-bezier(0.22, 1, 0.36, 1);
   }
-  @media (prefers-reduced-motion:reduce){.tab-panel.active{animation:none}
-    .blur-answer,#backTop{transition:none!important}}
+
+  html.theme-light {
+    color-scheme: light;
+    --bg-canvas: #f5f5f7;
+    --bg-elevated: rgba(255, 255, 255, 0.82);
+    --bg-card: rgba(255, 255, 255, 0.88);
+    --bg-card-solid: #ffffff;
+    --bg-subcard: rgba(242, 242, 247, 0.85);
+    --bg-glass-nav: rgba(248, 248, 252, 0.82);
+    --border-hairline: rgba(0, 0, 0, 0.08);
+    --border-highlight: rgba(0, 0, 0, 0.14);
+    --text-primary: #1d1d1f;
+    --text-secondary: #515154;
+    --text-tertiary: #86868b;
+    --shadow-card: 0 12px 32px -8px rgba(0, 0, 0, 0.07), inset 0 1px 0 0 rgba(255, 255, 255, 0.9);
+    --shadow-hover: 0 18px 40px -8px rgba(0, 0, 0, 0.12), inset 0 1px 0 0 rgba(255, 255, 255, 1);
+  }
+
+  html {
+    scroll-padding-top: calc(var(--hdr) + 14px);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--bg-canvas);
+    background-image:
+      radial-gradient(ellipse 80% 50% at 15% -10%, rgba(10, 132, 255, 0.16), transparent 60%),
+      radial-gradient(ellipse 70% 45% at 85% 5%, rgba(191, 90, 242, 0.12), transparent 60%),
+      radial-gradient(ellipse 60% 40% at 50% 100%, rgba(48, 209, 88, 0.08), transparent 60%);
+    background-attachment: fixed;
+    color: var(--text-primary);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: -0.011em;
+    transition: background-color 0.4s var(--spring), color 0.3s var(--spring);
+  }
+
+  h1, h2, h3, h4 {
+    letter-spacing: -0.024em;
+    font-weight: 650;
+  }
+
+  .font-mono {
+    font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+  }
+
+  header {
+    background: var(--bg-glass-nav) !important;
+    -webkit-backdrop-filter: saturate(190%) blur(28px) !important;
+    backdrop-filter: saturate(190%) blur(28px) !important;
+    border-bottom: 1px solid var(--border-hairline) !important;
+    box-shadow: 0 4px 24px -4px rgba(0, 0, 0, 0.28);
+    transition: background 0.35s var(--spring);
+  }
+
+  #mainNav {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border-hairline);
+    border-radius: 14px;
+    padding: 4px !important;
+    gap: 4px !important;
+    margin-bottom: 8px;
+  }
+  html.theme-light #mainNav {
+    background: rgba(0, 0, 0, 0.045);
+  }
+
+  #mainNav button {
+    border-radius: 10px !important;
+    border-bottom: none !important;
+    transition: all 0.28s var(--spring) !important;
+    position: relative;
+    font-weight: 500;
+  }
+  #mainNav button:hover { transform: translateY(-1px); }
+  #mainNav button:active { transform: scale(0.97); }
+  #mainNav button.tab-btn-active {
+    background: rgba(10, 132, 255, 0.22) !important;
+    color: #64d2ff !important;
+    box-shadow: 0 2px 10px rgba(10, 132, 255, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.22);
+    font-weight: 600 !important;
+  }
+  html.theme-light #mainNav button.tab-btn-active {
+    background: #ffffff !important;
+    color: #0066cc !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .bg-slate-900 {
+    background: var(--bg-elevated) !important;
+    -webkit-backdrop-filter: saturate(160%) blur(22px);
+    backdrop-filter: saturate(160%) blur(22px);
+    border-color: var(--border-hairline) !important;
+    border-radius: 22px !important;
+    box-shadow: var(--shadow-card);
+    transition: transform 0.35s var(--spring), box-shadow 0.35s var(--spring), border-color 0.3s ease;
+  }
+
+  .bg-slate-950 {
+    background: var(--bg-card) !important;
+    border-color: var(--border-hairline) !important;
+    border-radius: 18px !important;
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.06);
+    transition: transform 0.3s var(--spring), box-shadow 0.3s var(--spring), border-color 0.25s ease;
+  }
+  .bg-slate-950:hover {
+    border-color: var(--border-highlight) !important;
+  }
+
+  html.theme-light .text-white { color: #1d1d1f !important; }
+  html.theme-light .text-slate-100,
+  html.theme-light .text-slate-200,
+  html.theme-light .text-slate-300 { color: #2c2c2e !important; }
+  html.theme-light .text-slate-400 { color: #515154 !important; }
+  html.theme-light .text-slate-500 { color: #6e6e73 !important; }
+  html.theme-light .bg-slate-800,
+  html.theme-light .bg-slate-800\/50 { background-color: rgba(0, 0, 0, 0.05) !important; color: #1d1d1f !important; border-color: rgba(0,0,0,0.12) !important; }
+  html.theme-light .bg-sky-950\/40,
+  html.theme-light .bg-sky-950\/30,
+  html.theme-light .bg-sky-950 { background-color: rgba(10, 132, 255, 0.1) !important; color: #004080 !important; border-color: rgba(10, 132, 255, 0.28) !important; }
+  html.theme-light .bg-purple-950\/30,
+  html.theme-light .bg-purple-950 { background-color: rgba(175, 82, 222, 0.1) !important; color: #581c87 !important; border-color: rgba(175, 82, 222, 0.28) !important; }
+  html.theme-light .bg-emerald-950\/30,
+  html.theme-light .bg-emerald-950 { background-color: rgba(48, 209, 88, 0.12) !important; color: #065f46 !important; border-color: rgba(48, 209, 88, 0.3) !important; }
+  html.theme-light .bg-amber-950\/40,
+  html.theme-light .bg-amber-950\/30,
+  html.theme-light .bg-amber-950 { background-color: rgba(255, 159, 10, 0.13) !important; color: #78350f !important; border-color: rgba(255, 159, 10, 0.35) !important; }
+  html.theme-light .bg-rose-950\/40,
+  html.theme-light .bg-rose-950\/30,
+  html.theme-light .bg-rose-950 { background-color: rgba(255, 69, 58, 0.1) !important; color: #881337 !important; border-color: rgba(255, 69, 58, 0.28) !important; }
+  html.theme-light .text-sky-200, html.theme-light .text-sky-300, html.theme-light .text-sky-400 { color: #0055b3 !important; }
+  html.theme-light .text-amber-200, html.theme-light .text-amber-300, html.theme-light .text-amber-400 { color: #92400e !important; }
+  html.theme-light .text-rose-200, html.theme-light .text-rose-300, html.theme-light .text-rose-400 { color: #9f1239 !important; }
+  html.theme-light .text-emerald-300, html.theme-light .text-emerald-400 { color: #047857 !important; }
+  html.theme-light .text-purple-300, html.theme-light .text-purple-400 { color: #6b21a8 !important; }
+  html.theme-light .text-cyan-200, html.theme-light .text-cyan-300, html.theme-light .text-cyan-400 { color: #0e7490 !important; }
+
+  @keyframes appleStageIn {
+    0% { opacity: 0; transform: translateY(10px) scale(0.992); filter: blur(4px); }
+    100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+  }
+  .tab-panel { display: none; }
+  .tab-panel.active {
+    display: block;
+    animation: appleStageIn 0.42s var(--spring) forwards;
+  }
+  .engine-module { display: none; }
+  .engine-module.active {
+    display: block;
+    animation: appleStageIn 0.34s var(--spring) forwards;
+  }
+  .fuel-card, .react-card, .name-card, .poly-card {
+    animation: appleStageIn 0.3s var(--spring) forwards;
+  }
+
+  .blur-answer {
+    filter: blur(5.5px);
+    cursor: pointer;
+    transition: filter 0.28s var(--spring), background-color 0.28s ease, transform 0.2s var(--spring), box-shadow 0.25s ease;
+    user-select: none;
+    border: 1px solid rgba(100, 210, 255, 0.22);
+    padding: 1px 7px !important;
+    border-radius: 7px !important;
+  }
+  .blur-answer:hover {
+    filter: blur(2.5px);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(10, 132, 255, 0.2);
+  }
+  .blur-answer.revealed {
+    filter: blur(0);
+    cursor: pointer;
+    user-select: text;
+    background: rgba(48, 209, 88, 0.16) !important;
+    border-color: rgba(48, 209, 88, 0.45) !important;
+    box-shadow: 0 0 0 1px rgba(48, 209, 88, 0.15);
+  }
+
+  .mode-pill {
+    cursor: pointer;
+    transition: all 0.26s var(--spring);
+    border-radius: 9999px;
+    backdrop-filter: blur(10px);
+  }
+  .mode-pill:hover { transform: translateY(-1px); }
+  .mode-pill:active { transform: scale(0.96); }
+  .mode-pill.active {
+    background: linear-gradient(135deg, rgba(10, 132, 255, 0.26), rgba(100, 210, 255, 0.14)) !important;
+    color: #7dd3fc !important;
+    border-color: rgba(100, 210, 255, 0.65) !important;
+    box-shadow: 0 4px 14px -2px rgba(10, 132, 255, 0.35), inset 0 1px 0 rgba(255,255,255,0.2);
+  }
+
+  details > summary {
+    cursor: pointer;
+    list-style: none;
+    transition: background-color 0.2s ease;
+    border-radius: 14px;
+  }
+  details > summary::-webkit-details-marker { display: none; }
+  details[open] > summary {
+    border-bottom: 1px solid var(--border-hairline);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 10px;
+    border-radius: 9999px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.12);
+  }
+
+  .katex { font-size: 1.05em; }
+  .num-card { font-variant-numeric: tabular-nums; }
+  input[type=number]::-webkit-outer-spin-button,
+  input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  input[type=number] { -moz-appearance: textfield; }
+  .katex-block { overflow-x: auto; overflow-y: hidden; }
+  .katex-block .katex-display { text-align: left; margin: .35em 0; }
+
+  .apple-sim-panel {
+    background: linear-gradient(165deg, rgba(20, 24, 38, 0.85), rgba(12, 15, 26, 0.92));
+    border: 1px solid rgba(100, 210, 255, 0.22);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 18px 40px -12px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  }
+  html.theme-light .apple-sim-panel {
+    background: linear-gradient(165deg, rgba(255, 255, 255, 0.95), rgba(240, 246, 255, 0.92));
+    border-color: rgba(10, 132, 255, 0.25);
+    box-shadow: 0 14px 32px -10px rgba(10, 132, 255, 0.12);
+  }
+
+  .apple-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 7px 14px;
+    transition: all 0.24s var(--spring);
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(255, 255, 255, 0.07);
+    color: var(--text-primary);
+  }
+  .apple-btn:hover {
+    background: rgba(255, 255, 255, 0.13);
+    transform: translateY(-1px);
+  }
+  .apple-btn:active { transform: scale(0.97); }
+  .apple-btn-primary {
+    background: linear-gradient(180deg, #1e90ff 0%, #0071e3 100%);
+    color: #ffffff !important;
+    border-color: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 4px 14px rgba(0, 113, 227, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  }
+  .apple-btn-primary:hover {
+    background: linear-gradient(180deg, #339dff 0%, #0a7ff0 100%);
+    box-shadow: 0 6px 18px rgba(0, 113, 227, 0.55);
+  }
+
+  input[type=range].apple-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 6px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #ff453a, #ff9f0a, #30d158, #0a84ff, #bf5af2);
+    outline: none;
+  }
+  input[type=range].apple-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 2px solid #0a84ff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+    cursor: grab;
+    transition: transform 0.18s var(--spring);
+  }
+  input[type=range].apple-slider::-webkit-slider-thumb:active {
+    transform: scale(1.15);
+    cursor: grabbing;
+  }
+
+  .quiz-self-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px dashed var(--border-hairline);
+    font-size: 11px;
+  }
+
+  #cmdModal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: rgba(0, 0, 0, 0.58);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 10vh;
+  }
+  #cmdModal.open {
+    display: flex;
+    animation: appleStageIn 0.22s var(--spring) forwards;
+  }
+
+  .toc-strip { display: none; gap: 6px; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 2px 0 6px; margin-bottom: 2px; }
+  .toc-strip::-webkit-scrollbar { display: none; }
+  .toc-chip { flex-shrink: 0; font-size: 10px; line-height: 1; padding: 7px 11px; border-radius: 9999px; border: 1px solid var(--border-hairline); background: var(--bg-card); color: var(--text-secondary); font-weight: 600; white-space: nowrap; cursor: pointer; transition: all 0.2s var(--spring); }
+  #backTop { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom)); z-index: 70; width: 44px; height: 44px; border-radius: 9999px; border: 1px solid rgba(100, 210, 255, 0.35); background: var(--bg-glass-nav); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); color: #7dd3fc; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transform: translateY(8px); transition: opacity .25s, transform .25s var(--spring); box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+  #backTop.show { opacity: 1; pointer-events: auto; transform: none; }
+  #scrollProg { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: linear-gradient(90deg, #0a84ff, #64d2ff, #30d158); z-index: 80; pointer-events: none; }
+
+  @media (max-width:1023.98px){
+    header { padding-top: env(safe-area-inset-top); }
+    #mainNav { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+    #mainNav::-webkit-scrollbar { display: none; }
+    #mainNav button { flex-shrink: 0; padding-top: 9px; padding-bottom: 9px; }
+    select, input[type="number"], input[type="text"] { font-size: 16px !important; }
+    .mode-pill { padding: 8px 14px; }
+    .toc-chip { padding: 10px 12px; }
+    .katex { font-size: 1em; }
+    .toc-strip { display: flex; }
+  }
+  @media (prefers-reduced-motion:reduce){
+    .tab-panel.active, .engine-module.active { animation: none !important; }
+    .blur-answer, #backTop { transition: none !important; }
+  }
 </style>
 </head>
 <body class="text-slate-200 min-h-screen">
@@ -60,14 +387,29 @@
   <div class="max-w-7xl mx-auto px-4 py-3">
     <div class="flex flex-wrap items-center justify-between gap-2">
       <div>
-        <h1 class="text-base sm:text-lg font-bold text-white leading-tight">HKDSE · Topic V Master Studio</h1>
+        <div class="flex items-center gap-2.5"><div class="hidden sm:flex items-center gap-1.5 mr-1"><span class="w-2.5 h-2.5 rounded-full bg-[#ff5f56] inline-block shadow-sm"></span><span class="w-2.5 h-2.5 rounded-full bg-[#ffbd2e] inline-block shadow-sm"></span><span class="w-2.5 h-2.5 rounded-full bg-[#27c93f] inline-block shadow-sm"></span></div><h1 class="text-base sm:text-lg font-bold text-white leading-tight tracking-tight">HKDSE · Topic V Master Studio — Fossil Fuels &amp; Carbon Compounds</h1><span class="chip bg-sky-500/15 text-sky-300 border border-sky-400/30 text-[10px]">Interactive Studio Pro</span></div>
         <p class="text-[11px] text-slate-400 font-mono">Fossil Fuels &amp; Carbon Compounds · Petroleum, Homologous Series, Alkanes &amp; Alkenes, Addition Polymers</p>
       </div>
-      <div class="flex gap-2 text-[10px] font-mono">
+      <div class="flex flex-wrap items-center gap-2 text-[10px] font-mono">
         <span class="chip bg-sky-950 text-sky-400 border border-sky-800">Strands (a)–(d)</span>
         <span class="chip bg-purple-950 text-purple-400 border border-purple-800">Paper 1A + 1B</span>
         <span class="chip bg-emerald-950 text-emerald-400 border border-emerald-800">C&amp;A Guide 2018</span>
-        <span class="chip bg-amber-950 text-amber-400 border border-amber-800">NTF 18/08/2018 scope</span>
+        <div class="flex items-center gap-2 ml-1 pl-2 border-l border-slate-700/70">
+          <button type="button" onclick="openCmdModal()" class="apple-btn !py-1 !px-2.5 text-[11px]" title="Quick Concept &amp; Past-Paper Search (⌘K)">
+            <span>🔍 Search</span>
+            <kbd class="px-1.5 py-0.5 text-[9px] rounded bg-slate-800 text-slate-300 border border-slate-700">⌘K</kbd>
+          </button>
+          <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-900/90 border border-slate-700/80" title="Concept Mastery Progress across Quiz &amp; Syllabus Checkpoints">
+            <svg class="w-4 h-4 -rotate-90" viewBox="0 0 36 36">
+              <circle cx="18" cy="18" r="15" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="3.8"></circle>
+              <circle id="masteryRingCircle" cx="18" cy="18" r="15" fill="none" stroke="#30d158" stroke-width="3.8" stroke-dasharray="94.2" stroke-dashoffset="94.2" stroke-linecap="round"></circle>
+            </svg>
+            <span id="masteryPctText" class="text-[11px] font-semibold text-emerald-400 num-card">0% Mastered</span>
+          </div>
+          <button type="button" id="themeToggleBtn" onclick="toggleAppleTheme()" class="apple-btn !py-1 !px-2.5 text-[11px]" title="Switch between Apple Pro Dark and Cupertino Daylight mode">
+            <span id="themeToggleIcon">☀️ Daylight</span>
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -268,6 +610,73 @@ PP: 12 cited CP rows (2012–2016) + 6 recurring themes + “What 2017–2025 ev
   </div>
 </section>
 
+
+    <!-- ══ INTERACTIVE SYLLABUS AUDIT & CONCEPT READINESS MATRIX (EDB C&A Guide 2018 · pp. I-21 to I-25) ══ -->
+    <div class="mt-6 apple-sim-panel space-y-4" id="syllabus-audit-panel">
+      <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800/80 pb-3">
+        <div>
+          <span class="text-[10px] font-mono uppercase tracking-widest text-sky-400 font-bold">Interactive Syllabus Check-Off · EDB C&amp;A Guide (pp. I-21 to I-25)</span>
+          <h3 class="text-base font-bold text-white mt-0.5">HKDSE Topic V Competency Checklist &amp; Direct Simulator Links</h3>
+          <p class="text-xs text-slate-400">Tick each official EDB learning outcome across Strands (a)–(d) and Part II depth caps (`NTF-2018 II-B V (b)/(c)/(d)`) as you master it.</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <span id="sylAuditCount" class="chip bg-emerald-950 text-emerald-300 border border-emerald-700 font-mono">0 / 12 Outcomes Checked</span>
+          <button type="button" class="apple-btn text-xs" onclick="checkAllSyllabusOutcomes()">Check All</button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs" id="sylAuditGrid">
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">V(a) · Origin of Fossil Fuels (CP 2018 Q4)</b>Coal (ancient plants) vs. petroleum &amp; natural gas (marine organisms) under high T, high P &amp; absence of air over millions of years. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-fuel');selectFuel(0)">Inspect →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">V(a) · Fractional Distillation &amp; Property Gradation</b>7 fractions sorted by boiling-point range (molecular size → van der Waals’ forces); volatility, viscosity, colour &amp; sootiness. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-fuel');switchFuelMode('map')">Tower Sim →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">V(a) · Combustion Pollutants &amp; Matched Controls</b>CO (toxic), SO₂/NOₓ (acid rain), CO₂ (global warming → polar ice caps / sea level, CP 2025 Q4(c)); converter vs scrubber. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-fuel');selectFuel(9)">Inspect →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">V(b) · Homologous Series &amp; Carbon Catenation</b>Same general formula + functional group, physical gradation (ΔMᵣ = 14 for –CH₂–) &amp; similar chemical properties. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-name');selectName(1)">Inspect →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">V(b) · Systematic IUPAC Naming (≤ 8 C · NTF V(b))</b>Name alkanes, alkenes, alkanols &amp; alkanoic acids (displayed, condensed, skeletal) incl. 3,3-dichloropropene &amp; propenoic acid. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-name');switchNameMode('map')">IUPAC Studio →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">V(c) · Lab &amp; Industrial Cracking (CP 2012/2016/2024)</b>Heat broken unglazed porcelain (not just glass wool!); prevent suck-back; balance $\text{C}_8\text{H}_{18} \to \text{C}_2\text{H}_6 + 2\text{C}_3\text{H}_6$. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-fuel');switchFuelMode('map')">Cracking Sim →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">V(c) · Alkane UV Substitution &amp; Radicals (NTF V(c))</b>UV light condition (never "heat", CP 2019 Q5); radical steps ($\text{Cl}\cdot$, not $\text{Cl}^-$); excess alkane for monosubstitution. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-react');switchReactMode('map')">Reaction Lab →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">V(c) · Unsaturation Tests: $\text{Br}_2(aq)$ &amp; $\text{KMnO}_4/\text{H}^+$</b>Bromine water (orange/brown → colourless) &amp; acidified $\text{KMnO}_4$ (purple → colourless); 1,2-dibromo addition products. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-react');switchReactMode('map')">Test-Tube Sim →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">V(d) · Addition Polymerisation &amp; 5 Common Plastics</b>PE, PP, PVC, PS, Perspex (PMMA): monomer ⇄ repeating unit (no 'n' inside repeating unit, CP 2021 Q4 / 2025 Q4). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-poly');switchPolyMode('map')">Polymer Studio →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">V(d) · Benzene Ring Rule in Polystyrene (NTF V(d))</b>Phenyl ring double bonds NEVER undergo addition polymerisation; only the vinyl $\text{C=C}$ opens. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-poly');switchPolyMode('map')">Inspect PS →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">V(d) · Thermoplastic Structure &amp; Plastic Disposal</b>Weak van der Waals’ forces between polymer chains; evaluate landfill vs incineration (PVC releases HCl) vs recycling. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-poly');selectPoly(8)">Inspect →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">V(Calc) · Combustion &amp; Gas Volume Stoichiometry</b>Balance $\text{C}_x\text{H}_y$ combustion with state symbols; deduce empirical/molecular formula from $\text{CO}_2/\text{H}_2\text{O}$ masses. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-solver')">Solver →</button></span>
+        </label>
+      </div>
+    </div>
+
 <!-- ═══════════ TAB 2 · ENGINE A · FOSSIL FUELS, FRACTIONS & CRACKING ═══════════ -->
 <section id="tab-fuel" class="tab-panel space-y-6">
   <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-sm">
@@ -403,6 +812,26 @@ PP: 12 cited CP rows (2012–2016) + 6 recurring themes + “What 2017–2025 ev
           <p class="text-[11px] font-bold text-slate-300 uppercase tracking-wider mb-2">The fraction table — order is examinable, carbon numbers indicative (≈)</p>
           <div class="overflow-x-auto"><table class="w-full text-xs text-slate-300"><thead class="text-slate-400 uppercase tracking-wider text-[10px]"><tr><th class="p-2 text-left">Fraction (top → bottom)</th><th class="p-2 text-left">C atoms ≈</th><th class="p-2 text-left">Boiling range</th><th class="p-2 text-left">Characteristic</th><th class="p-2 text-left">Major use</th></tr></thead><tbody class="divide-y divide-slate-800"><tr><td class="p-2 font-semibold text-white">refinery gas</td><td class="p-2">C₁–C₄</td><td class="p-2">lowest</td><td class="p-2">most volatile gas</td><td class="p-2">bottled gas; hydrogen feedstock</td></tr><tr><td class="p-2 font-semibold text-white">petrol (gasoline)</td><td class="p-2">≈C₅–C₁₀</td><td class="p-2">low</td><td class="p-2">volatile, burns cleanly</td><td class="p-2">motor-car fuel</td></tr><tr><td class="p-2 font-semibold text-white">naphtha</td><td class="p-2">≈C₆–C₁₀</td><td class="p-2">low–mid</td><td class="p-2">volatile liquid</td><td class="p-2">cracked for alkenes; solvents</td></tr><tr><td class="p-2 font-semibold text-white">kerosene (paraffin)</td><td class="p-2">≈C₁₀–C₁₆</td><td class="p-2">mid</td><td class="p-2">burns in a steady flame</td><td class="p-2">jet fuel, heaters, lamps</td></tr><tr><td class="p-2 font-semibold text-white">diesel / light oil</td><td class="p-2">≈C₁₄–C₂₀</td><td class="p-2">mid–high</td><td class="p-2">more viscous</td><td class="p-2">diesel-engine fuel</td></tr><tr><td class="p-2 font-semibold text-white">lubricating / fuel oil</td><td class="p-2">≈C₂₀–C₅₀</td><td class="p-2">high</td><td class="p-2">viscous, smoky</td><td class="p-2">lubricants; ships, power stations</td></tr><tr><td class="p-2 font-semibold text-white">bitumen (residue)</td><td class="p-2">&gt;C₅₀</td><td class="p-2">highest</td><td class="p-2">thick, waterproof</td><td class="p-2">road surfacing, roofing</td></tr></tbody></table></div>
         </div>
+        <!-- ══ INTERACTIVE SIMULATOR A1: LAB CATALYTIC CRACKING RIG & FRACTION INSPECTOR (CP 2012 Q17 · CP 2016 Q3 · CP 2024 Q5) ══ -->
+        <div class="mt-6 apple-sim-panel space-y-5">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+            <div>
+              <span class="text-[10px] font-mono text-sky-400 uppercase font-bold">Interactive Simulator · Strand (a)/(c) Concept Check (CP 2012 Q17 · CP 2016 Q3 · CP 2024 Q5)</span>
+              <h4 class="text-sm font-bold text-white mt-0.5">Virtual Lab Cracking Bench: Kerosene/Medicinal Paraffin on Mineral Wool + Broken Unglazed Porcelain</h4>
+              <p class="text-[11px] text-slate-400">Test the 4 critical lab checkpoints below that HKEAA repeatedly examines in Paper 1A &amp; 1B (including the 2024 Q5(b)(iv) "only mineral wool heated" question!).</p>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-4 gap-2 text-xs">
+            <button type="button" onclick="showCrackSim(0)" class="crack-btn apple-btn apple-btn-primary !justify-start text-left p-2.5">🔥 1. Heat Broken Porcelain (Correct)</button>
+            <button type="button" onclick="showCrackSim(1)" class="crack-btn apple-btn !justify-start text-left p-2.5">⚠️ 2. Heat Mineral Wool ONLY (CP 2024 Q5)</button>
+            <button type="button" onclick="showCrackSim(2)" class="crack-btn apple-btn !justify-start text-left p-2.5">🫧 3. First Tube vs. Subsequent Tubes</button>
+            <button type="button" onclick="showCrackSim(3)" class="crack-btn apple-btn !justify-start text-left p-2.5">🛡️ 4. Suck-Back Prevention (CP 2016/2024)</button>
+          </div>
+
+          <div id="crackSimOut" class="p-4 rounded-xl bg-slate-950 border border-sky-800/60 text-xs text-slate-300 space-y-2 leading-relaxed"></div>
+        </div>
+
       </div>
     </div>
 
@@ -571,6 +1000,24 @@ PP: 12 cited CP rows (2012–2016) + 6 recurring themes + “What 2017–2025 ev
           <p class="text-[11px] font-bold text-slate-300 uppercase tracking-wider mb-2">Detection windows — the two test tubes</p>
           <div class="overflow-x-auto"><table class="w-full text-xs text-slate-300"><thead class="text-slate-400 uppercase tracking-wider text-[10px]"><tr><th class="p-2 text-left">Reagent</th><th class="p-2 text-left">With alkene (positive)</th><th class="p-2 text-left">With alkane (negative)</th></tr></thead><tbody class="divide-y divide-slate-800"><tr><td class="p-2 font-semibold text-white">Bromine water, shake</td><td class="p-2">orange / brown → colourless</td><td class="p-2">no change (stays orange/brown)</td></tr><tr><td class="p-2 font-semibold text-white">Acidified KMnO₄(aq), shake</td><td class="p-2">purple → colourless</td><td class="p-2">no change (stays purple)</td></tr></tbody></table></div>
         </div>
+        <!-- ══ INTERACTIVE SIMULATOR B1: ALKANE VS ALKENE WET-LAB & RADICAL SUBSTITUTION STUDIO (CP 2014 Q3 · 2015 Q6 · 2018 Q4 · 2019 Q3/Q5 · 2024 Q5 · 2025 Q4) ══ -->
+        <div class="mt-6 apple-sim-panel space-y-5">
+          <div class="border-b border-slate-800 pb-3">
+            <span class="text-[10px] font-mono text-emerald-400 uppercase font-bold">Interactive Simulator · Strand (c) Concept Check (CP 2014 Q3 · 2015 Q6 · 2019 Q5 · 2024 Q5 · 2025 Q4)</span>
+            <h4 class="text-sm font-bold text-white mt-0.5">Compare Alkane (Hexane / Ethane) vs. Alkene (Hex-1-ene / Propene) Under 4 Conditions</h4>
+            <p class="text-[11px] text-slate-400">Select a reagent &amp; condition below to compare both test tubes side-by-side and inspect the exact HKEAA colour change, reaction type, and structural products.</p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-4 gap-2 text-xs">
+            <button type="button" onclick="setAlkRx(0)" class="alkrx-btn apple-btn apple-btn-primary !py-2">1. Bromine Water (in Dark)</button>
+            <button type="button" onclick="setAlkRx(1)" class="alkrx-btn apple-btn !py-2">2. Br₂ (in Organic Solvent) + UV Light</button>
+            <button type="button" onclick="setAlkRx(2)" class="alkrx-btn apple-btn !py-2">3. Acidified KMnO₄(aq)</button>
+            <button type="button" onclick="setAlkRx(3)" class="alkrx-btn apple-btn !py-2">4. ⚠️ Acidified K₂Cr₂O₇(aq) (CP 2018/2019 Trap!)</button>
+          </div>
+
+          <div id="alkRxOut" class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs"></div>
+        </div>
+
       </div>
     </div>
 
@@ -750,6 +1197,27 @@ PP: 12 cited CP rows (2012–2016) + 6 recurring themes + “What 2017–2025 ev
           <div class="overflow-x-auto"><table class="w-full text-xs text-slate-300"><thead class="text-slate-400 uppercase tracking-wider text-[10px]"><tr><th class="p-2 text-left">C</th><th class="p-2 text-left">Root</th><th class="p-2 text-left">Alkane</th><th class="p-2 text-left">Alkene*</th><th class="p-2 text-left">Alkanol</th><th class="p-2 text-left">Alkanoic acid</th></tr></thead><tbody class="divide-y divide-slate-800"><tr><td class="p-2">1</td><td class="p-2 font-mono">meth-</td><td class="p-2">CH₄ methane</td><td class="p-2">—*</td><td class="p-2">CH₃OH methanol</td><td class="p-2">HCOOH methanoic acid</td></tr><tr><td class="p-2">2</td><td class="p-2 font-mono">eth-</td><td class="p-2">C₂H₆ ethane</td><td class="p-2">C₂H₄ ethene</td><td class="p-2">C₂H₅OH ethanol</td><td class="p-2">CH₃COOH ethanoic acid</td></tr><tr><td class="p-2">3</td><td class="p-2 font-mono">prop-</td><td class="p-2">C₃H₈ propane</td><td class="p-2">C₃H₆ propene</td><td class="p-2">C₃H₇OH propan-1-/2-ol</td><td class="p-2">C₂H₅COOH propanoic acid</td></tr><tr><td class="p-2">4</td><td class="p-2 font-mono">but-</td><td class="p-2">C₄H₁₀ butane</td><td class="p-2">C₄H₈ but-1-/2-ene</td><td class="p-2">C₄H₉OH butan-1-ol</td><td class="p-2">C₃H₇COOH butanoic acid</td></tr><tr><td class="p-2">5</td><td class="p-2 font-mono">pent-</td><td class="p-2">C₅H₁₂ pentane</td><td class="p-2">C₅H₁₀ pent-1-/2-ene</td><td class="p-2">C₅H₁₁OH pentan-1-ol</td><td class="p-2">C₄H₉COOH pentanoic acid</td></tr><tr><td class="p-2">6</td><td class="p-2 font-mono">hex-</td><td class="p-2">C₆H₁₄ hexane</td><td class="p-2">C₆H₁₂ hex-1-ene</td><td class="p-2">C₆H₁₃OH hexan-1-ol</td><td class="p-2">C₅H₁₁COOH hexanoic acid</td></tr><tr><td class="p-2">7</td><td class="p-2 font-mono">hept-</td><td class="p-2">C₇H₁₆ heptane</td><td class="p-2">C₇H₁₄ hept-1-ene</td><td class="p-2">C₇H₁₅OH heptan-1-ol</td><td class="p-2">C₆H₁₃COOH heptanoic acid</td></tr><tr><td class="p-2">8</td><td class="p-2 font-mono">oct-</td><td class="p-2">C₈H₁₈ octane</td><td class="p-2">C₈H₁₆ oct-1-ene</td><td class="p-2">C₈H₁₇OH octan-1-ol</td><td class="p-2">C₇H₁₅COOH octanoic acid</td></tr></tbody></table></div>
           <p class="text-[10px] text-slate-500 mt-2">* no C₁ alkene — a double bond needs two carbons. Carbon ceiling: oct-, 8 atoms <span class="font-mono">(NTF-2018 II-B V (b))</span>.</p>
         </div>
+        <!-- ══ INTERACTIVE SIMULATOR C1: IUPAC SYSTEMATIC NAMING & NOTATION STUDIO (≤ 8 C · NTF-2018 II-B V (b) · CP 2016 Q5 · CP 2023 Q7) ══ -->
+        <div class="mt-6 apple-sim-panel space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+            <div>
+              <span class="text-[10px] font-mono text-purple-400 uppercase font-bold">Interactive Simulator · Strand (b) Concept Check (NTF-2018 II-B V (b) · CP 2016 Q5 · CP 2023 Q7)</span>
+              <h4 class="text-sm font-bold text-white mt-0.5">IUPAC Name &amp; Multi-Notation Inspector: Condensed · Structural · Numbering Rule</h4>
+              <p class="text-[11px] text-slate-400">Pick any syllabus molecule below to inspect how the parent chain, principal functional group suffix, and substituent locants are assembled.</p>
+            </div>
+            <select id="iupacMolSel" onchange="updateIupacSim()" class="bg-slate-900 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-white font-medium">
+              <option value="m1" selected>1. CH₃C(CH₃)₂CH₃ — 2,2-dimethylpropane (CP 2023 Q7)</option>
+              <option value="m2">2. CH₃CH₂CH(CH₃)CH₂CH₃ — 3-methylpentane</option>
+              <option value="m3">3. CH₃CH=CHCH₃ vs CH₂=CHCH₂CH₃ — but-2-ene vs but-1-ene</option>
+              <option value="m4">4. Cl₂CHCH=CH₂ — 3,3-dichloropropene (NTF-2018 II-B V (b) exemplar!)</option>
+              <option value="m5">5. CH₂=CHCOOH — propenoic acid (CP 2016 Q5)</option>
+              <option value="m6">6. CH₃CH=CHCHBrCH₂OH — 2-bromopent-3-en-1-ol (NTF-2018 II-B V (b) exemplar!)</option>
+              <option value="m7">7. HOCH₂CH(OH)CH₂OH — propane-1,2,3-triol (NTF-2018 II-B V (b) exemplar!)</option>
+            </select>
+          </div>
+          <div id="iupacSimOut" class="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2 text-xs text-slate-300 leading-relaxed"></div>
+        </div>
+
       </div>
     </div>
 
@@ -918,6 +1386,26 @@ PP: 12 cited CP rows (2012–2016) + 6 recurring themes + “What 2017–2025 ev
           <div class="overflow-x-auto"><table class="w-full text-xs text-slate-300"><thead class="text-slate-400 uppercase tracking-wider text-[10px]"><tr><th class="p-2 text-left">Polymer</th><th class="p-2 text-left">Monomer</th><th class="p-2 text-left">Repeating unit</th><th class="p-2 text-left">Typical uses</th></tr></thead><tbody class="divide-y divide-slate-800"><tr><td class="p-2 font-semibold text-white">polyethene</td><td class="p-2">ethene CH₂=CH₂</td><td class="p-2">[–CH₂–CH₂–]ₙ</td><td class="p-2">bags, bottles, film, cable insulation</td></tr><tr><td class="p-2 font-semibold text-white">polypropene</td><td class="p-2">propene CH₂=CHCH₃</td><td class="p-2">[–CH₂–CH(CH₃)–]ₙ</td><td class="p-2">ropes, crates, car parts</td></tr><tr><td class="p-2 font-semibold text-white">polyvinyl chloride (PVC)</td><td class="p-2">chloroethene CH₂=CHCl</td><td class="p-2">[–CH₂–CHCl–]ₙ</td><td class="p-2">pipes, window frames, flooring</td></tr><tr><td class="p-2 font-semibold text-white">polystyrene</td><td class="p-2">styrene C₆H₅CH=CH₂</td><td class="p-2">[–CH₂–CH(C₆H₅)–]ₙ</td><td class="p-2">foam cups, packaging</td></tr><tr><td class="p-2 font-semibold text-white">Perspex (PMMA)</td><td class="p-2">methyl 2-methylpropenoate CH₂=C(CH₃)COOCH₃</td><td class="p-2">[–CH₂–C(CH₃)(COOCH₃)–]ₙ</td><td class="p-2">lenses, signs, display cases</td></tr></tbody></table></div>
           <p class="text-[10px] text-slate-500 mt-2">Across all five rows the backbone is always the two former double-bond carbons — and the phenyl ring of styrene never participates <span class="font-mono">(NTF-2018 II-B V (d))</span>.</p>
         </div>
+        <!-- ══ INTERACTIVE SIMULATOR D1: ADDITION POLYMER MONOMER ⇄ REPEATING UNIT STUDIO (CP 2014 Q3 · 2016 Q5 · 2021 Q4 · 2025 Q4) ══ -->
+        <div class="mt-6 apple-sim-panel space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+            <div>
+              <span class="text-[10px] font-mono text-cyan-400 uppercase font-bold">Interactive Simulator · Strand (d) Concept Check (CP 2014 Q3 · 2016 Q5 · 2021 Q4 · 2025 Q4)</span>
+              <h4 class="text-sm font-bold text-white mt-0.5">Monomer ⇄ Repeating Unit ⇄ Polymer Structure Debugger</h4>
+              <p class="text-[11px] text-slate-400">Select any addition polymer below to compare the exact 2D H-shaped display of its <b>Monomer</b>, <b>Repeating Unit (NO 'n'!)</b>, <b>Polymer</b>, and <b>Recorded Candidate Mistake</b>.</p>
+            </div>
+            <select id="polyTargetSel" onchange="updatePolySim()" class="bg-slate-900 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-white font-medium">
+              <option value="PP" selected>Polypropene (PP · from propene · CP 2021 Q4 / CP 2025 Q4)</option>
+              <option value="PE">Polyethene (PE · from ethene)</option>
+              <option value="PVC">Polyvinyl chloride (PVC · from chloroethene)</option>
+              <option value="PS">Polystyrene (PS · from phenylethene/styrene · NTF V(d))</option>
+              <option value="PMMA">Perspex (PMMA · from methyl 2-methylpropenoate)</option>
+              <option value="but2ene">Poly(but-2-ene) (from CH₃CH=CHCH₃ · 2-Carbon Backbone Trap!)</option>
+            </select>
+          </div>
+          <div id="polySimOut" class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs"></div>
+        </div>
+
       </div>
     </div>
 
@@ -1026,6 +1514,45 @@ PP: 12 cited CP rows (2012–2016) + 6 recurring themes + “What 2017–2025 ev
         </div>
         <button class="w-full bg-rose-700 hover:bg-rose-600 text-white text-xs font-semibold py-1.5 px-2 rounded-md" onclick="solverPoly()">Mass the polymer</button>
         <div id="svPolyOut" aria-live="polite" class="text-xs text-emerald-300 font-mono min-h-[20px] leading-relaxed"></div>
+      </div>
+    </div>
+
+    
+    <!-- ══ BENCH 6 · LIVE HKEAA MARK-SCHEME KEYWORD GRADER (TOPIC V EDITION) ══ -->
+    <div class="mt-6 apple-sim-panel space-y-4">
+      <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+        <div>
+          <span class="text-[10px] font-mono text-sky-400 uppercase font-bold px-2 py-0.5 bg-sky-950 rounded border border-sky-800">Bench 6 · Interactive Examiner Grader</span>
+          <h3 class="text-base font-bold text-white mt-1">Practice Writing Full-Mark Topic V Answers — Instant `[1M]` &amp; `[NOT ACCEPT]` Diagnostic</h3>
+          <p class="text-xs text-slate-400">Select a high-frequency Paper 1B question below and type your answer. The engine checks your phrasing against official HKEAA mark-scheme rubrics and flags fatal errors.</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 text-xs">
+        <div class="lg:col-span-1 space-y-2.5">
+          <label for="graderQSelect" class="block text-slate-300 font-semibold">Select HKDSE Exam Prompt:</label>
+          <select id="graderQSelect" onchange="loadGraderPrompt()" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white">
+            <option value="fd_principle">Q1 (2 marks · CP 2014 Q6 / 2024 Q5(a)): Explain the underlying principle of separating petroleum into fractions by fractional distillation, and why petrol boils lower than diesel.</option>
+            <option value="cracking_def">Q2 (2 marks · CP 2012 Q2 / 2016 Q3): State what "cracking" means and give TWO reasons why cracking is important in the petroleum industry.</option>
+            <option value="unsat_test">Q3 (2 marks · CP 2012 Q2 / 2014 Q3 / 2021 Q4): Describe a chemical test to distinguish propene from propane, stating the expected observations for both gases.</option>
+            <option value="crack_cold_cat">Q4 (2 marks · CP 2012 Q17 / 2024 Q5(b)(iv)): In the laboratory cracking of kerosene, explain what happens if only the mineral wool soaked with kerosene is heated while the unglazed porcelain is not heated.</option>
+            <option value="ch4_br2_uv">Q5 (3 marks · CP 2015 Q6 / 2019 Q5 / 2025 Q4): State the condition and reaction type when ethane reacts with bromine, and state how to favour the monosubstituted product.</option>
+            <option value="gw_conseq">Q6 (2 marks · CP 2012 Q10 / 2025 Q4(c)): Name the main greenhouse gas produced from burning fossil fuels and state one environmental consequence of global warming.</option>
+          </select>
+          <div id="graderPromptBox" class="p-3 rounded-xl bg-slate-950 border border-slate-800 text-slate-200 leading-relaxed"></div>
+        </div>
+
+        <div class="lg:col-span-2 space-y-3">
+          <textarea id="graderInput" rows="4" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-sky-500" placeholder="Type your exam explanation here..."></textarea>
+          <div class="flex flex-wrap gap-2">
+            <button type="button" onclick="gradeStudentAnswer()" class="apple-btn apple-btn-primary">✨ Grade My Answer Against Mark Scheme</button>
+            <button type="button" onclick="fillModelGraderAnswer()" class="apple-btn">Show Model Full-Mark Answer</button>
+            <button type="button" onclick="document.getElementById('graderInput').value='';document.getElementById('graderResultBox').innerHTML='Type an answer and click Grade.';" class="apple-btn">Clear</button>
+          </div>
+          <div id="graderResultBox" class="p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-300 space-y-2 leading-relaxed">
+            Type an answer above and click <b>Grade My Answer Against Mark Scheme</b> to see your mark breakdown and keyword hits.
+          </div>
+        </div>
       </div>
     </div>
 
@@ -1588,5 +2115,391 @@ else { try{ MOBILE_UX.init(); }catch(e){} }
   }catch(e){}
 })();
 </script>
+
+<!-- ═══════════ APPLE COMMAND PALETTE (⌘K) MODAL ═══════════ -->
+<div id="cmdModal" onclick="if(event.target===this)closeCmdModal()">
+  <div class="w-full max-w-xl mx-4 bg-slate-900 border border-slate-700/80 rounded-2xl shadow-2xl overflow-hidden">
+    <div class="flex items-center gap-3 px-4 py-3 border-b border-slate-800">
+      <span class="text-sky-400 text-sm">🔍</span>
+      <input id="cmdSearchInput" type="text" oninput="filterCmdList()" placeholder="Search fractions, cracking, substitution, addition polymers, IUPAC naming, or CP year..." class="w-full bg-transparent text-sm text-white placeholder-slate-400 focus:outline-none">
+      <button type="button" onclick="closeCmdModal()" class="text-xs text-slate-400 hover:text-white px-2 py-0.5 rounded bg-slate-800">ESC</button>
+    </div>
+    <div id="cmdResults" class="max-h-80 overflow-y-auto divide-y divide-slate-800/70 p-2 text-xs"></div>
+  </div>
+</div>
+
+<script>
+function toggleAppleTheme(){
+  const root = document.documentElement;
+  const isLight = root.classList.toggle('theme-light');
+  const icon = document.getElementById('themeToggleIcon');
+  if(icon) icon.textContent = isLight ? '🌙 Pro Dark' : '☀️ Daylight';
+  try { localStorage.setItem('hkdse_topic5_theme', isLight ? 'light' : 'dark'); } catch(e){}
+}
+
+const quizMasteryState = {};
+function injectQuizSelfCheckBars(){
+  ['fuelQuiz','reactQuiz','nameQuiz','polyQuiz'].forEach(qid => {
+    const container = document.getElementById(qid);
+    if(!container) return;
+    const headerDiv = container.previousElementSibling;
+    if(headerDiv && !headerDiv.querySelector('.hide-all-btn')){
+      const btnWrap = document.createElement('div');
+      btnWrap.className = 'flex items-center gap-2';
+      const revBtn = headerDiv.querySelector('button');
+      if(revBtn){
+        revBtn.parentNode.insertBefore(btnWrap, revBtn);
+        btnWrap.appendChild(revBtn);
+        const hideBtn = document.createElement('button');
+        hideBtn.type = 'button';
+        hideBtn.className = 'hide-all-btn text-[11px] font-semibold text-slate-300 border border-slate-700 px-3 py-1 rounded-full hover:bg-slate-800';
+        hideBtn.textContent = 'Reset Blanks';
+        hideBtn.onclick = () => container.querySelectorAll('.blur-answer').forEach(b => b.classList.remove('revealed'));
+        btnWrap.appendChild(hideBtn);
+      }
+    }
+    [...container.children].forEach((row, idx) => {
+      if(row.querySelector('.quiz-self-bar')) return;
+      const key = qid + '_' + idx;
+      const bar = document.createElement('div');
+      bar.className = 'quiz-self-bar';
+      bar.innerHTML = `<span class="text-[10px] font-mono text-slate-400">Tap blurred chips above to check each keyword, then log your recall:</span>
+        <div class="flex items-center gap-1.5">
+          <button type="button" class="apple-btn !py-0.5 !px-2 text-[10px]" onclick="markQuizRow('${key}', true, this)">✓ Got It</button>
+          <button type="button" class="apple-btn !py-0.5 !px-2 text-[10px]" onclick="markQuizRow('${key}', false, this)">↻ Review Again</button>
+        </div>`;
+      row.appendChild(bar);
+    });
+  });
+}
+function markQuizRow(key, mastered, btnEl){
+  quizMasteryState[key] = mastered;
+  const buttons = btnEl.parentElement.querySelectorAll('button');
+  buttons[0].className = mastered ? 'apple-btn !py-0.5 !px-2 text-[10px] !bg-emerald-600/30 !border-emerald-500 !text-emerald-300' : 'apple-btn !py-0.5 !px-2 text-[10px]';
+  buttons[1].className = !mastered ? 'apple-btn !py-0.5 !px-2 text-[10px] !bg-amber-600/30 !border-amber-500 !text-amber-300' : 'apple-btn !py-0.5 !px-2 text-[10px]';
+  updateMasteryRing();
+}
+function checkAllSyllabusOutcomes(){
+  document.querySelectorAll('.syl-chk').forEach(c => c.checked = true);
+  updateMasteryRing();
+}
+function updateMasteryRing(){
+  const sylChks = [...document.querySelectorAll('.syl-chk')];
+  const sylDone = sylChks.filter(c => c.checked).length;
+  const sylTotal = sylChks.length || 12;
+  const sylBadge = document.getElementById('sylAuditCount');
+  if(sylBadge) sylBadge.textContent = `${sylDone} / ${sylTotal} Outcomes Checked`;
+  const quizDone = Object.values(quizMasteryState).filter(Boolean).length;
+  const pct = Math.round(((sylDone + quizDone) / (sylTotal + 40)) * 100);
+  const circle = document.getElementById('masteryRingCircle');
+  const txt = document.getElementById('masteryPctText');
+  if(circle) circle.style.strokeDashoffset = String(94.2 - (94.2 * pct) / 100);
+  if(txt) txt.textContent = `${pct}% Mastered`;
+}
+
+/* Cracking Rig Sim */
+const CRACK_SIM_CASES = [
+  '<b>✅ 1. Heating Broken Unglazed Porcelain (Correct Lab Procedure · CP 2016 Q3):</b><br>• The unglazed porcelain (or $\text{Al}_2\text{O}_3$ / pumice) acts as a <b>hot catalyst</b>; it is broken into small pieces to <b>provide a larger surface area</b> for catalytic cracking (NOT "heated more efficiently" — CP 2016 Q3!).<br>• Occasional flicking of the flame onto the mineral wool vaporises the kerosene so the vapour passes over the red-hot porcelain and cracks into smaller alkanes and alkenes.',
+  '<b>🚨 2. Heating the Mineral Wool Directly While Leaving Porcelain Unheated (CP 2012 Q17 · CP 2024 Q5(b)(iv)):</b><br>• Only a quarter of candidates answered this correctly in 2024! When only the mineral wool is heated, <b>the kerosene simply vaporises (boils) and condenses back as oily liquid droplets</b> without cracking because <b>the porcelain catalyst is not hot enough</b> for cracking to occur.<br>• <b>Wrong answers flagged in CP 2024 Q5:</b> Saying "no catalyst is present" (the porcelain IS there, just cold!) or "kerosene burns".',
+  '<b>🫧 3. Why Discard the First Test Tube of Gas Collected?</b><br>• The first test tube of gas collected over water is <b>discarded</b> because it contains mainly <b>displaced air</b> from inside the heated boiling tube rather than the gaseous cracking products.<br>• Subsequent tubes contain gaseous alkanes + alkenes (flammable, and decolourise bromine water / acidified $\text{KMnO}_4(aq)$).',
+  '<b>🛡️ 4. Preventing Suck-Back at the End of the Experiment (CP 2016 Q3(d) · CP 2024 Q5(b)(ii)):</b><br>• Always <b>remove the delivery tube from the water trough BEFORE stopping heating</b>!<br>• <b>Why:</b> If heating stops while the tube is submerged, the gas inside the hot boiling tube cools and contracts (pressure drops below atmospheric pressure), sucking cold water back into the hot glass tube and cracking it.'
+];
+function showCrackSim(i){
+  document.querySelectorAll('.crack-btn').forEach((b, idx) => {
+    b.className = idx === i ? 'crack-btn apple-btn apple-btn-primary !justify-start text-left p-2.5' : 'crack-btn apple-btn !justify-start text-left p-2.5';
+  });
+  const el = document.getElementById('crackSimOut');
+  if(el && CRACK_SIM_CASES[i]){ el.innerHTML = CRACK_SIM_CASES[i]; safeInitKaTeX(); }
+}
+
+/* Alkane vs Alkene Wet-Lab */
+const ALKRX_CASES = [
+  {
+    alkane: '<div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800 space-y-1.5"><span class="chip bg-amber-950 text-amber-300 border border-amber-700">Alkane (Hexane) + Bromine Water in Dark</span><p class="text-slate-300"><b>Observation:</b> <b>No observable change</b> (two immiscible layers; orange/brown colour remains).</p><p class="text-slate-400"><b>Reason:</b> Saturated hydrocarbon (only $\text{C–C}$ and $\text{C–H}$ single bonds); no UV light to initiate free-radical substitution.</p></div>',
+    alkene: '<div class="p-3.5 rounded-xl bg-slate-950 border border-emerald-800/70 space-y-1.5"><span class="chip bg-emerald-950 text-emerald-300 border border-emerald-700">Alkene (Propene / Hex-1-ene) + Bromine Water</span><p class="text-slate-200"><b>Observation:</b> <b>Bromine water is decolourised immediately (from orange/brown to colourless)</b>.</p><p class="text-emerald-300"><b>Reaction Type:</b> <b>Addition reaction</b> across the $\text{C=C}$ double bond ($\text{CH}_3\text{CH=CH}_2 + \text{Br}_2 \rightarrow \text{CH}_3\text{CHBrCH}_2\text{Br}$, 1,2-dibromopropane). Never call it substitution (CP 2024 Q5)!</p></div>'
+  },
+  {
+    alkane: '<div class="p-3.5 rounded-xl bg-slate-950 border border-sky-800/70 space-y-1.5"><span class="chip bg-sky-950 text-sky-300 border border-sky-700">Alkane (Ethane / Methane) + Br₂ + UV Light</span><p class="text-slate-200"><b>Observation:</b> Reddish-brown/orange mixture <b>slowly fades to colourless</b>; misty fumes of $\text{HBr}(g)$ form.</p><p class="text-sky-300"><b>Reaction Type (CP 2015 Q6 / 2019 Q5 / 2025 Q4):</b> Free-radical <b>substitution</b> ($	ext{C}_2\text{H}_6 + \text{Br}_2 \xrightarrow{\text{UV}} \text{C}_2\text{H}_5\text{Br} + \text{HBr}$). Requires <b>UV light</b> (never "heat"!) and <b>excess alkane</b> to favour monosubstitution.</p></div>',
+    alkene: '<div class="p-3.5 rounded-xl bg-slate-950 border border-emerald-800/70 space-y-1.5"><span class="chip bg-emerald-950 text-emerald-300 border border-emerald-700">Alkene + Br₂ (in Organic Solvent)</span><p class="text-slate-200"><b>Observation:</b> Instantaneous decolourisation from <b>orange/brown to colourless</b> even without UV light.</p><p class="text-emerald-300"><b>Equation:</b> $\text{CH}_2\text{=CH}_2 + \text{Br}_2 \rightarrow \text{CH}_2\text{BrCH}_2\text{Br}$ (1,2-dibromoethane — one product only, no $\text{HBr}$ formed!).</p></div>'
+  },
+  {
+    alkane: '<div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800 space-y-1.5"><span class="chip bg-purple-950 text-purple-300 border border-purple-700">Alkane + Acidified KMnO₄(aq)</span><p class="text-slate-300"><b>Observation:</b> <b>No observable change</b> (solution stays purple).</p><p class="text-slate-400"><b>Reason:</b> Alkanes are saturated and resist oxidation by acidified permanganate at room temperature.</p></div>',
+    alkene: '<div class="p-3.5 rounded-xl bg-slate-950 border border-emerald-800/70 space-y-1.5"><span class="chip bg-emerald-950 text-emerald-300 border border-emerald-700">Alkene + Acidified KMnO₄(aq)</span><p class="text-slate-200"><b>Observation:</b> Acidified $\text{KMnO}_4(aq)$ changes from <b>purple to colourless</b>.</p><p class="text-emerald-300"><b>Note (MS Bank):</b> Always include the word <b>"acidified"</b> (in alkaline medium, $\text{MnO}_4^-$ forms a brown precipitate of $\text{MnO}_2(s)$ instead).</p></div>'
+  },
+  {
+    alkane: '<div class="p-3.5 rounded-xl bg-slate-950 border border-rose-800/70 space-y-1.5"><span class="chip bg-rose-950 text-rose-300 border border-rose-700">🚨 CP 2018 Q4(c)(ii) &amp; CP 2019 Q3 Trap</span><p class="text-rose-200"><b>Acidified K₂Cr₂O₇(aq) + Alkane:</b> No change (stays orange).</p></div>',
+    alkene: '<div class="p-3.5 rounded-xl bg-slate-950 border border-rose-800/70 space-y-1.5"><span class="chip bg-rose-950 text-rose-300 border border-rose-700">🚨 Acidified K₂Cr₂O₇(aq) + Alkene: ALSO NO REACTION!</span><p class="text-rose-200"><b>Examiner Warning (CP 2018 Q4 / CP 2019 Q3):</b> Many candidates falsely claimed acidified potassium dichromate can distinguish ethane from ethene! <b>$\text{K}_2\text{Cr}_2\text{O}_7/\text{H}^+$ does NOT react with alkenes</b> (it oxidises alcohols/aldehydes in Topic XI). Use <b>bromine water</b> or <b>acidified $\text{KMnO}_4(aq)$</b>!</p></div>'
+  }
+];
+function setAlkRx(i){
+  document.querySelectorAll('.alkrx-btn').forEach((b, idx) => {
+    b.className = idx === i ? 'alkrx-btn apple-btn apple-btn-primary !py-2' : 'alkrx-btn apple-btn !py-2';
+  });
+  const c = ALKRX_CASES[i];
+  const out = document.getElementById('alkRxOut');
+  if(out && c){ out.innerHTML = c.alkane + c.alkene; safeInitKaTeX(); }
+}
+
+/* IUPAC Sim */
+const IUPAC_DATA = {
+  m1: '<b>2,2-dimethylpropane</b> · Molecular formula: $\text{C}_5\text{H}_{12}$ (Chain isomer of pentane &amp; 2-methylbutane)<br>• <b>Longest chain:</b> 3 carbons (`prop-`, saturated `-ane`)<br>• <b>Substituents:</b> Two methyl groups ($-\text{CH}_3$) both on C2 → `2,2-dimethylpropane`.<br>• <b>🚨 CP 2023 Q7 Formatting Rule:</b> Commas between numbers (`2,2`), hyphen between number and letter (`2,2-dimethyl`), and NO space before `propane` ("2,2 dimethyl propane" lost marks!).',
+  m2: '<b>3-methylpentane</b> · Condensed: $\text{CH}_3\text{CH}_2\text{CH(CH}_3)\text{CH}_2\text{CH}_3$ · Molecular formula: $\text{C}_6\text{H}_{14}$<br>• <b>Longest chain:</b> 5 carbons (`pentane`), numbered from either end gives C3 for the methyl branch → `3-methylpentane`.',
+  m3: '<b>Position Isomers of $\text{C}_4\text{H}_8$:</b><br>• $\text{CH}_2\text{=CHCH}_2\text{CH}_3$ = <b>but-1-ene</b> (double bond starts at C1)<br>• $\text{CH}_3\text{CH=CHCH}_3$ = <b>but-2-ene</b> (double bond starts at C2)<br>• Branched isomer: $\text{CH}_2\text{=C(CH}_3)_2$ = <b>2-methylpropene</b>. Never write bare "butene" (CP 2014 Q3)!',
+  m4: '<b>3,3-dichloropropene</b> (NTF-2018 II-B V (b) Official Exemplar) · Condensed: $\text{Cl}_2\text{CHCH=CH}_2$<br>• <b>Numbering Priority:</b> The $\text{C=C}$ double bond takes priority over halo substituents for the lowest locant! So the $\text{=CH}_2$ carbon is <b>C1</b>, making the two chlorine atoms sit on <b>C3</b> → `3,3-dichloropropene` (never "1,1-dichloroprop-2-ene").',
+  m5: '<b>propenoic acid</b> (CP 2016 Q5) · Condensed: $\text{CH}_2\text{=CHCOOH}$<br>• <b>Rule:</b> The $-\text{COOH}$ carbon is always C1; the 3-carbon chain contains a $\text{C=C}$ double bond (`prop-` + `-en-` + `-oic acid`) → <b>propenoic acid</b>.',
+  m6: '<b>2-bromopent-3-en-1-ol</b> (NTF-2018 II-B V (b) Official Exemplar) · Condensed: $\text{CH}_3\text{CH=CHCHBrCH}_2\text{OH}$<br>• <b>Rule:</b> The principal functional group suffix is `-ol` ($-\text{OH}$ on C1), so numbering starts at the $-\text{CH}_2\text{OH}$ end: C1 has `-ol`, C2 has `2-bromo-`, and the double bond starts at C3 (`pent-3-en-1-ol`).',
+  m7: '<b>propane-1,2,3-triol</b> (NTF-2018 II-B V (b) Official Exemplar · Glycerol) · Condensed: $\text{HOCH}_2\text{CH(OH)CH}_2\text{OH}$<br>• <b>Rule:</b> Three $-\text{OH}$ groups on a 3-carbon saturated chain; retain the "e" in `propane-` before consonant `t` → `propane-1,2,3-triol`.'
+};
+function updateIupacSim(){
+  const k = document.getElementById('iupacMolSel').value;
+  const out = document.getElementById('iupacSimOut');
+  if(out && IUPAC_DATA[k]){ out.innerHTML = IUPAC_DATA[k]; safeInitKaTeX(); }
+}
+
+/* Addition Polymer Sim */
+const POLY_SIM_DATA = {
+  PP: {
+    mono: '<div class="p-3 rounded-xl bg-slate-950 border border-slate-800"><span class="text-[10px] font-mono text-sky-400 uppercase font-bold block">1. Monomer (Propene)</span><pre class="font-mono text-xs text-white mt-2 leading-tight">  H   CH₃
+  |   |
+  C = C
+  |   |
+  H   H</pre><p class="text-[11px] text-slate-400 mt-2">Must draw the $\text{CH}_3$ group as a vertical side branch so the main chain has 2 carbons.</p></div>',
+    rep: '<div class="p-3 rounded-xl bg-slate-950 border border-emerald-800/70"><span class="text-[10px] font-mono text-emerald-400 uppercase font-bold block">2. Repeating Unit (NO "n"!)</span><pre class="font-mono text-xs text-emerald-300 mt-2 leading-tight">    H   CH₃
+    |   |
+— [ C — C ] —
+    |   |
+    H   H</pre><p class="text-[11px] text-emerald-200 mt-2">✅ Double bond opened to single bond, continuation bonds extend through brackets, <b>NO subscript n</b> for a repeating unit!</p></div>',
+    err: '<div class="p-3 rounded-xl bg-slate-950 border border-rose-800/70"><span class="text-[10px] font-mono text-rose-400 uppercase font-bold block">3. Recorded CP 2021 / 2025 Traps</span><p class="text-[11px] text-rose-200 mt-2 leading-relaxed">❌ Drawing the monomer with $\text{C=C}$ still inside the brackets.<br>❌ Adding subscript $n$ when asked for the <b>repeating unit</b> (or omitting $n$ when asked for the <b>polymer</b>).<br>❌ Putting 3 carbons in a row ($-\text{CH}_2\text{CH}_2\text{CH}_2-$) in the backbone!</p></div>'
+  },
+  PE: {
+    mono: '<div class="p-3 rounded-xl bg-slate-950 border border-slate-800"><span class="text-[10px] font-mono text-sky-400 uppercase font-bold block">1. Monomer (Ethene)</span><pre class="font-mono text-xs text-white mt-2 leading-tight">  H   H
+  |   |
+  C = C
+  |   |
+  H   H</pre><p class="text-[11px] text-slate-400 mt-2">Ethene, $\text{CH}_2\text{=CH}_2$ (from cracking naphtha/gas oil).</p></div>',
+    rep: '<div class="p-3 rounded-xl bg-slate-950 border border-emerald-800/70"><span class="text-[10px] font-mono text-emerald-400 uppercase font-bold block">2. Repeating Unit</span><pre class="font-mono text-xs text-emerald-300 mt-2 leading-tight">    H   H
+    |   |
+— [ C — C ] —
+    |   |
+    H   H</pre><p class="text-[11px] text-emerald-200 mt-2">✅ Uses: plastic bags, wrapping film, bottles, electrical wire insulation.</p></div>',
+    err: '<div class="p-3 rounded-xl bg-slate-950 border border-rose-800/70"><span class="text-[10px] font-mono text-rose-400 uppercase font-bold block">3. Examiner Watch-Out</span><p class="text-[11px] text-rose-200 mt-2 leading-relaxed">❌ Never forget the continuation bonds sticking out of both ends of the repeating unit!</p></div>'
+  },
+  PVC: {
+    mono: '<div class="p-3 rounded-xl bg-slate-950 border border-slate-800"><span class="text-[10px] font-mono text-sky-400 uppercase font-bold block">1. Monomer (Chloroethene)</span><pre class="font-mono text-xs text-white mt-2 leading-tight">  H   Cl
+  |   |
+  C = C
+  |   |
+  H   H</pre><p class="text-[11px] text-slate-400 mt-2">Systematic name: <b>chloroethene</b> (common name: vinyl chloride).</p></div>',
+    rep: '<div class="p-3 rounded-xl bg-slate-950 border border-emerald-800/70"><span class="text-[10px] font-mono text-emerald-400 uppercase font-bold block">2. Repeating Unit</span><pre class="font-mono text-xs text-emerald-300 mt-2 leading-tight">    H   Cl
+    |   |
+— [ C — C ] —
+    |   |
+    H   H</pre><p class="text-[11px] text-emerald-200 mt-2">✅ Rigid PVC: drain pipes, window frames; plasticised PVC: cable sheathing, raincoats.</p></div>',
+    err: '<div class="p-3 rounded-xl bg-slate-950 border border-rose-800/70"><span class="text-[10px] font-mono text-rose-400 uppercase font-bold block">3. Disposal &amp; Formula Trap</span><p class="text-[11px] text-rose-200 mt-2 leading-relaxed">⚠️ Incinerating PVC releases toxic/corrosive $\text{HCl}(g)$ (causes acid rain; removed by flue-gas scrubbers). Never eliminate $\text{HCl}$ during polymerisation!</p></div>'
+  },
+  PS: {
+    mono: '<div class="p-3 rounded-xl bg-slate-950 border border-slate-800"><span class="text-[10px] font-mono text-sky-400 uppercase font-bold block">1. Monomer (Styrene / Phenylethene)</span><pre class="font-mono text-xs text-white mt-2 leading-tight">  H   C₆H₅
+  |   |
+  C = C
+  |   |
+  H   H</pre><p class="text-[11px] text-slate-400 mt-2">Phenylethene (styrene), $\text{C}_6\text{H}_5\text{CH=CH}_2$.</p></div>',
+    rep: '<div class="p-3 rounded-xl bg-slate-950 border border-emerald-800/70"><span class="text-[10px] font-mono text-emerald-400 uppercase font-bold block">2. Repeating Unit (NTF V(d))</span><pre class="font-mono text-xs text-emerald-300 mt-2 leading-tight">    H   C₆H₅
+    |   |
+— [ C — C ] —
+    |   |
+    H   H</pre><p class="text-[11px] text-emerald-200 mt-2">✅ Transparent PS: CD cases, sample jars; Expanded PS (foam): disposable cups, shock-absorbing packaging.</p></div>',
+    err: '<div class="p-3 rounded-xl bg-slate-950 border border-rose-800/70"><span class="text-[10px] font-mono text-rose-400 uppercase font-bold block">3. NTF-2018 II-B V (d) Rule</span><p class="text-[11px] text-rose-200 mt-2 leading-relaxed">🚨 <b>Never open the benzene ring ($\text{-C}_6\text{H}_5$)!</b> Only the side-chain vinyl $\text{C=C}$ undergoes addition polymerisation. Also never call it "condensation polymerisation" (CP 2015)!</p></div>'
+  },
+  PMMA: {
+    mono: '<div class="p-3 rounded-xl bg-slate-950 border border-slate-800"><span class="text-[10px] font-mono text-sky-400 uppercase font-bold block">1. Monomer (Methyl 2-methylpropenoate)</span><pre class="font-mono text-xs text-white mt-2 leading-tight">  H     CH₃
+  |     |
+  C  =  C
+  |     |
+  H     COOCH₃</pre><p class="text-[11px] text-slate-400 mt-2">Formula: $\text{CH}_2\text{=C(CH}_3)\text{COOCH}_3$.</p></div>',
+    rep: '<div class="p-3 rounded-xl bg-slate-950 border border-emerald-800/70"><span class="text-[10px] font-mono text-emerald-400 uppercase font-bold block">2. Repeating Unit (Perspex)</span><pre class="font-mono text-xs text-emerald-300 mt-2 leading-tight">    H     CH₃
+    |     |
+— [ C  —  C ] —
+    |     |
+    H     COOCH₃</pre><p class="text-[11px] text-emerald-200 mt-2">✅ Highly transparent, tough, lightweight glass substitute: aircraft windows, car light covers, contact lenses.</p></div>',
+    err: '<div class="p-3 rounded-xl bg-slate-950 border border-rose-800/70"><span class="text-[10px] font-mono text-rose-400 uppercase font-bold block">3. Side-Group Trap</span><p class="text-[11px] text-rose-200 mt-2 leading-relaxed">⚠️ Keep BOTH $-\text{CH}_3$ and $-\text{COOCH}_3$ attached to the SAME right-hand backbone carbon! The ester group $-\text{COOCH}_3$ does not react during addition polymerisation.</p></div>'
+  },
+  but2ene: {
+    mono: '<div class="p-3 rounded-xl bg-slate-950 border border-slate-800"><span class="text-[10px] font-mono text-sky-400 uppercase font-bold block">1. Monomer (But-2-ene)</span><pre class="font-mono text-xs text-white mt-2 leading-tight">  CH₃   CH₃
+  |     |
+  C  =  C
+  |     |
+  H     H</pre><p class="text-[11px] text-slate-400 mt-2">Redraw $\text{CH}_3\text{CH=CHCH}_3$ with the two $-\text{CH}_3$ groups pointing up/down on the two $\text{C=C}$ carbons!</p></div>',
+    rep: '<div class="p-3 rounded-xl bg-slate-950 border border-emerald-800/70"><span class="text-[10px] font-mono text-emerald-400 uppercase font-bold block">2. Repeating Unit</span><pre class="font-mono text-xs text-emerald-300 mt-2 leading-tight">    CH₃   CH₃
+    |     |
+— [ C  —  C ] —
+    |     |
+    H     H</pre><p class="text-[11px] text-emerald-200 mt-2">✅ Notice that the backbone inside the brackets STILL has only <b>2 carbons</b>, each carrying one $-\text{CH}_3$ branch!</p></div>',
+    err: '<div class="p-3 rounded-xl bg-slate-950 border border-rose-800/70"><span class="text-[10px] font-mono text-rose-400 uppercase font-bold block">3. 4-Carbon Backbone Trap</span><p class="text-[11px] text-rose-200 mt-2 leading-relaxed">❌ Never draw $-\text{CH}_2\text{CH}_2\text{CH}_2\text{CH}_2-$ as the repeating unit of poly(but-2-ene)! Only the 2 carbons of the $\text{C=C}$ form the polymer backbone.</p></div>'
+  }
+};
+function updatePolySim(){
+  const k = document.getElementById('polyTargetSel').value;
+  const d = POLY_SIM_DATA[k];
+  const out = document.getElementById('polySimOut');
+  if(out && d){ out.innerHTML = d.mono + d.rep + d.err; safeInitKaTeX(); }
+}
+
+/* Bench 6: Live HKEAA Keyword Answer Grader (Topic V) */
+const GRADER_RUBRICS = {
+  fd_principle: {
+    prompt: '<b>Question (2 marks · CP 2014 Q6 / CP 2024 Q5(a)):</b> Explain the underlying principle of separating petroleum into fractions by fractional distillation, and explain why petrol has a lower boiling point range than diesel.',
+    model: 'Petroleum is a mixture of hydrocarbons with different boiling points (boiling-point ranges). Petrol contains hydrocarbon molecules with a smaller molecular size (smaller relative molecular mass / fewer carbon atoms) than diesel, so the van der Waals’ forces between petrol molecules are weaker and less heat energy is needed to overcome them.',
+    marks: [
+      { label: '1M · Different Boiling Points + Smaller Molecular Size', re: /(different\s+boiling\s+points?|smaller\s+(relative\s+)?molecular\s+(size|mass)|fewer\s+carbon\s+atoms)/i, hint: 'CP 2024 Q5(a) / CP 2014 Q6 Requirement: State that hydrocarbons in the fractions have <b>different boiling points</b> because petrol has <b>smaller molecular size (smaller Mr / fewer C atoms)</b> than diesel.' },
+      { label: '1M · Weaker van der Waals’ Forces Between Molecules', re: /weaker\s+(intermolecular\s+forces|van\s+der\s+waals)/i, hint: 'CP 2021 Paper 2 Requirement: State that there are <b>weaker van der Waals’ forces between petrol molecules</b>.' }
+    ],
+    traps: [
+      { re: /melting\s+point/i, msg: 'CP 2014 Q6 Verbatim Error: Fractional distillation separates by <b>boiling point</b>, NEVER by melting point!' },
+      { re: /break(ing)?\s+covalent\s+bonds/i, msg: 'Fatal Structure Error: Boiling hydrocarbons overcomes weak intermolecular van der Waals’ forces, NEVER covalent bonds!' }
+    ]
+  },
+  cracking_def: {
+    prompt: '<b>Question (2 marks · CP 2012 Q2 / CP 2016 Q3):</b> State the meaning of "cracking" and give TWO reasons why cracking is important in the petroleum industry.',
+    model: 'Cracking is the breaking down (thermal decomposition) of larger hydrocarbon molecules into smaller hydrocarbon molecules by heat (and a catalyst). It is important to convert heavy fractions in low demand into more useful smaller alkanes (such as petrol) to meet market demand, and to produce alkenes which are raw materials for making polymers (plastics) and petrochemicals.',
+    marks: [
+      { label: '1M · Break Large Hydrocarbons into Smaller Ones + Petrol Demand', re: /(break(ing)?\s+down|thermal\s+decomposition)[\s\S]{0,60}(large(r)?[\s\S]{0,30}small(er)?)|produce\s+(more\s+useful\s+)?petrol/i, hint: 'State that cracking breaks <b>large hydrocarbon molecules into smaller, more useful ones (such as petrol)</b>.' },
+      { label: '1M · Produces Alkenes for Polymers / Petrochemicals', re: /produce\s+alkenes/i, hint: 'MS Bank §5 Requirement: State that cracking <b>produces alkenes</b> (feedstock for making addition polymers/plastics).' }
+    ],
+    traps: [
+      { re: /separate\s+(useful\s+)?fractions/i, msg: 'CP 2016 Q3 Verbatim Error: Cracking is a chemical decomposition reaction — it does NOT "separate useful fractions from petroleum" (that is fractional distillation)!' }
+    ]
+  },
+  unsat_test: {
+    prompt: '<b>Question (2 marks · CP 2012 Q2 / CP 2014 Q3 / CP 2021 Q4):</b> Describe a chemical test to distinguish between propene and propane, stating the expected observations for both gases.',
+    model: 'Pass each gas separately into bromine water (or acidified potassium permanganate solution). Propene decolourises the bromine water from orange/brown to colourless (or acidified KMnO₄ from purple to colourless), whereas propane gives no observable change.',
+    marks: [
+      { label: '1M · Correct Reagent Named (Bromine Water / Acidified KMnO₄)', re: /(bromine\s+water|br2\(aq\)|bromine\s+in\s+organic\s+solvent|acidified\s+(potassium\s+permanganate|kmno4))/i, hint: 'CP 2014 Q3 Requirement: Name <b>bromine water</b> (or bromine in organic solvent / <b>acidified potassium permanganate solution</b>).' },
+      { label: '1M · Both Observations: Orange/Purple → Colourless + No Change', re: /((orange|brown|reddish[-\s]*brown|purple)[\s\S]{0,30}colourless|decolouri[sz]es)[\s\S]{0,60}(no\s+(observable\s+)?change|remains|stays)/i, hint: 'CP 2012 Q2(c)(ii) Requirement: State the colour change (<b>orange/brown to colourless</b>) for propene AND <b>no observable change</b> for propane!' }
+    ],
+    traps: [
+      { re: /bromine\s+liquid|liquid\s+bromine/i, msg: 'CP 2014 Q3 Verbatim Error: Never use "bromine liquid" — use <b>bromine water</b> (or bromine in organic solvent)!' },
+      { re: /colourless\s+to\s+(brown|orange)/i, msg: 'CP 2016 Q3 / CP 2025 Q4(b)(i) Reversal Error: The colour change is from <b>orange/brown to colourless</b>, NEVER "colourless to brown"!' },
+      { re: /potassium\s+dichromate|k2cr2o7/i, msg: 'CP 2018 Q4(c)(ii) / CP 2019 Q3 Error: Acidified potassium dichromate does NOT react with alkenes!' }
+    ]
+  },
+  crack_cold_cat: {
+    prompt: '<b>Question (2 marks · CP 2012 Q17 / CP 2024 Q5(b)(iv)):</b> In the laboratory cracking of kerosene, explain what happens if only the mineral wool soaked with kerosene is heated strongly while the unglazed porcelain pieces are not heated.',
+    model: 'No cracking takes place because the unglazed porcelain catalyst is not hot enough to catalyse the thermal decomposition. Instead, the kerosene only vaporises (boils) when heated and condenses as oily liquid droplets in the collection tube.',
+    marks: [
+      { label: '1M · Porcelain Catalyst Not Hot Enough → No Cracking', re: /(no\s+cracking|does\s+not\s+crack|cannot\s+crack)|(porcelain|catalyst)[\s\S]{0,40}not\s+(heated|hot)/i, hint: 'CP 2024 Q5(b)(iv) Requirement: State that <b>no cracking occurs because the porcelain catalyst is not hot enough</b>.' },
+      { label: '1M · Kerosene Only Vaporises / Distils Over', re: /(vapori[sz]es|boils?|evaporates?)/i, hint: 'CP 2012 Q17 / CP 2024 Q5 Requirement: State that heating the mineral wool <b>only vaporises the kerosene</b>.' }
+    ],
+    traps: [
+      { re: /no\s+catalyst\s+is\s+present/i, msg: 'CP 2024 Q5(b)(iv) Verbatim Error: "No catalyst is present" is wrong — the porcelain catalyst IS present in the tube, it is simply not heated!' }
+    ]
+  },
+  ch4_br2_uv: {
+    prompt: '<b>Question (3 marks · CP 2015 Q6 / CP 2019 Q5 / CP 2025 Q4):</b> State the reaction condition and reaction type when ethane reacts with bromine, and state how the reaction conditions should be adjusted to favour the formation of bromoethane as the major product.',
+    model: 'Condition: ultraviolet (UV) light (or sunlight). Reaction type: substitution reaction. To favour the monosubstituted product (bromoethane), use an excess amount of ethane.',
+    marks: [
+      { label: '1M · Condition: UV Light / Sunlight', re: /(uv(\s+light)?|ultraviolet(\s+light)?|sunlight)/i, hint: 'CP 2019 Q5(b) Requirement: State <b>UV light / ultraviolet light / sunlight</b>.' },
+      { label: '1M · Type: Substitution (Spelled Correctly)', re: /substitution/i, hint: 'CP 2015 Q6 / CP 2019 Q5(c) Requirement: Spell <b>substitution</b> correctly.' },
+      { label: '1M · Use Excess Ethane for Monosubstitution', re: /excess\s+(amount\s+of\s+)?ethane/i, hint: 'CP 2015 Q6 / CP 2025 Q4 Requirement: State using <b>excess ethane</b> to favour the monosubstituted product.' }
+    ],
+    traps: [
+      { re: /subsituation/i, msg: 'CP 2015 Q6 / CP 2019 Q5 Spelling Penalty: "subsituation" is marked wrong — spell it <b>substitution</b>!' },
+      { re: /\bheat\b/i, msg: 'CP 2019 Q5(b) Verbatim Error: "gave heat as the answer" — alkane halogenation requires <b>UV light</b>, not heat!' }
+    ]
+  },
+  gw_conseq: {
+    prompt: '<b>Question (2 marks · CP 2012 Q10 / CP 2025 Q4(c)):</b> Name the major greenhouse gas emitted from the complete combustion of fossil fuels, and state one environmental consequence of global warming.',
+    model: 'Carbon dioxide (CO₂). Global warming causes the melting of polar ice caps (glaciers), which leads to a rise in sea levels and flooding of low-lying coastal areas (or extreme weather / climate change).',
+    marks: [
+      { label: '1M · Carbon Dioxide (CO₂)', re: /(carbon\s+dioxide|co2)/i, hint: 'Name <b>carbon dioxide (CO₂)</b>.' },
+      { label: '1M · Specific Consequence (Polar Ice Caps Melting / Sea Level Rise / Flooding)', re: /(polar\s+ice\s+caps?|sea\s+levels?\s+ris(e|ing)|flooding\s+of\s+low[-\s]*lying|climate\s+change|extreme\s+weather)/i, hint: 'CP 2025 Q4(c) Requirement: State a complete consequence such as <b>melting of polar ice caps causing sea levels to rise / flooding of low-lying areas</b>.' }
+    ],
+    traps: [
+      { re: /acid\s+rain/i, msg: 'CP 2025 Q4(c) Verbatim Error: "Provided irrelevant environmental problems, such as acid rain" — CO₂ causes global warming, whereas SO₂ and NOₓ cause acid rain!' }
+    ]
+  }
+};
+
+function loadGraderPrompt(){
+  const sel = document.getElementById('graderQSelect');
+  if(!sel) return;
+  const r = GRADER_RUBRICS[sel.value];
+  const box = document.getElementById('graderPromptBox');
+  if(box && r) box.innerHTML = r.prompt;
+}
+function fillModelGraderAnswer(){
+  const sel = document.getElementById('graderQSelect');
+  if(!sel) return;
+  const r = GRADER_RUBRICS[sel.value];
+  if(!r) return;
+  document.getElementById('graderInput').value = r.model;
+  gradeStudentAnswer();
+}
+function gradeStudentAnswer(){
+  const sel = document.getElementById('graderQSelect');
+  const txt = (document.getElementById('graderInput').value || '').trim();
+  const out = document.getElementById('graderResultBox');
+  if(!sel || !out) return;
+  const r = GRADER_RUBRICS[sel.value];
+  if(!txt){ out.innerHTML = '<span class="text-amber-300">Please type an answer first, or click "Show Model Full-Mark Answer".</span>'; return; }
+  let score = 0, rowsHtml = '', trapHtml = '';
+  r.marks.forEach(m => {
+    const hit = m.re.test(txt);
+    if(hit) score++;
+    rowsHtml += `<div class="p-2 rounded-lg border ${hit ? 'bg-emerald-950/40 border-emerald-700 text-emerald-200' : 'bg-slate-900 border-slate-800 text-slate-300'}"><b>${hit ? '✅ [1M Earned]' : '⬜ [0M Missed]'} ${m.label}:</b> ${hit ? 'Keyword verified in your answer.' : m.hint}</div>`;
+  });
+  r.traps.forEach(t => {
+    if(t.re.test(txt)) trapHtml += `<div class="p-2.5 rounded-lg bg-rose-950/60 border border-rose-600 text-rose-200 font-medium">🚨 <b>[NOT ACCEPT / Contradiction Penalty]:</b> ${t.msg}</div>`;
+  });
+  out.innerHTML = `<div class="flex items-center justify-between border-b border-slate-800 pb-2"><span class="font-bold text-white text-sm">Examiner Diagnostic Score: <span class="text-sky-400 font-mono">${score} / ${r.marks.length} marks</span></span><span class="chip ${score===r.marks.length && !trapHtml ? 'bg-emerald-950 text-emerald-300 border-emerald-700' : 'bg-amber-950 text-amber-300 border-amber-700'}">${score===r.marks.length && !trapHtml ? 'Full Marks Wording' : 'Keep Refining'}</span></div>${trapHtml}<div class="space-y-1.5 mt-2">${rowsHtml}</div>`;
+}
+
+const CMD_INDEX = [
+  { title: 'Fractional Distillation of Petroleum & 7 Fractions Table', tag: 'Strand (a) · Map', action: ()=>{switchTab('tab-fuel');switchFuelMode('map');} },
+  { title: 'Virtual Lab Cracking Rig (Porcelain vs Glass Wool · CP 2024 Q5)', tag: 'Strand (c) · Sim', action: ()=>{switchTab('tab-fuel');switchFuelMode('map');} },
+  { title: 'Alkane UV Substitution vs Alkene Addition Wet-Lab', tag: 'Strand (c) · Sim', action: ()=>{switchTab('tab-react');switchReactMode('map');} },
+  { title: 'IUPAC Systematic Naming & Multi-Notation Studio (≤ 8 C)', tag: 'Strand (b) · Sim', action: ()=>{switchTab('tab-name');switchNameMode('map');} },
+  { title: 'Addition Polymer Monomer ⇄ Repeating Unit Studio (PE, PP, PVC, PS, PMMA)', tag: 'Strand (d) · Sim', action: ()=>{switchTab('tab-poly');switchPolyMode('map');} },
+  { title: 'Combustion & Empirical/Molecular Formula Benches', tag: 'Solver · Benches 1–5', action: ()=>{switchTab('tab-solver');} },
+  { title: 'Live HKEAA Keyword Answer Grader (Bench 6)', tag: 'Solver · Exam Practice', action: ()=>{switchTab('tab-solver');} },
+  { title: 'Candidate Performance Intelligence (2012–2025)', tag: 'Past Papers · Tab 7', action: ()=>{switchTab('tab-pp');} }
+];
+function openCmdModal(){ const m=document.getElementById('cmdModal'); if(m){ m.classList.add('open'); const inp=document.getElementById('cmdSearchInput'); if(inp){inp.value='';filterCmdList();setTimeout(()=>inp.focus(),50);}}}
+function closeCmdModal(){ const m=document.getElementById('cmdModal'); if(m) m.classList.remove('open'); }
+function filterCmdList(){
+  const q = (document.getElementById('cmdSearchInput').value || '').toLowerCase();
+  const box = document.getElementById('cmdResults');
+  if(!box) return;
+  box.innerHTML = '';
+  CMD_INDEX.filter(i => i.title.toLowerCase().includes(q) || i.tag.toLowerCase().includes(q)).forEach(i => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'w-full text-left px-3 py-2.5 rounded-xl hover:bg-slate-800/80 flex items-center justify-between transition';
+    btn.innerHTML = `<span class="text-white font-medium">${i.title}</span><span class="chip bg-sky-950 text-sky-300 border border-sky-800">${i.tag}</span>`;
+    btn.onclick = () => { closeCmdModal(); i.action(); };
+    box.appendChild(btn);
+  });
+}
+document.addEventListener('keydown', e => {
+  if((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k'){ e.preventDefault(); const m=document.getElementById('cmdModal'); if(m && m.classList.contains('open')) closeCmdModal(); else openCmdModal(); }
+  else if(e.key === 'Escape') closeCmdModal();
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  try { if(localStorage.getItem('hkdse_topic5_theme') === 'light') toggleAppleTheme(); } catch(e){}
+  injectQuizSelfCheckBars();
+  showCrackSim(0);
+  setAlkRx(0);
+  updateIupacSim();
+  updatePolySim();
+  loadGraderPrompt();
+  updateMasteryRing();
+  document.getElementById('svGasVal').value = '0.25'; solverGas();
+  document.getElementById('svCx').value = '3'; document.getElementById('svCy').value = '8'; document.getElementById('svCn').value = '0.5'; solverCombust();
+  document.getElementById('svMM').value = '44'; solverMM();
+  document.getElementById('svCO2m').value = '8.8'; document.getElementById('svH2Om').value = '3.6'; document.getElementById('svMm').value = '42'; solverCH();
+  document.getElementById('svPM').value = '28'; document.getElementById('svPn').value = '0.5'; solverPoly();
+});
+</script>
+
 </body>
 </html>

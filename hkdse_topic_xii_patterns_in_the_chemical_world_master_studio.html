@@ -9,48 +9,375 @@
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
 <style>
-  :root { color-scheme: dark; }
-  body { background:#020617; font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
-  .tab-panel { display:none; }
-  .tab-panel.active { display:block; }
-  .blur-answer { filter: blur(6px); cursor:pointer; transition: filter .25s ease; user-select:none; }
-  .blur-answer.revealed { filter: blur(0); cursor:default; user-select:text; }
-  .engine-module { display:none; }
-  .engine-module.active { display:block; }
-  .mode-pill { cursor:pointer; }
-  .mode-pill.active { background:rgba(56,189,248,.15); color:#7dd3fc; border-color:#38bdf8; }
-  details > summary { cursor:pointer; list-style:none; }
-  details > summary::-webkit-details-marker { display:none; }
-  .chip { display:inline-block; padding:2px 10px; border-radius:9999px; font-size:11px; font-weight:600; }
-  .katex { font-size:1.05em; }
-  .num-card { font-variant-numeric: tabular-nums; }
-  input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner-spin-button { -webkit-appearance:none; margin:0; }
-  input[type=number] { -moz-appearance:textfield; }
-  .katex-block{overflow-x:auto;overflow-y:hidden}
-  .katex-block .katex-display{text-align:left;margin:.35em 0}
-  /* ══ MOBILE UX LAYER (chrome-only) ══ */
-  :root{--hdr:120px}
-  html{scroll-padding-top:calc(var(--hdr) + 10px)}
-  .toc-strip{display:none;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:2px 0 6px;margin-bottom:2px}
-  .toc-strip::-webkit-scrollbar{display:none}
-  .toc-chip{flex-shrink:0;font-size:10px;line-height:1;padding:7px 11px;border-radius:9999px;border:1px solid rgba(51,65,85,.9);background:rgba(15,23,42,.85);color:#94a3b8;font-weight:600;white-space:nowrap;cursor:pointer}
-  #backTop{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:70;width:44px;height:44px;border-radius:9999px;border:1px solid rgba(56,189,248,.35);background:rgba(8,14,26,.92);color:#7dd3fc;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transform:translateY(8px);transition:opacity .25s,transform .25s}
-  #backTop.show{opacity:1;pointer-events:auto;transform:none}
-  #scrollProg{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,#0ea5e9,#38bdf8);z-index:80;pointer-events:none}
-  @media (max-width:1023.98px){
-    header{background-color:rgba(2,6,23,.97)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;padding-top:env(safe-area-inset-top)}
-    #mainNav{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:4px}
-    #mainNav::-webkit-scrollbar{display:none}
-    #mainNav button{flex-shrink:0}
-    select,input[type="number"],input[type="text"]{font-size:16px!important}
-    #mainNav button{padding-top:10px;padding-bottom:10px}
-    .mode-pill{padding:8px 14px}
-    .toc-chip{padding:10px 12px}
-    .katex{font-size:1em}
-    .toc-strip{display:flex}
+  :root {
+    color-scheme: dark;
+    --hdr: 118px;
+    --bg-canvas: #000000;
+    --bg-elevated: rgba(22, 22, 29, 0.72);
+    --bg-card: rgba(28, 28, 36, 0.68);
+    --bg-card-solid: #16161d;
+    --bg-subcard: rgba(38, 38, 48, 0.55);
+    --bg-glass-nav: rgba(14, 14, 20, 0.76);
+    --border-hairline: rgba(255, 255, 255, 0.09);
+    --border-highlight: rgba(255, 255, 255, 0.16);
+    --text-primary: #f5f5f7;
+    --text-secondary: #a1a1aa;
+    --text-tertiary: #6e6e77;
+    --accent-blue: #0a84ff;
+    --accent-teal: #64d2ff;
+    --accent-purple: #bf5af2;
+    --accent-emerald: #30d158;
+    --accent-amber: #ff9f0a;
+    --accent-rose: #ff453a;
+    --shadow-card: 0 20px 44px -12px rgba(0, 0, 0, 0.65), inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+    --shadow-hover: 0 24px 52px -10px rgba(0, 0, 0, 0.75), inset 0 1px 0 0 rgba(255, 255, 255, 0.18);
+    --spring: cubic-bezier(0.22, 1, 0.36, 1);
   }
-  @media (prefers-reduced-motion:reduce){.tab-panel.active{animation:none}
-    .blur-answer,#backTop{transition:none!important}}
+
+  html.theme-light {
+    color-scheme: light;
+    --bg-canvas: #f5f5f7;
+    --bg-elevated: rgba(255, 255, 255, 0.82);
+    --bg-card: rgba(255, 255, 255, 0.88);
+    --bg-card-solid: #ffffff;
+    --bg-subcard: rgba(242, 242, 247, 0.85);
+    --bg-glass-nav: rgba(248, 248, 252, 0.82);
+    --border-hairline: rgba(0, 0, 0, 0.08);
+    --border-highlight: rgba(0, 0, 0, 0.14);
+    --text-primary: #1d1d1f;
+    --text-secondary: #515154;
+    --text-tertiary: #86868b;
+    --shadow-card: 0 12px 32px -8px rgba(0, 0, 0, 0.07), inset 0 1px 0 0 rgba(255, 255, 255, 0.9);
+    --shadow-hover: 0 18px 40px -8px rgba(0, 0, 0, 0.12), inset 0 1px 0 0 rgba(255, 255, 255, 1);
+  }
+
+  html {
+    scroll-padding-top: calc(var(--hdr) + 14px);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--bg-canvas);
+    background-image:
+      radial-gradient(ellipse 80% 50% at 15% -10%, rgba(10, 132, 255, 0.16), transparent 60%),
+      radial-gradient(ellipse 70% 45% at 85% 5%, rgba(191, 90, 242, 0.12), transparent 60%),
+      radial-gradient(ellipse 60% 40% at 50% 100%, rgba(48, 209, 88, 0.08), transparent 60%);
+    background-attachment: fixed;
+    color: var(--text-primary);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: -0.011em;
+    transition: background-color 0.4s var(--spring), color 0.3s var(--spring);
+  }
+
+  h1, h2, h3, h4 {
+    letter-spacing: -0.024em;
+    font-weight: 650;
+  }
+
+  .font-mono {
+    font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+  }
+
+  header {
+    background: var(--bg-glass-nav) !important;
+    -webkit-backdrop-filter: saturate(190%) blur(28px) !important;
+    backdrop-filter: saturate(190%) blur(28px) !important;
+    border-bottom: 1px solid var(--border-hairline) !important;
+    box-shadow: 0 4px 24px -4px rgba(0, 0, 0, 0.28);
+    transition: background 0.35s var(--spring);
+  }
+
+  #mainNav {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border-hairline);
+    border-radius: 14px;
+    padding: 4px !important;
+    gap: 4px !important;
+    margin-bottom: 8px;
+  }
+  html.theme-light #mainNav {
+    background: rgba(0, 0, 0, 0.045);
+  }
+
+  #mainNav button {
+    border-radius: 10px !important;
+    border-bottom: none !important;
+    transition: all 0.28s var(--spring) !important;
+    position: relative;
+    font-weight: 500;
+  }
+  #mainNav button:hover { transform: translateY(-1px); }
+  #mainNav button:active { transform: scale(0.97); }
+  #mainNav button.tab-btn-active {
+    background: rgba(10, 132, 255, 0.22) !important;
+    color: #64d2ff !important;
+    box-shadow: 0 2px 10px rgba(10, 132, 255, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.22);
+    font-weight: 600 !important;
+  }
+  html.theme-light #mainNav button.tab-btn-active {
+    background: #ffffff !important;
+    color: #0066cc !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .bg-slate-900 {
+    background: var(--bg-elevated) !important;
+    -webkit-backdrop-filter: saturate(160%) blur(22px);
+    backdrop-filter: saturate(160%) blur(22px);
+    border-color: var(--border-hairline) !important;
+    border-radius: 22px !important;
+    box-shadow: var(--shadow-card);
+    transition: transform 0.35s var(--spring), box-shadow 0.35s var(--spring), border-color 0.3s ease;
+  }
+
+  .bg-slate-950 {
+    background: var(--bg-card) !important;
+    border-color: var(--border-hairline) !important;
+    border-radius: 18px !important;
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.06);
+    transition: transform 0.3s var(--spring), box-shadow 0.3s var(--spring), border-color 0.25s ease;
+  }
+  .bg-slate-950:hover {
+    border-color: var(--border-highlight) !important;
+  }
+
+  html.theme-light .text-white { color: #1d1d1f !important; }
+  html.theme-light .text-slate-100,
+  html.theme-light .text-slate-200,
+  html.theme-light .text-slate-300 { color: #2c2c2e !important; }
+  html.theme-light .text-slate-400 { color: #515154 !important; }
+  html.theme-light .text-slate-500 { color: #6e6e73 !important; }
+  html.theme-light .bg-slate-800,
+  html.theme-light .bg-slate-800\/50 { background-color: rgba(0, 0, 0, 0.05) !important; color: #1d1d1f !important; border-color: rgba(0,0,0,0.12) !important; }
+  html.theme-light .bg-sky-950\/40,
+  html.theme-light .bg-sky-950\/30,
+  html.theme-light .bg-sky-950 { background-color: rgba(10, 132, 255, 0.1) !important; color: #004080 !important; border-color: rgba(10, 132, 255, 0.28) !important; }
+  html.theme-light .bg-purple-950\/30,
+  html.theme-light .bg-purple-950 { background-color: rgba(175, 82, 222, 0.1) !important; color: #581c87 !important; border-color: rgba(175, 82, 222, 0.28) !important; }
+  html.theme-light .bg-emerald-950\/30,
+  html.theme-light .bg-emerald-950 { background-color: rgba(48, 209, 88, 0.12) !important; color: #065f46 !important; border-color: rgba(48, 209, 88, 0.3) !important; }
+  html.theme-light .bg-amber-950\/40,
+  html.theme-light .bg-amber-950\/30,
+  html.theme-light .bg-amber-950 { background-color: rgba(255, 159, 10, 0.13) !important; color: #78350f !important; border-color: rgba(255, 159, 10, 0.35) !important; }
+  html.theme-light .bg-rose-950\/40,
+  html.theme-light .bg-rose-950\/30,
+  html.theme-light .bg-rose-950 { background-color: rgba(255, 69, 58, 0.1) !important; color: #881337 !important; border-color: rgba(255, 69, 58, 0.28) !important; }
+  html.theme-light .text-sky-200, html.theme-light .text-sky-300, html.theme-light .text-sky-400 { color: #0055b3 !important; }
+  html.theme-light .text-amber-200, html.theme-light .text-amber-300, html.theme-light .text-amber-400 { color: #92400e !important; }
+  html.theme-light .text-rose-200, html.theme-light .text-rose-300, html.theme-light .text-rose-400 { color: #9f1239 !important; }
+  html.theme-light .text-emerald-300, html.theme-light .text-emerald-400 { color: #047857 !important; }
+  html.theme-light .text-purple-300, html.theme-light .text-purple-400 { color: #6b21a8 !important; }
+  html.theme-light .text-cyan-200, html.theme-light .text-cyan-300, html.theme-light .text-cyan-400 { color: #0e7490 !important; }
+
+  @keyframes appleStageIn {
+    0% { opacity: 0; transform: translateY(10px) scale(0.992); filter: blur(4px); }
+    100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+  }
+  .tab-panel { display: none; }
+  .tab-panel.active {
+    display: block;
+    animation: appleStageIn 0.42s var(--spring) forwards;
+  }
+  .engine-module { display: none; }
+  .engine-module.active {
+    display: block;
+    animation: appleStageIn 0.34s var(--spring) forwards;
+  }
+  .phys-card, .oxide-card, .eq-card, .trans-card {
+    animation: appleStageIn 0.3s var(--spring) forwards;
+  }
+
+  .blur-answer {
+    filter: blur(5.5px);
+    cursor: pointer;
+    transition: filter 0.28s var(--spring), background-color 0.28s ease, transform 0.2s var(--spring), box-shadow 0.25s ease;
+    user-select: none;
+    border: 1px solid rgba(100, 210, 255, 0.22);
+    padding: 1px 7px !important;
+    border-radius: 7px !important;
+  }
+  .blur-answer:hover {
+    filter: blur(2.5px);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(10, 132, 255, 0.2);
+  }
+  .blur-answer.revealed {
+    filter: blur(0);
+    cursor: pointer;
+    user-select: text;
+    background: rgba(48, 209, 88, 0.16) !important;
+    border-color: rgba(48, 209, 88, 0.45) !important;
+    box-shadow: 0 0 0 1px rgba(48, 209, 88, 0.15);
+  }
+
+  .mode-pill {
+    cursor: pointer;
+    transition: all 0.26s var(--spring);
+    border-radius: 9999px;
+    backdrop-filter: blur(10px);
+  }
+  .mode-pill:hover { transform: translateY(-1px); }
+  .mode-pill:active { transform: scale(0.96); }
+  .mode-pill.active {
+    background: linear-gradient(135deg, rgba(10, 132, 255, 0.26), rgba(100, 210, 255, 0.14)) !important;
+    color: #7dd3fc !important;
+    border-color: rgba(100, 210, 255, 0.65) !important;
+    box-shadow: 0 4px 14px -2px rgba(10, 132, 255, 0.35), inset 0 1px 0 rgba(255,255,255,0.2);
+  }
+
+  details > summary {
+    cursor: pointer;
+    list-style: none;
+    transition: background-color 0.2s ease;
+    border-radius: 14px;
+  }
+  details > summary::-webkit-details-marker { display: none; }
+  details[open] > summary {
+    border-bottom: 1px solid var(--border-hairline);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 10px;
+    border-radius: 9999px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.12);
+  }
+
+  .katex { font-size: 1.05em; }
+  .num-card { font-variant-numeric: tabular-nums; }
+  input[type=number]::-webkit-outer-spin-button,
+  input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  input[type=number] { -moz-appearance: textfield; }
+  .katex-block { overflow-x: auto; overflow-y: hidden; }
+  .katex-block .katex-display { text-align: left; margin: .35em 0; }
+
+  .apple-sim-panel {
+    background: linear-gradient(165deg, rgba(20, 24, 38, 0.85), rgba(12, 15, 26, 0.92));
+    border: 1px solid rgba(100, 210, 255, 0.22);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 18px 40px -12px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  }
+  html.theme-light .apple-sim-panel {
+    background: linear-gradient(165deg, rgba(255, 255, 255, 0.95), rgba(240, 246, 255, 0.92));
+    border-color: rgba(10, 132, 255, 0.25);
+    box-shadow: 0 14px 32px -10px rgba(10, 132, 255, 0.12);
+  }
+
+  .apple-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 7px 14px;
+    transition: all 0.24s var(--spring);
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(255, 255, 255, 0.07);
+    color: var(--text-primary);
+  }
+  .apple-btn:hover {
+    background: rgba(255, 255, 255, 0.13);
+    transform: translateY(-1px);
+  }
+  .apple-btn:active { transform: scale(0.97); }
+  .apple-btn-primary {
+    background: linear-gradient(180deg, #1e90ff 0%, #0071e3 100%);
+    color: #ffffff !important;
+    border-color: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 4px 14px rgba(0, 113, 227, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  }
+  .apple-btn-primary:hover {
+    background: linear-gradient(180deg, #339dff 0%, #0a7ff0 100%);
+    box-shadow: 0 6px 18px rgba(0, 113, 227, 0.55);
+  }
+
+  input[type=range].apple-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 6px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #ff453a, #ff9f0a, #30d158, #0a84ff, #bf5af2);
+    outline: none;
+  }
+  input[type=range].apple-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 2px solid #0a84ff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+    cursor: grab;
+    transition: transform 0.18s var(--spring);
+  }
+  input[type=range].apple-slider::-webkit-slider-thumb:active {
+    transform: scale(1.15);
+    cursor: grabbing;
+  }
+
+  .quiz-self-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px dashed var(--border-hairline);
+    font-size: 11px;
+  }
+
+  #cmdModal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: rgba(0, 0, 0, 0.58);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 10vh;
+  }
+  #cmdModal.open {
+    display: flex;
+    animation: appleStageIn 0.22s var(--spring) forwards;
+  }
+
+  .toc-strip { display: none; gap: 6px; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 2px 0 6px; margin-bottom: 2px; }
+  .toc-strip::-webkit-scrollbar { display: none; }
+  .toc-chip { flex-shrink: 0; font-size: 10px; line-height: 1; padding: 7px 11px; border-radius: 9999px; border: 1px solid var(--border-hairline); background: var(--bg-card); color: var(--text-secondary); font-weight: 600; white-space: nowrap; cursor: pointer; transition: all 0.2s var(--spring); }
+  #backTop { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom)); z-index: 70; width: 44px; height: 44px; border-radius: 9999px; border: 1px solid rgba(100, 210, 255, 0.35); background: var(--bg-glass-nav); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); color: #7dd3fc; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transform: translateY(8px); transition: opacity .25s, transform .25s var(--spring); box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+  #backTop.show { opacity: 1; pointer-events: auto; transform: none; }
+  #scrollProg { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: linear-gradient(90deg, #0a84ff, #64d2ff, #30d158); z-index: 80; pointer-events: none; }
+
+  @media (max-width:1023.98px){
+    header { padding-top: env(safe-area-inset-top); }
+    #mainNav { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+    #mainNav::-webkit-scrollbar { display: none; }
+    #mainNav button { flex-shrink: 0; padding-top: 9px; padding-bottom: 9px; }
+    select, input[type="number"], input[type="text"] { font-size: 16px !important; }
+    .mode-pill { padding: 8px 14px; }
+    .toc-chip { padding: 10px 12px; }
+    .katex { font-size: 1em; }
+    .toc-strip { display: flex; }
+  }
+  @media (prefers-reduced-motion:reduce){
+    .tab-panel.active, .engine-module.active { animation: none !important; }
+    .blur-answer, #backTop { transition: none !important; }
+  }
 </style>
 </head>
 <body class="text-slate-200 min-h-screen">
@@ -60,14 +387,29 @@
   <div class="max-w-7xl mx-auto px-4 py-3">
     <div class="flex flex-wrap items-center justify-between gap-2">
       <div>
-        <h1 class="text-base sm:text-lg font-bold text-white leading-tight">HKDSE · Topic XII Master Studio</h1>
+        <div class="flex items-center gap-2.5"><div class="hidden sm:flex items-center gap-1.5 mr-1"><span class="w-2.5 h-2.5 rounded-full bg-[#ff5f56] inline-block shadow-sm"></span><span class="w-2.5 h-2.5 rounded-full bg-[#ffbd2e] inline-block shadow-sm"></span><span class="w-2.5 h-2.5 rounded-full bg-[#27c93f] inline-block shadow-sm"></span></div><h1 class="text-base sm:text-lg font-bold text-white leading-tight tracking-tight">HKDSE · Topic XII Master Studio — Patterns in the Chemical World</h1><span class="chip bg-sky-500/15 text-sky-300 border border-sky-400/30 text-[10px]">Interactive Studio Pro</span></div>
         <p class="text-[11px] text-slate-400 font-mono">Patterns in the Chemical World · Li→Ar Periodic Trends, Oxides of Na–Cl &amp; Transition Metals</p>
       </div>
-      <div class="flex gap-2 text-[10px] font-mono">
+      <div class="flex flex-wrap items-center gap-2 text-[10px] font-mono">
         <span class="chip bg-sky-950 text-sky-400 border border-sky-800">Strands (a)–(c)</span>
         <span class="chip bg-purple-950 text-purple-400 border border-purple-800">Paper 1A + 1B</span>
         <span class="chip bg-emerald-950 text-emerald-400 border border-emerald-800">C&amp;A Guide 2018</span>
-        <span class="chip bg-amber-950 text-amber-400 border border-amber-800">Depth: Part I wording</span>
+        <div class="flex items-center gap-2 ml-1 pl-2 border-l border-slate-700/70">
+          <button type="button" onclick="openCmdModal()" class="apple-btn !py-1 !px-2.5 text-[11px]" title="Quick Concept &amp; Past-Paper Search (⌘K)">
+            <span>🔍 Search</span>
+            <kbd class="px-1.5 py-0.5 text-[9px] rounded bg-slate-800 text-slate-300 border border-slate-700">⌘K</kbd>
+          </button>
+          <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-900/90 border border-slate-700/80" title="Concept Mastery Progress across Quiz &amp; Syllabus Checkpoints">
+            <svg class="w-4 h-4 -rotate-90" viewBox="0 0 36 36">
+              <circle cx="18" cy="18" r="15" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="3.8"></circle>
+              <circle id="masteryRingCircle" cx="18" cy="18" r="15" fill="none" stroke="#30d158" stroke-width="3.8" stroke-dasharray="94.2" stroke-dashoffset="94.2" stroke-linecap="round"></circle>
+            </svg>
+            <span id="masteryPctText" class="text-[11px] font-semibold text-emerald-400 num-card">0% Mastered</span>
+          </div>
+          <button type="button" id="themeToggleBtn" onclick="toggleAppleTheme()" class="apple-btn !py-1 !px-2.5 text-[11px]" title="Switch between Apple Pro Dark and Cupertino Daylight mode">
+            <span id="themeToggleIcon">☀️ Daylight</span>
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -258,6 +600,73 @@
   </div>
 </section>
 
+
+    <!-- ══ INTERACTIVE SYLLABUS AUDIT & CONCEPT READINESS MATRIX (EDB C&A Guide 2018 · Topic XII Strands a–c) ══ -->
+    <div class="mt-6 apple-sim-panel space-y-4" id="syllabus-audit-panel">
+      <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800/80 pb-3">
+        <div>
+          <span class="text-[10px] font-mono uppercase tracking-widest text-sky-400 font-bold">Interactive Syllabus Check-Off · EDB C&amp;A Guide (Topic XII Strands a–c)</span>
+          <h3 class="text-base font-bold text-white mt-0.5">HKDSE Topic XII Competency Checklist &amp; Direct Simulator Links</h3>
+          <p class="text-xs text-slate-400">Tick each official EDB learning outcome across Strands (a)–(c) as you master it.</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <span id="sylAuditCount" class="chip bg-emerald-950 text-emerald-300 border border-emerald-700 font-mono">0 / 12 Outcomes Checked</span>
+          <button type="button" class="apple-btn text-xs" onclick="checkAllSyllabusOutcomes()">Check All</button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs" id="sylAuditGrid">
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">XII(a) · Bonding &amp; Structure Across $\text{Li} \to \text{Ar}$</b>Giant metallic ($\text{Li, Be, Na, Mg, Al}$) → giant covalent ($\text{B, C, Si}$) → simple molecular ($\text{N}_2, \text{O}_2, \text{F}_2, \text{P}_4, \text{S}_8, \text{Cl}_2$) → monatomic ($\text{Ne, Ar}$). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-phys');switchPhysMode('map')">Trend Sim →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">XII(a) · Melting-Point Curve &amp; $\text{S}_8 &gt; \text{P}_4 &gt; \text{Cl}_2 &gt; \text{Ar}$</b>Explain metallic climb ($\text{Na}^+ &lt; \text{Mg}^{2+} &lt; \text{Al}^{3+}$), giant covalent peak ($\text{C, Si}$), and molecular tail by <b>molecular size</b> (CP 2013/2024 Q13). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-phys');switchPhysMode('map')">Trend Sim →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">XII(a) · Electrical Conductivity ($\text{Al} &gt; \text{Mg} &gt; \text{Na} &gt; \text{Si} = \text{S}$)</b>Number of delocalised electrons per atom ($\text{Al}: 3 &gt; \text{Mg}: 2 &gt; \text{Na}: 1$); never argue by "reactivity" (CP 2016 Q14). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-phys');switchPhysMode('map')">Trend Sim →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">XII(b) · Formulae &amp; Bonding of Period-3 Oxides</b>Ionic ($\text{Na}_2\text{O, MgO, Al}_2\text{O}_3$) → giant covalent ($\text{SiO}_2$) → simple molecular ($\text{P}_4\text{O}_{10}, \text{SO}_2, \text{Cl}_2\text{O}$); draw $\text{Na}_2\text{O}$ &amp; $\text{Cl}_2\text{O}$ diagrams (CP 2015 Q10). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-oxide');switchOxideMode('map')">Oxide Lab →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">XII(b) · Behaviour of the 7 Oxides in Water (CP 2015/2022/2025)</b>$\text{Na}_2\text{O} \to 2\text{NaOH}$ (no $\text{H}_2$!); $\text{MgO} \to \text{Mg(OH)}_2$ (slight); $\text{Al}_2\text{O}_3/\text{SiO}_2$ insoluble; $\text{P}_4\text{O}_{10} \to 4\text{H}_3\text{PO}_4$; $\text{SO}_2 \rightleftharpoons \text{H}_2\text{SO}_3$; $\text{Cl}_2\text{O} \to 2\text{HClO}$. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-oxide');switchOxideMode('map')">Oxide Lab →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">XII(b) · Basic → Amphoteric → Acidic Trend (CP 2018/2024 Q13)</b>Prove $\text{Al}_2\text{O}_3$ is amphoteric with BOTH acid and alkali equations ($\text{AlCl}_3 + \text{H}_2\text{O}$ and $\text{NaAl(OH)}_4$); $\text{SiO}_2 + 2\text{NaOH} \to \text{Na}_2\text{SiO}_3 + \text{H}_2\text{O}$. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-eq');switchEqMode('map')">Eq Studio →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">XII(c) · Position of Transition Metals in Periodic Table</b>Central d-block between Group II and Group III (Period 4: $\text{Sc}$ to $\text{Zn}$); contrast with Group I metals. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-trans');selectTrans(0)">Inspect →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">XII(c) · Coloured Aqueous Ions (CP 2014/2020/2023/2025)</b>Know colours of $\text{Fe}^{3+}$ (yellow), $\text{Fe}^{2+}$ (pale green), $\text{Cr}^{3+}$ (green), $\text{CrO}_4^{2-}$ (yellow), $\text{Cr}_2\text{O}_7^{2-}$ (orange), $\text{Cu}^{2+}$ (blue), $\text{Co}^{2+}$ (pink), $\text{MnO}_4^-$ (purple), $\text{VO}_2^+$ (yellow) &amp; $\text{VO}^{2+}$ (blue). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-trans');switchTransMode('map')">Ion Rack →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">XII(c) · Variable Oxidation States (CP 2017/2021/2023)</b>Cite different compounds/ions ($\text{Fe}^{2+}=+2$ vs $\text{Fe}^{3+}=+3$; $\text{Mn}^{2+}=+2, \text{MnO}_2=+4, \text{MnO}_4^-=+7$ — never cite the free element 0, CP 2021 Q12!). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-trans');switchTransMode('map')">Ion Rack →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">XII(c) · Catalytic Properties &amp; Regeneration (CP 2017/2020/2022)</b>$\text{Fe}$ (Haber), $\text{V}_2\text{O}_5$ (Contact), $\text{MnO}_2$ ($\text{H}_2\text{O}_2$ decomposition), $\text{Co}^{2+}$ / $\text{Mn}^{2+}$ homogeneous catalysis via variable oxidation states. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-trans');selectTrans(8)">Inspect →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">XII(c) · Importance in Industry &amp; Health (STSE)</b>Industrial catalysts, stainless steel ($\text{Fe} + \text{C} + \text{Cr/Ni/Mn}$), and iron in haemoglobin/myoglobin binding $\text{O}_2$. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-trans');selectTrans(9)">Inspect →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">XII(Synthesis) · Full-Mark Periodicity Essays</b>Write communication-mark explanations for Period 2/3 trends, oxide acid–base proofs, and transition-metal properties. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-solver')">Grader →</button></span>
+        </label>
+      </div>
+    </div>
+
 <!-- ═══════════ TAB 2 · ENGINE A · PHYSICAL TRENDS Li→Ar ═══════════ -->
 <section id="tab-phys" class="tab-panel space-y-6">
   <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-sm">
@@ -447,6 +856,25 @@
             <tr><td class="p-2">conductivity, Period 3</td><td class="p-2 font-mono text-emerald-300">Al &gt; Na &gt; Si = S</td><td class="p-2">more delocalised electrons · electrons not mobile <i>(ms bank §2, §9)</i></td></tr>
           </tbody></table></div>
         </div>
+        <!-- ══ INTERACTIVE SIMULATOR A1: PERIOD 2 & PERIOD 3 MELTING POINT & CONDUCTIVITY COMPARISON STUDIO (CP 2013 · 2016 Q14 · 2024 Q1/Q13) ══ -->
+        <div class="mt-6 apple-sim-panel space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+            <div>
+              <span class="text-[10px] font-mono text-sky-400 uppercase font-bold">Interactive Simulator · Strand (a) Concept Check (CP 2013 · CP 2016 Q14 · CP 2024 Q1/Q13)</span>
+              <h4 class="text-sm font-bold text-white mt-0.5">Interactive Period 2 &amp; Period 3 Element Pair Comparator</h4>
+              <p class="text-[11px] text-slate-400">Select any high-frequency exam comparison below to inspect the exact 3-part HKEAA mark-scheme explanation (Structure $\rightarrow$ Holding Particles $\rightarrow$ Energy / Mobility).</p>
+            </div>
+            <select id="p23CompSel" onchange="updateP23CompSim()" class="bg-slate-900 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-white font-medium">
+              <option value="p3_mp_metals" selected>1. Melting Point: Na &lt; Mg &lt; Al (Giant Metallic Climb)</option>
+              <option value="p3_mp_nonmetals">2. Melting Point: S₈ &gt; P₄ &gt; Cl₂ &gt; Ar (Simple Molecular Tail · CP 2024 Q13)</option>
+              <option value="p2_setpiece">3. Melting Point: N₂ &lt; Li &lt; Be &lt; C(graphite) (Period 2 Set-Piece · CP 2013)</option>
+              <option value="p3_cond">4. Electrical Conductivity: Al &gt; Mg &gt; Na &gt; Si = S (CP 2016 Q14)</option>
+              <option value="graphite_cond">5. Why C(graphite) Conducts Along Layers While Diamond &amp; Si Do Not (CP 2024 Q1)</option>
+            </select>
+          </div>
+          <div id="p23CompOut" class="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2 text-xs text-slate-300 leading-relaxed"></div>
+        </div>
+
       </div>
     </div>
 
@@ -652,6 +1080,27 @@
             <li>“Acid–base character changes from <b>basic</b> through <b>amphoteric</b> to <b>acidic</b> across the period.”</li>
           </ul>
         </div>
+        <!-- ══ INTERACTIVE SIMULATOR B1: PERIOD-3 OXIDE WET-LAB — WATER, DILUTE HCl & NaOH TESTS (CP 2015 Q10 · 2018 Q14 · 2022 Q13 · 2024 Q13 · 2025 Q13) ══ -->
+        <div class="mt-6 apple-sim-panel space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+            <div>
+              <span class="text-[10px] font-mono text-emerald-400 uppercase font-bold">Interactive Simulator · Strand (b) Concept Check (CP 2015 Q10 · CP 2018 Q14 · CP 2022 Q13 · CP 2024 Q13 · CP 2025 Q13)</span>
+              <h4 class="text-sm font-bold text-white mt-0.5">Virtual Period-3 Oxide Bench: Test Any Oxide in Water + UI, Dilute HCl(aq) &amp; NaOH(aq)</h4>
+              <p class="text-[11px] text-slate-400">Click any of the 7 syllabus oxides below to see its structure, its reaction in all 3 tubes, and the exact CP pitfalls to avoid:</p>
+            </div>
+            <div class="flex flex-wrap gap-1.5 text-xs">
+              <button type="button" onclick="setOxideLab('Na2O')" class="oxlab-btn apple-btn apple-btn-primary !py-1 !px-2.5" data-ox="Na2O">Na₂O(s)</button>
+              <button type="button" onclick="setOxideLab('MgO')" class="oxlab-btn apple-btn !py-1 !px-2.5" data-ox="MgO">MgO(s)</button>
+              <button type="button" onclick="setOxideLab('Al2O3')" class="oxlab-btn apple-btn !py-1 !px-2.5" data-ox="Al2O3">Al₂O₃(s)</button>
+              <button type="button" onclick="setOxideLab('SiO2')" class="oxlab-btn apple-btn !py-1 !px-2.5" data-ox="SiO2">SiO₂(s)</button>
+              <button type="button" onclick="setOxideLab('P4O10')" class="oxlab-btn apple-btn !py-1 !px-2.5" data-ox="P4O10">P₄O₁₀(s)</button>
+              <button type="button" onclick="setOxideLab('SO2')" class="oxlab-btn apple-btn !py-1 !px-2.5" data-ox="SO2">SO₂(g)</button>
+              <button type="button" onclick="setOxideLab('Cl2O')" class="oxlab-btn apple-btn !py-1 !px-2.5" data-ox="Cl2O">Cl₂O(g)</button>
+            </div>
+          </div>
+          <div id="oxideLabOut" class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs"></div>
+        </div>
+
       </div>
     </div>
 
@@ -837,6 +1286,24 @@
             <tr><td class="p-2 font-mono text-rose-300">“+H₂” ban</td><td class="p-2">no hydrogen from <b>oxides</b> + water</td><td class="p-2">H₂ belongs to metals + water/steam only (Route cross-check!)</td></tr>
           </tbody></table></div>
         </div>
+        <!-- ══ INTERACTIVE SIMULATOR C1: PERIOD-3 EQUATION SELECTOR BY REACTION ROUTE (CP 2015 Q10 · 2018 Q14 · 2024 Q13) ══ -->
+        <div class="mt-6 apple-sim-panel space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+            <div>
+              <span class="text-[10px] font-mono text-purple-400 uppercase font-bold">Interactive Simulator · Strand (b) Equation Drill (CP 2015 Q10 · CP 2018 Q14 · CP 2024 Q13)</span>
+              <h4 class="text-sm font-bold text-white mt-0.5">Filter the Period-3 Equation Bank by Reaction Route</h4>
+              <p class="text-[11px] text-slate-400">Click any reaction category below to display all balanced equations with state symbols and oxidation-number checks.</p>
+            </div>
+            <div class="flex flex-wrap gap-1.5 text-xs">
+              <button type="button" onclick="showEqRoute(0)" class="eqrt-btn apple-btn apple-btn-primary !py-1 !px-2.5">1. Element + O₂(g) Formation</button>
+              <button type="button" onclick="showEqRoute(1)" class="eqrt-btn apple-btn !py-1 !px-2.5">2. Oxide + H₂O(l) (CP 2015/2022/2025)</button>
+              <button type="button" onclick="showEqRoute(2)" class="eqrt-btn apple-btn !py-1 !px-2.5">3. Amphoteric Al₂O₃ Dual Proof (CP 2024 Q13)</button>
+              <button type="button" onclick="showEqRoute(3)" class="eqrt-btn apple-btn !py-1 !px-2.5">4. Acidic Oxides + NaOH(aq)</button>
+            </div>
+          </div>
+          <div id="eqRouteOut" class="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2 text-xs text-slate-300 leading-relaxed"></div>
+        </div>
+
       </div>
     </div>
 
@@ -1021,6 +1488,25 @@
           <p class="text-[11px] font-bold text-slate-300 uppercase tracking-wider mb-2">Oxidation-number ladder — manganese (the strand’s own example)</p>
           <p class="text-xs text-slate-300 leading-relaxed font-mono">+7 MnO₄⁻ (purple) → +6 (manganate(VI), green — context) → +4 MnO₂ (brown solid) → +2 Mn²⁺ (pale) ; iron runs just +2 / +3; copper +1 / +2.</p>
         </div>
+        <!-- ══ INTERACTIVE SIMULATOR D1: TRANSITION METAL ION COLOUR SWATCH & CATALYTIC CYCLE STUDIO (CP 2014 Q11 · 2017 Q14 · 2020 Q12 · 2023 Q13 · 2025 Q13) ══ -->
+        <div class="mt-6 apple-sim-panel space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+            <div>
+              <span class="text-[10px] font-mono text-rose-400 uppercase font-bold">Interactive Simulator · Strand (c) Concept Check (CP 2014 Q11 · CP 2017 Q14 · CP 2020 Q12 · CP 2023 Q13 · CP 2025 Q13)</span>
+              <h4 class="text-sm font-bold text-white mt-0.5">Interactive Transition-Metal Ion Swatch Rack, Variable O.N. &amp; Catalytic Regeneration Explorer</h4>
+              <p class="text-[11px] text-slate-400">Select a transition-metal series below to inspect the live test-tube colour swatches, oxidation-number ownership phrasing, and catalytic cycles.</p>
+            </div>
+            <select id="tmSeriesSel" onchange="updateTmSeriesSim()" class="bg-slate-900 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-white font-medium">
+              <option value="fe_cu" selected>1. Iron (Fe²⁺ vs Fe³⁺) &amp; Copper (Cu²⁺) (CP 2014 Q21 / CP 2021 Q12 / CP 2023 Q13)</option>
+              <option value="cr_series">2. Chromium Series: Cr³⁺ (Green), CrO₄²⁻ (Yellow) &amp; Cr₂O₇²⁻ (Orange · CP 2025 Q13)</option>
+              <option value="mn_series">3. Manganese Series: Mn²⁺ (+2), MnO₂ (+4) &amp; MnO₄⁻ (+7 · CP 2017 Q14 / CP 2022 Q10)</option>
+              <option value="v_series">4. Vanadium Ladder: VO₂⁺ (+5 Yellow) → VO²⁺ (+4 Blue) → V³⁺ (+3 Green) → V²⁺ (+2 Violet · CP 2014 Q11)</option>
+              <option value="co_cat">5. Cobalt Homogeneous Catalysis: Pink Co²⁺(aq) ⇄ Green Co³⁺(aq) Regeneration (CP 2020 Q12)</option>
+            </select>
+          </div>
+          <div id="tmSeriesOut" class="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2.5 text-xs text-slate-300 leading-relaxed"></div>
+        </div>
+
       </div>
     </div>
 
@@ -1158,6 +1644,44 @@
         </div>
         <button class="w-full bg-amber-700 hover:bg-amber-600 text-white text-xs font-semibold py-1.5 px-2 rounded-md" onclick="solverDecide()">Decide</button>
         <div id="stOut" aria-live="polite" class="text-xs text-emerald-300 font-mono min-h-[20px]"></div>
+      </div>
+    </div>
+
+    
+    <!-- ══ BENCH 5 · LIVE HKEAA MARK-SCHEME KEYWORD GRADER (TOPIC XII EDITION) ══ -->
+    <div class="mt-6 apple-sim-panel space-y-4">
+      <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+        <div>
+          <span class="text-[10px] font-mono text-sky-400 uppercase font-bold px-2 py-0.5 bg-sky-950 rounded border border-sky-800">Bench 5 · Interactive Examiner Grader</span>
+          <h3 class="text-base font-bold text-white mt-1">Practice Writing Full-Mark Topic XII Answers — Instant `[1M]` &amp; `[NOT ACCEPT]` Diagnostic</h3>
+          <p class="text-xs text-slate-400">Select a high-frequency Paper 1B question below and type your answer. The engine checks your phrasing against official HKEAA mark-scheme rubrics and flags fatal periodicity misconceptions.</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 text-xs">
+        <div class="lg:col-span-1 space-y-2.5">
+          <label for="graderQSelect" class="block text-slate-300 font-semibold">Select HKDSE Exam Prompt:</label>
+          <select id="graderQSelect" onchange="loadGraderPrompt()" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white">
+            <option value="cond_order">Q1 (3 marks · CP 2016 Q14): Arrange Na, Al, Si and S in decreasing order of electrical conductivity at room temperature and explain your answer.</option>
+            <option value="al2o3_amph">Q2 (3 marks · CP 2018 Q14 / 2024 Q13): State the acid–base nature of Al₂O₃ and write TWO chemical equations to illustrate your answer.</option>
+            <option value="sio2_p4o10_so2">Q3 (3 marks · CP 2021 Q3 / 2023 Q13): Explain why the melting point of SiO₂ is much higher than that of P₄O₁₀, and why the melting point of P₄O₁₀ is higher than that of SO₂.</option>
+            <option value="cl2o_water">Q4 (2 marks · CP 2015 Q10 / 2022 Q13 / 2025 Q13): Describe the behaviour of Cl₂O when added to water and write a chemical equation for the reaction involved.</option>
+            <option value="tm_fe_props">Q5 (2 marks · CP 2020 Q12 / 2023 Q13): Using iron (or cobalt) as an example, state TWO characteristic properties of transition metals illustrated by its aqueous ions.</option>
+          </select>
+          <div id="graderPromptBox" class="p-3 rounded-xl bg-slate-950 border border-slate-800 text-slate-200 leading-relaxed"></div>
+        </div>
+
+        <div class="lg:col-span-2 space-y-3">
+          <textarea id="graderInput" rows="4" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-sky-500" placeholder="Type your exam explanation here..."></textarea>
+          <div class="flex flex-wrap gap-2">
+            <button type="button" onclick="gradeStudentAnswer()" class="apple-btn apple-btn-primary">✨ Grade My Answer Against Mark Scheme</button>
+            <button type="button" onclick="fillModelGraderAnswer()" class="apple-btn">Show Model Full-Mark Answer</button>
+            <button type="button" onclick="document.getElementById('graderInput').value='';document.getElementById('graderResultBox').innerHTML='Type an answer and click Grade.';" class="apple-btn">Clear</button>
+          </div>
+          <div id="graderResultBox" class="p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-300 space-y-2 leading-relaxed">
+            Type an answer above and click <b>Grade My Answer Against Mark Scheme</b> to see your mark breakdown and keyword hits.
+          </div>
+        </div>
       </div>
     </div>
 
@@ -1716,5 +2240,324 @@ else { try{ MOBILE_UX.init(); }catch(e){} }
   }catch(e){}
 })();
 </script>
+
+<!-- ═══════════ APPLE COMMAND PALETTE (⌘K) MODAL ═══════════ -->
+<div id="cmdModal" onclick="if(event.target===this)closeCmdModal()">
+  <div class="w-full max-w-xl mx-4 bg-slate-900 border border-slate-700/80 rounded-2xl shadow-2xl overflow-hidden">
+    <div class="flex items-center gap-3 px-4 py-3 border-b border-slate-800">
+      <span class="text-sky-400 text-sm">🔍</span>
+      <input id="cmdSearchInput" type="text" oninput="filterCmdList()" placeholder="Search Period 2/3 melting points, conductivity, Na₂O to Cl₂O oxides, Al₂O₃ amphoteric, transition metal colours, or CP year..." class="w-full bg-transparent text-sm text-white placeholder-slate-400 focus:outline-none">
+      <button type="button" onclick="closeCmdModal()" class="text-xs text-slate-400 hover:text-white px-2 py-0.5 rounded bg-slate-800">ESC</button>
+    </div>
+    <div id="cmdResults" class="max-h-80 overflow-y-auto divide-y divide-slate-800/70 p-2 text-xs"></div>
+  </div>
+</div>
+
+<script>
+function toggleAppleTheme(){
+  const root = document.documentElement;
+  const isLight = root.classList.toggle('theme-light');
+  const icon = document.getElementById('themeToggleIcon');
+  if(icon) icon.textContent = isLight ? '🌙 Pro Dark' : '☀️ Daylight';
+  try { localStorage.setItem('hkdse_topic12_theme', isLight ? 'light' : 'dark'); } catch(e){}
+}
+
+const quizMasteryState = {};
+function injectQuizSelfCheckBars(){
+  ['physQuiz','oxideQuiz','eqQuiz','transQuiz'].forEach(qid => {
+    const container = document.getElementById(qid);
+    if(!container) return;
+    const headerDiv = container.previousElementSibling;
+    if(headerDiv && !headerDiv.querySelector('.hide-all-btn')){
+      const btnWrap = document.createElement('div');
+      btnWrap.className = 'flex items-center gap-2';
+      const revBtn = headerDiv.querySelector('button');
+      if(revBtn){
+        revBtn.parentNode.insertBefore(btnWrap, revBtn);
+        btnWrap.appendChild(revBtn);
+        const hideBtn = document.createElement('button');
+        hideBtn.type = 'button';
+        hideBtn.className = 'hide-all-btn text-[11px] font-semibold text-slate-300 border border-slate-700 px-3 py-1 rounded-full hover:bg-slate-800';
+        hideBtn.textContent = 'Reset Blanks';
+        hideBtn.onclick = () => container.querySelectorAll('.blur-answer').forEach(b => b.classList.remove('revealed'));
+        btnWrap.appendChild(hideBtn);
+      }
+    }
+    [...container.children].forEach((row, idx) => {
+      if(row.querySelector('.quiz-self-bar')) return;
+      const key = qid + '_' + idx;
+      const bar = document.createElement('div');
+      bar.className = 'quiz-self-bar';
+      bar.innerHTML = `<span class="text-[10px] font-mono text-slate-400">Tap blurred chips above to check each keyword, then log your recall:</span>
+        <div class="flex items-center gap-1.5">
+          <button type="button" class="apple-btn !py-0.5 !px-2 text-[10px]" onclick="markQuizRow('${key}', true, this)">✓ Got It</button>
+          <button type="button" class="apple-btn !py-0.5 !px-2 text-[10px]" onclick="markQuizRow('${key}', false, this)">↻ Review Again</button>
+        </div>`;
+      row.appendChild(bar);
+    });
+  });
+}
+function markQuizRow(key, mastered, btnEl){
+  quizMasteryState[key] = mastered;
+  const buttons = btnEl.parentElement.querySelectorAll('button');
+  buttons[0].className = mastered ? 'apple-btn !py-0.5 !px-2 text-[10px] !bg-emerald-600/30 !border-emerald-500 !text-emerald-300' : 'apple-btn !py-0.5 !px-2 text-[10px]';
+  buttons[1].className = !mastered ? 'apple-btn !py-0.5 !px-2 text-[10px] !bg-amber-600/30 !border-amber-500 !text-amber-300' : 'apple-btn !py-0.5 !px-2 text-[10px]';
+  updateMasteryRing();
+}
+function checkAllSyllabusOutcomes(){
+  document.querySelectorAll('.syl-chk').forEach(c => c.checked = true);
+  updateMasteryRing();
+}
+function updateMasteryRing(){
+  const sylChks = [...document.querySelectorAll('.syl-chk')];
+  const sylDone = sylChks.filter(c => c.checked).length;
+  const sylTotal = sylChks.length || 12;
+  const sylBadge = document.getElementById('sylAuditCount');
+  if(sylBadge) sylBadge.textContent = `${sylDone} / ${sylTotal} Outcomes Checked`;
+  const quizDone = Object.values(quizMasteryState).filter(Boolean).length;
+  const pct = Math.round(((sylDone + quizDone) / (sylTotal + 44)) * 100);
+  const circle = document.getElementById('masteryRingCircle');
+  const txt = document.getElementById('masteryPctText');
+  if(circle) circle.style.strokeDashoffset = String(94.2 - (94.2 * pct) / 100);
+  if(txt) txt.textContent = `${pct}% Mastered`;
+}
+
+/* 1. Period 2 & 3 Comparison Sim */
+const P23_COMP_DATA = {
+  p3_mp_metals: '<b>Melting Point of Period-3 Metals: $\text{Na} &lt; \text{Mg} &lt; \text{Al}$:</b><br>• <b>1. Structure Type:</b> All three have <b>giant metallic structures</b> (never say "molecules" or "ionic bonds", CP 2013 / CP 2025 Q1!).<br>• <b>2. Particles &amp; Bond Strength:</b> Going from $\text{Na}$ to $\text{Mg}$ to $\text{Al}$, the number of outermost shell electrons donated to the sea of <b>delocalised electrons per atom increases</b> ($1 \rightarrow 2 \rightarrow 3$) and the cationic charge increases ($\text{Na}^+ \rightarrow \text{Mg}^{2+} \rightarrow \text{Al}^{3+}$) with smaller ionic radius.<br>• <b>3. Conclusion:</b> Electrostatic attraction (<b>metallic bond</b>) between the positive metal ions and delocalised electrons becomes progressively stronger, requiring more heat energy to overcome.',
+  p3_mp_nonmetals: '<b>Melting Point of Period-3 Non-Metals: $\text{S}_8 &gt; \text{P}_4 &gt; \text{Cl}_2 &gt; \text{Ar}$ (CP 2024 Q13):</b><br>• <b>1. Structure Type:</b> All four have <b>simple molecular structures</b> ($\text{Ar}$ is monatomic), so melting only overcomes <b>weak intermolecular van der Waals’ forces</b> (never covalent bonds!).<br>• <b>2. Molecular Size Order:</b> Sulphur exists as <b>$\text{S}_8$ crown-ring molecules</b>, phosphorus as <b>$\text{P}_4$ tetrahedral molecules</b>, chlorine as diatomic $\text{Cl}_2$, and argon as monatomic $\text{Ar}$.<br>• <b>3. Conclusion:</b> Molecular size decreases in the order $\text{S}_8 &gt; \text{P}_4 &gt; \text{Cl}_2 &gt; \text{Ar}$ (never say "molecular mass"!), so the strength of van der Waals’ forces and melting point decrease in the same order.',
+  p2_setpiece: '<b>Period-2 Set-Piece Melting-Point Order: $\text{N}_2 &lt; \text{Li} &lt; \text{Be} &lt; \text{C(graphite)}$ (MS Bank §9 · CP 2013):</b><br>• <b>$\text{N}_2$ (Lowest):</b> <b>Simple molecular structure</b> — only weak van der Waals’ forces between $\text{N}_2$ molecules need to be overcome in melting.<br>• <b>$\text{Li} &lt; \text{Be}$ (Middle):</b> Both have <b>giant metallic structures</b>; $\text{Be}$ contributes 2 delocalised electrons per atom ($\text{Be}^{2+}$) vs 1 in $\text{Li}$ ($\text{Li}^+$), so the metallic bond in $\text{Li}$ is weaker than that in $\text{Be}$.<br>• <b>$\text{C(graphite)}$ (Highest):</b> <b>Giant covalent structure</b> — melting requires a huge amount of energy to break <b>millions of strong covalent bonds between carbon atoms</b>.',
+  p3_cond: '<b>Electrical Conductivity Order: $\text{Al} &gt; \text{Mg} &gt; \text{Na} &gt; \text{Si} = \text{S}$ (MS Bank §9 · CP 2016 Q14):</b><br>• <b>Why $\text{Al} &gt; \text{Na}$:</b> Both have <b>giant metallic structures</b> with mobile delocalised electrons; each $\text{Al}$ atom contributes <b>3 delocalised electrons</b> whereas each $\text{Na}$ atom contributes only 1, so $\text{Al}$ has a higher concentration of mobile delocalised electrons (never say "because Na is more reactive", CP 2016 Q14!).<br>• <b>Why $\text{Si} = \text{S}$ (Non-Conductors):</b> $\text{Si}$ has a <b>giant covalent structure</b> and $\text{S}$ ($\text{S}_8$) has a <b>simple molecular structure</b>; neither has <b>mobile delocalised electrons or mobile ions</b>.',
+  graphite_cond: '<b>Why Graphite Conducts Electricity Along Layers While Diamond &amp; Silicon Do Not (CP 2024 Q1):</b><br>• All three have <b>giant covalent structures</b>.<br>• In diamond and silicon, every atom uses all 4 of its outermost shell electrons to form 4 covalent bonds, so there are <b>no delocalised electrons</b>.<br>• In graphite, each carbon atom is covalently bonded to only <b>3 other carbon atoms</b> in flat hexagonal layers, leaving <b>1 outermost electron per carbon atom delocalised</b> and free to move along the layers (always use the exact term "<b>delocalised electrons</b>", not "free electrons" — CP 2024 Q1!).'
+};
+function updateP23CompSim(){
+  const k = document.getElementById('p23CompSel').value;
+  const out = document.getElementById('p23CompOut');
+  if(out && P23_COMP_DATA[k]){ out.innerHTML = P23_COMP_DATA[k]; safeInitKaTeX(); }
+}
+
+/* 2. Period-3 Oxide Wet-Lab */
+const OXIDE_LAB_DATA = {
+  Na2O: {
+    water: '<b>1. + H₂O(l) &amp; Universal Indicator:</b><br>Dissolves &amp; reacts <b>vigorously</b> to form a colourless, <b>strongly alkaline solution (pH ≈ 13–14, UI turns purple/violet)</b>:<br>$\text{Na}_2\text{O}(s) + \text{H}_2\text{O}(l) \rightarrow 2\text{NaOH}(aq)$<br>🚨 <b>CP 2015 Q10 Trap:</b> NEVER write $+\text{H}_2(g)$!',
+    acid: '<b>2. + Dilute HCl(aq):</b><br>Reacts readily to form salt and water:<br>$\text{Na}_2\text{O}(s) + 2\text{HCl}(aq) \rightarrow 2\text{NaCl}(aq) + \text{H}_2\text{O}(l)$',
+    alkali: '<b>3. + NaOH(aq) &amp; Verdict:</b><br>No reaction with $\text{NaOH}(aq)$.<br><b>Verdict:</b> <b>Giant ionic structure · BASIC oxide</b>.'
+  },
+  MgO: {
+    water: '<b>1. + H₂O(l) &amp; Universal Indicator:</b><br>Reacts <b>only slightly / slowly</b> and is sparingly soluble, forming a <b>weakly alkaline solution (pH ≈ 9–10, UI turns blue)</b>:<br>$\text{MgO}(s) + \text{H}_2\text{O}(l) \rightleftharpoons \text{Mg(OH)}_2(s/aq)$<br>🚨 <b>CP 2022 Q13 Trap:</b> Do not say $\text{MgO}$ is completely insoluble with pH 7!',
+    acid: '<b>2. + Dilute HCl(aq):</b><br>White solid dissolves to give a colourless solution:<br>$\text{MgO}(s) + 2\text{HCl}(aq) \rightarrow \text{MgCl}_2(aq) + \text{H}_2\text{O}(l)$',
+    alkali: '<b>3. + NaOH(aq) &amp; Verdict:</b><br>No reaction with $\text{NaOH}(aq)$.<br><b>Verdict:</b> <b>Giant ionic structure · BASIC oxide</b>.'
+  },
+  Al2O3: {
+    water: '<b>1. + H₂O(l) &amp; Universal Indicator:</b><br><b>Insoluble in water / No reaction (pH remains 7, UI stays green)</b>.<br>🚨 <b>CP 2022 Q13 Trap:</b> Never say "alkaline $\text{Al(OH)}_3$ is formed" or "amphoteric when added to water"!',
+    acid: '<b>2. + Dilute HCl(aq) (Basic Behaviour):</b><br>Dissolves in warm acid to form a salt and water:<br>$\text{Al}_2\text{O}_3(s) + 6\text{HCl}(aq) \rightarrow 2\text{AlCl}_3(aq) + 3\text{H}_2\text{O}(l)$',
+    alkali: '<b>3. + HotNaOH(aq) (Acidic Behaviour · AMPHOTERIC!):</b><br>Dissolves in hot alkali to form a salt:<br>$\text{Al}_2\text{O}_3(s) + 2\text{NaOH}(aq) + 3\text{H}_2\text{O}(l) \rightarrow 2\text{NaAl(OH)}_4(aq)$<br>(or $\text{Al}_2\text{O}_3 + 2\text{NaOH} \rightarrow 2\text{NaAlO}_2 + \text{H}_2\text{O}$).'
+  },
+  SiO2: {
+    water: '<b>1. + H₂O(l) &amp; Universal Indicator:</b><br><b>Insoluble in water / No reaction (pH remains 7, UI stays green)</b>.<br>🚨 <b>CP 2021 Q12 / CP 2025 Q13 Trap:</b> $\text{SiO}_2$ does NOT dissolve in water and does NOT give a solution with $\text{pH} &lt; 7$!',
+    acid: '<b>2. + Dilute HCl(aq):</b><br>No reaction with acids.',
+    alkali: '<b>3. + Hot Conc. NaOH(aq) &amp; Verdict:</b><br>Reacts with hot concentrated / molten alkali to form silicate salt and water:<br>$\text{SiO}_2(s) + 2\text{NaOH}(aq) \rightarrow \text{Na}_2\text{SiO}_3(aq) + \text{H}_2\text{O}(l)$<br><b>Verdict:</b> <b>Giant covalent structure · ACIDIC oxide</b>.'
+  },
+  P4O10: {
+    water: '<b>1. + H₂O(l) &amp; Universal Indicator:</b><br>Reacts <b>vigorously</b> with cold water (hissing, heat evolved) to form an <b>acidic solution of phosphoric(V) acid (pH ≈ 1–2, UI turns red)</b>:<br>$\text{P}_4\text{O}_{10}(s) + 6\text{H}_2\text{O}(l) \rightarrow 4\text{H}_3\text{PO}_4(aq)$<br>🚨 <b>CP 2022 Q13 Trap:</b> Product is $\text{H}_3\text{PO}_4$, NEVER $\text{H}_3\text{PO}_3$!',
+    acid: '<b>2. + Dilute HCl(aq):</b><br>No reaction with acids.',
+    alkali: '<b>3. + NaOH(aq) &amp; Verdict:</b><br>Neutralises alkali to form phosphate salt and water.<br><b>Verdict:</b> <b>Simple molecular structure · ACIDIC oxide</b>.'
+  },
+  SO2: {
+    water: '<b>1. + H₂O(l) &amp; Universal Indicator:</b><br>Dissolves and reacts reversibly with water to form an <b>acidic solution of sulphurous acid (pH ≈ 2–3, UI turns red/orange)</b>:<br>$\text{SO}_2(g) + \text{H}_2\text{O}(l) \rightleftharpoons \text{H}_2\text{SO}_3(aq)$',
+    acid: '<b>2. + Dilute HCl(aq):</b><br>No reaction with acids.',
+    alkali: '<b>3. + NaOH(aq) &amp; Verdict:</b><br>Reacts with alkali to form <b>sodium sulphite</b> and water:<br>$\text{SO}_2(g) + 2\text{NaOH}(aq) \rightarrow \text{Na}_2\text{SO}_3(aq) + \text{H}_2\text{O}(l)$<br><b>Verdict:</b> <b>Simple molecular structure · ACIDIC oxide</b>.'
+  },
+  Cl2O: {
+    water: '<b>1. + H₂O(l) &amp; Universal Indicator:</b><br>Dissolves and reacts with water to form an <b>acidic solution of chloric(I) acid / hypochlorous acid (pH &lt; 7, UI turns red/orange, then bleaches)</b>:<br>$\text{Cl}_2\text{O}(g) + \text{H}_2\text{O}(l) \rightarrow 2\text{HClO}(aq)$<br>🚨 <b>CP 2015 Q10 / 2022 Q13 / 2025 Q13 Trap:</b> Product is $\text{HClO}$ ONLY, NEVER "$\text{HCl} + \text{HOCl}$"!',
+    acid: '<b>2. + Dilute HCl(aq):</b><br>No reaction as a base.',
+    alkali: '<b>3. + NaOH(aq) &amp; Verdict:</b><br>$\text{Cl}_2\text{O}(g) + 2\text{NaOH}(aq) \rightarrow 2\text{NaClO}(aq) + \text{H}_2\text{O}(l)$<br><b>Verdict:</b> <b>Simple molecular structure · ACIDIC oxide</b>.'
+  }
+};
+function setOxideLab(ox){
+  document.querySelectorAll('.oxlab-btn').forEach(b => {
+    b.className = b.dataset.ox === ox ? 'oxlab-btn apple-btn apple-btn-primary !py-1 !px-2.5' : 'oxlab-btn apple-btn !py-1 !px-2.5';
+  });
+  const d = OXIDE_LAB_DATA[ox];
+  const out = document.getElementById('oxideLabOut');
+  if(!out || !d) return;
+  out.innerHTML = `<div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800 leading-relaxed">${d.water}</div>`
+    + `<div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800 leading-relaxed">${d.acid}</div>`
+    + `<div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800 leading-relaxed">${d.alkali}</div>`;
+  safeInitKaTeX();
+}
+
+/* 3. Equation Route Filter */
+const EQ_ROUTE_DATA = [
+  '<b>Route 1 · Synthesis of Period-3 Oxides from Elements + $\text{O}_2(g)$:</b><br>• $4\text{Na}(s) + \text{O}_2(g) \rightarrow 2\text{Na}_2\text{O}(s)$ (yellow flame, white solid)<br>• $2\text{Mg}(s) + \text{O}_2(g) \rightarrow 2\text{MgO}(s)$ (burns with a bright white light, white solid)<br>• $4\text{Al}(s) + 3\text{O}_2(g) \rightarrow 2\text{Al}_2\text{O}_3(s)$<br>• $\text{Si}(s) + \text{O}_2(g) \rightarrow \text{SiO}_2(s)$<br>• $4\text{P}(s) + 5\text{O}_2(g) \rightarrow \text{P}_4\text{O}_{10}(s)$ (white fumes)<br>• $\text{S}(s) + \text{O}_2(g) \rightarrow \text{SO}_2(g)$ (blue flame, choking gas)',
+  '<b>Route 2 · Period-3 Oxides + Water (CP 2015 Q10 · CP 2022 Q13 · CP 2025 Q13):</b><br>• $\text{Na}_2\text{O}(s) + \text{H}_2\text{O}(l) \rightarrow 2\text{NaOH}(aq)$ (strongly alkaline; NO $\text{H}_2$!)<br>• $\text{MgO}(s) + \text{H}_2\text{O}(l) \rightleftharpoons \text{Mg(OH)}_2(s/aq)$ (slow, weakly alkaline)<br>• $\text{Al}_2\text{O}_3(s)$ and $\text{SiO}_2(s)$ + $\text{H}_2\text{O}(l) \rightarrow$ <b>no reaction (insoluble)</b><br>• $\text{P}_4\text{O}_{10}(s) + 6\text{H}_2\text{O}(l) \rightarrow 4\text{H}_3\text{PO}_4(aq)$ (or $\text{P}_2\text{O}_5 + 3\text{H}_2\text{O} \rightarrow 2\text{H}_3\text{PO}_4$)<br>• $\text{SO}_2(g) + \text{H}_2\text{O}(l) \rightleftharpoons \text{H}_2\text{SO}_3(aq)$<br>• $\text{Cl}_2\text{O}(g) + \text{H}_2\text{O}(l) \rightarrow 2\text{HClO}(aq)$ (chloric(I) acid ONLY!)',
+  '<b>Route 3 · Amphoteric Proof for $\text{Al}_2\text{O}_3(s)$ (CP 2018 Q14 · CP 2024 Q13):</b><br>• <b>Acting as a Base (with acid):</b> $\text{Al}_2\text{O}_3(s) + 6\text{HCl}(aq) \rightarrow 2\text{AlCl}_3(aq) + 3\text{H}_2\text{O}(l)$ (or $\text{Al}_2\text{O}_3(s) + 6\text{H}^+(aq) \rightarrow 2\text{Al}^{3+}(aq) + 3\text{H}_2\text{O}(l)$)<br>• <b>Acting as an Acid (with hot alkali):</b> $\text{Al}_2\text{O}_3(s) + 2\text{NaOH}(aq) + 3\text{H}_2\text{O}(l) \rightarrow 2\text{NaAl(OH)}_4(aq)$ (or $\text{Al}_2\text{O}_3(s) + 2\text{NaOH}(aq) \rightarrow 2\text{NaAlO}_2(aq) + \text{H}_2\text{O}(l)$).',
+  '<b>Route 4 · Acidic Oxides + $\text{NaOH}(aq)$:</b><br>• $\text{SiO}_2(s) + 2\text{NaOH}(aq) \xrightarrow{\text{hot conc.}} \text{Na}_2\text{SiO}_3(aq) + \text{H}_2\text{O}(l)$<br>• $\text{P}_4\text{O}_{10}(s) + 12\text{NaOH}(aq) \rightarrow 4\text{Na}_3\text{PO}_4(aq) + 6\text{H}_2\text{O}(l)$<br>• $\text{SO}_2(g) + 2\text{NaOH}(aq) \rightarrow \text{Na}_2\text{SO}_3(aq) + \text{H}_2\text{O}(l)$ (sodium sulphite, S stays $+4$!)<br>• $\text{Cl}_2\text{O}(g) + 2\text{NaOH}(aq) \rightarrow 2\text{NaClO}(aq) + \text{H}_2\text{O}(l)$ (sodium chlorate(I), Cl stays $+1$!)'
+];
+function showEqRoute(i){
+  document.querySelectorAll('.eqrt-btn').forEach((b, idx) => {
+    b.className = idx === i ? 'eqrt-btn apple-btn apple-btn-primary !py-1 !px-2.5' : 'eqrt-btn apple-btn !py-1 !px-2.5';
+  });
+  const out = document.getElementById('eqRouteOut');
+  if(out && EQ_ROUTE_DATA[i]){ out.innerHTML = EQ_ROUTE_DATA[i]; safeInitKaTeX(); }
+}
+
+/* 4. Transition Metal Ion Swatch & Catalytic Cycle Studio */
+const TM_SERIES_DATA = {
+  fe_cu: '<b>Iron ($\text{Fe}^{2+}$ vs $\text{Fe}^{3+}$) &amp; Copper ($\text{Cu}^{2+}$) (CP 2021 Q12 · CP 2023 Q13):</b><br>• <span class="chip bg-emerald-950 text-emerald-300 border border-emerald-700">$\text{Fe}^{2+}(aq)$: Pale green</span> &nbsp; <span class="chip bg-amber-950 text-amber-300 border border-amber-700">$\text{Fe}^{3+}(aq)$: Yellow / brown</span> &nbsp; <span class="chip bg-sky-950 text-sky-300 border border-sky-700">$\text{Cu}^{2+}(aq)$: Blue</span><br>• <b>CP 2023 Q13 Model Wording for Variable O.N.:</b> "The oxidation number of Fe in $\text{Fe}^{2+}$ is $+2$, while the oxidation number of Fe in $\text{Fe}^{3+}$ is $+3$." (Never write "The oxidation number of $\text{Fe}^{2+}$ is $+2$" or cite elemental $\text{Cu}(s)=0$, CP 2021 Q12!).<br>• <b>CP 2023 Q13 Model Wording for Colour:</b> "Iron forms coloured ions (e.g. $\text{Fe}^{2+}(aq)$ is pale green and $\text{Fe}^{3+}(aq)$ is yellow)." (Never write "Transition metals are coloured"!).',
+  cr_series: '<b>Chromium Series: $\text{Cr}^{3+}(aq)$, $\text{CrO}_4^{2-}(aq)$ &amp; $\text{Cr}_2\text{O}_7^{2-}(aq)$ (CP 2025 Q13):</b><br>• <span class="chip bg-emerald-950 text-emerald-300 border border-emerald-700">$\text{Cr}^{3+}(aq)$ (+3): Green</span> &nbsp; <span class="chip bg-yellow-950 text-yellow-300 border border-yellow-700">$\text{CrO}_4^{2-}(aq)$ (+6): Yellow</span> &nbsp; <span class="chip bg-orange-950 text-orange-300 border border-orange-700">$\text{Cr}_2\text{O}_7^{2-}(aq)$ (+6): Orange</span><br>• <b>Acid–Alkali Chromate/Dichromate Equilibrium:</b> $2\text{CrO}_4^{2-}(aq)\text{ (yellow)} + 2\text{H}^+(aq) \rightleftharpoons \text{Cr}_2\text{O}_7^{2-}(aq)\text{ (orange)} + \text{H}_2\text{O}(l)$ (Note: this is NOT a redox reaction — Cr is $+6$ in both! CP 2025 Q13 penalized claiming $\text{CrO}_4^{2-}$ or $\text{Cr}_2\text{O}_7^{2-}$ is green!).',
+  mn_series: '<b>Manganese Series: $\text{Mn}^{2+}(+2)$, $\text{MnO}_2(+4)$ &amp; $\text{MnO}_4^-(+7)$ (CP 2017 Q14 · CP 2022 Q10):</b><br>• <span class="chip bg-slate-800 text-slate-200 border border-slate-600">$\text{Mn}^{2+}(aq)$ (+2): Very pale pink / colourless</span> &nbsp; <span class="chip bg-amber-950 text-amber-200 border border-amber-700">$\text{MnO}_2(s)$ (+4): Brown/black solid</span> &nbsp; <span class="chip bg-purple-950 text-purple-300 border border-purple-700">$\text{MnO}_4^-(aq)$ (+7): Deep purple</span><br>• <b>Autocatalysis / $\text{MnO}_2$ Catalysis (CP 2017 Q14 / CP 2022 Q10):</b> In the reaction between $\text{MnO}_4^-$ and $\text{C}_2\text{O}_4^{2-}$, $\text{Mn}^{2+}(aq)$ acts as the catalyst; in the decomposition of $\text{H}_2\text{O}_2(aq)$, adding $\text{MnO}_2(s)$ increases the reaction rate.',
+  v_series: '<b>Vanadium Oxidation-State Ladder (CP 2014 Q11):</b><br>• <span class="chip bg-yellow-950 text-yellow-300 border border-yellow-700">$\text{VO}_2^+(aq)$ (V = +5): Yellow</span> $\rightarrow$ <span class="chip bg-sky-950 text-sky-300 border border-sky-700">$\text{VO}^{2+}(aq)$ (V = +4): Blue</span> $\rightarrow$ <span class="chip bg-emerald-950 text-emerald-300 border border-emerald-700">$\text{V}^{3+}(aq)$ (V = +3): Green</span> $\rightarrow$ <span class="chip bg-purple-950 text-purple-300 border border-purple-700">$\text{V}^{2+}(aq)$ (V = +2): Violet</span><br>• <b>CP 2014 Q11 Reason Requirement:</b> When $\text{SO}_2(g)$ reduces yellow $\text{VO}_2^+(aq)$ to blue $\text{VO}^{2+}(aq)$ (or green $\text{V}^{3+}$), always state both the final colour AND the electron/oxidation-number change!',
+  co_cat: '<b>Cobalt Homogeneous Catalysis: $\text{Co}^{2+}(aq)$ in Tartrate + $\text{H}_2\text{O}_2$ Reaction (CP 2020 Q12):</b><br>• <b>Observation Sequence:</b> Adding <b>pink $\text{Co}^{2+}(aq)$</b> ($	ext{CoCl}_2$) causes vigorous effervescence and the solution turns <b>green ($\text{Co}^{3+}(aq)$ intermediate)</b>, then <b>returns to pink ($\text{Co}^{2+}(aq)$ regenerated)</b> at the end of the reaction!<br>• <b>3 Transition-Metal Characteristics Illustrated (CP 2020 Q12):</b> (1) <b>Catalytic property</b> ($\text{Co}^{2+}$ speeds up the reaction and is regenerated unchanged at the end); (2) <b>Variable oxidation states</b> ($\text{Co}^{2+}$ oxidised to $\text{Co}^{3+}$ then reduced back to $\text{Co}^{2+}$); (3) <b>Forming coloured ions</b> ($\text{Co}^{2+}(aq)$ is pink, $\text{Co}^{3+}(aq)$ is green).'
+};
+function updateTmSeriesSim(){
+  const k = document.getElementById('tmSeriesSel').value;
+  const out = document.getElementById('tmSeriesOut');
+  if(out && TM_SERIES_DATA[k]){ out.innerHTML = TM_SERIES_DATA[k]; safeInitKaTeX(); }
+}
+
+/* 5. Bench 5: Live HKEAA Keyword Answer Grader (Topic XII) */
+const GRADER_RUBRICS = {
+  cond_order: {
+    prompt: '<b>Question (3 marks · CP 2016 Q14):</b> Arrange sodium, aluminium, silicon and sulphur in decreasing order of electrical conductivity at room temperature, and explain your answer in terms of bonding and structure.',
+    model: 'Decreasing order of electrical conductivity: aluminium > sodium > silicon = sulphur. Both aluminium and sodium have giant metallic structures with mobile delocalised electrons. The number of delocalised electrons per atom in aluminium (3) is greater than that in sodium (1), so aluminium has a higher electrical conductivity than sodium. Silicon has a giant covalent structure and sulphur (S₈) has a simple molecular structure; their electrons are not mobile (no delocalised electrons), so they do not conduct electricity.',
+    marks: [
+      { label: '1M · Correct Order: Al > Na > Si = S + Structure Types Named', re: /al(uminium)?\s*>\s*na|giant\s+metallic[\s\S]{0,60}(giant\s+covalent|simple\s+molecular)/i, hint: 'State the order <b>Al > Na > Si = S</b> and identify <b>giant metallic (Al, Na), giant covalent (Si) and simple molecular (S)</b>.' },
+      { label: '1M · Al Has More Delocalised Electrons Per Atom Than Na', re: /(more|greater\s+number\s+of)\s+delocali[sz]ed\s+electrons/i, hint: 'MS Bank §2 Wording: State that <b>the number of delocalised electrons of aluminium is more than that of sodium</b>.' },
+      { label: '1M · Si & S Have No Mobile / Delocalised Electrons', re: /(no\s+(mobile|delocali[sz]ed)\s+electrons|electrons\s+are\s+not\s+mobile)/i, hint: 'State that in silicon and sulphur <b>the electrons are not mobile (no delocalised electrons)</b>.' }
+    ],
+    traps: [
+      { re: /more\s+reactive/i, msg: 'CP 2016 Q14 Verbatim Error: "sodium conducts better because it is more reactive" — reactivity is a chemical property, not the cause of metallic conductivity!' }
+    ]
+  },
+  al2o3_amph: {
+    prompt: '<b>Question (3 marks · CP 2018 Q14 / CP 2024 Q13):</b> State the acid–base nature of aluminium oxide (Al₂O₃) and write TWO chemical equations (or ionic equations) to illustrate its behaviour.',
+    model: 'Aluminium oxide (Al₂O₃) is an amphoteric oxide (it reacts with both acids and alkalis to form salts and water). With acid: Al₂O₃(s) + 6HCl(aq) → 2AlCl₃(aq) + 3H₂O(l). With alkali: Al₂O₃(s) + 2NaOH(aq) + 3H₂O(l) → 2NaAl(OH)₄(aq) (or Al₂O₃(s) + 2NaOH(aq) → 2NaAlO₂(aq) + H₂O(l)).',
+    marks: [
+      { label: '1M · Amphoteric Oxide (Spelled Correctly)', re: /amphoteric/i, hint: 'CP 2018 Q14 Requirement: State and spell <b>amphoteric</b> correctly.' },
+      { label: '1M · Equation with Acid → Salt (AlCl₃ / Al³⁺) + H₂O', re: /al2o3[\s\S]{0,25}(hcl|h\+)[\s\S]{0,30}(alcl3|al3\+)[\s\S]{0,20}h2o/i, hint: 'CP 2024 Q13 Requirement: Write the equation with acid forming <b>AlCl₃ (or Al³⁺) AND H₂O</b>.' },
+      { label: '1M · Equation with Alkali → Aluminate Salt (NaAl(OH)₄ / NaAlO₂)', re: /al2o3[\s\S]{0,35}(naoh|oh-)[\s\S]{0,35}(naal\(oh\)4|al\(oh\)4-|naalo2|alo2-)/i, hint: 'Write the equation with alkali forming <b>NaAl(OH)₄ (or NaAlO₂)</b>.' }
+    ],
+    traps: [
+      { re: /atmospheric/i, msg: 'CP 2018 Q14 Verbatim Error: "wrongly stated that Al₂O₃ is an atmospheric oxide" — spell it <b>amphoteric</b>!' },
+      { re: /amphoteric\s+when\s+added\s+(in|to)\s+water/i, msg: 'CP 2022 Q13 Verbatim Error: Al₂O₃ is insoluble in water — amphoterism is shown by reacting with acids AND alkalis!' }
+    ]
+  },
+  sio2_p4o10_so2: {
+    prompt: '<b>Question (3 marks · CP 2021 Q3 / CP 2023 Q13):</b> Explain why the melting point of SiO₂ is much higher than that of P₄O₁₀, and why the melting point of P₄O₁₀ is higher than that of SO₂.',
+    model: 'SiO₂ has a giant covalent structure in which Si and O atoms are linked by strong covalent bonds throughout the lattice, whereas P₄O₁₀ and SO₂ have simple molecular structures in which discrete molecules are held together by weak intermolecular van der Waals’ forces. Melting SiO₂ requires a large amount of energy to break millions of strong covalent bonds between Si and O atoms. Between P₄O₁₀ and SO₂, a P₄O₁₀ molecule has a larger molecular size than an SO₂ molecule, so the van der Waals’ forces between P₄O₁₀ molecules are stronger than those between SO₂ molecules.',
+    marks: [
+      { label: '1M · SiO₂ Giant Covalent (Strong Covalent Bonds Between Si & O Atoms)', re: /giant\s+covalent[\s\S]{0,55}strong\s+covalent\s+bonds/i, hint: 'CP 2023 Q13 Requirement: State that SiO₂ has a <b>giant covalent structure with strong covalent bonds between Si and O atoms</b>.' },
+      { label: '1M · P₄O₁₀ & SO₂ Simple Molecular (Weak vdW Between Molecules)', re: /simple\s+molecular[\s\S]{0,55}weak\s+van\s+der\s+waals/i, hint: 'State that P₄O₁₀ and SO₂ have <b>simple molecular structures with weak van der Waals’ forces between molecules</b>.' },
+      { label: '1M · P₄O₁₀ Larger Molecular Size Than SO₂ → Stronger vdW', re: /(larger|greater|bigger)\s+molecular\s+size[\s\S]{0,45}stronger\s+van\s+der\s+waals/i, hint: 'State that P₄O₁₀ has a <b>larger molecular size</b> than SO₂, so van der Waals’ forces between P₄O₁₀ molecules are stronger.' }
+    ],
+    traps: [
+      { re: /sio2\s+molecules/i, msg: 'CP 2021 Q3 / CP 2023 Q13 Verbatim Error: "SiO₂ molecules are held by strong covalent bonds" — SiO₂ is giant covalent and has NO molecules!' },
+      { re: /molecular\s+mass/i, msg: 'CP 2023 Q13 Verbatim Error: Explain van der Waals’ strength in terms of <b>molecular size</b>, NEVER "molecular mass"!' }
+    ]
+  },
+  cl2o_water: {
+    prompt: '<b>Question (2 marks · CP 2015 Q10 / CP 2022 Q13 / CP 2025 Q13):</b> Describe the behaviour of dichlorine monoxide (Cl₂O) when added to water, and write a chemical equation for the reaction involved.',
+    model: 'Cl₂O dissolves in and reacts with water to form an acidic solution of chloric(I) acid (hypochlorous acid). Equation: Cl₂O(g) + H₂O(l) → 2HClO(aq).',
+    marks: [
+      { label: '1M · Dissolves/Reacts to Form an Acidic Solution', re: /(dissolves|reacts|soluble)[\s\S]{0,45}acidic/i, hint: 'CP 2015 Q10 Requirement: State BOTH that it dissolves/reacts AND that it forms an <b>acidic solution</b>.' },
+      { label: '1M · Equation: Cl₂O + H₂O → 2HClO (or 2HOCl)', re: /cl2o(\(g\))?\s*\+\s*h2o(\(l\))?\s*(->|→|=)\s*2\s*(hclo|hocl)/i, hint: 'Write the balanced equation: <b>Cl₂O + H₂O → 2HClO</b>.' }
+    ],
+    traps: [
+      { re: /hcl\s*\+\s*(hclo|hocl)|->\s*2?\s*hcl\b/i, msg: 'CP 2015 Q10 / CP 2022 Q13 / CP 2025 Q13 Verbatim Error: Cl₂O + H₂O forms <b>HClO only</b>, NEVER "HCl + HOCl" (that is Cl₂ + H₂O)!' }
+    ]
+  },
+  tm_fe_props: {
+    prompt: '<b>Question (2 marks · CP 2020 Q12 / CP 2023 Q13):</b> Using iron as an example, state TWO characteristic properties of transition metals illustrated by its aqueous ions, giving specific examples.',
+    model: '1. Iron exhibits variable oxidation states in its compounds: for example, the oxidation number of iron in Fe²⁺(aq) is +2, while the oxidation number of iron in Fe³⁺(aq) is +3. 2. Iron forms coloured aqueous ions: for example, Fe²⁺(aq) is pale green and Fe³⁺(aq) is yellow (or brown).',
+    marks: [
+      { label: '1M · Variable Oxidation States (+2 in Fe²⁺ and +3 in Fe³⁺)', re: /variable\s+oxidation\s+(states|numbers)[\s\S]{0,60}(\+2[\s\S]{0,25}\+3|fe2\+[\s\S]{0,25}fe3\+)/i, hint: 'CP 2023 Q13 Better Answer: State <b>variable oxidation states</b> and specify that <b>the oxidation number of Fe in Fe²⁺ is +2 and in Fe³⁺ is +3</b>.' },
+      { label: '1M · Forms Coloured Ions (Fe²⁺ Pale Green, Fe³⁺ Yellow)', re: /coloured\s+(aqueous\s+)?ions[\s\S]{0,60}(pale\s+green|yellow)/i, hint: 'CP 2023 Q13 Better Answer: State that <b>iron forms coloured ions</b> and give the colours (<b>Fe²⁺ pale green, Fe³⁺ yellow</b>).' }
+    ],
+    traps: [
+      { re: /transition\s+metals\s+(are\s+coloured|have\s+different\s+colours)/i, msg: 'CP 2020 Q12 / CP 2021 Q12 / CP 2023 Q13 Verbatim Error: Never write "transition metals are coloured" — write "transition metals form <b>coloured ions / compounds</b>"!' }
+    ]
+  }
+};
+
+function loadGraderPrompt(){
+  const sel = document.getElementById('graderQSelect');
+  if(!sel) return;
+  const r = GRADER_RUBRICS[sel.value];
+  const box = document.getElementById('graderPromptBox');
+  if(box && r) box.innerHTML = r.prompt;
+}
+function fillModelGraderAnswer(){
+  const sel = document.getElementById('graderQSelect');
+  if(!sel) return;
+  const r = GRADER_RUBRICS[sel.value];
+  if(!r) return;
+  document.getElementById('graderInput').value = r.model;
+  gradeStudentAnswer();
+}
+function gradeStudentAnswer(){
+  const sel = document.getElementById('graderQSelect');
+  const txt = (document.getElementById('graderInput').value || '').trim();
+  const out = document.getElementById('graderResultBox');
+  if(!sel || !out) return;
+  const r = GRADER_RUBRICS[sel.value];
+  if(!txt){ out.innerHTML = '<span class="text-amber-300">Please type an answer first, or click "Show Model Full-Mark Answer".</span>'; return; }
+  let score = 0, rowsHtml = '', trapHtml = '';
+  r.marks.forEach(m => {
+    const hit = m.re.test(txt);
+    if(hit) score++;
+    rowsHtml += `<div class="p-2 rounded-lg border ${hit ? 'bg-emerald-950/40 border-emerald-700 text-emerald-200' : 'bg-slate-900 border-slate-800 text-slate-300'}"><b>${hit ? '✅ [1M Earned]' : '⬜ [0M Missed]'} ${m.label}:</b> ${hit ? 'Keyword verified in your answer.' : m.hint}</div>`;
+  });
+  r.traps.forEach(t => {
+    if(t.re.test(txt)) trapHtml += `<div class="p-2.5 rounded-lg bg-rose-950/60 border border-rose-600 text-rose-200 font-medium">🚨 <b>[NOT ACCEPT / Contradiction Penalty]:</b> ${t.msg}</div>`;
+  });
+  out.innerHTML = `<div class="flex items-center justify-between border-b border-slate-800 pb-2"><span class="font-bold text-white text-sm">Examiner Diagnostic Score: <span class="text-sky-400 font-mono">${score} / ${r.marks.length} marks</span></span><span class="chip ${score===r.marks.length && !trapHtml ? 'bg-emerald-950 text-emerald-300 border-emerald-700' : 'bg-amber-950 text-amber-300 border-amber-700'}">${score===r.marks.length && !trapHtml ? 'Full Marks Wording' : 'Keep Refining'}</span></div>${trapHtml}<div class="space-y-1.5 mt-2">${rowsHtml}</div>`;
+}
+
+const CMD_INDEX = [
+  { title: 'Period 2 & Period 3 Melting-Point & Conductivity Comparator', tag: 'Strand (a) · Sim', action: ()=>{switchTab('tab-phys');switchPhysMode('map');} },
+  { title: 'Virtual Period-3 Oxide Wet-Lab (Na₂O to Cl₂O in H₂O, HCl, NaOH)', tag: 'Strand (b) · Sim', action: ()=>{switchTab('tab-oxide');switchOxideMode('map');} },
+  { title: 'Period-3 Oxide Equation Selector & Amphoteric Dual-Proof', tag: 'Strand (b) · Sim', action: ()=>{switchTab('tab-eq');switchEqMode('map');} },
+  { title: 'Transition Metal Ion Colour Swatch Rack & Catalytic Cycles', tag: 'Strand (c) · Sim', action: ()=>{switchTab('tab-trans');switchTransMode('map');} },
+  { title: 'Oxide Formula, Equation Balancer, MP Ranker & Transition Benches', tag: 'Solver · Benches 1–4', action: ()=>{switchTab('tab-solver');} },
+  { title: 'Live HKEAA Keyword Answer Grader (Bench 5)', tag: 'Solver · Exam Practice', action: ()=>{switchTab('tab-solver');} },
+  { title: 'Candidate Performance Intelligence (2012–2025)', tag: 'Past Papers · Tab 7', action: ()=>{switchTab('tab-pp');} }
+];
+function openCmdModal(){ const m=document.getElementById('cmdModal'); if(m){ m.classList.add('open'); const inp=document.getElementById('cmdSearchInput'); if(inp){inp.value='';filterCmdList();setTimeout(()=>inp.focus(),50);}}}
+function closeCmdModal(){ const m=document.getElementById('cmdModal'); if(m) m.classList.remove('open'); }
+function filterCmdList(){
+  const q = (document.getElementById('cmdSearchInput').value || '').toLowerCase();
+  const box = document.getElementById('cmdResults');
+  if(!box) return;
+  box.innerHTML = '';
+  CMD_INDEX.filter(i => i.title.toLowerCase().includes(q) || i.tag.toLowerCase().includes(q)).forEach(i => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'w-full text-left px-3 py-2.5 rounded-xl hover:bg-slate-800/80 flex items-center justify-between transition';
+    btn.innerHTML = `<span class="text-white font-medium">${i.title}</span><span class="chip bg-sky-950 text-sky-300 border border-sky-800">${i.tag}</span>`;
+    btn.onclick = () => { closeCmdModal(); i.action(); };
+    box.appendChild(btn);
+  });
+}
+document.addEventListener('keydown', e => {
+  if((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k'){ e.preventDefault(); const m=document.getElementById('cmdModal'); if(m && m.classList.contains('open')) closeCmdModal(); else openCmdModal(); }
+  else if(e.key === 'Escape') closeCmdModal();
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  try { if(localStorage.getItem('hkdse_topic12_theme') === 'light') toggleAppleTheme(); } catch(e){}
+  injectQuizSelfCheckBars();
+  updateP23CompSim();
+  setOxideLab('Na2O');
+  showEqRoute(0);
+  updateTmSeriesSim();
+  loadGraderPrompt();
+  updateMasteryRing();
+  solverOxide();
+  document.getElementById('sbA').value = '1'; document.getElementById('sbB').value = '6'; document.getElementById('sbC').value = '4'; solverBalance();
+  solverRank();
+});
+</script>
+
 </body>
 </html>

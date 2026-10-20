@@ -9,49 +9,420 @@
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
 <style>
-  :root { color-scheme: dark; }
-  body { background:#020617; font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
-  .tab-panel { display:none; }
-  .tab-panel.active { display:block; }
-  .blur-answer { filter: blur(6px); cursor:pointer; transition: filter .25s ease; user-select:none; }
-  .blur-answer.revealed { filter: blur(0); cursor:default; user-select:text; }
-  .engine-module { display:none; }
-  .engine-module.active { display:block; }
-  .mode-pill { cursor:pointer; }
-  .mode-pill.active { background:rgba(56,189,248,.15); color:#7dd3fc; border-color:#38bdf8; }
-  details > summary { cursor:pointer; list-style:none; }
-  details > summary::-webkit-details-marker { display:none; }
-  .chip { display:inline-block; padding:2px 10px; border-radius:9999px; font-size:11px; font-weight:600; }
-  .katex { font-size:1.05em; }
-  .num-card { font-variant-numeric: tabular-nums; }
-  input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner-spin-button { -webkit-appearance:none; margin:0; }
-  input[type=number] { -moz-appearance:textfield; }
-  .edot { font-size:10px; line-height:1; letter-spacing:-1px; }
-  .katex-block{overflow-x:auto;overflow-y:hidden}
-  .katex-block .katex-display{text-align:left;margin:.35em 0}
-  /* ══ MOBILE UX LAYER (chrome-only) ══ */
-  :root{--hdr:120px}
-  html{scroll-padding-top:calc(var(--hdr) + 10px)}
-  .toc-strip{display:none;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:2px 0 6px;margin-bottom:2px}
-  .toc-strip::-webkit-scrollbar{display:none}
-  .toc-chip{flex-shrink:0;font-size:10px;line-height:1;padding:7px 11px;border-radius:9999px;border:1px solid rgba(51,65,85,.9);background:rgba(15,23,42,.85);color:#94a3b8;font-weight:600;white-space:nowrap;cursor:pointer}
-  #backTop{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:70;width:44px;height:44px;border-radius:9999px;border:1px solid rgba(56,189,248,.35);background:rgba(8,14,26,.92);color:#7dd3fc;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transform:translateY(8px);transition:opacity .25s,transform .25s}
-  #backTop.show{opacity:1;pointer-events:auto;transform:none}
-  #scrollProg{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,#0ea5e9,#38bdf8);z-index:80;pointer-events:none}
-  @media (max-width:1023.98px){
-    header{background-color:rgba(2,6,23,.97)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;padding-top:env(safe-area-inset-top)}
-    #mainNav{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:4px}
-    #mainNav::-webkit-scrollbar{display:none}
-    #mainNav button{flex-shrink:0}
-    select,input[type="number"],input[type="text"]{font-size:16px!important}
-    #mainNav button{padding-top:10px;padding-bottom:10px}
-    .mode-pill{padding:8px 14px}
-    .toc-chip{padding:10px 12px}
-    .katex{font-size:1em}
-    .toc-strip{display:flex}
+  :root {
+    color-scheme: dark;
+    --hdr: 118px;
+    --bg-canvas: #000000;
+    --bg-elevated: rgba(22, 22, 29, 0.72);
+    --bg-card: rgba(28, 28, 36, 0.68);
+    --bg-card-solid: #16161d;
+    --bg-subcard: rgba(38, 38, 48, 0.55);
+    --bg-glass-nav: rgba(14, 14, 20, 0.76);
+    --border-hairline: rgba(255, 255, 255, 0.09);
+    --border-highlight: rgba(255, 255, 255, 0.16);
+    --text-primary: #f5f5f7;
+    --text-secondary: #a1a1aa;
+    --text-tertiary: #6e6e77;
+    --accent-blue: #0a84ff;
+    --accent-teal: #64d2ff;
+    --accent-purple: #bf5af2;
+    --accent-emerald: #30d158;
+    --accent-amber: #ff9f0a;
+    --accent-rose: #ff453a;
+    --shadow-card: 0 20px 44px -12px rgba(0, 0, 0, 0.65), inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+    --shadow-hover: 0 24px 52px -10px rgba(0, 0, 0, 0.75), inset 0 1px 0 0 rgba(255, 255, 255, 0.18);
+    --spring: cubic-bezier(0.22, 1, 0.36, 1);
   }
-  @media (prefers-reduced-motion:reduce){.tab-panel.active{animation:none}
-    .blur-answer,#backTop{transition:none!important}}
+
+  html.theme-light {
+    color-scheme: light;
+    --bg-canvas: #f5f5f7;
+    --bg-elevated: rgba(255, 255, 255, 0.82);
+    --bg-card: rgba(255, 255, 255, 0.88);
+    --bg-card-solid: #ffffff;
+    --bg-subcard: rgba(242, 242, 247, 0.85);
+    --bg-glass-nav: rgba(248, 248, 252, 0.82);
+    --border-hairline: rgba(0, 0, 0, 0.08);
+    --border-highlight: rgba(0, 0, 0, 0.14);
+    --text-primary: #1d1d1f;
+    --text-secondary: #515154;
+    --text-tertiary: #86868b;
+    --shadow-card: 0 12px 32px -8px rgba(0, 0, 0, 0.07), inset 0 1px 0 0 rgba(255, 255, 255, 0.9);
+    --shadow-hover: 0 18px 40px -8px rgba(0, 0, 0, 0.12), inset 0 1px 0 0 rgba(255, 255, 255, 1);
+  }
+
+  html {
+    scroll-padding-top: calc(var(--hdr) + 14px);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--bg-canvas);
+    background-image:
+      radial-gradient(ellipse 80% 50% at 15% -10%, rgba(10, 132, 255, 0.16), transparent 60%),
+      radial-gradient(ellipse 70% 45% at 85% 5%, rgba(191, 90, 242, 0.12), transparent 60%),
+      radial-gradient(ellipse 60% 40% at 50% 100%, rgba(48, 209, 88, 0.08), transparent 60%);
+    background-attachment: fixed;
+    color: var(--text-primary);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: -0.011em;
+    transition: background-color 0.4s var(--spring), color 0.3s var(--spring);
+  }
+
+  h1, h2, h3, h4 {
+    letter-spacing: -0.024em;
+    font-weight: 650;
+  }
+
+  .font-mono {
+    font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+  }
+
+  /* Apple Frosted Glass Header & Segmented Bar */
+  header {
+    background: var(--bg-glass-nav) !important;
+    -webkit-backdrop-filter: saturate(190%) blur(28px) !important;
+    backdrop-filter: saturate(190%) blur(28px) !important;
+    border-bottom: 1px solid var(--border-hairline) !important;
+    box-shadow: 0 4px 24px -4px rgba(0, 0, 0, 0.28);
+    transition: background 0.35s var(--spring);
+  }
+
+  #mainNav {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border-hairline);
+    border-radius: 14px;
+    padding: 4px !important;
+    gap: 4px !important;
+    margin-bottom: 8px;
+  }
+  html.theme-light #mainNav {
+    background: rgba(0, 0, 0, 0.045);
+  }
+
+  #mainNav button {
+    border-radius: 10px !important;
+    border-bottom: none !important;
+    transition: all 0.28s var(--spring) !important;
+    position: relative;
+    font-weight: 500;
+  }
+  #mainNav button:hover {
+    transform: translateY(-1px);
+  }
+  #mainNav button:active {
+    transform: scale(0.97);
+  }
+  #mainNav button.tab-btn-active {
+    background: rgba(10, 132, 255, 0.22) !important;
+    color: #64d2ff !important;
+    box-shadow: 0 2px 10px rgba(10, 132, 255, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.22);
+    font-weight: 600 !important;
+  }
+  html.theme-light #mainNav button.tab-btn-active {
+    background: #ffffff !important;
+    color: #0066cc !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Apple Bento Surface Cards */
+  .bg-slate-900 {
+    background: var(--bg-elevated) !important;
+    -webkit-backdrop-filter: saturate(160%) blur(22px);
+    backdrop-filter: saturate(160%) blur(22px);
+    border-color: var(--border-hairline) !important;
+    border-radius: 22px !important;
+    box-shadow: var(--shadow-card);
+    transition: transform 0.35s var(--spring), box-shadow 0.35s var(--spring), border-color 0.3s ease;
+  }
+
+  .bg-slate-950 {
+    background: var(--bg-card) !important;
+    border-color: var(--border-hairline) !important;
+    border-radius: 18px !important;
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.06);
+    transition: transform 0.3s var(--spring), box-shadow 0.3s var(--spring), border-color 0.25s ease;
+  }
+  .bg-slate-950:hover {
+    border-color: var(--border-highlight) !important;
+  }
+
+  /* Light mode text & surface overrides */
+  html.theme-light .text-white { color: #1d1d1f !important; }
+  html.theme-light .text-slate-100,
+  html.theme-light .text-slate-200,
+  html.theme-light .text-slate-300 { color: #2c2c2e !important; }
+  html.theme-light .text-slate-400 { color: #515154 !important; }
+  html.theme-light .text-slate-500 { color: #6e6e73 !important; }
+  html.theme-light .bg-slate-800,
+  html.theme-light .bg-slate-800\/50 { background-color: rgba(0, 0, 0, 0.05) !important; color: #1d1d1f !important; border-color: rgba(0,0,0,0.12) !important; }
+  html.theme-light .bg-sky-950\/40,
+  html.theme-light .bg-sky-950\/30,
+  html.theme-light .bg-sky-950 { background-color: rgba(10, 132, 255, 0.1) !important; color: #004080 !important; border-color: rgba(10, 132, 255, 0.28) !important; }
+  html.theme-light .bg-purple-950\/30,
+  html.theme-light .bg-purple-950 { background-color: rgba(175, 82, 222, 0.1) !important; color: #581c87 !important; border-color: rgba(175, 82, 222, 0.28) !important; }
+  html.theme-light .bg-emerald-950\/30,
+  html.theme-light .bg-emerald-950 { background-color: rgba(48, 209, 88, 0.12) !important; color: #065f46 !important; border-color: rgba(48, 209, 88, 0.3) !important; }
+  html.theme-light .bg-amber-950\/40,
+  html.theme-light .bg-amber-950\/30,
+  html.theme-light .bg-amber-950 { background-color: rgba(255, 159, 10, 0.13) !important; color: #78350f !important; border-color: rgba(255, 159, 10, 0.35) !important; }
+  html.theme-light .bg-rose-950\/40,
+  html.theme-light .bg-rose-950\/30,
+  html.theme-light .bg-rose-950 { background-color: rgba(255, 69, 58, 0.1) !important; color: #881337 !important; border-color: rgba(255, 69, 58, 0.28) !important; }
+  html.theme-light .text-sky-200, html.theme-light .text-sky-300, html.theme-light .text-sky-400 { color: #0055b3 !important; }
+  html.theme-light .text-amber-200, html.theme-light .text-amber-300, html.theme-light .text-amber-400 { color: #92400e !important; }
+  html.theme-light .text-rose-200, html.theme-light .text-rose-300, html.theme-light .text-rose-400 { color: #9f1239 !important; }
+  html.theme-light .text-emerald-300, html.theme-light .text-emerald-400 { color: #047857 !important; }
+  html.theme-light .text-purple-300, html.theme-light .text-purple-400 { color: #6b21a8 !important; }
+  html.theme-light .text-cyan-300, html.theme-light .text-cyan-400 { color: #0e7490 !important; }
+
+  /* Tab & Module Fluid Spring Animations */
+  @keyframes appleStageIn {
+    0% { opacity: 0; transform: translateY(10px) scale(0.992); filter: blur(4px); }
+    100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+  }
+  .tab-panel { display: none; }
+  .tab-panel.active {
+    display: block;
+    animation: appleStageIn 0.42s var(--spring) forwards;
+  }
+  .engine-module { display: none; }
+  .engine-module.active {
+    display: block;
+    animation: appleStageIn 0.34s var(--spring) forwards;
+  }
+  .atom-card, .table-card, .bonds-card, .struct-card {
+    animation: appleStageIn 0.3s var(--spring) forwards;
+  }
+
+  /* Blur answer pill with Apple spring reveal */
+  .blur-answer {
+    filter: blur(5.5px);
+    cursor: pointer;
+    transition: filter 0.28s var(--spring), background-color 0.28s ease, transform 0.2s var(--spring), box-shadow 0.25s ease;
+    user-select: none;
+    border: 1px solid rgba(100, 210, 255, 0.22);
+    padding: 1px 7px !important;
+    border-radius: 7px !important;
+  }
+  .blur-answer:hover {
+    filter: blur(2.5px);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(10, 132, 255, 0.2);
+  }
+  .blur-answer.revealed {
+    filter: blur(0);
+    cursor: pointer;
+    user-select: text;
+    background: rgba(48, 209, 88, 0.16) !important;
+    border-color: rgba(48, 209, 88, 0.45) !important;
+    box-shadow: 0 0 0 1px rgba(48, 209, 88, 0.15);
+  }
+
+  /* Mode Pills -> Apple Segmented Buttons */
+  .mode-pill {
+    cursor: pointer;
+    transition: all 0.26s var(--spring);
+    border-radius: 9999px;
+    backdrop-filter: blur(10px);
+  }
+  .mode-pill:hover {
+    transform: translateY(-1px);
+  }
+  .mode-pill:active {
+    transform: scale(0.96);
+  }
+  .mode-pill.active {
+    background: linear-gradient(135deg, rgba(10, 132, 255, 0.26), rgba(100, 210, 255, 0.14)) !important;
+    color: #7dd3fc !important;
+    border-color: rgba(100, 210, 255, 0.65) !important;
+    box-shadow: 0 4px 14px -2px rgba(10, 132, 255, 0.35), inset 0 1px 0 rgba(255,255,255,0.2);
+  }
+
+  details > summary {
+    cursor: pointer;
+    list-style: none;
+    transition: background-color 0.2s ease;
+    border-radius: 14px;
+  }
+  details > summary::-webkit-details-marker { display: none; }
+  details[open] > summary {
+    border-bottom: 1px solid var(--border-hairline);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 10px;
+    border-radius: 9999px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.12);
+  }
+
+  .katex { font-size: 1.05em; }
+  .num-card { font-variant-numeric: tabular-nums; }
+  input[type=number]::-webkit-outer-spin-button,
+  input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  input[type=number] { -moz-appearance: textfield; }
+  .katex-block { overflow-x: auto; overflow-y: hidden; }
+  .katex-block .katex-display { text-align: left; margin: .35em 0; }
+
+  /* Apple Interactive Studio Components */
+  .apple-sim-panel {
+    background: linear-gradient(165deg, rgba(20, 24, 38, 0.85), rgba(12, 15, 26, 0.92));
+    border: 1px solid rgba(100, 210, 255, 0.22);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 18px 40px -12px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  }
+  html.theme-light .apple-sim-panel {
+    background: linear-gradient(165deg, rgba(255, 255, 255, 0.95), rgba(240, 246, 255, 0.92));
+    border-color: rgba(10, 132, 255, 0.25);
+    box-shadow: 0 14px 32px -10px rgba(10, 132, 255, 0.12);
+  }
+
+  .apple-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 7px 14px;
+    transition: all 0.24s var(--spring);
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(255, 255, 255, 0.07);
+    color: var(--text-primary);
+  }
+  .apple-btn:hover {
+    background: rgba(255, 255, 255, 0.13);
+    transform: translateY(-1px);
+  }
+  .apple-btn:active {
+    transform: scale(0.97);
+  }
+  .apple-btn-primary {
+    background: linear-gradient(180deg, #1e90ff 0%, #0071e3 100%);
+    color: #ffffff !important;
+    border-color: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 4px 14px rgba(0, 113, 227, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  }
+  .apple-btn-primary:hover {
+    background: linear-gradient(180deg, #339dff 0%, #0a7ff0 100%);
+    box-shadow: 0 6px 18px rgba(0, 113, 227, 0.55);
+  }
+
+  /* Range slider styling */
+  input[type=range].apple-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 6px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #0a84ff, #bf5af2, #30d158);
+    outline: none;
+  }
+  input[type=range].apple-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 2px solid #0a84ff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+    cursor: grab;
+    transition: transform 0.18s var(--spring);
+  }
+  input[type=range].apple-slider::-webkit-slider-thumb:active {
+    transform: scale(1.15);
+    cursor: grabbing;
+  }
+
+  /* Periodic Table Mini Grid */
+  .pt-grid {
+    display: grid;
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+    gap: 6px;
+  }
+  .pt-tile {
+    border-radius: 10px;
+    padding: 6px 4px;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.22s var(--spring);
+    user-select: none;
+  }
+  .pt-tile:hover {
+    transform: translateY(-2px) scale(1.04);
+    border-color: rgba(100, 210, 255, 0.7);
+  }
+  .pt-tile.active-tile {
+    box-shadow: 0 0 0 2px #0a84ff, 0 8px 20px rgba(10, 132, 255, 0.35);
+    transform: translateY(-2px);
+  }
+
+  /* Self-check mastery buttons on quiz rows */
+  .quiz-self-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px dashed var(--border-hairline);
+    font-size: 11px;
+  }
+
+  /* Command Palette Modal */
+  #cmdModal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: rgba(0, 0, 0, 0.58);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 10vh;
+  }
+  #cmdModal.open {
+    display: flex;
+    animation: appleStageIn 0.22s var(--spring) forwards;
+  }
+
+  /* Mobile UX Layer */
+  .toc-strip { display: none; gap: 6px; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 2px 0 6px; margin-bottom: 2px; }
+  .toc-strip::-webkit-scrollbar { display: none; }
+  .toc-chip { flex-shrink: 0; font-size: 10px; line-height: 1; padding: 7px 11px; border-radius: 9999px; border: 1px solid var(--border-hairline); background: var(--bg-card); color: var(--text-secondary); font-weight: 600; white-space: nowrap; cursor: pointer; transition: all 0.2s var(--spring); }
+  #backTop { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom)); z-index: 70; width: 44px; height: 44px; border-radius: 9999px; border: 1px solid rgba(100, 210, 255, 0.35); background: var(--bg-glass-nav); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); color: #7dd3fc; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transform: translateY(8px); transition: opacity .25s, transform .25s var(--spring); box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+  #backTop.show { opacity: 1; pointer-events: auto; transform: none; }
+  #scrollProg { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: linear-gradient(90deg, #0a84ff, #64d2ff, #30d158); z-index: 80; pointer-events: none; }
+
+  @media (max-width:1023.98px){
+    header { padding-top: env(safe-area-inset-top); }
+    #mainNav { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+    #mainNav::-webkit-scrollbar { display: none; }
+    #mainNav button { flex-shrink: 0; padding-top: 9px; padding-bottom: 9px; }
+    select, input[type="number"], input[type="text"] { font-size: 16px !important; }
+    .mode-pill { padding: 8px 14px; }
+    .toc-chip { padding: 10px 12px; }
+    .katex { font-size: 1em; }
+    .toc-strip { display: flex; }
+  }
+  @media (prefers-reduced-motion:reduce){
+    .tab-panel.active, .engine-module.active { animation: none !important; }
+    .blur-answer, #backTop { transition: none !important; }
+  }
 </style>
 </head>
 <body class="text-slate-200 min-h-screen">
@@ -61,14 +432,29 @@
   <div class="max-w-7xl mx-auto px-4 py-3">
     <div class="flex flex-wrap items-center justify-between gap-2">
       <div>
-        <h1 class="text-base sm:text-lg font-bold text-white leading-tight">HKDSE · Topic II Master Studio</h1>
+        <div class="flex items-center gap-2.5"><div class="hidden sm:flex items-center gap-1.5 mr-1"><span class="w-2.5 h-2.5 rounded-full bg-[#ff5f56] inline-block shadow-sm"></span><span class="w-2.5 h-2.5 rounded-full bg-[#ffbd2e] inline-block shadow-sm"></span><span class="w-2.5 h-2.5 rounded-full bg-[#27c93f] inline-block shadow-sm"></span></div><h1 class="text-base sm:text-lg font-bold text-white leading-tight tracking-tight">HKDSE · Topic II Master Studio — Microscopic World I</h1><span class="chip bg-sky-500/15 text-sky-300 border border-sky-400/30 text-[10px]">Interactive Studio Pro</span></div>
         <p class="text-[11px] text-slate-400 font-mono">Microscopic World I · Atomic Structure, Bonding &amp; Structures of Substances</p>
       </div>
-      <div class="flex gap-2 text-[10px] font-mono">
+      <div class="flex flex-wrap items-center gap-2 text-[10px] font-mono">
         <span class="chip bg-sky-950 text-sky-400 border border-sky-800">Strands (a)–(i)</span>
         <span class="chip bg-purple-950 text-purple-400 border border-purple-800">Paper 1A + 1B</span>
         <span class="chip bg-emerald-950 text-emerald-400 border border-emerald-800">C&amp;A Guide 2018</span>
-        <span class="chip bg-amber-950 text-amber-400 border border-amber-800">NTF 18/08/2018 scope</span>
+        <div class="flex items-center gap-2 ml-1 pl-2 border-l border-slate-700/70">
+          <button type="button" onclick="openCmdModal()" class="apple-btn !py-1 !px-2.5 text-[11px]" title="Quick Concept &amp; Past-Paper Search (⌘K)">
+            <span>🔍 Search</span>
+            <kbd class="px-1.5 py-0.5 text-[9px] rounded bg-slate-800 text-slate-300 border border-slate-700">⌘K</kbd>
+          </button>
+          <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-900/90 border border-slate-700/80" title="Concept Mastery Progress across Quiz &amp; Syllabus Checkpoints">
+            <svg class="w-4 h-4 -rotate-90" viewBox="0 0 36 36">
+              <circle cx="18" cy="18" r="15" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="3.8"></circle>
+              <circle id="masteryRingCircle" cx="18" cy="18" r="15" fill="none" stroke="#30d158" stroke-width="3.8" stroke-dasharray="94.2" stroke-dashoffset="94.2" stroke-linecap="round"></circle>
+            </svg>
+            <span id="masteryPctText" class="text-[11px] font-semibold text-emerald-400 num-card">0% Mastered</span>
+          </div>
+          <button type="button" id="themeToggleBtn" onclick="toggleAppleTheme()" class="apple-btn !py-1 !px-2.5 text-[11px]" title="Switch between Apple Pro Dark and Cupertino Daylight mode">
+            <span id="themeToggleIcon">☀️ Daylight</span>
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -368,6 +754,73 @@
   </div>
 </section>
 
+
+    <!-- ══ INTERACTIVE SYLLABUS AUDIT & CONCEPT READINESS MATRIX (EDB C&A Guide 2018 · pp. I-4 to I-9) ══ -->
+    <div class="mt-6 apple-sim-panel space-y-4" id="syllabus-audit-panel">
+      <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800/80 pb-3">
+        <div>
+          <span class="text-[10px] font-mono uppercase tracking-widest text-sky-400 font-bold">Interactive Syllabus Check-Off · EDB C&amp;A Guide (pp. I-4 to I-9)</span>
+          <h3 class="text-base font-bold text-white mt-0.5">HKDSE Topic II Competency Checklist &amp; Direct Simulator Links</h3>
+          <p class="text-xs text-slate-400">Tick each official EDB learning outcome across Strands (a)–(i) as you master it, or launch its interactive simulator directly.</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <span id="sylAuditCount" class="chip bg-emerald-950 text-emerald-300 border border-emerald-700 font-mono">0 / 12 Outcomes Checked</span>
+          <button type="button" class="apple-btn text-xs" onclick="checkAllSyllabusOutcomes()">Check All</button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs" id="sylAuditGrid">
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">II(a) · Subatomic Particles &amp; Nuclide Symbols</b>Deduce p, n, e in atoms and ions from $^{A}_{Z}\text{X}^{c\pm}$; classify metals, non-metals &amp; metalloids. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-atom');switchAtomMode('map')">Shell Builder →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">II(a) · Isotopes &amp; Relative Atomic Mass ($A_r$)</b>Define isotopes ("same element, same p, different n"); compute $A_r$ and reverse % abundance (unitless). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-solver')">$A_r$ &amp; % Solver →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">II(a) · Electronic Arrangement ($Z \le 20$) &amp; Octet</b>Write $2,8,8,2$ arrangements; draw atom vs. ion electron diagrams with `[ ]` and charge. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-atom');switchAtomMode('map')">Atom/Ion Sim →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">II(b) · Periodic Table Position ↔ Structure</b>Period = occupied shells; Group = valence electrons; He (2) in Group 0; Pb vs $\text{Pb}^{2+}$ shells (CP 2016 Q20). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-table');switchTableModel('map')">PT Explorer →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">II(b) · Group I, II, VII, 0 Trends &amp; Extrapolation</b>Reactivity $\uparrow$ down Group I/II, $\downarrow$ down Group VII; halogen displacement &amp; predicting Rb/Cs/At. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-table');switchTableModel('map')">Halogen Lab →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">II(c,d) · Metallic Bonding &amp; Giant Metallic Properties</b>Electrostatic attraction between delocalised electrons and positive metal ions; malleability &amp; Al vs Na mp. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-struct');switchStructMode('map')">Stress Lab →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">II(e) · Ionic Bonding, Polyatomics &amp; Formulae</b>Electron transfer; dot-and-cross diagrams ($\text{Na}_2\text{O}, \text{MgCl}_2, \text{Al}_2\text{O}_3, \text{Li}_3\text{N}$); formula mass vs $M_r$. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-bonds');switchBondsMode('map')">Diagram Studio →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">II(e) · Ion Colours &amp; Migration of Ions Lab (p. I-8)</b>Colours of $\text{Cu}^{2+}, \text{Fe}^{2+}, \text{Fe}^{3+}, \text{MnO}_4^-, \text{Cr}_2\text{O}_7^{2-}$ &amp; filter-paper ion migration towards electrodes. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-bonds');switchBondsMode('map')">Migration Sim →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">II(e) · Covalent &amp; Dative Covalent Bonding</b>Single/double/triple bonds with lone pairs ($\text{CO}_2, \text{N}_2, \text{C}_2\text{H}_2, \text{C}_2\text{N}_2, \text{PCl}_3$) + dative $\text{NH}_4^+$ &amp; $\text{H}_3\text{O}^+$. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-bonds');switchBondsMode('map')">Inspect Diagrams →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">II(f) · Giant Ionic Lattices (NaCl 6:6 &amp; CsCl 8:8)</b>Lattice coordination, brittleness mechanism (like-charge repulsion), and molten/aqueous mobile-ion conduction. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-struct');selectStruct(0)">Inspect Lattices →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">II(g,h) · Simple Molecular vs. Giant Covalent</b>$\text{CO}_2, \text{I}_2, \text{S}_8, \text{CS}_2$ (weak vdW between molecules; molecular size lever) vs. Diamond, Graphite &amp; Quartz $\text{SiO}_2$. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-struct');switchStructMode('map')">Structure Sim →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">II(i) · Deducing Structure from Physical Data</b>Identify unknown substances from mp/bp, solid/molten/aqueous conductivity, hardness &amp; solubility. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-struct');switchStructMode('map')">Mystery Lab →</button></span>
+        </label>
+      </div>
+    </div>
+
 <!-- ═══════════ TAB 2 · ENGINE A · ATOM & ISOTOPES ═══════════ -->
 <section id="tab-atom" class="tab-panel space-y-6">
   <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-sm">
@@ -502,6 +955,60 @@
           <p class="text-[11px] font-bold text-slate-300 uppercase tracking-wider mb-2">The particle table — memorise row by row</p>
           <div class="overflow-x-auto"><table class="w-full text-xs text-slate-300"><thead class="text-slate-400 uppercase tracking-wider text-[10px]"><tr><th class="p-2 text-left">Particle</th><th class="p-2 text-left">Relative charge</th><th class="p-2 text-left">Relative mass</th><th class="p-2 text-left">Found in</th></tr></thead><tbody class="divide-y divide-slate-800"><tr><td class="p-2 font-semibold text-white">proton</td><td class="p-2">+1</td><td class="p-2">1</td><td class="p-2">nucleus</td></tr><tr><td class="p-2 font-semibold text-white">neutron</td><td class="p-2">0</td><td class="p-2">1</td><td class="p-2">nucleus</td></tr><tr><td class="p-2 font-semibold text-white">electron</td><td class="p-2">−1</td><td class="p-2">1⁄1836 (negligible)</td><td class="p-2">shells outside nucleus</td></tr></tbody></table></div>
         </div>
+        <!-- ══ INTERACTIVE SIMULATOR A1: LIVE BOHR ELECTRON SHELL & ION DIAGRAM BUILDER (Z = 1 to 20) ══ -->
+        <div class="mt-6 apple-sim-panel space-y-5">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+            <div>
+              <span class="text-[10px] font-mono text-sky-400 uppercase font-bold">Interactive Simulator · Strand (a) Concept Check (CP 2015 Q10 · CP 2020 Q1)</span>
+              <h4 class="text-sm font-bold text-white mt-0.5">Live Electron Shell &amp; Ion Diagram Studio (Z = 1 to 20 · Atom vs. Stable Ion Toggle)</h4>
+              <p class="text-[11px] text-slate-400">Drag the atomic number slider ($Z = 1\text{ to }20$) and switch between <b>Neutral Atom</b> and <b>Stable Ion</b> to inspect how shells, square brackets, and charges change.</p>
+            </div>
+            <div class="flex items-center gap-1.5 bg-slate-900 p-1 rounded-xl border border-slate-700">
+              <button type="button" id="atomModeAtomBtn" onclick="setAtomSimMode('atom')" class="apple-btn apple-btn-primary !py-1 !px-3 text-xs">Neutral Atom</button>
+              <button type="button" id="atomModeIonBtn" onclick="setAtomSimMode('ion')" class="apple-btn !py-1 !px-3 text-xs">Stable Ion [ ]q±</button>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 items-center">
+            <!-- Controls -->
+            <div class="space-y-3">
+              <div class="flex items-center justify-between text-xs">
+                <span class="text-slate-400 font-mono">Select Atomic Number (Z)</span>
+                <span id="atomZReadout" class="font-mono text-base font-bold text-sky-300 num-card">Z = 11 (Na)</span>
+              </div>
+              <input type="range" id="atomZSlider" min="1" max="20" value="11" step="1" class="apple-slider" oninput="updateAtomSim()">
+              <div class="flex flex-wrap gap-1.5 pt-1">
+                <button type="button" class="apple-btn !py-1 !px-2 text-[11px]" onclick="jumpAtomZ(2,'atom')">He (2)</button>
+                <button type="button" class="apple-btn !py-1 !px-2 text-[11px]" onclick="jumpAtomZ(8,'ion')">O²⁻ (CP 2015)</button>
+                <button type="button" class="apple-btn !py-1 !px-2 text-[11px]" onclick="jumpAtomZ(11,'ion')">Na⁺</button>
+                <button type="button" class="apple-btn !py-1 !px-2 text-[11px]" onclick="jumpAtomZ(12,'ion')">Mg²⁺</button>
+                <button type="button" class="apple-btn !py-1 !px-2 text-[11px]" onclick="jumpAtomZ(17,'ion')">Cl⁻</button>
+                <button type="button" class="apple-btn !py-1 !px-2 text-[11px]" onclick="jumpAtomZ(19,'atom')">K (2,8,8,1)</button>
+                <button type="button" class="apple-btn !py-1 !px-2 text-[11px]" onclick="jumpAtomZ(20,'atom')">Ca (2,8,8,2)</button>
+              </div>
+              <div id="atomSimTrapBox" class="p-3 rounded-xl bg-sky-950/40 border border-sky-800/70 text-xs text-sky-200 leading-relaxed"></div>
+            </div>
+
+            <!-- Live SVG Electron Shell Diagram -->
+            <div class="flex flex-col items-center justify-center p-4 rounded-2xl bg-slate-950 border border-slate-800 min-h-[230px]">
+              <svg id="bohrSvg" width="220" height="210" viewBox="0 0 220 210" role="img" aria-label="Interactive electron shell diagram"></svg>
+              <span id="bohrCaption" class="chip bg-sky-950 text-sky-300 border border-sky-700 mt-1 font-mono">Na · 2,8,1</span>
+            </div>
+
+            <!-- Particle & Shell Readout -->
+            <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2.5 text-xs">
+              <div id="atomSpecTitle" class="font-bold text-white text-sm">Sodium atom, ²³₁₁Na</div>
+              <div class="grid grid-cols-3 gap-2 text-center font-mono">
+                <div class="p-2 rounded-lg bg-slate-900 border border-slate-800"><span class="text-[10px] text-slate-400 block">Protons</span><span id="atomPCount" class="text-sm font-bold text-sky-400">11</span></div>
+                <div class="p-2 rounded-lg bg-slate-900 border border-slate-800"><span class="text-[10px] text-slate-400 block">Neutrons</span><span id="atomNCount" class="text-sm font-bold text-purple-400">12</span></div>
+                <div class="p-2 rounded-lg bg-slate-900 border border-slate-800"><span class="text-[10px] text-slate-400 block">Electrons</span><span id="atomECount" class="text-sm font-bold text-emerald-400">11</span></div>
+              </div>
+              <p id="atomShellDetail" class="text-slate-300 leading-relaxed"></p>
+              <p id="atomNobleMatch" class="text-emerald-300 font-mono text-[11px]"></p>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -668,6 +1175,70 @@
           <div class="p-4 bg-amber-950/30 border border-amber-800/60 rounded-lg"><p class="text-[11px] font-bold text-amber-300 uppercase tracking-wider mb-2">Down a group — halogens</p><p class="text-xs text-slate-300">More shells → nucleus attracts an incoming electron less strongly → reactivity <b>decreases</b>; the displacement direction Cl₂→Br₂→I₂ is fixed in this order.</p></div>
         </div>
         <div class="mt-4 p-4 bg-slate-900 border border-slate-800 rounded-lg"><p class="text-[11px] font-bold text-slate-300 uppercase tracking-wider mb-2">Same-period neighbours</p><p class="text-xs text-slate-400 leading-relaxed">Across a period, valence electrons rise 1→8 while shell count stays — metals (left) → metalloids → non-metals (right); their oxides’ acid–base behaviour changes too, but that comparison belongs to <b>Topic XII</b>.</p></div>
+        <!-- ══ INTERACTIVE SIMULATOR B1: MINI PERIODIC TABLE EXPLORER & HALOGEN DISPLACEMENT BENCH ══ -->
+        <div class="mt-6 apple-sim-panel space-y-5">
+          <div class="border-b border-slate-800 pb-3">
+            <span class="text-[10px] font-mono text-purple-400 uppercase font-bold">Interactive Simulator · Strand (b) Concept Check (CP 2016 Q20 · CP 2020 Q1)</span>
+            <h4 class="text-sm font-bold text-white mt-0.5">1. Interactive Main-Group Periodic Table (Groups I–0, Periods 1–4 + Unfamiliar Group Extrapolation)</h4>
+            <p class="text-[11px] text-slate-400">Click any element tile (including unfamiliar Period 5/6 extrapolation targets <b>Rb, Cs, Br, I, At</b>) to inspect its shell count, valence electrons, ion formed, and HKEAA group-trend reasoning.</p>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 items-start">
+            <div class="lg:col-span-2 space-y-2">
+              <div class="grid grid-cols-8 gap-1.5 text-[10px] font-mono text-slate-400 text-center">
+                <span>Grp I</span><span>Grp II</span><span>Grp III</span><span>Grp IV</span><span>Grp V</span><span>Grp VI</span><span>Grp VII</span><span>Grp 0</span>
+              </div>
+              <div id="ptInteractiveGrid" class="pt-grid"></div>
+            </div>
+
+            <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2 text-xs">
+              <div class="flex items-center justify-between">
+                <span id="ptCardTitle" class="font-bold text-white text-sm">Chlorine (Cl · Z = 17)</span>
+                <span id="ptCardBadge" class="chip bg-emerald-950 text-emerald-300 border border-emerald-700 font-mono">Period 3 · Group VII</span>
+              </div>
+              <p id="ptCardArr" class="font-mono text-sky-300 bg-slate-900 p-2 rounded-lg border border-slate-800">Electronic arrangement: 2,8,7 (3 occupied shells, 7 outermost/valence e⁻)</p>
+              <p id="ptCardBehavior" class="text-slate-300 leading-relaxed"></p>
+              <p id="ptCardTrend" class="text-amber-300 leading-relaxed"></p>
+            </div>
+          </div>
+
+          <!-- Halogen Displacement Wet-Lab Matrix -->
+          <div class="border-t border-slate-800 pt-4">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+              <div>
+                <h4 class="text-xs font-bold text-white uppercase tracking-wider">2. Interactive Group VII Halogen Displacement &amp; Group I/II Reactivity Wet-Lab</h4>
+                <p class="text-[11px] text-slate-400">Select an aqueous halogen ($	ext{Cl}_2, 	ext{Br}_2, 	ext{I}_2$) and a halide salt solution ($	ext{KCl}, 	ext{KBr}, 	ext{KI}$) to test whether displacement occurs and read the full-mark observation + ionic equation.</p>
+              </div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs items-end">
+              <div>
+                <label class="block text-slate-400 mb-1">Add Aqueous Halogen:</label>
+                <select id="halGasSel" onchange="runHalogenSim()" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white">
+                  <option value="Cl2" selected>Chlorine water, Cl₂(aq) (very pale green/colourless)</option>
+                  <option value="Br2">Bromine water, Br₂(aq) (yellow-orange / orange-brown)</option>
+                  <option value="I2">Aqueous iodine, I₂(aq) (brown in KI(aq))</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-slate-400 mb-1">Into Halide Solution:</label>
+                <select id="halSaltSel" onchange="runHalogenSim()" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white">
+                  <option value="KCl">Potassium chloride, KCl(aq) (colourless)</option>
+                  <option value="KBr" selected>Potassium bromide, KBr(aq) (colourless)</option>
+                  <option value="KI">Potassium iodide, KI(aq) (colourless)</option>
+                </select>
+              </div>
+              <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800 flex items-center gap-2.5">
+                <div id="halTubeSwatch" class="w-8 h-8 rounded-lg border border-white/20 shrink-0" style="background: linear-gradient(180deg, #d97706 0%, #b45309 100%);"></div>
+                <div>
+                  <span class="text-[10px] font-mono text-slate-400 block">Resulting Mixture</span>
+                  <span id="halVerdictBadge" class="font-bold text-amber-300">Displacement Occurs!</span>
+                </div>
+              </div>
+            </div>
+            <div id="halSimOut" class="mt-3 p-3 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-300 leading-relaxed"></div>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -868,6 +1439,91 @@
           <div class="p-4 bg-rose-950/30 border border-rose-800/60 rounded-lg"><p class="text-[11px] font-bold text-rose-300 uppercase tracking-wider mb-2">Metal + metal → metallic</p><p class="text-xs text-slate-300">Valence electrons delocalise across the whole lattice: attraction between the metal ions and the electron sea.</p></div>
         </div>
         <div class="mt-4 p-4 bg-slate-900 border border-slate-800 rounded-lg"><p class="text-[11px] font-bold text-slate-300 uppercase tracking-wider mb-2">The bond-strength ladder you must not confuse</p><p class="text-xs text-slate-400 leading-relaxed">Strong: ionic / covalent / metallic bonds (within the lattice or molecule). <b>Weak: van der Waals’ forces</b>, which act <i>only between molecules</i> and are what melting/boiling overcomes in simple molecular substances — Engine D applies this ladder to melting points.</p></div>
+        <!-- ══ INTERACTIVE SIMULATOR C1: DOT-AND-CROSS DIAGRAM INSPECTOR & FILTER-PAPER ION MIGRATION LAB ══ -->
+        <div class="mt-6 apple-sim-panel space-y-5">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+            <div>
+              <span class="text-[10px] font-mono text-emerald-400 uppercase font-bold">Interactive Simulator · Strand (e) Concept Check (CP 2014 · 2015 Q10 · 2021 Q1 · 2024 Q1)</span>
+              <h4 class="text-sm font-bold text-white mt-0.5">1. High-Risk HKDSE Electron Diagram Inspector (Outermost Shells Only · • and ×)</h4>
+              <p class="text-[11px] text-slate-400">Select a high-frequency exam target and toggle between the <b>Full-Mark HKEAA Diagram</b> and the <b>Recorded Candidate Mistake</b>.</p>
+            </div>
+            <div class="flex items-center gap-1.5 bg-slate-900 p-1 rounded-xl border border-slate-700">
+              <button type="button" id="edModeRightBtn" onclick="setEdViewMode('right')" class="apple-btn apple-btn-primary !py-1 !px-3 text-xs">✅ Full-Mark Diagram</button>
+              <button type="button" id="edModeWrongBtn" onclick="setEdViewMode('wrong')" class="apple-btn !py-1 !px-3 text-xs">❌ Candidate Mistake</button>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 items-center">
+            <div class="space-y-2">
+              <label class="text-[10px] font-mono uppercase text-slate-400 font-bold block">Choose Exam Target (with CP Year)</label>
+              <div class="grid grid-cols-2 gap-1.5 text-xs">
+                <button type="button" onclick="selectEdTarget('CO2')" class="ed-target-btn apple-btn apple-btn-primary !justify-start" data-ed="CO2">CO₂ (CP 2014)</button>
+                <button type="button" onclick="selectEdTarget('Na2O')" class="ed-target-btn apple-btn !justify-start" data-ed="Na2O">Na₂O (CP 2015 Q10)</button>
+                <button type="button" onclick="selectEdTarget('PCl3')" class="ed-target-btn apple-btn !justify-start" data-ed="PCl3">PCl₃ (CP 2016 Q4)</button>
+                <button type="button" onclick="selectEdTarget('C2H2')" class="ed-target-btn apple-btn !justify-start" data-ed="C2H2">C₂H₂ (CP 2021 Q1)</button>
+                <button type="button" onclick="selectEdTarget('C2N2')" class="ed-target-btn apple-btn !justify-start" data-ed="C2N2">C₂N₂ (CP 2024 Q1)</button>
+                <button type="button" onclick="selectEdTarget('NH4')" class="ed-target-btn apple-btn !justify-start" data-ed="NH4">NH₄⁺ / H₃O⁺ (Dative)</button>
+                <button type="button" onclick="selectEdTarget('Li3N')" class="ed-target-btn apple-btn !justify-start" data-ed="Li3N">Li₃N (CP 2018 Q1)</button>
+                <button type="button" onclick="selectEdTarget('Al2O3')" class="ed-target-btn apple-btn !justify-start" data-ed="Al2O3">Al₂O₃ (CP 2025 Q1)</button>
+              </div>
+            </div>
+
+            <!-- Visual SVG Electron Diagram Box -->
+            <div class="flex flex-col items-center justify-center p-4 rounded-2xl bg-slate-950 border border-slate-800 min-h-[185px]">
+              <div id="edSvgContainer" class="w-full flex items-center justify-center"></div>
+              <span id="edStatusBadge" class="chip bg-emerald-950 text-emerald-300 border border-emerald-700 mt-2">✅ Full Marks · All lone pairs &amp; bond pairs shown</span>
+            </div>
+
+            <!-- Explanation & Checklist -->
+            <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2 text-xs">
+              <div id="edCardTitle" class="font-bold text-white text-sm">Carbon dioxide, CO₂ (Simple molecular · Double covalent)</div>
+              <p id="edCardRule" class="text-slate-300 leading-relaxed"></p>
+              <p id="edCardCpNote" class="text-rose-300 leading-relaxed"></p>
+            </div>
+          </div>
+
+          <!-- Interactive Filter-Paper Ion Migration Lab (EDB Suggested Activity p. I-8) -->
+          <div class="border-t border-slate-800 pt-4">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+              <div>
+                <span class="text-[10px] font-mono text-cyan-400 uppercase font-bold">EDB Syllabus Suggested Activity (p. I-8)</span>
+                <h4 class="text-xs font-bold text-white uppercase tracking-wider mt-0.5">2. Interactive Migration of Coloured Ions on Filter Paper Simulator</h4>
+                <p class="text-[11px] text-slate-400">Place a crystal/drop of a coloured ionic salt in the centre of filter paper moistened with $	ext{Na}_2	ext{SO}_4(aq)$ and switch on the 20 V d.c. power supply.</p>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <select id="migSaltSel" onchange="runMigrationSim(false)" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-white">
+                  <option value="CuCr2O7" selected>Copper(II) dichromate, CuCr₂O₇ (Green crystal = Cu²⁺ + Cr₂O₇²⁻)</option>
+                  <option value="KMnO4">Potassium permanganate, KMnO₄ (Purple crystal = K⁺ + MnO₄⁻)</option>
+                  <option value="CuSO4">Copper(II) sulphate, CuSO₄ (Blue crystal = Cu²⁺ + SO₄²⁻)</option>
+                </select>
+                <button type="button" onclick="runMigrationSim(true)" class="apple-btn apple-btn-primary text-xs">⚡ Switch On 20 V DC</button>
+                <button type="button" onclick="runMigrationSim(false)" class="apple-btn text-xs">Reset</button>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 items-center text-xs">
+              <div class="lg:col-span-2 p-4 rounded-xl bg-slate-950 border border-slate-800">
+                <div class="flex items-center justify-between text-[11px] font-mono mb-2">
+                  <span class="chip bg-rose-950 text-rose-300 border border-rose-700">➕ Positive Electrode (Anode)</span>
+                  <span class="text-slate-400">Filter paper moistened with Na₂SO₄(aq)</span>
+                  <span class="chip bg-sky-950 text-sky-300 border border-sky-700">➖ Negative Electrode (Cathode)</span>
+                </div>
+                <div class="relative h-14 rounded-lg bg-slate-100/95 border border-slate-400 flex items-center justify-center overflow-hidden">
+                  <!-- Centre line -->
+                  <div class="absolute top-0 bottom-0 left-1/2 w-px border-l border-dashed border-slate-400"></div>
+                  <!-- Anode-bound anion spot -->
+                  <div id="migAnionSpot" class="w-9 h-9 rounded-full transition-all duration-700 flex items-center justify-center text-[9px] font-bold text-white shadow-md" style="background:#ea580c; transform: translateX(0px);">Cr₂O₇²⁻</div>
+                  <!-- Cathode-bound cation spot -->
+                  <div id="migCationSpot" class="w-9 h-9 rounded-full transition-all duration-700 flex items-center justify-center text-[9px] font-bold text-white shadow-md" style="background:#0284c7; transform: translateX(0px);">Cu²⁺</div>
+                </div>
+              </div>
+              <div id="migReadout" class="p-3.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-300 leading-relaxed">
+                Click <b>⚡ Switch On 20 V DC</b> to watch oppositely charged ions migrate toward the electrodes and see why the filter paper must be moistened with $	ext{Na}_2	ext{SO}_4(aq)$.
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -1070,6 +1726,55 @@
           <div class="p-4 bg-purple-950/30 border border-purple-800/60 rounded-lg"><p class="text-[11px] font-bold text-purple-300 uppercase tracking-wider mb-2">Giant metallic (Na, Cu, Al)</p><p class="text-xs text-slate-300">Melting overcomes the metallic bonds between the positive ions and the delocalised electrons → usually high mp. Conducts in both solid and liquid states via <b>delocalised electrons</b>.</p></div>
         </div>
         <div class="mt-4 p-4 bg-slate-900 border border-slate-800 rounded-lg"><p class="text-[11px] font-bold text-slate-300 uppercase tracking-wider mb-2">Identify an unknown from data</p><p class="text-xs text-slate-400 leading-relaxed">Two families only — <b>simple</b> (molecular: mp tracks intermolecular forces) vs <b>giant</b> (ionic / covalent / metallic: mp tracks bond strength). Then read the evidence. mp &gt; 500 °C &amp; conducts only molten → giant ionic. mp &lt; 300 °C, insoluble-but-organic-solvent or gaseous → simple molecular. Insoluble hard solid, mp &gt; 1500 °C → giant covalent. Shiny malleable conductor → metallic. (Examiners reward stating the reading <b>and</b> the reason.)</p></div>
+        <!-- ══ INTERACTIVE SIMULATOR D1: MYSTERY SUBSTANCE STRUCTURE DEDUCER & STRESS/CONDUCTIVITY LAB ══ -->
+        <div class="mt-6 apple-sim-panel space-y-5">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+            <div>
+              <span class="text-[10px] font-mono text-amber-400 uppercase font-bold">Interactive Simulator · Strands (f)–(i) Concept Check (CP 2012 Q16 · 2016 Q14 · 2022 Q1 · 2024 Q13)</span>
+              <h4 class="text-sm font-bold text-white mt-0.5">Physical Property Bench: Heat, Voltage &amp; Mechanical Stress Explorer</h4>
+              <p class="text-[11px] text-slate-400">Pick a substance below and run the 3 lab tests (<b>1. Thermal Melting/Boiling</b>, <b>2. Solid vs. Molten/Aqueous Conduction</b>, <b>3. Mechanical Shear</b>) to see what breaks at the microscopic level.</p>
+            </div>
+            <select id="structSimSelect" onchange="updateStructSim()" class="bg-slate-900 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-white font-medium">
+              <option value="NaCl" selected>Mystery A · NaCl / SrCl₂ (mp 801 °C · Giant Ionic)</option>
+              <option value="SiO2">Mystery B · Quartz SiO₂ (mp 1713 °C · Giant Covalent)</option>
+              <option value="CO2">Mystery C · Dry Ice CO₂ / CS₂ (sublimes −78 °C · Simple Molecular)</option>
+              <option value="S8">Mystery D · Octasulphur S₈ / I₂ (mp 115 °C · Simple Molecular · CP 2024 Q13)</option>
+              <option value="Graphite">Mystery E · Graphite (sublimes ≈3600 °C · Giant Covalent Layered)</option>
+              <option value="Diamond">Mystery F · Diamond (mp >3550 °C · Giant Covalent 3D)</option>
+              <option value="Al">Mystery G · Aluminium / Copper (mp 660 °C · Giant Metallic)</option>
+              <option value="HI">Mystery H · Hydrogen Iodide HI vs KI (mp −51 °C · CP 2022 Q1 Trap!)</option>
+            </select>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+            <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-[10px] font-mono uppercase text-amber-400 font-bold">🔥 Test 1 · Heat (Melt / Boil)</span>
+                <span id="stMpBadge" class="chip bg-amber-950 text-amber-300 border border-amber-700 font-mono">High mp (801 °C)</span>
+              </div>
+              <p id="stHeatText" class="text-slate-300 leading-relaxed"></p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-[10px] font-mono uppercase text-sky-400 font-bold">⚡ Test 2 · Electrical Conduction</span>
+                <span id="stCondBadge" class="chip bg-sky-950 text-sky-300 border border-sky-700 font-mono">Molten / (aq) Only</span>
+              </div>
+              <p id="stCondText" class="text-slate-300 leading-relaxed"></p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-[10px] font-mono uppercase text-purple-400 font-bold">🔨 Test 3 · Mechanical Stress</span>
+                <span id="stMechBadge" class="chip bg-purple-950 text-purple-300 border border-purple-700 font-mono">Hard but Brittle</span>
+              </div>
+              <p id="stMechText" class="text-slate-300 leading-relaxed"></p>
+            </div>
+          </div>
+
+          <div id="stExaminerBox" class="p-3.5 rounded-xl bg-rose-950/35 border border-rose-800/60 text-xs text-rose-200 leading-relaxed"></div>
+        </div>
+
       </div>
     </div>
 
@@ -1183,6 +1888,68 @@
           <div class="flex items-end"><button class="w-full bg-amber-700 hover:bg-amber-600 text-white text-xs font-semibold py-1.5 px-2 rounded-md" onclick="solverConfig()">Locate element</button></div>
         </div>
         <div id="svCfgOut" aria-live="polite" class="text-xs text-emerald-300 font-mono min-h-[20px]"></div>
+      </div>
+    </div>
+
+    
+    <!-- ══ BENCH 2B · REVERSE ISOTOPE ABUNDANCE SOLVER (CP 2021 Q3 % HANDLING) ══ -->
+    <div class="mt-6 bg-slate-950 border border-slate-800 rounded-xl p-5 space-y-3">
+      <div class="flex flex-wrap items-center justify-between gap-2">
+        <div class="flex items-center gap-2">
+          <span class="text-[10px] font-mono text-purple-400 uppercase font-bold px-2 py-0.5 bg-purple-950 rounded border border-purple-800">Bench 2B · Algebraic % Solver</span>
+          <h3 class="text-sm font-bold text-white">Reverse Isotope Calculation: Given $A_r$, Find % Abundance of Two Isotopes (CP 2021 Q3)</h3>
+        </div>
+        <div class="flex gap-1.5 text-xs">
+          <button type="button" class="apple-btn !py-1 !px-2.5 text-[11px]" onclick="loadRevIso(10,11,10.8,'B')">Boron (10.8)</button>
+          <button type="button" class="apple-btn !py-1 !px-2.5 text-[11px]" onclick="loadRevIso(63,65,63.55,'Cu')">Copper (63.55)</button>
+          <button type="button" class="apple-btn !py-1 !px-2.5 text-[11px]" onclick="loadRevIso(69,71,69.72,'Ga')">Gallium (69.72)</button>
+          <button type="button" class="apple-btn !py-1 !px-2.5 text-[11px]" onclick="loadRevIso(79,81,79.9,'Br')">Bromine (79.9)</button>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-4 gap-2 text-xs">
+        <div><label class="block text-slate-400 mb-1">Isotope 1 Mass ($M_1$)</label><input id="revM1" type="number" value="63" class="w-full bg-slate-900 border border-slate-700 rounded-md px-2 py-1.5 text-slate-100 num-card"></div>
+        <div><label class="block text-slate-400 mb-1">Isotope 2 Mass ($M_2$)</label><input id="revM2" type="number" value="65" class="w-full bg-slate-900 border border-slate-700 rounded-md px-2 py-1.5 text-slate-100 num-card"></div>
+        <div><label class="block text-slate-400 mb-1">Given $A_r$ (unitless)</label><input id="revAr" type="number" step="0.01" value="63.55" class="w-full bg-slate-900 border border-slate-700 rounded-md px-2 py-1.5 text-slate-100 num-card"></div>
+        <div class="flex items-end"><button type="button" class="w-full apple-btn apple-btn-primary py-2" onclick="solveReverseIsotope()">Solve Let x% &amp; (100−x)%</button></div>
+      </div>
+      <div id="revIsoOut" class="text-xs text-emerald-300 font-mono leading-relaxed p-2.5 rounded-lg bg-slate-900 border border-slate-800"></div>
+    </div>
+
+    <!-- ══ BENCH 5 · LIVE HKEAA MARK-SCHEME KEYWORD GRADER (TOPIC II EDITION) ══ -->
+    <div class="mt-6 apple-sim-panel space-y-4">
+      <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+        <div>
+          <span class="text-[10px] font-mono text-sky-400 uppercase font-bold px-2 py-0.5 bg-sky-950 rounded border border-sky-800">Bench 5 · Interactive Examiner Grader</span>
+          <h3 class="text-base font-bold text-white mt-1">Practice Writing Full-Mark Topic II Answers — Instant `[1M]` &amp; `[NOT ACCEPT]` Diagnostic</h3>
+          <p class="text-xs text-slate-400">Select a classic Paper 1B question below and type your explanation. The engine checks your phrasing against official HKEAA mark-scheme rubrics and flags fatal bonding-vs-intermolecular traps.</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 text-xs">
+        <div class="lg:col-span-1 space-y-2.5">
+          <label for="graderQSelect" class="block text-slate-300 font-semibold">Select HKDSE Exam Prompt:</label>
+          <select id="graderQSelect" onchange="loadGraderPrompt()" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white">
+            <option value="sio2_co2">Q1 (3 marks · CP 2012 Q16 / 2021 Q3): Explain why SiO₂ has a much higher melting point than CO₂.</option>
+            <option value="srcl2_cond">Q2 (2 marks · CP 2015 Q7 / 2023 Q1): Explain why solid SrCl₂ does not conduct electricity, whereas molten SrCl₂ does.</option>
+            <option value="graphite_prop">Q3 (3 marks · CP 2013 / 2024 Q1): Explain in terms of bonding and structure why graphite conducts electricity and is slippery.</option>
+            <option value="isotope_def">Q4 (2 marks · CP 2012 Q1 / 2016 Q4): Define "isotopes" and explain why ³⁵Cl and ³⁷Cl have the same chemical properties.</option>
+            <option value="dative_h3o">Q5 (2 marks · CP 2017 / 2022 Q4): Describe how the dative covalent bond in H₃O⁺ is formed from H₂O and H⁺.</option>
+            <option value="group1_trend">Q6 (2 marks · CP 2013): Explain why potassium is more reactive towards water than lithium.</option>
+          </select>
+          <div id="graderPromptBox" class="p-3 rounded-xl bg-slate-950 border border-slate-800 text-slate-200 leading-relaxed"></div>
+        </div>
+
+        <div class="lg:col-span-2 space-y-3">
+          <textarea id="graderInput" rows="4" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-sky-500" placeholder="Type your exam explanation here (e.g., SiO2 has a giant covalent structure while CO2 has a simple molecular structure...)"></textarea>
+          <div class="flex flex-wrap gap-2">
+            <button type="button" onclick="gradeStudentAnswer()" class="apple-btn apple-btn-primary">✨ Grade My Answer Against Mark Scheme</button>
+            <button type="button" onclick="fillModelGraderAnswer()" class="apple-btn">Show Model Full-Mark Answer</button>
+            <button type="button" onclick="document.getElementById('graderInput').value='';document.getElementById('graderResultBox').innerHTML='Type an answer and click Grade.';" class="apple-btn">Clear</button>
+          </div>
+          <div id="graderResultBox" class="p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-300 space-y-2 leading-relaxed">
+            Type an answer above and click <b>Grade My Answer Against Mark Scheme</b> to see your mark breakdown and keyword hits.
+          </div>
+        </div>
       </div>
     </div>
 
@@ -1691,5 +2458,787 @@ else { try{ MOBILE_UX.init(); }catch(e){} }
   }catch(e){}
 })();
 </script>
+
+<!-- ═══════════ APPLE COMMAND PALETTE (⌘K) MODAL ═══════════ -->
+<div id="cmdModal" onclick="if(event.target===this)closeCmdModal()">
+  <div class="w-full max-w-xl mx-4 bg-slate-900 border border-slate-700/80 rounded-2xl shadow-2xl overflow-hidden">
+    <div class="flex items-center gap-3 px-4 py-3 border-b border-slate-800">
+      <span class="text-sky-400 text-sm">🔍</span>
+      <input id="cmdSearchInput" type="text" oninput="filterCmdList()" placeholder="Search any structure, diagram, ion colour, or CP year (e.g. CO2, dative, graphite, CsCl, 2024)..." class="w-full bg-transparent text-sm text-white placeholder-slate-400 focus:outline-none">
+      <button type="button" onclick="closeCmdModal()" class="text-xs text-slate-400 hover:text-white px-2 py-0.5 rounded bg-slate-800">ESC</button>
+    </div>
+    <div id="cmdResults" class="max-h-80 overflow-y-auto divide-y divide-slate-800/70 p-2 text-xs"></div>
+  </div>
+</div>
+
+<script>
+/* ══ APPLE STUDIO PRO · TOPIC II INTERACTIVE ENGINE & DIAGNOSTIC LAYER ══ */
+
+/* 1. Theme Toggle (Apple Pro Dark <-> Cupertino Daylight) */
+function toggleAppleTheme(){
+  const root = document.documentElement;
+  const isLight = root.classList.toggle('theme-light');
+  const icon = document.getElementById('themeToggleIcon');
+  if(icon) icon.textContent = isLight ? '🌙 Pro Dark' : '☀️ Daylight';
+  try { localStorage.setItem('hkdse_topic2_theme', isLight ? 'light' : 'dark'); } catch(e){}
+}
+
+/* 2. Mastery Ring + Quiz Self-Score Injection */
+function injectQuizSelfCheckBars(){
+  const quizIds = ['atomQuiz','tableQuiz','bondsQuiz','structQuiz'];
+  quizIds.forEach(qid => {
+    const container = document.getElementById(qid);
+    if(!container) return;
+    const headerDiv = container.previousElementSibling;
+    if(headerDiv && !headerDiv.querySelector('.hide-all-btn')){
+      const btnWrap = document.createElement('div');
+      btnWrap.className = 'flex items-center gap-2';
+      const revBtn = headerDiv.querySelector('button');
+      if(revBtn){
+        revBtn.parentNode.insertBefore(btnWrap, revBtn);
+        btnWrap.appendChild(revBtn);
+        const hideBtn = document.createElement('button');
+        hideBtn.type = 'button';
+        hideBtn.className = 'hide-all-btn text-[11px] font-semibold text-slate-300 border border-slate-700 px-3 py-1 rounded-full hover:bg-slate-800';
+        hideBtn.textContent = 'Reset Blanks';
+        hideBtn.onclick = () => {
+          container.querySelectorAll('.blur-answer').forEach(b => b.classList.remove('revealed'));
+        };
+        btnWrap.appendChild(hideBtn);
+      }
+    }
+    [...container.children].forEach((row, idx) => {
+      if(row.querySelector('.quiz-self-bar')) return;
+      const key = qid + '_' + idx;
+      const bar = document.createElement('div');
+      bar.className = 'quiz-self-bar';
+      bar.innerHTML = `
+        <span class="text-[10px] font-mono text-slate-400">Tap blurred chips above to check each keyword, then log your recall:</span>
+        <div class="flex items-center gap-1.5">
+          <button type="button" class="apple-btn !py-0.5 !px-2 text-[10px]" data-qkey="${key}" onclick="markQuizRow('${key}', true, this)">✓ Got It</button>
+          <button type="button" class="apple-btn !py-0.5 !px-2 text-[10px]" data-qkey="${key}" onclick="markQuizRow('${key}', false, this)">↻ Review Again</button>
+        </div>
+      `;
+      row.appendChild(bar);
+    });
+  });
+}
+
+const quizMasteryState = {};
+function markQuizRow(key, mastered, btnEl){
+  quizMasteryState[key] = mastered;
+  const parent = btnEl.parentElement;
+  const buttons = parent.querySelectorAll('button');
+  buttons[0].className = mastered
+    ? 'apple-btn !py-0.5 !px-2 text-[10px] !bg-emerald-600/30 !border-emerald-500 !text-emerald-300'
+    : 'apple-btn !py-0.5 !px-2 text-[10px]';
+  buttons[1].className = !mastered
+    ? 'apple-btn !py-0.5 !px-2 text-[10px] !bg-amber-600/30 !border-amber-500 !text-amber-300'
+    : 'apple-btn !py-0.5 !px-2 text-[10px]';
+  updateMasteryRing();
+}
+
+function checkAllSyllabusOutcomes(){
+  document.querySelectorAll('.syl-chk').forEach(c => c.checked = true);
+  updateMasteryRing();
+}
+
+function updateMasteryRing(){
+  const sylChks = [...document.querySelectorAll('.syl-chk')];
+  const sylDone = sylChks.filter(c => c.checked).length;
+  const sylTotal = sylChks.length || 12;
+  const sylBadge = document.getElementById('sylAuditCount');
+  if(sylBadge) sylBadge.textContent = `${sylDone} / ${sylTotal} Outcomes Checked`;
+
+  const quizDone = Object.values(quizMasteryState).filter(Boolean).length;
+  const quizTotal = 48;
+  const totalPossible = sylTotal + quizTotal;
+  const pct = Math.round(((sylDone + quizDone) / totalPossible) * 100);
+
+  const circle = document.getElementById('masteryRingCircle');
+  const txt = document.getElementById('masteryPctText');
+  if(circle){
+    const circum = 94.2;
+    circle.style.strokeDashoffset = String(circum - (circum * pct) / 100);
+  }
+  if(txt) txt.textContent = `${pct}% Mastered`;
+}
+
+/* 3. Strand (a) Interactive Bohr Shell & Ion Diagram Builder (Z = 1..20) */
+const ELEMENTS_20 = [
+  null,
+  { z:1, sym:'H', name:'Hydrogen', a:1, atom:[1], ion:[0], ionSym:'H⁺', charge:'+1', ionLabel:'+', noble:'(empty shell — proton)', grp:'(I)', per:1 },
+  { z:2, sym:'He', name:'Helium', a:4, atom:[2], ion:[2], ionSym:'He (no ion)', charge:'0', ionLabel:'', noble:'He (2 · stable duplet)', grp:'0', per:1 },
+  { z:3, sym:'Li', name:'Lithium', a:7, atom:[2,1], ion:[2], ionSym:'Li⁺', charge:'+1', ionLabel:'+', noble:'He (2)', grp:'I', per:2 },
+  { z:4, sym:'Be', name:'Beryllium', a:9, atom:[2,2], ion:[2], ionSym:'Be²⁺', charge:'+2', ionLabel:'2+', noble:'He (2)', grp:'II', per:2 },
+  { z:5, sym:'B', name:'Boron', a:11, atom:[2,3], ion:[2,3], ionSym:'B (covalent)', charge:'0', ionLabel:'', noble:'Shares e⁻ covalently', grp:'III', per:2 },
+  { z:6, sym:'C', name:'Carbon', a:12, atom:[2,4], ion:[2,4], ionSym:'C (covalent)', charge:'0', ionLabel:'', noble:'Shares 4 e⁻ covalently', grp:'IV', per:2 },
+  { z:7, sym:'N', name:'Nitrogen', a:14, atom:[2,5], ion:[2,8], ionSym:'N³⁻', charge:'-3', ionLabel:'3−', noble:'Ne (2,8)', grp:'V', per:2 },
+  { z:8, sym:'O', name:'Oxygen', a:16, atom:[2,6], ion:[2,8], ionSym:'O²⁻', charge:'-2', ionLabel:'2−', noble:'Ne (2,8)', grp:'VI', per:2 },
+  { z:9, sym:'F', name:'Fluorine', a:19, atom:[2,7], ion:[2,8], ionSym:'F⁻', charge:'-1', ionLabel:'−', noble:'Ne (2,8)', grp:'VII', per:2 },
+  { z:10, sym:'Ne', name:'Neon', a:20, atom:[2,8], ion:[2,8], ionSym:'Ne (no ion)', charge:'0', ionLabel:'', noble:'Ne (2,8 · stable octet)', grp:'0', per:2 },
+  { z:11, sym:'Na', name:'Sodium', a:23, atom:[2,8,1], ion:[2,8], ionSym:'Na⁺', charge:'+1', ionLabel:'+', noble:'Ne (2,8)', grp:'I', per:3 },
+  { z:12, sym:'Mg', name:'Magnesium', a:24, atom:[2,8,2], ion:[2,8], ionSym:'Mg²⁺', charge:'+2', ionLabel:'2+', noble:'Ne (2,8)', grp:'II', per:3 },
+  { z:13, sym:'Al', name:'Aluminium', a:27, atom:[2,8,3], ion:[2,8], ionSym:'Al³⁺', charge:'+3', ionLabel:'3+', noble:'Ne (2,8)', grp:'III', per:3 },
+  { z:14, sym:'Si', name:'Silicon', a:28, atom:[2,8,4], ion:[2,8,4], ionSym:'Si (metalloid network)', charge:'0', ionLabel:'', noble:'Giant covalent network', grp:'IV', per:3 },
+  { z:15, sym:'P', name:'Phosphorus', a:31, atom:[2,8,5], ion:[2,8,8], ionSym:'P³⁻', charge:'-3', ionLabel:'3−', noble:'Ar (2,8,8)', grp:'V', per:3 },
+  { z:16, sym:'S', name:'Sulphur', a:32, atom:[2,8,6], ion:[2,8,8], ionSym:'S²⁻', charge:'-2', ionLabel:'2−', noble:'Ar (2,8,8)', grp:'VI', per:3 },
+  { z:17, sym:'Cl', name:'Chlorine', a:35, atom:[2,8,7], ion:[2,8,8], ionSym:'Cl⁻', charge:'-1', ionLabel:'−', noble:'Ar (2,8,8)', grp:'VII', per:3 },
+  { z:18, sym:'Ar', name:'Argon', a:40, atom:[2,8,8], ion:[2,8,8], ionSym:'Ar (no ion)', charge:'0', ionLabel:'', noble:'Ar (2,8,8 · stable octet)', grp:'0', per:3 },
+  { z:19, sym:'K', name:'Potassium', a:39, atom:[2,8,8,1], ion:[2,8,8], ionSym:'K⁺', charge:'+1', ionLabel:'+', noble:'Ar (2,8,8)', grp:'I', per:4 },
+  { z:20, sym:'Ca', name:'Calcium', a:40, atom:[2,8,8,2], ion:[2,8,8], ionSym:'Ca²⁺', charge:'+2', ionLabel:'2+', noble:'Ar (2,8,8)', grp:'II', per:4 }
+];
+
+let atomSimMode = 'atom';
+function setAtomSimMode(m){
+  atomSimMode = m;
+  document.getElementById('atomModeAtomBtn').className = m==='atom' ? 'apple-btn apple-btn-primary !py-1 !px-3 text-xs' : 'apple-btn !py-1 !px-3 text-xs';
+  document.getElementById('atomModeIonBtn').className = m==='ion' ? 'apple-btn apple-btn-primary !py-1 !px-3 text-xs' : 'apple-btn !py-1 !px-3 text-xs';
+  updateAtomSim();
+}
+function jumpAtomZ(z, m){
+  const sl = document.getElementById('atomZSlider');
+  if(sl) sl.value = String(z);
+  setAtomSimMode(m);
+}
+
+function updateAtomSim(){
+  const sl = document.getElementById('atomZSlider');
+  if(!sl) return;
+  const z = parseInt(sl.value, 10);
+  const el = ELEMENTS_20[z];
+  if(!el) return;
+
+  const isIon = atomSimMode === 'ion' && el.charge !== '0';
+  const shells = isIon ? el.ion : el.atom;
+  const eCount = shells.reduce((a,b)=>a+b, 0);
+
+  document.getElementById('atomZReadout').textContent = `Z = ${el.z} (${el.sym})`;
+  document.getElementById('atomSpecTitle').textContent = isIon
+    ? `${el.name} ion, ${el.ionSym} (A = ${el.a}, Z = ${el.z})`
+    : `${el.name} atom, ${el.sym} (A = ${el.a}, Z = ${el.z})`;
+  document.getElementById('atomPCount').textContent = String(el.z);
+  document.getElementById('atomNCount').textContent = String(el.a - el.z);
+  document.getElementById('atomECount').textContent = String(eCount);
+
+  const shellStr = shells[0] === 0 ? '0 (bare proton H⁺)' : shells.join(',');
+  document.getElementById('bohrCaption').textContent = `${isIon ? el.ionSym : el.sym} · ${shellStr}`;
+  document.getElementById('atomShellDetail').innerHTML = isIon
+    ? `<b>Ion formation:</b> Atom (${el.atom.join(',')}) ${el.charge.startsWith('+') ? 'loses ' + el.charge.slice(1) + ' valence e⁻' : 'gains ' + el.charge.slice(1) + ' e⁻'} → <b>${shellStr}</b> with square brackets and <b>${el.ionLabel}</b> charge.`
+    : `<b>Atom arrangement:</b> <b>${el.atom.join(',')}</b> → <b>${el.per}</b> occupied shell(s) (Period ${el.per}), <b>${el.atom[el.atom.length-1]}</b> valence e⁻ (Group ${el.grp}).`;
+  document.getElementById('atomNobleMatch').textContent = `Isoelectronic / stability target: ${el.noble}`;
+
+  const trapBox = document.getElementById('atomSimTrapBox');
+  if(z === 19 || z === 20){
+    trapBox.innerHTML = `<b>⚠️ Z = ${z} Shell-Filling Rule:</b> Never write "2,8,${z-10}"! Within $Z \le 20$, the 3rd shell holds <b>8</b> electrons before the 4th shell opens: <b>${el.atom.join(',')}</b>.`;
+  } else if(z === 2){
+    trapBox.innerHTML = `<b>⚠️ Helium Trap:</b> He has <b>2</b> outermost electrons (duplet, 1st shell full), yet sits in <b>Group 0</b> — so "all noble gases have 8 outermost electrons" scores 0 marks!`;
+  } else if(isIon){
+    trapBox.innerHTML = `<b>⚠️ CP 2015 Q10 / CP 2020 Q1 Ion Rule:</b> When drawing an ion, you MUST include <b>square brackets [ ]</b> and the <b>${el.ionLabel} charge outside</b>!`;
+  } else {
+    trapBox.innerHTML = `<b>💡 Exam Check:</b> Check whether the question stem asks for the <b>atom</b> (${el.atom.join(',')}) or the <b>ion</b> (${el.ion.join(',')}) before drawing (CP 2020 Q1).`;
+  }
+
+  // Render SVG Bohr rings
+  const svg = document.getElementById('bohrSvg');
+  const cx = 110, cy = 105;
+  const radii = [26, 44, 62, 80];
+  let out = '';
+
+  // Optional ion brackets
+  if(isIon){
+    out += `<path d="M 24 22 L 14 22 L 14 188 L 24 188" fill="none" stroke="#38bdf8" stroke-width="2.2"/>`;
+    out += `<path d="M 186 22 L 196 22 L 196 188 L 186 188" fill="none" stroke="#38bdf8" stroke-width="2.2"/>`;
+    out += `<text x="201" y="34" fill="#38bdf8" font-size="14" font-weight="bold" font-family="monospace">${el.ionLabel}</text>`;
+  }
+
+  // Nucleus
+  out += `<circle cx="${cx}" cy="${cy}" r="14" fill="#1e293b" stroke="#64d2ff" stroke-width="1.5"/>`;
+  out += `<text x="${cx}" y="${cy+4}" fill="#f8fafc" font-size="11" font-weight="bold" text-anchor="middle">${el.sym}</text>`;
+
+  // Shells and paired electron dots
+  const pairAngles = [90, 270, 0, 180, 82, 262, 352, 172];
+  shells.forEach((count, sIdx) => {
+    if(count <= 0) return;
+    const r = radii[sIdx];
+    out += `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="rgba(148,163,184,0.45)" stroke-width="1.2"/>`;
+    for(let k=0; k<count; k++){
+      const ang = (sIdx === 0 ? (k === 0 ? 85 : 95) : pairAngles[k]) * Math.PI / 180;
+      const ex = cx + r * Math.cos(ang);
+      const ey = cy - r * Math.sin(ang);
+      const isAdded = isIon && el.charge.startsWith('-') && sIdx === shells.length - 1 && k >= el.atom[el.atom.length-1];
+      if(isAdded){
+        out += `<text x="${ex}" y="${ey+3.5}" fill="#f43f5e" font-size="11" font-weight="bold" text-anchor="middle">×</text>`;
+      } else {
+        out += `<circle cx="${ex}" cy="${ey}" r="3.2" fill="#38bdf8"/>`;
+      }
+    }
+  });
+  svg.innerHTML = out;
+}
+
+/* 4. Strand (b) Interactive Mini Periodic Table & Halogen Displacement Matrix */
+const PT_TILES = [
+  // Row 1 (Period 1)
+  { sym:'H', z:1, col:1, row:1, cat:'nonmetal', arr:'1', grp:'(I)', per:1, bhv:'Non-metal gas (H₂); forms H⁺ (or shares 1 e⁻ covalently).', trd:'Sits alone above Group I/VII.' },
+  { sym:'He', z:2, col:8, row:1, cat:'noble', arr:'2', grp:'0', per:1, bhv:'Monatomic unreactive gas; 1st shell is full (duplet of 2 e⁻).', trd:'⚠️ Trap: Placed in Group 0 despite having 2 outermost electrons (not Group II!).' },
+  // Row 2 (Period 2)
+  { sym:'Li', z:3, col:1, row:2, cat:'metal', arr:'2,1', grp:'I', per:2, bhv:'Alkali metal: floats on water, fizzes steadily → 2LiOH(aq) + H₂(g).', trd:'Least reactive Group I metal; reactivity increases down Group I (Li < Na < K < Rb < Cs).' },
+  { sym:'Be', z:4, col:2, row:2, cat:'metal', arr:'2,2', grp:'II', per:2, bhv:'Group II metal; 2 valence e⁻ → Be²⁺.', trd:'Less reactive than Mg and Ca down Group II.' },
+  { sym:'B', z:5, col:3, row:2, cat:'metalloid', arr:'2,3', grp:'III', per:2, bhv:'Metalloid; forms covalent compounds (e.g. BF₃).', trd:'Above Al (which is a reactive metal forming Al³⁺).' },
+  { sym:'C', z:6, col:4, row:2, cat:'nonmetal', arr:'2,4', grp:'IV', per:2, bhv:'Non-metal; giant covalent allotropes (diamond, graphite) & simple molecular CO₂.', trd:'Compare C vs Si: CO₂ is simple molecular, whereas SiO₂ is giant covalent!' },
+  { sym:'N', z:7, col:5, row:2, cat:'nonmetal', arr:'2,5', grp:'V', per:2, bhv:'Diatomic gas N≡N (triple bond + 1 lone pair per N); forms N³⁻ in Li₃N / Mg₃N₂.', trd:'CP 2018 Q1: Li₃N is giant ionic (3 Li⁺ and N³⁻), not covalent!' },
+  { sym:'O', z:8, col:6, row:2, cat:'nonmetal', arr:'2,6', grp:'VI', per:2, bhv:'Diatomic gas O=O (double bond); gains 2 e⁻ → O²⁻ (2,8) with metals.', trd:'Compare O vs S: O₂ is a gas while S₈ is a simple molecular yellow solid (CP 2024 Q13).' },
+  { sym:'F', z:9, col:7, row:2, cat:'halogen', arr:'2,7', grp:'VII', per:2, bhv:'Pale yellow diatomic halogen (F₂); gains 1 e⁻ → F⁻ (2,8).', trd:'Most reactive Group VII element! Halogen reactivity DECREASES down the group (F₂ > Cl₂ > Br₂ > I₂ > At₂).' },
+  { sym:'Ne', z:10, col:8, row:2, cat:'noble', arr:'2,8', grp:'0', per:2, bhv:'Unreactive monatomic gas (stable octet); used in advertising signs.', trd:'Isoelectronic reference for Na⁺, Mg²⁺, Al³⁺, N³⁻, O²⁻, F⁻.' },
+  // Row 3 (Period 3)
+  { sym:'Na', z:11, col:1, row:3, cat:'metal', arr:'2,8,1', grp:'I', per:3, bhv:'Soft alkali metal stored under paraffin oil; melts into silvery ball on water → 2NaOH + H₂.', trd:'More reactive than Li, less reactive than K (outer e⁻ further from nucleus, weaker attraction).' },
+  { sym:'Mg', z:12, col:2, row:3, cat:'metal', arr:'2,8,2', grp:'II', per:3, bhv:'Reacts very slowly with cold water, vigorously with steam or dilute HCl → MgCl₂ + H₂.', trd:'Less reactive than Ca (Ca has 4 shells vs Mg 3 shells).' },
+  { sym:'Al', z:13, col:3, row:3, cat:'metal', arr:'2,8,3', grp:'III', per:3, bhv:'Giant metallic (3 delocalised e⁻ per Al³⁺ ion) → higher mp & better electrical conductor than Na (CP 2016 Q14).', trd:'CP 2025 Q1 trap: bonding in Al metal is metallic, NOT ionic!' },
+  { sym:'Si', z:14, col:4, row:3, cat:'metalloid', arr:'2,8,4', grp:'IV', per:3, bhv:'Metalloid (semi-conductor) with giant covalent structure like diamond; quartz SiO₂ is also giant covalent.', trd:'CP 2016 Q14: Si has much lower electrical conductivity than Na and Al.' },
+  { sym:'P', z:15, col:5, row:3, cat:'nonmetal', arr:'2,8,5', grp:'V', per:3, bhv:'Non-metal (P₄); forms PCl₃ (1 lone pair on P, 3 on each Cl — CP 2016 Q4).', trd:'5 valence electrons → needs 3 more for octet.' },
+  { sym:'S', z:16, col:6, row:3, cat:'nonmetal', arr:'2,8,6', grp:'VI', per:3, bhv:'Simple molecular solid S₈ (crown ring); forms S²⁻ (2,8,8) with metals.', trd:'CP 2024 Q13: Never call sulphur "giant covalent" — it consists of discrete S₈ molecules held by vdW forces!' },
+  { sym:'Cl', z:17, col:7, row:3, cat:'halogen', arr:'2,8,7', grp:'VII', per:3, bhv:'Greenish-yellow toxic gas (Cl₂); displaces Br₂ and I₂ from KBr(aq) and KI(aq).', trd:'Reactivity: Cl₂ > Br₂ > I₂ because smaller Cl atom attracts an incoming e⁻ more strongly.' },
+  { sym:'Ar', z:18, col:8, row:3, cat:'noble', arr:'2,8,8', grp:'0', per:3, bhv:'Unreactive noble gas (stable octet); used to fill filament light bulbs.', trd:'CP 2015 trap: Symbol is Ar (never "Ag" or "At"!). Sits before K(19) despite Ar having mass 40 vs K 39.' },
+  // Row 4 + Extrapolation Row
+  { sym:'K', z:19, col:1, row:4, cat:'metal', arr:'2,8,8,1', grp:'I', per:4, bhv:'Reacts violently with water (melts, darts, burns with lilac flame) → 2KOH(aq) + H₂(g).', trd:'More reactive than Na: 4 occupied shells → outermost e⁻ further from nucleus & more shielded.' },
+  { sym:'Ca', z:20, col:2, row:4, cat:'metal', arr:'2,8,8,2', grp:'II', per:4, bhv:'Sinks in cold water and gives steady stream of H₂ bubbles + cloudy Ca(OH)₂; brick-red flame.', trd:'More reactive than Mg towards water and dilute HCl.' },
+  { sym:'Rb/Cs', z:37, col:3, row:4, cat:'extrap', arr:'Group I (Per 5/6)', grp:'I', per:5, bhv:'🔮 Extrapolation Target (Rubidium / Caesium): Soft silvery metal, stored under oil, forms Rb⁺/Cs⁺ and alkaline MOH + H₂.', trd:'Reacts EXPLOSIVELY with water — even more reactive than K because valence e⁻ is in shell 5/6!' },
+  { sym:'Sr/Ba', z:38, col:4, row:4, cat:'extrap', arr:'Group II (Per 5/6)', grp:'II', per:5, bhv:'🔮 Extrapolation Target (Strontium / Barium): Metallic bond in element (CP 2017); forms Sr²⁺/Ba²⁺ ionic salts (SrCl₂, BaCl₂).', trd:'CP 2016 Q20 note: Atom and its M²⁺ ion warn on occupied shell count; solid SrCl₂ ions are not mobile (CP 2023 Q1).' },
+  { sym:'Br₂', z:35, col:6, row:4, cat:'halogen', arr:'Group VII (Per 4)', grp:'VII', per:4, bhv:'Reddish-brown volatile liquid (only liquid non-metal at r.t.p.); orange-brown in water.', trd:'Less reactive than Cl₂, more reactive than I₂ — displaces I₂ from KI(aq) but cannot displace Cl₂.' },
+  { sym:'I₂', z:53, col:7, row:4, cat:'halogen', arr:'Group VII (Per 5)', grp:'VII', per:5, bhv:'Grey-black crystalline solid; sublimes to violet vapour; brown in KI(aq), purple in organic solvent.', trd:'Simple molecular structure held by weak van der Waals’ forces between I₂ molecules.' },
+  { sym:'At₂', z:85, col:8, row:4, cat:'extrap', arr:'Group VII (Per 6)', grp:'VII', per:6, bhv:'🔮 Extrapolation Target (Astatine): Black solid at r.t.p. (largest molecule → strongest vdW in Group VII), forms NaAt (ionic) and HAt (covalent).', trd:'LEAST reactive halogen — cannot displace Cl⁻, Br⁻ or I⁻ from solution!' }
+];
+
+function initPtGrid(){
+  const grid = document.getElementById('ptInteractiveGrid');
+  if(!grid) return;
+  grid.innerHTML = '';
+  for(let r=1; r<=4; r++){
+    for(let c=1; c<=8; c++){
+      const item = PT_TILES.find(t => t.row===r && t.col===c);
+      const cell = document.createElement('div');
+      if(!item){
+        cell.className = 'p-1';
+        grid.appendChild(cell);
+        continue;
+      }
+      const bgMap = {
+        metal: 'bg-sky-950/60 text-sky-300 border-sky-800/70',
+        metalloid: 'bg-amber-950/60 text-amber-300 border-amber-800/70',
+        nonmetal: 'bg-emerald-950/60 text-emerald-300 border-emerald-800/70',
+        halogen: 'bg-purple-950/60 text-purple-300 border-purple-800/70',
+        noble: 'bg-cyan-950/60 text-cyan-300 border-cyan-800/70',
+        extrap: 'bg-rose-950/60 text-rose-300 border-rose-700/80'
+      };
+      cell.className = `pt-tile ${bgMap[item.cat] || ''} ${item.sym==='Cl'?'active-tile':''}`;
+      cell.innerHTML = `<div class="text-[9px] font-mono opacity-75">${item.z}</div><div class="text-xs font-bold">${item.sym}</div>`;
+      cell.onclick = () => {
+        grid.querySelectorAll('.pt-tile').forEach(t => t.classList.remove('active-tile'));
+        cell.classList.add('active-tile');
+        document.getElementById('ptCardTitle').textContent = `${item.sym} (Z = ${item.z})`;
+        document.getElementById('ptCardBadge').textContent = `Period ${item.per} · Group ${item.grp}`;
+        document.getElementById('ptCardArr').textContent = `Electronic arrangement: ${item.arr}`;
+        document.getElementById('ptCardBehavior').innerHTML = `<b>Key Chemistry:</b> ${item.bhv}`;
+        document.getElementById('ptCardTrend').innerHTML = `<b>Trend &amp; Exam Watch-Out:</b> ${item.trd}`;
+      };
+      grid.appendChild(cell);
+    }
+  }
+  // Trigger initial Cl view
+  const clItem = PT_TILES.find(t => t.sym==='Cl');
+  if(clItem){
+    document.getElementById('ptCardBehavior').innerHTML = `<b>Key Chemistry:</b> ${clItem.bhv}`;
+    document.getElementById('ptCardTrend').innerHTML = `<b>Trend &amp; Exam Watch-Out:</b> ${clItem.trd}`;
+  }
+}
+
+function runHalogenSim(){
+  const g = document.getElementById('halGasSel').value;
+  const s = document.getElementById('halSaltSel').value;
+  const swatch = document.getElementById('halTubeSwatch');
+  const badge = document.getElementById('halVerdictBadge');
+  const out = document.getElementById('halSimOut');
+
+  const rank = { Cl2: 3, Br2: 2, I2: 1 };
+  const saltRank = { KCl: 3, KBr: 2, KI: 1 };
+
+  if(rank[g] > saltRank[s]){
+    badge.className = 'font-bold text-emerald-400';
+    badge.textContent = '✅ Displacement Occurs!';
+    if(s === 'KBr'){
+      swatch.style.background = 'linear-gradient(180deg, #f59e0b 0%, #b45309 100%)';
+      out.innerHTML = `<b>Observation:</b> Colourless KBr(aq) turns <b>orange / reddish-brown</b> (due to displaced $\text{Br}_2(aq)$).<br><b>Ionic Equation:</b> $\text{Cl}_2(aq) + 2\text{Br}^-(aq) \rightarrow 2\text{Cl}^-(aq) + \text{Br}_2(aq)$.<br><b>Reason:</b> Chlorine is higher in Group VII than bromine (smaller atom, fewer shells), so a Cl atom attracts an incoming electron more strongly than Br.`;
+    } else {
+      swatch.style.background = 'linear-gradient(180deg, #92400e 0%, #451a03 100%)';
+      const halName = g === 'Cl2' ? 'Chlorine' : 'Bromine';
+      out.innerHTML = `<b>Observation:</b> Colourless KI(aq) turns <b>brown</b> (due to displaced $\text{I}_2(aq)$; turns purple if shaken with an organic solvent).<br><b>Ionic Equation:</b> $\text{${g === 'Cl2' ? 'Cl_2' : 'Br_2'}}(aq) + 2\text{I}^-(aq) \rightarrow 2\text{${g === 'Cl2' ? 'Cl' : 'Br'}}^-(aq) + \text{I}_2(aq)$.<br><b>Reason:</b> ${halName} is more reactive (stronger oxidising agent) than iodine because oxidizing power decreases down Group VII.`;
+    }
+  } else {
+    badge.className = 'font-bold text-rose-400';
+    badge.textContent = '❌ No Displacement Reaction';
+    const colors = { Cl2: '#fef08a', Br2: '#d97706', I2: '#78350f' };
+    swatch.style.background = colors[g];
+    out.innerHTML = `<b>Observation:</b> No reaction — the solution simply keeps the diluted colour of added ${g}(aq).<br><b>Why:</b> A less reactive (or identical) halogen <b>cannot displace</b> a more reactive halide ion from solution because reactivity decreases down Group VII ($\text{Cl}_2 > \text{Br}_2 > \text{I}_2$).`;
+  }
+  safeInitKaTeX();
+}
+
+/* 5. Strand (e) Interactive Dot-and-Cross Diagram Studio & Ion Migration Simulator */
+let currentEdTarget = 'CO2';
+let currentEdMode = 'right';
+
+const ED_TARGETS = {
+  CO2: {
+    title: 'Carbon dioxide, CO₂ (Simple molecular · Two C=O double bonds)',
+    rule: 'Carbon (Group IV, 4 valence e⁻) shares <b>two pairs of electrons</b> with each Oxygen (Group VI, 6 valence e⁻). Each oxygen atom MUST still show <b>two lone pairs (4 non-bonding electrons)</b>!',
+    cp: '<b>🚨 CP 2014 Examiner Report:</b> Most candidates could not draw the CO₂ electron diagram — either drawing single bonds or omitting the two lone pairs on each oxygen atom.',
+    svgRight: `<svg viewBox="0 0 280 110" class="w-64"><circle cx="70" cy="55" r="36" fill="none" stroke="#38bdf8" stroke-width="1.5"/><circle cx="140" cy="55" r="36" fill="none" stroke="#a855f7" stroke-width="1.5"/><circle cx="210" cy="55" r="36" fill="none" stroke="#38bdf8" stroke-width="1.5"/><text x="58" y="60" fill="#f8fafc" font-size="14" font-weight="bold">O</text><text x="140" y="60" fill="#f8fafc" font-size="14" font-weight="bold" text-anchor="middle">C</text><text x="222" y="60" fill="#f8fafc" font-size="14" font-weight="bold" text-anchor="end">O</text><text x="105" y="47" fill="#38bdf8" font-size="11" text-anchor="middle">• ×</text><text x="105" y="67" fill="#38bdf8" font-size="11" text-anchor="middle">• ×</text><text x="175" y="47" fill="#38bdf8" font-size="11" text-anchor="middle">× •</text><text x="175" y="67" fill="#38bdf8" font-size="11" text-anchor="middle">× •</text><text x="65" y="27" fill="#38bdf8" font-size="12" text-anchor="middle">• •</text><text x="65" y="90" fill="#38bdf8" font-size="12" text-anchor="middle">• •</text><text x="215" y="27" fill="#38bdf8" font-size="12" text-anchor="middle">• •</text><text x="215" y="90" fill="#38bdf8" font-size="12" text-anchor="middle">• •</text></svg>`,
+    svgWrong: `<svg viewBox="0 0 280 110" class="w-64"><circle cx="70" cy="55" r="36" fill="none" stroke="#f43f5e" stroke-width="1.5"/><circle cx="140" cy="55" r="36" fill="none" stroke="#f43f5e" stroke-width="1.5"/><circle cx="210" cy="55" r="36" fill="none" stroke="#f43f5e" stroke-width="1.5"/><text x="58" y="60" fill="#f8fafc" font-size="14" font-weight="bold">O</text><text x="140" y="60" fill="#f8fafc" font-size="14" font-weight="bold" text-anchor="middle">C</text><text x="222" y="60" fill="#f8fafc" font-size="14" font-weight="bold" text-anchor="end">O</text><text x="105" y="47" fill="#fca5a5" font-size="11" text-anchor="middle">• ×</text><text x="105" y="67" fill="#fca5a5" font-size="11" text-anchor="middle">• ×</text><text x="175" y="47" fill="#fca5a5" font-size="11" text-anchor="middle">× •</text><text x="175" y="67" fill="#fca5a5" font-size="11" text-anchor="middle">× •</text><text x="140" y="104" fill="#fb7185" font-size="10" text-anchor="middle">❌ 0 Marks: Lone pairs on O omitted!</text></svg>`
+  },
+  Na2O: {
+    title: 'Sodium oxide, Na₂O (Giant ionic · Electron transfer)',
+    rule: 'Two Na atoms each lose 1 electron to form <b>two $[\text{Na}]^+$ cations</b>; one O atom gains 2 electrons to form <b>one $[\text{O}]^{2-}$ anion</b> with 8 outer electrons (6 • + 2 ×) inside square brackets.',
+    cp: '<b>🚨 CP 2015 Q10 Examiner Report:</b> Many candidates handed in a "covalent-like" overlapping-ring diagram for ionic Na₂O, or wrote the wrong charge/electrons on O²⁻.',
+    svgRight: `<svg viewBox="0 0 280 110" class="w-64"><text x="45" y="62" fill="#38bdf8" font-size="18" font-weight="bold" text-anchor="middle">2 [ Na ]⁺</text><path d="M 125 18 L 117 18 L 117 92 L 125 92" fill="none" stroke="#a855f7" stroke-width="2"/><path d="M 215 18 L 223 18 L 223 92 L 215 92" fill="none" stroke="#a855f7" stroke-width="2"/><text x="235" y="28" fill="#a855f7" font-size="13" font-weight="bold">2−</text><circle cx="170" cy="55" r="30" fill="none" stroke="#a855f7" stroke-width="1.5"/><text x="170" y="60" fill="#f8fafc" font-size="14" font-weight="bold" text-anchor="middle">O</text><text x="170" y="33" fill="#e2e8f0" font-size="11" text-anchor="middle">• •</text><text x="170" y="83" fill="#e2e8f0" font-size="11" text-anchor="middle">• •</text><text x="145" y="59" fill="#e2e8f0" font-size="11" text-anchor="middle">: </text><text x="194" y="59" fill="#38bdf8" font-size="11" text-anchor="middle">× ×</text></svg>`,
+    svgWrong: `<svg viewBox="0 0 280 110" class="w-64"><circle cx="75" cy="55" r="30" fill="none" stroke="#f43f5e" stroke-width="1.5"/><circle cx="140" cy="55" r="34" fill="none" stroke="#f43f5e" stroke-width="1.5"/><circle cx="205" cy="55" r="30" fill="none" stroke="#f43f5e" stroke-width="1.5"/><text x="68" y="60" fill="#f8fafc" font-size="13">Na</text><text x="140" y="60" fill="#f8fafc" font-size="13" text-anchor="middle">O</text><text x="212" y="60" fill="#f8fafc" font-size="13" text-anchor="end">Na</text><text x="108" y="58" fill="#fca5a5" font-size="11" text-anchor="middle">• ×</text><text x="172" y="58" fill="#fca5a5" font-size="11" text-anchor="middle">× •</text><text x="140" y="104" fill="#fb7185" font-size="10" text-anchor="middle">❌ 0 Marks: Drawn as covalent sharing (CP 2015 Q10)!</text></svg>`
+  },
+  PCl3: {
+    title: 'Phosphorus trichloride, PCl₃ (Simple molecular · 3 single bonds + lone pairs)',
+    rule: 'Central P (Group V, 5 valence e⁻) forms <b>3 single covalent bonds</b> with 3 Cl atoms and retains <b>1 lone pair</b>; each Cl atom MUST show <b>3 lone pairs (6 non-bonding e⁻)</b>.',
+    cp: '<b>🚨 CP 2016 Q4 Examiner Report:</b> Candidates frequently omitted the lone pair on P or the three lone pairs on each peripheral Cl atom.',
+    svgRight: `<svg viewBox="0 0 280 110" class="w-64"><text x="140" y="25" fill="#a855f7" font-size="12" font-weight="bold" text-anchor="middle">• • (lone pair on P)</text><text x="140" y="58" fill="#f8fafc" font-size="15" font-weight="bold" text-anchor="middle">Cl — P — Cl</text><text x="140" y="82" fill="#f8fafc" font-size="14" font-weight="bold" text-anchor="middle">|</text><text x="140" y="98" fill="#f8fafc" font-size="14" font-weight="bold" text-anchor="middle">Cl</text><text x="46" y="58" fill="#38bdf8" font-size="10">3 LP on each Cl</text><text x="200" y="58" fill="#38bdf8" font-size="10">3 LP on each Cl</text></svg>`,
+    svgWrong: `<svg viewBox="0 0 280 110" class="w-64"><text x="140" y="55" fill="#fca5a5" font-size="15" font-weight="bold" text-anchor="middle">Cl : P : Cl (no lone pairs)</text><text x="140" y="100" fill="#fb7185" font-size="10" text-anchor="middle">❌ 0 Marks: Omitting lone pairs on P or Cl (CP 2016 Q4)!</text></svg>`
+  },
+  C2H2: {
+    title: 'Ethyne, C₂H₂ (Simple molecular · C≡C triple bond · CP 2021 Q1)',
+    rule: 'Each C atom (4 valence e⁻) shares <b>1 pair with H</b> and <b>3 pairs (triple bond) with the other C atom</b>: $\text{H} : \text{C} \; \vdots\vdots \; \text{C} : \text{H}$. Neither C nor H has any lone pairs!',
+    cp: '<b>🚨 CP 2021 Q1 Examiner Report:</b> Candidates drew the electron diagram of C₂H₄ instead, or added impossible lone pairs onto the carbon atoms.',
+    svgRight: `<svg viewBox="0 0 280 110" class="w-64"><text x="140" y="58" fill="#38bdf8" font-size="16" font-weight="bold" font-family="monospace" text-anchor="middle">H  :  C  ⋮⋮  C  :  H</text><text x="140" y="90" fill="#34d399" font-size="10" text-anchor="middle">3 shared pairs (6 e⁻) between C and C; 0 lone pairs</text></svg>`,
+    svgWrong: `<svg viewBox="0 0 280 110" class="w-64"><text x="140" y="55" fill="#fca5a5" font-size="15" font-weight="bold" font-family="monospace" text-anchor="middle">H : C :: C : H (with lone pairs on C)</text><text x="140" y="95" fill="#fb7185" font-size="10" text-anchor="middle">❌ 0 Marks: C=C double bond + stray lone pairs on C (CP 2021 Q1)!</text></svg>`
+  },
+  C2N2: {
+    title: 'Cyanogen, C₂N₂ (Simple molecular · :N≡C–C≡N: · CP 2024 Q1)',
+    rule: 'Structure is $\text{:N}\equiv\text{C}-\text{C}\equiv\text{N:}$ — each C forms a triple bond (3 shared pairs) with N and a single bond (1 shared pair) with the other C. Each N atom MUST show <b>1 lone pair</b>!',
+    cp: '<b>🚨 CP 2024 Q1 Examiner Report:</b> Lone pairs on the two nitrogen atoms were frequently neglected.',
+    svgRight: `<svg viewBox="0 0 280 110" class="w-64"><text x="140" y="58" fill="#38bdf8" font-size="15" font-weight="bold" font-family="monospace" text-anchor="middle">:N  ⋮⋮  C  :  C  ⋮⋮  N:</text><text x="140" y="90" fill="#34d399" font-size="10" text-anchor="middle">1 lone pair on each N + C≡N triple bonds + C–C single bond</text></svg>`,
+    svgWrong: `<svg viewBox="0 0 280 110" class="w-64"><text x="140" y="55" fill="#fca5a5" font-size="15" font-weight="bold" font-family="monospace" text-anchor="middle">N  ⋮⋮  C  :  C  ⋮⋮  N</text><text x="140" y="95" fill="#fb7185" font-size="10" text-anchor="middle">❌ 0 Marks: Nitrogen lone pairs neglected (CP 2024 Q1)!</text></svg>`
+  },
+  NH4: {
+    title: 'Ammonium ion, NH₄⁺ & Hydronium ion, H₃O⁺ (Dative covalent bond)',
+    rule: 'In $\text{NH}_4^+$, the N atom of $\text{NH}_3$ donates its <b>lone pair of electrons</b> to an empty shell of a <b>hydrogen ion ($\text{H}^+$)</b>. Enclose the entire ion in <b>square brackets `[ ]` with a `+` charge</b>!',
+    cp: '<b>🚨 CP 2017 / CP 2022 Q4 Trap:</b> Never write "formed between a water/ammonia molecule and a hydrogen <i>atom</i>" — the acceptor is a <b>hydrogen ion, H⁺</b>!',
+    svgRight: `<svg viewBox="0 0 280 110" class="w-64"><path d="M 65 14 L 55 14 L 55 96 L 65 96" fill="none" stroke="#38bdf8" stroke-width="2"/><path d="M 215 14 L 225 14 L 225 96 L 215 96" fill="none" stroke="#38bdf8" stroke-width="2"/><text x="234" y="26" fill="#38bdf8" font-size="15" font-weight="bold">+</text><text x="140" y="28" fill="#f8fafc" font-size="12" font-weight="bold" text-anchor="middle">H (from H⁺)</text><text x="140" y="43" fill="#fbbf24" font-size="12" font-weight="bold" text-anchor="middle">•• (both from N)</text><text x="140" y="62" fill="#f8fafc" font-size="14" font-weight="bold" text-anchor="middle">H : N : H</text><text x="140" y="78" fill="#f8fafc" font-size="12" font-weight="bold" text-anchor="middle">:</text><text x="140" y="92" fill="#f8fafc" font-size="12" font-weight="bold" text-anchor="middle">H</text></svg>`,
+    svgWrong: `<svg viewBox="0 0 280 110" class="w-64"><text x="140" y="52" fill="#fca5a5" font-size="14" font-weight="bold" text-anchor="middle">NH₄ (no brackets, no + charge)</text><text x="140" y="92" fill="#fb7185" font-size="10" text-anchor="middle">❌ 0 Marks: Missing [ ]⁺ or saying "H atom" instead of "H⁺ ion"!</text></svg>`
+  },
+  Li3N: {
+    title: 'Lithium nitride, Li₃N (Giant ionic · 3 Li⁺ and N³⁻ · CP 2018 Q1)',
+    rule: 'Lithium is a Group I metal and Nitrogen is a Group V non-metal: 3 Li atoms transfer 1 electron each to 1 N atom, forming <b>$3\,[\text{Li}]^+$ and $[\text{N}]^{3-}$</b>.',
+    cp: '<b>🚨 CP 2018 Q1 Examiner Report:</b> "Common mistake: Li₃N is a covalent compound" — many candidates drew shared pairs instead of ions with brackets and charges!',
+    svgRight: `<svg viewBox="0 0 280 110" class="w-64"><text x="65" y="60" fill="#38bdf8" font-size="18" font-weight="bold" text-anchor="middle">3 [ Li ]⁺</text><text x="190" y="60" fill="#a855f7" font-size="18" font-weight="bold" text-anchor="middle">[ :N: ]³⁻ (8 outer e⁻)</text></svg>`,
+    svgWrong: `<svg viewBox="0 0 280 110" class="w-64"><text x="140" y="55" fill="#fca5a5" font-size="15" font-weight="bold" text-anchor="middle">Li — N — Li (covalent lines)</text><text x="140" y="95" fill="#fb7185" font-size="10" text-anchor="middle">❌ 0 Marks: Li₃N is IONIC, never covalent (CP 2018 Q1)!</text></svg>`
+  },
+  Al2O3: {
+    title: 'Aluminium oxide, Al₂O₃ (Giant ionic · 2 Al³⁺ and 3 O²⁻ · CP 2025 Q1)',
+    rule: 'Two Al atoms each lose 3 valence electrons ($2\,[\text{Al}]^{3+}$) and three O atoms each gain 2 electrons ($3\,[\text{O}]^{2-}$, each with 8 outer electrons). Total charge $+6 - 6 = 0$.',
+    cp: '<b>🚨 CP 2025 Q1 Examiner Report:</b> Tested again in 2025 — ensure stoichiometry ($2\,\text{Al}^{3+} : 3\,\text{O}^{2-}$), brackets, and charges are all shown.',
+    svgRight: `<svg viewBox="0 0 280 110" class="w-64"><text x="65" y="60" fill="#38bdf8" font-size="18" font-weight="bold" text-anchor="middle">2 [ Al ]³⁺</text><text x="195" y="60" fill="#a855f7" font-size="18" font-weight="bold" text-anchor="middle">3 [ :O: ]²⁻ (8 outer e⁻)</text></svg>`,
+    svgWrong: `<svg viewBox="0 0 280 110" class="w-64"><text x="140" y="55" fill="#fca5a5" font-size="15" font-weight="bold" text-anchor="middle">[Al]⁺ [O]⁻ or covalent sharing</text><text x="140" y="95" fill="#fb7185" font-size="10" text-anchor="middle">❌ 0 Marks: Wrong ion charges or missing stoichiometry 2:3!</text></svg>`
+  }
+};
+
+function selectEdTarget(key){
+  currentEdTarget = key;
+  document.querySelectorAll('.ed-target-btn').forEach(b => {
+    b.className = b.dataset.ed === key ? 'ed-target-btn apple-btn apple-btn-primary !justify-start' : 'ed-target-btn apple-btn !justify-start';
+  });
+  renderEdTarget();
+}
+function setEdViewMode(m){
+  currentEdMode = m;
+  document.getElementById('edModeRightBtn').className = m==='right' ? 'apple-btn apple-btn-primary !py-1 !px-3 text-xs' : 'apple-btn !py-1 !px-3 text-xs';
+  document.getElementById('edModeWrongBtn').className = m==='wrong' ? 'apple-btn apple-btn-primary !py-1 !px-3 text-xs' : 'apple-btn !py-1 !px-3 text-xs';
+  renderEdTarget();
+}
+function renderEdTarget(){
+  const d = ED_TARGETS[currentEdTarget];
+  if(!d) return;
+  document.getElementById('edCardTitle').textContent = d.title;
+  document.getElementById('edCardRule').innerHTML = d.rule;
+  document.getElementById('edCardCpNote').innerHTML = d.cp;
+  const box = document.getElementById('edSvgContainer');
+  const badge = document.getElementById('edStatusBadge');
+  if(currentEdMode === 'right'){
+    box.innerHTML = d.svgRight;
+    badge.className = 'chip bg-emerald-950 text-emerald-300 border border-emerald-700 mt-2';
+    badge.textContent = '✅ Full-Mark HKEAA Diagram';
+  } else {
+    box.innerHTML = d.svgWrong;
+    badge.className = 'chip bg-rose-950 text-rose-300 border border-rose-700 mt-2';
+    badge.textContent = '❌ Recorded Zero-Mark Candidate Mistake';
+  }
+  safeInitKaTeX();
+}
+
+function runMigrationSim(powerOn){
+  const sel = document.getElementById('migSaltSel').value;
+  const anionSpot = document.getElementById('migAnionSpot');
+  const cationSpot = document.getElementById('migCationSpot');
+  const out = document.getElementById('migReadout');
+
+  if(sel === 'CuCr2O7'){
+    anionSpot.style.background = '#ea580c'; anionSpot.textContent = 'Cr₂O₇²⁻'; anionSpot.style.opacity = '1';
+    cationSpot.style.background = '#0284c7'; cationSpot.textContent = 'Cu²⁺'; cationSpot.style.opacity = '1';
+    anionSpot.style.transform = powerOn ? 'translateX(-110px)' : 'translateX(0px)';
+    cationSpot.style.transform = powerOn ? 'translateX(110px)' : 'translateX(0px)';
+    out.innerHTML = powerOn
+      ? '<b>⚡ Observation (CuCr₂O₇):</b> An <b>orange spot (Cr₂O₇²⁻ anions)</b> migrates towards the <b>positive electrode (anode)</b>, while a <b>blue spot (Cu²⁺ cations)</b> migrates towards the <b>negative electrode (cathode)</b> — direct visual proof that oppositely charged mobile ions exist!'
+      : '<b>Ready (Green CuCr₂O₇ drop):</b> Contains blue Cu²⁺(aq) cations and orange Cr₂O₇²⁻(aq) anions. Click <b>⚡ Switch On 20 V DC</b>.';
+  } else if(sel === 'KMnO4'){
+    anionSpot.style.background = '#9333ea'; anionSpot.textContent = 'MnO₄⁻'; anionSpot.style.opacity = '1';
+    cationSpot.style.background = 'transparent'; cationSpot.textContent = 'K⁺ (colourless)'; cationSpot.style.color = '#475569';
+    anionSpot.style.transform = powerOn ? 'translateX(-110px)' : 'translateX(0px)';
+    cationSpot.style.transform = powerOn ? 'translateX(110px)' : 'translateX(0px)';
+    out.innerHTML = powerOn
+      ? '<b>⚡ Observation (KMnO₄):</b> A <b>purple spot (MnO₄⁻ anions)</b> migrates towards the <b>positive electrode (anode)</b>. Why is no coloured spot seen moving to the negative electrode? Because <b>potassium ions, K⁺(aq), are colourless</b> (though they still migrate to the cathode!).'
+      : '<b>Ready (Purple KMnO₄ crystal):</b> Contains colourless K⁺ cations and purple MnO₄⁻ anions. Click <b>⚡ Switch On 20 V DC</b>.';
+  } else {
+    anionSpot.style.background = 'transparent'; anionSpot.textContent = 'SO₄²⁻ (colourless)'; anionSpot.style.color = '#475569';
+    cationSpot.style.background = '#0284c7'; cationSpot.textContent = 'Cu²⁺'; cationSpot.style.color = '#ffffff';
+    anionSpot.style.transform = powerOn ? 'translateX(-110px)' : 'translateX(0px)';
+    cationSpot.style.transform = powerOn ? 'translateX(110px)' : 'translateX(0px)';
+    out.innerHTML = powerOn
+      ? '<b>⚡ Observation (CuSO₄):</b> A <b>blue spot (Cu²⁺ cations)</b> migrates towards the <b>negative electrode (cathode)</b>, while colourless SO₄²⁻ anions migrate unseen towards the positive electrode. (Note: Na₂SO₄(aq) moistens the paper to increase electrical conductivity!).'
+      : '<b>Ready (Blue CuSO₄ crystal):</b> Contains blue Cu²⁺ cations and colourless SO₄²⁻ anions. Click <b>⚡ Switch On 20 V DC</b>.';
+  }
+}
+
+/* 6. Strands (f)–(i) Mystery Substance Structure Deducer */
+const STRUCT_SIM_DATA = {
+  NaCl: {
+    mp: 'High mp (801 °C) · Giant Ionic',
+    heat: '<b>Strong ionic bonds</b> (electrostatic attractions between oppositely charged $\text{Na}^+$ and $\text{Cl}^-$ ions) throughout the giant ionic lattice require a lot of heat energy to overcome.',
+    condBadge: 'Molten / (aq) Only',
+    cond: '<b>Solid: Non-conductor</b> — ions are held in fixed positions in the lattice and <b>are not mobile</b> (CP 2023 Q1).<br><b>Molten / Aqueous: Conducts</b> via <b>mobile ions</b> (never "free electrons" — CP 2015 Q7!).',
+    mechBadge: 'Hard & Brittle',
+    mech: '<b>Brittle:</b> Force shifts an ion layer so <b>ions of the same charge are brought close together</b>; strong repulsion splits the crystal.',
+    exam: '<b>🚨 CP 2018 Q3 / CP 2022 Q1 Trap:</b> Never write "ionic bonds between NaCl molecules" — no molecules exist in a giant ionic lattice!'
+  },
+  SiO2: {
+    mp: 'Very High mp (1713 °C) · Giant Covalent',
+    heat: 'Melting requires breaking <b>millions of strong covalent bonds between Si and O atoms</b> in the 3D giant covalent network.',
+    condBadge: 'Non-conductor (All States)',
+    cond: '<b>Non-conductor in both solid and molten states:</b> All outer shell electrons are held in localised covalent bonds; there are <b>no delocalised electrons and no mobile ions</b>.',
+    mechBadge: 'Very Hard & Insoluble',
+    mech: 'Rigid tetrahedral 3D network (each Si bonded to 4 O; each O bridges 2 Si) makes quartz hard and insoluble in both water and organic solvents.',
+    exam: '<b>🚨 CP 2012 Q16 / CP 2021 Q3 Trap:</b> Writing "SiO₂ molecules are held by strong covalent bonds" scores <b>0 marks</b> — SiO₂ has NO molecules!'
+  },
+  CO2: {
+    mp: 'Sublimes −78 °C · Simple Molecular',
+    heat: 'Sublimation/boiling only overcomes the <b>weak van der Waals’ forces between discrete $\text{CO}_2$ molecules</b>. The strong $\text{C=O}$ covalent bonds inside each molecule do NOT break!',
+    condBadge: 'Non-conductor',
+    cond: 'Consists of neutral $\text{CO}_2$ molecules — neither mobile ions nor delocalised electrons are present.',
+    mechBadge: 'Soft Solid (Dry Ice)',
+    mech: 'Weak intermolecular van der Waals’ forces allow molecules to separate easily with minimal thermal energy.',
+    exam: '<b>🚨 CP 2012 Q1 / CP 2013 Trap:</b> Comparing $\text{CS}_2$ (liquid) vs $\text{CO}_2$ (gas): $\text{CS}_2$ has a <b>larger molecular size</b> (not "molecular mass", CP 2022 Q4) → stronger van der Waals’ forces between molecules.'
+  },
+  S8: {
+    mp: 'Low mp (115 °C) · Simple Molecular (S₈)',
+    heat: 'Sulphur consists of discrete <b>$\text{S}_8$ molecules</b> (simple molecular structure). Melting overcomes only the <b>weak van der Waals’ forces between $\text{S}_8$ molecules</b>.',
+    condBadge: 'Non-conductor (CP 2016 Q14)',
+    cond: 'No delocalised electrons and no mobile ions — sulphur is an electrical insulator.',
+    mechBadge: 'Brittle Yellow Molecular Solid',
+    mech: 'Because $\text{S}_8$ has a larger molecular size than $\text{Cl}_2$ or $\text{O}_2$, its van der Waals’ forces are strong enough to make it a solid at room temperature.',
+    exam: '<b>🚨 CP 2024 Q13 Trap:</b> Many candidates falsely wrote "Sulphur has a giant covalent structure" — sulphur is <b>simple molecular ($\text{S}_8$)</b>!'
+  },
+  Graphite: {
+    mp: 'Sublimes ≈3600 °C · Giant Covalent (Layered)',
+    heat: 'Sublimation requires breaking <b>millions of strong covalent bonds between carbon atoms within the hexagonal layers</b> (in-plane $\text{C–C} = 0.142\text{ nm}$).',
+    condBadge: 'Conducts as Solid (Along Layers)',
+    cond: 'Each carbon atom uses 3 of its 4 outer electrons in covalent bonds, leaving <b>1 delocalised electron per carbon atom</b> that is mobile <b>along the layers</b>.',
+    mechBadge: 'Soft & Slippery (Lubricant)',
+    mech: 'Adjacent graphene layers ($0.335\text{ nm}$ apart) are held only by <b>weak van der Waals’ forces</b> and can easily <b>slide over one another</b>.',
+    exam: '<b>🚨 CP 2013 / CP 2024 Q1 Trap:</b> Never call graphite "simple molecular", and never use metallic wording ("sea of electrons around positive ions")!'
+  },
+  Diamond: {
+    mp: 'Very High mp (>3550 °C) · Giant Covalent',
+    heat: 'Melting/subliming requires breaking <b>millions of strong $\text{C–C}$ covalent bonds</b> throughout the 3D tetrahedral giant covalent network.',
+    condBadge: 'Non-conductor (Insulator)',
+    cond: 'Each carbon atom uses <b>all 4 outermost electrons</b> in forming 4 single covalent bonds — <b>no delocalised electrons</b> exist.',
+    mechBadge: 'Hardest Natural Substance',
+    mech: 'Rigid 3D tetrahedral network of strong covalent bonds resists scratching (used in glass cutters and rock-drilling bits).',
+    exam: '<b>🚨 CP 2024 Q1 Trap:</b> "Covalent bonds form between diamond molecules" scores 0 marks — diamond is a continuous giant covalent network of atoms!'
+  },
+  Al: {
+    mp: 'High mp (660 °C) · Giant Metallic',
+    heat: 'Melting overcomes the <b>strong metallic bonds</b> (electrostatic attraction between positive $\text{Al}^{3+}$ metal ions and the sea of delocalised electrons).',
+    condBadge: 'Good Conductor (Solid & Molten)',
+    cond: 'Conducts in both solid and liquid states due to <b>mobile delocalised electrons</b> (Al has 3 delocalised e⁻ per atom vs Na’s 1 → higher conductivity & higher mp than Na, CP 2016 Q14).',
+    mechBadge: 'Malleable & Ductile',
+    mech: 'When an external force is applied, <b>layers of metal ions slide over one another</b> to new positions <b>without breaking the non-directional metallic bonds</b> (CP 2025 Q1).',
+    exam: '<b>🚨 CP 2017 / CP 2025 Q1 Trap:</b> Never state that the bonding in aluminium or barium metal is an "ionic bond" — it is a <b>metallic bond</b>!'
+  },
+  HI: {
+    mp: 'Low mp (−51 °C) · Simple Molecular (HI)',
+    heat: '$\text{HI}$ is a covalent compound with a <b>simple molecular structure</b> (weak van der Waals’ forces between $\text{HI}$ molecules), whereas $\text{KI}$ has a <b>giant ionic structure</b>!',
+    condBadge: 'Pure HI(l): No · HI(aq): Yes!',
+    cond: 'Pure liquid $\text{HI}$ consists of neutral molecules (non-conductor), but in water $\text{HI}(aq)$ ionises to form <b>mobile $\text{H}^+(aq)$ and $\text{I}^-(aq)$ ions</b> that conduct electricity!',
+    mechBadge: 'Gas at Room Temperature',
+    mech: 'Contrast $\text{KI}$ (white crystalline ionic solid, mp 681 °C) with $\text{HI}$ (colourless gas, mp −51 °C).',
+    exam: '<b>🚨 CP 2022 Q1 Headline Disaster:</b> Candidates swapped $\text{KI}$ and $\text{HI}$, claiming "HI is ionic / giant covalent" or that "HI(aq) has delocalised electrons to conduct electricity"!'
+  }
+};
+
+function updateStructSim(){
+  const sel = document.getElementById('structSimSelect');
+  if(!sel) return;
+  const d = STRUCT_SIM_DATA[sel.value];
+  if(!d) return;
+  document.getElementById('stMpBadge').textContent = d.mp;
+  document.getElementById('stHeatText').innerHTML = d.heat;
+  document.getElementById('stCondBadge').textContent = d.condBadge;
+  document.getElementById('stCondText').innerHTML = d.cond;
+  document.getElementById('stMechBadge').textContent = d.mechBadge;
+  document.getElementById('stMechText').innerHTML = d.mech;
+  document.getElementById('stExaminerBox').innerHTML = d.exam;
+  safeInitKaTeX();
+}
+
+/* 7. Bench 2B: Reverse Isotope Abundance Solver */
+function loadRevIso(m1, m2, ar, sym){
+  document.getElementById('revM1').value = m1;
+  document.getElementById('revM2').value = m2;
+  document.getElementById('revAr').value = ar;
+  solveReverseIsotope(sym);
+}
+function solveReverseIsotope(sym){
+  const m1 = parseFloat(document.getElementById('revM1').value);
+  const m2 = parseFloat(document.getElementById('revM2').value);
+  const ar = parseFloat(document.getElementById('revAr').value);
+  const out = document.getElementById('revIsoOut');
+  if(!(m1>0) || !(m2>0) || m1===m2 || !(ar>0)){
+    out.textContent = 'Enter two distinct isotopic masses M₁, M₂ and a valid Ar between them.';
+    return;
+  }
+  const lo = Math.min(m1, m2), hi = Math.max(m1, m2);
+  if(ar < lo || ar > hi){
+    out.textContent = `Given Ar (${ar}) must lie between ${lo} and ${hi}.`;
+    return;
+  }
+  // m1*(x/100) + m2*((100-x)/100) = ar  => (m1 - m2)*x + 100*m2 = 100*ar
+  const x = (100 * ar - 100 * m2) / (m1 - m2);
+  const y = 100 - x;
+  const label = sym || 'X';
+  out.innerHTML = `<b>Step 1 (Define variable):</b> Let the relative abundance of $^{${m1}}\text{${label}}$ be $x\%$ and $^{${m2}}\text{${label}}$ be $(100 - x)\%$.<br>`
+    + `<b>Step 2 (Set up weighted mean):</b> $\frac{${m1}x + ${m2}(100 - x)}{100} = ${ar}$ (Note: $A_r$ has <b>no unit</b> — CP 2012 Q1 / CP 2022 Q2).<br>`
+    + `<b>Step 3 (Solve):</b> $x = <b>${x.toFixed(1)}\%</b>$ ($^{${m1}}\text{${label}}$) and $100 - x = <b>${y.toFixed(1)}\%</b>$ ($^{${m2}}\text{${label}}$).`;
+  safeInitKaTeX();
+}
+
+/* 8. Bench 5: Live HKEAA Keyword Answer Grader (Topic II) */
+const GRADER_RUBRICS = {
+  sio2_co2: {
+    prompt: '<b>Question (3 marks · CP 2012 Q16 / CP 2021 Q3):</b> Explain, in terms of bonding and structure, why silicon(IV) oxide (SiO₂) has a much higher melting point than carbon dioxide (CO₂).',
+    model: 'Silicon(IV) oxide has a giant covalent structure, whereas carbon dioxide has a simple molecular structure. Melting SiO₂ requires a large amount of energy to break millions of strong covalent bonds between Si and O atoms, whereas melting/subliming CO₂ only overcomes the weak van der Waals’ forces between CO₂ molecules.',
+    marks: [
+      { label: '1M · Both Structure Types Named', re: /giant\s+covalent[\s\S]*simple\s+molecular|simple\s+molecular[\s\S]*giant\s+covalent/i, hint: 'State both structure types: SiO₂ has a <b>giant covalent structure</b> and CO₂ has a <b>simple molecular structure</b>.' },
+      { label: '1M · Strong Covalent Bonds in SiO₂', re: /(break|overcome)[\s\S]{0,45}(many|millions|lots|strong)\s+covalent\s+bonds/i, hint: 'State that melting SiO₂ requires breaking <b>many / millions of strong covalent bonds between atoms</b>.' },
+      { label: '1M · Weak van der Waals’ Forces in CO₂', re: /weak\s+(van\s+der\s+waals|intermolecular)[\s\S]{0,35}molecules/i, hint: 'State that CO₂ molecules are held together by <b>weak van der Waals’ forces between CO₂ molecules</b>.' }
+    ],
+    traps: [
+      { re: /sio2\s+molecules|molecules\s+of\s+sio2|molecules\s+of\s+silicon/i, msg: 'CP 2012 Q16 / CP 2021 Q3 Fatal Error: "SiO₂ molecules" — SiO₂ is a giant covalent network and contains NO molecules!' },
+      { re: /covalent\s+bonds?\s+between\s+(co2\s+)?molecules/i, msg: 'CP 2012/2013 Repeat-Offence: Covalent bonds are WITHIN molecules, never BETWEEN molecules!' }
+    ]
+  },
+  srcl2_cond: {
+    prompt: '<b>Question (2 marks · CP 2015 Q7 / CP 2023 Q1):</b> Explain why solid strontium chloride (SrCl₂) does not conduct electricity, whereas molten SrCl₂ conducts electricity well.',
+    model: 'In solid SrCl₂, the Sr²⁺ and Cl⁻ ions are held in fixed positions in the giant ionic lattice and are not mobile. When molten, the ions become mobile and can move freely to carry electrical charge.',
+    marks: [
+      { label: '1M · Solid Ions Fixed / Not Mobile', re: /ions?[\s\S]{0,45}(not\s+mobile|cannot\s+move|fixed\s+positions?)/i, hint: 'CP 2023 Q1 Requirement: State that the <b>ions in solid SrCl₂ are in fixed positions / are not mobile</b>.' },
+      { label: '1M · Molten Has Mobile Ions', re: /mobile\s+ions?|ions?[\s\S]{0,30}(move\s+freely|are\s+mobile)/i, hint: 'State that molten SrCl₂ contains <b>mobile ions</b>.' }
+    ],
+    traps: [
+      { re: /(free|mobile|delocali[sz]ed)\s+electrons/i, msg: 'CP 2015 Q7 / CP 2016 Q2 Zero-Mark Trap: Ionic compounds conduct via <b>mobile ions</b>, NEVER via mobile/delocalised electrons!' }
+    ]
+  },
+  graphite_prop: {
+    prompt: '<b>Question (3 marks · CP 2013 / CP 2024 Q1):</b> Explain, in terms of bonding and structure, why graphite conducts electricity and can be used as a solid lubricant.',
+    model: 'Graphite has a giant covalent layered structure in which each carbon atom uses 3 of its 4 outermost shell electrons to form covalent bonds with 3 other carbon atoms in hexagonal layers, leaving 1 delocalised electron per carbon atom that is mobile along the layers to conduct electricity. Because adjacent layers are held only by weak van der Waals’ forces, the layers can easily slide over one another, making graphite soft and slippery.',
+    marks: [
+      { label: '1M · Giant Covalent Layered + 3 Bonds per C', re: /(giant\s+covalent|hexagonal\s+layers?|3\s+(other\s+)?carbon)/i, hint: 'Identify graphite’s <b>giant covalent layered structure</b> where each C bonds to 3 other C atoms.' },
+      { label: '1M · Delocalised Electrons Along Layers', re: /delocali[sz]ed\s+electrons?[\s\S]{0,45}(along|within|between)?\s*(the\s+)?layers?|layers?[\s\S]{0,45}delocali[sz]ed\s+electrons?/i, hint: 'CP 2024 Q1 Requirement: Use the exact term <b>delocalised electrons</b> moving <b>along the layers</b> (not vague "free electrons").' },
+      { label: '1M · Weak vdW Between Layers → Slide', re: /(weak\s+van\s+der\s+waals|weak\s+forces)[\s\S]{0,50}slide|slide\s+over\s+(each\s+other|one\s+another)/i, hint: 'State that layers are held by <b>weak van der Waals’ forces</b> and can <b>slide over one another</b>.' }
+    ],
+    traps: [
+      { re: /simple\s+molecular/i, msg: 'CP 2013 / CP 2024 Q1 Fatal Trap: "Graphite has a simple molecular structure" scores 0 marks — graphite is <b>giant covalent</b>!' },
+      { re: /sea\s+of\s+electrons|positive\s+ions/i, msg: 'Word Ban: "Sea of electrons around positive ions" is metallic bonding — graphite has neutral carbon atoms with 1 delocalised electron per C!' }
+    ]
+  },
+  isotope_def: {
+    prompt: '<b>Question (2 marks · CP 2012 Q1 / CP 2016 Q4):</b> Define the term "isotopes" and explain why ³⁵Cl and ³⁷Cl have the same chemical properties.',
+    model: 'Isotopes are atoms of the same element with the same number of protons but different numbers of neutrons. ³⁵Cl and ³⁷Cl have the same chemical properties because they have the same electronic arrangement (same number of outermost shell electrons).',
+    marks: [
+      { label: '1M · Complete Isotope Definition', re: /atoms\s+of\s+the\s+same\s+element[\s\S]{0,45}same\s+number\s+of\s+protons[\s\S]{0,45}different\s+numbers?\s+of\s+neutrons/i, hint: 'CP 2012 Q1 Requirement: Must start with "<b>atoms of the same element</b> with the <b>same number of protons</b> but <b>different numbers of neutrons</b>".' },
+      { label: '1M · Same Electronic Arrangement', re: /same\s+(electronic\s+arrangement|electronic\s+configuration|number\s+of\s+(outermost\s+shell\s+)?electrons)/i, hint: 'State that they have the <b>same electronic arrangement</b> (or same number of electrons).' }
+    ],
+    traps: [
+      { re: /different\s+atomic\s+numbers?/i, msg: 'Contradiction Penalty: Isotopes have the SAME atomic number (proton number)!' }
+    ]
+  },
+  dative_h3o: {
+    prompt: '<b>Question (2 marks · CP 2017 / CP 2022 Q4):</b> Describe how the dative covalent bond in the hydronium ion (H₃O⁺) is formed when water reacts with a hydrogen ion.',
+    model: 'The oxygen atom in the H₂O molecule donates a lone pair of electrons to the empty outermost shell of the hydrogen ion (H⁺) to form a dative covalent bond, where both shared electrons come from the oxygen atom.',
+    marks: [
+      { label: '1M · Lone Pair Donated by Oxygen', re: /(oxygen|o\s+atom)[\s\S]{0,50}(lone\s+pair|both\s+electrons)|(lone\s+pair|both\s+electrons)[\s\S]{0,50}(oxygen|o\s+atom)/i, hint: 'State that the <b>oxygen atom in H₂O supplies/donates a lone pair of electrons (both shared electrons)</b>.' },
+      { label: '1M · Accepted by Hydrogen Ion (H⁺)', re: /hydrogen\s+ion|h\+/i, hint: 'CP 2022 Q4 Requirement: State that the lone pair is shared with a <b>hydrogen ion (H⁺)</b> (which has an empty shell).' }
+    ],
+    traps: [
+      { re: /hydrogen\s+atom/i, msg: 'CP 2017 / CP 2022 Q4 Verbatim Wrong Answer: "formed between a water molecule and a hydrogen atom" — it must be a <b>hydrogen ion (H⁺)</b>!' }
+    ]
+  },
+  group1_trend: {
+    prompt: '<b>Question (2 marks · CP 2013):</b> Explain why potassium is more reactive towards water than lithium.',
+    model: 'A potassium atom has more occupied electron shells (4 shells) than a lithium atom (2 shells), so its outermost shell electron is further from the nucleus and more shielded. The electrostatic attraction between the nucleus and the outermost shell electron is weaker in potassium, so potassium loses its outermost shell electron more easily.',
+    marks: [
+      { label: '1M · Further From Nucleus / More Shells + Weaker Attraction', re: /(more\s+(occupied\s+)?shells?|further\s+from\s+(the\s+)?nucleus)[\s\S]{0,70}weaker\s+(electrostatic\s+)?attraction/i, hint: 'State that K’s outermost electron is <b>further from the nucleus (more shells)</b>, so the <b>attraction between the nucleus and the valence electron is weaker</b>.' },
+      { label: '1M · Loses Valence Electron More Easily', re: /los(es|e|ing)[\s\S]{0,35}electron[\s\S]{0,25}more\s+easily|more\s+easily\s+lost/i, hint: 'Conclude that the potassium atom <b>loses its outermost shell electron more easily</b>.' }
+    ],
+    traps: []
+  }
+};
+
+function loadGraderPrompt(){
+  const sel = document.getElementById('graderQSelect');
+  if(!sel) return;
+  const r = GRADER_RUBRICS[sel.value];
+  const box = document.getElementById('graderPromptBox');
+  if(box && r) box.innerHTML = r.prompt;
+}
+
+function fillModelGraderAnswer(){
+  const sel = document.getElementById('graderQSelect');
+  if(!sel) return;
+  const r = GRADER_RUBRICS[sel.value];
+  if(!r) return;
+  document.getElementById('graderInput').value = r.model;
+  gradeStudentAnswer();
+}
+
+function gradeStudentAnswer(){
+  const sel = document.getElementById('graderQSelect');
+  const txt = (document.getElementById('graderInput').value || '').trim();
+  const out = document.getElementById('graderResultBox');
+  if(!sel || !out) return;
+  const r = GRADER_RUBRICS[sel.value];
+  if(!txt){
+    out.innerHTML = '<span class="text-amber-300">Please type an answer first, or click "Show Model Full-Mark Answer".</span>';
+    return;
+  }
+
+  let score = 0;
+  let rowsHtml = '';
+  r.marks.forEach(m => {
+    const hit = m.re.test(txt);
+    if(hit) score++;
+    rowsHtml += `<div class="p-2 rounded-lg border ${hit ? 'bg-emerald-950/40 border-emerald-700 text-emerald-200' : 'bg-slate-900 border-slate-800 text-slate-300'}">
+      <b>${hit ? '✅ [1M Earned]' : '⬜ [0M Missed]'} ${m.label}:</b> ${hit ? 'Keyword verified in your answer.' : m.hint}
+    </div>`;
+  });
+
+  let trapHtml = '';
+  r.traps.forEach(t => {
+    if(t.re.test(txt)){
+      trapHtml += `<div class="p-2.5 rounded-lg bg-rose-950/60 border border-rose-600 text-rose-200 font-medium">🚨 <b>[NOT ACCEPT / Contradiction Penalty]:</b> ${t.msg}</div>`;
+    }
+  });
+
+  out.innerHTML = `
+    <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+      <span class="font-bold text-white text-sm">Examiner Diagnostic Score: <span class="text-sky-400 font-mono">${score} / ${r.marks.length} marks</span></span>
+      <span class="chip ${score===r.marks.length && !trapHtml ? 'bg-emerald-950 text-emerald-300 border-emerald-700' : 'bg-amber-950 text-amber-300 border-amber-700'}">${score===r.marks.length && !trapHtml ? 'Full Marks Wording' : 'Keep Refining'}</span>
+    </div>
+    ${trapHtml}
+    <div class="space-y-1.5 mt-2">${rowsHtml}</div>
+  `;
+}
+
+/* 9. Command Palette (⌘K) Quick Search */
+const CMD_INDEX = [
+  { title: 'Interactive Bohr Shell & Ion Diagram Builder (Z = 1–20)', tag: 'Strand (a) · Sim', action: ()=>{switchTab('tab-atom');switchAtomMode('map');} },
+  { title: 'Isotopes & Relative Atomic Mass (Ar unitless)', tag: 'Strand (a) · CP 2012/2022', action: ()=>{switchTab('tab-atom');switchAtomMode('explorer');selectAtom(6);} },
+  { title: 'Reverse Isotope % Abundance Algebraic Solver', tag: 'Solver · Bench 2B', action: ()=>{switchTab('tab-solver');} },
+  { title: 'Interactive Periodic Table & Unfamiliar Elements (Rb, Cs, At)', tag: 'Strand (b) · Sim', action: ()=>{switchTab('tab-table');switchTableModel('map');} },
+  { title: 'Halogen Displacement Wet-Lab Matrix (Cl₂, Br₂, I₂)', tag: 'Strand (b) · Sim', action: ()=>{switchTab('tab-table');switchTableModel('map');} },
+  { title: 'Electron Dot-and-Cross Diagram Debugger (CO₂, Na₂O, C₂H₂, C₂N₂)', tag: 'Strand (e) · CP 2014–2025', action: ()=>{switchTab('tab-bonds');switchBondsMode('map');} },
+  { title: 'Dative Covalent Bond (NH₄⁺ & H₃O⁺)', tag: 'Strand (e) · CP 2017/2022', action: ()=>{switchTab('tab-bonds');switchBondsMode('explorer');selectBonds(10);} },
+  { title: 'Filter-Paper Migration of Coloured Ions Simulator (CuCr₂O₇, KMnO₄)', tag: 'Strand (e) · EDB Activity', action: ()=>{switchTab('tab-bonds');switchBondsMode('map');} },
+  { title: 'Colours of Common Aqueous Ions (Cu²⁺, Fe²⁺, Fe³⁺, MnO₄⁻, Cr₂O₇²⁻)', tag: 'Strand (e) · Card 6', action: ()=>{switchTab('tab-bonds');switchBondsMode('explorer');selectBonds(6);} },
+  { title: 'Giant Ionic Lattices: NaCl (6:6) vs CsCl (8:8) & Brittleness', tag: 'Strand (f) · CP 2013', action: ()=>{switchTab('tab-struct');switchStructMode('explorer');selectStruct(1);} },
+  { title: 'Graphite vs Diamond vs Quartz (SiO₂) Giant Covalent', tag: 'Strand (h) · CP 2012/2024', action: ()=>{switchTab('tab-struct');switchStructMode('explorer');selectStruct(5);} },
+  { title: 'Mystery Substance Structure Deducer (NaCl, SiO₂, S₈, HI vs KI)', tag: 'Strand (i) · Sim', action: ()=>{switchTab('tab-struct');switchStructMode('map');} },
+  { title: 'Live HKEAA Keyword Answer Grader (Bench 5)', tag: 'Solver · Exam Practice', action: ()=>{switchTab('tab-solver');} },
+  { title: 'Candidate Performance Intelligence (2012–2025)', tag: 'Past Papers · Tab 7', action: ()=>{switchTab('tab-pp');} },
+  { title: 'Master NOT ACCEPT & Misconceptions Checklist', tag: 'Final Review · Tab 8', action: ()=>{switchTab('tab-review');} }
+];
+
+function openCmdModal(){
+  const m = document.getElementById('cmdModal');
+  if(!m) return;
+  m.classList.add('open');
+  const inp = document.getElementById('cmdSearchInput');
+  if(inp){ inp.value = ''; filterCmdList(); setTimeout(()=>inp.focus(), 50); }
+}
+function closeCmdModal(){
+  const m = document.getElementById('cmdModal');
+  if(m) m.classList.remove('open');
+}
+function filterCmdList(){
+  const q = (document.getElementById('cmdSearchInput').value || '').toLowerCase();
+  const box = document.getElementById('cmdResults');
+  if(!box) return;
+  box.innerHTML = '';
+  CMD_INDEX.filter(item => item.title.toLowerCase().includes(q) || item.tag.toLowerCase().includes(q)).forEach(item => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'w-full text-left px-3 py-2.5 rounded-xl hover:bg-slate-800/80 flex items-center justify-between transition';
+    btn.innerHTML = `<span class="text-white font-medium">${item.title}</span><span class="chip bg-sky-950 text-sky-300 border border-sky-800">${item.tag}</span>`;
+    btn.onclick = () => { closeCmdModal(); item.action(); };
+    box.appendChild(btn);
+  });
+}
+
+document.addEventListener('keydown', e => {
+  if((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k'){
+    e.preventDefault();
+    const m = document.getElementById('cmdModal');
+    if(m && m.classList.contains('open')) closeCmdModal();
+    else openCmdModal();
+  } else if(e.key === 'Escape'){
+    closeCmdModal();
+  }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  try {
+    if(localStorage.getItem('hkdse_topic2_theme') === 'light') toggleAppleTheme();
+  } catch(e){}
+  injectQuizSelfCheckBars();
+  updateAtomSim();
+  initPtGrid();
+  runHalogenSim();
+  renderEdTarget();
+  runMigrationSim(false);
+  updateStructSim();
+  solveReverseIsotope('Cu');
+  loadGraderPrompt();
+  updateMasteryRing();
+  // Pre-populate default solver benches so students immediately see live output
+  document.getElementById('svZ').value = '11'; document.getElementById('svA').value = '23'; document.getElementById('svC').value = '1'; solverParticles();
+  document.getElementById('svM1').value = '35'; document.getElementById('svP1').value = '75'; document.getElementById('svM2').value = '37'; document.getElementById('svP2').value = '25'; solverAr();
+  solverMass();
+  document.getElementById('svCfg').value = '2,8,7'; solverConfig();
+});
+</script>
+
 </body>
 </html>

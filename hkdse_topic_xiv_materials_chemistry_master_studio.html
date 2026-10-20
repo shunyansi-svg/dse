@@ -9,49 +9,375 @@
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
 <style>
-  :root { color-scheme: dark; }
-  body { background:#020617; font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
-  .tab-panel { display:none; }
-  .tab-panel.active { display:block; }
-  .blur-answer { filter: blur(6px); cursor:pointer; transition: filter .25s ease; user-select:none; }
-  .blur-answer.revealed { filter: blur(0); cursor:default; user-select:text; }
-  .engine-module { display:none; }
-  .engine-module.active { display:block; }
-  .mode-pill { cursor:pointer; }
-  .mode-pill.active { background:rgba(56,189,248,.15); color:#7dd3fc; border-color:#38bdf8; }
-  details > summary { cursor:pointer; list-style:none; }
-  details > summary::-webkit-details-marker { display:none; }
-  .chip { display:inline-block; padding:2px 10px; border-radius:9999px; font-size:11px; font-weight:600; }
-  .katex { font-size:1.05em; }
-  .num-card { font-variant-numeric: tabular-nums; }
-  input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner-spin-button { -webkit-appearance:none; margin:0; }
-  input[type=number] { -moz-appearance:textfield; }
-  .edot { font-size:10px; line-height:1; letter-spacing:-1px; }
-  .katex-block{overflow-x:auto;overflow-y:hidden}
-  .katex-block .katex-display{text-align:left;margin:.35em 0}
-  /* ══ MOBILE UX LAYER (chrome-only) ══ */
-  :root{--hdr:132px}
-  html{scroll-padding-top:calc(var(--hdr) + 10px)}
-  .toc-strip{display:none;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:2px 0 6px;margin-bottom:2px}
-  .toc-strip::-webkit-scrollbar{display:none}
-  .toc-chip{flex-shrink:0;font-size:10px;line-height:1;padding:7px 11px;border-radius:9999px;border:1px solid rgba(51,65,85,.9);background:rgba(15,23,42,.85);color:#94a3b8;font-weight:600;white-space:nowrap;cursor:pointer}
-  #backTop{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:70;width:44px;height:44px;border-radius:9999px;border:1px solid rgba(56,189,248,.35);background:rgba(8,14,26,.92);color:#7dd3fc;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transform:translateY(8px);transition:opacity .25s,transform .25s}
-  #backTop.show{opacity:1;pointer-events:auto;transform:none}
-  #scrollProg{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,#0ea5e9,#38bdf8);z-index:80;pointer-events:none}
-  @media (max-width:1023.98px){
-    header{background-color:rgba(2,6,23,.97)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;padding-top:env(safe-area-inset-top)}
-    #mainNav{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:4px}
-    #mainNav::-webkit-scrollbar{display:none}
-    #mainNav button{flex-shrink:0}
-    select,input[type="number"],input[type="text"]{font-size:16px!important}
-    #mainNav button{padding-top:10px;padding-bottom:10px}
-    .mode-pill{padding:8px 14px}
-    .toc-chip{padding:10px 12px}
-    .katex{font-size:1em}
-    .toc-strip{display:flex}
+  :root {
+    color-scheme: dark;
+    --hdr: 118px;
+    --bg-canvas: #000000;
+    --bg-elevated: rgba(22, 22, 29, 0.72);
+    --bg-card: rgba(28, 28, 36, 0.68);
+    --bg-card-solid: #16161d;
+    --bg-subcard: rgba(38, 38, 48, 0.55);
+    --bg-glass-nav: rgba(14, 14, 20, 0.76);
+    --border-hairline: rgba(255, 255, 255, 0.09);
+    --border-highlight: rgba(255, 255, 255, 0.16);
+    --text-primary: #f5f5f7;
+    --text-secondary: #a1a1aa;
+    --text-tertiary: #6e6e77;
+    --accent-blue: #0a84ff;
+    --accent-teal: #64d2ff;
+    --accent-purple: #bf5af2;
+    --accent-emerald: #30d158;
+    --accent-amber: #ff9f0a;
+    --accent-rose: #ff453a;
+    --shadow-card: 0 20px 44px -12px rgba(0, 0, 0, 0.65), inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+    --shadow-hover: 0 24px 52px -10px rgba(0, 0, 0, 0.75), inset 0 1px 0 0 rgba(255, 255, 255, 0.18);
+    --spring: cubic-bezier(0.22, 1, 0.36, 1);
   }
-  @media (prefers-reduced-motion:reduce){.tab-panel.active{animation:none}
-    .blur-answer,#backTop{transition:none!important}}
+
+  html.theme-light {
+    color-scheme: light;
+    --bg-canvas: #f5f5f7;
+    --bg-elevated: rgba(255, 255, 255, 0.82);
+    --bg-card: rgba(255, 255, 255, 0.88);
+    --bg-card-solid: #ffffff;
+    --bg-subcard: rgba(242, 242, 247, 0.85);
+    --bg-glass-nav: rgba(248, 248, 252, 0.82);
+    --border-hairline: rgba(0, 0, 0, 0.08);
+    --border-highlight: rgba(0, 0, 0, 0.14);
+    --text-primary: #1d1d1f;
+    --text-secondary: #515154;
+    --text-tertiary: #86868b;
+    --shadow-card: 0 12px 32px -8px rgba(0, 0, 0, 0.07), inset 0 1px 0 0 rgba(255, 255, 255, 0.9);
+    --shadow-hover: 0 18px 40px -8px rgba(0, 0, 0, 0.12), inset 0 1px 0 0 rgba(255, 255, 255, 1);
+  }
+
+  html {
+    scroll-padding-top: calc(var(--hdr) + 14px);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--bg-canvas);
+    background-image:
+      radial-gradient(ellipse 80% 50% at 15% -10%, rgba(10, 132, 255, 0.16), transparent 60%),
+      radial-gradient(ellipse 70% 45% at 85% 5%, rgba(191, 90, 242, 0.12), transparent 60%),
+      radial-gradient(ellipse 60% 40% at 50% 100%, rgba(48, 209, 88, 0.08), transparent 60%);
+    background-attachment: fixed;
+    color: var(--text-primary);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: -0.011em;
+    transition: background-color 0.4s var(--spring), color 0.3s var(--spring);
+  }
+
+  h1, h2, h3, h4 {
+    letter-spacing: -0.024em;
+    font-weight: 650;
+  }
+
+  .font-mono {
+    font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+  }
+
+  header {
+    background: var(--bg-glass-nav) !important;
+    -webkit-backdrop-filter: saturate(190%) blur(28px) !important;
+    backdrop-filter: saturate(190%) blur(28px) !important;
+    border-bottom: 1px solid var(--border-hairline) !important;
+    box-shadow: 0 4px 24px -4px rgba(0, 0, 0, 0.28);
+    transition: background 0.35s var(--spring);
+  }
+
+  #mainNav {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border-hairline);
+    border-radius: 14px;
+    padding: 4px !important;
+    gap: 4px !important;
+    margin-bottom: 8px;
+  }
+  html.theme-light #mainNav {
+    background: rgba(0, 0, 0, 0.045);
+  }
+
+  #mainNav button {
+    border-radius: 10px !important;
+    border-bottom: none !important;
+    transition: all 0.28s var(--spring) !important;
+    position: relative;
+    font-weight: 500;
+  }
+  #mainNav button:hover { transform: translateY(-1px); }
+  #mainNav button:active { transform: scale(0.97); }
+  #mainNav button.tab-btn-active {
+    background: rgba(10, 132, 255, 0.22) !important;
+    color: #64d2ff !important;
+    box-shadow: 0 2px 10px rgba(10, 132, 255, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.22);
+    font-weight: 600 !important;
+  }
+  html.theme-light #mainNav button.tab-btn-active {
+    background: #ffffff !important;
+    color: #0066cc !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .bg-slate-900 {
+    background: var(--bg-elevated) !important;
+    -webkit-backdrop-filter: saturate(160%) blur(22px);
+    backdrop-filter: saturate(160%) blur(22px);
+    border-color: var(--border-hairline) !important;
+    border-radius: 22px !important;
+    box-shadow: var(--shadow-card);
+    transition: transform 0.35s var(--spring), box-shadow 0.35s var(--spring), border-color 0.3s ease;
+  }
+
+  .bg-slate-950 {
+    background: var(--bg-card) !important;
+    border-color: var(--border-hairline) !important;
+    border-radius: 18px !important;
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.06);
+    transition: transform 0.3s var(--spring), box-shadow 0.3s var(--spring), border-color 0.25s ease;
+  }
+  .bg-slate-950:hover {
+    border-color: var(--border-highlight) !important;
+  }
+
+  html.theme-light .text-white { color: #1d1d1f !important; }
+  html.theme-light .text-slate-100,
+  html.theme-light .text-slate-200,
+  html.theme-light .text-slate-300 { color: #2c2c2e !important; }
+  html.theme-light .text-slate-400 { color: #515154 !important; }
+  html.theme-light .text-slate-500 { color: #6e6e73 !important; }
+  html.theme-light .bg-slate-800,
+  html.theme-light .bg-slate-800\/50 { background-color: rgba(0, 0, 0, 0.05) !important; color: #1d1d1f !important; border-color: rgba(0,0,0,0.12) !important; }
+  html.theme-light .bg-sky-950\/40,
+  html.theme-light .bg-sky-950\/30,
+  html.theme-light .bg-sky-950 { background-color: rgba(10, 132, 255, 0.1) !important; color: #004080 !important; border-color: rgba(10, 132, 255, 0.28) !important; }
+  html.theme-light .bg-purple-950\/30,
+  html.theme-light .bg-purple-950 { background-color: rgba(175, 82, 222, 0.1) !important; color: #581c87 !important; border-color: rgba(175, 82, 222, 0.28) !important; }
+  html.theme-light .bg-emerald-950\/30,
+  html.theme-light .bg-emerald-950 { background-color: rgba(48, 209, 88, 0.12) !important; color: #065f46 !important; border-color: rgba(48, 209, 88, 0.3) !important; }
+  html.theme-light .bg-amber-950\/40,
+  html.theme-light .bg-amber-950\/30,
+  html.theme-light .bg-amber-950 { background-color: rgba(255, 159, 10, 0.13) !important; color: #78350f !important; border-color: rgba(255, 159, 10, 0.35) !important; }
+  html.theme-light .bg-rose-950\/40,
+  html.theme-light .bg-rose-950\/30,
+  html.theme-light .bg-rose-950 { background-color: rgba(255, 69, 58, 0.1) !important; color: #881337 !important; border-color: rgba(255, 69, 58, 0.28) !important; }
+  html.theme-light .text-sky-200, html.theme-light .text-sky-300, html.theme-light .text-sky-400 { color: #0055b3 !important; }
+  html.theme-light .text-amber-200, html.theme-light .text-amber-300, html.theme-light .text-amber-400 { color: #92400e !important; }
+  html.theme-light .text-rose-200, html.theme-light .text-rose-300, html.theme-light .text-rose-400 { color: #9f1239 !important; }
+  html.theme-light .text-emerald-300, html.theme-light .text-emerald-400 { color: #047857 !important; }
+  html.theme-light .text-purple-300, html.theme-light .text-purple-400 { color: #6b21a8 !important; }
+  html.theme-light .text-cyan-200, html.theme-light .text-cyan-300, html.theme-light .text-cyan-400 { color: #0e7490 !important; }
+
+  @keyframes appleStageIn {
+    0% { opacity: 0; transform: translateY(10px) scale(0.992); filter: blur(4px); }
+    100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+  }
+  .tab-panel { display: none; }
+  .tab-panel.active {
+    display: block;
+    animation: appleStageIn 0.42s var(--spring) forwards;
+  }
+  .engine-module { display: none; }
+  .engine-module.active {
+    display: block;
+    animation: appleStageIn 0.34s var(--spring) forwards;
+  }
+  .natu-card, .plas-card, .alloy-card, .smart-card {
+    animation: appleStageIn 0.3s var(--spring) forwards;
+  }
+
+  .blur-answer {
+    filter: blur(5.5px);
+    cursor: pointer;
+    transition: filter 0.28s var(--spring), background-color 0.28s ease, transform 0.2s var(--spring), box-shadow 0.25s ease;
+    user-select: none;
+    border: 1px solid rgba(100, 210, 255, 0.22);
+    padding: 1px 7px !important;
+    border-radius: 7px !important;
+  }
+  .blur-answer:hover {
+    filter: blur(2.5px);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(10, 132, 255, 0.2);
+  }
+  .blur-answer.revealed {
+    filter: blur(0);
+    cursor: pointer;
+    user-select: text;
+    background: rgba(48, 209, 88, 0.16) !important;
+    border-color: rgba(48, 209, 88, 0.45) !important;
+    box-shadow: 0 0 0 1px rgba(48, 209, 88, 0.15);
+  }
+
+  .mode-pill {
+    cursor: pointer;
+    transition: all 0.26s var(--spring);
+    border-radius: 9999px;
+    backdrop-filter: blur(10px);
+  }
+  .mode-pill:hover { transform: translateY(-1px); }
+  .mode-pill:active { transform: scale(0.96); }
+  .mode-pill.active {
+    background: linear-gradient(135deg, rgba(10, 132, 255, 0.26), rgba(100, 210, 255, 0.14)) !important;
+    color: #7dd3fc !important;
+    border-color: rgba(100, 210, 255, 0.65) !important;
+    box-shadow: 0 4px 14px -2px rgba(10, 132, 255, 0.35), inset 0 1px 0 rgba(255,255,255,0.2);
+  }
+
+  details > summary {
+    cursor: pointer;
+    list-style: none;
+    transition: background-color 0.2s ease;
+    border-radius: 14px;
+  }
+  details > summary::-webkit-details-marker { display: none; }
+  details[open] > summary {
+    border-bottom: 1px solid var(--border-hairline);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 10px;
+    border-radius: 9999px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.12);
+  }
+
+  .katex { font-size: 1.05em; }
+  .num-card { font-variant-numeric: tabular-nums; }
+  input[type=number]::-webkit-outer-spin-button,
+  input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  input[type=number] { -moz-appearance: textfield; }
+  .katex-block { overflow-x: auto; overflow-y: hidden; }
+  .katex-block .katex-display { text-align: left; margin: .35em 0; }
+
+  .apple-sim-panel {
+    background: linear-gradient(165deg, rgba(20, 24, 38, 0.85), rgba(12, 15, 26, 0.92));
+    border: 1px solid rgba(100, 210, 255, 0.22);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 18px 40px -12px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  }
+  html.theme-light .apple-sim-panel {
+    background: linear-gradient(165deg, rgba(255, 255, 255, 0.95), rgba(240, 246, 255, 0.92));
+    border-color: rgba(10, 132, 255, 0.25);
+    box-shadow: 0 14px 32px -10px rgba(10, 132, 255, 0.12);
+  }
+
+  .apple-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 7px 14px;
+    transition: all 0.24s var(--spring);
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(255, 255, 255, 0.07);
+    color: var(--text-primary);
+  }
+  .apple-btn:hover {
+    background: rgba(255, 255, 255, 0.13);
+    transform: translateY(-1px);
+  }
+  .apple-btn:active { transform: scale(0.97); }
+  .apple-btn-primary {
+    background: linear-gradient(180deg, #1e90ff 0%, #0071e3 100%);
+    color: #ffffff !important;
+    border-color: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 4px 14px rgba(0, 113, 227, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  }
+  .apple-btn-primary:hover {
+    background: linear-gradient(180deg, #339dff 0%, #0a7ff0 100%);
+    box-shadow: 0 6px 18px rgba(0, 113, 227, 0.55);
+  }
+
+  input[type=range].apple-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 6px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #ff453a, #ff9f0a, #30d158, #0a84ff, #bf5af2);
+    outline: none;
+  }
+  input[type=range].apple-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 2px solid #0a84ff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+    cursor: grab;
+    transition: transform 0.18s var(--spring);
+  }
+  input[type=range].apple-slider::-webkit-slider-thumb:active {
+    transform: scale(1.15);
+    cursor: grabbing;
+  }
+
+  .quiz-self-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px dashed var(--border-hairline);
+    font-size: 11px;
+  }
+
+  #cmdModal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: rgba(0, 0, 0, 0.58);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 10vh;
+  }
+  #cmdModal.open {
+    display: flex;
+    animation: appleStageIn 0.22s var(--spring) forwards;
+  }
+
+  .toc-strip { display: none; gap: 6px; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 2px 0 6px; margin-bottom: 2px; }
+  .toc-strip::-webkit-scrollbar { display: none; }
+  .toc-chip { flex-shrink: 0; font-size: 10px; line-height: 1; padding: 7px 11px; border-radius: 9999px; border: 1px solid var(--border-hairline); background: var(--bg-card); color: var(--text-secondary); font-weight: 600; white-space: nowrap; cursor: pointer; transition: all 0.2s var(--spring); }
+  #backTop { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom)); z-index: 70; width: 44px; height: 44px; border-radius: 9999px; border: 1px solid rgba(100, 210, 255, 0.35); background: var(--bg-glass-nav); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); color: #7dd3fc; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transform: translateY(8px); transition: opacity .25s, transform .25s var(--spring); box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+  #backTop.show { opacity: 1; pointer-events: auto; transform: none; }
+  #scrollProg { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: linear-gradient(90deg, #0a84ff, #64d2ff, #30d158); z-index: 80; pointer-events: none; }
+
+  @media (max-width:1023.98px){
+    header { padding-top: env(safe-area-inset-top); }
+    #mainNav { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+    #mainNav::-webkit-scrollbar { display: none; }
+    #mainNav button { flex-shrink: 0; padding-top: 9px; padding-bottom: 9px; }
+    select, input[type="number"], input[type="text"] { font-size: 16px !important; }
+    .mode-pill { padding: 8px 14px; }
+    .toc-chip { padding: 10px 12px; }
+    .katex { font-size: 1em; }
+    .toc-strip { display: flex; }
+  }
+  @media (prefers-reduced-motion:reduce){
+    .tab-panel.active, .engine-module.active { animation: none !important; }
+    .blur-answer, #backTop { transition: none !important; }
+  }
 </style>
 </head>
 <body class="text-slate-200 min-h-screen">
@@ -61,14 +387,29 @@
   <div class="max-w-7xl mx-auto px-4 py-3">
     <div class="flex flex-wrap items-center justify-between gap-2">
       <div>
-        <h1 class="text-base sm:text-lg font-bold text-white leading-tight">HKDSE · Topic XIV Master Studio</h1>
+        <div class="flex items-center gap-2.5"><div class="hidden sm:flex items-center gap-1.5 mr-1"><span class="w-2.5 h-2.5 rounded-full bg-[#ff5f56] inline-block shadow-sm"></span><span class="w-2.5 h-2.5 rounded-full bg-[#ffbd2e] inline-block shadow-sm"></span><span class="w-2.5 h-2.5 rounded-full bg-[#27c93f] inline-block shadow-sm"></span></div><h1 class="text-base sm:text-lg font-bold text-white leading-tight tracking-tight">HKDSE · Topic XIV Master Studio — Materials Chemistry</h1><span class="chip bg-sky-500/15 text-sky-300 border border-sky-400/30 text-[10px]">Interactive Studio Pro</span></div>
         <p class="text-[11px] text-slate-400 font-mono">Materials Chemistry · Polymers, Metals &amp; Alloys, Liquid Crystals, Nanomaterials &amp; Green Chemistry</p>
       </div>
-      <div class="flex flex-wrap gap-2 text-[10px] font-mono">
+      <div class="flex flex-wrap items-center gap-2 text-[10px] font-mono">
         <span class="chip bg-sky-950 text-sky-400 border border-sky-800">Strands (a)–(e)</span>
-        <span class="chip bg-purple-950 text-purple-400 border border-purple-800">Paper 2 · elective</span>
+        <span class="chip bg-purple-950 text-purple-400 border border-purple-800">Paper 2 · Section B</span>
         <span class="chip bg-emerald-950 text-emerald-400 border border-emerald-800">C&amp;A Guide 2018</span>
-        <span class="chip bg-amber-950 text-amber-400 border border-amber-800">NTF 18/08/2018 scope</span>
+        <div class="flex items-center gap-2 ml-1 pl-2 border-l border-slate-700/70">
+          <button type="button" onclick="openCmdModal()" class="apple-btn !py-1 !px-2.5 text-[11px]" title="Quick Concept &amp; Past-Paper Search (⌘K)">
+            <span>🔍 Search</span>
+            <kbd class="px-1.5 py-0.5 text-[9px] rounded bg-slate-800 text-slate-300 border border-slate-700">⌘K</kbd>
+          </button>
+          <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-900/90 border border-slate-700/80" title="Concept Mastery Progress across Quiz &amp; Syllabus Checkpoints">
+            <svg class="w-4 h-4 -rotate-90" viewBox="0 0 36 36">
+              <circle cx="18" cy="18" r="15" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="3.8"></circle>
+              <circle id="masteryRingCircle" cx="18" cy="18" r="15" fill="none" stroke="#30d158" stroke-width="3.8" stroke-dasharray="94.2" stroke-dashoffset="94.2" stroke-linecap="round"></circle>
+            </svg>
+            <span id="masteryPctText" class="text-[11px] font-semibold text-emerald-400 num-card">0% Mastered</span>
+          </div>
+          <button type="button" id="themeToggleBtn" onclick="toggleAppleTheme()" class="apple-btn !py-1 !px-2.5 text-[11px]" title="Switch between Apple Pro Dark and Cupertino Daylight mode">
+            <span id="themeToggleIcon">☀️ Daylight</span>
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -254,6 +595,73 @@
 </section>
 
 <!-- ═══════════ TAB 2 · ENGINE A · STRAND (a) · NATURALLY OCCURRING POLYMERS ═══════════ -->
+
+<!-- ══ INTERACTIVE SYLLABUS AUDIT & CONCEPT READINESS MATRIX (EDB C&A Guide 2018 · Topic XIV Strands a–e) ══ -->
+<div class="mt-6 apple-sim-panel space-y-4" id="syllabus-audit-panel">
+  <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800/80 pb-3">
+    <div>
+      <span class="text-[10px] font-mono uppercase tracking-widest text-sky-400 font-bold">Interactive Syllabus Check-Off · EDB C&amp;A Guide (Topic XIV Strands a–e)</span>
+      <h3 class="text-base font-bold text-white mt-0.5">HKDSE Topic XIV Competency Checklist &amp; Direct Simulator Links</h3>
+      <p class="text-xs text-slate-400">Tick each official EDB learning outcome across Strands (a)–(e) and Part II depth caps (`NTF-2018 II-B XIV (d)`) as you master it.</p>
+    </div>
+    <div class="flex items-center gap-2">
+      <span id="sylAuditCount" class="chip bg-emerald-950 text-emerald-300 border border-emerald-700 font-mono">0 / 12 Outcomes Checked</span>
+      <button type="button" class="apple-btn text-xs" onclick="checkAllSyllabusOutcomes()">Check All</button>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs" id="sylAuditGrid">
+    <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+      <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+      <span><b class="text-white block">XIV(a) · Cellulose vs Chitin Structure &amp; H-Bonding</b>Cellulose $-\text{OH}$ H-bonds <b>with water</b> (absorbs water); chitin $\text{C=O}\cdots\text{H-N}$ H-bonds <b>between adjacent chains</b> (CP 2021 / CP 2024 Q2). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-natu');switchNatuMode('map')">Biopolymer Sim →</button></span>
+    </label>
+    <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+      <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+      <span><b class="text-white block">XIV(a) · Cellulose vs Chitin IR Spectrum Contrast</b>Both show broad $\text{O-H}$; only chitin shows amide $\text{C=O}$ and $\text{N-H}$ peaks (CP 2016 Q3). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-natu');switchNatuMode('map')">IR Contrast Sim →</button></span>
+    </label>
+    <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+      <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+      <span><b class="text-white block">XIV(b) · Addition Polymers (PTFE, PMMA, Superglue)</b>Deduce monomers &amp; repeat units; PMMA held by weak van der Waals' forces (NOT thermosetting, CP 2021). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-plas');selectPlas(3)">Inspect →</button></span>
+    </label>
+    <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+      <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+      <span><b class="text-white block">XIV(b) · Condensation Polymers (PET, PBT, Nylon-6,6, Kevlar, Urea-Methanal)</b>Elimination of small molecules ($\text{H}_2\text{O}$); <b>four</b> $-\text{CH}_2-$ between $\text{C=O}$ in nylon-6,6 (CP 2016 Q31); Kevlar benzene rigidity + H-bonds + aromatic stacking (CP 2016/2024). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-plas');switchPlasMode('map')">Polymer Lab →</button></span>
+    </label>
+    <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+      <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+      <span><b class="text-white block">XIV(b) · HDPE vs LDPE, Vulcanisation &amp; Moulding</b>HDPE less branched $\to$ closer packing $\to$ denser/harder (CP 2022 Q2); $\text{S-S}$ cross-links in rubber (CP 2012/2024); blow moulding for bottles (CP 2014/2022). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-plas');switchPlasMode('map')">Polymer Lab →</button></span>
+    </label>
+    <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+      <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+      <span><b class="text-white block">XIV(b) · Biodegradable Polyesters (PLA &amp; PHB)</b>Lactic acid condensation $\to$ PLA; ester groups hydrolysed in acidic, alkaline, or bacterial conditions (MS Bank §5 / CP 2024 Q2). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-plas');selectPlas(12)">Inspect →</button></span>
+    </label>
+    <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+      <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+      <span><b class="text-white block">XIV(c) · Close-Packed (hcp, ccp) vs Open (bcc) Unit Cells</b>Stacking A-B (hcp, CN 12) vs A-B-C (ccp, CN 12, 4 atoms) vs open bcc (CN 8, 2 atoms) with fractional reduction shown (CP 2012–2025). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-alloy');switchAlloyMode('map')">Unit Cell Slicer →</button></span>
+    </label>
+    <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+      <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+      <span><b class="text-white block">XIV(c) · Alloy Hardness &amp; Metallic Malleability</b>Different-sized foreign atoms distort layers and <b>obstruct layer sliding</b> (CP 2025 Q2); pure metal ions shift without breaking metallic bonds (CP 2025 P1 Q1). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-alloy');switchAlloyMode('map')">Shear Sim →</button></span>
+    </label>
+    <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+      <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+      <span><b class="text-white block">XIV(d) · Liquid Crystals: 3 Structural Features &amp; Phases</b>Rigid central part + polar group + long alkyl chain (MS Bank §2); crystalline $\to$ smectic $\to$ nematic $\to$ isotropic; cholesteric chiral phase (CP 2015/2017/2024/2025). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-smart');switchSmartMode('map')">LC &amp; LCD Sim →</button></span>
+    </label>
+    <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+      <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+      <span><b class="text-white block">XIV(d) · LCD Pixel Switching &amp; Depth Guard (`NTF XIV(d)`)</b>Explain why pixel appears black when voltage is applied (CP 2015 Q2); formula recall NOT expected. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-smart');switchSmartMode('map')">LC &amp; LCD Sim →</button></span>
+    </label>
+    <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+      <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+      <span><b class="text-white block">XIV(d) · Nanomaterials ($\le 100\text{ nm}$) &amp; Unit Conversion</b>Organic/inorganic particles up to $100\text{ nm}$ ($1\text{ nm} = 10^{-9}\text{ m}$, CP 2020/2023/2025); high surface-area-to-volume ratio; uses &amp; safety. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-smart');selectSmart(5)">Inspect →</button></span>
+    </label>
+    <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+      <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+      <span><b class="text-white block">XIV(e) · Green Chemistry in Synthetic Materials</b>Supercritical $\text{CO}_2$/$\text{H}_2\text{O}$ solvents, Ziegler–Natta catalysis, corn-starch PLA renewability vs food supply, atom economy (100% for addition, $<100\%$ for condensation, CP 2025 Q2). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-solver')">Grader →</button></span>
+    </label>
+  </div>
+</div>
+
 <section id="tab-natu" class="tab-panel space-y-6">
 <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-sm">
 <div class="border-b border-slate-800 pb-4 mb-6">
@@ -384,6 +792,34 @@
 <div class="overflow-x-auto"><table class="w-full text-xs text-slate-300"><thead class="text-slate-400 uppercase tracking-wider text-[10px]"><tr><th class="p-2 text-left">Polymer</th><th class="p-2 text-left">Monomer unit</th><th class="p-2 text-left">Linkage</th><th class="p-2 text-left">Key forces</th><th class="p-2 text-left">Properties</th><th class="p-2 text-left">Where found</th></tr></thead><tbody class="divide-y divide-slate-800"><tr><td class="p-2 font-semibold text-white">cellulose</td><td class="p-2">β-glucose</td><td class="p-2">1,4 glycosidic</td><td class="p-2">H-bonds within, between chains; –OH with water</td><td class="p-2">straight unbranched fibres; strong; absorbs, no dissolving; not hydrolysed</td><td class="p-2">cell walls</td></tr><tr><td class="p-2 font-semibold text-white">chitin</td><td class="p-2">N-acetylglucosamine</td><td class="p-2">1,4</td><td class="p-2">C=O···N–H H-bonds between chains</td><td class="p-2">tough, rigid; no water uptake</td><td class="p-2">exoskeletons, fungi</td></tr><tr><td class="p-2 font-semibold text-white">starch</td><td class="p-2">α-glucose</td><td class="p-2">1,4 + branches</td><td class="p-2">H-bonding with water; coils not packs</td><td class="p-2">helix + branches; blue-black with iodine</td><td class="p-2">grains, tubers</td></tr><tr><td class="p-2 font-semibold text-white">proteins</td><td class="p-2">amino acids</td><td class="p-2">amide</td><td class="p-2">H-bonds via N–H, C=O between chains</td><td class="p-2">condensation polymer; hydrolyses to amino acids</td><td class="p-2">muscle, enzymes</td></tr></tbody></table></div>
 <p class="text-[11px] text-slate-400 mt-3">Answer feature → force → property; the 2012 comments penalise jumping straight to the force <i>(CP 2012 Q2)</i>.</p>
 </div>
+
+<!-- ══ INTERACTIVE SIMULATOR A1: CELLULOSE VS CHITIN H-BONDING & IR SPECTRUM COMPARATOR (CP 2016 Q3 / CP 2021 / CP 2024 Q2 / CP 2025 Q2) ══ -->
+<div class="mt-6 apple-sim-panel space-y-4">
+  <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+    <div>
+      <span class="text-[10px] font-mono uppercase tracking-widest text-sky-400 font-bold">Interactive Biopolymer &amp; IR Lab · Strand (a)</span>
+      <h4 class="text-sm font-bold text-white mt-0.5">Cellulose vs Chitin vs Starch: Chain Architecture, Water Interaction &amp; IR Spectrum Overlay</h4>
+      <p class="text-xs text-slate-400">Switch between the natural polymers to inspect why cotton/cellulose absorbs water without dissolving (CP 2025 Q2), why lobster-shell chitin excludes water (CP 2021 / CP 2024 Q2), and how their IR spectra differ (CP 2016 Q3).</p>
+    </div>
+    <div class="flex gap-1.5">
+      <button type="button" id="bioBtnCell" onclick="selectBiopolySim('cellulose')" class="apple-btn !py-1 !px-3 text-xs border-sky-500 text-sky-300 bg-sky-950/50">Cellulose (Cotton)</button>
+      <button type="button" id="bioBtnChit" onclick="selectBiopolySim('chitin')" class="apple-btn !py-1 !px-3 text-xs">Chitin (Exoskeleton)</button>
+      <button type="button" id="bioBtnStar" onclick="selectBiopolySim('starch')" class="apple-btn !py-1 !px-3 text-xs">Starch (Amylose)</button>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 items-center">
+    <div class="p-3 bg-slate-950 border border-slate-800 rounded-xl">
+      <div class="flex justify-between items-center mb-1">
+        <span class="text-[11px] font-bold text-sky-300 uppercase tracking-wider">Simulated IR Transmittance Spectrum (cm⁻¹)</span>
+        <span class="text-[10px] font-mono text-slate-400">CP 2016 Q3 Comparison</span>
+      </div>
+      <svg id="biopolyIrSvg" viewBox="0 0 420 180" class="w-full h-auto"></svg>
+    </div>
+    <div id="biopolySimVerdict" class="p-4 bg-slate-950 border border-sky-800/60 rounded-xl text-xs text-slate-200 space-y-2 leading-relaxed"></div>
+  </div>
+</div>
+
 </div>
 </div>
 <!-- MODULE 3 · QUIZ -->
@@ -494,6 +930,38 @@
 <p class="text-[11px] font-bold text-slate-300 uppercase tracking-wider mb-2">Flow — deducing monomers from a repeat unit: find the linkage → split → restore</p>
 <div class="p-4 bg-sky-950/30 border border-sky-800/60 rounded-lg"><p class="text-xs text-slate-300"><b>1 · Find the linkage</b> — all-carbon backbone ⇒ addition; –COO– or –CONH– in the backbone ⇒ condensation, and the linkage names the family. <b>2 · Split</b> — addition: between the two backbone carbons from the C=C; condensation: at each ester/amide link, between C=O and O (or N). <b>3 · Restore + book-keep</b> — re-form the C=C, or put –OH back on the carbonyl side and –H on the O/N side; n outside, bonds crossing, small molecule shown. Seven in ten failed this deduction for PBT <i>(CP 2016 Q2)</i>.</p></div>
 </div>
+
+<!-- ══ INTERACTIVE SIMULATOR B1: POLYMER CHAIN ARCHITECTURE, HEAT/STRESS TESTER & MOULDING MATCHER (CP 2012 / CP 2014 / CP 2016 / CP 2022 / CP 2024) ══ -->
+<div class="mt-6 apple-sim-panel space-y-4">
+  <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+    <div>
+      <span class="text-[10px] font-mono uppercase tracking-widest text-purple-400 font-bold">Interactive Polymer Structure–Property Bench · Strand (b)</span>
+      <h4 class="text-sm font-bold text-white mt-0.5">Chain Packing, Inter-Chain Forces, Heat/Tensile Response &amp; Fabrication Moulding Selector</h4>
+      <p class="text-xs text-slate-400">Select a synthetic polymer and apply <b>Heat</b> or <b>Tensile Stretch</b> to visualize chain packing, hydrogen bonds, aromatic stacking, or covalent cross-links.</p>
+    </div>
+    <div class="flex flex-wrap gap-1.5">
+      <select id="polyArchSelect" onchange="updatePolyArchSim()" class="bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs text-white font-semibold">
+        <option value="hdpe">HDPE vs LDPE (Branching &amp; Packing · CP 2022 Q2)</option>
+        <option value="kevlar">Kevlar vs Nylon-6,6 (Benzene Rigidity, H-Bonds &amp; Stacking · CP 2016 / 2024 Q2)</option>
+        <option value="rubber">Vulcanised Rubber (S–S Disulphur Cross-Links &amp; Elasticity · CP 2012 / 2024 Q2)</option>
+        <option value="urea">Urea-Methanal vs PMMA (3D Covalent Network vs Weak vdW · CP 2021 / 2023 Q2)</option>
+      </select>
+      <select id="polyStressMode" onchange="updatePolyArchSim()" class="bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs text-sky-300 font-mono">
+        <option value="rest">State: Ambient Rest</option>
+        <option value="pull">Action: Apply Tensile Pull / Force</option>
+        <option value="heat">Action: Apply Heat (Moulding Test)</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-5 gap-4 items-center">
+    <div class="lg:col-span-3 p-3 bg-slate-950 border border-slate-800 rounded-xl">
+      <svg id="polyArchSvg" viewBox="0 0 450 190" class="w-full h-auto"></svg>
+    </div>
+    <div id="polyArchVerdict" class="lg:col-span-2 p-4 bg-slate-950 border border-purple-800/60 rounded-xl text-xs text-slate-200 space-y-2 leading-relaxed"></div>
+  </div>
+</div>
+
 </div>
 </div>
 <!-- MODULE 3 · QUIZ -->
@@ -690,6 +1158,54 @@
 <div class="p-4 bg-purple-950/30 border border-purple-800/60 rounded-lg"><p class="text-[11px] font-bold text-purple-300 uppercase tracking-wider mb-2">Gate 3 · contacts</p><p class="text-xs text-slate-300 leading-relaxed">Close packings CN 12 (6+3+3); bcc 8; a 13 counts the sphere itself <i>(CP 2016 Q2)</i>.</p></div>
 <div class="p-4 bg-rose-950/30 border border-rose-800/60 rounded-lg"><p class="text-[11px] font-bold text-rose-300 uppercase tracking-wider mb-2">Gate 4 · tally</p><p class="text-xs text-slate-300 leading-relaxed">8×⅛ + 6×½ = 4 (ccp); 1 + 8 × 1/8 = 2 (bcc); bare totals forfeit deduction marks.</p></div>
 </div>
+
+<!-- ══ INTERACTIVE SIMULATOR C1: 3D-PROJECTED UNIT CELL FRACTIONAL SLICER & ALLOY LAYER-SLIDING LAB (CP 2012–2025) ══ -->
+<div class="mt-6 apple-sim-panel space-y-4">
+  <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+    <div>
+      <span class="text-[10px] font-mono uppercase tracking-widest text-emerald-400 font-bold">Interactive Crystal Lattice &amp; Alloy Simulator · Strand (c)</span>
+      <h4 class="text-sm font-bold text-white mt-0.5">3D-Projected Unit Cell Slicer (Defeating the "14" &amp; "13" Traps) &amp; Alloy Shear Simulator</h4>
+      <p class="text-xs text-slate-400">Toggle <b>Slice Shared Spheres at Cell Boundaries</b> to see why 14 drawn spheres in CCP reduce to $8	imesrac{1}{8}+6	imesrac{1}{2}=4$ atoms, and apply shear force to compare pure metal malleability vs alloy hardness (CP 2015 / CP 2016 / CP 2022 / CP 2025).</p>
+    </div>
+    <div class="flex flex-wrap gap-2 items-center">
+      <select id="cellSimType" onchange="updateCrystalSim()" class="bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs text-white font-semibold">
+        <option value="ccp">CCP / FCC (Cu, Au, Al, Ag · 14 points → 4 atoms · CN 12)</option>
+        <option value="bcc">BCC Open Structure (Fe · 9 points → 2 atoms · CN 8)</option>
+        <option value="hcp">HCP (Zn, Ti · A-B-A stacking · CN 12)</option>
+        <option value="ptmn">Two-Element Tetragonal/Ordered Cell (8 corners Pt + 4 faces Pt + 2 faces Mn · CP 2020)</option>
+      </select>
+      <label class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-slate-900 border border-emerald-700/70 text-xs text-emerald-300 cursor-pointer">
+        <input type="checkbox" id="cellSliceChk" checked onchange="updateCrystalSim()" class="accent-emerald-500 rounded">
+        <span>Slice Fractional Spheres ($rac{1}{8}, rac{1}{2}, 1$)</span>
+      </label>
+      <select id="alloyShearSelect" onchange="updateCrystalSim()" class="bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs text-amber-300 font-mono">
+        <option value="pure">Lattice: Pure Metal + Shear Force</option>
+        <option value="inter">Alloy: Interstitial (C in Fe Steel) + Shear</option>
+        <option value="subst">Alloy: Substitutional (Zn in Cu Brass / Y in Ti) + Shear</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+    <div class="p-3 bg-slate-950 border border-slate-800 rounded-xl">
+      <div class="flex justify-between items-center mb-1">
+        <span class="text-[11px] font-bold text-emerald-300 uppercase tracking-wider">3D Isometric Unit Cell &amp; Fractional Reduction</span>
+        <span id="cellSimTallyTag" class="text-[10px] font-mono text-amber-300">8 × 1/8 + 6 × 1/2 = 4 atoms</span>
+      </div>
+      <svg id="cellSimSvg" viewBox="0 0 380 205" class="w-full h-auto"></svg>
+    </div>
+    <div class="p-3 bg-slate-950 border border-slate-800 rounded-xl">
+      <div class="flex justify-between items-center mb-1">
+        <span class="text-[11px] font-bold text-amber-300 uppercase tracking-wider">Atomic Layer Sliding under External Shear Force</span>
+        <span id="shearSimTag" class="text-[10px] font-mono text-sky-300">Ions shift without breaking metallic bonds</span>
+      </div>
+      <svg id="shearSimSvg" viewBox="0 0 380 205" class="w-full h-auto"></svg>
+    </div>
+  </div>
+
+  <div id="crystalSimVerdict" class="p-3.5 bg-slate-950 border border-emerald-800/60 rounded-xl text-xs text-slate-200 leading-relaxed space-y-1"></div>
+</div>
+
 </div>
 </div>
 </div>
@@ -909,6 +1425,62 @@
 </div>
 </div>
 </div>
+
+<!-- ══ INTERACTIVE SIMULATOR D1: LIQUID CRYSTAL PHASE LADDER, LCD PIXEL SWITCH & NANOSCALE CONVERTER (CP 2013 / CP 2015 / CP 2017 / CP 2022 / CP 2024 / CP 2025) ══ -->
+<div class="mt-6 apple-sim-panel space-y-4">
+  <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+    <div>
+      <span class="text-[10px] font-mono uppercase tracking-widest text-cyan-400 font-bold">Interactive Smart Materials Workbench · Strands (d) + (e)</span>
+      <h4 class="text-sm font-bold text-white mt-0.5">Liquid-Crystal Phase Temperature Slider, Crossed-Polariser LCD Pixel &amp; Nanoscale Check</h4>
+      <p class="text-xs text-slate-400">Slide Temperature from Crystalline $	o$ Smectic $	o$ Nematic $	o$ Isotropic Liquid, toggle <b>Applied Voltage</b> on the LCD pixel (CP 2015 Q2 / CP 2022 Q2), and test particle diameters in metres against the $100	ext{ nm}$ cap (CP 2023 / CP 2025 Q2).</p>
+    </div>
+    <span id="lcPhaseBadge" class="chip bg-cyan-950 text-cyan-300 border border-cyan-700 font-mono">Phase: Smectic (Layered + Aligned)</span>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+    <div class="p-3 bg-slate-950/90 border border-slate-800 rounded-xl space-y-1">
+      <div class="flex justify-between"><span class="text-slate-400">Temperature Phase Ladder</span><span id="lcTempStageLbl" class="font-mono text-amber-300">Smectic Phase</span></div>
+      <input id="lcPhaseSlider" type="range" min="0" max="4" step="1" value="1" oninput="updateSmartMatSim()" class="w-full accent-cyan-500">
+      <div class="flex justify-between text-[9.5px] text-slate-500 font-mono"><span>Solid</span><span>Smectic</span><span>Nematic</span><span>Cholesteric*</span><span>Isotropic</span></div>
+    </div>
+    <div class="p-3 bg-slate-950/90 border border-slate-800 rounded-xl flex flex-col justify-between">
+      <span class="text-slate-400 font-semibold">LCD Pixel Voltage (Crossed Polarisers · CP 2015 Q2)</span>
+      <label class="flex items-center gap-2 cursor-pointer mt-1">
+        <input type="checkbox" id="lcdVoltChk" onchange="updateSmartMatSim()" class="accent-cyan-500 rounded">
+        <span id="lcdVoltLbl" class="text-cyan-300 font-semibold">Voltage OFF (V = 0 → Twisted → Bright Pixel)</span>
+      </label>
+    </div>
+    <div class="p-3 bg-slate-950/90 border border-slate-800 rounded-xl space-y-1">
+      <label class="text-slate-400 font-semibold block">Nanoparticle Size Converter ($1	ext{ nm} = 10^{-9}	ext{ m}$ · CP 2025)</label>
+      <select id="nanoSizeSelect" onchange="updateSmartMatSim()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-2 py-1 text-white font-mono">
+        <option value="4.5e-8" selected>d = 4.5 × 10⁻⁸ m (= 45 nm → Nanoparticle ✓)</option>
+        <option value="8.0e-9">d = 8.0 × 10⁻⁹ m (= 8.0 nm Ag cluster ✓ · CP 2023)</option>
+        <option value="3.2e-7">d = 3.2 × 10⁻⁷ m (= 320 nm → Exceeds 100 nm ✗)</option>
+        <option value="1.5e-6">d = 1.5 × 10⁻⁶ m (= 1500 nm microplastic ✗)</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+    <div class="p-3 bg-slate-950 border border-slate-800 rounded-xl">
+      <div class="flex justify-between items-center mb-1">
+        <span class="text-[11px] font-bold text-cyan-300 uppercase tracking-wider">Molecular Rod Arrangement in Selected Phase</span>
+        <span class="text-[10px] font-mono text-slate-400">Rigid core + polar group + long alkyl tail</span>
+      </div>
+      <svg id="lcPhaseSimSvg" viewBox="0 0 380 175" class="w-full h-auto"></svg>
+    </div>
+    <div class="p-3 bg-slate-950 border border-slate-800 rounded-xl">
+      <div class="flex justify-between items-center mb-1">
+        <span class="text-[11px] font-bold text-amber-300 uppercase tracking-wider">Crossed-Polariser LCD Pixel Light Path</span>
+        <span id="lcdPixelStateTag" class="text-[10px] font-mono text-emerald-300">Pixel: BRIGHT (Light transmitted)</span>
+      </div>
+      <svg id="lcdPixelSimSvg" viewBox="0 0 380 175" class="w-full h-auto"></svg>
+    </div>
+  </div>
+
+  <div id="smartSimVerdict" class="p-3.5 bg-slate-950 border border-cyan-800/60 rounded-xl text-xs text-slate-200 leading-relaxed space-y-1"></div>
+</div>
+
 <div id="smart-quiz" class="engine-module">
 <div class="bg-slate-950 border border-slate-800 rounded-xl p-6">
 <div class="flex items-center justify-between mb-4">
@@ -1066,6 +1638,53 @@
 <p class="text-[10px] text-slate-500 leading-relaxed">$\text{atom economy} = \dfrac{M_r(\text{desired product})}{\sum M_r(\text{all reactants})} \times 100\%$ — note the bank lines: “Atom economy = 58/76 = 76.32%” and “The calculation of atom economy is based on a 100% completed reaction. Most reactions do not go to completion” (ms bank §10). It is read from the EQUATION, so it is NOT the same as percentage yield — candidates who could not separate the two terms lost the comparison mark (CP 2013 Paper 2 §C context). The ethene preset shows the bank’s other line, “atom economy of the reaction is 100%” (ms bank §10) — addition polymerisations waste no atoms, which is exactly why the comparison sentence writes itself. For the evaluation half: “It has a higher atom economy” / “produces less waste” / “Less hazardous chemicals are used” (ms bank §10) — and each line must be pinned to the named process, not recited as a general principle.</p>
 </div>
 </div>
+
+<div class="bg-slate-950 border border-sky-800/70 rounded-xl p-5 space-y-4 md:col-span-2 apple-sim-panel mt-4">
+  <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+    <div>
+      <span class="text-[10px] font-mono text-sky-400 uppercase font-bold px-2 py-0.5 bg-sky-950 rounded border border-sky-800">Bench 6 · AI-Style HKEAA Keyword Grader</span>
+      <h3 class="text-sm font-bold text-white mt-1">Live Paper 2 Section B Long-Question Answer Grader (2012–2025 Marking Scheme Rubrics)</h3>
+      <p class="text-[11px] text-slate-400">Select an authentic HKDSE Topic XIV question, type your explanation, and get instant mark-by-mark diagnostic feedback plus recorded <b>[NOT ACCEPT]</b> trap warnings.</p>
+    </div>
+    <div class="flex items-center gap-2">
+      <button type="button" onclick="fillModelGraderAnswer()" class="apple-btn text-xs">Show Model Full-Mark Answer</button>
+    </div>
+  </div>
+
+  <div>
+    <label for="graderQSelect" class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Select Question (Paper 2 Section B)</label>
+    <select id="graderQSelect" onchange="loadGraderPrompt()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white font-semibold">
+      <option value="unit_cell">Q1 · Unit Cell Definition, Gold/Copper CCP Name, Coordination Number &amp; Atom Tally (4 marks · CP 2015 / CP 2016 / CP 2022 / CP 2025 Q2)</option>
+      <option value="kevlar_nylon">Q2 · Why Kevlar is More Rigid and Stronger than Nylon-6,6 (3 marks · CP 2016 Q2 / CP 2024 Q2)</option>
+      <option value="alloy_hard">Q3 · Why Pure Aluminium is Malleable but Titanium/Steel Alloy is Harder (3 marks · CP 2012 Q2 / CP 2025 Q2 / CP 2025 P1 Q1)</option>
+      <option value="lc_pixel">Q4 · Liquid Crystal Structural Features, Smectic Arrangement &amp; Black Pixel Under Voltage (3 marks · CP 2015 Q2 / CP 2017 Q2)</option>
+    </select>
+  </div>
+
+  <div id="graderPromptBox" class="p-3.5 bg-slate-900/90 border border-slate-800 rounded-xl text-xs text-slate-200 leading-relaxed"></div>
+
+  <textarea id="graderInput" rows="4" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-sky-500" placeholder="Type your full HKDSE exam answer here..."></textarea>
+
+  <div class="flex flex-wrap gap-2">
+    <button type="button" onclick="gradeStudentAnswer()" class="py-2 px-4 rounded-lg bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold transition">Grade My Answer Against HKEAA Marking Scheme</button>
+    <button type="button" onclick="document.getElementById('graderInput').value='';document.getElementById('graderResultBox').innerHTML='Awaiting your answer...';" class="py-2 px-3 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold">Clear</button>
+  </div>
+
+  <div id="graderResultBox" aria-live="polite" class="p-3.5 bg-slate-900 border border-slate-800 rounded-xl text-xs text-slate-300 space-y-2">Awaiting your answer...</div>
+</div>
+
+<!-- Command-K Modal -->
+<div id="cmdModal" class="cmd-modal-backdrop" onclick="if(event.target===this)closeCmdModal()">
+  <div class="cmd-modal-box">
+    <div class="flex items-center gap-2 px-4 py-3 border-b border-slate-800">
+      <span class="text-sky-400">🔍</span>
+      <input id="cmdSearchInput" type="text" oninput="filterCmdList()" placeholder="Jump to any Topic XIV concept, unit-cell slicer, polymer lab, LCD simulator, or past-paper trap..." class="w-full bg-transparent text-sm text-white focus:outline-none">
+      <button type="button" onclick="closeCmdModal()" class="text-xs text-slate-400 hover:text-white px-1.5 py-0.5 rounded bg-slate-800">ESC</button>
+    </div>
+    <div id="cmdResults" class="p-2 max-h-80 overflow-y-auto space-y-1 text-xs"></div>
+  </div>
+</div>
+
 <!-- Exam-chain strip -->
 <div class="mt-6 p-4 bg-slate-950 border border-slate-800 rounded-xl text-xs text-slate-300 leading-relaxed">
 <p class="text-[11px] font-bold text-slate-300 uppercase tracking-wider mb-2">Why this matters — the exam chain</p>
@@ -1668,5 +2287,520 @@ else { try{ MOBILE_UX.init(); }catch(e){} }
   }catch(e){}
 })();
 </script>
+
+<script>
+/* ══ APPLE STUDIO PRO INTERACTIVE UPGRADE · TOPIC XIV MATERIALS CHEMISTRY ══ */
+function toggleAppleTheme(){
+  const b = document.body;
+  const isLight = b.classList.toggle('light-mode');
+  const icon = document.getElementById('themeToggleIcon');
+  if(icon) icon.textContent = isLight ? '🌙 Studio Dark' : '☀️ Daylight';
+  try { localStorage.setItem('hkdse_topic14_theme', isLight ? 'light' : 'dark'); } catch(e){}
+}
+
+function updateMasteryRing(){
+  const chks = document.querySelectorAll('.syl-chk');
+  const checked = [...chks].filter(c => c.checked).length;
+  const sylBadge = document.getElementById('sylAuditCount');
+  if(sylBadge) sylBadge.textContent = `${checked} / ${chks.length} Outcomes Checked`;
+  const blurs = document.querySelectorAll('.blur-answer');
+  const revealed = [...blurs].filter(b => b.classList.contains('revealed')).length;
+  const total = chks.length + blurs.length;
+  const pct = total > 0 ? Math.round(((checked + revealed) / total) * 100) : 0;
+  const circle = document.getElementById('masteryRingCircle');
+  const txt = document.getElementById('masteryPctText');
+  if(circle){
+    const circ = 94.2;
+    circle.style.strokeDashoffset = (circ - (circ * pct) / 100).toFixed(1);
+  }
+  if(txt) txt.textContent = `${pct}% Mastered`;
+}
+function checkAllSyllabusOutcomes(){
+  document.querySelectorAll('.syl-chk').forEach(c => { c.checked = true; });
+  updateMasteryRing();
+}
+document.addEventListener('click', e => {
+  if(e.target && e.target.classList && e.target.classList.contains('blur-answer')){
+    setTimeout(updateMasteryRing, 50);
+  }
+});
+
+function injectQuizSelfCheckBars(){
+  ['natuQuiz','plasQuiz','alloyQuiz','smartQuiz'].forEach(qid => {
+    const box = document.getElementById(qid);
+    if(!box) return;
+    const total = box.querySelectorAll('.blur-answer').length;
+    const bar = document.createElement('div');
+    bar.className = 'mb-3 p-2.5 rounded-xl bg-slate-900/90 border border-slate-800 flex items-center justify-between text-xs';
+    bar.innerHTML = `<span class="text-slate-400">Active-Recall Blanks in this Engine: <b class="text-sky-300 font-mono">${total} blanks</b> (tap any blur to reveal &amp; update mastery ring)</span><button type="button" class="apple-btn !py-1 !px-2.5 text-[11px]" onclick="document.querySelectorAll('#${qid} .blur-answer').forEach(b=>b.classList.remove('revealed'));updateMasteryRing();">Reset Blanks</button>`;
+    box.parentElement.insertBefore(bar, box);
+  });
+}
+
+function selectBiopolySim(type){
+  ['cellulose','chitin','starch'].forEach(k => {
+    const id = k==='cellulose'?'bioBtnCell':(k==='chitin'?'bioBtnChit':'bioBtnStar');
+    const b = document.getElementById(id);
+    if(b) b.className = k===type ? 'apple-btn !py-1 !px-3 text-xs border-sky-500 text-sky-300 bg-sky-950/50' : 'apple-btn !py-1 !px-3 text-xs';
+  });
+  const svg = document.getElementById('biopolyIrSvg');
+  const box = document.getElementById('biopolySimVerdict');
+  const isChit = type === 'chitin';
+  if(svg){
+    svg.innerHTML = `
+      <line x1="40" y1="20" x2="40" y2="150" stroke="#475569" stroke-width="1.5"/>
+      <line x1="40" y1="150" x2="400" y2="150" stroke="#475569" stroke-width="1.5"/>
+      <text x="10" y="32" fill="#94a3b8" font-size="9.5">%T</text>
+      <text x="50" y="168" fill="#94a3b8" font-size="9">3600</text>
+      <text x="135" y="168" fill="#94a3b8" font-size="9">3000</text>
+      <text x="245" y="168" fill="#94a3b8" font-size="9">1700</text>
+      <text x="335" y="168" fill="#94a3b8" font-size="9">1000 cm⁻¹</text>
+      <path d="M 45 35 C 60 35, 70 125, 90 125 C 110 125, 118 40, 128 40 ${isChit ? 'C 132 40, 136 105, 142 105 C 148 105, 152 40, 156 40' : ''} C 165 40, 170 95, 176 95 C 182 95, 188 35, 225 35 ${isChit ? 'C 242 35, 250 135, 258 135 C 266 135, 274 35, 290 35' : 'L 290 35'} C 310 35, 325 115, 345 115 C 365 115, 380 35, 395 35" fill="none" stroke="${isChit?'#34d399':'#38bdf8'}" stroke-width="2.4"/>
+      <text x="64" y="140" fill="#7dd3fc" font-size="9">Broad O–H (3230–3670)</text>
+      ${isChit ? `<text x="115" y="118" fill="#fbbf24" font-size="8.5">N–H (3350–3500)</text><text x="220" y="145" fill="#34d399" font-size="9" font-weight="bold">Amide C=O (~1680)</text>` : `<text x="210" y="85" fill="#64748b" font-size="9">No C=O or N–H peak</text>`}
+    `;
+  }
+  if(box){
+    if(type === 'cellulose'){
+      box.innerHTML = `
+        <div class="font-bold text-white text-sm">Cellulose (Cotton / Plant Cell Walls · β-Glucose)</div>
+        <div><b class="text-sky-300">Why Cotton Absorbs Water (CP 2021 / CP 2023 / CP 2025 Q2):</b> "Cellulose consists of numerous <b>hydroxyl (–OH) groups</b> that can form <b>hydrogen bonds with water molecules</b>" (MS Bank §5).</div>
+        <div><b class="text-amber-300">Why Cotton is Insoluble in Water (CP 2025 Q2):</b> Long, unbranched straight β-1,4 chains pack closely and are held together by extensive <b>intermolecular hydrogen bonds between adjacent chains</b>, which water cannot break apart.</div>
+        <div><b class="text-emerald-300">IR Spectrum (CP 2016 Q3):</b> Shows broad O–H (3230–3670 cm⁻¹) and C–H/C–O bands, but <b>lacks N–H and C=O absorptions</b>.</div>
+      `;
+    } else if(type === 'chitin'){
+      box.innerHTML = `
+        <div class="font-bold text-white text-sm">Chitin (Lobster Exoskeletons &amp; Fungi · N-Acetylglucosamine)</div>
+        <div><b class="text-emerald-300">Why Chitin is Hard &amp; Does Not Absorb Water (CP 2021 / CP 2024 Q2):</b> "Chitin consists of <b>strong intermolecular hydrogen bonds formed between C=O and N–H groups of the adjacent chains</b>" (MS Bank §5) — chains are tightly locked, excluding water.</div>
+        <div><b class="text-amber-300">IR Spectrum Difference vs Cellulose (CP 2016 Q3):</b> Like cellulose it shows broad O–H, but <b>only chitin shows N–H (3350–3500 cm⁻¹) and amide C=O (~1680 cm⁻¹) absorption peaks</b>.</div>
+      `;
+    } else {
+      box.innerHTML = `
+        <div class="font-bold text-white text-sm">Starch (Amylose Helix + Branched Amylopectin · α-Glucose)</div>
+        <div><b class="text-purple-300">Structure vs Cellulose:</b> Built from <b>α-glucose</b>; α-1,4 links coil the chain into a helix (amylose) or branched bush (amylopectin) so chains cannot pack into rigid fibres.</div>
+        <div><b class="text-emerald-300">Green Feedstock Role (CP 2016 / CP 2024 Q2):</b> Corn starch is a <b>renewable resource</b> used to make lactic acid and biodegradable <b>PLA</b> (though diversion of corn crops can reduce food supply / cause deforestation, MS Bank §10).</div>
+      `;
+    }
+  }
+}
+
+function updatePolyArchSim(){
+  const arch = document.getElementById('polyArchSelect').value;
+  const mode = document.getElementById('polyStressMode').value;
+  const svg = document.getElementById('polyArchSvg');
+  const box = document.getElementById('polyArchVerdict');
+  const stretch = mode === 'pull' ? 22 : 0;
+  const heatJiggle = mode === 'heat' ? 14 : 0;
+
+  if(arch === 'hdpe'){
+    svg.innerHTML = `
+      <text x="20" y="22" fill="#38bdf8" font-size="10.5" font-weight="bold">HDPE (Linear, Less Branched → Close Packing)</text>
+      <path d="M 20 ${42-heatJiggle*0.3} L ${200+stretch*0.4} ${42+heatJiggle*0.3}" stroke="#38bdf8" stroke-width="3.5"/>
+      <path d="M 20 58 L ${200+stretch*0.4} 58" stroke="#38bdf8" stroke-width="3.5"/>
+      <path d="M 20 ${74+heatJiggle*0.3} L ${200+stretch*0.4} ${74-heatJiggle*0.3}" stroke="#38bdf8" stroke-width="3.5"/>
+      <text x="20" y="96" fill="#94a3b8" font-size="9.5">Stronger van der Waals' forces → higher density, higher mp, rigid bottle</text>
+
+      <text x="20" y="122" fill="#c084fc" font-size="10.5" font-weight="bold">LDPE (Highly Branched → Poor Packing)</text>
+      <path d="M 20 ${140-heatJiggle} Q 95 132 ${190+stretch} ${142+heatJiggle}" fill="none" stroke="#c084fc" stroke-width="3"/>
+      <line x1="75" y1="136" x2="88" y2="155" stroke="#c084fc" stroke-width="2.5"/>
+      <line x1="135" y1="138" x2="122" y2="122" stroke="#c084fc" stroke-width="2.5"/>
+      <path d="M 20 ${172+heatJiggle} Q 110 180 ${190+stretch} ${168-heatJiggle}" fill="none" stroke="#c084fc" stroke-width="3"/>
+      <line x1="105" y1="174" x2="118" y2="155" stroke="#c084fc" stroke-width="2.5"/>
+      <text x="235" y="155" fill="#d8b4fe" font-size="9.5">Branches hold chains apart → weaker vdW</text>
+    `;
+    box.innerHTML = `
+      <div class="font-bold text-white text-sm">HDPE vs LDPE (CP 2022 Q2 / MS Bank §2)</div>
+      <div><b>1. Structural Feature:</b> "<b>HDPE is less branched than LDPE</b>" (more linear chains).</div>
+      <div><b>2. Packing &amp; Forces:</b> Linear HDPE chains <b>pack more closely together</b>, resulting in <b>stronger van der Waals' forces</b> between polymer chains than in highly branched LDPE.</div>
+      <div><b>3. Property &amp; Moulding:</b> HDPE has higher density, greater rigidity, and higher melting point — ideal for rigid bottles made by <b>blow moulding</b> (NOT compression moulding, CP 2014 Q2).</div>
+    `;
+  } else if(arch === 'kevlar'){
+    svg.innerHTML = `
+      <text x="20" y="24" fill="#34d399" font-size="10.5" font-weight="bold">Kevlar Chains: Rigid Benzene Rings + H-Bonds + Aromatic Stacking</text>
+      ${[58, 115, 168].map((y, idx) => `
+        <g transform="translate(${idx*stretch*0.15}, 0)">
+          <line x1="25" y1="${y}" x2="415" y2="${y}" stroke="#34d399" stroke-width="2.5"/>
+          <polygon points="75,${y-12} 95,${y-12} 105,${y} 95,${y+12} 75,${y+12} 65,${y}" fill="#064e3b" stroke="#6ee7b7" stroke-width="1.8"/>
+          <polygon points="215,${y-12} 235,${y-12} 245,${y} 235,${y+12} 215,${y+12} 205,${y}" fill="#064e3b" stroke="#6ee7b7" stroke-width="1.8"/>
+          <polygon points="355,${y-12} 375,${y-12} 385,${y} 375,${y+12} 355,${y+12} 345,${y}" fill="#064e3b" stroke="#6ee7b7" stroke-width="1.8"/>
+          <text x="132" y="${y-4}" fill="#fbbf24" font-size="9">C=O · · · H–N</text>
+        </g>
+      `).join('')}
+      <line x1="145" y1="62" x2="145" y2="110" stroke="#f59e0b" stroke-width="1.8" stroke-dasharray="3 3"/>
+      <line x1="145" y1="120" x2="145" y2="163" stroke="#f59e0b" stroke-width="1.8" stroke-dasharray="3 3"/>
+      <line x1="285" y1="62" x2="285" y2="110" stroke="#f59e0b" stroke-width="1.8" stroke-dasharray="3 3"/>
+      <text x="230" y="92" fill="#fde047" font-size="9">Intermolecular H-bonds + π–π aromatic stacking</text>
+    `;
+    box.innerHTML = `
+      <div class="font-bold text-white text-sm">Kevlar vs Nylon-6,6 (CP 2016 Q2 / CP 2024 Q2)</div>
+      <div><b>1. Rigid Backbone:</b> "The <b>benzene groups</b> in Kevlar molecules have a <b>more rigid structure</b>" (restricting chain rotation compared with flexible –(CH₂)₄–/–(CH₂)₆– chains in nylon-6,6).</div>
+      <div><b>2. Inter-Chain Forces:</b> Planar chains pack closely with extensive <b>intermolecular hydrogen bonds</b> between amide C=O and N–H groups AND <b>aromatic stacking</b> between benzene rings of adjacent chains (CP 2024 Q2 exemplar note!).</div>
+      <div><b>3. Trap Alert:</b> Kevlar has <b>NO covalent cross-links</b> between chains!</div>
+    `;
+  } else if(arch === 'rubber'){
+    svg.innerHTML = `
+      <text x="20" y="24" fill="#fbbf24" font-size="10.5" font-weight="bold">Vulcanised Rubber: Polyisoprene Chains Stitched by Disulphur (–S–S–) Cross-Links</text>
+      <path d="M 25 65 Q 95 ${40+stretch*0.5} 175 65 T 325 65 T ${405+stretch} 65" fill="none" stroke="#38bdf8" stroke-width="3"/>
+      <path d="M 25 140 Q 95 ${165-stretch*0.5} 175 140 T 325 140 T ${405+stretch} 140" fill="none" stroke="#38bdf8" stroke-width="3"/>
+      <line x1="135" y1="62" x2="135" y2="142" stroke="#f59e0b" stroke-width="3.2"/>
+      <text x="142" y="105" fill="#fbbf24" font-size="10" font-weight="bold">–S–S– cross-link</text>
+      <line x1="285" y1="62" x2="285" y2="142" stroke="#f59e0b" stroke-width="3.2"/>
+      <text x="292" y="105" fill="#fbbf24" font-size="10" font-weight="bold">–S–S– cross-link</text>
+      <text x="35" y="178" fill="#94a3b8" font-size="9.5">${mode==='pull'?'Stretched: S–S covalent cross-links prevent irreversible slippage and pull chains back!':'Sparse S–S links allow chains to uncoil under pull and recoil when released.'}</text>
+    `;
+    box.innerHTML = `
+      <div class="font-bold text-white text-sm">Vulcanisation of Rubber (CP 2012 Q2 / CP 2024 Q2)</div>
+      <div><b>1. Chemistry (MS Bank §3):</b> "<b>Sulphur reacts with some of the C=C bonds</b> in the polymer chains, forming <b>sulphur S–S (disulphur) cross-links</b> between chains."</div>
+      <div><b>2. Two-Part Property Phrase (CP 2012 Q2):</b> Vulcanised rubber is <b>rigid with some flexibility (elastic)</b> — chains uncoil when stretched, and the covalent S–S cross-links prevent permanent chain slippage so the rubber returns to its original shape.</div>
+    `;
+  } else {
+    svg.innerHTML = `
+      <text x="20" y="24" fill="#fb7185" font-size="10.5" font-weight="bold">Urea-Methanal (3D Covalent Cross-Linked Network) vs PMMA (Linear vdW)</text>
+      <line x1="30" y1="55" x2="210" y2="55" stroke="#fb7185" stroke-width="3.2"/>
+      <line x1="30" y1="105" x2="210" y2="105" stroke="#fb7185" stroke-width="3.2"/>
+      <line x1="30" y1="155" x2="210" y2="155" stroke="#fb7185" stroke-width="3.2"/>
+      <line x1="65" y1="55" x2="65" y2="155" stroke="#fb7185" stroke-width="2.8"/>
+      <line x1="120" y1="55" x2="120" y2="155" stroke="#fb7185" stroke-width="2.8"/>
+      <line x1="175" y1="55" x2="175" y2="155" stroke="#fb7185" stroke-width="2.8"/>
+      <text x="32" y="178" fill="#fda4af" font-size="9.5">Thermoset: covalent cross-links → no slip on heat</text>
+
+      <line x1="255" y1="${65-heatJiggle}" x2="425" y2="${65+heatJiggle}" stroke="#38bdf8" stroke-width="3"/>
+      <line x1="255" y1="110" x2="425" y2="110" stroke="#38bdf8" stroke-width="3"/>
+      <line x1="255" y1="${150+heatJiggle}" x2="425" y2="${150-heatJiggle}" stroke="#38bdf8" stroke-width="3"/>
+      <text x="255" y="178" fill="#7dd3fc" font-size="9.5">PMMA / PET: weak vdW only → softens on heat</text>
+    `;
+    box.innerHTML = `
+      <div class="font-bold text-white text-sm">Thermoset vs Thermoplastic (CP 2014 / CP 2021 / CP 2023 Q2)</div>
+      <div><b>1. Thermosetting (Urea-Methanal):</b> Extensive <b>covalent cross-linkages</b> between polymer chains prevent chains from slipping over one another; cannot be softened or melted again by heating once set hard (moulded by <b>compression moulding</b>).</div>
+      <div><b>2. PMMA &amp; PET (MS Bank §5 / CP 2021 / CP 2023 Q2):</b> "PMMA is not a thermosetting plastic because its molecules are held by <b>weak van der Waals' forces</b>" (no cross-links between chains).</div>
+    `;
+  }
+}
+
+function updateCrystalSim(){
+  const type = document.getElementById('cellSimType').value;
+  const slice = document.getElementById('cellSliceChk').checked;
+  const shear = document.getElementById('alloyShearSelect').value;
+  const cellSvg = document.getElementById('cellSimSvg');
+  const cellTag = document.getElementById('cellSimTallyTag');
+  const shearSvg = document.getElementById('shearSimSvg');
+  const shearTag = document.getElementById('shearSimTag');
+  const vBox = document.getElementById('crystalSimVerdict');
+
+  const rCorner = slice ? 6.5 : 12;
+  const rFace = slice ? 9.5 : 13;
+  const rBody = 15;
+
+  const corners = [
+    [110,45],[230,45],[230,155],[110,155],
+    [70,80],[190,80],[190,190],[70,190]
+  ];
+  const faces = [
+    [150,62],[150,172],
+    [90,117],[210,117],
+    [170,100],[130,135]
+  ];
+
+  let cubeEdges = `
+    <polygon points="110,45 230,45 230,155 110,155" fill="none" stroke="#475569" stroke-width="1.4" stroke-dasharray="3 3"/>
+    <line x1="110" y1="45" x2="70" y2="80" stroke="#64748b" stroke-width="1.5"/>
+    <line x1="230" y1="45" x2="190" y2="80" stroke="#64748b" stroke-width="1.5"/>
+    <line x1="230" y1="155" x2="190" y2="190" stroke="#64748b" stroke-width="1.5"/>
+    <line x1="110" y1="155" x2="70" y2="190" stroke="#475569" stroke-width="1.4" stroke-dasharray="3 3"/>
+    <polygon points="70,80 190,80 190,190 70,190" fill="none" stroke="#94a3b8" stroke-width="2"/>
+  `;
+
+  if(type === 'ccp'){
+    cellTag.textContent = slice ? 'Sliced: 8×(1/8) + 6×(1/2) = 1 + 3 = 4 atoms' : 'Unsliced view: 14 spheres drawn (Trap: NOT 14 atoms!)';
+    cellSvg.innerHTML = cubeEdges +
+      corners.map(([x,y]) => `<circle cx="${x}" cy="${y}" r="${rCorner}" fill="#38bdf8" stroke="#0284c7" stroke-width="1.5"/>`).join('') +
+      faces.map(([x,y]) => `<circle cx="${x}" cy="${y}" r="${rFace}" fill="#f59e0b" stroke="#b45309" stroke-width="1.5"/>`).join('') +
+      `<text x="245" y="65" fill="#7dd3fc" font-size="10" font-weight="bold">8 corners × 1/8 = 1</text>
+       <text x="245" y="90" fill="#fbbf24" font-size="10" font-weight="bold">6 faces × 1/2 = 3</text>
+       <text x="245" y="120" fill="#34d399" font-size="11" font-weight="bold">Total = 4 atoms</text>
+       <text x="245" y="142" fill="#e2e8f0" font-size="9.5">A-B-C · CN = 12</text>
+       <text x="245" y="162" fill="#fda4af" font-size="9">(Cu, Au, Al, Ag)</text>`;
+  } else if(type === 'bcc'){
+    cellTag.textContent = slice ? 'Sliced: 1 (body) + 8×(1/8) = 2 atoms' : 'Unsliced view: 9 spheres drawn → reduces to 2 atoms';
+    cellSvg.innerHTML = cubeEdges +
+      corners.map(([x,y]) => `<circle cx="${x}" cy="${y}" r="${rCorner}" fill="#38bdf8" stroke="#0284c7" stroke-width="1.5"/>`).join('') +
+      `<circle cx="150" cy="117" r="${rBody}" fill="#22d3ee" stroke="#0891b2" stroke-width="2"/>
+       <text x="245" y="65" fill="#7dd3fc" font-size="10" font-weight="bold">8 corners × 1/8 = 1</text>
+       <text x="245" y="90" fill="#22d3ee" font-size="10" font-weight="bold">1 body centre × 1 = 1</text>
+       <text x="245" y="120" fill="#34d399" font-size="11" font-weight="bold">Total = 2 atoms</text>
+       <text x="245" y="142" fill="#e2e8f0" font-size="9.5">Open bcc · CN = 8</text>
+       <text x="245" y="162" fill="#fda4af" font-size="9">(Iron, Fe · CP 2012/2024)</text>`;
+  } else if(type === 'hcp'){
+    cellTag.textContent = 'HCP: A-B-A stacking · CN = 12 (6 in layer + 3 above + 3 below)';
+    cellSvg.innerHTML = `
+      <polygon points="145,25 215,42 215,82 145,98 75,82 75,42" fill="none" stroke="#6ee7b7" stroke-width="1.8"/>
+      <polygon points="145,118 215,135 215,175 145,191 75,175 75,135" fill="none" stroke="#6ee7b7" stroke-width="1.8"/>
+      <line x1="75" y1="42" x2="75" y2="135" stroke="#475569" stroke-width="1.4"/>
+      <line x1="215" y1="42" x2="215" y2="135" stroke="#475569" stroke-width="1.4"/>
+      <line x1="145" y1="98" x2="145" y2="191" stroke="#475569" stroke-width="1.4"/>
+      <circle cx="145" cy="60" r="9" fill="#34d399"/>
+      <circle cx="122" cy="108" r="11" fill="#38bdf8"/><circle cx="168" cy="108" r="11" fill="#38bdf8"/><circle cx="145" cy="122" r="11" fill="#38bdf8"/>
+      <circle cx="145" cy="155" r="9" fill="#34d399"/>
+      <text x="232" y="65" fill="#6ee7b7" font-size="10" font-weight="bold">Layer A (top &amp; bottom)</text>
+      <text x="232" y="95" fill="#7dd3fc" font-size="10" font-weight="bold">Layer B (3 inside)</text>
+      <text x="232" y="125" fill="#fbbf24" font-size="10.5" font-weight="bold">A-B-A · CN = 12</text>
+      <text x="232" y="150" fill="#94a3b8" font-size="9.5">(Zn, Mg, Ti · CP 2025)</text>
+    `;
+  } else {
+    cellTag.textContent = 'CP 2020 Pt/Mn Cell: Pt = 8×(1/8) + 4×(1/2) = 3; Mn = 2×(1/2) = 1';
+    cellSvg.innerHTML = cubeEdges +
+      corners.map(([x,y]) => `<circle cx="${x}" cy="${y}" r="${rCorner}" fill="#38bdf8" stroke="#0284c7" stroke-width="1.5"/>`).join('') +
+      [[150,62],[150,172]].map(([x,y]) => `<circle cx="${x}" cy="${y}" r="${rFace}" fill="#f43f5e" stroke="#be123c" stroke-width="1.5"/>`).join('') +
+      [[90,117],[210,117],[170,100],[130,135]].map(([x,y]) => `<circle cx="${x}" cy="${y}" r="${rFace}" fill="#38bdf8" stroke="#0284c7" stroke-width="1.5"/>`).join('') +
+      `<text x="242" y="65" fill="#7dd3fc" font-size="9.5" font-weight="bold">Pt: 8×(1/8) + 4×(1/2) = 3</text>
+       <text x="242" y="90" fill="#fb7185" font-size="9.5" font-weight="bold">Mn: 2×(1/2) = 1</text>
+       <text x="242" y="118" fill="#34d399" font-size="10.5" font-weight="bold">Formula = Pt₃Mn</text>`;
+  }
+
+  if(shear === 'pure'){
+    shearTag.textContent = 'Pure Metal: Regular layers slide easily (Malleable · CP 2025 P1 Q1)';
+    shearSvg.innerHTML = `
+      <text x="20" y="30" fill="#fbbf24" font-size="10" font-weight="bold">Force →</text>
+      <path d="M 65 26 L 105 26" stroke="#fbbf24" stroke-width="2.5"/>
+      ${[0,1,2,3,4].map(i => `<circle cx="${135 + i*42}" cy="55" r="16" fill="#38bdf8" stroke="#0284c7" stroke-width="2"/>`).join('')}
+      ${[0,1,2,3,4].map(i => `<circle cx="${105 + i*42}" cy="102" r="16" fill="#38bdf8" stroke="#0284c7" stroke-width="2"/>`).join('')}
+      ${[0,1,2,3,4].map(i => `<circle cx="${105 + i*42}" cy="149" r="16" fill="#38bdf8" stroke="#0284c7" stroke-width="2"/>`).join('')}
+      <text x="25" y="188" fill="#6ee7b7" font-size="9.5">Same-sized ions in regular layers → shift without breaking non-directional metallic bonds.</text>
+    `;
+  } else if(shear === 'inter'){
+    shearTag.textContent = 'Steel (C in Fe): Small C atoms wedge in spaces & obstruct sliding';
+    shearSvg.innerHTML = `
+      <text x="20" y="30" fill="#fb7185" font-size="10" font-weight="bold">Force → Blocked!</text>
+      ${[0,1,2,3,4].map(i => `<circle cx="${108 + i*43}" cy="55" r="16" fill="#38bdf8" stroke="#0284c7" stroke-width="2"/>`).join('')}
+      <circle cx="172" cy="79" r="7.5" fill="#f59e0b" stroke="#fff" stroke-width="1.2"/>
+      <circle cx="258" cy="79" r="7.5" fill="#f59e0b" stroke="#fff" stroke-width="1.2"/>
+      ${[0,1,2,3,4].map(i => `<circle cx="${105 + i*43}" cy="105" r="16" fill="#38bdf8" stroke="#0284c7" stroke-width="2"/>`).join('')}
+      <circle cx="129" cy="128" r="7.5" fill="#f59e0b" stroke="#fff" stroke-width="1.2"/>
+      ${[0,1,2,3,4].map(i => `<circle cx="${105 + i*43}" cy="153" r="16" fill="#38bdf8" stroke="#0284c7" stroke-width="2"/>`).join('')}
+      <text x="25" y="188" fill="#fbbf24" font-size="9.5">Smaller C atoms fill holes → distort regular layers → obstruct layer sliding → harder!</text>
+    `;
+  } else {
+    shearTag.textContent = 'Substitutional Alloy (Brass / Ti-Y): Different atom size locks layers (CP 2025 Q2)';
+    shearSvg.innerHTML = `
+      <text x="20" y="30" fill="#fb7185" font-size="10" font-weight="bold">Force → Jammed!</text>
+      ${[0,1,2,3,4].map(i => `<circle cx="${108 + i*44}" cy="${i===2?52:56}" r="${i===2?21:15}" fill="${i===2?'#c084fc':'#38bdf8'}" stroke="#fff" stroke-width="1.5"/>`).join('')}
+      ${[0,1,2,3,4].map(i => `<circle cx="${105 + i*44}" cy="${i===1?109:105}" r="${i===1?21:15}" fill="${i===1?'#c084fc':'#38bdf8'}" stroke="#fff" stroke-width="1.5"/>`).join('')}
+      ${[0,1,2,3,4].map(i => `<circle cx="${105 + i*44}" cy="154" r="15" fill="#38bdf8" stroke="#0284c7" stroke-width="1.5"/>`).join('')}
+      <text x="25" y="188" fill="#d8b4fe" font-size="9.5">Foreign atoms of DIFFERENT size disrupt regular arrangement → layers cannot slide easily.</text>
+    `;
+  }
+
+  vBox.innerHTML = `
+    <div><b>1. Always Show the Fractional Reduction (CP 2012 / CP 2015 / CP 2022 / CP 2025 Q2):</b> Write the site contributions explicitly — e.g. <span class="font-mono text-emerald-300">8 × 1/8 + 6 × 1/2 = 4</span> for CCP (Cu, Au, Al, Ag) or <span class="font-mono text-sky-300">1 + 8 × 1/8 = 2</span> for BCC (Fe). A bare integer without the reduction loses method marks!</div>
+    <div><b>2. Two-Link Alloy Hardness Chain (CP 2025 Q2 Exemplar Note):</b> Link 1: Foreign atoms have a <b>different size</b> from the host metal atoms, distorting the regular arrangement of layers. Link 2: This <b>hinders/obstructs the sliding of layers of atoms over one another</b> when a force is applied.</div>
+  `;
+}
+
+function updateSmartMatSim(){
+  const stage = parseInt(document.getElementById('lcPhaseSlider').value, 10);
+  const voltOn = document.getElementById('lcdVoltChk').checked;
+  const nanoM = parseFloat(document.getElementById('nanoSizeSelect').value);
+  const nanoNm = nanoM * 1e9;
+
+  const stages = [
+    { name: 'Crystalline Solid', badge: 'Crystalline Solid (Positional + Orientational Order)', desc: 'Molecules are locked in a 3D lattice with fixed positions and fixed orientation (does not flow).' },
+    { name: 'Smectic Phase', badge: 'Smectic Phase (Layered + Aligned · CP 2015 Q2)', desc: 'Molecules are arranged in <b>layers</b> and aligned in a regular direction within each layer; layers can slide over one another.' },
+    { name: 'Nematic Phase', badge: 'Nematic Phase (Aligned Parallel Only · CP 2019 / 2024 Q2)', desc: 'Rod-shaped molecules align along a common preferred direction (orientational order), but have <b>no layered positional order</b>.' },
+    { name: 'Cholesteric (Chiral Nematic)', badge: 'Cholesteric Phase (Chiral Compound Helical Twist · CP 2025 Q2)', desc: 'Exhibited by <b>chiral</b> liquid-crystal compounds (CP 2025 Q2): molecules align in layers whose preferred direction twists helically from layer to layer, reflecting specific wavelengths (thermometers).' },
+    { name: 'Isotropic Liquid', badge: 'Isotropic Liquid (Above Clearing Point · Random)', desc: 'Above the clearing point: molecules move randomly with neither positional nor orientational order.' }
+  ];
+  const st = stages[stage];
+  document.getElementById('lcTempStageLbl').textContent = st.name;
+  document.getElementById('lcPhaseBadge').textContent = st.badge;
+
+  const pSvg = document.getElementById('lcPhaseSimSvg');
+  let rods = '';
+  const cols = [55, 110, 165, 220, 275, 330];
+  const rows = [42, 92, 142];
+  rows.forEach((ry, rIdx) => {
+    cols.forEach((cx, cIdx) => {
+      let x = cx, y = ry, ang = 0, fill = '#38bdf8';
+      if(stage === 0){ ang = 0; fill = '#fda4af'; }
+      else if(stage === 1){ x += (rIdx%2)*8 - 4; ang = 4; fill = '#fcd34d'; }
+      else if(stage === 2){ x += ((rIdx*7+cIdx*13)%18)-9; y += ((cIdx*11+rIdx*5)%16)-8; ang = ((cIdx%3)-1)*5; fill = '#7dd3fc'; }
+      else if(stage === 3){ ang = rIdx * 32 - 32; fill = '#c084fc'; }
+      else { x += ((rIdx*9+cIdx*15)%20)-10; y += ((cIdx*7)%16)-8; ang = (rIdx*57 + cIdx*43)%180 - 90; fill = '#6ee7b7'; }
+      rods += `<rect x="${x-4}" y="${y-14}" width="8" height="28" rx="4" fill="${fill}" transform="rotate(${ang} ${x} ${y})"/>`;
+    });
+    if(stage === 1) rods += `<line x1="30" y1="${ry+22}" x2="355" y2="${ry+22}" stroke="#475569" stroke-dasharray="4 3"/>`;
+  });
+  if(pSvg) pSvg.innerHTML = `<rect x="15" y="12" width="350" height="152" rx="10" fill="#0f172a" stroke="#334155"/>` + rods;
+
+  const lcdSvg = document.getElementById('lcdPixelSimSvg');
+  const lcdTag = document.getElementById('lcdPixelStateTag');
+  const lcdLbl = document.getElementById('lcdVoltLbl');
+  if(lcdLbl) lcdLbl.textContent = voltOn ? 'Voltage ON (V > 0 → Molecules Align with Field → BLACK Pixel)' : 'Voltage OFF (V = 0 → Twisted Guide → BRIGHT Pixel)';
+  if(lcdTag){
+    lcdTag.textContent = voltOn ? 'Pixel: BLACK (Polarised light blocked!)' : 'Pixel: BRIGHT (Polarised light rotated 90° & transmitted)';
+    lcdTag.className = voltOn ? 'text-[10px] font-mono text-rose-300' : 'text-[10px] font-mono text-emerald-300';
+  }
+  if(lcdSvg){
+    lcdSvg.innerHTML = `
+      <rect x="15" y="12" width="350" height="152" rx="10" fill="#0f172a" stroke="#334155"/>
+      <rect x="40" y="30" width="22" height="115" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="1.8"/>
+      <text x="26" y="25" fill="#7dd3fc" font-size="9">Polariser 1 (↕)</text>
+      <rect x="115" y="30" width="145" height="115" rx="6" fill="rgba(30,41,59,0.55)" stroke="${voltOn?'#f43f5e':'#34d399'}" stroke-width="1.8"/>
+      <text x="128" y="25" fill="${voltOn?'#fda4af':'#6ee7b7'}" font-size="9" font-weight="bold">${voltOn?'Voltage ON: Rods align →':'Voltage OFF: Twisted helix'}</text>
+      ${[140, 172, 204, 236].map((lx, idx) => voltOn
+        ? `<rect x="${lx-10}" y="82" width="20" height="7" rx="3.5" fill="#fb7185"/>`
+        : `<rect x="${lx-4}" y="74" width="8" height="24" rx="4" fill="#34d399" transform="rotate(${idx*28} ${lx} 86)"/>`
+      ).join('')}
+      <rect x="305" y="30" width="22" height="115" rx="3" fill="#1e293b" stroke="#c084fc" stroke-width="1.8"/>
+      <text x="282" y="25" fill="#d8b4fe" font-size="9">Polariser 2 (↔)</text>
+      <rect x="338" y="45" width="20" height="85" rx="4" fill="${voltOn?'#020617':'#fde047'}" stroke="#64748b"/>
+      <text x="72" y="160" fill="${voltOn?'#fda4af':'#6ee7b7'}" font-size="9.5">${voltOn?'Plane of polarisation NOT rotated → blocked by 2nd polariser → BLACK (CP 2015 Q2)':'Twisted LC guides plane of polarisation by 90° → passes 2nd polariser → BRIGHT'}</text>
+    `;
+  }
+
+  const vBox = document.getElementById('smartSimVerdict');
+  if(vBox){
+    const isNano = nanoNm <= 100;
+    vBox.innerHTML = `
+      <div><b>1. Phase Description (${st.name}):</b> ${st.desc}</div>
+      <div><b>2. Nanoscale Unit Conversion Check (CP 2020 / CP 2023 / CP 2025 Q2):</b> $d = ${nanoM.toExponential(1)}\text{ m} = ${nanoM.toExponential(1)} \times 10^9\text{ nm} = \mathbf{${fmt(nanoNm)}\text{ nm}}$ → ${isNano ? '<span class="text-emerald-300 font-bold">Within the 1–100 nm range of nanoparticles ✓</span>' : '<span class="text-rose-300 font-bold">Exceeds 100 nm ceiling — NOT a nanoparticle ✗</span>'}.</div>
+    `;
+  }
+}
+
+const GRADER_RUBRICS = {
+  unit_cell: {
+    prompt: '<b>Question (4 marks · CP 2015 Q2 / CP 2016 Q2 / CP 2022 Q2 / CP 2025 Q2):</b> Explain the meaning of the term "unit cell". Given that gold (or copper/aluminium) crystallises in a face-centred cubic lattice, state the name of its close-packed structure, give the coordination number of each atom, and show how the number of atoms in one unit cell is deduced.',
+    model: 'A unit cell is the smallest repeating unit of a crystal lattice which, when repeated in three dimensions, generates the whole crystal. Gold has a cubic close-packed (ccp / face-centred cubic) structure with a coordination number of 12. Number of atoms per unit cell = 8 × (1/8) + 6 × (1/2) = 1 + 3 = 4.',
+    marks: [
+      { label: '1M · Unit Cell Definition (Smallest Repeating Unit in 3D)', re: /smallest\s+repeating\s+(unit|volume|pattern|portion)/i, hint: 'CP 2015 Q2 Requirement: Define a unit cell as the <b>smallest repeating unit</b> of a crystal lattice.' },
+      { label: '1M · Structure Name: Cubic Close-Packed (ccp) / Face-Centred Cubic', re: /(cubic\s+close-?packed|face-?cent(er|re)d\s+cubic|ccp|fcc)/i, hint: 'CP 2016 Q2 / CP 2022 Q2 Requirement: Name the structure as <b>cubic close-packed (ccp)</b> or <b>face-centred cubic</b>.' },
+      { label: '1M · Coordination Number = 12', re: /coordination\s+number[\s\S]{0,20}12|cn\s*=\s*12/i, hint: 'CP 2016 Q2 / MS Bank §2 Requirement: State <b>coordination number = 12</b> (never 13!).' },
+      { label: '1M · Fractional Deduction Shown: 8 × 1/8 + 6 × 1/2 = 4', re: /(8\s*[\*×x]\s*(1\/8|0\.125|⅛)[\s\S]{0,25}6\s*[\*×x]\s*(1\/2|0\.5|½)|12\s*[\*×x]\s*(1\/4|0\.25|¼)[\s\S]{0,20}\+\s*1)[\s\S]{0,20}=\s*4/i, hint: 'CP 2012 / CP 2022 / CP 2025 Q2 Requirement: Show the fractional reduction explicitly: <b>8 × (1/8) + 6 × (1/2) = 4</b>.' }
+    ],
+    traps: [
+      { re: /body-?cent(er|re)d\s+cubic/i, msg: 'CP 2016 Q2 Verbatim Error: Gold/copper/aluminium is cubic close-packed (ccp), NOT body-centred cubic!' },
+      { re: /coordination\s+number[\s\S]{0,15}13|14\s+atoms/i, msg: 'CP 2015 / CP 2016 / CP 2017 Q2 Verbatim Error: Never count the central sphere itself in CN ("13") and never count unshared spheres ("14" or "13" atoms)!' }
+    ]
+  },
+  kevlar_nylon: {
+    prompt: '<b>Question (3 marks · CP 2016 Q2 / CP 2024 Q2):</b> Explain, in terms of structure and intermolecular forces, why Kevlar has a much higher rigidity and tensile strength than nylon-6,6.',
+    model: 'Kevlar polymer chains contain benzene rings (aromatic groups) which give the polymer backbone a much more rigid and planar structure than the flexible hydrocarbon chains (–(CH₂)₄– and –(CH₂)₆–) in nylon-6,6. The planar Kevlar chains pack closely together with extensive intermolecular hydrogen bonds between the C=O and N–H of amide groups, as well as aromatic stacking interactions between the benzene rings of adjacent polymer chains.',
+    marks: [
+      { label: '1M · Benzene Rings Give Kevlar a More Rigid / Planar Chain Structure', re: /(benzene|aromatic|phenyl)[\s\S]{0,45}rigid/i, hint: 'MS Bank §5 / CP 2016 Q2 Requirement: State that the <b>benzene groups in Kevlar molecules have a more rigid structure</b> than the flexible alkyl chains in nylon-6,6.' },
+      { label: '1M · Extensive Intermolecular Hydrogen Bonds Between Chains', re: /hydrogen\s+bonds?[\s\S]{0,45}(between|adjacent|amide|c=o|n-h)/i, hint: 'CP 2016 Q2 Requirement: State that strong <b>intermolecular hydrogen bonds</b> form between C=O and N–H groups of adjacent chains.' },
+      { label: '1M · Aromatic Stacking / Closer Packing of Planar Chains', re: /(aromatic\s+stacking|stacking|pack\s+closely|planar)/i, hint: 'MS Bank §5 / CP 2024 Q2 Exemplar Note: Mention <b>aromatic stacking</b> (or close packing of planar benzene rings) between adjacent polymer molecules.' }
+    ],
+    traps: [
+      { re: /cross-?link/i, msg: 'Examiner Trap: Kevlar is a linear condensation polyamide held by intermolecular H-bonds and aromatic stacking — it does NOT have covalent cross-links!' }
+    ]
+  },
+  alloy_hard: {
+    prompt: '<b>Question (3 marks · CP 2012 Q2 / CP 2025 Q2 / CP 2025 P1 Q1):</b> Explain why pure aluminium (or titanium) is malleable, whereas introducing another element of different atomic size into the metal forms an alloy that is much harder.',
+    model: 'Pure aluminium has a giant metallic structure in which same-sized metal ions are arranged in regular layers. When an external force is applied, the layers of metal ions slide over one another easily to new positions without breaking the non-directional metallic bonds. In the alloy, the added atoms have a different atomic size from the host metal atoms, which distorts the regular arrangement of layers and hinders (obstructs) the sliding of layers of atoms over one another.',
+    marks: [
+      { label: '1M · Pure Metal Malleability: Layers Slide Without Breaking Metallic Bonds', re: /(layers?\s+of\s+(ions|atoms)\s+(slide|shift)|shift\s+but\s+without\s+breaking)[\s\S]{0,45}metallic\s+bonds?/i, hint: 'MS Bank §3 / CP 2025 P1 Q1 Requirement: State that layers of metal ions <b>shift/slide over one another without breaking the non-directional metallic bonds</b>.' },
+      { label: '1M · Alloy: Foreign Atoms Have Different Size → Distort Regular Layers', re: /(different\s+(atomic\s+)?size|size[\s\S]{0,20}differs?)[\s\S]{0,50}(distort|disrupt|irregular|layers?)/i, hint: 'MS Bank §3 / CP 2025 Q2 Requirement: State that the added atoms have a <b>different size</b> from the host metal atoms, disrupting the regular layers.' },
+      { label: '1M · Alloy: Sliding of Atomic Layers is Obstructed / More Difficult', re: /(difficult|hinder|obstruct|prevent)[\s\S]{0,40}(layers?[\s\S]{0,20}slid|sliding\s+of[\s\S]{0,20}layers?)/i, hint: 'MS Bank §3 / CP 2025 Q2 Exemplar Note: Don't stop at size difference — state that it makes it <b>more difficult for the layers of atoms to slide over one another</b>!' }
+    ],
+    traps: [
+      { re: /ionic\s+bonds?\s+in\s+(solid\s+)?(aluminium|metal)/i, msg: 'CP 2025 P1 Q1 Verbatim Error: Solid aluminium has giant metallic bonding, NEVER "ionic bonds"!' },
+      { re: /breaks?\s+the\s+metallic\s+bonds/i, msg: 'MS Bank §3 Trap: Hammering a metal shifts layers WITHOUT breaking the metallic bonds!' }
+    ]
+  },
+  lc_pixel: {
+    prompt: '<b>Question (3 marks · CP 2015 Q2 / CP 2017 Q2):</b> State the three structural features of organic molecules that exhibit liquid-crystalline behaviour, describe how molecules are arranged in the smectic phase, and explain why a liquid-crystal display (LCD) pixel between crossed polarisers appears black when a voltage is applied.',
+    model: 'Molecules exhibiting liquid-crystalline behaviour possess a rigid central part (e.g. benzene rings), a polar group, and a long alkyl chain. In the smectic phase, the rod-shaped molecules are aligned in a preferred direction and arranged in layers. When a voltage is applied across the LCD pixel, the polar liquid-crystal molecules align with the electric field and untwist, so they no longer rotate/guide the plane of polarised light; the light is blocked by the second crossed polariser and the pixel appears black.',
+    marks: [
+      { label: '1M · Three Structural Features: Rigid Central Part + Polar Group + Long Alkyl Chain', re: /rigid[\s\S]{0,35}polar\s+group[\s\S]{0,35}(long\s+)?(alkyl|hydrocarbon)\s+chain/i, hint: 'MS Bank §2 / CP 2017 Q2 Requirement: Name all three features: a <b>rigid central part, a polar group, and a long alkyl chain</b>.' },
+      { label: '1M · Smectic Phase: Molecules Aligned in Layers', re: /smectic[\s\S]{0,45}layers?[\s\S]{0,45}(aligned|parallel|same\s+direction)|layers?[\s\S]{0,35}aligned/i, hint: 'CP 2015 Q2 Requirement: State that in the smectic phase, molecules are arranged in <b>layers</b> and <b>aligned</b> within each layer.' },
+      { label: '1M · Black Pixel Under Voltage: Molecules Re-Align → Light Blocked by Polariser', re: /(align|re-?orient|untwist)[\s\S]{0,55}(block|cannot\s+pass|polariser|polarizer)/i, hint: 'CP 2015 Q2 Requirement: Explain that under voltage the molecules <b>re-align with the electric field</b> so polarised light is no longer guided and is <b>blocked by the second polariser</b>.' }
+    ],
+    traps: [
+      { re: /liquid\s+crystal[\s\S]{0,25}becomes?\s+a\s+(liquid|gas)\s+at\s+very\s+low\s+temperature/i, msg: 'CP 2013 Q2 Verbatim Error: At very low temperatures a liquid crystal becomes a crystalline SOLID, never a liquid or gas!' }
+    ]
+  }
+};
+
+function loadGraderPrompt(){
+  const sel = document.getElementById('graderQSelect');
+  if(!sel) return;
+  const r = GRADER_RUBRICS[sel.value];
+  const box = document.getElementById('graderPromptBox');
+  if(box && r) box.innerHTML = r.prompt;
+}
+function fillModelGraderAnswer(){
+  const sel = document.getElementById('graderQSelect');
+  if(!sel) return;
+  const r = GRADER_RUBRICS[sel.value];
+  if(!r) return;
+  document.getElementById('graderInput').value = r.model;
+  gradeStudentAnswer();
+}
+function gradeStudentAnswer(){
+  const sel = document.getElementById('graderQSelect');
+  const txt = (document.getElementById('graderInput').value || '').trim();
+  const out = document.getElementById('graderResultBox');
+  if(!sel || !out) return;
+  const r = GRADER_RUBRICS[sel.value];
+  if(!txt){ out.innerHTML = '<span class="text-amber-300">Please type an answer first, or click "Show Model Full-Mark Answer".</span>'; return; }
+  let score = 0, rowsHtml = '', trapHtml = '';
+  r.marks.forEach(m => {
+    const hit = m.re.test(txt);
+    if(hit) score++;
+    rowsHtml += `<div class="p-2 rounded-lg border ${hit ? 'bg-emerald-950/40 border-emerald-700 text-emerald-200' : 'bg-slate-900 border-slate-800 text-slate-300'}"><b>${hit ? '✅ [1M Earned]' : '⬜ [0M Missed]'} ${m.label}:</b> ${hit ? 'Keyword verified in your answer.' : m.hint}</div>`;
+  });
+  r.traps.forEach(t => {
+    if(t.re.test(txt)) trapHtml += `<div class="p-2.5 rounded-lg bg-rose-950/60 border border-rose-600 text-rose-200 font-medium">🚨 <b>[NOT ACCEPT / Examiner Trap]:</b> ${t.msg}</div>`;
+  });
+  out.innerHTML = `<div class="flex items-center justify-between border-b border-slate-800 pb-2"><span class="font-bold text-white text-sm">Examiner Diagnostic Score: <span class="text-sky-400 font-mono">${score} / ${r.marks.length} marks</span></span><span class="chip ${score===r.marks.length && !trapHtml ? 'bg-emerald-950 text-emerald-300 border-emerald-700' : 'bg-amber-950 text-amber-300 border-amber-700'}">${score===r.marks.length && !trapHtml ? 'Full Marks Wording' : 'Keep Refining'}</span></div>${trapHtml}<div class="space-y-1.5 mt-2">${rowsHtml}</div>`;
+}
+
+const CMD_INDEX = [
+  { title: 'Cellulose vs Chitin vs Starch H-Bonding & IR Spectrum Lab', tag: 'Strand (a) · Sim', action: ()=>{switchTab('tab-natu');switchNatuMode('map');} },
+  { title: 'Polymer Architecture, Branching, Kevlar & Cross-Link Stress Lab', tag: 'Strand (b) · Sim', action: ()=>{switchTab('tab-plas');switchPlasMode('map');} },
+  { title: '3D Isometric Unit Cell Slicer (CCP/BCC/HCP) & Alloy Shear Sim', tag: 'Strand (c) · Sim', action: ()=>{switchTab('tab-alloy');switchAlloyMode('map');} },
+  { title: 'Liquid Crystal Phase Slider, Crossed-Polariser LCD & Nanoscale Sim', tag: 'Strands (d)+(e) · Sim', action: ()=>{switchTab('tab-smart');switchSmartMode('map');} },
+  { title: 'Unit-Cell Tally, CN, Monomer, LC & Atom-Economy Benches', tag: 'Solver · Benches 1–5', action: ()=>{switchTab('tab-solver');} },
+  { title: 'Live HKEAA Keyword Answer Grader (Bench 6)', tag: 'Solver · Exam Practice', action: ()=>{switchTab('tab-solver');} },
+  { title: 'Paper 2 Section B Past Papers Intelligence (2012–2025)', tag: 'Past Papers · Tab 7', action: ()=>{switchTab('tab-pp');} }
+];
+function openCmdModal(){ const m=document.getElementById('cmdModal'); if(m){ m.classList.add('open'); const inp=document.getElementById('cmdSearchInput'); if(inp){inp.value='';filterCmdList();setTimeout(()=>inp.focus(),50);}}}
+function closeCmdModal(){ const m=document.getElementById('cmdModal'); if(m) m.classList.remove('open'); }
+function filterCmdList(){
+  const q = (document.getElementById('cmdSearchInput').value || '').toLowerCase();
+  const box = document.getElementById('cmdResults');
+  if(!box) return;
+  box.innerHTML = '';
+  CMD_INDEX.filter(i => i.title.toLowerCase().includes(q) || i.tag.toLowerCase().includes(q)).forEach(i => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'w-full text-left px-3 py-2.5 rounded-xl hover:bg-slate-800/80 flex items-center justify-between transition';
+    btn.innerHTML = `<span class="text-white font-medium">${i.title}</span><span class="chip bg-sky-950 text-sky-300 border border-sky-800">${i.tag}</span>`;
+    btn.onclick = () => { closeCmdModal(); i.action(); };
+    box.appendChild(btn);
+  });
+}
+document.addEventListener('keydown', e => {
+  if((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k'){ e.preventDefault(); const m=document.getElementById('cmdModal'); if(m && m.classList.contains('open')) closeCmdModal(); else openCmdModal(); }
+  else if(e.key === 'Escape') closeCmdModal();
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  try { if(localStorage.getItem('hkdse_topic14_theme') === 'light') toggleAppleTheme(); } catch(e){}
+  injectQuizSelfCheckBars();
+  selectBiopolySim('cellulose');
+  updatePolyArchSim();
+  updateCrystalSim();
+  updateSmartMatSim();
+  loadGraderPrompt();
+  updateMasteryRing();
+  ucPreset('ccp');
+  solverCN();
+  solverPoly();
+  document.getElementById('lcRigid').checked = true; document.getElementById('lcPolar').checked = true; document.getElementById('lcChain').checked = true; solverLC();
+  document.getElementById('aePreset').value = 'des'; aeLoad();
+});
+</script>
+
 </body>
 </html>

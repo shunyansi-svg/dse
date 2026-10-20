@@ -9,49 +9,406 @@
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
 <style>
-  :root { color-scheme: dark; }
-  body { background:#020617; font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
-  .tab-panel { display:none; }
-  .tab-panel.active { display:block; }
-  .blur-answer { filter: blur(6px); cursor:pointer; transition: filter .25s ease; user-select:none; }
-  .blur-answer.revealed { filter: blur(0); cursor:default; user-select:text; }
-  .engine-module { display:none; }
-  .engine-module.active { display:block; }
-  .mode-pill { cursor:pointer; }
-  .mode-pill.active { background:rgba(56,189,248,.15); color:#7dd3fc; border-color:#38bdf8; }
-  details > summary { cursor:pointer; list-style:none; }
-  details > summary::-webkit-details-marker { display:none; }
-  .chip { display:inline-block; padding:2px 10px; border-radius:9999px; font-size:11px; font-weight:600; }
-  .katex { font-size:1.05em; }
-  .num-card { font-variant-numeric: tabular-nums; }
-  input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner-spin-button { -webkit-appearance:none; margin:0; }
-  input[type=number] { -moz-appearance:textfield; }
-  .edot { font-size:10px; line-height:1; letter-spacing:-1px; }
-  .katex-block{overflow-x:auto;overflow-y:hidden}
-  .katex-block .katex-display{text-align:left;margin:.35em 0}
-  /* ══ MOBILE UX LAYER (chrome-only) ══ */
-  :root{--hdr:120px}
-  html{scroll-padding-top:calc(var(--hdr) + 10px)}
-  .toc-strip{display:none;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:2px 0 6px;margin-bottom:2px}
-  .toc-strip::-webkit-scrollbar{display:none}
-  .toc-chip{flex-shrink:0;font-size:10px;line-height:1;padding:7px 11px;border-radius:9999px;border:1px solid rgba(51,65,85,.9);background:rgba(15,23,42,.85);color:#94a3b8;font-weight:600;white-space:nowrap;cursor:pointer}
-  #backTop{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:70;width:44px;height:44px;border-radius:9999px;border:1px solid rgba(56,189,248,.35);background:rgba(8,14,26,.92);color:#7dd3fc;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transform:translateY(8px);transition:opacity .25s,transform .25s}
-  #backTop.show{opacity:1;pointer-events:auto;transform:none}
-  #scrollProg{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,#0ea5e9,#38bdf8);z-index:80;pointer-events:none}
-  @media (max-width:1023.98px){
-    header{background-color:rgba(2,6,23,.97)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;padding-top:env(safe-area-inset-top)}
-    #mainNav{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:4px}
-    #mainNav::-webkit-scrollbar{display:none}
-    #mainNav button{flex-shrink:0}
-    select,input[type="number"],input[type="text"]{font-size:16px!important}
-    #mainNav button{padding-top:10px;padding-bottom:10px}
-    .mode-pill{padding:8px 14px}
-    .toc-chip{padding:10px 12px}
-    .katex{font-size:1em}
-    .toc-strip{display:flex}
+  :root {
+    color-scheme: dark;
+    --hdr: 118px;
+    --bg-canvas: #000000;
+    --bg-elevated: rgba(22, 22, 29, 0.72);
+    --bg-card: rgba(28, 28, 36, 0.68);
+    --bg-card-solid: #16161d;
+    --bg-subcard: rgba(38, 38, 48, 0.55);
+    --bg-glass-nav: rgba(14, 14, 20, 0.76);
+    --border-hairline: rgba(255, 255, 255, 0.09);
+    --border-highlight: rgba(255, 255, 255, 0.16);
+    --text-primary: #f5f5f7;
+    --text-secondary: #a1a1aa;
+    --text-tertiary: #6e6e77;
+    --accent-blue: #0a84ff;
+    --accent-teal: #64d2ff;
+    --accent-purple: #bf5af2;
+    --accent-emerald: #30d158;
+    --accent-amber: #ff9f0a;
+    --accent-rose: #ff453a;
+    --shadow-card: 0 20px 44px -12px rgba(0, 0, 0, 0.65), inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+    --shadow-hover: 0 24px 52px -10px rgba(0, 0, 0, 0.75), inset 0 1px 0 0 rgba(255, 255, 255, 0.18);
+    --spring: cubic-bezier(0.22, 1, 0.36, 1);
   }
-  @media (prefers-reduced-motion:reduce){.tab-panel.active{animation:none}
-    .blur-answer,#backTop{transition:none!important}}
+
+  html.theme-light {
+    color-scheme: light;
+    --bg-canvas: #f5f5f7;
+    --bg-elevated: rgba(255, 255, 255, 0.82);
+    --bg-card: rgba(255, 255, 255, 0.88);
+    --bg-card-solid: #ffffff;
+    --bg-subcard: rgba(242, 242, 247, 0.85);
+    --bg-glass-nav: rgba(248, 248, 252, 0.82);
+    --border-hairline: rgba(0, 0, 0, 0.08);
+    --border-highlight: rgba(0, 0, 0, 0.14);
+    --text-primary: #1d1d1f;
+    --text-secondary: #515154;
+    --text-tertiary: #86868b;
+    --shadow-card: 0 12px 32px -8px rgba(0, 0, 0, 0.07), inset 0 1px 0 0 rgba(255, 255, 255, 0.9);
+    --shadow-hover: 0 18px 40px -8px rgba(0, 0, 0, 0.12), inset 0 1px 0 0 rgba(255, 255, 255, 1);
+  }
+
+  html {
+    scroll-padding-top: calc(var(--hdr) + 14px);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--bg-canvas);
+    background-image:
+      radial-gradient(ellipse 80% 50% at 15% -10%, rgba(10, 132, 255, 0.16), transparent 60%),
+      radial-gradient(ellipse 70% 45% at 85% 5%, rgba(191, 90, 242, 0.12), transparent 60%),
+      radial-gradient(ellipse 60% 40% at 50% 100%, rgba(48, 209, 88, 0.08), transparent 60%);
+    background-attachment: fixed;
+    color: var(--text-primary);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: -0.011em;
+    transition: background-color 0.4s var(--spring), color 0.3s var(--spring);
+  }
+
+  h1, h2, h3, h4 {
+    letter-spacing: -0.024em;
+    font-weight: 650;
+  }
+
+  .font-mono {
+    font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+  }
+
+  /* Apple Frosted Glass Header & Segmented Bar */
+  header {
+    background: var(--bg-glass-nav) !important;
+    -webkit-backdrop-filter: saturate(190%) blur(28px) !important;
+    backdrop-filter: saturate(190%) blur(28px) !important;
+    border-bottom: 1px solid var(--border-hairline) !important;
+    box-shadow: 0 4px 24px -4px rgba(0, 0, 0, 0.28);
+    transition: background 0.35s var(--spring);
+  }
+
+  #mainNav {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border-hairline);
+    border-radius: 14px;
+    padding: 4px !important;
+    gap: 4px !important;
+    margin-bottom: 8px;
+  }
+  html.theme-light #mainNav {
+    background: rgba(0, 0, 0, 0.045);
+  }
+
+  #mainNav button {
+    border-radius: 10px !important;
+    border-bottom: none !important;
+    transition: all 0.28s var(--spring) !important;
+    position: relative;
+    font-weight: 500;
+  }
+  #mainNav button:hover {
+    transform: translateY(-1px);
+  }
+  #mainNav button:active {
+    transform: scale(0.97);
+  }
+  #mainNav button.tab-btn-active {
+    background: rgba(10, 132, 255, 0.22) !important;
+    color: #64d2ff !important;
+    box-shadow: 0 2px 10px rgba(10, 132, 255, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.22);
+    font-weight: 600 !important;
+  }
+  html.theme-light #mainNav button.tab-btn-active {
+    background: #ffffff !important;
+    color: #0066cc !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Apple Bento Surface Cards */
+  .bg-slate-900 {
+    background: var(--bg-elevated) !important;
+    -webkit-backdrop-filter: saturate(160%) blur(22px);
+    backdrop-filter: saturate(160%) blur(22px);
+    border-color: var(--border-hairline) !important;
+    border-radius: 22px !important;
+    box-shadow: var(--shadow-card);
+    transition: transform 0.35s var(--spring), box-shadow 0.35s var(--spring), border-color 0.3s ease;
+  }
+
+  .bg-slate-950 {
+    background: var(--bg-card) !important;
+    border-color: var(--border-hairline) !important;
+    border-radius: 18px !important;
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.06);
+    transition: transform 0.3s var(--spring), box-shadow 0.3s var(--spring), border-color 0.25s ease;
+  }
+  .bg-slate-950:hover {
+    border-color: var(--border-highlight) !important;
+  }
+
+  /* Light mode text & surface overrides */
+  html.theme-light .text-white { color: #1d1d1f !important; }
+  html.theme-light .text-slate-100,
+  html.theme-light .text-slate-200,
+  html.theme-light .text-slate-300 { color: #2c2c2e !important; }
+  html.theme-light .text-slate-400 { color: #515154 !important; }
+  html.theme-light .text-slate-500 { color: #6e6e73 !important; }
+  html.theme-light .bg-slate-800,
+  html.theme-light .bg-slate-800\/50 { background-color: rgba(0, 0, 0, 0.05) !important; color: #1d1d1f !important; border-color: rgba(0,0,0,0.12) !important; }
+  html.theme-light .bg-sky-950\/40,
+  html.theme-light .bg-sky-950\/30,
+  html.theme-light .bg-sky-950 { background-color: rgba(10, 132, 255, 0.1) !important; color: #004080 !important; border-color: rgba(10, 132, 255, 0.28) !important; }
+  html.theme-light .bg-purple-950\/30,
+  html.theme-light .bg-purple-950 { background-color: rgba(175, 82, 222, 0.1) !important; color: #581c87 !important; border-color: rgba(175, 82, 222, 0.28) !important; }
+  html.theme-light .bg-emerald-950\/30,
+  html.theme-light .bg-emerald-950 { background-color: rgba(48, 209, 88, 0.12) !important; color: #065f46 !important; border-color: rgba(48, 209, 88, 0.3) !important; }
+  html.theme-light .bg-amber-950\/40,
+  html.theme-light .bg-amber-950\/30,
+  html.theme-light .bg-amber-950 { background-color: rgba(255, 159, 10, 0.13) !important; color: #78350f !important; border-color: rgba(255, 159, 10, 0.35) !important; }
+  html.theme-light .bg-rose-950\/40,
+  html.theme-light .bg-rose-950 { background-color: rgba(255, 69, 58, 0.1) !important; color: #881337 !important; border-color: rgba(255, 69, 58, 0.28) !important; }
+  html.theme-light .text-sky-200, html.theme-light .text-sky-300, html.theme-light .text-sky-400 { color: #0055b3 !important; }
+  html.theme-light .text-amber-200, html.theme-light .text-amber-300, html.theme-light .text-amber-400 { color: #92400e !important; }
+  html.theme-light .text-rose-200, html.theme-light .text-rose-300, html.theme-light .text-rose-400 { color: #9f1239 !important; }
+  html.theme-light .text-emerald-300, html.theme-light .text-emerald-400 { color: #047857 !important; }
+  html.theme-light .text-purple-300, html.theme-light .text-purple-400 { color: #6b21a8 !important; }
+  html.theme-light .text-cyan-300, html.theme-light .text-cyan-400 { color: #0e7490 !important; }
+
+  /* Tab & Module Fluid Spring Animations */
+  @keyframes appleStageIn {
+    0% { opacity: 0; transform: translateY(10px) scale(0.992); filter: blur(4px); }
+    100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+  }
+  .tab-panel { display: none; }
+  .tab-panel.active {
+    display: block;
+    animation: appleStageIn 0.42s var(--spring) forwards;
+  }
+  .engine-module { display: none; }
+  .engine-module.active {
+    display: block;
+    animation: appleStageIn 0.34s var(--spring) forwards;
+  }
+  .atm-card, .sea-card, .rock-card, .kit-card {
+    animation: appleStageIn 0.3s var(--spring) forwards;
+  }
+
+  /* Blur answer pill with Apple spring reveal */
+  .blur-answer {
+    filter: blur(5.5px);
+    cursor: pointer;
+    transition: filter 0.28s var(--spring), background-color 0.28s ease, transform 0.2s var(--spring), box-shadow 0.25s ease;
+    user-select: none;
+    border: 1px solid rgba(100, 210, 255, 0.22);
+    padding: 1px 7px !important;
+    border-radius: 7px !important;
+  }
+  .blur-answer:hover {
+    filter: blur(2.5px);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(10, 132, 255, 0.2);
+  }
+  .blur-answer.revealed {
+    filter: blur(0);
+    cursor: pointer;
+    user-select: text;
+    background: rgba(48, 209, 88, 0.16) !important;
+    border-color: rgba(48, 209, 88, 0.45) !important;
+    box-shadow: 0 0 0 1px rgba(48, 209, 88, 0.15);
+  }
+
+  /* Mode Pills -> Apple Segmented Buttons */
+  .mode-pill {
+    cursor: pointer;
+    transition: all 0.26s var(--spring);
+    border-radius: 9999px;
+    backdrop-filter: blur(10px);
+  }
+  .mode-pill:hover {
+    transform: translateY(-1px);
+  }
+  .mode-pill:active {
+    transform: scale(0.96);
+  }
+  .mode-pill.active {
+    background: linear-gradient(135deg, rgba(10, 132, 255, 0.26), rgba(100, 210, 255, 0.14)) !important;
+    color: #7dd3fc !important;
+    border-color: rgba(100, 210, 255, 0.65) !important;
+    box-shadow: 0 4px 14px -2px rgba(10, 132, 255, 0.35), inset 0 1px 0 rgba(255,255,255,0.2);
+  }
+
+  details > summary {
+    cursor: pointer;
+    list-style: none;
+    transition: background-color 0.2s ease;
+    border-radius: 14px;
+  }
+  details > summary::-webkit-details-marker { display: none; }
+  details[open] > summary {
+    border-bottom: 1px solid var(--border-hairline);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 10px;
+    border-radius: 9999px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.12);
+  }
+
+  .katex { font-size: 1.05em; }
+  .num-card { font-variant-numeric: tabular-nums; }
+  input[type=number]::-webkit-outer-spin-button,
+  input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  input[type=number] { -moz-appearance: textfield; }
+  .katex-block { overflow-x: auto; overflow-y: hidden; }
+  .katex-block .katex-display { text-align: left; margin: .35em 0; }
+
+  /* Apple Interactive Studio Components */
+  .apple-sim-panel {
+    background: linear-gradient(165deg, rgba(20, 24, 38, 0.85), rgba(12, 15, 26, 0.92));
+    border: 1px solid rgba(100, 210, 255, 0.22);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 18px 40px -12px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  }
+  html.theme-light .apple-sim-panel {
+    background: linear-gradient(165deg, rgba(255, 255, 255, 0.95), rgba(240, 246, 255, 0.92));
+    border-color: rgba(10, 132, 255, 0.25);
+    box-shadow: 0 14px 32px -10px rgba(10, 132, 255, 0.12);
+  }
+
+  .apple-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 7px 14px;
+    transition: all 0.24s var(--spring);
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(255, 255, 255, 0.07);
+    color: var(--text-primary);
+  }
+  .apple-btn:hover {
+    background: rgba(255, 255, 255, 0.13);
+    transform: translateY(-1px);
+  }
+  .apple-btn:active {
+    transform: scale(0.97);
+  }
+  .apple-btn-primary {
+    background: linear-gradient(180deg, #1e90ff 0%, #0071e3 100%);
+    color: #ffffff !important;
+    border-color: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 4px 14px rgba(0, 113, 227, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  }
+  .apple-btn-primary:hover {
+    background: linear-gradient(180deg, #339dff 0%, #0a7ff0 100%);
+    box-shadow: 0 6px 18px rgba(0, 113, 227, 0.55);
+  }
+
+  /* Range slider styling */
+  input[type=range].apple-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 6px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #0a84ff, #bf5af2, #ff453a);
+    outline: none;
+  }
+  input[type=range].apple-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 2px solid #0a84ff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+    cursor: grab;
+    transition: transform 0.18s var(--spring);
+  }
+  input[type=range].apple-slider::-webkit-slider-thumb:active {
+    transform: scale(1.15);
+    cursor: grabbing;
+  }
+
+  /* Flame animation */
+  @keyframes flameFlicker {
+    0%, 100% { transform: scaleX(1) scaleY(1) translateY(0); opacity: 0.92; }
+    33% { transform: scaleX(0.95) scaleY(1.05) translateY(-2px); opacity: 1; }
+    66% { transform: scaleX(1.04) scaleY(0.97) translateY(1px); opacity: 0.88; }
+  }
+  .bunsen-flame {
+    animation: flameFlicker 1.5s infinite ease-in-out;
+    transform-origin: bottom center;
+  }
+
+  /* Self-check mastery buttons on quiz rows */
+  .quiz-self-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px dashed var(--border-hairline);
+    font-size: 11px;
+  }
+
+  /* Command Palette Modal */
+  #cmdModal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: rgba(0, 0, 0, 0.58);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 10vh;
+  }
+  #cmdModal.open {
+    display: flex;
+    animation: appleStageIn 0.22s var(--spring) forwards;
+  }
+
+  /* Mobile UX Layer */
+  .toc-strip { display: none; gap: 6px; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 2px 0 6px; margin-bottom: 2px; }
+  .toc-strip::-webkit-scrollbar { display: none; }
+  .toc-chip { flex-shrink: 0; font-size: 10px; line-height: 1; padding: 7px 11px; border-radius: 9999px; border: 1px solid var(--border-hairline); background: var(--bg-card); color: var(--text-secondary); font-weight: 600; white-space: nowrap; cursor: pointer; transition: all 0.2s var(--spring); }
+  #backTop { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom)); z-index: 70; width: 44px; height: 44px; border-radius: 9999px; border: 1px solid rgba(100, 210, 255, 0.35); background: var(--bg-glass-nav); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); color: #7dd3fc; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transform: translateY(8px); transition: opacity .25s, transform .25s var(--spring); box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+  #backTop.show { opacity: 1; pointer-events: auto; transform: none; }
+  #scrollProg { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: linear-gradient(90deg, #0a84ff, #64d2ff, #30d158); z-index: 80; pointer-events: none; }
+
+  @media (max-width:1023.98px){
+    header { padding-top: env(safe-area-inset-top); }
+    #mainNav { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+    #mainNav::-webkit-scrollbar { display: none; }
+    #mainNav button { flex-shrink: 0; padding-top: 9px; padding-bottom: 9px; }
+    select, input[type="number"], input[type="text"] { font-size: 16px !important; }
+    .mode-pill { padding: 8px 14px; }
+    .toc-chip { padding: 10px 12px; }
+    .katex { font-size: 1em; }
+    .toc-strip { display: flex; }
+  }
+  @media (prefers-reduced-motion:reduce){
+    .tab-panel.active, .engine-module.active, .bunsen-flame { animation: none !important; }
+    .blur-answer, #backTop { transition: none !important; }
+  }
 </style>
 </head>
 <body class="text-slate-200 min-h-screen">
@@ -74,14 +431,29 @@ Citation law: (CP yyyy Qn) only where the Q-token greps cp_yyyy.txt; else (CP yy
   <div class="max-w-7xl mx-auto px-4 py-3">
     <div class="flex flex-wrap items-center justify-between gap-2">
       <div>
-        <h1 class="text-base sm:text-lg font-bold text-white leading-tight">HKDSE · Topic I Master Studio — Planet Earth</h1>
+        <div class="flex items-center gap-2.5"><div class="hidden sm:flex items-center gap-1.5 mr-1"><span class="w-2.5 h-2.5 rounded-full bg-[#ff5f56] inline-block shadow-sm"></span><span class="w-2.5 h-2.5 rounded-full bg-[#ffbd2e] inline-block shadow-sm"></span><span class="w-2.5 h-2.5 rounded-full bg-[#27c93f] inline-block shadow-sm"></span></div><h1 class="text-base sm:text-lg font-bold text-white leading-tight tracking-tight">HKDSE · Topic I Master Studio — Planet Earth</h1><span class="chip bg-sky-500/15 text-sky-300 border border-sky-400/30 text-[10px]">Interactive Studio Pro</span></div>
         <p class="text-[11px] text-slate-400 font-mono">Planet Earth · “we are living in a world of chemicals” · Strands (a) atmosphere · (b) ocean · (c) rocks &amp; minerals</p>
       </div>
-      <div class="flex gap-2 text-[10px] font-mono">
+      <div class="flex flex-wrap items-center gap-2 text-[10px] font-mono">
         <span class="chip bg-sky-950 text-sky-400 border border-sky-800">Strands (a)–(c)</span>
         <span class="chip bg-purple-950 text-purple-400 border border-purple-800">Paper 1A + 1B</span>
         <span class="chip bg-emerald-950 text-emerald-400 border border-emerald-800">C&amp;A Guide 2018</span>
-        <span class="chip bg-amber-950 text-amber-400 border border-amber-800">Depth: Part I wording</span>
+        <div class="flex items-center gap-2 ml-1 pl-2 border-l border-slate-700/70">
+          <button type="button" onclick="openCmdModal()" class="apple-btn !py-1 !px-2.5 text-[11px]" title="Quick Concept &amp; Past-Paper Search (⌘K)">
+            <span>🔍 Search</span>
+            <kbd class="px-1.5 py-0.5 text-[9px] rounded bg-slate-800 text-slate-300 border border-slate-700">⌘K</kbd>
+          </button>
+          <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-900/90 border border-slate-700/80" title="Concept Mastery Progress across Quiz &amp; Syllabus Checkpoints">
+            <svg class="w-4 h-4 -rotate-90" viewBox="0 0 36 36">
+              <circle cx="18" cy="18" r="15" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="3.8"></circle>
+              <circle id="masteryRingCircle" cx="18" cy="18" r="15" fill="none" stroke="#30d158" stroke-width="3.8" stroke-dasharray="94.2" stroke-dashoffset="94.2" stroke-linecap="round"></circle>
+            </svg>
+            <span id="masteryPctText" class="text-[11px] font-semibold text-emerald-400 num-card">0% Mastered</span>
+          </div>
+          <button type="button" id="themeToggleBtn" onclick="toggleAppleTheme()" class="apple-btn !py-1 !px-2.5 text-[11px]" title="Switch between Apple Pro Dark and Cupertino Daylight mode">
+            <span id="themeToggleIcon">☀️ Daylight</span>
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -246,6 +618,73 @@ Citation law: (CP yyyy Qn) only where the Q-token greps cp_yyyy.txt; else (CP yy
   </div>
 </section>
 
+
+    <!-- ══ INTERACTIVE SYLLABUS AUDIT & CONCEPT READINESS MATRIX (EDB C&A Guide 2018) ══ -->
+    <div class="mt-6 apple-sim-panel space-y-4" id="syllabus-audit-panel">
+      <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800/80 pb-3">
+        <div>
+          <span class="text-[10px] font-mono uppercase tracking-widest text-sky-400 font-bold">Interactive Syllabus Check-Off · EDB C&amp;A Guide (pp. I-1 to I-3)</span>
+          <h3 class="text-base font-bold text-white mt-0.5">HKDSE Topic I Competency Checklist &amp; Direct Simulator Links</h3>
+          <p class="text-xs text-slate-400">Tick each official EDB learning outcome as you master it, or jump straight to its interactive simulator and examiner trap test.</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <span id="sylAuditCount" class="chip bg-emerald-950 text-emerald-300 border border-emerald-700 font-mono">0 / 12 Outcomes Checked</span>
+          <button type="button" class="apple-btn text-xs" onclick="checkAllSyllabusOutcomes()">Check All</button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs" id="sylAuditGrid">
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">I(overview) · 9 Core Terms</b>Classify element, compound, mixture; physical/chemical change &amp; property; solvent, solute, saturated solution. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-kit');switchKitMode('explorer')">Open Toolkit →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">I(a) · Composition of Air &amp; % O₂ Lab</b>78% N₂, 21% O₂, ~0.9% Ar, ~0.04% CO₂ by volume + copper-syringe % O₂ determination. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-atm');switchAtmMode('map')">Run Air Lab →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">I(a) · Fractional Distillation of Liquid Air</b>Filter dust → remove CO₂ &amp; H₂O → cool/compress (−200 °C) → N₂ boils first (−196 °C) before O₂ (−183 °C). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-atm');switchAtmMode('map')">Column Sim →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">I(a) · Test for Oxygen</b>Glowing wooden splint relights (never "burning splint", which tests H₂). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-solver')">Test Bench →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">I(b) · Separation of Sea Water</b>Evaluate filtration, evaporation, crystallisation &amp; simple distillation + condenser setup. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-sea');switchSeaMode('map')">Apparatus Lab →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">I(b) · Flame Test &amp; AgNO₃ Chloride Test</b>Pt/nichrome wire + conc. HCl + non-luminous flame (Na⁺ golden yellow, K⁺ lilac, Ca²⁺ brick-red); AgNO₃ + dilute HNO₃. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-sea');switchSeaMode('map')">Flame Sim →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">I(b) · Test for Presence of Water</b>Anhydrous CuSO₄ (white → blue) or dry CoCl₂ paper (blue → pink) — proves presence, not purity! <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-sea');selectSea(5)">Inspect Card →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">I(b) · Electrolysis of Sea Water / Brine</b>Anode: Cl₂(g); Cathode: H₂(g); Solution: NaOH(aq) + industrial "brine" distinction (CP 2013 Q2). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-sea');switchSeaMode('map')">Cell Sim →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">I(c) · Metal Extraction (3 Methods)</b>Physical method (Au / magnet for Fe), heating alone (Ag₂O), heating with carbon (CuO, PbO). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-rock');selectRock(6)">Inspect Card →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">I(c) · Limestone, Chalk &amp; Marble Cycle</b>Hardness &amp; geological formation (sedimentary vs metamorphic) + heat/water/acid actions &amp; Ca(HCO₃)₂ erosion. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-rock');switchRockMode('map')">Lime Cycle Sim →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">I(c) · Suck-Back Prevention &amp; CO₂ Test</b>Lift delivery tube out of limewater BEFORE stopping heating (CP 2016 Q7 / CP 2024 1B Q5). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-rock');switchRockMode('map')">Suck-Back Sim →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">I(Activity) · Multi-Step Mixture Problem Solving</b>Separate Salt + Sand + Water or Oil + Water + Sand in the right experimental sequence. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-kit');switchKitMode('map')">Sequencer →</button></span>
+        </label>
+      </div>
+    </div>
+
 <!-- ═══════════ TAB 2 · ENGINE A · THE ATMOSPHERE ═══════════ -->
 <section id="tab-atm" class="tab-panel space-y-6">
   <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-sm">
@@ -345,6 +784,83 @@ Citation law: (CP yyyy Qn) only where the Q-token greps cp_yyyy.txt; else (CP yy
           <p class="text-[11px] font-bold text-slate-300 uppercase tracking-wider mb-2">The boiling-point strip — memorise the order</p>
           <div class="overflow-x-auto"><table class="w-full text-xs text-slate-300"><thead class="text-slate-400 uppercase tracking-wider text-[10px]"><tr><th class="p-2 text-left">Gas</th><th class="p-2 text-left">Boiling point</th><th class="p-2 text-left">In the warming column</th><th class="p-2 text-left">Main Topic-I use line</th></tr></thead><tbody class="divide-y divide-slate-800"><tr><td class="p-2 font-semibold text-white">nitrogen</td><td class="p-2">≈ −196 °C</td><td class="p-2">vaporises <b>first</b> — gas from the top</td><td class="p-2">inert food packaging; ammonia feedstock (→ Topic XIII)</td></tr><tr><td class="p-2 font-semibold text-white">argon</td><td class="p-2">≈ −186 °C</td><td class="p-2">between the two; removed separately</td><td class="p-2">filling for lamps (light bulbs)</td></tr><tr><td class="p-2 font-semibold text-white">oxygen</td><td class="p-2">≈ −183 °C</td><td class="p-2">boils later — collected while column warms</td><td class="p-2">medicinal respiration; welding</td></tr></tbody></table></div>
           <p class="text-[10px] text-slate-500 mt-3">The deeper “why different boiling points” (intermolecular forces) is Topic II / VI wording — badge, don’t blend. Instrument-grade analysis of the gases is Topic XV.</p>
+        <!-- ══ INTERACTIVE SIMULATOR A1: FRACTIONAL DISTILLATION COLUMN & COPPER-SYRINGE % O2 LAB ══ -->
+        <div class="mt-6 apple-sim-panel space-y-5">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+            <div>
+              <span class="text-[10px] font-mono text-sky-400 uppercase font-bold">Interactive Simulator · Strand (a) Concept Check</span>
+              <h4 class="text-sm font-bold text-white mt-0.5">1. Cryogenic Fractional Distillation Column &amp; Pre-Treatment Simulator</h4>
+              <p class="text-[11px] text-slate-400">Drag the column temperature slider from −205 °C up to −175 °C and toggle the pre-purification unit to test why CO₂ &amp; H₂O must be removed first.</p>
+            </div>
+            <label class="flex items-center gap-2 text-xs bg-slate-900/90 border border-slate-700 px-3 py-1.5 rounded-full cursor-pointer">
+              <input type="checkbox" id="atmFilterToggle" checked onchange="updateAtmSim()" class="accent-sky-500">
+              <span class="text-slate-200 font-medium">Pre-remove Dust, CO₂ (−78 °C) &amp; H₂O (0 °C)</span>
+            </label>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 items-center">
+            <div class="lg:col-span-2 space-y-3">
+              <div class="flex items-center justify-between text-xs">
+                <span class="text-slate-400 font-mono">Column Temperature Control</span>
+                <span id="atmTempReadout" class="font-mono text-base font-bold text-sky-300 num-card">−196 °C</span>
+              </div>
+              <input type="range" id="atmTempSlider" min="-205" max="-175" value="-196" step="1" class="apple-slider" oninput="updateAtmSim()">
+              <div class="flex justify-between text-[10px] font-mono text-slate-400">
+                <span>−205 °C (All Liquid)</span>
+                <span class="text-sky-400">−196 °C (N₂ b.p.)</span>
+                <span class="text-purple-400">−186 °C (Ar b.p.)</span>
+                <span class="text-emerald-400">−183 °C (O₂ b.p.)</span>
+                <span>−175 °C (All Gas)</span>
+              </div>
+              <div id="atmSimAlert" class="p-3 rounded-xl bg-sky-950/40 border border-sky-800/70 text-xs text-sky-200 leading-relaxed"></div>
+            </div>
+
+            <div class="bg-slate-950/90 border border-slate-800 rounded-xl p-4 space-y-2.5 text-xs">
+              <div class="text-[10px] font-mono uppercase text-slate-400 font-bold">Live Fractionating Column State</div>
+              <div id="stateN2" class="flex items-center justify-between p-2 rounded-lg bg-slate-900 border border-slate-800">
+                <span class="font-semibold text-white">N₂ (78% · b.p. −196 °C)</span>
+                <span class="chip bg-sky-950 text-sky-300 border border-sky-700" id="badgeN2">Boiling off @ Top</span>
+              </div>
+              <div id="stateAr" class="flex items-center justify-between p-2 rounded-lg bg-slate-900 border border-slate-800">
+                <span class="font-semibold text-white">Ar (0.9% · b.p. −186 °C)</span>
+                <span class="chip bg-slate-800 text-slate-300 border border-slate-700" id="badgeAr">Liquid in Column</span>
+              </div>
+              <div id="stateO2" class="flex items-center justify-between p-2 rounded-lg bg-slate-900 border border-slate-800">
+                <span class="font-semibold text-white">O₂ (21% · b.p. −183 °C)</span>
+                <span class="chip bg-slate-800 text-slate-300 border border-slate-700" id="badgeO2">Liquid @ Bottom</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Copper-Syringe % O2 Lab Simulator -->
+          <div class="border-t border-slate-800 pt-4 mt-2">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+              <div>
+                <h4 class="text-xs font-bold text-white uppercase tracking-wider">2. Classic School Lab Simulator: Determining % of O₂ in Air (Heated Copper in Gas Syringes)</h4>
+                <p class="text-[11px] text-slate-400">Pass 100 cm³ of dry air repeatedly over excess heated copper ($2\text{Cu(s)} + \text{O}_2\text{(g)} \rightarrow 2\text{CuO(s)}$, reddish-brown $\rightarrow$ black solid) and cool to room temperature before reading.</p>
+              </div>
+              <div class="flex gap-2">
+                <button type="button" class="apple-btn apple-btn-primary text-xs" onclick="stepCuSyringe(1)">Pass Air Over Heated Cu (+1 Pass)</button>
+                <button type="button" class="apple-btn text-xs" onclick="stepCuSyringe(0)">Reset (100 cm³)</button>
+              </div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 text-xs">
+              <div class="p-3 rounded-xl bg-slate-950 border border-slate-800">
+                <span class="text-[10px] text-slate-400 font-mono block">Pass Count &amp; Tube Solid</span>
+                <span id="cuPassText" class="text-sm font-bold text-white mt-0.5 block">0 passes · Reddish-brown Cu</span>
+              </div>
+              <div class="p-3 rounded-xl bg-slate-950 border border-slate-800">
+                <span class="text-[10px] text-slate-400 font-mono block">Syringe Volume (cooled to r.t.p.)</span>
+                <span id="cuVolText" class="text-sm font-bold text-sky-400 font-mono mt-0.5 block num-card">100.0 cm³</span>
+              </div>
+              <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 sm:col-span-2">
+                <span class="text-[10px] text-slate-400 font-mono block">Examiner Note &amp; % O₂ Calculation</span>
+                <span id="cuCalcText" class="text-xs text-emerald-300 font-mono mt-0.5 block">Click "Pass Air Over Heated Cu" until constant volume (79.0 cm³) is reached.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
         </div>
       </div>
     </div>
@@ -501,6 +1017,71 @@ Citation law: (CP yyyy Qn) only where the Q-token greps cp_yyyy.txt; else (CP yy
           <p class="text-[11px] font-bold text-slate-300 uppercase tracking-wider mb-2">The three sample tests this column demands</p>
           <div class="overflow-x-auto"><table class="w-full text-xs text-slate-300"><thead class="text-slate-400 uppercase tracking-wider text-[10px]"><tr><th class="p-2 text-left">Show that the sample contains…</th><th class="p-2 text-left">Procedure</th><th class="p-2 text-left">Positive result</th></tr></thead><tbody class="divide-y divide-slate-800"><tr><td class="p-2 font-semibold text-white">water</td><td class="p-2">white anhydrous copper(II) sulphate / dry blue cobalt chloride paper</td><td class="p-2">white → blue / blue → pink</td></tr><tr><td class="p-2 font-semibold text-white">sodium</td><td class="p-2">flame test (bank procedure, conc. HCl on clean nichrome/Pt wire)</td><td class="p-2">intense golden yellow flame</td></tr><tr><td class="p-2 font-semibold text-white">chloride</td><td class="p-2">dissolve in water; aqueous silver nitrate + dilute nitric acid</td><td class="p-2">white precipitate (AgCl)</td></tr></tbody></table></div>
           <p class="text-[10px] text-slate-500 mt-3">Beyond this table — halide discrimination in ammonia, instrument confirmations, quantitative wet analysis — is Topic XV territory.</p>
+        <!-- ══ INTERACTIVE SIMULATOR B1: FLAME TEST STUDIO, DISTILLATION DEBUGGER & ELECTROLYSIS CELL ══ -->
+        <div class="mt-6 apple-sim-panel space-y-5">
+          <div class="border-b border-slate-800 pb-3">
+            <span class="text-[10px] font-mono text-purple-400 uppercase font-bold">Interactive Simulator · Strand (b) Concept Check</span>
+            <h4 class="text-sm font-bold text-white mt-0.5">1. Virtual Flame Test &amp; Silver Nitrate Wet-Lab Bench (CP 2016 Q9 · CP 2025 1B Q2)</h4>
+            <p class="text-[11px] text-slate-400">Select a sample below to inspect its non-luminous Bunsen flame colour, AgNO₃(aq) + dilute HNO₃(aq) result, and the mandatory 4-step laboratory wire protocol.</p>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 items-center">
+            <div class="space-y-2">
+              <div class="text-[10px] font-mono uppercase text-slate-400 font-bold">Choose Sample to Test</div>
+              <div class="grid grid-cols-2 gap-2">
+                <button type="button" onclick="setFlameSample('NaCl')" class="flame-btn apple-btn justify-start text-left !py-2 border-sky-500/60" data-sample="NaCl">🧂 NaCl(s)</button>
+                <button type="button" onclick="setFlameSample('KCl')" class="flame-btn apple-btn justify-start text-left !py-2" data-sample="KCl">🧪 KCl(s)</button>
+                <button type="button" onclick="setFlameSample('CaCO3')" class="flame-btn apple-btn justify-start text-left !py-2" data-sample="CaCO3">🪨 CaCO₃(s)</button>
+                <button type="button" onclick="setFlameSample('CuSO4')" class="flame-btn apple-btn justify-start text-left !py-2" data-sample="CuSO4">💎 CuSO₄(s)</button>
+                <button type="button" onclick="setFlameSample('MgSO4')" class="flame-btn apple-btn justify-start text-left !py-2 col-span-2" data-sample="MgSO4">⚠️ MgSO₄(s) (CP 2016 Q9 Trap!)</button>
+              </div>
+            </div>
+
+            <!-- Visual Bunsen Burner Flame -->
+            <div class="flex flex-col items-center justify-center p-4 rounded-2xl bg-slate-950 border border-slate-800 min-h-[165px] relative overflow-hidden">
+              <div id="flameGlowBg" class="absolute inset-0 opacity-25 pointer-events-none transition-all duration-500" style="background: radial-gradient(circle at 50% 60%, #fbbf24, transparent 70%);"></div>
+              <svg width="90" height="110" viewBox="0 0 90 110" class="relative z-10">
+                <!-- Outer flame cone -->
+                <path id="flameOuterPath" class="bunsen-flame" d="M45 8 C24 38, 18 65, 45 88 C72 65, 66 38, 45 8 Z" fill="#fbbf24" fill-opacity="0.88" stroke="#f59e0b" stroke-width="1.5"/>
+                <!-- Inner pale blue non-luminous cone -->
+                <path d="M45 48 C36 64, 35 76, 45 88 C55 76, 54 64, 45 48 Z" fill="#38bdf8" fill-opacity="0.75"/>
+                <!-- Platinum/nichrome wire loop -->
+                <line x1="8" y1="68" x2="45" y2="56" stroke="#cbd5e1" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="45" cy="56" r="3" fill="none" stroke="#f8fafc" stroke-width="1.6"/>
+                <!-- Burner barrel -->
+                <rect x="37" y="88" width="16" height="20" rx="2" fill="#475569" stroke="#94a3b8" stroke-width="1"/>
+              </svg>
+              <span id="flameLabelBadge" class="chip bg-amber-950 text-amber-300 border border-amber-700 mt-1 relative z-10">Intense Golden Yellow Flame (Na⁺)</span>
+            </div>
+
+            <!-- Readout Card -->
+            <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2 text-xs">
+              <div id="flameDetailTitle" class="font-bold text-white text-sm">Sample: Sodium chloride, NaCl(s)</div>
+              <p id="flameDetailProc" class="text-slate-300 leading-relaxed"><b>1. Flame Test (CP 2025 1B Q2):</b> Moisten a clean <b>nichrome / platinum wire</b> with <b>concentrated hydrochloric acid</b>, dip into crushed solid, and heat in a <b>non-luminous flame</b> → <b>intense golden yellow flame</b>.</p>
+              <p id="flameDetailWet" class="text-emerald-300 leading-relaxed"><b>2. Anion Test (CP 2016 Q9):</b> Dissolve solid in deionised water first, then add <b>AgNO₃(aq) acidified with dilute HNO₃(aq)</b> → <b>white precipitate</b> of AgCl(s).</p>
+            </div>
+          </div>
+
+          <!-- Distillation Setup Debugger (CP 2021 2 Q3) -->
+          <div class="border-t border-slate-800 pt-4">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+              <div>
+                <h4 class="text-xs font-bold text-white uppercase tracking-wider">2. Distillation Setup Spot-the-Flaw Inspector (CP 2021 2 Q3 · Simple &amp; Fractional Distillation)</h4>
+                <p class="text-[11px] text-slate-400">Click each apparatus checkpoint to verify why candidates lose diagram marks in Paper 1B &amp; Paper 2.</p>
+              </div>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
+              <button type="button" class="apple-btn !justify-start text-left p-2.5" onclick="showDistilSpot(0)">🌡️ 1. Thermometer Bulb</button>
+              <button type="button" class="apple-btn !justify-start text-left p-2.5" onclick="showDistilSpot(1)">💧 2. Condenser Water Flow</button>
+              <button type="button" class="apple-btn !justify-start text-left p-2.5" onclick="showDistilSpot(2)">🫧 3. Anti-bumping Granules</button>
+              <button type="button" class="apple-btn !justify-start text-left p-2.5" onclick="showDistilSpot(3)">🧪 4. Open Receiver &amp; Column</button>
+            </div>
+            <div id="distilSpotOut" class="mt-2.5 p-3 rounded-xl bg-purple-950/35 border border-purple-800/60 text-xs text-purple-200 leading-relaxed">
+              <b>🌡️ Thermometer Bulb Position:</b> The bulb must sits right <b>opposite the side-arm exit</b> into the condenser so it measures the temperature of the <b>vapour distilling over</b> (100 °C for pure water), NOT dipped inside the boiling sea water!
+            </div>
+          </div>
+        </div>
+
         </div>
       </div>
     </div>
@@ -654,6 +1235,50 @@ Citation law: (CP yyyy Qn) only where the Q-token greps cp_yyyy.txt; else (CP yy
           <p class="text-[11px] font-bold text-slate-300 uppercase tracking-wider mb-2">Every edge, in word-equation wording</p>
           <div class="overflow-x-auto"><table class="w-full text-xs text-slate-300"><thead class="text-slate-400 uppercase tracking-wider text-[10px]"><tr><th class="p-2 text-left">Action (Part I wording)</th><th class="p-2 text-left">Word equation / result</th><th class="p-2 text-left">What you observe</th></tr></thead><tbody class="divide-y divide-slate-800"><tr><td class="p-2">heat on CaCO₃</td><td class="p-2">calcium carbonate → calcium oxide + carbon dioxide</td><td class="p-2">gas evolved; limewater turns milky</td></tr><tr><td class="p-2">water on CaCO₃</td><td class="p-2">no reaction (insoluble)</td><td class="p-2">solid unchanged</td></tr><tr><td class="p-2">water on CaO</td><td class="p-2">calcium oxide + water → calcium hydroxide</td><td class="p-2">warms up; white solid crumbles</td></tr><tr><td class="p-2">acid on CaCO₃</td><td class="p-2">calcium carbonate + hydrochloric acid → calcium chloride + water + carbon dioxide</td><td class="p-2">effervescence; gas milky with limewater</td></tr></tbody></table></div>
           <p class="text-[10px] text-slate-500 mt-3">The names in brackets — quicklime/slaked lime — are the ones the strand’s erosion story uses. Quantitative lime chemistry, neutralisation and the ionic level are Topic IV/VIII territory.</p>
+        <!-- ══ INTERACTIVE SIMULATOR C1: LIMESTONE CYCLE + EXCESS CO2 + SUCK-BACK SAFETY BENCH ══ -->
+        <div class="mt-6 apple-sim-panel space-y-5">
+          <div class="border-b border-slate-800 pb-3">
+            <span class="text-[10px] font-mono text-emerald-400 uppercase font-bold">Interactive Simulator · Strand (c) Concept Check</span>
+            <h4 class="text-sm font-bold text-white mt-0.5">1. Interactive Limestone Cycle &amp; Excess-CO₂ Erosion Explorer (CP 2023 1B Q1 · CP 2024 1B Q4)</h4>
+            <p class="text-[11px] text-slate-400">Click any reaction step below to inspect the exact word equation, symbol/ionic equation, observations, and HKEAA formula watch-out.</p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-5 gap-2 text-xs">
+            <button type="button" onclick="selectLimeStep(0)" class="lime-step-btn apple-btn apple-btn-primary !py-2.5">🔥 Step 1: Strong Heat on CaCO₃</button>
+            <button type="button" onclick="selectLimeStep(1)" class="lime-step-btn apple-btn !py-2.5">💧 Step 2: Add Drops of H₂O to CaO</button>
+            <button type="button" onclick="selectLimeStep(2)" class="lime-step-btn apple-btn !py-2.5">🫧 Step 3: Filter &amp; Bubble CO₂</button>
+            <button type="button" onclick="selectLimeStep(3)" class="lime-step-btn apple-btn !py-2.5">🌧️ Step 4: Excess CO₂ / Cave Erosion</button>
+            <button type="button" onclick="selectLimeStep(4)" class="lime-step-btn apple-btn !py-2.5">🧪 Step 5: Dilute Acid on CaCO₃</button>
+          </div>
+
+          <div id="limeCycleOut" class="p-4 rounded-xl bg-slate-950 border border-emerald-800/60 space-y-2 text-xs">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <span id="limeStepTitle" class="font-bold text-emerald-300 text-sm">🔥 Step 1 · Thermal Decomposition of Calcium Carbonate (Limestone / Chalk / Marble)</span>
+              <span id="limeStepBadge" class="chip bg-emerald-950 text-emerald-300 border border-emerald-700 font-mono">Endothermic · Strong Heat (Roasting)</span>
+            </div>
+            <p id="limeStepWord" class="font-mono text-white bg-slate-900 p-2.5 rounded-lg border border-slate-800">Word equation: calcium carbonate → calcium oxide + carbon dioxide &nbsp;|&nbsp; Symbol: CaCO₃(s) → CaO(s) + CO₂(g)</p>
+            <p id="limeStepObs" class="text-slate-300 leading-relaxed"><b>Observation &amp; Notes:</b> White solid remains white (quicklime, CaO); colourless gas evolved turns limewater milky. Requires strong Bunsen roaring flame.</p>
+            <p id="limeStepTrap" class="text-rose-300 leading-relaxed"><b>⚠️ Examiner Trap:</b> Never call this "burning calcium carbonate" (no O₂ reactant is involved) and never write "Ca" or "O₂" as products.</p>
+          </div>
+
+          <!-- Suck-Back Safety Simulator (CP 2016 Q7 / CP 2024 1B Q5) -->
+          <div class="border-t border-slate-800 pt-4">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+              <div>
+                <h4 class="text-xs font-bold text-white uppercase tracking-wider">2. Suck-Back Safety Simulator: Shutting Down the Heated Boiling Tube Rig (CP 2016 Q7 · CP 2024 1B Q5)</h4>
+                <p class="text-[11px] text-slate-400">You are heating CaCO₃(s) (or hydrated salt) in a boiling tube with a delivery tube dipped into limewater. Test which action you perform FIRST when finishing the experiment:</p>
+              </div>
+              <div class="flex gap-2">
+                <button type="button" class="apple-btn border-emerald-600/70 text-emerald-300" onclick="testSuckBack('tube-first')">✅ Lift Delivery Tube Out FIRST</button>
+                <button type="button" class="apple-btn border-rose-600/70 text-rose-300" onclick="testSuckBack('burner-first')">❌ Turn Off Bunsen Burner FIRST</button>
+              </div>
+            </div>
+            <div id="suckBackOut" class="p-3 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-300 leading-relaxed">
+              Click one of the two shutdown sequences above to see the pressure change and examiner marking verdict.
+            </div>
+          </div>
+        </div>
+
         </div>
       </div>
     </div>
@@ -815,6 +1440,38 @@ Citation law: (CP yyyy Qn) only where the Q-token greps cp_yyyy.txt; else (CP yy
           <p class="text-[11px] font-bold text-slate-300 uppercase tracking-wider mb-2">The test-answer chain — three marks live here</p>
           <p class="text-xs text-slate-300 leading-relaxed">Every “test” answer walks the same road: <b>① procedure</b> (“add aqueous silver nitrate with a little dilute nitric acid…”) → <b>② observation</b> (“…a white precipitate forms”) → <b>③ conclusion</b> (“…so chloride ions are present”). The bank splits the marks (“Correct chemical reagent = 1 mark / Correct observations … = 1 mark”) and zeros contradictory answers <i>(ms bank §11 + conventions)</i>. Solids: <b>dissolve in water first</b> <i>(CP 2016 Q9)</i>.</p>
           <p class="text-[10px] text-slate-500 mt-3">Chromatography, instrumental confirmations and quantitative wet analysis are not in Topic I’s columns → Topic XV. Explaining why methods work at particle level → Topic II/VI.</p>
+        <!-- ══ INTERACTIVE SIMULATOR D1: MULTI-STEP MIXTURE SEPARATION SEQUENCER (EDB Suggested Activity p. I-3) ══ -->
+        <div class="mt-6 apple-sim-panel space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+            <div>
+              <span class="text-[10px] font-mono text-amber-400 uppercase font-bold">Interactive Problem-Solving Sequencer · EDB Syllabus Activity (p. I-3)</span>
+              <h4 class="text-sm font-bold text-white mt-0.5">Build the Correct Lab Procedure Sequence (CP 2014 Q12 · CP 2015 · CP 2023 1B Q9)</h4>
+              <p class="text-[11px] text-slate-400">Select a mixture challenge, then click the procedural steps in the exact order required for full marks.</p>
+            </div>
+            <select id="seqChallengeSelect" onchange="initSeqChallenge()" class="bg-slate-900 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-white font-medium">
+              <option value="sand_salt">Challenge 1: Obtain pure dry Sand AND dry NaCl from a Sand + Salt mixture</option>
+              <option value="oil_water_sand">Challenge 2: Separate Sand, Cooking Oil, and Water from a 3-part mixture</option>
+              <option value="crystals_cuso4">Challenge 3: Obtain pure dry CuSO₄·5H₂O crystals from aqueous CuSO₄ solution</option>
+              <option value="cu_fe2o3">Challenge 4: Obtain pure dry Copper powder from Cu(s) + MgO(s) mixture (CP 2015 style)</option>
+            </select>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+            <div class="space-y-2">
+              <div class="text-[10px] font-mono uppercase text-slate-400 font-bold">Available Lab Steps (Click in chronological order)</div>
+              <div id="seqPool" class="flex flex-col gap-1.5"></div>
+            </div>
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-[10px] font-mono uppercase text-slate-400 font-bold">Your Assembled Procedure Chain</span>
+                <button type="button" onclick="initSeqChallenge()" class="text-[11px] text-sky-400 hover:underline">Reset Steps</button>
+              </div>
+              <div id="seqChosen" class="min-h-[135px] p-3 rounded-xl bg-slate-950 border border-slate-800 space-y-1.5"></div>
+              <div id="seqFeedback" class="p-3 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 leading-relaxed">Click the first step on the left to begin building your experimental procedure.</div>
+            </div>
+          </div>
+        </div>
+
         </div>
       </div>
     </div>
@@ -930,6 +1587,45 @@ Citation law: (CP yyyy Qn) only where the Q-token greps cp_yyyy.txt; else (CP yy
         </div>
         <button class="w-full bg-amber-700 hover:bg-amber-600 text-white text-xs font-semibold py-1.5 px-2 rounded-md" onclick="solverTest()">Print the full-mark answer</button>
         <div id="svTestOut" aria-live="polite" class="text-xs text-emerald-300 font-mono min-h-[20px] leading-relaxed"></div>
+      </div>
+    </div>
+
+    
+    <!-- ══ BENCH 5 · LIVE HKEAA MARK-SCHEME KEYWORD GRADER (ACTIVE DIAGNOSTIC) ══ -->
+    <div class="mt-6 apple-sim-panel space-y-4">
+      <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+        <div>
+          <span class="text-[10px] font-mono text-sky-400 uppercase font-bold px-2 py-0.5 bg-sky-950 rounded border border-sky-800">Bench 5 · Interactive Examiner Grader</span>
+          <h3 class="text-base font-bold text-white mt-1">Practice Writing Full-Mark HKDSE Answers — Instant Keyword &amp; Trap Diagnostic</h3>
+          <p class="text-xs text-slate-400">Type your answer to a high-frequency Paper 1B question below. The engine grades your phrasing against official HKEAA mark-scheme keywords (`[1M]`) and flags fatal `[NOT ACCEPT]` phrases.</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 text-xs">
+        <div class="lg:col-span-1 space-y-2.5">
+          <label for="graderQSelect" class="block text-slate-300 font-semibold">Select HKDSE Exam Prompt:</label>
+          <select id="graderQSelect" onchange="loadGraderPrompt()" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white">
+            <option value="flame_proc">Q1 (3 marks · CP 2025 1B Q2): Describe how to carry out a flame test on solid NaCl(s) and state the observation.</option>
+            <option value="air_distil">Q2 (3 marks · CP 2023 1B Q2 / 2024 1B Q5): Explain how nitrogen and oxygen are separated from air in industry.</option>
+            <option value="chloride_test">Q3 (3 marks · CP 2016 Q9): Describe a chemical test to show the presence of chloride ions in solid table salt.</option>
+            <option value="suck_back">Q4 (2 marks · CP 2016 Q7 / 2024 1B Q5): State and explain the precaution before stopping heating a solid with a delivery tube in limewater.</option>
+            <option value="carbonate_test">Q5 (2 marks · Strand c): Describe how to show that a piece of limestone contains carbonate ions.</option>
+            <option value="metal_extract">Q6 (3 marks · CP 2024 1B Q9): State the extraction methods for silver from Ag₂O, copper from CuO, and gold from rock.</option>
+          </select>
+          <div id="graderPromptBox" class="p-3 rounded-xl bg-slate-950 border border-slate-800 text-slate-200 leading-relaxed"></div>
+        </div>
+
+        <div class="lg:col-span-2 space-y-3">
+          <textarea id="graderInput" rows="4" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-sky-500" placeholder="Type your exam answer here (e.g., Moisten a clean platinum wire with concentrated hydrochloric acid, dip into the solid, and heat in a non-luminous flame...)"></textarea>
+          <div class="flex flex-wrap gap-2">
+            <button type="button" onclick="gradeStudentAnswer()" class="apple-btn apple-btn-primary">✨ Grade My Answer Against Mark Scheme</button>
+            <button type="button" onclick="fillModelGraderAnswer()" class="apple-btn">Show Model Full-Mark Answer</button>
+            <button type="button" onclick="document.getElementById('graderInput').value='';document.getElementById('graderResultBox').innerHTML='Type an answer and click Grade.';" class="apple-btn">Clear</button>
+          </div>
+          <div id="graderResultBox" class="p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-300 space-y-2 leading-relaxed">
+            Type an answer above and click <b>Grade My Answer Against Mark Scheme</b> to see your mark breakdown and keyword hits.
+          </div>
+        </div>
       </div>
     </div>
 
@@ -1448,5 +2144,607 @@ else { try{ MOBILE_UX.init(); }catch(e){} }
   }catch(e){}
 })();
 </script>
+
+<!-- ═══════════ APPLE COMMAND PALETTE (⌘K) MODAL ═══════════ -->
+<div id="cmdModal" onclick="if(event.target===this)closeCmdModal()">
+  <div class="w-full max-w-xl mx-4 bg-slate-900 border border-slate-700/80 rounded-2xl shadow-2xl overflow-hidden">
+    <div class="flex items-center gap-3 px-4 py-3 border-b border-slate-800">
+      <span class="text-sky-400 text-sm">🔍</span>
+      <input id="cmdSearchInput" type="text" oninput="filterCmdList()" placeholder="Search any chemical test, separation method, CP year (e.g. 2025, flame, suck-back, brine)..." class="w-full bg-transparent text-sm text-white placeholder-slate-400 focus:outline-none">
+      <button type="button" onclick="closeCmdModal()" class="text-xs text-slate-400 hover:text-white px-2 py-0.5 rounded bg-slate-800">ESC</button>
+    </div>
+    <div id="cmdResults" class="max-h-80 overflow-y-auto divide-y divide-slate-800/70 p-2 text-xs"></div>
+  </div>
+</div>
+
+<script>
+/* ══ APPLE STUDIO PRO INTERACTIVE ENGINE & DIAGNOSTIC LAYER ══ */
+
+/* 1. Theme Toggle (Apple Pro Dark <-> Cupertino Daylight) */
+function toggleAppleTheme(){
+  const root = document.documentElement;
+  const isLight = root.classList.toggle('theme-light');
+  const icon = document.getElementById('themeToggleIcon');
+  if(icon) icon.textContent = isLight ? '🌙 Pro Dark' : '☀️ Daylight';
+  try { localStorage.setItem('hkdse_topic1_theme', isLight ? 'light' : 'dark'); } catch(e){}
+}
+
+/* 2. Mastery Ring + Quiz Self-Score Injection */
+function injectQuizSelfCheckBars(){
+  const quizIds = ['atmQuiz','seaQuiz','rockQuiz','kitQuiz'];
+  quizIds.forEach(qid => {
+    const container = document.getElementById(qid);
+    if(!container) return;
+    // Also add "Hide All" button next to "Reveal all"
+    const headerDiv = container.previousElementSibling;
+    if(headerDiv && !headerDiv.querySelector('.hide-all-btn')){
+      const btnWrap = document.createElement('div');
+      btnWrap.className = 'flex items-center gap-2';
+      const revBtn = headerDiv.querySelector('button');
+      if(revBtn){
+        revBtn.parentNode.insertBefore(btnWrap, revBtn);
+        btnWrap.appendChild(revBtn);
+        const hideBtn = document.createElement('button');
+        hideBtn.type = 'button';
+        hideBtn.className = 'hide-all-btn text-[11px] font-semibold text-slate-300 border border-slate-700 px-3 py-1 rounded-full hover:bg-slate-800';
+        hideBtn.textContent = 'Reset Blanks';
+        hideBtn.onclick = () => {
+          container.querySelectorAll('.blur-answer').forEach(b => b.classList.remove('revealed'));
+        };
+        btnWrap.appendChild(hideBtn);
+      }
+    }
+    [...container.children].forEach((row, idx) => {
+      if(row.querySelector('.quiz-self-bar')) return;
+      const key = qid + '_' + idx;
+      const bar = document.createElement('div');
+      bar.className = 'quiz-self-bar';
+      bar.innerHTML = `
+        <span class="text-[10px] font-mono text-slate-400">Tap blurred chips above to check each keyword, then log your recall:</span>
+        <div class="flex items-center gap-1.5">
+          <button type="button" class="apple-btn !py-0.5 !px-2 text-[10px]" data-qkey="${key}" onclick="markQuizRow('${key}', true, this)">✓ Got It</button>
+          <button type="button" class="apple-btn !py-0.5 !px-2 text-[10px]" data-qkey="${key}" onclick="markQuizRow('${key}', false, this)">↻ Review Again</button>
+        </div>
+      `;
+      row.appendChild(bar);
+    });
+  });
+}
+
+const quizMasteryState = {};
+function markQuizRow(key, mastered, btnEl){
+  quizMasteryState[key] = mastered;
+  const parent = btnEl.parentElement;
+  const buttons = parent.querySelectorAll('button');
+  buttons[0].className = mastered
+    ? 'apple-btn !py-0.5 !px-2 text-[10px] !bg-emerald-600/30 !border-emerald-500 !text-emerald-300'
+    : 'apple-btn !py-0.5 !px-2 text-[10px]';
+  buttons[1].className = !mastered
+    ? 'apple-btn !py-0.5 !px-2 text-[10px] !bg-amber-600/30 !border-amber-500 !text-amber-300'
+    : 'apple-btn !py-0.5 !px-2 text-[10px]';
+  updateMasteryRing();
+}
+
+function checkAllSyllabusOutcomes(){
+  document.querySelectorAll('.syl-chk').forEach(c => c.checked = true);
+  updateMasteryRing();
+}
+
+function updateMasteryRing(){
+  const sylChks = [...document.querySelectorAll('.syl-chk')];
+  const sylDone = sylChks.filter(c => c.checked).length;
+  const sylTotal = sylChks.length || 12;
+  const sylBadge = document.getElementById('sylAuditCount');
+  if(sylBadge) sylBadge.textContent = `${sylDone} / ${sylTotal} Outcomes Checked`;
+
+  const quizDone = Object.values(quizMasteryState).filter(Boolean).length;
+  const quizTotal = 43;
+  const totalPossible = sylTotal + quizTotal;
+  const pct = Math.round(((sylDone + quizDone) / totalPossible) * 100);
+
+  const circle = document.getElementById('masteryRingCircle');
+  const txt = document.getElementById('masteryPctText');
+  if(circle){
+    const circum = 94.2;
+    circle.style.strokeDashoffset = String(circum - (circum * pct) / 100);
+  }
+  if(txt) txt.textContent = `${pct}% Mastered`;
+}
+
+/* 3. Strand (a) Fractional Distillation Column & Copper-Syringe % O2 Simulator */
+function updateAtmSim(){
+  const slider = document.getElementById('atmTempSlider');
+  if(!slider) return;
+  const T = parseInt(slider.value, 10);
+  const filtered = document.getElementById('atmFilterToggle').checked;
+  const readout = document.getElementById('atmTempReadout');
+  const alertBox = document.getElementById('atmSimAlert');
+  const bN2 = document.getElementById('badgeN2');
+  const bAr = document.getElementById('badgeAr');
+  const bO2 = document.getElementById('badgeO2');
+
+  readout.textContent = (T < 0 ? '−' + Math.abs(T) : T) + ' °C';
+
+  if(!filtered){
+    alertBox.className = 'p-3 rounded-xl bg-rose-950/50 border border-rose-700 text-xs text-rose-200 leading-relaxed';
+    alertBox.innerHTML = '<b>🚨 COLUMN BLOCKED! (Examiner Trap):</b> Because CO₂ (freezes at −78 °C) and H₂O vapour (freezes at 0 °C) were <b>not removed before cooling to −200 °C</b>, solid dry ice and ice crystals have clogged the heat exchangers and pipes!';
+  } else if(T < -196){
+    alertBox.className = 'p-3 rounded-xl bg-sky-950/40 border border-sky-800/70 text-xs text-sky-200 leading-relaxed';
+    alertBox.innerHTML = '<b>❄️ Fully Liquefied Air (below −196 °C):</b> Dust, CO₂ and H₂O were removed first, and high pressure + cooling turned N₂, Ar and O₂ into a pale blue liquid mixture ready for fractionation.';
+  } else if(T >= -196 && T < -186){
+    alertBox.className = 'p-3 rounded-xl bg-emerald-950/40 border border-emerald-800/70 text-xs text-emerald-200 leading-relaxed';
+    alertBox.innerHTML = '<b>✅ N₂ Boils Off First (−196 °C):</b> Nitrogen has the <b>lowest boiling point</b> (−196 °C), so it vaporises first and rises to the <b>top of the fractionating column</b> while Ar and O₂ remain liquid.';
+  } else if(T >= -186 && T < -183){
+    alertBox.className = 'p-3 rounded-xl bg-purple-950/40 border border-purple-800/70 text-xs text-purple-200 leading-relaxed';
+    alertBox.innerHTML = '<b>🟣 Argon Fraction (−186 °C):</b> Nitrogen has already boiled off at the top; argon now vaporises in the middle fraction, while liquid oxygen (−183 °C) still remains at the bottom.';
+  } else {
+    alertBox.className = 'p-3 rounded-xl bg-amber-950/40 border border-amber-800/70 text-xs text-amber-200 leading-relaxed';
+    alertBox.innerHTML = '<b>🔥 Oxygen Boils Last (−183 °C):</b> At −183 °C and above, oxygen (highest boiling point of the three) finally vaporises from the bottom of the column.';
+  }
+
+  const setGasBadge = (el, isGas, bpName) => {
+    if(!el) return;
+    if(isGas){
+      el.className = 'chip bg-emerald-950 text-emerald-300 border border-emerald-700';
+      el.textContent = 'GAS (' + bpName + ')';
+    } else {
+      el.className = 'chip bg-sky-950 text-sky-300 border border-sky-800';
+      el.textContent = 'LIQUID (in column)';
+    }
+  };
+  setGasBadge(bN2, T >= -196, 'exits @ Top');
+  setGasBadge(bAr, T >= -186, 'exits @ Middle');
+  setGasBadge(bO2, T >= -183, 'exits @ Bottom');
+}
+
+let cuPasses = 0;
+function stepCuSyringe(delta){
+  if(delta === 0) cuPasses = 0;
+  else cuPasses = Math.min(5, cuPasses + 1);
+  const vols = [100.0, 88.0, 82.5, 79.5, 79.0, 79.0];
+  const v = vols[cuPasses];
+  const passEl = document.getElementById('cuPassText');
+  const volEl = document.getElementById('cuVolText');
+  const calcEl = document.getElementById('cuCalcText');
+  if(!passEl) return;
+  passEl.textContent = cuPasses === 0
+    ? '0 passes · Reddish-brown Cu(s)'
+    : `${cuPasses} pass${cuPasses>1?'es':''} · Turning black (CuO formed)`;
+  volEl.textContent = v.toFixed(1) + ' cm³';
+  if(cuPasses === 0){
+    calcEl.textContent = '100.0 cm³ dry air in syringe. Heat excess Cu and push air back and forth until volume stays constant.';
+  } else if(cuPasses < 4){
+    calcEl.textContent = `O₂ is still reacting with heated Cu: 2Cu(s) + O₂(g) → 2CuO(s). Volume dropped by ${(100-v).toFixed(1)} cm³ so far — keep passing!`;
+  } else {
+    calcEl.textContent = `Constant volume reached (79.0 cm³ after cooling to room temp)! % O₂ by volume = (100.0 − 79.0) ÷ 100.0 × 100% = 21.0%.`;
+  }
+}
+
+/* 4. Strand (b) Flame Test Studio & Distillation Debugger */
+const FLAME_DATA = {
+  NaCl: {
+    color: '#fbbf24', stroke: '#f59e0b', badge: 'Intense Golden Yellow Flame (Na⁺)',
+    title: 'Sample: Sodium chloride, NaCl(s)',
+    proc: '<b>1. Flame Test (CP 2025 1B Q2):</b> Moisten a clean <b>nichrome / platinum wire</b> with <b>concentrated hydrochloric acid</b>, dip into crushed solid, and heat in a <b>non-luminous flame</b> → <b>intense golden yellow flame</b>.',
+    wet: '<b>2. Anion Test (CP 2016 Q9):</b> Dissolve solid in deionised water first, then add <b>AgNO₃(aq) acidified with dilute HNO₃(aq)</b> → <b>white precipitate</b> of AgCl(s).'
+  },
+  KCl: {
+    color: '#c084fc', stroke: '#a855f7', badge: 'Lilac Flame (K⁺) [Not Accept: deep purple/violet]',
+    title: 'Sample: Potassium chloride, KCl(s)',
+    proc: '<b>1. Flame Test (ms bank §11):</b> Same conc. HCl + clean nichrome/Pt wire + non-luminous flame procedure → <b>lilac flame</b> (Accept: purple / light purple; <b>Not Accept: deep purple / violet</b>).',
+    wet: '<b>2. Anion Test:</b> Dissolve in water; add <b>acidified AgNO₃(aq)</b> (with dilute HNO₃) → <b>white precipitate</b> of AgCl(s).'
+  },
+  CaCO3: {
+    color: '#ef4444', stroke: '#dc2626', badge: 'Brick-Red Flame (Ca²⁺)',
+    title: 'Sample: Limestone / Calcium carbonate, CaCO₃(s)',
+    proc: '<b>1. Flame Test (CP 2018 2 Q3):</b> Moisten clean Pt/nichrome wire with <b>concentrated HCl</b> (converts CaCO₃ to volatile CaCl₂), dip into sample, heat in <b>non-luminous flame</b> → <b>brick-red flame</b>.',
+    wet: '<b>2. Carbonate Test (Strand c):</b> Add <b>dilute HCl(aq)</b> to solid → <b>effervescence</b> (colourless gas bubbles); pass gas into <b>limewater</b> → turns <b>milky</b>.'
+  },
+  CuSO4: {
+    color: '#2dd4bf', stroke: '#14b8a6', badge: 'Bluish-Green Flame (Cu²⁺)',
+    title: 'Sample: Copper(II) sulphate, CuSO₄(s)',
+    proc: '<b>1. Flame Test (ms bank §11):</b> Clean Pt/nichrome wire + conc. HCl + non-luminous flame → <b>bluish-green flame</b> shows Cu²⁺ ions.',
+    wet: '<b>2. Water of Crystallisation Test:</b> White <b>anhydrous CuSO₄(s)</b> turns <b>blue</b> on adding water; blue hydrated crystals turn white on heating (CP 2025 2 Q3).'
+  },
+  MgSO4: {
+    color: '#38bdf8', stroke: '#0284c7', badge: 'NO Characteristic Flame Colour! (CP 2016 Q9 Trap)',
+    title: 'Sample: Magnesium sulphate, MgSO₄(s) — Examiner Trap!',
+    proc: '<b>🚨 CP 2016 Q9 Warning:</b> “Many candidates incorrectly considered that flame test can be used, and gave incorrect answers like bright white light for MgSO₄(s).” (Bright white light is burning Mg <i>metal ribbon</i>, NOT Mg²⁺ ions in a salt!).',
+    wet: '<b>✅ Correct Approach:</b> First <b>dissolve the solid in water</b>, then use aqueous reagent tests (Topic IV/XV) rather than a flame test.'
+  }
+};
+
+function setFlameSample(key){
+  const d = FLAME_DATA[key];
+  if(!d) return;
+  const path = document.getElementById('flameOuterPath');
+  const glow = document.getElementById('flameGlowBg');
+  const badge = document.getElementById('flameLabelBadge');
+  const title = document.getElementById('flameDetailTitle');
+  const proc = document.getElementById('flameDetailProc');
+  const wet = document.getElementById('flameDetailWet');
+  if(path){ path.setAttribute('fill', d.color); path.setAttribute('stroke', d.stroke); }
+  if(glow){ glow.style.background = `radial-gradient(circle at 50% 60%, ${d.color}, transparent 70%)`; }
+  if(badge) badge.textContent = d.badge;
+  if(title) title.textContent = d.title;
+  if(proc) proc.innerHTML = d.proc;
+  if(wet) wet.innerHTML = d.wet;
+}
+
+const DISTIL_SPOTS = [
+  '<b>🌡️ 1. Thermometer Bulb Position:</b> The bulb must sit right <b>opposite the side-arm exit</b> leading to the condenser so it records the boiling point of the <b>vapour distilling over</b>, never submerged in the solution.',
+  '<b>💧 2. Liebig Condenser Water Flow:</b> Cooling water MUST enter at the <b>lowest point (bottom inlet)</b> and leave at the <b>top outlet</b> (counter-current flow) so the condenser jacket stays completely full of cold water.',
+  '<b>🫧 3. Anti-bumping Granules:</b> Added to the sea water / liquid before heating to promote <b>smooth boiling</b> (prevent violent bumping that would splash salty water into the condenser).',
+  '<b>🧪 4. Open Receiver &amp; Fractionating Column (CP 2021 2 Q3):</b> Never seal the receiving flask (heating a closed system causes an explosion!). For <b>fractional distillation</b> of miscible liquids, add a <b>fractionating column packed with glass beads</b> between the flask and condenser.'
+];
+function showDistilSpot(idx){
+  const el = document.getElementById('distilSpotOut');
+  if(el && DISTIL_SPOTS[idx]) el.innerHTML = DISTIL_SPOTS[idx];
+}
+
+/* 5. Strand (c) Limestone Cycle & Suck-Back Safety Simulator */
+const LIME_STEPS = [
+  {
+    title: '🔥 Step 1 · Thermal Decomposition of Calcium Carbonate (Limestone / Chalk / Marble)',
+    badge: 'Endothermic · Strong Heat (Roasting)',
+    word: 'Word: calcium carbonate → calcium oxide + carbon dioxide  |  Symbol: CaCO₃(s) → CaO(s) + CO₂(g)',
+    obs: '<b>Observation &amp; Notes:</b> White solid remains white (quicklime, CaO); evolved gas turns limewater milky. Requires strong roaring Bunsen flame.',
+    trap: '<b>⚠️ Examiner Trap:</b> Never call this "burning calcium carbonate" (no O₂ reactant is involved) and never write "Ca" or "O₂" as products.'
+  },
+  {
+    title: '💧 Step 2 · Slaking of Quicklime (Action of Water on Calcium Oxide)',
+    badge: 'Exothermic · Releases Heat',
+    word: 'Word: calcium oxide + water → calcium hydroxide  |  Symbol: CaO(s) + H₂O(l) → Ca(OH)₂(s)',
+    obs: '<b>Observation &amp; Notes:</b> White lump of quicklime cracks, swells, crumbles into fine white powder (<b>slaked lime</b>) with a hissing sound and <b>significant heat released</b>. Dissolving/filtering in excess water gives saturated <b>limewater, Ca(OH)₂(aq)</b>.',
+    trap: '<b>⚠️ Examiner Trap (CP 2023 1B Q1):</b> The chemical formula of calcium hydroxide is <b>Ca(OH)₂</b> — writing "CaOH" is a recorded zero-mark error! Also note: CaCO₃ itself shows <b>no observable change</b> with pure water.'
+  },
+  {
+    title: '🫧 Step 3 · Test for Carbon Dioxide with Limewater (Precipitation of CaCO₃)',
+    badge: 'Gas Test · White Precipitate',
+    word: 'Word: calcium hydroxide + carbon dioxide → calcium carbonate + water  |  Symbol: Ca(OH)₂(aq) + CO₂(g) → CaCO₃(s) + H₂O(l)',
+    obs: '<b>Observation &amp; Notes:</b> Colourless limewater turns <b>milky / cloudy white</b> because insoluble white <b>calcium carbonate, CaCO₃(s)</b> precipitates out — completing the limestone cycle!',
+    trap: '<b>⚠️ Examiner Trap (CP 2022 2 Q3):</b> Both CO₂(g) and SO₂(g) turn limewater milky — so limewater CANNOT be used to distinguish CO₂ from SO₂!'
+  },
+  {
+    title: '🌧️ Step 4 · Excess CO₂ in Limewater &amp; Natural Erosion of Limestone Caves (CP 2023 1B Q1)',
+    badge: 'Soluble Hydrogencarbonate · Cave Erosion',
+    word: 'Word: calcium carbonate + water + carbon dioxide → calcium hydrogencarbonate  |  Symbol: CaCO₃(s) + H₂O(l) + CO₂(g) → Ca(HCO₃)₂(aq)',
+    obs: '<b>Observation &amp; Real-World Erosion Link:</b> When <b>excess CO₂</b> is bubbled into milky limewater, the white precipitate dissolves and the solution turns <b>clear/colourless again</b> because soluble <b>calcium hydrogencarbonate, Ca(HCO₃)₂(aq)</b> forms! In nature, rainwater absorbs atmospheric CO₂ to form weak carbonic acid, slowly dissolving underground limestone rocks into caves.',
+    trap: '<b>⚠️ Examiner Trap (CP 2023 1B Q1):</b> Candidates frequently wrote the wrong formula "CaHCO3" — it MUST be <b>Ca(HCO₃)₂</b> with brackets!'
+  },
+  {
+    title: '🧪 Step 5 · Action of Dilute Acid on Limestone &amp; Test for Carbonate Ions (CP 2024 1B Q4)',
+    badge: 'Acid–Carbonate · Effervescence',
+    word: 'Word: calcium carbonate + hydrochloric acid → calcium chloride + water + carbon dioxide  |  Ionic: CaCO₃(s) + 2H⁺(aq) → Ca²⁺(aq) + H₂O(l) + CO₂(g)',
+    obs: '<b>Observation &amp; Notes:</b> Solid dissolves with <b>effervescence (colourless gas bubbles)</b>; passing the gas into limewater turns it <b>milky</b>. Acid rain (containing H₂SO₄ / HNO₃) corrodes outdoor marble &amp; limestone statues by this exact reaction.',
+    trap: '<b>⚠️ Examiner Trap (CP 2024 1B Q4):</b> In the ionic equation, CaCO₃(s) is an <b>insoluble solid</b> so it must NOT be split into ions on the left! Never write "Ca" or "CaO" as products.'
+  }
+];
+
+function selectLimeStep(idx){
+  const s = LIME_STEPS[idx];
+  if(!s) return;
+  document.getElementById('limeStepTitle').textContent = s.title;
+  document.getElementById('limeStepBadge').textContent = s.badge;
+  document.getElementById('limeStepWord').textContent = s.word;
+  document.getElementById('limeStepObs').innerHTML = s.obs;
+  document.getElementById('limeStepTrap').innerHTML = s.trap;
+  document.querySelectorAll('.lime-step-btn').forEach((b, i) => {
+    b.className = i === idx ? 'lime-step-btn apple-btn apple-btn-primary !py-2.5' : 'lime-step-btn apple-btn !py-2.5';
+  });
+}
+
+function testSuckBack(choice){
+  const out = document.getElementById('suckBackOut');
+  if(!out) return;
+  if(choice === 'tube-first'){
+    out.className = 'p-3 rounded-xl bg-emerald-950/45 border border-emerald-700 text-xs text-emerald-200 leading-relaxed';
+    out.innerHTML = '<b>✅ FULL MARKS (CP 2016 Q7 · CP 2024 1B Q5):</b> You <b>removed the delivery tube from the limewater BEFORE stopping heating</b>. Why? When heating stops, the gas inside the hot boiling tube cools and contracts (gas pressure drops below atmospheric pressure); since the tube is already in the air, cold limewater cannot be sucked back into the hot glass tube!';
+  } else {
+    out.className = 'p-3 rounded-xl bg-rose-950/50 border border-rose-700 text-xs text-rose-200 leading-relaxed';
+    out.innerHTML = '<b>💥 SUCK-BACK DISASTER (0 Marks):</b> Because the burner was turned off while the delivery tube was still submerged, the gas inside the boiling tube cooled and contracted, dropping the internal pressure below atmospheric pressure. Cold limewater was <b>sucked back into the red-hot boiling tube, cracking the glass!</b> (Remember: "cool down slowly" or "use a fume cupboard" also score 0 marks in CP 2016 Q7).';
+  }
+}
+
+/* 6. Strand (d) Multi-Step Mixture Separation Sequencer */
+const SEQ_CHALLENGES = {
+  sand_salt: {
+    steps: [
+      '1. Add excess deionised water to the mixture and stir to dissolve the sodium chloride completely.',
+      '2. Filter the mixture through filter paper in a filter funnel to trap the insoluble sand as the residue.',
+      '3. Wash the sand residue on the filter paper with a little deionised water and dry it in an oven.',
+      '4. Heat the sodium chloride filtrate in an evaporating dish to evaporate the water and obtain dry salt.'
+    ],
+    why: 'Exploits the difference in <b>solubility in water</b> first (filtration separates insoluble sand residue from soluble salt filtrate), then <b>volatility / boiling point</b> (evaporation recovers non-volatile NaCl).'
+  },
+  oil_water_sand: {
+    steps: [
+      '1. Filter the mixture to remove the insoluble sand as the residue on the filter paper.',
+      '2. Pour the filtrate (cooking oil + water) into a separating funnel and allow two layers to settle.',
+      '3. Open the tap of the separating funnel to run off the lower aqueous layer (water) into a beaker.',
+      '4. Collect the upper cooking-oil layer from the separating funnel.'
+    ],
+    why: 'Matches EDB Suggested Activity (p. I-3) &amp; ms bank §11: filtration removes the insoluble solid first; the <b>separating funnel</b> separates immiscible liquids where <b>water is the lower liquid layer</b>.'
+  },
+  crystals_cuso4: {
+    steps: [
+      '1. Heat the CuSO₄(aq) solution in an evaporating dish to evaporate some water until the solution becomes saturated.',
+      '2. Allow the hot saturated solution to cool slowly at room temperature for a period of time so large crystals grow.',
+      '3. Filter the mixture to collect the CuSO₄·5H₂O crystals as the residue on the filter paper.',
+      '4. Wash the crystals with a little cold deionised water and dry them between pieces of filter paper.'
+    ],
+    why: 'Matches CP 2023 1B Q9 crystallisation rubric: concentrate → cool for a definite period of time → filter → wash with minimal cold distilled water &amp; dry between filter papers (never oven-bake hydrated crystals or they lose water of crystallisation!).'
+  },
+  cu_fe2o3: {
+    steps: [
+      '1. Add excess dilute hydrochloric acid (or dilute sulphuric acid) to the Cu(s) + MgO(s) mixture and warm gently.',
+      '2. Stir until all the MgO reacts and dissolves to form soluble salt while unreactive Cu powder remains unreacted.',
+      '3. Filter the mixture to collect the unreacted copper powder as the residue on the filter paper.',
+      '4. Wash the copper residue with deionised water and dry it.'
+    ],
+    why: 'Matches CP 2015 discipline: choose a reagent that reacts ONLY with the unwanted impurity (or use a magnet if separating Fe powder from Cu powder), leaving the wanted copper intact to be filtered, washed and dried.'
+  }
+};
+
+let seqCurrentOrder = [];
+function initSeqChallenge(){
+  const sel = document.getElementById('seqChallengeSelect');
+  if(!sel) return;
+  const ch = SEQ_CHALLENGES[sel.value];
+  if(!ch) return;
+  seqCurrentOrder = [];
+  const pool = document.getElementById('seqPool');
+  const chosen = document.getElementById('seqChosen');
+  const fb = document.getElementById('seqFeedback');
+  chosen.innerHTML = '<div class="text-slate-500 italic">No steps selected yet — click steps on the left in order (1 → 4).</div>';
+  fb.className = 'p-3 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 leading-relaxed';
+  fb.innerHTML = 'Select Step 1 from the shuffled list on the left.';
+
+  // Deterministic shuffle so it isn't in 1,2,3,4 order
+  const indices = [2, 0, 3, 1];
+  pool.innerHTML = '';
+  indices.forEach(idx => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'apple-btn !justify-start text-left !py-2 !px-3 w-full';
+    // Strip leading "1. " so student has to think!
+    const cleanText = ch.steps[idx].replace(/^\d+\.\s*/, '');
+    btn.textContent = '• ' + cleanText;
+    btn.onclick = () => pickSeqStep(sel.value, idx, btn);
+    pool.appendChild(btn);
+  });
+}
+
+function pickSeqStep(chKey, stepIdx, btnEl){
+  const ch = SEQ_CHALLENGES[chKey];
+  const expectedIdx = seqCurrentOrder.length;
+  const chosen = document.getElementById('seqChosen');
+  const fb = document.getElementById('seqFeedback');
+
+  if(stepIdx !== expectedIdx){
+    fb.className = 'p-3 rounded-xl bg-rose-950/50 border border-rose-700 text-rose-200 leading-relaxed';
+    fb.innerHTML = `<b>⚠️ Out-of-order step!</b> Think carefully: before doing that, what needs to happen to the mixture first? (Expected Step ${expectedIdx + 1}).`;
+    return;
+  }
+
+  seqCurrentOrder.push(stepIdx);
+  btnEl.disabled = true;
+  btnEl.classList.add('opacity-40', 'pointer-events-none');
+  if(seqCurrentOrder.length === 1) chosen.innerHTML = '';
+  const item = document.createElement('div');
+  item.className = 'p-2 rounded-lg bg-emerald-950/40 border border-emerald-800/70 text-emerald-200 font-medium';
+  item.textContent = ch.steps[stepIdx];
+  chosen.appendChild(item);
+
+  if(seqCurrentOrder.length === ch.steps.length){
+    fb.className = 'p-3 rounded-xl bg-emerald-950/50 border border-emerald-700 text-emerald-200 leading-relaxed';
+    fb.innerHTML = '<b>🎉 Perfect 4-Step Procedure!</b> ' + ch.why;
+  } else {
+    fb.className = 'p-3 rounded-xl bg-sky-950/40 border border-sky-800 text-sky-200 leading-relaxed';
+    fb.innerHTML = `<b>✅ Step ${seqCurrentOrder.length} correct!</b> Now select Step ${seqCurrentOrder.length + 1}.`;
+  }
+}
+
+/* 7. Bench 5: Live HKEAA Keyword Answer Grader */
+const GRADER_RUBRICS = {
+  flame_proc: {
+    prompt: '<b>Question (3 marks · CP 2025 1B Q2):</b> Describe how to carry out a flame test on a solid sample of sodium chloride in a school laboratory, and state the expected observation.',
+    model: 'Moisten a clean nichrome wire (or platinum wire) with concentrated hydrochloric acid, dip it into the crushed sodium chloride solid, and heat the tip of the wire in a non-luminous Bunsen flame. An intense golden yellow flame is observed.',
+    marks: [
+      { label: '1M · Wire + Acid Cleaning', re: /(nichrome|platinum)[\s\S]*concentrated\s+(hydrochloric\s+acid|hcl)|concentrated\s+(hydrochloric\s+acid|hcl)[\s\S]*(nichrome|platinum)/i, hint: 'Mention moistening a clean <b>nichrome / platinum wire</b> with <b>concentrated hydrochloric acid</b>.' },
+      { label: '1M · Sample + Non-luminous Flame', re: /non-?luminous(\s+bunsen)?\s+flame/i, hint: 'State dipping into the solid and heating in a <b>non-luminous flame</b>.' },
+      { label: '1M · Flame Observation', re: /golden[-\s]+yellow/i, hint: 'State the exact colour: <b>(intense) golden yellow flame</b> (not just "yellow").' }
+    ],
+    traps: [
+      { re: /sulphuric\s+acid|h2so4|nitric\s+acid|hno3/i, msg: 'CP 2025 1B Q2 Trap: Never use sulphuric acid or nitric acid to clean/moisten the flame-test wire — use <b>concentrated hydrochloric acid</b> (converts salts into volatile chlorides).' },
+      { re: /luminous\s+flame/i, mask: /non-?luminous/i, msg: 'Trap: A luminous flame is already yellow and masks the test — you must specify a <b>non-luminous flame</b>.' }
+    ]
+  },
+  air_distil: {
+    prompt: '<b>Question (3 marks · CP 2023 1B Q2 / CP 2024 1B Q5):</b> Name the industrial method used to obtain nitrogen and oxygen from air, and explain the underlying principle of how they are separated.',
+    model: 'Fractional distillation of liquefied air. Dust, carbon dioxide and water vapour are removed first, and air is compressed and cooled into liquid air. Upon warming in the fractionating column, nitrogen has a lower boiling point (−196 °C) than oxygen (−183 °C), so nitrogen boils off first at the top while oxygen remains liquid longer.',
+    marks: [
+      { label: '1M · Full Method Name', re: /fractional\s+distillation\s+of\s+(liquefied|liquid)\s+air/i, hint: 'Write the complete phrase: <b>fractional distillation of liquefied (or liquid) air</b> (CP 2023 1B Q2 penalized omitting "liquefied air").' },
+      { label: '1M · Boiling Point Principle', re: /different\s+boiling\s+points?|lower\s+boiling\s+point|higher\s+boiling\s+point/i, hint: 'State the principle: N₂ and O₂ have <b>different boiling points</b> (CP 2024 1B Q5).' },
+      { label: '1M · Which Boils First', re: /nitrogen[\s\S]{0,60}(boils?|vaporises?|evaporates?)\s+(off\s+)?first/i, hint: 'Specify that <b>nitrogen has a lower boiling point (−196 °C) and boils off first</b>.' }
+    ],
+    traps: [
+      { re: /oxygen[\s\S]{0,40}boils?\s+(off\s+)?first/i, msg: 'Fatal Reversal: Nitrogen (−196 °C) has the lower boiling point and boils off FIRST, not oxygen (−183 °C)!' }
+    ]
+  },
+  chloride_test: {
+    prompt: '<b>Question (3 marks · CP 2016 Q9):</b> Describe a chemical test to show the presence of chloride ions in a solid sample of common salt, and state the observation.',
+    model: 'Dissolve the solid sample in deionised (or distilled) water first. Add aqueous silver nitrate acidified with dilute nitric acid. A white precipitate (of silver chloride) is formed.',
+    marks: [
+      { label: '1M · Dissolve Solid First', re: /dissolve[\s\S]{0,45}(water|deionised|distilled)/i, hint: 'CP 2016 Q9 Requirement: You must <b>dissolve the solid in deionised/distilled water first</b> before adding aqueous reagents!' },
+      { label: '1M · Acidified Silver Nitrate Reagent', re: /(silver\s+nitrate|agno3)[\s\S]{0,50}(dilute\s+nitric\s+acid|hno3|acidified)|(dilute\s+nitric\s+acid|hno3|acidified)[\s\S]{0,50}(silver\s+nitrate|agno3)/i, hint: 'Name both reagents: <b>aqueous silver nitrate, AgNO₃(aq)</b> and <b>dilute nitric acid, HNO₃(aq)</b>.' },
+      { label: '1M · Observation', re: /white\s+(precipitate|ppt)/i, hint: 'State the observation: a <b>white precipitate</b> forms.' }
+    ],
+    traps: [
+      { re: /hydrochloric\s+acid|hcl/i, msg: 'Contradiction Zero-Mark Trap: Never acidify a chloride test with hydrochloric acid (HCl adds Cl⁻ ions to the sample!). Use <b>dilute nitric acid</b>.' }
+    ]
+  },
+  suck_back: {
+    prompt: '<b>Question (2 marks · CP 2016 Q7 / CP 2024 1B Q5):</b> When heating calcium carbonate in a boiling tube with a delivery tube dipped into limewater, state what precaution must be taken before stopping heating, and explain why.',
+    model: 'Remove the delivery tube from the limewater before stopping heating (removing the flame). This prevents cold limewater from being sucked back into the hot boiling tube (which would crack the hot glass) when the gas inside cools and contracts.',
+    marks: [
+      { label: '1M · Correct Procedure', re: /(remove|lift|take\s+out)[\s\S]{0,40}delivery\s+tube[\s\S]{0,40}before[\s\S]{0,30}(stop|heat|flame|burner)/i, hint: 'State clearly: <b>remove the delivery tube from the limewater before stopping heating</b>.' },
+      { label: '1M · Prevent Suck-Back / Pressure Reason', re: /suck(ing)?[-\s]*back|(cools?\s+and\s+contracts?|pressure\s+drops?)/i, hint: 'Explain why: to <b>prevent sucking back</b> of cold limewater into the hot tube as the gas inside cools and contracts.' }
+    ],
+    traps: [
+      { re: /cool(ed)?\s+down\s+slowly|fume\s+cupboard/i, msg: 'CP 2016 Q7 Verbatim Wrong Answer: "cool down slowly" and "take into a fume cupboard" do not prevent suck-back and score 0 marks.' }
+    ]
+  },
+  carbonate_test: {
+    prompt: '<b>Question (2 marks · Strand c):</b> Describe how you would show by a chemical test that a solid sample of limestone contains carbonate ions.',
+    model: 'Add dilute hydrochloric acid to the solid sample and pass the gas evolved into limewater. Effervescence occurs (colourless gas bubbles are given off) and the limewater turns milky.',
+    marks: [
+      { label: '1M · Acid + Limewater Procedure', re: /(dilute\s+(hydrochloric|nitric)\s+acid|hcl|hno3)[\s\S]{0,80}limewater/i, hint: 'Include both steps: add <b>dilute hydrochloric acid</b> to the solid AND pass the gas evolved into <b>limewater</b>.' },
+      { label: '1M · Effervescence + Milky Observation', re: /(effervescence|bubbles?|fiz+)[\s\S]{0,60}milky|milky[\s\S]{0,60}(effervescence|bubbles?)/i, hint: 'State both observations: <b>effervescence (gas bubbles)</b> and the <b>limewater turns milky</b>.' }
+    ],
+    traps: []
+  },
+  metal_extract: {
+    prompt: '<b>Question (3 marks · CP 2024 1B Q9):</b> State the method used to extract (i) silver from silver oxide, (ii) copper from copper(II) oxide, and (iii) gold from gold-bearing rock.',
+    model: '(i) Silver from silver oxide: heating alone (thermal decomposition). (ii) Copper from copper(II) oxide: heating with carbon (carbon reduction). (iii) Gold from rock: physical method (such as panning).',
+    marks: [
+      { label: '1M · Silver = Heating Alone', re: /heating\s+alone|heat\s+alone|thermal\s+decomposition/i, hint: 'Silver oxide is decomposed by <b>heating alone</b>.' },
+      { label: '1M · Copper = Heating with Carbon', re: /heat(ing)?\s+with\s+carbon|carbon\s+reduction/i, hint: 'Copper(II) oxide is reduced by <b>heating with carbon</b>.' },
+      { label: '1M · Gold = Physical Method', re: /physical\s+method|panning/i, hint: 'Gold exists as a free element and is isolated by a <b>physical method</b>.' }
+    ],
+    traps: [
+      { re: /silver\s+oxide\s+by\s+physical\s+method/i, msg: 'CP 2024 1B Q9 Verbatim Wrong Answer: "silver can be obtained from silver oxide by physical method" — silver oxide is a compound and requires <b>heating alone</b>!' }
+    ]
+  }
+};
+
+function loadGraderPrompt(){
+  const sel = document.getElementById('graderQSelect');
+  if(!sel) return;
+  const r = GRADER_RUBRICS[sel.value];
+  const box = document.getElementById('graderPromptBox');
+  if(box && r) box.innerHTML = r.prompt;
+}
+
+function fillModelGraderAnswer(){
+  const sel = document.getElementById('graderQSelect');
+  if(!sel) return;
+  const r = GRADER_RUBRICS[sel.value];
+  if(!r) return;
+  document.getElementById('graderInput').value = r.model;
+  gradeStudentAnswer();
+}
+
+function gradeStudentAnswer(){
+  const sel = document.getElementById('graderQSelect');
+  const txt = (document.getElementById('graderInput').value || '').trim();
+  const out = document.getElementById('graderResultBox');
+  if(!sel || !out) return;
+  const r = GRADER_RUBRICS[sel.value];
+  if(!txt){
+    out.innerHTML = '<span class="text-amber-300">Please type an answer first, or click "Show Model Full-Mark Answer".</span>';
+    return;
+  }
+
+  let score = 0;
+  let rowsHtml = '';
+  r.marks.forEach(m => {
+    const hit = m.re.test(txt);
+    if(hit) score++;
+    rowsHtml += `<div class="p-2 rounded-lg border ${hit ? 'bg-emerald-950/40 border-emerald-700 text-emerald-200' : 'bg-slate-900 border-slate-800 text-slate-300'}">
+      <b>${hit ? '✅ [1M Earned]' : '⬜ [0M Missed]'} ${m.label}:</b> ${hit ? 'Keyword verified in your answer.' : m.hint}
+    </div>`;
+  });
+
+  let trapHtml = '';
+  r.traps.forEach(t => {
+    if(t.re.test(txt) && (!t.mask || !t.mask.test(txt))){
+      trapHtml += `<div class="p-2.5 rounded-lg bg-rose-950/60 border border-rose-600 text-rose-200 font-medium">🚨 <b>[NOT ACCEPT / Contradiction Penalty]:</b> ${t.msg}</div>`;
+    }
+  });
+
+  out.innerHTML = `
+    <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+      <span class="font-bold text-white text-sm">Examiner Diagnostic Score: <span class="text-sky-400 font-mono">${score} / ${r.marks.length} marks</span></span>
+      <span class="chip ${score===r.marks.length && !trapHtml ? 'bg-emerald-950 text-emerald-300 border-emerald-700' : 'bg-amber-950 text-amber-300 border-amber-700'}">${score===r.marks.length && !trapHtml ? 'Full Marks Wording' : 'Keep Refining'}</span>
+    </div>
+    ${trapHtml}
+    <div class="space-y-1.5 mt-2">${rowsHtml}</div>
+  `;
+}
+
+/* 8. Command Palette (⌘K) Quick Search */
+const CMD_INDEX = [
+  { title: 'Composition of Air & % O₂ Copper-Syringe Lab', tag: 'Strand (a) · Sim', action: ()=>{switchTab('tab-atm');switchAtmMode('map');} },
+  { title: 'Fractional Distillation of Liquid Air (−196 °C N₂ first)', tag: 'Strand (a) · CP 2023/2024', action: ()=>{switchTab('tab-atm');switchAtmMode('map');} },
+  { title: 'Test for Oxygen (Glowing splint relights)', tag: 'Strand (a) · CP 2022 1B Q2', action: ()=>{switchTab('tab-atm');switchAtmMode('explorer');selectAtm(4);} },
+  { title: 'Flame Test Procedure & Colours (Na⁺, K⁺, Ca²⁺, Cu²⁺)', tag: 'Strand (b) · CP 2025 1B Q2', action: ()=>{switchTab('tab-sea');switchSeaMode('map');} },
+  { title: 'Test for Chloride (Dissolve first + AgNO₃ + dilute HNO₃)', tag: 'Strand (b) · CP 2016 Q9', action: ()=>{switchTab('tab-sea');switchSeaMode('explorer');selectSea(4);} },
+  { title: 'Test for Water (Anhydrous CuSO₄ / Dry CoCl₂ paper)', tag: 'Strand (b) · ms bank §11', action: ()=>{switchTab('tab-sea');switchSeaMode('explorer');selectSea(5);} },
+  { title: 'Electrolysis of Sea Water vs Brine (Cl₂, H₂, NaOH)', tag: 'Strand (b) · CP 2013 Q2', action: ()=>{switchTab('tab-sea');switchSeaMode('explorer');selectSea(6);} },
+  { title: 'Distillation Setup Spot-the-Flaw (Thermometer & Condenser)', tag: 'Strand (b) · CP 2021 2 Q3', action: ()=>{switchTab('tab-sea');switchSeaMode('map');} },
+  { title: 'Limestone, Chalk & Marble Cycle + Ca(HCO₃)₂ Cave Erosion', tag: 'Strand (c) · CP 2023 1B Q1', action: ()=>{switchTab('tab-rock');switchRockMode('map');} },
+  { title: 'Suck-Back Prevention Simulator (Lift delivery tube first)', tag: 'Strand (c) · CP 2016 Q7 / 2024', action: ()=>{switchTab('tab-rock');switchRockMode('map');} },
+  { title: 'Extraction of Metals (Physical, Heating Alone, Carbon)', tag: 'Strand (c) · CP 2024 1B Q9', action: ()=>{switchTab('tab-rock');switchRockMode('explorer');selectRock(6);} },
+  { title: 'Multi-Step Mixture Separation Problem-Solving Sequencer', tag: 'Toolkit · EDB Activity', action: ()=>{switchTab('tab-kit');switchKitMode('map');} },
+  { title: 'Live HKEAA Keyword Answer Grader (Bench 5)', tag: 'Solver · Exam Practice', action: ()=>{switchTab('tab-solver');} },
+  { title: 'Candidate Performance Intelligence (2012–2025)', tag: 'Past Papers · Tab 7', action: ()=>{switchTab('tab-pp');} },
+  { title: 'Master NOT ACCEPT & Misconceptions Checklist', tag: 'Final Review · Tab 8', action: ()=>{switchTab('tab-review');} }
+];
+
+function openCmdModal(){
+  const m = document.getElementById('cmdModal');
+  if(!m) return;
+  m.classList.add('open');
+  const inp = document.getElementById('cmdSearchInput');
+  if(inp){ inp.value = ''; filterCmdList(); setTimeout(()=>inp.focus(), 50); }
+}
+function closeCmdModal(){
+  const m = document.getElementById('cmdModal');
+  if(m) m.classList.remove('open');
+}
+function filterCmdList(){
+  const q = (document.getElementById('cmdSearchInput').value || '').toLowerCase();
+  const box = document.getElementById('cmdResults');
+  if(!box) return;
+  box.innerHTML = '';
+  CMD_INDEX.filter(item => item.title.toLowerCase().includes(q) || item.tag.toLowerCase().includes(q)).forEach(item => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'w-full text-left px-3 py-2.5 rounded-xl hover:bg-slate-800/80 flex items-center justify-between transition';
+    btn.innerHTML = `<span class="text-white font-medium">${item.title}</span><span class="chip bg-sky-950 text-sky-300 border border-sky-800">${item.tag}</span>`;
+    btn.onclick = () => { closeCmdModal(); item.action(); };
+    box.appendChild(btn);
+  });
+}
+
+document.addEventListener('keydown', e => {
+  if((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k'){
+    e.preventDefault();
+    const m = document.getElementById('cmdModal');
+    if(m && m.classList.contains('open')) closeCmdModal();
+    else openCmdModal();
+  } else if(e.key === 'Escape'){
+    closeCmdModal();
+  }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  try {
+    if(localStorage.getItem('hkdse_topic1_theme') === 'light') toggleAppleTheme();
+  } catch(e){}
+  injectQuizSelfCheckBars();
+  updateAtmSim();
+  initSeqChallenge();
+  loadGraderPrompt();
+  updateMasteryRing();
+  // Pre-populate default solver benches so students immediately see live output
+  document.getElementById('svAirV').value = '250'; solverAir();
+  document.getElementById('svMs').value = '50.0'; document.getElementById('svRes').value = '1.75'; solverSalt();
+  solverSep();
+  solverTest();
+});
+</script>
+
 </body>
 </html>

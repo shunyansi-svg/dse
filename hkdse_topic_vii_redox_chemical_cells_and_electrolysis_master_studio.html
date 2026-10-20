@@ -9,52 +9,375 @@
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
 <style>
-  :root { color-scheme: dark; }
-  body { background:#020617; font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
-  .tab-panel { display:none; }
-  .tab-panel.active { display:block; }
-  .blur-answer { filter: blur(6px); cursor:pointer; transition: filter .25s ease; user-select:none; }
-  .blur-answer.revealed { filter: blur(0); cursor:default; user-select:text; }
-  .engine-module { display:none; }
-  .engine-module.active { display:block; }
-  .mode-pill { cursor:pointer; }
-  .mode-pill.active { background:rgba(56,189,248,.15); color:#7dd3fc; border-color:#38bdf8; }
-  details > summary { cursor:pointer; list-style:none; }
-  details > summary::-webkit-details-marker { display:none; }
-  .chip { display:inline-block; padding:2px 10px; border-radius:9999px; font-size:11px; font-weight:600; }
-  .katex { font-size:1.05em; }
+  :root {
+    color-scheme: dark;
+    --hdr: 118px;
+    --bg-canvas: #000000;
+    --bg-elevated: rgba(22, 22, 29, 0.72);
+    --bg-card: rgba(28, 28, 36, 0.68);
+    --bg-card-solid: #16161d;
+    --bg-subcard: rgba(38, 38, 48, 0.55);
+    --bg-glass-nav: rgba(14, 14, 20, 0.76);
+    --border-hairline: rgba(255, 255, 255, 0.09);
+    --border-highlight: rgba(255, 255, 255, 0.16);
+    --text-primary: #f5f5f7;
+    --text-secondary: #a1a1aa;
+    --text-tertiary: #6e6e77;
+    --accent-blue: #0a84ff;
+    --accent-teal: #64d2ff;
+    --accent-purple: #bf5af2;
+    --accent-emerald: #30d158;
+    --accent-amber: #ff9f0a;
+    --accent-rose: #ff453a;
+    --shadow-card: 0 20px 44px -12px rgba(0, 0, 0, 0.65), inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+    --shadow-hover: 0 24px 52px -10px rgba(0, 0, 0, 0.75), inset 0 1px 0 0 rgba(255, 255, 255, 0.18);
+    --spring: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  html.theme-light {
+    color-scheme: light;
+    --bg-canvas: #f5f5f7;
+    --bg-elevated: rgba(255, 255, 255, 0.82);
+    --bg-card: rgba(255, 255, 255, 0.88);
+    --bg-card-solid: #ffffff;
+    --bg-subcard: rgba(242, 242, 247, 0.85);
+    --bg-glass-nav: rgba(248, 248, 252, 0.82);
+    --border-hairline: rgba(0, 0, 0, 0.08);
+    --border-highlight: rgba(0, 0, 0, 0.14);
+    --text-primary: #1d1d1f;
+    --text-secondary: #515154;
+    --text-tertiary: #86868b;
+    --shadow-card: 0 12px 32px -8px rgba(0, 0, 0, 0.07), inset 0 1px 0 0 rgba(255, 255, 255, 0.9);
+    --shadow-hover: 0 18px 40px -8px rgba(0, 0, 0, 0.12), inset 0 1px 0 0 rgba(255, 255, 255, 1);
+  }
+
+  html {
+    scroll-padding-top: calc(var(--hdr) + 14px);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--bg-canvas);
+    background-image:
+      radial-gradient(ellipse 80% 50% at 15% -10%, rgba(10, 132, 255, 0.16), transparent 60%),
+      radial-gradient(ellipse 70% 45% at 85% 5%, rgba(191, 90, 242, 0.12), transparent 60%),
+      radial-gradient(ellipse 60% 40% at 50% 100%, rgba(48, 209, 88, 0.08), transparent 60%);
+    background-attachment: fixed;
+    color: var(--text-primary);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: -0.011em;
+    transition: background-color 0.4s var(--spring), color 0.3s var(--spring);
+  }
+
+  h1, h2, h3, h4 {
+    letter-spacing: -0.024em;
+    font-weight: 650;
+  }
+
+  .font-mono {
+    font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+  }
+
+  header {
+    background: var(--bg-glass-nav) !important;
+    -webkit-backdrop-filter: saturate(190%) blur(28px) !important;
+    backdrop-filter: saturate(190%) blur(28px) !important;
+    border-bottom: 1px solid var(--border-hairline) !important;
+    box-shadow: 0 4px 24px -4px rgba(0, 0, 0, 0.28);
+    transition: background 0.35s var(--spring);
+  }
+
+  #mainNav {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border-hairline);
+    border-radius: 14px;
+    padding: 4px !important;
+    gap: 4px !important;
+    margin-bottom: 8px;
+  }
+  html.theme-light #mainNav {
+    background: rgba(0, 0, 0, 0.045);
+  }
+
+  #mainNav button {
+    border-radius: 10px !important;
+    border-bottom: none !important;
+    transition: all 0.28s var(--spring) !important;
+    position: relative;
+    font-weight: 500;
+  }
+  #mainNav button:hover { transform: translateY(-1px); }
+  #mainNav button:active { transform: scale(0.97); }
+  #mainNav button.tab-btn-active {
+    background: rgba(10, 132, 255, 0.22) !important;
+    color: #64d2ff !important;
+    box-shadow: 0 2px 10px rgba(10, 132, 255, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.22);
+    font-weight: 600 !important;
+  }
+  html.theme-light #mainNav button.tab-btn-active {
+    background: #ffffff !important;
+    color: #0066cc !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .bg-slate-900 {
+    background: var(--bg-elevated) !important;
+    -webkit-backdrop-filter: saturate(160%) blur(22px);
+    backdrop-filter: saturate(160%) blur(22px);
+    border-color: var(--border-hairline) !important;
+    border-radius: 22px !important;
+    box-shadow: var(--shadow-card);
+    transition: transform 0.35s var(--spring), box-shadow 0.35s var(--spring), border-color 0.3s ease;
+  }
+
+  .bg-slate-950 {
+    background: var(--bg-card) !important;
+    border-color: var(--border-hairline) !important;
+    border-radius: 18px !important;
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.06);
+    transition: transform 0.3s var(--spring), box-shadow 0.3s var(--spring), border-color 0.25s ease;
+  }
+  .bg-slate-950:hover {
+    border-color: var(--border-highlight) !important;
+  }
+
+  html.theme-light .text-white { color: #1d1d1f !important; }
+  html.theme-light .text-slate-100,
+  html.theme-light .text-slate-200,
+  html.theme-light .text-slate-300 { color: #2c2c2e !important; }
+  html.theme-light .text-slate-400 { color: #515154 !important; }
+  html.theme-light .text-slate-500 { color: #6e6e73 !important; }
+  html.theme-light .bg-slate-800,
+  html.theme-light .bg-slate-800\/50 { background-color: rgba(0, 0, 0, 0.05) !important; color: #1d1d1f !important; border-color: rgba(0,0,0,0.12) !important; }
+  html.theme-light .bg-sky-950\/40,
+  html.theme-light .bg-sky-950\/30,
+  html.theme-light .bg-sky-950 { background-color: rgba(10, 132, 255, 0.1) !important; color: #004080 !important; border-color: rgba(10, 132, 255, 0.28) !important; }
+  html.theme-light .bg-purple-950\/30,
+  html.theme-light .bg-purple-950 { background-color: rgba(175, 82, 222, 0.1) !important; color: #581c87 !important; border-color: rgba(175, 82, 222, 0.28) !important; }
+  html.theme-light .bg-emerald-950\/30,
+  html.theme-light .bg-emerald-950 { background-color: rgba(48, 209, 88, 0.12) !important; color: #065f46 !important; border-color: rgba(48, 209, 88, 0.3) !important; }
+  html.theme-light .bg-amber-950\/40,
+  html.theme-light .bg-amber-950\/30,
+  html.theme-light .bg-amber-950 { background-color: rgba(255, 159, 10, 0.13) !important; color: #78350f !important; border-color: rgba(255, 159, 10, 0.35) !important; }
+  html.theme-light .bg-rose-950\/40,
+  html.theme-light .bg-rose-950\/30,
+  html.theme-light .bg-rose-950 { background-color: rgba(255, 69, 58, 0.1) !important; color: #881337 !important; border-color: rgba(255, 69, 58, 0.28) !important; }
+  html.theme-light .text-sky-200, html.theme-light .text-sky-300, html.theme-light .text-sky-400 { color: #0055b3 !important; }
+  html.theme-light .text-amber-200, html.theme-light .text-amber-300, html.theme-light .text-amber-400 { color: #92400e !important; }
+  html.theme-light .text-rose-200, html.theme-light .text-rose-300, html.theme-light .text-rose-400 { color: #9f1239 !important; }
+  html.theme-light .text-emerald-300, html.theme-light .text-emerald-400 { color: #047857 !important; }
+  html.theme-light .text-purple-300, html.theme-light .text-purple-400 { color: #6b21a8 !important; }
+  html.theme-light .text-cyan-200, html.theme-light .text-cyan-300, html.theme-light .text-cyan-400 { color: #0e7490 !important; }
+
+  @keyframes appleStageIn {
+    0% { opacity: 0; transform: translateY(10px) scale(0.992); filter: blur(4px); }
+    100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+  }
+  .tab-panel { display: none; }
+  .tab-panel.active {
+    display: block;
+    animation: appleStageIn 0.42s var(--spring) forwards;
+  }
+  .engine-module { display: none; }
+  .engine-module.active {
+    display: block;
+    animation: appleStageIn 0.34s var(--spring) forwards;
+  }
+  .onum-card, .hrx-card, .cell-card, .elec-card {
+    animation: appleStageIn 0.3s var(--spring) forwards;
+  }
+
+  .blur-answer {
+    filter: blur(5.5px);
+    cursor: pointer;
+    transition: filter 0.28s var(--spring), background-color 0.28s ease, transform 0.2s var(--spring), box-shadow 0.25s ease;
+    user-select: none;
+    border: 1px solid rgba(100, 210, 255, 0.22);
+    padding: 1px 7px !important;
+    border-radius: 7px !important;
+  }
+  .blur-answer:hover {
+    filter: blur(2.5px);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(10, 132, 255, 0.2);
+  }
+  .blur-answer.revealed {
+    filter: blur(0);
+    cursor: pointer;
+    user-select: text;
+    background: rgba(48, 209, 88, 0.16) !important;
+    border-color: rgba(48, 209, 88, 0.45) !important;
+    box-shadow: 0 0 0 1px rgba(48, 209, 88, 0.15);
+  }
+
+  .mode-pill {
+    cursor: pointer;
+    transition: all 0.26s var(--spring);
+    border-radius: 9999px;
+    backdrop-filter: blur(10px);
+  }
+  .mode-pill:hover { transform: translateY(-1px); }
+  .mode-pill:active { transform: scale(0.96); }
+  .mode-pill.active {
+    background: linear-gradient(135deg, rgba(10, 132, 255, 0.26), rgba(100, 210, 255, 0.14)) !important;
+    color: #7dd3fc !important;
+    border-color: rgba(100, 210, 255, 0.65) !important;
+    box-shadow: 0 4px 14px -2px rgba(10, 132, 255, 0.35), inset 0 1px 0 rgba(255,255,255,0.2);
+  }
+
+  details > summary {
+    cursor: pointer;
+    list-style: none;
+    transition: background-color 0.2s ease;
+    border-radius: 14px;
+  }
+  details > summary::-webkit-details-marker { display: none; }
+  details[open] > summary {
+    border-bottom: 1px solid var(--border-hairline);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 10px;
+    border-radius: 9999px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.12);
+  }
+
+  .katex { font-size: 1.05em; }
   .num-card { font-variant-numeric: tabular-nums; }
-  input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner-spin-button { -webkit-appearance:none; margin:0; }
-  input[type=number] { -moz-appearance:textfield; }
-  .edot { font-size:10px; line-height:1; letter-spacing:-1px; }
-  .katex-block{overflow-x:auto;overflow-y:hidden}
-  .katex-block .katex-display{text-align:left;margin:.35em 0}
-  /* ══ MOBILE UX LAYER (chrome-only) ══ */
-  :root{--hdr:120px}
-  html{scroll-padding-top:calc(var(--hdr) + 10px)}
-  .toc-strip{display:none;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:2px 0 6px;margin-bottom:2px}
-  .toc-strip::-webkit-scrollbar{display:none}
-  .toc-chip{flex-shrink:0;font-size:10px;line-height:1;padding:7px 11px;border-radius:9999px;border:1px solid rgba(51,65,85,.9);background:rgba(15,23,42,.85);color:#94a3b8;font-weight:600;white-space:nowrap;cursor:pointer}
-  #backTop{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:70;width:44px;height:44px;border-radius:9999px;border:1px solid rgba(56,189,248,.35);background:rgba(8,14,26,.92);color:#7dd3fc;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transform:translateY(8px);transition:opacity .25s,transform .25s}
-  #backTop.show{opacity:1;pointer-events:auto;transform:none}
-  #scrollProg{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,#0ea5e9,#38bdf8);z-index:80;pointer-events:none}
+  input[type=number]::-webkit-outer-spin-button,
+  input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  input[type=number] { -moz-appearance: textfield; }
+  .katex-block { overflow-x: auto; overflow-y: hidden; }
+  .katex-block .katex-display { text-align: left; margin: .35em 0; }
+
+  .apple-sim-panel {
+    background: linear-gradient(165deg, rgba(20, 24, 38, 0.85), rgba(12, 15, 26, 0.92));
+    border: 1px solid rgba(100, 210, 255, 0.22);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 18px 40px -12px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  }
+  html.theme-light .apple-sim-panel {
+    background: linear-gradient(165deg, rgba(255, 255, 255, 0.95), rgba(240, 246, 255, 0.92));
+    border-color: rgba(10, 132, 255, 0.25);
+    box-shadow: 0 14px 32px -10px rgba(10, 132, 255, 0.12);
+  }
+
+  .apple-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 7px 14px;
+    transition: all 0.24s var(--spring);
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(255, 255, 255, 0.07);
+    color: var(--text-primary);
+  }
+  .apple-btn:hover {
+    background: rgba(255, 255, 255, 0.13);
+    transform: translateY(-1px);
+  }
+  .apple-btn:active { transform: scale(0.97); }
+  .apple-btn-primary {
+    background: linear-gradient(180deg, #1e90ff 0%, #0071e3 100%);
+    color: #ffffff !important;
+    border-color: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 4px 14px rgba(0, 113, 227, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  }
+  .apple-btn-primary:hover {
+    background: linear-gradient(180deg, #339dff 0%, #0a7ff0 100%);
+    box-shadow: 0 6px 18px rgba(0, 113, 227, 0.55);
+  }
+
+  input[type=range].apple-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 6px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #ff453a, #ff9f0a, #30d158, #0a84ff, #bf5af2);
+    outline: none;
+  }
+  input[type=range].apple-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 2px solid #0a84ff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+    cursor: grab;
+    transition: transform 0.18s var(--spring);
+  }
+  input[type=range].apple-slider::-webkit-slider-thumb:active {
+    transform: scale(1.15);
+    cursor: grabbing;
+  }
+
+  .quiz-self-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px dashed var(--border-hairline);
+    font-size: 11px;
+  }
+
+  #cmdModal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: rgba(0, 0, 0, 0.58);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 10vh;
+  }
+  #cmdModal.open {
+    display: flex;
+    animation: appleStageIn 0.22s var(--spring) forwards;
+  }
+
+  .toc-strip { display: none; gap: 6px; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 2px 0 6px; margin-bottom: 2px; }
+  .toc-strip::-webkit-scrollbar { display: none; }
+  .toc-chip { flex-shrink: 0; font-size: 10px; line-height: 1; padding: 7px 11px; border-radius: 9999px; border: 1px solid var(--border-hairline); background: var(--bg-card); color: var(--text-secondary); font-weight: 600; white-space: nowrap; cursor: pointer; transition: all 0.2s var(--spring); }
+  #backTop { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom)); z-index: 70; width: 44px; height: 44px; border-radius: 9999px; border: 1px solid rgba(100, 210, 255, 0.35); background: var(--bg-glass-nav); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); color: #7dd3fc; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transform: translateY(8px); transition: opacity .25s, transform .25s var(--spring); box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+  #backTop.show { opacity: 1; pointer-events: auto; transform: none; }
+  #scrollProg { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: linear-gradient(90deg, #0a84ff, #64d2ff, #30d158); z-index: 80; pointer-events: none; }
+
   @media (max-width:1023.98px){
-    header{background-color:rgba(2,6,23,.97)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;padding-top:env(safe-area-inset-top)}
-    #mainNav{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:4px}
-    #mainNav::-webkit-scrollbar{display:none}
-    #mainNav button{flex-shrink:0}
-    select,input[type="number"],input[type="text"]{font-size:16px!important}
-    #mainNav button{padding-top:10px;padding-bottom:10px}
-    .mode-pill{padding:8px 14px}
-    .toc-chip{padding:10px 12px}
-    .katex{font-size:1em}
-    .toc-strip{display:flex}
+    header { padding-top: env(safe-area-inset-top); }
+    #mainNav { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+    #mainNav::-webkit-scrollbar { display: none; }
+    #mainNav button { flex-shrink: 0; padding-top: 9px; padding-bottom: 9px; }
+    select, input[type="number"], input[type="text"] { font-size: 16px !important; }
+    .mode-pill { padding: 8px 14px; }
+    .toc-chip { padding: 10px 12px; }
+    .katex { font-size: 1em; }
+    .toc-strip { display: flex; }
   }
-  @media (max-width:767.98px){
-    .katex{font-size:.94em}
+  @media (prefers-reduced-motion:reduce){
+    .tab-panel.active, .engine-module.active { animation: none !important; }
+    .blur-answer, #backTop { transition: none !important; }
   }
-  @media (prefers-reduced-motion:reduce){.tab-panel.active{animation:none}
-    .blur-answer,#backTop{transition:none!important}}
 </style>
 </head>
 <body class="text-slate-200 min-h-screen">
@@ -64,14 +387,29 @@
   <div class="max-w-7xl mx-auto px-4 py-3">
     <div class="flex flex-wrap items-center justify-between gap-2">
       <div>
-        <h1 class="text-base sm:text-lg font-bold text-white leading-tight">HKDSE · Topic VII Master Studio</h1>
+        <div class="flex items-center gap-2.5"><div class="hidden sm:flex items-center gap-1.5 mr-1"><span class="w-2.5 h-2.5 rounded-full bg-[#ff5f56] inline-block shadow-sm"></span><span class="w-2.5 h-2.5 rounded-full bg-[#ffbd2e] inline-block shadow-sm"></span><span class="w-2.5 h-2.5 rounded-full bg-[#27c93f] inline-block shadow-sm"></span></div><h1 class="text-base sm:text-lg font-bold text-white leading-tight tracking-tight">HKDSE · Topic VII Master Studio — Redox, Chemical Cells &amp; Electrolysis</h1><span class="chip bg-sky-500/15 text-sky-300 border border-sky-400/30 text-[10px]">Interactive Studio Pro</span></div>
         <p class="text-[11px] text-slate-400 font-mono">Redox Reactions · Chemical Cells &amp; Electrolysis · Oxidation Numbers, Half-Equations, Fuel Cells, Preferential Discharge</p>
       </div>
-      <div class="flex gap-2 text-[10px] font-mono">
+      <div class="flex flex-wrap items-center gap-2 text-[10px] font-mono">
         <span class="chip bg-sky-950 text-sky-400 border border-sky-800">Strands (a)–(e)</span>
         <span class="chip bg-purple-950 text-purple-400 border border-purple-800">Paper 1A + 1B</span>
         <span class="chip bg-emerald-950 text-emerald-400 border border-emerald-800">C&amp;A Guide 2018</span>
-        <span class="chip bg-amber-950 text-amber-400 border border-amber-800">NTF 18/08/2018 depth caps</span>
+        <div class="flex items-center gap-2 ml-1 pl-2 border-l border-slate-700/70">
+          <button type="button" onclick="openCmdModal()" class="apple-btn !py-1 !px-2.5 text-[11px]" title="Quick Concept &amp; Past-Paper Search (⌘K)">
+            <span>🔍 Search</span>
+            <kbd class="px-1.5 py-0.5 text-[9px] rounded bg-slate-800 text-slate-300 border border-slate-700">⌘K</kbd>
+          </button>
+          <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-900/90 border border-slate-700/80" title="Concept Mastery Progress across Quiz &amp; Syllabus Checkpoints">
+            <svg class="w-4 h-4 -rotate-90" viewBox="0 0 36 36">
+              <circle cx="18" cy="18" r="15" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="3.8"></circle>
+              <circle id="masteryRingCircle" cx="18" cy="18" r="15" fill="none" stroke="#30d158" stroke-width="3.8" stroke-dasharray="94.2" stroke-dashoffset="94.2" stroke-linecap="round"></circle>
+            </svg>
+            <span id="masteryPctText" class="text-[11px] font-semibold text-emerald-400 num-card">0% Mastered</span>
+          </div>
+          <button type="button" id="themeToggleBtn" onclick="toggleAppleTheme()" class="apple-btn !py-1 !px-2.5 text-[11px]" title="Switch between Apple Pro Dark and Cupertino Daylight mode">
+            <span id="themeToggleIcon">☀️ Daylight</span>
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -295,6 +633,73 @@
   </div>
 </section>
 
+
+    <!-- ══ INTERACTIVE SYLLABUS AUDIT & CONCEPT READINESS MATRIX (EDB C&A Guide 2018 · Topic VII Strands a–e) ══ -->
+    <div class="mt-6 apple-sim-panel space-y-4" id="syllabus-audit-panel">
+      <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800/80 pb-3">
+        <div>
+          <span class="text-[10px] font-mono uppercase tracking-widest text-sky-400 font-bold">Interactive Syllabus Check-Off · EDB C&amp;A Guide (Topic VII Strands a–e)</span>
+          <h3 class="text-base font-bold text-white mt-0.5">HKDSE Topic VII Competency Checklist &amp; Direct Simulator Links</h3>
+          <p class="text-xs text-slate-400">Tick each official EDB learning outcome across Strands (a)–(e) and Part II depth caps (`NTF-2018 II-B VII (a)/(d)`) as you master it.</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <span id="sylAuditCount" class="chip bg-emerald-950 text-emerald-300 border border-emerald-700 font-mono">0 / 12 Outcomes Checked</span>
+          <button type="button" class="apple-btn text-xs" onclick="checkAllSyllabusOutcomes()">Check All</button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs" id="sylAuditGrid">
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">VII(a) · Primary vs. Secondary Cells (NTF VII(a))</b>Compare characteristics (voltage, rechargeability, size, capacity, price) of Zn-C, alkaline Mn, Ag₂O, Li-ion, NiMH &amp; lead-acid. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-cell');selectCell(10)">Inspect →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">VII(b) · Simple Chemical Cells &amp; Salt Bridge (CP 2012/2024)</b>Anode (−) oxidation → electrons in wire → cathode (+) reduction; salt bridge completes circuit by ion migration (never electrons!). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-cell');switchCellMode('map')">Cell Sim →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">VII(c) · Oxidation Numbers &amp; Agent Identification</b>Assign ON (peroxide O = −I, hydride H = −I); ON ↑ = oxidised = reducing agent; ON ↓ = reduced = oxidising agent (CP 2016 Q8 / 2024 Q3). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-onum');switchOnumMode('map')">Redox Lab →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">VII(c) · Common Oxidising &amp; Reducing Agents</b>$\text{MnO}_4^-/H^+$, $\text{Cr}_2\text{O}_7^{2-}/H^+$, $\text{Fe}^{3+}$, $\text{Cl}_2$, dilute/conc. $\text{HNO}_3$, conc. $\text{H}_2\text{SO}_4$ vs $\text{SO}_3^{2-}, \text{I}^-, \text{Fe}^{2+}, \text{Zn}$. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-onum');switchOnumMode('map')">Redox Lab →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">VII(c) · Balancing Half-Equations &amp; Overall Redox</b>4-station acidic balancing + alkaline fuel-cell balancing; cancel $\text{e}^-$ for overall ionic equation (CP 2014 Q9 / 2015 Q16 / 2023 Q2). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-hrx');switchHrxMode('map')">Balance Sim →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">VII(d) · Inert-Electrode Cells ($\text{Pt}|\text{Fe}^{2+},\text{Fe}^{3+}$)</b>Predict electrode polarity, electron flow, colour changes, and stoichiometric mole ratios (6 $\text{Fe}^{2+}$ : 1 $\text{Cr}_2\text{O}_7^{2-}$, CP 2015 Q16). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-cell');switchCellMode('map')">Cell Sim →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">VII(d) · Alkaline $\text{H}_2\text{–O}_2$ Fuel Cell (CP 2013/2025 Q9)</b>Anode: $\text{H}_2 + 2\text{OH}^- \to 2\text{H}_2\text{O} + 2\text{e}^-$ (never $\text{H}^+$ in KOH, CP 2025 Q9!); cathode: $\text{O}_2 + 2\text{H}_2\text{O} + 4\text{e}^- \to 4\text{OH}^-$; pros &amp; cons. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-cell');switchCellMode('map')">Fuel Cell Sim →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">VII(d) · Recharging Secondary Cells (CP 2016 Q15)</b>Recharge reverses discharge reaction; reduction occurs at the negative electrode ($\text{Cd(OH)}_2 + 2\text{e}^- \to \text{Cd} + 2\text{OH}^-$). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-cell');selectCell(9)">Inspect →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">VII(e) · Preferential Discharge (3 Factors · CP 2014/2025)</b>(1) Position in ECS, (2) Relative ion concentration (brine vs dilute $\text{NaCl}$, CP 2022 P2), (3) Nature of electrodes (Cu anode dissolves, CP 2021 Q2). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-elec');switchElecMode('map')">Electrolysis Sim →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">VII(e) · $\text{H}_2\text{SO}_4 / \text{Na}_2\text{SO}_4$, Brine &amp; $\text{CuSO}_4$ Cases</b>Universal indicator colour changes at anode (red) &amp; cathode (blue, CP 2025 Q6); 2:1 $\text{H}_2:\text{O}_2$ volume ratio; fading vs constant blue $\text{CuSO}_4$. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-elec');switchElecMode('map')">Electrolysis Sim →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">VII(e) · Electroplating &amp; Cu Purification (CP 2015/2023)</b>Object = cathode (−), plating metal = anode (+), single electrolyte bath (NO salt bridge, CP 2023 Q8!); electron-mole stoichiometry. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-elec');switchElecMode('map')">Plating Sim →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">VII(Synthesis) · Full-Mark Redox &amp; Cell Wording</b>Avoid fatal carrier/electrode traps and write full-mark HKEAA explanations. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-solver')">Grader →</button></span>
+        </label>
+      </div>
+    </div>
+
 <!-- ═══════════ TAB 2 · ENGINE A · OXIDATION NUMBERS & AGENTS ═══════════ -->
 <section id="tab-onum" class="tab-panel space-y-6">
   <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-sm">
@@ -438,6 +843,42 @@
           <p class="text-[11px] font-bold text-slate-300 uppercase tracking-wider mb-2">Syllabus agents at a glance</p>
           <div class="overflow-x-auto"><table class="w-full text-xs text-slate-300"><thead class="text-slate-400 uppercase tracking-wider text-[10px]"><tr><th class="p-2 text-left">Agent</th><th class="p-2 text-left">Changed into</th><th class="p-2 text-left">ON change</th><th class="p-2 text-left">Visible change</th></tr></thead><tbody class="divide-y divide-slate-800"><tr><td class="p-2 font-mono">acidified KMnO₄</td><td class="p-2 font-mono">Mn²⁺(aq)</td><td class="p-2">Mn +VII → +II</td><td class="p-2">purple → colourless</td></tr><tr><td class="p-2 font-mono">acidified K₂Cr₂O₇</td><td class="p-2 font-mono">Cr³⁺(aq)</td><td class="p-2">Cr +VI → +III</td><td class="p-2">orange → green</td></tr><tr><td class="p-2 font-mono">Fe³⁺(aq)</td><td class="p-2 font-mono">Fe²⁺(aq)</td><td class="p-2">Fe +III → +II</td><td class="p-2">yellow → pale green</td></tr><tr><td class="p-2 font-mono">Cl₂(aq)</td><td class="p-2 font-mono">Cl⁻(aq)</td><td class="p-2">Cl 0 → −I</td><td class="p-2">pale green → colourless; iodide → brown I₂</td></tr><tr><td class="p-2 font-mono">conc. HNO₃ / conc. H₂SO₄</td><td class="p-2 font-mono">NO₂ / SO₂</td><td class="p-2">N +V→+IV · S +VI→+IV</td><td class="p-2">brown gas / choking gas — never H₂</td></tr><tr><td class="p-2 font-mono">SO₃²⁻(aq) (agent → product)</td><td class="p-2 font-mono">SO₄²⁻(aq)</td><td class="p-2">S +IV → +VI</td><td class="p-2">decolourises acidified permanganate</td></tr><tr><td class="p-2 font-mono">I⁻(aq)</td><td class="p-2 font-mono">I₂ (brown in KI(aq), I₃⁻)</td><td class="p-2">I −I → 0</td><td class="p-2">colourless → brown solution</td></tr><tr><td class="p-2 font-mono">Fe²⁺(aq)</td><td class="p-2 font-mono">Fe³⁺(aq)</td><td class="p-2">Fe +II → +III</td><td class="p-2">pale green → yellow</td></tr><tr><td class="p-2 font-mono">Zn(s)</td><td class="p-2 font-mono">Zn²⁺(aq)</td><td class="p-2">Zn 0 → +II</td><td class="p-2">granules dissolve</td></tr></tbody></table></div>
         </div>
+        <!-- ══ INTERACTIVE SIMULATOR A1: REDOX REAGENT TEST-TUBE MIXER (CP 2013 Q22 · 2014 Q5/Q14 · 2016 Q8 · 2023 Q2) ══ -->
+        <div class="mt-6 apple-sim-panel space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+            <div>
+              <span class="text-[10px] font-mono text-sky-400 uppercase font-bold">Interactive Simulator · Strand (c) Concept Check (CP 2013 Q22 · CP 2014 Q5/Q14 · CP 2023 Q2)</span>
+              <h4 class="text-sm font-bold text-white mt-0.5">Virtual Redox Test-Tube Bench: Oxidising Agents × Reducing Agents</h4>
+              <p class="text-[11px] text-slate-400">Select an oxidising agent and a reducing agent below to inspect the live colour change, oxidation-number proof, and balanced ionic equation.</p>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+            <div>
+              <label class="block text-slate-400 mb-1 font-semibold">Select Oxidising Agent (Reduced · ON ↓):</label>
+              <select id="rxOxSel" onchange="updateRedoxMixerSim()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white">
+                <option value="kmno4" selected>1. Acidified KMnO₄(aq) (Purple MnO₄⁻ → Colourless Mn²⁺)</option>
+                <option value="k2cr2o7">2. Acidified K₂Cr₂O₇(aq) (Orange Cr₂O₇²⁻ → Green Cr³⁺)</option>
+                <option value="fe3">3. Iron(III) solution, Fe³⁺(aq) (Yellow/brown → Pale green Fe²⁺)</option>
+                <option value="cl2">4. Aqueous chlorine, Cl₂(aq) (Pale green → Colourless Cl⁻)</option>
+                <option value="conc_hno3">5. Concentrated HNO₃(aq) (Oxidising acid → Brown NO₂(g) · CP 2014 Q5)</option>
+                <option value="conc_h2so4">6. Concentrated H₂SO₄(l) (Oxidising acid → Choking SO₂(g) · CP 2014 Q5)</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-slate-400 mb-1 font-semibold">Select Reducing Agent (Oxidised · ON ↑):</label>
+              <select id="rxRedSel" onchange="updateRedoxMixerSim()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white">
+                <option value="so3" selected>1. Sulphite / SO₂(g), SO₃²⁻(aq) (Colourless → SO₄²⁻ · CP 2013 Q22 / 2023 Q2)</option>
+                <option value="i_minus">2. Iodide solution, I⁻(aq) (Colourless → Brown I₂(aq) / I₃⁻)</option>
+                <option value="fe2">3. Iron(II) solution, Fe²⁺(aq) (Pale green → Yellow/brown Fe³⁺)</option>
+                <option value="cu">4. Copper metal, Cu(s) (Reddish-brown solid → Blue Cu²⁺(aq))</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="redoxMixerOut" class="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2 text-xs text-slate-300 leading-relaxed"></div>
+        </div>
+
       </div>
     </div>
 
@@ -616,6 +1057,25 @@
           <p class="text-[11px] font-bold text-slate-300 uppercase tracking-wider mb-2">The equation-form table — answer the form that is asked</p>
           <div class="overflow-x-auto"><table class="w-full text-xs text-slate-300"><thead class="text-slate-400 uppercase tracking-wider text-[10px]"><tr><th class="p-2 text-left">If the stem says…</th><th class="p-2 text-left">…write</th><th class="p-2 text-left">Contains e⁻?</th><th class="p-2 text-left">CP reminder</th></tr></thead><tbody class="divide-y divide-slate-800"><tr><td class="p-2">“half equation at electrode X”</td><td class="p-2">one redox half, electrons explicit</td><td class="p-2">yes</td><td class="p-2">wrong electrode answered — CP 2015 Q7(e)</td></tr><tr><td class="p-2">“overall equation for the cell”</td><td class="p-2">halves added, electrons cancelled</td><td class="p-2">no</td><td class="p-2">complete instead of ionic — CP 2012 Q7</td></tr><tr><td class="p-2">“ionic equation for the reaction”</td><td class="p-2">reacting ions only, spectators out</td><td class="p-2">no</td><td class="p-2">half given instead — CP 2014 Q9</td></tr><tr><td class="p-2">“equation” (cell/electrolysis data)</td><td class="p-2">balanced formulae + state symbols</td><td class="p-2">no</td><td class="p-2">states carry marks — ms bank</td></tr></tbody></table></div>
         </div>
+        <!-- ══ INTERACTIVE SIMULATOR B1: 5-STATION REDOX EQUATION COMBINER (CP 2014 Q9 · 2015 Q16 · 2023 Q2 · 2025 Q9) ══ -->
+        <div class="mt-6 apple-sim-panel space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+            <div>
+              <span class="text-[10px] font-mono text-purple-400 uppercase font-bold">Interactive Simulator · Strand (c) Concept Check (CP 2014 Q9 · CP 2015 Q16 · CP 2023 Q2 · CP 2025 Q9)</span>
+              <h4 class="text-sm font-bold text-white mt-0.5">Step-by-Step Half-Equation &amp; Overall Ionic Equation Combiner</h4>
+              <p class="text-[11px] text-slate-400">Pick any high-yield HKDSE redox pair below to trace both half-equations, the electron-scaling multipliers, and the final cancelled ionic equation.</p>
+            </div>
+            <select id="combPairSel" onchange="updateCombSim()" class="bg-slate-900 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-white font-medium">
+              <option value="cr2o7_so2" selected>1. Acidified Cr₂O₇²⁻(aq) + SO₂(g) / SO₃²⁻(aq) (CP 2023 Q2)</option>
+              <option value="cr2o7_fe2">2. Acidified Cr₂O₇²⁻(aq) + Fe²⁺(aq) (6:1 Mole Ratio · CP 2015 Q16)</option>
+              <option value="mno4_so3">3. Acidified MnO₄⁻(aq) + SO₃²⁻(aq) (CP 2014 Q9)</option>
+              <option value="cu_dil_hno3">4. Cu(s) + Dilute HNO₃(aq) → Cu²⁺ + NO(g) (3:2 Ratio)</option>
+              <option value="fuel_alk">5. Alkaline H₂–O₂ Fuel Cell (KOH Electrolyte · CP 2025 Q9)</option>
+            </select>
+          </div>
+          <div id="combSimOut" class="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2 text-xs text-slate-300 leading-relaxed"></div>
+        </div>
+
       </div>
     </div>
 
@@ -811,6 +1271,24 @@
           <div class="overflow-x-auto"><table class="w-full text-xs text-slate-300"><thead class="text-slate-400 uppercase tracking-wider text-[10px]"><tr><th class="p-2 text-left">Cell</th><th class="p-2 text-left">Type</th><th class="p-2 text-left">Voltage</th><th class="p-2 text-left">Key characteristics</th><th class="p-2 text-left">Typical use &amp; justification</th></tr></thead><tbody class="divide-y divide-slate-800"><tr><td class="p-2 font-semibold text-white">zinc-carbon</td><td class="p-2">primary</td><td class="p-2">≈1.5 V</td><td class="p-2">cheapest; low capacity; can leak</td><td class="p-2">clocks, TV remotes — cheap, low drain</td></tr><tr><td class="p-2 font-semibold text-white">alkaline manganese</td><td class="p-2">primary</td><td class="p-2">1.5 V</td><td class="p-2">higher capacity, longer shelf life, steadier voltage</td><td class="p-2">cameras, torches — high drain</td></tr><tr><td class="p-2 font-semibold text-white">silver oxide</td><td class="p-2">primary</td><td class="p-2">≈1.5 V</td><td class="p-2">very small button, flat &amp; stable voltage</td><td class="p-2">watches, calculators — tiny, steady</td></tr><tr><td class="p-2 font-semibold text-white">lithium ion</td><td class="p-2">secondary</td><td class="p-2">≈3.6–3.7 V</td><td class="p-2">light, high capacity per mass, rechargeable</td><td class="p-2">phones, laptops — recharge, portability</td></tr><tr><td class="p-2 font-semibold text-white">NiMH</td><td class="p-2">secondary</td><td class="p-2">≈1.2 V</td><td class="p-2">rechargeable, high capacity, robust</td><td class="p-2">hybrid vehicles, camera packs</td></tr><tr><td class="p-2 font-semibold text-white">lead-acid accumulator</td><td class="p-2">secondary</td><td class="p-2">≈2 V/cell (12 V)</td><td class="p-2">delivers very large current; heavy; cheap per amp-hour</td><td class="p-2">car starting — huge surge current</td></tr></tbody></table></div>
         </div>
         <div class="mt-4 p-4 bg-rose-950/30 border border-rose-800/60 rounded-lg text-xs text-rose-200 leading-relaxed">⛔ Depth banner: structures &amp; working principles of all six cells “are not expected” <span class="font-mono text-[10px]">(NTF-2018 II-B VII (a))</span> — table entries are characteristics for justification questions only.</div>
+        <!-- ══ INTERACTIVE SIMULATOR C1: GALVANIC HALF-CELL, SALT BRIDGE & ALKALINE FUEL-CELL STUDIO (CP 2012 Q3 · 2015 Q16 · 2016 Q15 · 2024 Q3 · 2025 Q9) ══ -->
+        <div class="mt-6 apple-sim-panel space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+            <div>
+              <span class="text-[10px] font-mono text-emerald-400 uppercase font-bold">Interactive Simulator · Strand (b)+(d) Concept Check (CP 2012 Q3 · CP 2016 Q15 · CP 2024 Q3 · CP 2025 Q9)</span>
+              <h4 class="text-sm font-bold text-white mt-0.5">Interactive Chemical Cell, Salt-Bridge Carrier &amp; Alkaline Fuel-Cell Inspector</h4>
+              <p class="text-[11px] text-slate-400">Select a cell setup below to inspect the live SVG schematic, external electron flow, internal ion migration, and electrode half-equations.</p>
+            </div>
+            <select id="cellSimSel" onchange="updateCellSim()" class="bg-slate-900 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-white font-medium">
+              <option value="mn_cu" selected>1. Mn|Mn²⁺(aq) || Cu²⁺(aq)|Cu Cell (CP 2024 Q3)</option>
+              <option value="fe_cr2o7">2. Pt|Fe²⁺,Fe³⁺ || Cr₂O₇²⁻,Cr³⁺,H⁺|Pt Inert-Electrode Cell (CP 2015 Q16)</option>
+              <option value="fuel_cell">3. Alkaline H₂–O₂ Fuel Cell with Conc. KOH(aq) (CP 2025 Q9)</option>
+              <option value="nicd_recharge">4. Recharging a Secondary Ni–Cd Cell (Reverse Direction · CP 2016 Q15)</option>
+            </select>
+          </div>
+          <div id="cellSimOut" class="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2 text-xs text-slate-300 leading-relaxed"></div>
+        </div>
+
       </div>
     </div>
 
@@ -1011,6 +1489,25 @@
           <p class="text-[11px] font-bold text-slate-300 uppercase tracking-wider mb-2">Gas tests strip</p>
           <p class="text-xs text-slate-300"><b>Hydrogen:</b> lighted splint — pop. <b>Oxygen:</b> glowing splint — relights. <b>Chlorine:</b> damp blue litmus — bleaches (pale green gas). <b>Bromine:</b> reddish-brown gas/fumes. <b>Iodine:</b> brown solution in excess iodide ($\text{I}_{3}^{-}$ wording) <i>(ms bank; CP 2016 Q8; CP 2013)</i>.</p>
         </div>
+        <!-- ══ INTERACTIVE SIMULATOR D1: ELECTROLYSIS, UNIVERSAL-INDICATOR Na₂SO₄ & ELECTROPLATING DEBUGGER (CP 2013 · 2015 Q7 · 2021 Q2 · 2022 P2 · 2023 Q8 · 2025 Q6) ══ -->
+        <div class="mt-6 apple-sim-panel space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+            <div>
+              <span class="text-[10px] font-mono text-amber-400 uppercase font-bold">Interactive Simulator · Strand (e) Concept Check (CP 2015 Q7 · CP 2021 Q2 · CP 2022 P2 · CP 2023 Q8 · CP 2025 Q6)</span>
+              <h4 class="text-sm font-bold text-white mt-0.5">Interactive Electrolysis &amp; Electroplating Case Inspector</h4>
+              <p class="text-[11px] text-slate-400">Select any of the 5 classic HKDSE electrolysis setups to inspect the 4-ion inventory, comparative preferential-discharge explanation, electrode observations, and solution pH/colour changes.</p>
+            </div>
+            <select id="elecCaseSel" onchange="updateElecCaseSim()" class="bg-slate-900 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-white font-medium">
+              <option value="na2so4_ui" selected>1. Na₂SO₄(aq) + Universal Indicator with Pt Electrodes (CP 2025 Q6)</option>
+              <option value="brine_membrane">2. Concentrated NaCl(aq) (Brine) in Membrane Cell (CP 2013 / CP 2022 P2)</option>
+              <option value="cuso4_graphite">3. CuSO₄(aq) with Graphite/Pt Electrodes (Blue Fades + Acidifies)</option>
+              <option value="cuso4_cu">4. CuSO₄(aq) with Copper Electrodes (Blue Unchanged · CP 2015 Q7 / 2021 Q2)</option>
+              <option value="ni_plating">5. Nickel Electroplating Setup &amp; Diagram Traps (CP 2023 Q8)</option>
+            </select>
+          </div>
+          <div id="elecCaseOut" class="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2 text-xs text-slate-300 leading-relaxed"></div>
+        </div>
+
       </div>
     </div>
 
@@ -1157,6 +1654,45 @@
         <button class="w-full bg-rose-700 hover:bg-rose-600 text-white text-xs font-semibold py-1.5 px-2 rounded-md" onclick="solverDischarge()">Predict the products</button>
         <div id="svDOut" aria-live="polite" class="text-xs text-emerald-300 font-mono min-h-[20px] leading-relaxed"></div>
         <p class="text-[10px] text-slate-500 leading-relaxed">Rules encoded: cation lower in the electrochemical series is discharged; metals above hydrogen release H₂ from aqueous solution; concentrated halide beats OH⁻ at the anode; sulfate / nitrate never discharge in water; a copper anode dissolves instead <i>(ms summary §7.3; CP 2014 Q8; CP 2015 Q7)</i>.</p>
+      </div>
+    </div>
+
+    
+    <!-- ══ BENCH 6 · LIVE HKEAA MARK-SCHEME KEYWORD GRADER (TOPIC VII EDITION) ══ -->
+    <div class="mt-6 apple-sim-panel space-y-4">
+      <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+        <div>
+          <span class="text-[10px] font-mono text-sky-400 uppercase font-bold px-2 py-0.5 bg-sky-950 rounded border border-sky-800">Bench 6 · Interactive Examiner Grader</span>
+          <h3 class="text-base font-bold text-white mt-1">Practice Writing Full-Mark Topic VII Answers — Instant `[1M]` &amp; `[NOT ACCEPT]` Diagnostic</h3>
+          <p class="text-xs text-slate-400">Select a high-frequency Paper 1B question below and type your answer. The engine checks your phrasing against official HKEAA mark-scheme rubrics and flags fatal carrier/electrode errors.</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 text-xs">
+        <div class="lg:col-span-1 space-y-2.5">
+          <label for="graderQSelect" class="block text-slate-300 font-semibold">Select HKDSE Exam Prompt:</label>
+          <select id="graderQSelect" onchange="loadGraderPrompt()" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white">
+            <option value="salt_bridge">Q1 (2 marks · CP 2012 Q3 / 2024 Q3): State TWO functions of a salt bridge in a chemical cell.</option>
+            <option value="fuel_cell_alk">Q2 (3 marks · CP 2013 / 2025 Q9): Write the half-equations at the anode and cathode of an alkaline H₂–O₂ fuel cell (with KOH electrolyte) and state one environmental advantage.</option>
+            <option value="na2so4_cathode">Q3 (3 marks · CP 2014 Q8 / 2025 Q6): In the electrolysis of Na₂SO₄(aq) containing universal indicator using Pt electrodes, explain the gas formed and indicator colour change at the cathode.</option>
+            <option value="brine_anode">Q4 (2 marks · CP 2013 / 2022 P2): Explain why chlorine gas instead of oxygen gas is produced at the anode during the electrolysis of concentrated NaCl(aq) (brine).</option>
+            <option value="cuso4_electrodes">Q5 (2 marks · CP 2015 Q7 / 2021 Q2): Compare the change in colour intensity of CuSO₄(aq) when electrolysed using graphite electrodes versus copper electrodes, and explain why.</option>
+            <option value="ox_agent_mno2">Q6 (2 marks · CP 2016 Q8): In the reaction 2MnO₂(s) + Zn(s) + 2NH₄⁺(aq) → Mn₂O₃(s) + Zn²⁺(aq) + 2NH₃(aq) + H₂O(l), identify the oxidising agent and explain in terms of oxidation number.</option>
+          </select>
+          <div id="graderPromptBox" class="p-3 rounded-xl bg-slate-950 border border-slate-800 text-slate-200 leading-relaxed"></div>
+        </div>
+
+        <div class="lg:col-span-2 space-y-3">
+          <textarea id="graderInput" rows="4" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-sky-500" placeholder="Type your exam explanation here..."></textarea>
+          <div class="flex flex-wrap gap-2">
+            <button type="button" onclick="gradeStudentAnswer()" class="apple-btn apple-btn-primary">✨ Grade My Answer Against Mark Scheme</button>
+            <button type="button" onclick="fillModelGraderAnswer()" class="apple-btn">Show Model Full-Mark Answer</button>
+            <button type="button" onclick="document.getElementById('graderInput').value='';document.getElementById('graderResultBox').innerHTML='Type an answer and click Grade.';" class="apple-btn">Clear</button>
+          </div>
+          <div id="graderResultBox" class="p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-300 space-y-2 leading-relaxed">
+            Type an answer above and click <b>Grade My Answer Against Mark Scheme</b> to see your mark breakdown and keyword hits.
+          </div>
+        </div>
       </div>
     </div>
 
@@ -1840,5 +2376,309 @@ else { try{ MOBILE_UX.init(); }catch(e){} }
   }catch(e){}
 })();
 </script>
+
+<!-- ═══════════ APPLE COMMAND PALETTE (⌘K) MODAL ═══════════ -->
+<div id="cmdModal" onclick="if(event.target===this)closeCmdModal()">
+  <div class="w-full max-w-xl mx-4 bg-slate-900 border border-slate-700/80 rounded-2xl shadow-2xl overflow-hidden">
+    <div class="flex items-center gap-3 px-4 py-3 border-b border-slate-800">
+      <span class="text-sky-400 text-sm">🔍</span>
+      <input id="cmdSearchInput" type="text" oninput="filterCmdList()" placeholder="Search oxidation numbers, half-equations, fuel cells, preferential discharge, electroplating, or CP year..." class="w-full bg-transparent text-sm text-white placeholder-slate-400 focus:outline-none">
+      <button type="button" onclick="closeCmdModal()" class="text-xs text-slate-400 hover:text-white px-2 py-0.5 rounded bg-slate-800">ESC</button>
+    </div>
+    <div id="cmdResults" class="max-h-80 overflow-y-auto divide-y divide-slate-800/70 p-2 text-xs"></div>
+  </div>
+</div>
+
+<script>
+function toggleAppleTheme(){
+  const root = document.documentElement;
+  const isLight = root.classList.toggle('theme-light');
+  const icon = document.getElementById('themeToggleIcon');
+  if(icon) icon.textContent = isLight ? '🌙 Pro Dark' : '☀️ Daylight';
+  try { localStorage.setItem('hkdse_topic7_theme', isLight ? 'light' : 'dark'); } catch(e){}
+}
+
+const quizMasteryState = {};
+function injectQuizSelfCheckBars(){
+  ['onumQuiz','hrxQuiz','cellQuiz','elecQuiz'].forEach(qid => {
+    const container = document.getElementById(qid);
+    if(!container) return;
+    const headerDiv = container.previousElementSibling;
+    if(headerDiv && !headerDiv.querySelector('.hide-all-btn')){
+      const btnWrap = document.createElement('div');
+      btnWrap.className = 'flex items-center gap-2';
+      const revBtn = headerDiv.querySelector('button');
+      if(revBtn){
+        revBtn.parentNode.insertBefore(btnWrap, revBtn);
+        btnWrap.appendChild(revBtn);
+        const hideBtn = document.createElement('button');
+        hideBtn.type = 'button';
+        hideBtn.className = 'hide-all-btn text-[11px] font-semibold text-slate-300 border border-slate-700 px-3 py-1 rounded-full hover:bg-slate-800';
+        hideBtn.textContent = 'Reset Blanks';
+        hideBtn.onclick = () => container.querySelectorAll('.blur-answer').forEach(b => b.classList.remove('revealed'));
+        btnWrap.appendChild(hideBtn);
+      }
+    }
+    [...container.children].forEach((row, idx) => {
+      if(row.querySelector('.quiz-self-bar')) return;
+      const key = qid + '_' + idx;
+      const bar = document.createElement('div');
+      bar.className = 'quiz-self-bar';
+      bar.innerHTML = `<span class="text-[10px] font-mono text-slate-400">Tap blurred chips above to check each keyword, then log your recall:</span>
+        <div class="flex items-center gap-1.5">
+          <button type="button" class="apple-btn !py-0.5 !px-2 text-[10px]" onclick="markQuizRow('${key}', true, this)">✓ Got It</button>
+          <button type="button" class="apple-btn !py-0.5 !px-2 text-[10px]" onclick="markQuizRow('${key}', false, this)">↻ Review Again</button>
+        </div>`;
+      row.appendChild(bar);
+    });
+  });
+}
+function markQuizRow(key, mastered, btnEl){
+  quizMasteryState[key] = mastered;
+  const buttons = btnEl.parentElement.querySelectorAll('button');
+  buttons[0].className = mastered ? 'apple-btn !py-0.5 !px-2 text-[10px] !bg-emerald-600/30 !border-emerald-500 !text-emerald-300' : 'apple-btn !py-0.5 !px-2 text-[10px]';
+  buttons[1].className = !mastered ? 'apple-btn !py-0.5 !px-2 text-[10px] !bg-amber-600/30 !border-amber-500 !text-amber-300' : 'apple-btn !py-0.5 !px-2 text-[10px]';
+  updateMasteryRing();
+}
+function checkAllSyllabusOutcomes(){
+  document.querySelectorAll('.syl-chk').forEach(c => c.checked = true);
+  updateMasteryRing();
+}
+function updateMasteryRing(){
+  const sylChks = [...document.querySelectorAll('.syl-chk')];
+  const sylDone = sylChks.filter(c => c.checked).length;
+  const sylTotal = sylChks.length || 12;
+  const sylBadge = document.getElementById('sylAuditCount');
+  if(sylBadge) sylBadge.textContent = `${sylDone} / ${sylTotal} Outcomes Checked`;
+  const quizDone = Object.values(quizMasteryState).filter(Boolean).length;
+  const pct = Math.round(((sylDone + quizDone) / (sylTotal + 42)) * 100);
+  const circle = document.getElementById('masteryRingCircle');
+  const txt = document.getElementById('masteryPctText');
+  if(circle) circle.style.strokeDashoffset = String(94.2 - (94.2 * pct) / 100);
+  if(txt) txt.textContent = `${pct}% Mastered`;
+}
+
+/* 1. Redox Reagent Mixer Sim */
+function updateRedoxMixerSim(){
+  const ox = document.getElementById('rxOxSel').value;
+  const red = document.getElementById('rxRedSel').value;
+  const out = document.getElementById('redoxMixerOut');
+  if(!out) return;
+  const key = ox + '_' + red;
+  const SPECIAL = {
+    kmno4_so3: '<b>Acidified $\text{KMnO}_4(aq)$ + $\text{SO}_3^{2-}(aq)$ (CP 2013 Q22 / CP 2014 Q9):</b><br>• <b>Observation:</b> Purple acidified $\text{KMnO}_4(aq)$ is <b>decolourised (turns from purple to colourless)</b>.<br>• <b>Oxidation Numbers:</b> Mn decreases from $+7$ in $\text{MnO}_4^-$ to $+2$ in $\text{Mn}^{2+}$ (oxidising agent); S increases from $+4$ in $\text{SO}_3^{2-}$ to $+6$ in $\text{SO}_4^{2-}$ (reducing agent).<br>• <b>Overall Ionic Equation:</b> $2\text{MnO}_4^-(aq) + 5\text{SO}_3^{2-}(aq) + 6\text{H}^+(aq) \rightarrow 2\text{Mn}^{2+}(aq) + 5\text{SO}_4^{2-}(aq) + 3\text{H}_2\text{O}(l)$.',
+    k2cr2o7_so3: '<b>Acidified $\text{K}_2\text{Cr}_2\text{O}_7(aq)$ + $\text{SO}_3^{2-}(aq) / \text{SO}_2(g)$ (CP 2023 Q2):</b><br>• <b>Observation:</b> Solution changes from <b>orange to green</b>.<br>• <b>Oxidation Numbers:</b> Cr decreases from $+6$ in $\text{Cr}_2\text{O}_7^{2-}$ to $+3$ in $\text{Cr}^{3+}$; S increases from $+4$ to $+6$.<br>• <b>Overall Ionic Equation (CP 2023 Q2):</b> $\text{Cr}_2\text{O}_7^{2-}(aq) + 3\text{SO}_2(g) + 2\text{H}^+(aq) \rightarrow 2\text{Cr}^{3+}(aq) + 3\text{SO}_4^{2-}(aq) + \text{H}_2\text{O}(l)$.',
+    k2cr2o7_fe2: '<b>Acidified $\text{K}_2\text{Cr}_2\text{O}_7(aq)$ + $\text{Fe}^{2+}(aq)$ (CP 2015 Q16):</b><br>• <b>Observation:</b> Orange dichromate turns green/brownish-yellow.<br>• <b>Mole Ratio (CP 2015 Q16):</b> <b>$6\text{ mol Fe}^{2+} : 1\text{ mol Cr}_2\text{O}_7^{2-}$</b>.<br>• <b>Overall Ionic Equation:</b> $\text{Cr}_2\text{O}_7^{2-}(aq) + 14\text{H}^+(aq) + 6\text{Fe}^{2+}(aq) \rightarrow 2\text{Cr}^{3+}(aq) + 6\text{Fe}^{3+}(aq) + 7\text{H}_2\text{O}(l)$.',
+    conc_hno3_cu: '<b>Concentrated $\text{HNO}_3(aq)$ + $\text{Cu}(s)$ (CP 2014 Q5):</b><br>• <b>Observation:</b> Copper dissolves to form a <b>blue solution</b> ($\text{Cu}^{2+}(aq)$) and evolves toxic <b>brown fumes of $\text{NO}_2(g)$</b> (NEVER $\text{H}_2(g)$ — CP 2014 Q5!).<br>• <b>Overall Ionic Equation:</b> $\text{Cu}(s) + 2\text{NO}_3^-(aq) + 4\text{H}^+(aq) \rightarrow \text{Cu}^{2+}(aq) + 2\text{NO}_2(g) + 2\text{H}_2\text{O}(l)$.',
+    conc_h2so4_cu: '<b>Hot Concentrated $\text{H}_2\text{SO}_4(l)$ + $\text{Cu}(s)$ (CP 2014 Q5):</b><br>• <b>Observation:</b> Copper dissolves to give a blue solution and evolves colourless <b>choking fumes of $\text{SO}_2(g)$</b> (NEVER $\text{H}_2(g)$!).<br>• <b>Equation:</b> $\text{Cu}(s) + 2\text{H}_2\text{SO}_4(l) \rightarrow \text{CuSO}_4(aq) + \text{SO}_2(g) + 2\text{H}_2\text{O}(l)$.'
+  };
+  if(SPECIAL[key]){ out.innerHTML = SPECIAL[key]; safeInitKaTeX(); return; }
+  const oxNames = {
+    kmno4: 'Acidified $\text{MnO}_4^-(aq)$ (purple $\rightarrow$ colourless $\text{Mn}^{2+}$, Mn $+7 \rightarrow +2$)',
+    k2cr2o7: 'Acidified $\text{Cr}_2\text{O}_7^{2-}(aq)$ (orange $\rightarrow$ green $\text{Cr}^{3+}$, Cr $+6 \rightarrow +3$)',
+    fe3: '$\text{Fe}^{3+}(aq)$ (yellow/brown $\rightarrow$ pale green $\text{Fe}^{2+}$, Fe $+3 \rightarrow +2$)',
+    cl2: '$\text{Cl}_2(aq)$ (pale green $\rightarrow$ colourless $\text{Cl}^-$, Cl $0 \rightarrow -1$)',
+    conc_hno3: 'Concentrated $\text{HNO}_3(aq)$ (reduced to brown $\text{NO}_2(g)$, N $+5 \rightarrow +4$)',
+    conc_h2so4: 'Concentrated $\text{H}_2\text{SO}_4(l)$ (reduced to choking $\text{SO}_2(g)$, S $+6 \rightarrow +4$)'
+  };
+  const redNames = {
+    so3: '$\text{SO}_3^{2-}(aq)$ (oxidised to colourless $\text{SO}_4^{2-}(aq)$, S $+4 \rightarrow +6$)',
+    i_minus: '$\text{I}^-(aq)$ (oxidised to brown $\text{I}_2(aq) / \text{I}_3^-(aq)$, I $-1 \rightarrow 0$)',
+    fe2: '$\text{Fe}^{2+}(aq)$ (pale green $\rightarrow$ yellow/brown $\text{Fe}^{3+}(aq)$, Fe $+2 \rightarrow +3$)',
+    cu: '$\text{Cu}(s)$ (reddish-brown solid dissolves $\rightarrow$ blue $\text{Cu}^{2+}(aq)$, Cu $0 \rightarrow +2$)'
+  };
+  out.innerHTML = `<b>Oxidising Agent (Reduced):</b> ${oxNames[ox]}<br><b>Reducing Agent (Oxidised):</b> ${redNames[red]}<br><b>Rule Check:</b> Combine both half-equations by scaling electrons lost = electrons gained, and include state symbols!`;
+  safeInitKaTeX();
+}
+
+/* 2. 5-Station Equation Combiner */
+const COMB_SIM_DATA = {
+  cr2o7_so2: '<b>Acidified $\text{Cr}_2\text{O}_7^{2-}(aq) + \text{SO}_2(g)$ (CP 2023 Q2):</b><br>• <b>Reduction Half ($\times 1$):</b> $\text{Cr}_2\text{O}_7^{2-}(aq) + 14\text{H}^+(aq) + 6\text{e}^- \rightarrow 2\text{Cr}^{3+}(aq) + 7\text{H}_2\text{O}(l)$<br>• <b>Oxidation Half ($\times 3$):</b> $3 \times [\text{SO}_2(g) + 2\text{H}_2\text{O}(l) \rightarrow \text{SO}_4^{2-}(aq) + 4\text{H}^+(aq) + 2\text{e}^-]$<br>• <b>Cancel $6\text{e}^-$, $12\text{H}^+$ and $6\text{H}_2\text{O}$:</b> $\text{Cr}_2\text{O}_7^{2-}(aq) + 3\text{SO}_2(g) + 2\text{H}^+(aq) \rightarrow 2\text{Cr}^{3+}(aq) + 3\text{SO}_4^{2-}(aq) + \text{H}_2\text{O}(l)$.',
+  cr2o7_fe2: '<b>Acidified $\text{Cr}_2\text{O}_7^{2-}(aq) + \text{Fe}^{2+}(aq)$ (CP 2015 Q16):</b><br>• <b>Reduction Half ($\times 1$):</b> $\text{Cr}_2\text{O}_7^{2-}(aq) + 14\text{H}^+(aq) + 6\text{e}^- \rightarrow 2\text{Cr}^{3+}(aq) + 7\text{H}_2\text{O}(l)$<br>• <b>Oxidation Half ($\times 6$):</b> $6\text{Fe}^{2+}(aq) \rightarrow 6\text{Fe}^{3+}(aq) + 6\text{e}^-$<br>• <b>Overall Ionic Equation (6:1 Ratio):</b> $\text{Cr}_2\text{O}_7^{2-}(aq) + 14\text{H}^+(aq) + 6\text{Fe}^{2+}(aq) \rightarrow 2\text{Cr}^{3+}(aq) + 6\text{Fe}^{3+}(aq) + 7\text{H}_2\text{O}(l)$.',
+  mno4_so3: '<b>Acidified $\text{MnO}_4^-(aq) + \text{SO}_3^{2-}(aq)$ (CP 2014 Q9):</b><br>• <b>Reduction Half ($\times 2$):</b> $2\text{MnO}_4^-(aq) + 16\text{H}^+(aq) + 10\text{e}^- \rightarrow 2\text{Mn}^{2+}(aq) + 8\text{H}_2\text{O}(l)$<br>• <b>Oxidation Half ($\times 5$):</b> $5\text{SO}_3^{2-}(aq) + 5\text{H}_2\text{O}(l) \rightarrow 5\text{SO}_4^{2-}(aq) + 10\text{H}^+(aq) + 10\text{e}^-$<br>• <b>Overall Ionic Equation:</b> $2\text{MnO}_4^-(aq) + 5\text{SO}_3^{2-}(aq) + 6\text{H}^+(aq) \rightarrow 2\text{Mn}^{2+}(aq) + 5\text{SO}_4^{2-}(aq) + 3\text{H}_2\text{O}(l)$.',
+  cu_dil_hno3: '<b>$\text{Cu}(s) + \text{Dilute HNO}_3(aq) \rightarrow \text{Cu}^{2+}(aq) + \text{NO}(g)$:</b><br>• <b>Oxidation Half ($\times 3$):</b> $3\text{Cu}(s) \rightarrow 3\text{Cu}^{2+}(aq) + 6\text{e}^-$<br>• <b>Reduction Half ($\times 2$):</b> $2\text{NO}_3^-(aq) + 8\text{H}^+(aq) + 6\text{e}^- \rightarrow 2\text{NO}(g) + 4\text{H}_2\text{O}(l)$<br>• <b>Overall Ionic Equation (3:2 Ratio):</b> $3\text{Cu}(s) + 2\text{NO}_3^-(aq) + 8\text{H}^+(aq) \rightarrow 3\text{Cu}^{2+}(aq) + 2\text{NO}(g) + 4\text{H}_2\text{O}(l)$.',
+  fuel_alk: '<b>Alkaline $\text{H}_2\text{–O}_2$ Fuel Cell (Concentrated $\text{KOH}(aq)$ Electrolyte · CP 2025 Q9):</b><br>• <b>Anode (−, Oxidation of Fuel · $\times 2$):</b> $\text{H}_2(g) + 2\text{OH}^-(aq) \rightarrow 2\text{H}_2\text{O}(l) + 2\text{e}^-$ (🚨 CP 2025 Q9 Trap: NEVER write $\text{H}_2 \rightarrow 2\text{H}^+ + 2\text{e}^-$ in an alkaline medium!)<br>• <b>Cathode (+, Reduction of $\text{O}_2$ · $\times 1$):</b> $\text{O}_2(g) + 2\text{H}_2\text{O}(l) + 4\text{e}^- \rightarrow 4\text{OH}^-(aq)$<br>• <b>Overall Cell Equation:</b> $2\text{H}_2(g) + \text{O}_2(g) \rightarrow 2\text{H}_2\text{O}(l)$.'
+};
+function updateCombSim(){
+  const k = document.getElementById('combPairSel').value;
+  const out = document.getElementById('combSimOut');
+  if(out && COMB_SIM_DATA[k]){ out.innerHTML = COMB_SIM_DATA[k]; safeInitKaTeX(); }
+}
+
+/* 3. Cell Sim */
+const CELL_SIM_DATA = {
+  mn_cu: '<b>$\text{Mn}(s)|\text{Mn}^{2+}(aq) \parallel \text{Cu}^{2+}(aq)|\text{Cu}(s)$ Cell (CP 2024 Q3):</b><br>• <b>Anode (Negative Electrode):</b> $\text{Mn}(s) \rightarrow \text{Mn}^{2+}(aq) + 2\text{e}^-$ ($\text{Mn}$ is the strongest reducing agent — never write "$\text{Mn}^{2+}$" or "$\text{Mn/Mn}^{2+}$" as the reducing agent, CP 2024 Q3!).<br>• <b>Cathode (Positive Electrode):</b> $\text{Cu}^{2+}(aq) + 2\text{e}^- \rightarrow \text{Cu}(s)$ (CP 2024 Q3 flagged candidates who confused anode with cathode and wrote the $\text{Mn}$ half-equation here!).<br>• <b>Salt Bridge Function:</b> Completes the circuit by <b>allowing ions to migrate</b> and maintains electrical neutrality (NEVER "allows electrons to pass through"!).',
+  fe_cr2o7: '<b>$\text{Pt}|\text{Fe}^{2+}(aq),\text{Fe}^{3+}(aq) \parallel \text{Cr}_2\text{O}_7^{2-}(aq),\text{Cr}^{3+}(aq),\text{H}^+(aq)|\text{Pt}$ Cell (CP 2015 Q16):</b><br>• <b>Negative Electrode (Anode):</b> $\text{Fe}^{2+}(aq) \rightarrow \text{Fe}^{3+}(aq) + \text{e}^-$ (solution changes from pale green to yellow/brown).<br>• <b>Positive Electrode (Cathode):</b> $\text{Cr}_2\text{O}_7^{2-}(aq) + 14\text{H}^+(aq) + 6\text{e}^- \rightarrow 2\text{Cr}^{3+}(aq) + 7\text{H}_2\text{O}(l)$ (orange to green).<br>• <b>Electron Flow &amp; Stoichiometry:</b> Electrons flow from the $\text{Fe}^{2+}/\text{Fe}^{3+}$ half-cell to the $\text{Cr}_2\text{O}_7^{2-}$ half-cell through the external wire; $6\text{ mol Fe}^{2+}$ react per $1\text{ mol Cr}_2\text{O}_7^{2-}$.',
+  fuel_cell: '<b>Alkaline $\text{H}_2\text{–O}_2$ Fuel Cell with Concentrated $\text{KOH}(aq)$ (CP 2025 Q9):</b><br>• <b>Anode (−):</b> $\text{H}_2(g) + 2\text{OH}^-(aq) \rightarrow 2\text{H}_2\text{O}(l) + 2\text{e}^-$ (never $\text{H}^+$ in alkaline medium!).<br>• <b>Cathode (+):</b> $\text{O}_2(g) + 2\text{H}_2\text{O}(l) + 4\text{e}^- \rightarrow 4\text{OH}^-(aq)$.<br>• <b>Role of $\text{KOH}(aq)$ vs Porous Pt/Ni Electrodes (CP 2025 Q9):</b> $\text{KOH}(aq)$ is the <b>electrolyte</b> (provides mobile $\text{OH}^-$ ions), whereas the porous Pt/Ni electrodes act as <b>electrical conductors and catalysts</b>!',
+  nicd_recharge: '<b>Recharging a Secondary Nickel–Cadmium (Ni–Cd) Cell (CP 2016 Q15):</b><br>• <b>Discharge Overall:</b> $2\text{NiO(OH)}(s) + \text{Cd}(s) + 2\text{H}_2\text{O}(l) \rightarrow 2\text{Ni(OH)}_2(s) + \text{Cd(OH)}_2(s)$.<br>• <b>Recharge Rule (CP 2016 Q15):</b> During recharge, the external d.c. supply forces the reaction in the <b>opposite direction</b>, and <b>reduction occurs at the negative electrode</b>: $\text{Cd(OH)}_2(s) + 2\text{e}^- \rightarrow \text{Cd}(s) + 2\text{OH}^-(aq)$.'
+};
+function updateCellSim(){
+  const k = document.getElementById('cellSimSel').value;
+  const out = document.getElementById('cellSimOut');
+  if(out && CELL_SIM_DATA[k]){ out.innerHTML = CELL_SIM_DATA[k]; safeInitKaTeX(); }
+}
+
+/* 4. Electrolysis Case Sim */
+const ELEC_CASE_DATA = {
+  na2so4_ui: '<b>1. Electrolysis of $\text{Na}_2\text{SO}_4(aq)$ with Universal Indicator using Pt Electrodes (CP 2025 Q6):</b><br>• <b>Ions Present:</b> $\text{Na}^+(aq), \text{H}^+(aq)$ and $\text{SO}_4^{2-}(aq), \text{OH}^-(aq)$.<br>• <b>At Cathode (−):</b> $\text{H}^+(aq)$ is lower in the ECS than $\text{Na}^+(aq)$ (a stronger oxidising agent) and is <b>preferentially discharged</b>: $2\text{H}^+(aq) + 2\text{e}^- \rightarrow \text{H}_2(g)$. Because $\text{H}^+$ is consumed, excess $\text{OH}^-(aq)$ remains near the cathode → universal indicator turns <b>blue / purple (alkaline)</b>.<br>• <b>At Anode (+):</b> $\text{OH}^-(aq)$ is preferentially discharged over $\text{SO}_4^{2-}(aq)$: $4\text{OH}^-(aq) \rightarrow \text{O}_2(g) + 2\text{H}_2\text{O}(l) + 4\text{e}^-$. Excess $\text{H}^+(aq)$ remains near the anode → indicator turns <b>red (acidic)</b>!',
+  brine_membrane: '<b>2. Electrolysis of Concentrated $\text{NaCl}(aq)$ (Brine) in a Membrane Cell (CP 2013 · CP 2022 P2):</b><br>• <b>At Anode (+):</b> Although $\text{OH}^-(aq)$ is a stronger reducing agent than $\text{Cl}^-(aq)$, the <b>concentration of $\text{Cl}^-(aq)$ is much higher than that of $\text{OH}^-(aq)$</b> (comparative sense required, CP 2022 P2!), so $\text{Cl}^-(aq)$ is preferentially discharged: $2\text{Cl}^-(aq) \rightarrow \text{Cl}_2(g) + 2\text{e}^-$.<br>• <b>Role of Ion-Selective Membrane (CP 2022 P2):</b> Allows $\text{Na}^+(aq)$ ions to pass through to the cathode compartment while <b>preventing $\text{Cl}^-(aq)$ ions (and $\text{Cl}_2$) from passing through</b>, ensuring pure $\text{NaOH}(aq)$ free of $\text{NaCl}$.',
+  cuso4_graphite: '<b>3. Electrolysis of $\text{CuSO}_4(aq)$ with Inert Graphite / Platinum Electrodes:</b><br>• <b>Cathode (−):</b> $\text{Cu}^{2+}(aq)$ is lower in the ECS than $\text{H}^+(aq)$ and is preferentially discharged: $\text{Cu}^{2+}(aq) + 2\text{e}^- \rightarrow \text{Cu}(s)$ (reddish-brown solid deposited).<br>• <b>Anode (+):</b> $\text{OH}^-(aq)$ is preferentially discharged: $4\text{OH}^-(aq) \rightarrow \text{O}_2(g) + 2\text{H}_2\text{O}(l) + 4\text{e}^-$.<br>• <b>Solution Change:</b> The <b>blue colour of the solution gradually fades</b> (as $[\text{Cu}^{2+}(aq)]$ decreases) and the solution becomes acidic ($\text{H}_2\text{SO}_4$).',
+  cuso4_cu: '<b>4. Electrolysis of $\text{CuSO}_4(aq)$ with Active Copper Electrodes (CP 2015 Q7 · CP 2021 Q2):</b><br>• <b>Cathode (−):</b> $\text{Cu}^{2+}(aq) + 2\text{e}^- \rightarrow \text{Cu}(s)$ (reddish-brown deposit; cathode mass increases).<br>• <b>Anode (+):</b> Because the anode is made of active copper, the <b>copper anode dissolves</b> instead of $\text{OH}^-$ discharging: $\text{Cu}(s) \rightarrow \text{Cu}^{2+}(aq) + 2\text{e}^-$ (never say $\text{SO}_2$ or $\text{O}_2$ is formed, CP 2021 Q2!).<br>• <b>Solution Change (CP 2015 Q7):</b> The <b>blue colour intensity of $\text{CuSO}_4(aq)$ remains unchanged</b> because the rate of $\text{Cu}^{2+}$ formed at the anode equals the rate of $\text{Cu}^{2+}$ discharged at the cathode.',
+  ni_plating: '<b>5. Electroplating an Object with Nickel / Copper (CP 2015 Q7 · CP 2023 Q8):</b><br>• <b>Setup:</b> Object to be plated = <b>cathode (− terminal of d.c. supply)</b>; pure nickel/copper rod = <b>anode (+ terminal)</b>; single beaker of $\text{NiSO}_4(aq) / \text{CuSO}_4(aq)$ electrolyte.<br>• <b>🚨 CP 2023 Q8 Diagram Traps:</b> (1) Always label the $+$ and $-$ terminals of the d.c. power supply; (2) <b>NEVER draw a salt bridge</b> in an electroplating bath (both electrodes dip into the same single electrolyte!).'
+};
+function updateElecCaseSim(){
+  const k = document.getElementById('elecCaseSel').value;
+  const out = document.getElementById('elecCaseOut');
+  if(out && ELEC_CASE_DATA[k]){ out.innerHTML = ELEC_CASE_DATA[k]; safeInitKaTeX(); }
+}
+
+/* 5. Bench 6: Live HKEAA Keyword Answer Grader (Topic VII) */
+const GRADER_RUBRICS = {
+  salt_bridge: {
+    prompt: '<b>Question (2 marks · CP 2012 Q3 / CP 2024 Q3):</b> State TWO functions of a salt bridge in a chemical cell.',
+    model: '1. It completes the electrical circuit by allowing ions to migrate between the two half-cells. 2. It maintains electrical neutrality (balances the charges) in the two half-cell solutions by providing mobile cations and anions (without allowing the solutions to mix directly).',
+    marks: [
+      { label: '1M · Completes Circuit by Ion Migration', re: /complete(s)?\s+(the\s+)?(electrical\s+)?circuit[\s\S]{0,40}ions?|ions?\s+(to\s+)?migrate[\s\S]{0,40}complete/i, hint: 'State that it <b>completes the circuit by allowing ions to migrate</b>.' },
+      { label: '1M · Maintains Electrical Neutrality / Balances Charges', re: /(electrical\s+neutrality|electrically\s+neutral|balance(s)?\s+(the\s+)?charges)/i, hint: 'State that it <b>maintains electrical neutrality (balances charges)</b> in the half-cells.' }
+    ],
+    traps: [
+      { re: /allow(s)?\s+electrons\s+to\s+(pass|flow|move)/i, msg: 'CP 2012 Q3 / CP 2024 Q3 Fatal Error: A salt bridge NEVER allows electrons to pass through — only <b>ions</b> migrate through the salt bridge!' }
+    ]
+  },
+  fuel_cell_alk: {
+    prompt: '<b>Question (3 marks · CP 2013 / CP 2025 Q9):</b> Write the ionic half-equations for the reactions occurring at the anode and cathode of an alkaline hydrogen–oxygen fuel cell (with concentrated KOH(aq) electrolyte), and state one environmental advantage of using this cell.',
+    model: 'Anode (−): H₂(g) + 2OH⁻(aq) → 2H₂O(l) + 2e⁻. Cathode (+): O₂(g) + 2H₂O(l) + 4e⁻ → 4OH⁻(aq). Environmental advantage: The only chemical product emitted is water, so it does not emit air pollutants or greenhouse gases such as CO₂, CO or NOₓ.',
+    marks: [
+      { label: '1M · Anode Half-Equation in Alkaline Medium', re: /h2(\(g\))?\s*\+\s*2\s*oh-(\(aq\))?\s*(->|→|=)\s*2\s*h2o(\(l\))?\s*\+\s*2\s*e-/i, hint: 'Anode: <b>H₂(g) + 2OH⁻(aq) → 2H₂O(l) + 2e⁻</b>.' },
+      { label: '1M · Cathode Half-Equation in Alkaline Medium', re: /o2(\(g\))?\s*\+\s*2\s*h2o(\(l\))?\s*\+\s*4\s*e-\s*(->|→|=)\s*4\s*oh-(\(aq\))?/i, hint: 'Cathode: <b>O₂(g) + 2H₂O(l) + 4e⁻ → 4OH⁻(aq)</b>.' },
+      { label: '1M · Only Water Produced / Non-Polluting', re: /(only\s+water|water\s+is\s+the\s+only\s+product|no\s+pollutant|does\s+not\s+emit\s+co2)/i, hint: 'CP 2013 Requirement: State that <b>only water is produced / emitted (no pollutant gases like CO₂, CO, NOₓ)</b>.' }
+    ],
+    traps: [
+      { re: /h2(\(g\))?\s*(->|→|=)\s*2\s*h\+/i, msg: 'CP 2025 Q9 Verbatim Error: "wrongly suggested that H₂(g) is oxidised to H⁺(aq) ions in the alkaline medium at anode" — in KOH(aq), H₂ reacts with OH⁻ to form H₂O!' }
+    ]
+  },
+  na2so4_cathode: {
+    prompt: '<b>Question (3 marks · CP 2014 Q8 / CP 2025 Q6):</b> In the electrolysis of aqueous sodium sulphate containing universal indicator using platinum electrodes, state and explain the observation(s) at the cathode.',
+    model: 'Colourless gas bubbles (hydrogen) are evolved at the cathode, and the solution around the cathode turns blue (or purple). H⁺(aq) ions are lower in the electrochemical series than Na⁺(aq) ions (H⁺ is a stronger oxidising agent), so H⁺(aq) ions are preferentially discharged (2H⁺(aq) + 2e⁻ → H₂(g)), leaving an excess of OH⁻(aq) ions around the cathode which makes the solution alkaline.',
+    marks: [
+      { label: '1M · Observations: Colourless Gas Bubbles + Turns Blue/Purple', re: /(bubbles|gas|effervescence)[\s\S]{0,45}(blue|purple)|(blue|purple)[\s\S]{0,45}(bubbles|gas)/i, hint: 'State BOTH observations: <b>colourless gas bubbles evolve</b> AND universal indicator turns <b>blue/purple</b>.' },
+      { label: '1M · H⁺ Preferentially Discharged (Lower in ECS than Na⁺)', re: /h\+(\(aq\))?[\s\S]{0,45}(lower\s+in\s+(the\s+)?(ecs|electrochemical\s+series)|stronger\s+oxidi[sz]ing\s+agent|preferentially\s+discharged)/i, hint: 'CP 2025 Q6 Requirement: Explain why — <b>H⁺(aq) is lower in the ECS than Na⁺(aq) and is preferentially discharged</b>.' },
+      { label: '1M · Excess OH⁻(aq) Left Around Cathode → Alkaline', re: /(excess|concentration\s+of\s+oh-|amount\s+of\s+oh-)[\s\S]{0,40}(alkaline|increases)/i, hint: 'MS Bank Wording: Consumption of H⁺(aq) leaves <b>excess OH⁻(aq) ions → alkaline</b>.' }
+    ],
+    traps: [
+      { re: /sodium\s+is\s+(formed|deposited|discharged)/i, msg: 'CP 2014 Q8 Trap: Na⁺(aq) is never discharged at a Pt cathode in aqueous solution — H⁺(aq) is preferentially discharged!' }
+    ]
+  },
+  brine_anode: {
+    prompt: '<b>Question (2 marks · CP 2013 / CP 2022 P2):</b> Explain why chlorine gas instead of oxygen gas is formed at the anode during the electrolysis of concentrated sodium chloride solution (brine) using graphite electrodes.',
+    model: 'In concentrated sodium chloride solution, the concentration of Cl⁻(aq) ions is much higher than the concentration of OH⁻(aq) ions. Due to this concentration effect, Cl⁻(aq) ions are preferentially discharged at the anode to form chlorine gas (2Cl⁻(aq) → Cl₂(g) + 2e⁻).',
+    marks: [
+      { label: '1M · Comparative Concentration: [Cl⁻(aq)] Much Higher Than [OH⁻(aq)]', re: /concentration\s+of\s+(cl-|chloride)[\s\S]{0,40}(higher|greater)\s+than[\s\S]{0,30}(oh-|hydroxide)/i, hint: 'CP 2022 Paper 2 Requirement: Must state with a <b>comparative sense</b> that the <b>concentration of Cl⁻(aq) is much higher than that of OH⁻(aq)</b>.' },
+      { label: '1M · Cl⁻(aq) Preferentially Discharged to Form Cl₂', re: /(cl-|chloride)[\s\S]{0,35}preferentially\s+discharged/i, hint: 'Conclude that <b>Cl⁻(aq) ions are preferentially discharged</b> at the anode.' }
+    ],
+    traps: []
+  },
+  cuso4_electrodes: {
+    prompt: '<b>Question (2 marks · CP 2015 Q7 / CP 2021 Q2):</b> Compare the change in the blue colour intensity of CuSO₄(aq) during electrolysis using graphite electrodes versus copper electrodes, and explain the difference.',
+    model: 'With graphite electrodes, the blue colour fades because Cu²⁺(aq) ions are discharged at the cathode while OH⁻(aq) ions are discharged at the anode, so the concentration of Cu²⁺(aq) decreases. With copper electrodes, the blue colour intensity remains unchanged because the copper anode dissolves (Cu(s) → Cu²⁺(aq) + 2e⁻) to replenish Cu²⁺(aq) ions at the same rate they are deposited at the cathode.',
+    marks: [
+      { label: '1M · Graphite: Blue Colour Fades ([Cu²⁺] Decreases)', re: /graphite[\s\S]{0,50}(fades|paler|decreases)/i, hint: 'State that with <b>graphite electrodes the blue colour fades</b> as [Cu²⁺(aq)] decreases.' },
+      { label: '1M · Copper: Blue Unchanged (Cu Anode Dissolves to Replenish Cu²⁺)', re: /(unchanged|remains\s+the\s+same)[\s\S]{0,60}(anode\s+dissolves|cu\s*->\s*cu2\+)/i, hint: 'State that with <b>copper electrodes the blue colour remains unchanged because the Cu anode dissolves to form Cu²⁺(aq)</b>.' }
+    ],
+    traps: []
+  },
+  ox_agent_mno2: {
+    prompt: '<b>Question (2 marks · CP 2016 Q8):</b> In the cell reaction 2MnO₂(s) + Zn(s) + 2NH₄⁺(aq) → Mn₂O₃(s) + Zn²⁺(aq) + 2NH₃(aq) + H₂O(l), identify the oxidising agent and explain your answer in terms of oxidation number.',
+    model: 'MnO₂(s) is the oxidising agent because the oxidation number of Mn decreases from +4 in MnO₂ to +3 in Mn₂O₃.',
+    marks: [
+      { label: '1M · Identify MnO₂(s) as the Oxidising Agent', re: /mno2(\(s\))?\s+is\s+(the\s+)?oxidi[sz]ing\s+agent|oxidi[sz]ing\s+agent\s*(:|is)\s*mno2/i, hint: 'CP 2016 Q8 Requirement: Name the full reactant species <b>MnO₂(s)</b> as the oxidising agent.' },
+      { label: '1M · Oxidation Number of Mn Decreases from +4 to +3', re: /\+?4\s+to\s+\+?3/i, hint: 'MS Bank §6 Wording: State that the <b>oxidation number of Mn decreases / changes from +4 to +3</b>.' }
+    ],
+    traps: [
+      { re: /zn\s+is\s+(the\s+)?oxidi[sz]ing\s+agent/i, msg: 'CP 2016 Q8 Verbatim Error: "quite a number of candidates wrongly suggested Zn as the oxidising agent" — Zn is oxidised (0 to +2), so Zn is the reducing agent!' }
+    ]
+  }
+};
+
+function loadGraderPrompt(){
+  const sel = document.getElementById('graderQSelect');
+  if(!sel) return;
+  const r = GRADER_RUBRICS[sel.value];
+  const box = document.getElementById('graderPromptBox');
+  if(box && r) box.innerHTML = r.prompt;
+}
+function fillModelGraderAnswer(){
+  const sel = document.getElementById('graderQSelect');
+  if(!sel) return;
+  const r = GRADER_RUBRICS[sel.value];
+  if(!r) return;
+  document.getElementById('graderInput').value = r.model;
+  gradeStudentAnswer();
+}
+function gradeStudentAnswer(){
+  const sel = document.getElementById('graderQSelect');
+  const txt = (document.getElementById('graderInput').value || '').trim();
+  const out = document.getElementById('graderResultBox');
+  if(!sel || !out) return;
+  const r = GRADER_RUBRICS[sel.value];
+  if(!txt){ out.innerHTML = '<span class="text-amber-300">Please type an answer first, or click "Show Model Full-Mark Answer".</span>'; return; }
+  let score = 0, rowsHtml = '', trapHtml = '';
+  r.marks.forEach(m => {
+    const hit = m.re.test(txt);
+    if(hit) score++;
+    rowsHtml += `<div class="p-2 rounded-lg border ${hit ? 'bg-emerald-950/40 border-emerald-700 text-emerald-200' : 'bg-slate-900 border-slate-800 text-slate-300'}"><b>${hit ? '✅ [1M Earned]' : '⬜ [0M Missed]'} ${m.label}:</b> ${hit ? 'Keyword verified in your answer.' : m.hint}</div>`;
+  });
+  r.traps.forEach(t => {
+    if(t.re.test(txt)) trapHtml += `<div class="p-2.5 rounded-lg bg-rose-950/60 border border-rose-600 text-rose-200 font-medium">🚨 <b>[NOT ACCEPT / Contradiction Penalty]:</b> ${t.msg}</div>`;
+  });
+  out.innerHTML = `<div class="flex items-center justify-between border-b border-slate-800 pb-2"><span class="font-bold text-white text-sm">Examiner Diagnostic Score: <span class="text-sky-400 font-mono">${score} / ${r.marks.length} marks</span></span><span class="chip ${score===r.marks.length && !trapHtml ? 'bg-emerald-950 text-emerald-300 border-emerald-700' : 'bg-amber-950 text-amber-300 border-amber-700'}">${score===r.marks.length && !trapHtml ? 'Full Marks Wording' : 'Keep Refining'}</span></div>${trapHtml}<div class="space-y-1.5 mt-2">${rowsHtml}</div>`;
+}
+
+const CMD_INDEX = [
+  { title: 'Virtual Redox Test-Tube Mixer (MnO₄⁻, Cr₂O₇²⁻, HNO₃ vs SO₃²⁻, I⁻, Fe²⁺)', tag: 'Strand (c) · Sim', action: ()=>{switchTab('tab-onum');switchOnumMode('map');} },
+  { title: '5-Station Half-Equation & Overall Ionic Equation Combiner', tag: 'Strand (c) · Sim', action: ()=>{switchTab('tab-hrx');switchHrxMode('map');} },
+  { title: 'Galvanic Half-Cell, Salt-Bridge & Alkaline Fuel-Cell Simulator', tag: 'Strand (b)/(d) · Sim', action: ()=>{switchTab('tab-cell');switchCellMode('map');} },
+  { title: 'Electrolysis, Universal-Indicator Na₂SO₄ & Electroplating Studio', tag: 'Strand (e) · Sim', action: ()=>{switchTab('tab-elec');switchElecMode('map');} },
+  { title: 'Oxidation Number, Faraday Mass, Half-Eq & Discharge Benches', tag: 'Solver · Benches 1–5', action: ()=>{switchTab('tab-solver');} },
+  { title: 'Live HKEAA Keyword Answer Grader (Bench 6)', tag: 'Solver · Exam Practice', action: ()=>{switchTab('tab-solver');} },
+  { title: 'Candidate Performance Intelligence (2012–2025)', tag: 'Past Papers · Tab 7', action: ()=>{switchTab('tab-pp');} }
+];
+function openCmdModal(){ const m=document.getElementById('cmdModal'); if(m){ m.classList.add('open'); const inp=document.getElementById('cmdSearchInput'); if(inp){inp.value='';filterCmdList();setTimeout(()=>inp.focus(),50);}}}
+function closeCmdModal(){ const m=document.getElementById('cmdModal'); if(m) m.classList.remove('open'); }
+function filterCmdList(){
+  const q = (document.getElementById('cmdSearchInput').value || '').toLowerCase();
+  const box = document.getElementById('cmdResults');
+  if(!box) return;
+  box.innerHTML = '';
+  CMD_INDEX.filter(i => i.title.toLowerCase().includes(q) || i.tag.toLowerCase().includes(q)).forEach(i => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'w-full text-left px-3 py-2.5 rounded-xl hover:bg-slate-800/80 flex items-center justify-between transition';
+    btn.innerHTML = `<span class="text-white font-medium">${i.title}</span><span class="chip bg-sky-950 text-sky-300 border border-sky-800">${i.tag}</span>`;
+    btn.onclick = () => { closeCmdModal(); i.action(); };
+    box.appendChild(btn);
+  });
+}
+document.addEventListener('keydown', e => {
+  if((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k'){ e.preventDefault(); const m=document.getElementById('cmdModal'); if(m && m.classList.contains('open')) closeCmdModal(); else openCmdModal(); }
+  else if(e.key === 'Escape') closeCmdModal();
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  try { if(localStorage.getItem('hkdse_topic7_theme') === 'light') toggleAppleTheme(); } catch(e){}
+  injectQuizSelfCheckBars();
+  updateRedoxMixerSim();
+  updateCombSim();
+  updateCellSim();
+  updateElecCaseSim();
+  loadGraderPrompt();
+  updateMasteryRing();
+  solverOnum();
+  document.getElementById('svFI').value = '0.40'; document.getElementById('svFT').value = '100'; document.getElementById('svFM').value = '63.5'; solverFaraday();
+  solverEcell();
+  solverDischarge();
+});
+</script>
+
 </body>
 </html>

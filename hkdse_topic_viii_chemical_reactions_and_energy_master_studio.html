@@ -9,50 +9,375 @@
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
 <style>
-  :root { color-scheme: dark; }
-  body { background:#020617; font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
-  .tab-panel { display:none; }
-  .tab-panel.active { display:block; }
-  .blur-answer { filter: blur(6px); cursor:pointer; transition: filter .25s ease; user-select:none; }
-  .blur-answer.revealed { filter: blur(0); cursor:default; user-select:text; }
-  .engine-module { display:none; }
-  .engine-module.active { display:block; }
-  .mode-pill { cursor:pointer; }
-  .mode-pill.active { background:rgba(56,189,248,.15); color:#7dd3fc; border-color:#38bdf8; }
-  details > summary { cursor:pointer; list-style:none; }
-  details > summary::-webkit-details-marker { display:none; }
-  .chip { display:inline-block; padding:2px 10px; border-radius:9999px; font-size:11px; font-weight:600; }
-  .katex { font-size:1.05em; }
-  .num-card { font-variant-numeric: tabular-nums; }
-  input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner-spin-button { -webkit-appearance:none; margin:0; }
-  input[type=number] { -moz-appearance:textfield; }
-  .edot { font-size:10px; line-height:1; letter-spacing:-1px; }
-  .katex-block{overflow-x:auto;overflow-y:hidden}
-  .katex-block .katex-display{text-align:left;margin:.35em 0}
-  /* ══ MOBILE UX LAYER (chrome-only) ══ */
-  :root{--hdr:120px}
-  html{scroll-padding-top:calc(var(--hdr) + 10px)}
-  .toc-strip{display:none;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:2px 0 6px;margin-bottom:2px}
-  .toc-strip::-webkit-scrollbar{display:none}
-  .toc-chip{flex-shrink:0;font-size:10px;line-height:1;padding:7px 11px;border-radius:9999px;border:1px solid rgba(51,65,85,.9);background:rgba(15,23,42,.85);color:#94a3b8;font-weight:600;white-space:nowrap;cursor:pointer}
-  #backTop{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:70;width:44px;height:44px;border-radius:9999px;border:1px solid rgba(56,189,248,.35);background:rgba(8,14,26,.92);color:#7dd3fc;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transform:translateY(8px);transition:opacity .25s,transform .25s}
-  #backTop.show{opacity:1;pointer-events:auto;transform:none}
-  #scrollProg{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,#0ea5e9,#38bdf8);z-index:80;pointer-events:none}
-  @media (max-width:1023.98px){
-    header{background-color:rgba(2,6,23,.97)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;padding-top:env(safe-area-inset-top)}
-    #mainNav{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:4px}
-    #mainNav::-webkit-scrollbar{display:none}
-    #mainNav button{flex-shrink:0}
-    select,input[type="number"],input[type="text"]{font-size:16px!important}
-    #mainNav button{padding-top:10px;padding-bottom:10px}
-    .mode-pill{padding:8px 14px}
-    .toc-chip{padding:10px 12px}
-    .katex{font-size:1em}
-    .toc-strip{display:flex}
+  :root {
+    color-scheme: dark;
+    --hdr: 118px;
+    --bg-canvas: #000000;
+    --bg-elevated: rgba(22, 22, 29, 0.72);
+    --bg-card: rgba(28, 28, 36, 0.68);
+    --bg-card-solid: #16161d;
+    --bg-subcard: rgba(38, 38, 48, 0.55);
+    --bg-glass-nav: rgba(14, 14, 20, 0.76);
+    --border-hairline: rgba(255, 255, 255, 0.09);
+    --border-highlight: rgba(255, 255, 255, 0.16);
+    --text-primary: #f5f5f7;
+    --text-secondary: #a1a1aa;
+    --text-tertiary: #6e6e77;
+    --accent-blue: #0a84ff;
+    --accent-teal: #64d2ff;
+    --accent-purple: #bf5af2;
+    --accent-emerald: #30d158;
+    --accent-amber: #ff9f0a;
+    --accent-rose: #ff453a;
+    --shadow-card: 0 20px 44px -12px rgba(0, 0, 0, 0.65), inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+    --shadow-hover: 0 24px 52px -10px rgba(0, 0, 0, 0.75), inset 0 1px 0 0 rgba(255, 255, 255, 0.18);
+    --spring: cubic-bezier(0.22, 1, 0.36, 1);
   }
-  @media (max-width:767.98px){ .katex{font-size:.95em} }
-  @media (prefers-reduced-motion:reduce){.tab-panel.active{animation:none}
-    .blur-answer,#backTop{transition:none!important}}
+
+  html.theme-light {
+    color-scheme: light;
+    --bg-canvas: #f5f5f7;
+    --bg-elevated: rgba(255, 255, 255, 0.82);
+    --bg-card: rgba(255, 255, 255, 0.88);
+    --bg-card-solid: #ffffff;
+    --bg-subcard: rgba(242, 242, 247, 0.85);
+    --bg-glass-nav: rgba(248, 248, 252, 0.82);
+    --border-hairline: rgba(0, 0, 0, 0.08);
+    --border-highlight: rgba(0, 0, 0, 0.14);
+    --text-primary: #1d1d1f;
+    --text-secondary: #515154;
+    --text-tertiary: #86868b;
+    --shadow-card: 0 12px 32px -8px rgba(0, 0, 0, 0.07), inset 0 1px 0 0 rgba(255, 255, 255, 0.9);
+    --shadow-hover: 0 18px 40px -8px rgba(0, 0, 0, 0.12), inset 0 1px 0 0 rgba(255, 255, 255, 1);
+  }
+
+  html {
+    scroll-padding-top: calc(var(--hdr) + 14px);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--bg-canvas);
+    background-image:
+      radial-gradient(ellipse 80% 50% at 15% -10%, rgba(10, 132, 255, 0.16), transparent 60%),
+      radial-gradient(ellipse 70% 45% at 85% 5%, rgba(191, 90, 242, 0.12), transparent 60%),
+      radial-gradient(ellipse 60% 40% at 50% 100%, rgba(48, 209, 88, 0.08), transparent 60%);
+    background-attachment: fixed;
+    color: var(--text-primary);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: -0.011em;
+    transition: background-color 0.4s var(--spring), color 0.3s var(--spring);
+  }
+
+  h1, h2, h3, h4 {
+    letter-spacing: -0.024em;
+    font-weight: 650;
+  }
+
+  .font-mono {
+    font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+  }
+
+  header {
+    background: var(--bg-glass-nav) !important;
+    -webkit-backdrop-filter: saturate(190%) blur(28px) !important;
+    backdrop-filter: saturate(190%) blur(28px) !important;
+    border-bottom: 1px solid var(--border-hairline) !important;
+    box-shadow: 0 4px 24px -4px rgba(0, 0, 0, 0.28);
+    transition: background 0.35s var(--spring);
+  }
+
+  #mainNav {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border-hairline);
+    border-radius: 14px;
+    padding: 4px !important;
+    gap: 4px !important;
+    margin-bottom: 8px;
+  }
+  html.theme-light #mainNav {
+    background: rgba(0, 0, 0, 0.045);
+  }
+
+  #mainNav button {
+    border-radius: 10px !important;
+    border-bottom: none !important;
+    transition: all 0.28s var(--spring) !important;
+    position: relative;
+    font-weight: 500;
+  }
+  #mainNav button:hover { transform: translateY(-1px); }
+  #mainNav button:active { transform: scale(0.97); }
+  #mainNav button.tab-btn-active {
+    background: rgba(10, 132, 255, 0.22) !important;
+    color: #64d2ff !important;
+    box-shadow: 0 2px 10px rgba(10, 132, 255, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.22);
+    font-weight: 600 !important;
+  }
+  html.theme-light #mainNav button.tab-btn-active {
+    background: #ffffff !important;
+    color: #0066cc !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .bg-slate-900 {
+    background: var(--bg-elevated) !important;
+    -webkit-backdrop-filter: saturate(160%) blur(22px);
+    backdrop-filter: saturate(160%) blur(22px);
+    border-color: var(--border-hairline) !important;
+    border-radius: 22px !important;
+    box-shadow: var(--shadow-card);
+    transition: transform 0.35s var(--spring), box-shadow 0.35s var(--spring), border-color 0.3s ease;
+  }
+
+  .bg-slate-950 {
+    background: var(--bg-card) !important;
+    border-color: var(--border-hairline) !important;
+    border-radius: 18px !important;
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.06);
+    transition: transform 0.3s var(--spring), box-shadow 0.3s var(--spring), border-color 0.25s ease;
+  }
+  .bg-slate-950:hover {
+    border-color: var(--border-highlight) !important;
+  }
+
+  html.theme-light .text-white { color: #1d1d1f !important; }
+  html.theme-light .text-slate-100,
+  html.theme-light .text-slate-200,
+  html.theme-light .text-slate-300 { color: #2c2c2e !important; }
+  html.theme-light .text-slate-400 { color: #515154 !important; }
+  html.theme-light .text-slate-500 { color: #6e6e73 !important; }
+  html.theme-light .bg-slate-800,
+  html.theme-light .bg-slate-800\/50 { background-color: rgba(0, 0, 0, 0.05) !important; color: #1d1d1f !important; border-color: rgba(0,0,0,0.12) !important; }
+  html.theme-light .bg-sky-950\/40,
+  html.theme-light .bg-sky-950\/30,
+  html.theme-light .bg-sky-950 { background-color: rgba(10, 132, 255, 0.1) !important; color: #004080 !important; border-color: rgba(10, 132, 255, 0.28) !important; }
+  html.theme-light .bg-purple-950\/30,
+  html.theme-light .bg-purple-950 { background-color: rgba(175, 82, 222, 0.1) !important; color: #581c87 !important; border-color: rgba(175, 82, 222, 0.28) !important; }
+  html.theme-light .bg-emerald-950\/30,
+  html.theme-light .bg-emerald-950 { background-color: rgba(48, 209, 88, 0.12) !important; color: #065f46 !important; border-color: rgba(48, 209, 88, 0.3) !important; }
+  html.theme-light .bg-amber-950\/40,
+  html.theme-light .bg-amber-950\/30,
+  html.theme-light .bg-amber-950 { background-color: rgba(255, 159, 10, 0.13) !important; color: #78350f !important; border-color: rgba(255, 159, 10, 0.35) !important; }
+  html.theme-light .bg-rose-950\/40,
+  html.theme-light .bg-rose-950\/30,
+  html.theme-light .bg-rose-950 { background-color: rgba(255, 69, 58, 0.1) !important; color: #881337 !important; border-color: rgba(255, 69, 58, 0.28) !important; }
+  html.theme-light .text-sky-200, html.theme-light .text-sky-300, html.theme-light .text-sky-400 { color: #0055b3 !important; }
+  html.theme-light .text-amber-200, html.theme-light .text-amber-300, html.theme-light .text-amber-400 { color: #92400e !important; }
+  html.theme-light .text-rose-200, html.theme-light .text-rose-300, html.theme-light .text-rose-400 { color: #9f1239 !important; }
+  html.theme-light .text-emerald-300, html.theme-light .text-emerald-400 { color: #047857 !important; }
+  html.theme-light .text-purple-300, html.theme-light .text-purple-400 { color: #6b21a8 !important; }
+  html.theme-light .text-cyan-200, html.theme-light .text-cyan-300, html.theme-light .text-cyan-400 { color: #0e7490 !important; }
+
+  @keyframes appleStageIn {
+    0% { opacity: 0; transform: translateY(10px) scale(0.992); filter: blur(4px); }
+    100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+  }
+  .tab-panel { display: none; }
+  .tab-panel.active {
+    display: block;
+    animation: appleStageIn 0.42s var(--spring) forwards;
+  }
+  .engine-module { display: none; }
+  .engine-module.active {
+    display: block;
+    animation: appleStageIn 0.34s var(--spring) forwards;
+  }
+  .heat-card, .defn-card, .calor-card, .hess-card {
+    animation: appleStageIn 0.3s var(--spring) forwards;
+  }
+
+  .blur-answer {
+    filter: blur(5.5px);
+    cursor: pointer;
+    transition: filter 0.28s var(--spring), background-color 0.28s ease, transform 0.2s var(--spring), box-shadow 0.25s ease;
+    user-select: none;
+    border: 1px solid rgba(100, 210, 255, 0.22);
+    padding: 1px 7px !important;
+    border-radius: 7px !important;
+  }
+  .blur-answer:hover {
+    filter: blur(2.5px);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(10, 132, 255, 0.2);
+  }
+  .blur-answer.revealed {
+    filter: blur(0);
+    cursor: pointer;
+    user-select: text;
+    background: rgba(48, 209, 88, 0.16) !important;
+    border-color: rgba(48, 209, 88, 0.45) !important;
+    box-shadow: 0 0 0 1px rgba(48, 209, 88, 0.15);
+  }
+
+  .mode-pill {
+    cursor: pointer;
+    transition: all 0.26s var(--spring);
+    border-radius: 9999px;
+    backdrop-filter: blur(10px);
+  }
+  .mode-pill:hover { transform: translateY(-1px); }
+  .mode-pill:active { transform: scale(0.96); }
+  .mode-pill.active {
+    background: linear-gradient(135deg, rgba(10, 132, 255, 0.26), rgba(100, 210, 255, 0.14)) !important;
+    color: #7dd3fc !important;
+    border-color: rgba(100, 210, 255, 0.65) !important;
+    box-shadow: 0 4px 14px -2px rgba(10, 132, 255, 0.35), inset 0 1px 0 rgba(255,255,255,0.2);
+  }
+
+  details > summary {
+    cursor: pointer;
+    list-style: none;
+    transition: background-color 0.2s ease;
+    border-radius: 14px;
+  }
+  details > summary::-webkit-details-marker { display: none; }
+  details[open] > summary {
+    border-bottom: 1px solid var(--border-hairline);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 10px;
+    border-radius: 9999px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.12);
+  }
+
+  .katex { font-size: 1.05em; }
+  .num-card { font-variant-numeric: tabular-nums; }
+  input[type=number]::-webkit-outer-spin-button,
+  input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  input[type=number] { -moz-appearance: textfield; }
+  .katex-block { overflow-x: auto; overflow-y: hidden; }
+  .katex-block .katex-display { text-align: left; margin: .35em 0; }
+
+  .apple-sim-panel {
+    background: linear-gradient(165deg, rgba(20, 24, 38, 0.85), rgba(12, 15, 26, 0.92));
+    border: 1px solid rgba(100, 210, 255, 0.22);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 18px 40px -12px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  }
+  html.theme-light .apple-sim-panel {
+    background: linear-gradient(165deg, rgba(255, 255, 255, 0.95), rgba(240, 246, 255, 0.92));
+    border-color: rgba(10, 132, 255, 0.25);
+    box-shadow: 0 14px 32px -10px rgba(10, 132, 255, 0.12);
+  }
+
+  .apple-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 7px 14px;
+    transition: all 0.24s var(--spring);
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(255, 255, 255, 0.07);
+    color: var(--text-primary);
+  }
+  .apple-btn:hover {
+    background: rgba(255, 255, 255, 0.13);
+    transform: translateY(-1px);
+  }
+  .apple-btn:active { transform: scale(0.97); }
+  .apple-btn-primary {
+    background: linear-gradient(180deg, #1e90ff 0%, #0071e3 100%);
+    color: #ffffff !important;
+    border-color: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 4px 14px rgba(0, 113, 227, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  }
+  .apple-btn-primary:hover {
+    background: linear-gradient(180deg, #339dff 0%, #0a7ff0 100%);
+    box-shadow: 0 6px 18px rgba(0, 113, 227, 0.55);
+  }
+
+  input[type=range].apple-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 6px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #ff453a, #ff9f0a, #30d158, #0a84ff, #bf5af2);
+    outline: none;
+  }
+  input[type=range].apple-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 2px solid #0a84ff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+    cursor: grab;
+    transition: transform 0.18s var(--spring);
+  }
+  input[type=range].apple-slider::-webkit-slider-thumb:active {
+    transform: scale(1.15);
+    cursor: grabbing;
+  }
+
+  .quiz-self-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px dashed var(--border-hairline);
+    font-size: 11px;
+  }
+
+  #cmdModal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: rgba(0, 0, 0, 0.58);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 10vh;
+  }
+  #cmdModal.open {
+    display: flex;
+    animation: appleStageIn 0.22s var(--spring) forwards;
+  }
+
+  .toc-strip { display: none; gap: 6px; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 2px 0 6px; margin-bottom: 2px; }
+  .toc-strip::-webkit-scrollbar { display: none; }
+  .toc-chip { flex-shrink: 0; font-size: 10px; line-height: 1; padding: 7px 11px; border-radius: 9999px; border: 1px solid var(--border-hairline); background: var(--bg-card); color: var(--text-secondary); font-weight: 600; white-space: nowrap; cursor: pointer; transition: all 0.2s var(--spring); }
+  #backTop { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom)); z-index: 70; width: 44px; height: 44px; border-radius: 9999px; border: 1px solid rgba(100, 210, 255, 0.35); background: var(--bg-glass-nav); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); color: #7dd3fc; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transform: translateY(8px); transition: opacity .25s, transform .25s var(--spring); box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+  #backTop.show { opacity: 1; pointer-events: auto; transform: none; }
+  #scrollProg { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: linear-gradient(90deg, #0a84ff, #64d2ff, #30d158); z-index: 80; pointer-events: none; }
+
+  @media (max-width:1023.98px){
+    header { padding-top: env(safe-area-inset-top); }
+    #mainNav { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+    #mainNav::-webkit-scrollbar { display: none; }
+    #mainNav button { flex-shrink: 0; padding-top: 9px; padding-bottom: 9px; }
+    select, input[type="number"], input[type="text"] { font-size: 16px !important; }
+    .mode-pill { padding: 8px 14px; }
+    .toc-chip { padding: 10px 12px; }
+    .katex { font-size: 1em; }
+    .toc-strip { display: flex; }
+  }
+  @media (prefers-reduced-motion:reduce){
+    .tab-panel.active, .engine-module.active { animation: none !important; }
+    .blur-answer, #backTop { transition: none !important; }
+  }
 </style>
 </head>
 <body class="text-slate-200 min-h-screen">
@@ -62,14 +387,29 @@
   <div class="max-w-7xl mx-auto px-4 py-3">
     <div class="flex flex-wrap items-center justify-between gap-2">
       <div>
-        <h1 class="text-base sm:text-lg font-bold text-white leading-tight">HKDSE · Topic VIII Master Studio</h1>
+        <div class="flex items-center gap-2.5"><div class="hidden sm:flex items-center gap-1.5 mr-1"><span class="w-2.5 h-2.5 rounded-full bg-[#ff5f56] inline-block shadow-sm"></span><span class="w-2.5 h-2.5 rounded-full bg-[#ffbd2e] inline-block shadow-sm"></span><span class="w-2.5 h-2.5 rounded-full bg-[#27c93f] inline-block shadow-sm"></span></div><h1 class="text-base sm:text-lg font-bold text-white leading-tight tracking-tight">HKDSE · Topic VIII Master Studio — Chemical Reactions &amp; Energy</h1><span class="chip bg-sky-500/15 text-sky-300 border border-sky-400/30 text-[10px]">Interactive Studio Pro</span></div>
         <p class="text-[11px] text-slate-400 font-mono">Chemical Reactions &amp; Energy · Enthalpy Changes, Simple Calorimetry &amp; Hess's Law</p>
       </div>
-      <div class="flex gap-2 text-[10px] font-mono">
+      <div class="flex flex-wrap items-center gap-2 text-[10px] font-mono">
         <span class="chip bg-sky-950 text-sky-400 border border-sky-800">Strands (a)–(c)</span>
         <span class="chip bg-purple-950 text-purple-400 border border-purple-800">Paper 1A + 1B</span>
         <span class="chip bg-emerald-950 text-emerald-400 border border-emerald-800">C&amp;A Guide 2018</span>
-        <span class="chip bg-amber-950 text-amber-400 border border-amber-800">NTF 18/08/2018 scope</span>
+        <div class="flex items-center gap-2 ml-1 pl-2 border-l border-slate-700/70">
+          <button type="button" onclick="openCmdModal()" class="apple-btn !py-1 !px-2.5 text-[11px]" title="Quick Concept &amp; Past-Paper Search (⌘K)">
+            <span>🔍 Search</span>
+            <kbd class="px-1.5 py-0.5 text-[9px] rounded bg-slate-800 text-slate-300 border border-slate-700">⌘K</kbd>
+          </button>
+          <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-900/90 border border-slate-700/80" title="Concept Mastery Progress across Quiz &amp; Syllabus Checkpoints">
+            <svg class="w-4 h-4 -rotate-90" viewBox="0 0 36 36">
+              <circle cx="18" cy="18" r="15" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="3.8"></circle>
+              <circle id="masteryRingCircle" cx="18" cy="18" r="15" fill="none" stroke="#30d158" stroke-width="3.8" stroke-dasharray="94.2" stroke-dashoffset="94.2" stroke-linecap="round"></circle>
+            </svg>
+            <span id="masteryPctText" class="text-[11px] font-semibold text-emerald-400 num-card">0% Mastered</span>
+          </div>
+          <button type="button" id="themeToggleBtn" onclick="toggleAppleTheme()" class="apple-btn !py-1 !px-2.5 text-[11px]" title="Switch between Apple Pro Dark and Cupertino Daylight mode">
+            <span id="themeToggleIcon">☀️ Daylight</span>
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -265,6 +605,73 @@ Blur spans total: 124
   </div>
 </section>
 
+
+    <!-- ══ INTERACTIVE SYLLABUS AUDIT & CONCEPT READINESS MATRIX (EDB C&A Guide 2018 · Topic VIII Strands a–c) ══ -->
+    <div class="mt-6 apple-sim-panel space-y-4" id="syllabus-audit-panel">
+      <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800/80 pb-3">
+        <div>
+          <span class="text-[10px] font-mono uppercase tracking-widest text-sky-400 font-bold">Interactive Syllabus Check-Off · EDB C&amp;A Guide (Topic VIII Strands a–c)</span>
+          <h3 class="text-base font-bold text-white mt-0.5">HKDSE Topic VIII Competency Checklist &amp; Direct Simulator Links</h3>
+          <p class="text-xs text-slate-400">Tick each official EDB learning outcome across Strands (a)–(c) and Part II depth caps (`NTF-2018 II-B VIII (a)/(b)`) as you master it.</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <span id="sylAuditCount" class="chip bg-emerald-950 text-emerald-300 border border-emerald-700 font-mono">0 / 12 Outcomes Checked</span>
+          <button type="button" class="apple-btn text-xs" onclick="checkAllSyllabusOutcomes()">Check All</button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs" id="sylAuditGrid">
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">VIII(a) · Conservation of Energy &amp; Constant Pressure</b>System ↔ surroundings transfer; $\Delta H$ is heat change at <b>constant pressure</b> (CP 2016; no derivation expected, NTF VIII(a)). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-heat');selectHeat(1)">Inspect →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">VIII(a) · Exothermic ($\Delta H &lt; 0$) vs. Endothermic ($\Delta H &gt; 0$)</b>Recognise temperature rise vs fall; ALWAYS include the `$+$` sign on endothermic $\Delta H$ values (CP 2012 Q8 / 2024 Q8). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-heat');selectHeat(3)">Inspect →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">VIII(a) · Bond Breaking vs. Bond Forming (CP 2015/2021/2025)</b>Breaking absorbs energy, forming releases energy; compare energies (never count number of bonds, CP 2025 Q8!). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-heat');switchHeatMode('map')">Bond Ledger →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">VIII(a) · Enthalpy Level Diagrams (CP 2013)</b>Two horizontal levels with state symbols + single vertical $\Delta H$ arrow (never draw a reaction profile hump when level diagram is asked!). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-heat');switchHeatMode('map')">Level Sim →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">VIII(b) · $\Delta H_f^\circ$ Definition &amp; Equation (CP 2020/2025 Q8)</b>1 mol compound formed from its constituent elements in their standard states under standard conditions; $\Delta H_f^\circ(\text{element}) = 0$. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-defn');switchDefnMode('map')">Defn Studio →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">VIII(b) · $\Delta H_c^\circ$ &amp; $\Delta H_{\text{neut}}^\circ$ Definitions (CP 2014/2022/2024)</b>$\Delta H_c^\circ$: 1 mol burnt completely in excess $\text{O}_2$ ($\text{H}_2\text{O}(l)$); $\Delta H_{\text{neut}}^\circ$: per <b>1 mol of water formed</b> (CP 2022 Q7 / 2024 Q8). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-defn');switchDefnMode('map')">Defn Studio →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">VIII(b) · Simple Calorimetry ($q = mc\Delta T$) (NTF VIII(b))</b>Polystyrene cup (neutralisation/solution) &amp; spirit burner + copper can (combustion); bomb calorimeter NOT expected. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-calor');switchCalorMode('map')">Calorimetry Sim →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">VIII(b) · Calorimetry Errors &amp; Weak-Acid Ionisation (CP 2024 Q8)</b>Heat loss to surroundings / cup heat capacity neglected; why weak acids give less negative $\Delta H_{\text{neut}}$ (energy absorbed to ionise). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-calor');switchCalorMode('map')">Calorimetry Sim →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">VIII(c) · Why Indirect Hess Routes Are Needed (CP 2013/2016/2017/2025)</b>$\text{C} + \text{O}_2$ gives $\text{CO}/\text{CO}_2$ mixture; $\text{Mg}+\text{C}+\text{O}_2$ cannot react directly; $\text{CaCO}_3 + \text{H}_2\text{SO}_4$ forms insoluble $\text{CaSO}_4$ coating. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-hess');selectHess(1)">Inspect →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">VIII(c) · Constructing Labelled Enthalpy Cycles (CP 2012/2017/2025)</b>Balanced equations with state symbols at every node, correct arrow directions, and labelled $\Delta H$ terms. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-hess');switchHessMode('map')">Cycle Studio →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">VIII(c) · $\Delta H_f^\circ$ vs. $\Delta H_c^\circ$ Table Formulas</b>Formation: $\sum\Delta H_f^\circ(\text{products}) - \sum\Delta H_f^\circ(\text{reactants})$; Combustion: $\sum\Delta H_c^\circ(\text{reactants}) - \sum\Delta H_c^\circ(\text{products})$. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-hess');switchHessMode('map')">Cycle Studio →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">VIII(Synthesis) · Sign–Value–Unit &amp; Word-Perfect Definitions</b>Write full-mark definitions, bond explanations, and Hess cycles without sign or unit errors. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-solver')">Grader →</button></span>
+        </label>
+      </div>
+    </div>
+
 <!-- ═══════════ TAB 2 · ENGINE A · ENERGY CHANGES (STRAND a) ═══════════ -->
 <section id="tab-heat" class="tab-panel space-y-6">
   <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-sm">
@@ -410,6 +817,24 @@ Blur spans total: 124
             <p class="text-[10px] text-slate-500 mt-2">Wrong drawing = wrong marks, even with right chemistry — recorded on the CP <i>(CP 2013, Paper 1B context)</i>.</p>
           </div>
         </div>
+        <!-- ══ INTERACTIVE SIMULATOR A1: BOND-BREAKING VS BOND-FORMING LEDGER (CP 2015 · CP 2021 · CP 2025 Q8) ══ -->
+        <div class="mt-6 apple-sim-panel space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+            <div>
+              <span class="text-[10px] font-mono text-sky-400 uppercase font-bold">Interactive Simulator · Strand (a) Concept Check (CP 2015 · CP 2021 · CP 2025 Q8)</span>
+              <h4 class="text-sm font-bold text-white mt-0.5">Bond-Breaking (Endothermic) vs. Bond-Forming (Exothermic) Inventory</h4>
+              <p class="text-[11px] text-slate-400">Select a reaction below to inspect the exact type and number of covalent bonds broken and formed, and the 4-clause HKEAA explanation (including the 2025 Q8 $\text{H}_2\text{O}_2$ question!).</p>
+            </div>
+            <select id="bondRxSel" onchange="updateBondRxSim()" class="bg-slate-900 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-white font-medium">
+              <option value="h2o2" selected>1. H₂(g) + O₂(g) → H₂O₂(l) (ΔHf° = −188 kJ mol⁻¹ · CP 2025 Q8!)</option>
+              <option value="h2o">2. 2H₂(g) + O₂(g) → 2H₂O(l) (ΔH = −572 kJ mol⁻¹ · CP 2015)</option>
+              <option value="ch4">3. CH₄(g) + 2O₂(g) → CO₂(g) + 2H₂O(l) (ΔHc° = −890 kJ mol⁻¹)</option>
+              <option value="n2_o2">4. N₂(g) + O₂(g) → 2NO(g) (ΔH = +180 kJ mol⁻¹ · Endothermic!)</option>
+            </select>
+          </div>
+          <div id="bondRxOut" class="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2 text-xs text-slate-300 leading-relaxed"></div>
+        </div>
+
       </div>
     </div>
 
@@ -569,6 +994,25 @@ Blur spans total: 124
           <p class="text-[11px] font-bold text-slate-300 uppercase tracking-wider mb-2">The “one mole of what?” table</p>
           <div class="overflow-x-auto"><table class="w-full text-xs text-slate-300"><thead class="text-slate-400 uppercase tracking-wider text-[10px]"><tr><th class="p-2 text-left">Term</th><th class="p-2 text-left">One mole of…</th><th class="p-2 text-left">Equation anchor</th><th class="p-2 text-left">Sign habit</th></tr></thead><tbody class="divide-y divide-slate-800"><tr><td class="p-2 font-semibold text-white">ΔHf° formation</td><td class="p-2">compound <b>formed</b> from its elements</td><td class="p-2">1 product, fractional O₂ allowed</td><td class="p-2">often −; element = 0</td></tr><tr><td class="p-2 font-semibold text-white">ΔHc° combustion</td><td class="p-2">substance <b>burnt</b></td><td class="p-2">1 fuel + O₂ → CO₂ + H₂O(l)</td><td class="p-2">always −</td></tr><tr><td class="p-2 font-semibold text-white">ΔHneut° neutralisation</td><td class="p-2"><b>water formed</b></td><td class="p-2">H⁺(aq) + OH⁻(aq) → H₂O(l)</td><td class="p-2">always − (≈ −57)</td></tr><tr><td class="p-2 font-semibold text-white">ΔH reaction</td><td class="p-2">reaction <b>as written</b></td><td class="p-2">whatever equation is printed</td><td class="p-2">either — write the sign</td></tr></tbody></table></div>
         </div>
+        <!-- ══ INTERACTIVE SIMULATOR B1: THERMOCHEMICAL EQUATION & 4-SLOT DEFINITION STUDIO (CP 2014 Q6 · CP 2020 Q7 · CP 2025 Q8) ══ -->
+        <div class="mt-6 apple-sim-panel space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+            <div>
+              <span class="text-[10px] font-mono text-purple-400 uppercase font-bold">Interactive Simulator · Strand (b) Concept Check (CP 2014 Q6 · CP 2020 Q7 · CP 2025 Q8)</span>
+              <h4 class="text-sm font-bold text-white mt-0.5">Thermochemical Equation &amp; Word-Perfect Definition Inspector</h4>
+              <p class="text-[11px] text-slate-400">Pick any standard enthalpy term below to inspect its exact thermochemical equation (with fractional coefficients and state symbols) and its 4 mandatory definition clauses.</p>
+            </div>
+            <select id="thermoEqSel" onchange="updateThermoEqSim()" class="bg-slate-900 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-white font-medium">
+              <option value="dhf_h2o2" selected>1. ΔHf°[H₂O₂(l)] = −188 kJ mol⁻¹ (CP 2025 Q8)</option>
+              <option value="dhf_ch3oh">2. ΔHf°[CH₃OH(l)] = −239 kJ mol⁻¹ (Fractional ½O₂!)</option>
+              <option value="dhc_c2h5oh">3. ΔHc°[C₂H₅OH(l)] = −1367 kJ mol⁻¹ (CP 2014 Q6)</option>
+              <option value="dhc_c_co2">4. Why ΔHc°[C(graphite)] = ΔHf°[CO₂(g)] = −394 kJ mol⁻¹ (Dual Identity!)</option>
+              <option value="dhn_h2so4">5. ΔHneut° for H₂SO₄(aq) + 2NaOH(aq) (Per 1 mol H₂O formed · CP 2022 Q7 / 2024 Q8)</option>
+            </select>
+          </div>
+          <div id="thermoEqOut" class="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2 text-xs text-slate-300 leading-relaxed"></div>
+        </div>
+
       </div>
     </div>
 
@@ -746,6 +1190,23 @@ Blur spans total: 124
           <p class="text-[11px] font-bold text-slate-300 uppercase tracking-wider mb-2">Bias directions at a glance</p>
           <div class="overflow-x-auto"><table class="w-full text-xs text-slate-300"><thead class="text-slate-400 uppercase tracking-wider text-[10px]"><tr><th class="p-2 text-left">Problem in the lab</th><th class="p-2 text-left">Effect on |ΔT|</th><th class="p-2 text-left">Effect on measured ΔH</th><th class="p-2 text-left">MS-register phrase</th></tr></thead><tbody class="divide-y divide-slate-800"><tr><td class="p-2">Heat escapes during pouring/over time</td><td class="p-2">smaller</td><td class="p-2">less negative / less positive (underestimate)</td><td class="p-2">“heat lost to surroundings”</td></tr><tr><td class="p-2">Cup/can warms up too</td><td class="p-2">smaller (for the water)</td><td class="p-2">underestimate</td><td class="p-2">“heat capacity of the container was neglected”</td></tr><tr><td class="p-2">Soot on the can (incomplete combustion)</td><td class="p-2">smaller</td><td class="p-2">|ΔHc°| underestimate</td><td class="p-2">“incomplete combustion”</td></tr><tr><td class="p-2">Fuel evaporates from burner</td><td class="p-2">— (mass artefact)</td><td class="p-2">n too large ⇒ |ΔHc°| underestimate</td><td class="p-2">“some fuel evaporated, not burnt”</td></tr><tr><td class="p-2">Run done at 15 °C, not 25 °C</td><td class="p-2">—</td><td class="p-2">not a “standard” value anyway</td><td class="p-2">“not performed under standard conditions”</td></tr></tbody></table></div>
         </div>
+        <!-- ══ INTERACTIVE SIMULATOR C1: NEUTRALISATION & WEAK-ACID IONISATION CALORIMETRY LAB (CP 2022 Q7 · CP 2024 Q8) ══ -->
+        <div class="mt-6 apple-sim-panel space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+            <div>
+              <span class="text-[10px] font-mono text-emerald-400 uppercase font-bold">Interactive Simulator · Strand (b) Concept Check (CP 2022 Q7 · CP 2024 Q8)</span>
+              <h4 class="text-sm font-bold text-white mt-0.5">Compare Neutralisation Trials: Strong vs. Weak Acid &amp; Volume Scaling</h4>
+              <p class="text-[11px] text-slate-400">Click any trial comparison below to see why $\Delta T$, heat $q$, and $\Delta H_{\text{neut}}$ behave differently — and how CP 2024 Q8 tested weak-acid dissociation enthalpy!</p>
+            </div>
+            <div class="flex flex-wrap gap-1.5 text-xs">
+              <button type="button" onclick="showCalorCase(0)" class="calcase-btn apple-btn apple-btn-primary !py-1.5 !px-3">Trial 1: Strong Acids + Strong Alkalis (CP 2024 Q8)</button>
+              <button type="button" onclick="showCalorCase(1)" class="calcase-btn apple-btn !py-1.5 !px-3">Trial 2: Weak Acid CH₃COOH + NaOH (CP 2024 Q8)</button>
+              <button type="button" onclick="showCalorCase(2)" class="calcase-btn apple-btn !py-1.5 !px-3">Trial 3: Doubling Volumes vs. Doubling Concentrations</button>
+            </div>
+          </div>
+          <div id="calorCaseOut" class="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2 text-xs text-slate-300 leading-relaxed"></div>
+        </div>
+
       </div>
     </div>
 
@@ -917,6 +1378,29 @@ Blur spans total: 124
           <p class="text-[11px] font-bold text-slate-300 uppercase tracking-wider mb-2">Every cycle obeys one equality — read it off the picture</p>
           <div class="overflow-x-auto"><table class="w-full text-xs text-slate-300"><thead class="text-slate-400 uppercase tracking-wider text-[10px]"><tr><th class="p-2 text-left">Situation</th><th class="p-2 text-left">Equality to write</th><th class="p-2 text-left">Book-keeping to watch</th></tr></thead><tbody class="divide-y divide-slate-800"><tr><td class="p-2">Target hidden in a corner</td><td class="p-2">unknown leg = sum of the other route</td><td class="p-2">arrows head-to-tail: match direction before adding signs</td></tr><tr><td class="p-2">Given equation scaled (e.g. 2 mol H₂O)</td><td class="p-2">ΔH term × 2</td><td class="p-2">the missed coefficient was on the CP <i>(CP 2015 Paper 1B context)</i></td></tr><tr><td class="p-2">Given equation reversed</td><td class="p-2">ΔH → −ΔH</td><td class="p-2">keep magnitude, flip sign only <i>(CP 2014 Q6)</i></td></tr><tr><td class="p-2">Fractional coefficients (½O₂)</td><td class="p-2">halve the ΔH when halving a given equation</td><td class="p-2">the ½ stays outside every bracket <span style="white-space:nowrap">(MS bank)</span></td></tr></tbody></table></div>
         </div>
+        <!-- ══ INTERACTIVE SIMULATOR D1: VISUAL SVG HESS'S LAW CYCLE BUILDER (CP 2012 Q8 · CP 2013 Q.15 · CP 2017 · CP 2025 Q8) ══ -->
+        <div class="mt-6 apple-sim-panel space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+            <div>
+              <span class="text-[10px] font-mono text-cyan-400 uppercase font-bold">Interactive Simulator · Strand (c) Concept Check (CP 2012 Q8 · CP 2017 · CP 2025 Q8)</span>
+              <h4 class="text-sm font-bold text-white mt-0.5">Interactive SVG Enthalpy Cycle Builder (Balanced Nodes + State Symbols + Arrow Directions)</h4>
+              <p class="text-[11px] text-slate-400">Select an exam cycle below to inspect the complete 3-box SVG enthalpy cycle with state symbols, arrow directions, and algebraic verification.</p>
+            </div>
+            <select id="svgCycleSel" onchange="updateSvgCycleSim()" class="bg-slate-900 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-white font-medium">
+              <option value="khco3" selected>1. Thermal Decomposition: 2KHCO₃(s) → K₂CO₃(s) + H₂O(l) + CO₂(g) via HCl(aq) (CP 2012 Q8)</option>
+              <option value="co_form">2. Formation of CO(g): C(graphite) + ½O₂(g) → CO(g) via Combustion to CO₂(g) (CP 2013 Q.15)</option>
+              <option value="caco3_form">3. Formation of CaCO₃(s) from Elements via CaO(s) + CO₂(g) (CP 2016 / CP 2017)</option>
+              <option value="h2o2_decomp">4. Decomposition: 2H₂O₂(l) → 2H₂O(l) + O₂(g) via Formation Cycle (CP 2025 Q8)</option>
+            </select>
+          </div>
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 items-center text-xs">
+            <div class="lg:col-span-2 bg-slate-950 border border-slate-800 rounded-2xl p-4">
+              <svg id="hessCycleSvg" viewBox="0 0 460 195" class="w-full h-auto" role="img" aria-label="Enthalpy change cycle diagram"></svg>
+            </div>
+            <div id="hessCycleMath" class="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2 text-slate-300 leading-relaxed"></div>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -1049,6 +1533,45 @@ Blur spans total: 124
         </div>
         <button class="w-full bg-amber-700 hover:bg-amber-600 text-white text-xs font-semibold py-1.5 px-2 rounded-md" onclick="solverNeut()">Compute ΔHneut</button>
         <div id="sv4Out" aria-live="polite" class="text-xs text-emerald-300 font-mono min-h-[20px] leading-relaxed"></div>
+      </div>
+    </div>
+
+    
+    <!-- ══ BENCH 5 · LIVE HKEAA MARK-SCHEME KEYWORD GRADER (TOPIC VIII EDITION) ══ -->
+    <div class="mt-6 apple-sim-panel space-y-4">
+      <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+        <div>
+          <span class="text-[10px] font-mono text-sky-400 uppercase font-bold px-2 py-0.5 bg-sky-950 rounded border border-sky-800">Bench 5 · Interactive Examiner Grader</span>
+          <h3 class="text-base font-bold text-white mt-1">Practice Writing Full-Mark Topic VIII Answers — Instant `[1M]` &amp; `[NOT ACCEPT]` Diagnostic</h3>
+          <p class="text-xs text-slate-400">Select a high-frequency Paper 1B question below and type your answer. The engine checks your phrasing against official HKEAA mark-scheme rubrics and flags fatal errors.</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 text-xs">
+        <div class="lg:col-span-1 space-y-2.5">
+          <label for="graderQSelect" class="block text-slate-300 font-semibold">Select HKDSE Exam Prompt:</label>
+          <select id="graderQSelect" onchange="loadGraderPrompt()" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white">
+            <option value="def_dhf">Q1 (2 marks · CP 2025 Q8): State the meaning of the term "standard enthalpy change of formation" of H₂O₂(l) and write the corresponding thermochemical equation.</option>
+            <option value="def_dhc">Q2 (2 marks · CP 2014 Q6): Define the term "standard enthalpy change of combustion" of ethanol.</option>
+            <option value="bond_exo">Q3 (2 marks · CP 2015 / 2021 / 2025 Q8): Explain, in terms of bond breaking and bond forming, why the reaction H₂(g) + O₂(g) → H₂O₂(l) is exothermic (ΔH &lt; 0).</option>
+            <option value="indirect_co">Q4 (2 marks · CP 2013 Q.15 / 2016 / 2017): Explain why the standard enthalpy change of formation of CO(g) (or MgCO₃(s)) cannot be determined directly by experiment.</option>
+            <option value="caco3_h2so4">Q5 (2 marks · CP 2016): Explain why replacing dilute HCl(aq) with dilute H₂SO₄(aq) is unsuitable for determining the enthalpy change of reaction of solid CaCO₃ in a calorimeter.</option>
+            <option value="calor_errors">Q6 (2 marks · CP 2016 / MS Bank §8): State TWO sources of error that cause the experimental enthalpy change of combustion determined using a spirit burner and copper can to be less negative than the data-book value.</option>
+          </select>
+          <div id="graderPromptBox" class="p-3 rounded-xl bg-slate-950 border border-slate-800 text-slate-200 leading-relaxed"></div>
+        </div>
+
+        <div class="lg:col-span-2 space-y-3">
+          <textarea id="graderInput" rows="4" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-sky-500" placeholder="Type your exam explanation here..."></textarea>
+          <div class="flex flex-wrap gap-2">
+            <button type="button" onclick="gradeStudentAnswer()" class="apple-btn apple-btn-primary">✨ Grade My Answer Against Mark Scheme</button>
+            <button type="button" onclick="fillModelGraderAnswer()" class="apple-btn">Show Model Full-Mark Answer</button>
+            <button type="button" onclick="document.getElementById('graderInput').value='';document.getElementById('graderResultBox').innerHTML='Type an answer and click Grade.';" class="apple-btn">Clear</button>
+          </div>
+          <div id="graderResultBox" class="p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-300 space-y-2 leading-relaxed">
+            Type an answer above and click <b>Grade My Answer Against Mark Scheme</b> to see your mark breakdown and keyword hits.
+          </div>
+        </div>
       </div>
     </div>
 
@@ -1593,5 +2116,341 @@ else { try{ MOBILE_UX.init(); }catch(e){} }
   }catch(e){}
 })();
 </script>
+
+<!-- ═══════════ APPLE COMMAND PALETTE (⌘K) MODAL ═══════════ -->
+<div id="cmdModal" onclick="if(event.target===this)closeCmdModal()">
+  <div class="w-full max-w-xl mx-4 bg-slate-900 border border-slate-700/80 rounded-2xl shadow-2xl overflow-hidden">
+    <div class="flex items-center gap-3 px-4 py-3 border-b border-slate-800">
+      <span class="text-sky-400 text-sm">🔍</span>
+      <input id="cmdSearchInput" type="text" oninput="filterCmdList()" placeholder="Search enthalpy definitions, bond breaking/forming, q=mcΔT calorimetry, Hess cycles, or CP year..." class="w-full bg-transparent text-sm text-white placeholder-slate-400 focus:outline-none">
+      <button type="button" onclick="closeCmdModal()" class="text-xs text-slate-400 hover:text-white px-2 py-0.5 rounded bg-slate-800">ESC</button>
+    </div>
+    <div id="cmdResults" class="max-h-80 overflow-y-auto divide-y divide-slate-800/70 p-2 text-xs"></div>
+  </div>
+</div>
+
+<script>
+function toggleAppleTheme(){
+  const root = document.documentElement;
+  const isLight = root.classList.toggle('theme-light');
+  const icon = document.getElementById('themeToggleIcon');
+  if(icon) icon.textContent = isLight ? '🌙 Pro Dark' : '☀️ Daylight';
+  try { localStorage.setItem('hkdse_topic8_theme', isLight ? 'light' : 'dark'); } catch(e){}
+}
+
+const quizMasteryState = {};
+function injectQuizSelfCheckBars(){
+  ['heatQuiz','defnQuiz','calorQuiz','hessQuiz'].forEach(qid => {
+    const container = document.getElementById(qid);
+    if(!container) return;
+    const headerDiv = container.previousElementSibling;
+    if(headerDiv && !headerDiv.querySelector('.hide-all-btn')){
+      const btnWrap = document.createElement('div');
+      btnWrap.className = 'flex items-center gap-2';
+      const revBtn = headerDiv.querySelector('button');
+      if(revBtn){
+        revBtn.parentNode.insertBefore(btnWrap, revBtn);
+        btnWrap.appendChild(revBtn);
+        const hideBtn = document.createElement('button');
+        hideBtn.type = 'button';
+        hideBtn.className = 'hide-all-btn text-[11px] font-semibold text-slate-300 border border-slate-700 px-3 py-1 rounded-full hover:bg-slate-800';
+        hideBtn.textContent = 'Reset Blanks';
+        hideBtn.onclick = () => container.querySelectorAll('.blur-answer').forEach(b => b.classList.remove('revealed'));
+        btnWrap.appendChild(hideBtn);
+      }
+    }
+    [...container.children].forEach((row, idx) => {
+      if(row.querySelector('.quiz-self-bar')) return;
+      const key = qid + '_' + idx;
+      const bar = document.createElement('div');
+      bar.className = 'quiz-self-bar';
+      bar.innerHTML = `<span class="text-[10px] font-mono text-slate-400">Tap blurred chips above to check each keyword, then log your recall:</span>
+        <div class="flex items-center gap-1.5">
+          <button type="button" class="apple-btn !py-0.5 !px-2 text-[10px]" onclick="markQuizRow('${key}', true, this)">✓ Got It</button>
+          <button type="button" class="apple-btn !py-0.5 !px-2 text-[10px]" onclick="markQuizRow('${key}', false, this)">↻ Review Again</button>
+        </div>`;
+      row.appendChild(bar);
+    });
+  });
+}
+function markQuizRow(key, mastered, btnEl){
+  quizMasteryState[key] = mastered;
+  const buttons = btnEl.parentElement.querySelectorAll('button');
+  buttons[0].className = mastered ? 'apple-btn !py-0.5 !px-2 text-[10px] !bg-emerald-600/30 !border-emerald-500 !text-emerald-300' : 'apple-btn !py-0.5 !px-2 text-[10px]';
+  buttons[1].className = !mastered ? 'apple-btn !py-0.5 !px-2 text-[10px] !bg-amber-600/30 !border-amber-500 !text-amber-300' : 'apple-btn !py-0.5 !px-2 text-[10px]';
+  updateMasteryRing();
+}
+function checkAllSyllabusOutcomes(){
+  document.querySelectorAll('.syl-chk').forEach(c => c.checked = true);
+  updateMasteryRing();
+}
+function updateMasteryRing(){
+  const sylChks = [...document.querySelectorAll('.syl-chk')];
+  const sylDone = sylChks.filter(c => c.checked).length;
+  const sylTotal = sylChks.length || 12;
+  const sylBadge = document.getElementById('sylAuditCount');
+  if(sylBadge) sylBadge.textContent = `${sylDone} / ${sylTotal} Outcomes Checked`;
+  const quizDone = Object.values(quizMasteryState).filter(Boolean).length;
+  const pct = Math.round(((sylDone + quizDone) / (sylTotal + 40)) * 100);
+  const circle = document.getElementById('masteryRingCircle');
+  const txt = document.getElementById('masteryPctText');
+  if(circle) circle.style.strokeDashoffset = String(94.2 - (94.2 * pct) / 100);
+  if(txt) txt.textContent = `${pct}% Mastered`;
+}
+
+/* 1. Bond-Breaking vs Bond-Forming Ledger (CP 2015 / 2021 / 2025 Q8) */
+const BOND_RX_DATA = {
+  h2o2: '<b>$\text{H}_2(g) + \text{O}_2(g) \rightarrow \text{H}_2\text{O}_2(l)$ ($\Delta H_f^\circ = -188\text{ kJ mol}^{-1}$ · CP 2025 Q8):</b><br>• <b>Bonds Broken (Endothermic — Energy Absorbed):</b> <b>1 mol of $\text{H–H}$ single bonds</b> and <b>1 mol of $\text{O=O}$ double bonds</b>.<br>• <b>Bonds Formed (Exothermic — Energy Released):</b> <b>2 mol of $\text{O–H}$ single bonds</b> and <b>1 mol of $\text{O–O}$ single bonds</b> in $\text{H–O–O–H}$ (CP 2025 Q8 flagged candidates who missed either the number or the single $\text{O–O}$ bond!).<br>• <b>Full-Mark Explanation (CP 2025 Q8):</b> The energy <b>released in forming</b> the $\text{O–H}$ and $\text{O–O}$ bonds is <b>greater than</b> the energy <b>absorbed in breaking</b> the $\text{H–H}$ and $\text{O=O}$ bonds (never say "because 3 bonds are formed and 2 bonds are broken"!).',
+  h2o: '<b>$2\text{H}_2(g) + \text{O}_2(g) \rightarrow 2\text{H}_2\text{O}(l)$ ($\Delta H = -572\text{ kJ mol}^{-1}$ · CP 2015):</b><br>• <b>Bonds Broken (Absorbs Energy):</b> 2 mol of $\text{H–H}$ bonds and 1 mol of $\text{O=O}$ double bonds (never write "$\text{O–O}$"!).<br>• <b>Bonds Formed (Releases Energy):</b> 4 mol of $\text{O–H}$ bonds in $2\text{ mol H}_2\text{O}$ (+ heat released in condensing $\text{H}_2\text{O}$).<br>• <b>Verdict:</b> Energy released in bond forming &gt; energy absorbed in bond breaking $\Rightarrow$ exothermic ($\Delta H &lt; 0$).',
+  ch4: '<b>$\text{CH}_4(g) + 2\text{O}_2(g) \rightarrow \text{CO}_2(g) + 2\text{H}_2\text{O}(l)$ ($\Delta H_c^\circ = -890\text{ kJ mol}^{-1}$):</b><br>• <b>Bonds Broken (Absorbs Energy):</b> 4 mol of $\text{C–H}$ single bonds and 2 mol of $\text{O=O}$ double bonds.<br>• <b>Bonds Formed (Releases Energy):</b> 2 mol of $\text{C=O}$ double bonds (in $\text{O=C=O}$) and 4 mol of $\text{O–H}$ single bonds (in $2\text{H}_2\text{O}$).',
+  n2_o2: '<b>$\text{N}_2(g) + \text{O}_2(g) \rightarrow 2\text{NO}(g)$ ($\Delta H = +180\text{ kJ mol}^{-1}$ · Endothermic!):</b><br>• <b>Bonds Broken (Absorbs Energy):</b> 1 mol of very strong $\text{N}\equiv\text{N}$ triple bonds and 1 mol of $\text{O=O}$ double bonds.<br>• <b>Bonds Formed (Releases Energy):</b> 2 mol of nitrogen–oxygen bonds in $\text{NO}$.<br>• <b>Verdict:</b> Energy <b>absorbed in breaking</b> the strong $\text{N}\equiv\text{N}$ and $\text{O=O}$ bonds is <b>greater than</b> the energy <b>released in forming</b> the bonds in $\text{NO}$ $\Rightarrow$ endothermic ($\Delta H = +180\text{ kJ mol}^{-1}$).'
+};
+function updateBondRxSim(){
+  const k = document.getElementById('bondRxSel').value;
+  const out = document.getElementById('bondRxOut');
+  if(out && BOND_RX_DATA[k]){ out.innerHTML = BOND_RX_DATA[k]; safeInitKaTeX(); }
+}
+
+/* 2. Thermochemical Equation & Definition Studio */
+const THERMO_EQ_DATA = {
+  dhf_h2o2: '<b>Standard Enthalpy Change of Formation of $\text{H}_2\text{O}_2(l)$ (CP 2025 Q8):</b><br>• <b>Thermochemical Equation:</b> $\text{H}_2(g) + \text{O}_2(g) \rightarrow \text{H}_2\text{O}_2(l) \quad \Delta H_f^\circ = -188\text{ kJ mol}^{-1}$<br>• <b>Word-Perfect Definition (4 Slots):</b> The <b>enthalpy change</b> when <b>one mole</b> of $\text{H}_2\text{O}_2(l)$ is formed from its <b>constituent elements in their standard states</b> ($\text{H}_2(g)$ and $\text{O}_2(g)$) <b>under standard conditions</b> ($298\text{ K}, 101.3\text{ kPa}$).',
+  dhf_ch3oh: '<b>Standard Enthalpy Change of Formation of Methanol, $\text{CH}_3\text{OH}(l)$:</b><br>• <b>Thermochemical Equation:</b> $\text{C(s, graphite)} + 2\text{H}_2(g) + \frac{1}{2}\text{O}_2(g) \rightarrow \text{CH}_3\text{OH}(l) \quad \Delta H_f^\circ = -239\text{ kJ mol}^{-1}$<br>• <b>Why Fractional $\frac{1}{2}\text{O}_2(g)$?</b> The definition of $\Delta H_f^\circ$ anchors to <b>1 mole of $\text{CH}_3\text{OH}(l)$ formed</b>; multiplying the whole equation by 2 would double $\Delta H$ to $-478\text{ kJ mol}^{-1}$!',
+  dhc_c2h5oh: '<b>Standard Enthalpy Change of Combustion of Ethanol, $\text{C}_2\text{H}_5\text{OH}(l)$ (CP 2014 Q6):</b><br>• <b>Thermochemical Equation:</b> $\text{C}_2\text{H}_5\text{OH}(l) + 3\text{O}_2(g) \rightarrow 2\text{CO}_2(g) + 3\text{H}_2\text{O}(l) \quad \Delta H_c^\circ = -1367\text{ kJ mol}^{-1}$<br>• <b>Word-Perfect Definition (CP 2014 Q6):</b> The <b>enthalpy change</b> when <b>one mole of ethanol</b> undergoes <b>complete combustion</b> in excess oxygen <b>under standard conditions</b> (note: water must be liquid $\text{H}_2\text{O}(l)$!).',
+  dhc_c_co2: '<b>Why $\Delta H_c^\circ[\text{C(graphite)}] = \Delta H_f^\circ[\text{CO}_2(g)] = -394\text{ kJ mol}^{-1}$:</b><br>• <b>Equation:</b> $\text{C(s, graphite)} + \text{O}_2(g) \rightarrow \text{CO}_2(g)$<br>• This single equation simultaneously represents (1) the complete combustion of <b>1 mol of C(graphite)</b> in $\text{O}_2(g)$ AND (2) the formation of <b>1 mol of $\text{CO}_2(g)$</b> from its constituent elements in their standard states! (Similarly, $\Delta H_c^\circ[\text{H}_2(g)] = \Delta H_f^\circ[\text{H}_2\text{O}(l)] = -286\text{ kJ mol}^{-1}$).',
+  dhn_h2so4: '<b>Standard Enthalpy Change of Neutralisation ($\Delta H_{\text{neut}}^\circ$ · CP 2022 Q7 / CP 2024 Q8):</b><br>• <b>Equation per 1 mol $\text{H}_2\text{O}$:</b> $\frac{1}{2}\text{H}_2\text{SO}_4(aq) + \text{NaOH}(aq) \rightarrow \frac{1}{2}\text{Na}_2\text{SO}_4(aq) + \text{H}_2\text{O}(l) \quad \Delta H_{\text{neut}}^\circ = -57.3\text{ kJ mol}^{-1}$<br>• <b>🚨 CP 2022 Q7 / CP 2024 Q8 Trap:</b> For $\text{H}_2\text{SO}_4(aq) + 2\text{NaOH}(aq) \rightarrow \text{Na}_2\text{SO}_4(aq) + 2\text{H}_2\text{O}(l)$, $2\text{ mol of H}_2\text{O}$ are formed, so the reaction enthalpy is $2 \times (-57.3) = -114.6\text{ kJ mol}^{-1}$, while $\Delta H_{\text{neut}}^\circ$ per mole of water formed is still $-57.3\text{ kJ mol}^{-1}$!'
+};
+function updateThermoEqSim(){
+  const k = document.getElementById('thermoEqSel').value;
+  const out = document.getElementById('thermoEqOut');
+  if(out && THERMO_EQ_DATA[k]){ out.innerHTML = THERMO_EQ_DATA[k]; safeInitKaTeX(); }
+}
+
+/* 3. Calorimetry Case Sim (CP 2024 Q8) */
+const CALOR_CASES = [
+  '<b>Trial 1 · Why All Strong Acid + Strong Alkali Pairs Give $\Delta H_{\text{neut}}^\circ \approx -57.3\text{ kJ mol}^{-1}$ (CP 2024 Q8):</b><br>• <b>CP 2024 Q8 Accepted Answer:</b> All strong acids ($\text{HCl}, \text{HNO}_3$) and strong alkalis ($\text{NaOH}, \text{KOH}$) <b>completely dissociate (ionise) in water</b>, so the neutralisation reaction between any strong acid and strong alkali is simply the same net ionic reaction: $\text{H}^+(aq) + \text{OH}^-(aq) \rightarrow \text{H}_2\text{O}(l)$ per mole of water formed.<br>• <b>🚨 CP 2024 Q8 Rejected Incomplete Answers:</b> Saying "because the same moles of water are formed", "because the concentrations are the same", or "because they are all monobasic" did NOT explain why the molar enthalpy change is the same!',
+  '<b>Trial 2 · Weak Acid ($\text{CH}_3\text{COOH}$) + Strong Alkali ($\text{NaOH}$) Gives $\Delta H_{\text{neut}}^\circ \approx -55.2\text{ kJ mol}^{-1}$ (CP 2024 Q8):</b><br>• <b>Why Less Negative (Less Exothermic):</b> $\text{CH}_3\text{COOH}$ is a weak acid that only partially dissociates in water. During neutralisation, <b>some heat energy is absorbed to dissociate (ionise) the unionised $\text{CH}_3\text{COOH}$ molecules</b> into $\text{H}^+(aq)$ and $\text{CH}_3\text{COO}^-(aq)$.<br>• <b>Calculating $\Delta H$ of Dissociation (CP 2024 Q8):</b> $\Delta H_{\text{diss}} = \Delta H_{\text{neut}}(\text{weak}) - \Delta H_{\text{neut}}(\text{strong}) = (-55.2) - (-57.3) = <b>+2.1\text{ kJ mol}^{-1}</b>$ (keep the mandatory $+$ sign and $\text{kJ mol}^{-1}$ unit!).',
+  '<b>Trial 3 · Doubling Both Volumes (at Same M) vs. Doubling Both Concentrations (at Same V):</b><br>• <b>Case A: $100\text{ cm}^3$ of $1.0\text{ M HCl} + 100\text{ cm}^3$ of $1.0\text{ M NaOH}$ (vs $50+50\text{ cm}^3$):</b> Moles of $\text{H}_2\text{O}$ double ($0.10\text{ mol}$) AND total solution mass doubles ($200\text{ g}$), so <b>$\Delta T$ is UNCHANGED ($\approx +6.8\,^\circ\text{C}$)</b> and $\Delta H_{\text{neut}}$ is unchanged!<br>• <b>Case B: $50\text{ cm}^3$ of $2.0\text{ M HCl} + 50\text{ cm}^3$ of $2.0\text{ M NaOH}$:</b> Moles of $\text{H}_2\text{O}$ double ($0.10\text{ mol}$) while total solution mass stays $100\text{ g}$, so <b>$\Delta T$ DOUBLES ($\approx +13.6\,^\circ\text{C}$)</b>, while $\Delta H_{\text{neut}} = -q/n(\text{H}_2\text{O})$ STILL remains $-57.3\text{ kJ mol}^{-1}$!'
+];
+function showCalorCase(i){
+  document.querySelectorAll('.calcase-btn').forEach((b, idx) => {
+    b.className = idx === i ? 'calcase-btn apple-btn apple-btn-primary !py-1.5 !px-3' : 'calcase-btn apple-btn !py-1.5 !px-3';
+  });
+  const out = document.getElementById('calorCaseOut');
+  if(out && CALOR_CASES[i]){ out.innerHTML = CALOR_CASES[i]; safeInitKaTeX(); }
+}
+
+/* 4. Visual SVG Hess Cycle Builder */
+const SVG_CYCLES = {
+  khco3: {
+    topLeft: '2KHCO₃(s)', topRight: 'K₂CO₃(s) + H₂O(l) + CO₂(g)', bottom: '2KCl(aq) + 2H₂O(l) + 2CO₂(g)',
+    topLbl: 'ΔH_r = ?', leftSide: '+ 2HCl(aq)', rightSide: '+ 2HCl(aq)',
+    leftVal: '2 × ΔH₁ = 2(+28) = +56', rightVal: 'ΔH₂ = −30 kJ mol⁻¹',
+    dirLeft: 'down', dirRight: 'down',
+    math: '<b>Thermal Decomposition of $\text{KHCO}_3(s)$ (CP 2012 Q8):</b><br>• <b>Route Equality:</b> $\Delta H_r + \Delta H_2 = 2 \times \Delta H_1$<br>• <b>Substitute with Signs:</b> $\Delta H_r + (-30) = 2(+28) = +56$<br>• $\Delta H_r(	ext{for } 2\text{ mol KHCO}_3) = +56 - (-30) = +86\text{ kJ mol}^{-1}$.<br>• <b>Per Mole of $\text{KHCO}_3$ (CP 2012 Q8 Gate!):</b> $\div 2 = <b>+43\text{ kJ mol}^{-1}</b>$ (keep the $+$ sign!).'
+  },
+  co_form: {
+    topLeft: 'C(s, graphite) + O₂(g)', topRight: 'CO(g) + ½O₂(g)', bottom: 'CO₂(g)',
+    topLbl: 'ΔHf°[CO(g)] = ?', leftSide: 'ΔHc°[C(s)]', rightSide: 'ΔHc°[CO(g)]',
+    leftVal: '−394 kJ mol⁻¹', rightVal: '−284 kJ mol⁻¹',
+    dirLeft: 'down', dirRight: 'down',
+    math: '<b>Standard Enthalpy Change of Formation of $\text{CO}(g)$ (CP 2013 Q.15):</b><br>• <b>Route Equality:</b> $\Delta H_f^\circ[\text{CO}(g)] + \Delta H_c^\circ[\text{CO}(g)] = \Delta H_c^\circ[\text{C(graphite)}]$<br>• <b>Substitute:</b> $\Delta H_f^\circ[\text{CO}(g)] + (-284) = -394$<br>• $\Delta H_f^\circ[\text{CO}(g)] = (-394) - (-284) = <b>-110\text{ kJ mol}^{-1}</b>$.'
+  },
+  caco3_form: {
+    topLeft: 'CaO(s) + CO₂(g)', topRight: 'CaCO₃(s)', bottom: 'Ca(s) + C(graphite) + 3/2 O₂(g)',
+    topLbl: 'ΔH_r = −178 kJ mol⁻¹', leftSide: 'ΣΔHf°(CaO + CO₂)', rightSide: 'ΔHf°[CaCO₃(s)] = ?',
+    leftVal: '(−635) + (−394) = −1029', rightVal: 'y (Target)',
+    dirLeft: 'up', dirRight: 'up',
+    math: '<b>Formation Cycle for $\text{CaCO}_3(s)$ (CP 2016 / CP 2017):</b><br>• <b>Bottom Box = Elements in Standard States</b> (arrows point UP from elements to compounds for $\Delta H_f^\circ$).<br>• <b>Route Equality:</b> $\Delta H_f^\circ[\text{CaCO}_3(s)] = \Delta H_f^\circ[\text{CaO}(s)] + \Delta H_f^\circ[\text{CO}_2(g)] + \Delta H_r$<br>• $y = (-635) + (-394) + (-178) = <b>-1207\text{ kJ mol}^{-1}</b>$.'
+  },
+  h2o2_decomp: {
+    topLeft: '2H₂O₂(l)', topRight: '2H₂O(l) + O₂(g)', bottom: '2H₂(g) + 2O₂(g)',
+    topLbl: 'ΔH_r = ?', leftSide: '2 × ΔHf°[H₂O₂(l)]', rightSide: '2 × ΔHf°[H₂O(l)] + 0',
+    leftVal: '2(−188) = −376 kJ mol⁻¹', rightVal: '2(−286) = −572 kJ mol⁻¹',
+    dirLeft: 'up', dirRight: 'up',
+    math: '<b>Decomposition of $\text{H}_2\text{O}_2(l)$ via Formation Cycle (CP 2015 · CP 2025 Q8):</b><br>• <b>Formula:</b> $\Delta H_r^\circ = \sum \Delta H_f^\circ(\text{products}) - \sum \Delta H_f^\circ(\text{reactants})$<br>• $\Delta H_r^\circ = [2(-286) + 0] - [2(-188)] = -572 + 376 = <b>-196\text{ kJ mol}^{-1}</b>$ (or $-98\text{ kJ mol}^{-1}$ per mole of $\text{H}_2\text{O}_2(l)$).'
+  }
+};
+
+function updateSvgCycleSim(){
+  const k = document.getElementById('svgCycleSel').value;
+  const c = SVG_CYCLES[k];
+  if(!c) return;
+  document.getElementById('hessCycleMath').innerHTML = c.math;
+  const svg = document.getElementById('hessCycleSvg');
+  svg.innerHTML = `
+    <defs>
+      <marker id="arrSky" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><polygon points="0 0, 7 3.5, 0 7" fill="#38bdf8"/></marker>
+      <marker id="arrEm" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><polygon points="0 0, 7 3.5, 0 7" fill="#30d158"/></marker>
+    </defs>
+    <!-- Top Left Box -->
+    <rect x="12" y="14" width="165" height="40" rx="8" fill="#0f172a" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="94" y="38" fill="#f8fafc" font-size="10.5" font-weight="bold" text-anchor="middle">${c.topLeft}</text>
+    <!-- Top Right Box -->
+    <rect x="280" y="14" width="168" height="40" rx="8" fill="#0f172a" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="364" y="38" fill="#f8fafc" font-size="10.5" font-weight="bold" text-anchor="middle">${c.topRight}</text>
+    <!-- Top Arrow -->
+    <line x1="182" y1="34" x2="274" y2="34" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrSky)"/>
+    <text x="228" y="25" fill="#7dd3fc" font-size="10" font-weight="bold" text-anchor="middle">${c.topLbl}</text>
+    <!-- Bottom Box -->
+    <rect x="115" y="142" width="230" height="40" rx="8" fill="#0f172a" stroke="#30d158" stroke-width="1.5"/>
+    <text x="230" y="166" fill="#34d399" font-size="10.5" font-weight="bold" text-anchor="middle">${c.bottom}</text>
+    <!-- Left Diagonal Arrow -->
+    ${c.dirLeft === 'down'
+      ? `<line x1="95" y1="58" x2="170" y2="138" stroke="#30d158" stroke-width="2" marker-end="url(#arrEm)"/>`
+      : `<line x1="170" y1="138" x2="95" y2="58" stroke="#30d158" stroke-width="2" marker-end="url(#arrEm)"/>`}
+    <text x="72" y="96" fill="#cbd5e1" font-size="9.5" text-anchor="middle">${c.leftSide}</text>
+    <text x="72" y="110" fill="#fbbf24" font-size="9.5" font-weight="bold" text-anchor="middle">${c.leftVal}</text>
+    <!-- Right Diagonal Arrow -->
+    ${c.dirRight === 'down'
+      ? `<line x1="365" y1="58" x2="290" y2="138" stroke="#30d158" stroke-width="2" marker-end="url(#arrEm)"/>`
+      : `<line x1="290" y1="138" x2="365" y2="58" stroke="#30d158" stroke-width="2" marker-end="url(#arrEm)"/>`}
+    <text x="385" y="96" fill="#cbd5e1" font-size="9.5" text-anchor="middle">${c.rightSide}</text>
+    <text x="385" y="110" fill="#fbbf24" font-size="9.5" font-weight="bold" text-anchor="middle">${c.rightVal}</text>
+  `;
+  safeInitKaTeX();
+}
+
+/* 5. Bench 5: Live HKEAA Keyword Answer Grader (Topic VIII) */
+const GRADER_RUBRICS = {
+  def_dhf: {
+    prompt: '<b>Question (2 marks · CP 2025 Q8):</b> State the meaning of the term "standard enthalpy change of formation" of H₂O₂(l), and write the corresponding thermochemical equation.',
+    model: 'The standard enthalpy change of formation of H₂O₂(l) is the enthalpy change when one mole of H₂O₂(l) is formed from its constituent elements in their standard states under standard conditions (298 K and 101.3 kPa). Equation: H₂(g) + O₂(g) → H₂O₂(l)  ΔHf° = −188 kJ mol⁻¹.',
+    marks: [
+      { label: '1M · One Mole Formed from Elements in Standard States + Standard Conditions', re: /one\s+mole[\s\S]{0,65}elements[\s\S]{0,55}standard\s+(states|conditions)/i, hint: 'CP 2025 Q8 Requirement: Include ALL keywords — <b>enthalpy change when one mole of H₂O₂(l) is formed from its constituent elements in their standard states under standard conditions</b>.' },
+      { label: '1M · Balanced Thermochemical Equation with State Symbols', re: /h2\(g\)\s*\+\s*o2\(g\)\s*(->|→|=)\s*h2o2\(l\)/i, hint: 'CP 2020 Q7 / CP 2025 Q8 Requirement: Write <b>H₂(g) + O₂(g) → H₂O₂(l)</b> with state symbols!' }
+    ],
+    traps: []
+  },
+  def_dhc: {
+    prompt: '<b>Question (2 marks · CP 2014 Q6):</b> Define the term "standard enthalpy change of combustion" of ethanol.',
+    model: 'The standard enthalpy change of combustion of ethanol is the enthalpy change when one mole of ethanol undergoes complete combustion in excess oxygen under standard conditions (298 K and 101.3 kPa).',
+    marks: [
+      { label: '1M · Enthalpy Change + One Mole of Substance + Complete Combustion', re: /enthalpy\s+change[\s\S]{0,45}one\s+mole[\s\S]{0,45}complete(ly)?\s+(combustion|burnt|burned)/i, hint: 'CP 2014 Q6 Checklist: Must include <b>enthalpy change</b>, <b>one mole of substance</b>, and <b>complete combustion</b>.' },
+      { label: '1M · Under Standard Conditions', re: /standard\s+conditions|298\s*k[\s\S]{0,25}(1\s*atm|101)/i, hint: 'CP 2014 Q6 Checklist: Must include <b>under standard conditions</b>.' }
+    ],
+    traps: []
+  },
+  bond_exo: {
+    prompt: '<b>Question (2 marks · CP 2015 / CP 2021 / CP 2025 Q8):</b> Explain, in terms of bond breaking and bond forming, why the reaction H₂(g) + O₂(g) → H₂O₂(l) is exothermic (why ΔH is negative).',
+    model: 'Bond breaking is endothermic (absorbs energy) and bond forming is exothermic (releases energy). The energy released in forming the O–H and O–O covalent bonds in H₂O₂ is greater than the energy absorbed in breaking the H–H and O=O covalent bonds in the reactants.',
+    marks: [
+      { label: '1M · Breaking Absorbs Energy + Forming Releases Energy', re: /(break(ing)?[\s\S]{0,35}absorbs?|absorbs?[\s\S]{0,35}break(ing)?)[\s\S]{0,60}(form(ing)?[\s\S]{0,35}releases?|releases?[\s\S]{0,35}form(ing)?)|(releases?[\s\S]{0,35}form(ing)?)[\s\S]{0,60}(absorbs?[\s\S]{0,35}break(ing)?)/i, hint: 'CP 2015 / CP 2025 Q8 Requirement: Explicitly state that <b>energy is absorbed in bond breaking and released in bond forming</b>.' },
+      { label: '1M · Energy Released (Forming) > Energy Absorbed (Breaking)', re: /(released[\s\S]{0,40}(greater|more)\s+than[\s\S]{0,40}absorbed|absorbed[\s\S]{0,40}(less|smaller)\s+than[\s\S]{0,40}released)/i, hint: 'State that <b>the energy released in bond forming is greater than the energy absorbed in bond breaking</b>.' }
+    ],
+    traps: [
+      { re: /break(ing)?\s+bonds?\s+releases?\s+energy/i, msg: 'CP 2015 / CP 2025 Q8 Fatal Inversion: Bond breaking ABSORBS energy — it NEVER releases energy!' },
+      { re: /number\s+of\s+bonds?\s+formed\s+is\s+greater/i, msg: 'CP 2025 Q8 Verbatim Error: "exothermic because the number of bonds formed is greater than the number of bonds broken" — compare the <b>energies</b>, not the number of bonds!' }
+    ]
+  },
+  indirect_co: {
+    prompt: '<b>Question (2 marks · CP 2013 Q.15 / CP 2016 / CP 2017):</b> Explain why the standard enthalpy change of formation of carbon monoxide, CO(g), cannot be determined directly by burning carbon in oxygen.',
+    model: 'When carbon is burnt in oxygen, both carbon monoxide (CO) and carbon dioxide (CO₂) are formed at the same time (a mixture of CO and CO₂ is produced), so it is impossible to burn carbon completely to form pure CO(g) alone in a single direct experiment.',
+    marks: [
+      { label: '1M · Burning Carbon Gives a Mixture of CO and CO₂ (CO₂ Also Formed)', re: /(mixture\s+of\s+co\s+and\s+co2|co2\s+is\s+also\s+formed|both\s+co\s+and\s+co2)/i, hint: 'CP 2013 Q.15 Requirement: State that burning carbon produces a <b>mixture of CO and CO₂ (CO₂ is also formed)</b>.' },
+      { label: '1M · Cannot Stop at Pure CO Alone / Incomplete Reaction', re: /(cannot\s+obtain\s+pure\s+co|pure\s+co\s+cannot|incomplete|unreacted)/i, hint: 'Conclude that <b>pure CO(g) cannot be obtained alone</b> in a direct combustion experiment.' }
+    ],
+    traps: []
+  },
+  caco3_h2so4: {
+    prompt: '<b>Question (2 marks · CP 2016):</b> Explain why replacing dilute HCl(aq) with dilute H₂SO₄(aq) is unsuitable for determining the enthalpy change of reaction of solid CaCO₃ in a simple calorimeter.',
+    model: 'Calcium carbonate reacts with dilute sulphuric acid to form insoluble calcium sulphate (CaSO₄(s)), which coats the surface of the solid CaCO₃ and prevents it from reacting completely with the acid.',
+    marks: [
+      { label: '1M · Insoluble CaSO₄(s) Formed', re: /insoluble\s+(calcium\s+sulphate|caso4)/i, hint: 'CP 2016 / MS Bank §8 Wording: State that <b>insoluble CaSO₄ (calcium sulphate) will be formed</b>.' },
+      { label: '1M · Coats Surface of CaCO₃ → Reaction Incomplete / Stops', re: /(coats?|covers?|layer)[\s\S]{0,45}(stops?|prevents?|incomplete)/i, hint: 'State that the insoluble layer <b>coats the CaCO₃ surface and prevents complete reaction</b>.' }
+    ],
+    traps: []
+  },
+  calor_errors: {
+    prompt: '<b>Question (2 marks · CP 2016 / MS Bank §8):</b> State TWO sources of error that cause the experimental enthalpy change of combustion of an alcohol determined using a spirit burner and copper can to be less negative than the data-book value.',
+    model: '1. Heat loss to the surroundings (by convection/radiation) and heat absorbed by the copper can/thermometer (the heat capacity of the container was neglected). 2. Incomplete combustion of the alcohol (forming soot/carbon and CO), or evaporation of the volatile alcohol from the wick.',
+    marks: [
+      { label: '1M · Heat Loss to Surroundings / Heat Capacity of Container Neglected', re: /(heat\s+(loss|lost|transfer)\s+to\s+(the\s+)?surroundings?|heat\s+capacity\s+of\s+(the\s+)?(container|can|calorimeter))/i, hint: 'MS Bank §8 Wording: State <b>heat loss to the surroundings</b> or <b>heat capacity of the container/can was neglected</b>.' },
+      { label: '1M · Incomplete Combustion / Evaporation of Alcohol / Non-Standard Conditions', re: /(incomplete\s+combustion|evaporat(es|ion)\s+of\s+(the\s+)?(alcohol|fuel)|not\s+performed\s+(under|in)\s+standard\s+conditions)/i, hint: 'State a second valid source: <b>incomplete combustion of the alcohol</b>, <b>evaporation of fuel</b>, or <b>not performed under standard conditions</b>.' }
+    ],
+    traps: []
+  }
+};
+
+function loadGraderPrompt(){
+  const sel = document.getElementById('graderQSelect');
+  if(!sel) return;
+  const r = GRADER_RUBRICS[sel.value];
+  const box = document.getElementById('graderPromptBox');
+  if(box && r) box.innerHTML = r.prompt;
+}
+function fillModelGraderAnswer(){
+  const sel = document.getElementById('graderQSelect');
+  if(!sel) return;
+  const r = GRADER_RUBRICS[sel.value];
+  if(!r) return;
+  document.getElementById('graderInput').value = r.model;
+  gradeStudentAnswer();
+}
+function gradeStudentAnswer(){
+  const sel = document.getElementById('graderQSelect');
+  const txt = (document.getElementById('graderInput').value || '').trim();
+  const out = document.getElementById('graderResultBox');
+  if(!sel || !out) return;
+  const r = GRADER_RUBRICS[sel.value];
+  if(!txt){ out.innerHTML = '<span class="text-amber-300">Please type an answer first, or click "Show Model Full-Mark Answer".</span>'; return; }
+  let score = 0, rowsHtml = '', trapHtml = '';
+  r.marks.forEach(m => {
+    const hit = m.re.test(txt);
+    if(hit) score++;
+    rowsHtml += `<div class="p-2 rounded-lg border ${hit ? 'bg-emerald-950/40 border-emerald-700 text-emerald-200' : 'bg-slate-900 border-slate-800 text-slate-300'}"><b>${hit ? '✅ [1M Earned]' : '⬜ [0M Missed]'} ${m.label}:</b> ${hit ? 'Keyword verified in your answer.' : m.hint}</div>`;
+  });
+  r.traps.forEach(t => {
+    if(t.re.test(txt)) trapHtml += `<div class="p-2.5 rounded-lg bg-rose-950/60 border border-rose-600 text-rose-200 font-medium">🚨 <b>[NOT ACCEPT / Contradiction Penalty]:</b> ${t.msg}</div>`;
+  });
+  out.innerHTML = `<div class="flex items-center justify-between border-b border-slate-800 pb-2"><span class="font-bold text-white text-sm">Examiner Diagnostic Score: <span class="text-sky-400 font-mono">${score} / ${r.marks.length} marks</span></span><span class="chip ${score===r.marks.length && !trapHtml ? 'bg-emerald-950 text-emerald-300 border-emerald-700' : 'bg-amber-950 text-amber-300 border-amber-700'}">${score===r.marks.length && !trapHtml ? 'Full Marks Wording' : 'Keep Refining'}</span></div>${trapHtml}<div class="space-y-1.5 mt-2">${rowsHtml}</div>`;
+}
+
+const CMD_INDEX = [
+  { title: 'Bond-Breaking vs Bond-Forming Inventory (H₂O₂ CP 2025 Q8)', tag: 'Strand (a) · Sim', action: ()=>{switchTab('tab-heat');switchHeatMode('map');} },
+  { title: 'Thermochemical Equation & 4-Slot Definition Studio', tag: 'Strand (b) · Sim', action: ()=>{switchTab('tab-defn');switchDefnMode('map');} },
+  { title: 'Neutralisation & Weak-Acid Ionisation Calorimetry Lab (CP 2024 Q8)', tag: 'Strand (b) · Sim', action: ()=>{switchTab('tab-calor');switchCalorMode('map');} },
+  { title: 'Interactive SVG Hess’s Law Cycle Builder (KHCO₃, CO, CaCO₃, H₂O₂)', tag: 'Strand (c) · Sim', action: ()=>{switchTab('tab-hess');switchHessMode('map');} },
+  { title: 'q=mcΔT, Definition Decider, Hess Book-Keeper & Neutralisation Benches', tag: 'Solver · Benches 1–4', action: ()=>{switchTab('tab-solver');} },
+  { title: 'Live HKEAA Keyword Answer Grader (Bench 5)', tag: 'Solver · Exam Practice', action: ()=>{switchTab('tab-solver');} },
+  { title: 'Candidate Performance Intelligence (2012–2025)', tag: 'Past Papers · Tab 7', action: ()=>{switchTab('tab-pp');} }
+];
+function openCmdModal(){ const m=document.getElementById('cmdModal'); if(m){ m.classList.add('open'); const inp=document.getElementById('cmdSearchInput'); if(inp){inp.value='';filterCmdList();setTimeout(()=>inp.focus(),50);}}}
+function closeCmdModal(){ const m=document.getElementById('cmdModal'); if(m) m.classList.remove('open'); }
+function filterCmdList(){
+  const q = (document.getElementById('cmdSearchInput').value || '').toLowerCase();
+  const box = document.getElementById('cmdResults');
+  if(!box) return;
+  box.innerHTML = '';
+  CMD_INDEX.filter(i => i.title.toLowerCase().includes(q) || i.tag.toLowerCase().includes(q)).forEach(i => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'w-full text-left px-3 py-2.5 rounded-xl hover:bg-slate-800/80 flex items-center justify-between transition';
+    btn.innerHTML = `<span class="text-white font-medium">${i.title}</span><span class="chip bg-sky-950 text-sky-300 border border-sky-800">${i.tag}</span>`;
+    btn.onclick = () => { closeCmdModal(); i.action(); };
+    box.appendChild(btn);
+  });
+}
+document.addEventListener('keydown', e => {
+  if((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k'){ e.preventDefault(); const m=document.getElementById('cmdModal'); if(m && m.classList.contains('open')) closeCmdModal(); else openCmdModal(); }
+  else if(e.key === 'Escape') closeCmdModal();
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  try { if(localStorage.getItem('hkdse_topic8_theme') === 'light') toggleAppleTheme(); } catch(e){}
+  injectQuizSelfCheckBars();
+  updateBondRxSim();
+  updateThermoEqSim();
+  showCalorCase(0);
+  updateSvgCycleSim();
+  loadGraderPrompt();
+  updateMasteryRing();
+  hessRoute();
+  document.getElementById('sv1Mw').value = '100'; document.getElementById('sv1C').value = '4.2'; document.getElementById('sv1Ti').value = '25.0'; document.getElementById('sv1Tf').value = '45.0'; document.getElementById('sv1Name').value = 'C3H8'; document.getElementById('sv1Mass').value = '0.50'; document.getElementById('sv1MM').value = '44'; solverQdT();
+  solverDefn();
+  document.getElementById('sv3D1').value = '-467'; document.getElementById('sv3K1').value = '1'; document.getElementById('sv3D2').value = '-394'; document.getElementById('sv3K2').value = '1'; document.getElementById('sv3D3').value = '-286'; document.getElementById('sv3K3').value = '1'; document.getElementById('sv3D4').value = '-50'; document.getElementById('sv3K4').value = '-1'; solverHess();
+  document.getElementById('sv4Na').value = '0.050'; document.getElementById('sv4Nb').value = '0.050'; document.getElementById('sv4M').value = '100'; document.getElementById('sv4DT').value = '6.8'; solverNeut();
+});
+</script>
+
 </body>
 </html>

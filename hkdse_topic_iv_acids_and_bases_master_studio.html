@@ -9,49 +9,375 @@
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
 <style>
-  :root { color-scheme: dark; }
-  body { background:#020617; font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
-  .tab-panel { display:none; }
-  .tab-panel.active { display:block; }
-  .blur-answer { filter: blur(6px); cursor:pointer; transition: filter .25s ease; user-select:none; }
-  .blur-answer.revealed { filter: blur(0); cursor:default; user-select:text; }
-  .engine-module { display:none; }
-  .engine-module.active { display:block; }
-  .mode-pill { cursor:pointer; }
-  .mode-pill.active { background:rgba(56,189,248,.15); color:#7dd3fc; border-color:#38bdf8; }
-  details > summary { cursor:pointer; list-style:none; }
-  details > summary::-webkit-details-marker { display:none; }
-  .chip { display:inline-block; padding:2px 10px; border-radius:9999px; font-size:11px; font-weight:600; }
-  .katex { font-size:1.05em; }
-  .num-card { font-variant-numeric: tabular-nums; }
-  input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner-spin-button { -webkit-appearance:none; margin:0; }
-  input[type=number] { -moz-appearance:textfield; }
-  .edot { font-size:10px; line-height:1; letter-spacing:-1px; }
-  .katex-block{overflow-x:auto;overflow-y:hidden}
-  .katex-block .katex-display{text-align:left;margin:.35em 0}
-  /* ══ MOBILE UX LAYER (chrome-only) ══ */
-  :root{--hdr:120px}
-  html{scroll-padding-top:calc(var(--hdr) + 10px)}
-  .toc-strip{display:none;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:2px 0 6px;margin-bottom:2px}
-  .toc-strip::-webkit-scrollbar{display:none}
-  .toc-chip{flex-shrink:0;font-size:10px;line-height:1;padding:7px 11px;border-radius:9999px;border:1px solid rgba(51,65,85,.9);background:rgba(15,23,42,.85);color:#94a3b8;font-weight:600;white-space:nowrap;cursor:pointer}
-  #backTop{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:70;width:44px;height:44px;border-radius:9999px;border:1px solid rgba(56,189,248,.35);background:rgba(8,14,26,.92);color:#7dd3fc;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transform:translateY(8px);transition:opacity .25s,transform .25s}
-  #backTop.show{opacity:1;pointer-events:auto;transform:none}
-  #scrollProg{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,#0ea5e9,#38bdf8);z-index:80;pointer-events:none}
-  @media (max-width:1023.98px){
-    header{background-color:rgba(2,6,23,.97)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;padding-top:env(safe-area-inset-top)}
-    #mainNav{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:4px}
-    #mainNav::-webkit-scrollbar{display:none}
-    #mainNav button{flex-shrink:0}
-    select,input[type="number"],input[type="text"]{font-size:16px!important}
-    #mainNav button{padding-top:10px;padding-bottom:10px}
-    .mode-pill{padding:8px 14px}
-    .toc-chip{padding:10px 12px}
-    .katex{font-size:1em}
-    .toc-strip{display:flex}
+  :root {
+    color-scheme: dark;
+    --hdr: 118px;
+    --bg-canvas: #000000;
+    --bg-elevated: rgba(22, 22, 29, 0.72);
+    --bg-card: rgba(28, 28, 36, 0.68);
+    --bg-card-solid: #16161d;
+    --bg-subcard: rgba(38, 38, 48, 0.55);
+    --bg-glass-nav: rgba(14, 14, 20, 0.76);
+    --border-hairline: rgba(255, 255, 255, 0.09);
+    --border-highlight: rgba(255, 255, 255, 0.16);
+    --text-primary: #f5f5f7;
+    --text-secondary: #a1a1aa;
+    --text-tertiary: #6e6e77;
+    --accent-blue: #0a84ff;
+    --accent-teal: #64d2ff;
+    --accent-purple: #bf5af2;
+    --accent-emerald: #30d158;
+    --accent-amber: #ff9f0a;
+    --accent-rose: #ff453a;
+    --shadow-card: 0 20px 44px -12px rgba(0, 0, 0, 0.65), inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+    --shadow-hover: 0 24px 52px -10px rgba(0, 0, 0, 0.75), inset 0 1px 0 0 rgba(255, 255, 255, 0.18);
+    --spring: cubic-bezier(0.22, 1, 0.36, 1);
   }
-  @media (prefers-reduced-motion:reduce){.tab-panel.active{animation:none}
-    .blur-answer,#backTop{transition:none!important}}
+
+  html.theme-light {
+    color-scheme: light;
+    --bg-canvas: #f5f5f7;
+    --bg-elevated: rgba(255, 255, 255, 0.82);
+    --bg-card: rgba(255, 255, 255, 0.88);
+    --bg-card-solid: #ffffff;
+    --bg-subcard: rgba(242, 242, 247, 0.85);
+    --bg-glass-nav: rgba(248, 248, 252, 0.82);
+    --border-hairline: rgba(0, 0, 0, 0.08);
+    --border-highlight: rgba(0, 0, 0, 0.14);
+    --text-primary: #1d1d1f;
+    --text-secondary: #515154;
+    --text-tertiary: #86868b;
+    --shadow-card: 0 12px 32px -8px rgba(0, 0, 0, 0.07), inset 0 1px 0 0 rgba(255, 255, 255, 0.9);
+    --shadow-hover: 0 18px 40px -8px rgba(0, 0, 0, 0.12), inset 0 1px 0 0 rgba(255, 255, 255, 1);
+  }
+
+  html {
+    scroll-padding-top: calc(var(--hdr) + 14px);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--bg-canvas);
+    background-image:
+      radial-gradient(ellipse 80% 50% at 15% -10%, rgba(10, 132, 255, 0.16), transparent 60%),
+      radial-gradient(ellipse 70% 45% at 85% 5%, rgba(191, 90, 242, 0.12), transparent 60%),
+      radial-gradient(ellipse 60% 40% at 50% 100%, rgba(48, 209, 88, 0.08), transparent 60%);
+    background-attachment: fixed;
+    color: var(--text-primary);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: -0.011em;
+    transition: background-color 0.4s var(--spring), color 0.3s var(--spring);
+  }
+
+  h1, h2, h3, h4 {
+    letter-spacing: -0.024em;
+    font-weight: 650;
+  }
+
+  .font-mono {
+    font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+  }
+
+  header {
+    background: var(--bg-glass-nav) !important;
+    -webkit-backdrop-filter: saturate(190%) blur(28px) !important;
+    backdrop-filter: saturate(190%) blur(28px) !important;
+    border-bottom: 1px solid var(--border-hairline) !important;
+    box-shadow: 0 4px 24px -4px rgba(0, 0, 0, 0.28);
+    transition: background 0.35s var(--spring);
+  }
+
+  #mainNav {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border-hairline);
+    border-radius: 14px;
+    padding: 4px !important;
+    gap: 4px !important;
+    margin-bottom: 8px;
+  }
+  html.theme-light #mainNav {
+    background: rgba(0, 0, 0, 0.045);
+  }
+
+  #mainNav button {
+    border-radius: 10px !important;
+    border-bottom: none !important;
+    transition: all 0.28s var(--spring) !important;
+    position: relative;
+    font-weight: 500;
+  }
+  #mainNav button:hover { transform: translateY(-1px); }
+  #mainNav button:active { transform: scale(0.97); }
+  #mainNav button.tab-btn-active {
+    background: rgba(10, 132, 255, 0.22) !important;
+    color: #64d2ff !important;
+    box-shadow: 0 2px 10px rgba(10, 132, 255, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.22);
+    font-weight: 600 !important;
+  }
+  html.theme-light #mainNav button.tab-btn-active {
+    background: #ffffff !important;
+    color: #0066cc !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .bg-slate-900 {
+    background: var(--bg-elevated) !important;
+    -webkit-backdrop-filter: saturate(160%) blur(22px);
+    backdrop-filter: saturate(160%) blur(22px);
+    border-color: var(--border-hairline) !important;
+    border-radius: 22px !important;
+    box-shadow: var(--shadow-card);
+    transition: transform 0.35s var(--spring), box-shadow 0.35s var(--spring), border-color 0.3s ease;
+  }
+
+  .bg-slate-950 {
+    background: var(--bg-card) !important;
+    border-color: var(--border-hairline) !important;
+    border-radius: 18px !important;
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.06);
+    transition: transform 0.3s var(--spring), box-shadow 0.3s var(--spring), border-color 0.25s ease;
+  }
+  .bg-slate-950:hover {
+    border-color: var(--border-highlight) !important;
+  }
+
+  html.theme-light .text-white { color: #1d1d1f !important; }
+  html.theme-light .text-slate-100,
+  html.theme-light .text-slate-200,
+  html.theme-light .text-slate-300 { color: #2c2c2e !important; }
+  html.theme-light .text-slate-400 { color: #515154 !important; }
+  html.theme-light .text-slate-500 { color: #6e6e73 !important; }
+  html.theme-light .bg-slate-800,
+  html.theme-light .bg-slate-800\/50 { background-color: rgba(0, 0, 0, 0.05) !important; color: #1d1d1f !important; border-color: rgba(0,0,0,0.12) !important; }
+  html.theme-light .bg-sky-950\/40,
+  html.theme-light .bg-sky-950\/30,
+  html.theme-light .bg-sky-950 { background-color: rgba(10, 132, 255, 0.1) !important; color: #004080 !important; border-color: rgba(10, 132, 255, 0.28) !important; }
+  html.theme-light .bg-purple-950\/30,
+  html.theme-light .bg-purple-950 { background-color: rgba(175, 82, 222, 0.1) !important; color: #581c87 !important; border-color: rgba(175, 82, 222, 0.28) !important; }
+  html.theme-light .bg-emerald-950\/30,
+  html.theme-light .bg-emerald-950 { background-color: rgba(48, 209, 88, 0.12) !important; color: #065f46 !important; border-color: rgba(48, 209, 88, 0.3) !important; }
+  html.theme-light .bg-amber-950\/40,
+  html.theme-light .bg-amber-950\/30,
+  html.theme-light .bg-amber-950 { background-color: rgba(255, 159, 10, 0.13) !important; color: #78350f !important; border-color: rgba(255, 159, 10, 0.35) !important; }
+  html.theme-light .bg-rose-950\/40,
+  html.theme-light .bg-rose-950\/30,
+  html.theme-light .bg-rose-950 { background-color: rgba(255, 69, 58, 0.1) !important; color: #881337 !important; border-color: rgba(255, 69, 58, 0.28) !important; }
+  html.theme-light .text-sky-200, html.theme-light .text-sky-300, html.theme-light .text-sky-400 { color: #0055b3 !important; }
+  html.theme-light .text-amber-200, html.theme-light .text-amber-300, html.theme-light .text-amber-400 { color: #92400e !important; }
+  html.theme-light .text-rose-200, html.theme-light .text-rose-300, html.theme-light .text-rose-400 { color: #9f1239 !important; }
+  html.theme-light .text-emerald-300, html.theme-light .text-emerald-400 { color: #047857 !important; }
+  html.theme-light .text-purple-300, html.theme-light .text-purple-400 { color: #6b21a8 !important; }
+  html.theme-light .text-cyan-200, html.theme-light .text-cyan-300, html.theme-light .text-cyan-400 { color: #0e7490 !important; }
+
+  @keyframes appleStageIn {
+    0% { opacity: 0; transform: translateY(10px) scale(0.992); filter: blur(4px); }
+    100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+  }
+  .tab-panel { display: none; }
+  .tab-panel.active {
+    display: block;
+    animation: appleStageIn 0.42s var(--spring) forwards;
+  }
+  .engine-module { display: none; }
+  .engine-module.active {
+    display: block;
+    animation: appleStageIn 0.34s var(--spring) forwards;
+  }
+  .acid-card, .ph-card, .strength-card, .titration-card {
+    animation: appleStageIn 0.3s var(--spring) forwards;
+  }
+
+  .blur-answer {
+    filter: blur(5.5px);
+    cursor: pointer;
+    transition: filter 0.28s var(--spring), background-color 0.28s ease, transform 0.2s var(--spring), box-shadow 0.25s ease;
+    user-select: none;
+    border: 1px solid rgba(100, 210, 255, 0.22);
+    padding: 1px 7px !important;
+    border-radius: 7px !important;
+  }
+  .blur-answer:hover {
+    filter: blur(2.5px);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(10, 132, 255, 0.2);
+  }
+  .blur-answer.revealed {
+    filter: blur(0);
+    cursor: pointer;
+    user-select: text;
+    background: rgba(48, 209, 88, 0.16) !important;
+    border-color: rgba(48, 209, 88, 0.45) !important;
+    box-shadow: 0 0 0 1px rgba(48, 209, 88, 0.15);
+  }
+
+  .mode-pill {
+    cursor: pointer;
+    transition: all 0.26s var(--spring);
+    border-radius: 9999px;
+    backdrop-filter: blur(10px);
+  }
+  .mode-pill:hover { transform: translateY(-1px); }
+  .mode-pill:active { transform: scale(0.96); }
+  .mode-pill.active {
+    background: linear-gradient(135deg, rgba(10, 132, 255, 0.26), rgba(100, 210, 255, 0.14)) !important;
+    color: #7dd3fc !important;
+    border-color: rgba(100, 210, 255, 0.65) !important;
+    box-shadow: 0 4px 14px -2px rgba(10, 132, 255, 0.35), inset 0 1px 0 rgba(255,255,255,0.2);
+  }
+
+  details > summary {
+    cursor: pointer;
+    list-style: none;
+    transition: background-color 0.2s ease;
+    border-radius: 14px;
+  }
+  details > summary::-webkit-details-marker { display: none; }
+  details[open] > summary {
+    border-bottom: 1px solid var(--border-hairline);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 10px;
+    border-radius: 9999px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.12);
+  }
+
+  .katex { font-size: 1.05em; }
+  .num-card { font-variant-numeric: tabular-nums; }
+  input[type=number]::-webkit-outer-spin-button,
+  input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  input[type=number] { -moz-appearance: textfield; }
+  .katex-block { overflow-x: auto; overflow-y: hidden; }
+  .katex-block .katex-display { text-align: left; margin: .35em 0; }
+
+  .apple-sim-panel {
+    background: linear-gradient(165deg, rgba(20, 24, 38, 0.85), rgba(12, 15, 26, 0.92));
+    border: 1px solid rgba(100, 210, 255, 0.22);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 18px 40px -12px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  }
+  html.theme-light .apple-sim-panel {
+    background: linear-gradient(165deg, rgba(255, 255, 255, 0.95), rgba(240, 246, 255, 0.92));
+    border-color: rgba(10, 132, 255, 0.25);
+    box-shadow: 0 14px 32px -10px rgba(10, 132, 255, 0.12);
+  }
+
+  .apple-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 7px 14px;
+    transition: all 0.24s var(--spring);
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(255, 255, 255, 0.07);
+    color: var(--text-primary);
+  }
+  .apple-btn:hover {
+    background: rgba(255, 255, 255, 0.13);
+    transform: translateY(-1px);
+  }
+  .apple-btn:active { transform: scale(0.97); }
+  .apple-btn-primary {
+    background: linear-gradient(180deg, #1e90ff 0%, #0071e3 100%);
+    color: #ffffff !important;
+    border-color: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 4px 14px rgba(0, 113, 227, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  }
+  .apple-btn-primary:hover {
+    background: linear-gradient(180deg, #339dff 0%, #0a7ff0 100%);
+    box-shadow: 0 6px 18px rgba(0, 113, 227, 0.55);
+  }
+
+  input[type=range].apple-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 6px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #ff453a, #ff9f0a, #30d158, #0a84ff, #bf5af2);
+    outline: none;
+  }
+  input[type=range].apple-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 2px solid #0a84ff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+    cursor: grab;
+    transition: transform 0.18s var(--spring);
+  }
+  input[type=range].apple-slider::-webkit-slider-thumb:active {
+    transform: scale(1.15);
+    cursor: grabbing;
+  }
+
+  .quiz-self-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px dashed var(--border-hairline);
+    font-size: 11px;
+  }
+
+  #cmdModal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: rgba(0, 0, 0, 0.58);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 10vh;
+  }
+  #cmdModal.open {
+    display: flex;
+    animation: appleStageIn 0.22s var(--spring) forwards;
+  }
+
+  .toc-strip { display: none; gap: 6px; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 2px 0 6px; margin-bottom: 2px; }
+  .toc-strip::-webkit-scrollbar { display: none; }
+  .toc-chip { flex-shrink: 0; font-size: 10px; line-height: 1; padding: 7px 11px; border-radius: 9999px; border: 1px solid var(--border-hairline); background: var(--bg-card); color: var(--text-secondary); font-weight: 600; white-space: nowrap; cursor: pointer; transition: all 0.2s var(--spring); }
+  #backTop { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom)); z-index: 70; width: 44px; height: 44px; border-radius: 9999px; border: 1px solid rgba(100, 210, 255, 0.35); background: var(--bg-glass-nav); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); color: #7dd3fc; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transform: translateY(8px); transition: opacity .25s, transform .25s var(--spring); box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+  #backTop.show { opacity: 1; pointer-events: auto; transform: none; }
+  #scrollProg { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: linear-gradient(90deg, #0a84ff, #64d2ff, #30d158); z-index: 80; pointer-events: none; }
+
+  @media (max-width:1023.98px){
+    header { padding-top: env(safe-area-inset-top); }
+    #mainNav { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+    #mainNav::-webkit-scrollbar { display: none; }
+    #mainNav button { flex-shrink: 0; padding-top: 9px; padding-bottom: 9px; }
+    select, input[type="number"], input[type="text"] { font-size: 16px !important; }
+    .mode-pill { padding: 8px 14px; }
+    .toc-chip { padding: 10px 12px; }
+    .katex { font-size: 1em; }
+    .toc-strip { display: flex; }
+  }
+  @media (prefers-reduced-motion:reduce){
+    .tab-panel.active, .engine-module.active { animation: none !important; }
+    .blur-answer, #backTop { transition: none !important; }
+  }
 </style>
 </head>
 <body class="text-slate-200 min-h-screen">
@@ -61,14 +387,29 @@
   <div class="max-w-7xl mx-auto px-4 py-3">
     <div class="flex flex-wrap items-center justify-between gap-2">
       <div>
-        <h1 class="text-base sm:text-lg font-bold text-white leading-tight">HKDSE · Topic IV Master Studio</h1>
+        <div class="flex items-center gap-2.5"><div class="hidden sm:flex items-center gap-1.5 mr-1"><span class="w-2.5 h-2.5 rounded-full bg-[#ff5f56] inline-block shadow-sm"></span><span class="w-2.5 h-2.5 rounded-full bg-[#ffbd2e] inline-block shadow-sm"></span><span class="w-2.5 h-2.5 rounded-full bg-[#27c93f] inline-block shadow-sm"></span></div><h1 class="text-base sm:text-lg font-bold text-white leading-tight tracking-tight">HKDSE · Topic IV Master Studio — Acids and Bases</h1><span class="chip bg-sky-500/15 text-sky-300 border border-sky-400/30 text-[10px]">Interactive Studio Pro</span></div>
         <p class="text-[11px] text-slate-400 font-mono">Acids and Bases · Indicators, pH, Strength, Salts &amp; Volumetric Analysis</p>
       </div>
-      <div class="flex gap-2 text-[10px] font-mono">
+      <div class="flex flex-wrap items-center gap-2 text-[10px] font-mono">
         <span class="chip bg-sky-950 text-sky-400 border border-sky-800">Strands (a)–(f)</span>
         <span class="chip bg-purple-950 text-purple-400 border border-purple-800">Paper 1A + 1B</span>
         <span class="chip bg-emerald-950 text-emerald-400 border border-emerald-800">C&amp;A Guide 2018</span>
-        <span class="chip bg-amber-950 text-amber-400 border border-amber-800">NTF 18/08/2018 scope</span>
+        <div class="flex items-center gap-2 ml-1 pl-2 border-l border-slate-700/70">
+          <button type="button" onclick="openCmdModal()" class="apple-btn !py-1 !px-2.5 text-[11px]" title="Quick Concept &amp; Past-Paper Search (⌘K)">
+            <span>🔍 Search</span>
+            <kbd class="px-1.5 py-0.5 text-[9px] rounded bg-slate-800 text-slate-300 border border-slate-700">⌘K</kbd>
+          </button>
+          <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-900/90 border border-slate-700/80" title="Concept Mastery Progress across Quiz &amp; Syllabus Checkpoints">
+            <svg class="w-4 h-4 -rotate-90" viewBox="0 0 36 36">
+              <circle cx="18" cy="18" r="15" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="3.8"></circle>
+              <circle id="masteryRingCircle" cx="18" cy="18" r="15" fill="none" stroke="#30d158" stroke-width="3.8" stroke-dasharray="94.2" stroke-dashoffset="94.2" stroke-linecap="round"></circle>
+            </svg>
+            <span id="masteryPctText" class="text-[11px] font-semibold text-emerald-400 num-card">0% Mastered</span>
+          </div>
+          <button type="button" id="themeToggleBtn" onclick="toggleAppleTheme()" class="apple-btn !py-1 !px-2.5 text-[11px]" title="Switch between Apple Pro Dark and Cupertino Daylight mode">
+            <span id="themeToggleIcon">☀️ Daylight</span>
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -298,6 +639,73 @@ Depth caps: no weak-acid pH calculation · no Kw/pOH vocabulary · no salt hydro
   </div>
 </section>
 
+
+    <!-- ══ INTERACTIVE SYLLABUS AUDIT & CONCEPT READINESS MATRIX (EDB C&A Guide 2018 · pp. I-15 to I-20) ══ -->
+    <div class="mt-6 apple-sim-panel space-y-4" id="syllabus-audit-panel">
+      <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800/80 pb-3">
+        <div>
+          <span class="text-[10px] font-mono uppercase tracking-widest text-sky-400 font-bold">Interactive Syllabus Check-Off · EDB C&amp;A Guide (pp. I-15 to I-20)</span>
+          <h3 class="text-base font-bold text-white mt-0.5">HKDSE Topic IV Competency Checklist &amp; Direct Simulator Links</h3>
+          <p class="text-xs text-slate-400">Tick each official EDB learning outcome across Strands (a)–(f) as you master it, or launch its interactive simulator directly.</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <span id="sylAuditCount" class="chip bg-emerald-950 text-emerald-300 border border-emerald-700 font-mono">0 / 12 Outcomes Checked</span>
+          <button type="button" class="apple-btn text-xs" onclick="checkAllSyllabusOutcomes()">Check All</button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs" id="sylAuditGrid">
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">IV(a) · Role of Water &amp; H⁺(aq)</b>Dry HCl(g) / solid citric acid shows no acidic properties without water; H⁺(aq) causes acidity. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-acid');selectAcid(2)">Inspect →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">IV(a) · Basicity of Acids (CP 2012/2023/2024/2025)</b>Count ionisable H per molecule: HCl &amp; CH₃COOH (1), H₂SO₄ &amp; H₂C₂O₄ (2), H₃PO₄ &amp; citric (3). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-acid');switchAcidMode('map')">Basicity Sim →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">IV(a) · Alkalis, NH₄⁺ Test &amp; Cation Precipitates</b>OH⁻(aq) reactions with metal ions (NaOH vs NH₃(aq) excess) and warming with NH₄⁺ → NH₃(g). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-acid');switchAcidMode('map')">Cation Lab →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">IV(b) · Indicators &amp; End-Point Colours (CP 2012/2022)</b>Litmus, methyl orange (red → orange), phenolphthalein (colourless → pink), universal indicator vs pH meter. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-ph');switchPhMode('map')">pH Studio →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">IV(b) · pH = −log₁₀[H⁺(aq)] &amp; 10× Dilution</b>Calculate pH of strong acids/alkalis; 10× dilution shifts strong acid pH by +1 towards 7. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-ph');switchPhMode('map')">Dilution Sim →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">IV(c) · Strong vs. Weak &amp; Concentrated vs. Dilute</b>Extent of ionisation (→ vs ⇌) vs mol dm⁻³; fair-test comparisons (pH, rate with Mg, conductivity — never titre volume!). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-strength');switchStrengthMode('map')">Compare Lab →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">IV(d) · Neutralisation &amp; Exothermic ΔH_n (CP 2024 Q8)</b>H⁺(aq) + OH⁻(aq) → H₂O(l); why strong monoprotic acids + NaOH release the same heat per mole of H₂O. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-titration');selectTitration(1)">Inspect →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">IV(d) · Three Salt-Preparation Routes (CP 2012/2023)</b>(1) Acid + excess insoluble solid, (2) Acid + alkali titration, (3) Precipitation of PbSO₄/BaSO₄/AgCl. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-titration');switchTitrationMode('map')">Salt Router →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">IV(e) · Molarity, g dm⁻³ &amp; Safe Acid Dilution</b>Convert mol dm⁻³ ↔ g dm⁻³ (density × 1000 × % ÷ Mᵣ, CP 2014 Q7); add concentrated acid slowly to water in a beaker. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-solver')">Solver →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">IV(f) · Standard Solution Preparation (CP 2014/2019/2021)</b>Weigh primary standard (Na₂CO₃) → dissolve in beaker with distilled water → transfer + washings → 250.0 cm³ volumetric flask. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-titration');selectTitration(8)">Inspect →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">IV(f) · Titration Rinsing &amp; Error Analysis (CP 2013 Q4(e))</b>Rinse burette &amp; pipette with their solutions, conical flask with distilled water ONLY; 2 d.p. concordant titres. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-titration');switchTitrationMode('map')">Error Sim →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">IV(f) · Back-Titration Stoichiometry (NTF-2018 II-B IV (f))</b>Moles reacted with sample = moles of excess reagent added − moles left over in back-titration. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-solver')">Back-Titre Bench →</button></span>
+        </label>
+      </div>
+    </div>
+
 <!-- ═══════════ TAB 2 · ENGINE A · ACIDS & ALKALIS ═══════════ -->
 <section id="tab-acid" class="tab-panel space-y-6">
   <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-sm">
@@ -431,6 +839,61 @@ Depth caps: no weak-acid pH calculation · no Kw/pOH vocabulary · no salt hydro
         <div class="mt-4 p-4 bg-slate-900 border border-slate-800 rounded-lg">
           <p class="text-[11px] font-bold text-slate-300 uppercase tracking-wider mb-2">Alkalis mirror the acids</p><p class="text-xs text-slate-400 leading-relaxed">OH⁻(aq) attacks <b>ammonium salts → NH₃</b> (pungent, moist red litmus blue) and <b>metal ions → insoluble hydroxides</b> (Cu²⁺ blue ppt, Fe³⁺ reddish-brown ppt, Al³⁺ white ppt dissolving in excess NaOH). Both routes are the identification tools Paper 1B loves — the same two ions, H⁺ and OH⁻, run the whole topic.</p>
         </div>
+        <!-- ══ INTERACTIVE SIMULATOR A1: CATION HYDROXIDE PRECIPITATE BENCH & BASICITY INSPECTOR ══ -->
+        <div class="mt-6 apple-sim-panel space-y-5">
+          <div class="border-b border-slate-800 pb-3">
+            <span class="text-[10px] font-mono text-sky-400 uppercase font-bold">Interactive Simulator · Strand (a) Concept Check (CP 2014 Q9 · CP 2018 Q2 · CP 2023 Q4 · CP 2025 Q5)</span>
+            <h4 class="text-sm font-bold text-white mt-0.5">1. Virtual Alkali Wet-Lab: Metal Ions + NaOH(aq) vs. NH₃(aq) (Few Drops → Excess)</h4>
+            <p class="text-[11px] text-slate-400">Select an aqueous cation below to compare its precipitate colour with a few drops of alkali and whether it re-dissolves in <b>excess NaOH(aq)</b> vs. <b>excess NH₃(aq)</b>.</p>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 items-center text-xs">
+            <div class="space-y-2">
+              <label class="text-[10px] font-mono uppercase text-slate-400 font-bold block">Select Aqueous Cation:</label>
+              <div class="grid grid-cols-3 gap-1.5">
+                <button type="button" onclick="setCationSim('Cu2+')" class="cat-btn apple-btn apple-btn-primary" data-c="Cu2+">Cu²⁺(aq)</button>
+                <button type="button" onclick="setCationSim('Fe2+')" class="cat-btn apple-btn" data-c="Fe2+">Fe²⁺(aq)</button>
+                <button type="button" onclick="setCationSim('Fe3+')" class="cat-btn apple-btn" data-c="Fe3+">Fe³⁺(aq)</button>
+                <button type="button" onclick="setCationSim('Al3+')" class="cat-btn apple-btn" data-c="Al3+">Al³⁺(aq)</button>
+                <button type="button" onclick="setCationSim('Zn2+')" class="cat-btn apple-btn" data-c="Zn2+">Zn²⁺(aq)</button>
+                <button type="button" onclick="setCationSim('Pb2+')" class="cat-btn apple-btn" data-c="Pb2+">Pb²⁺(aq)</button>
+                <button type="button" onclick="setCationSim('Mg2+')" class="cat-btn apple-btn" data-c="Mg2+">Mg²⁺(aq)</button>
+                <button type="button" onclick="setCationSim('Ca2+')" class="cat-btn apple-btn" data-c="Ca2+">Ca²⁺(aq)</button>
+                <button type="button" onclick="setCationSim('NH4+')" class="cat-btn apple-btn" data-c="NH4+">NH₄⁺(aq)</button>
+              </div>
+            </div>
+
+            <div class="lg:col-span-2 p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2.5">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <span id="catSimTitle" class="font-bold text-white text-sm">Copper(II) ion, Cu²⁺(aq) (Blue solution)</span>
+                <span id="catSimPptBadge" class="chip bg-sky-950 text-sky-300 border border-sky-700 font-mono">Pale Blue Precipitate, Cu(OH)₂(s)</span>
+              </div>
+              <p id="catSimNaOH" class="text-slate-300 leading-relaxed"></p>
+              <p id="catSimNH3" class="text-emerald-300 leading-relaxed"></p>
+              <p id="catSimEq" class="font-mono text-sky-300 bg-slate-900 p-2 rounded-lg border border-slate-800"></p>
+            </div>
+          </div>
+
+          <!-- Basicity Inspector (CP 2016 Q6 / CP 2023 Q4 / CP 2024 Q4 / CP 2025 Q5) -->
+          <div class="border-t border-slate-800 pt-4">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+              <div>
+                <h4 class="text-xs font-bold text-white uppercase tracking-wider">2. Acid Basicity &amp; Ionisable-H Inspector (CP 2016 Q6 · CP 2023 Q4 · CP 2024 Q4 · CP 2025 Q5)</h4>
+                <p class="text-[11px] text-slate-400">Click any acid to see why counting total H atoms in the molecular formula is a recurring zero-mark trap:</p>
+              </div>
+              <div class="flex flex-wrap gap-1.5 text-xs">
+                <button type="button" onclick="showBasicityCard(0)" class="apple-btn !py-1 !px-2.5">CH₃COOH (Ethanoic)</button>
+                <button type="button" onclick="showBasicityCard(1)" class="apple-btn !py-1 !px-2.5">H₂C₂O₄ / Tartaric (CP 2025)</button>
+                <button type="button" onclick="showBasicityCard(2)" class="apple-btn !py-1 !px-2.5">Citric Acid (CP 2016 Q6)</button>
+                <button type="button" onclick="showBasicityCard(3)" class="apple-btn !py-1 !px-2.5">H₃NO₃S Sulphamic (CP 2024 Q4)</button>
+              </div>
+            </div>
+            <div id="basicityCardOut" class="p-3 rounded-xl bg-sky-950/35 border border-sky-800/60 text-xs text-sky-200 leading-relaxed">
+              <b>Ethanoic acid, CH₃COOH (4 H atoms in formula, Basicity = 1 · Monobasic):</b> Only the <b>1 H atom attached to oxygen in the –COOH group</b> ionises in water ($	ext{CH}_3	ext{COOH}(aq) ightleftharpoons 	ext{CH}_3	ext{COO}^-(aq) + 	ext{H}^+(aq)$). The three $	ext{C–H}$ bonds in $-	ext{CH}_3$ are non-polar and never ionise!
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -594,6 +1057,52 @@ Depth caps: no weak-acid pH calculation · no Kw/pOH vocabulary · no salt hydro
           <div class="p-4 bg-sky-950/30 border border-sky-800/60 rounded-lg"><p class="text-[11px] font-bold text-sky-300 uppercase tracking-wider mb-2">The scale ladder</p><p class="text-xs text-slate-300">pH 0 → 14 left to right: 1 M strong acid sits at <b>0</b>; every step is ×10 in [H⁺(aq)]; green pH 7 at 25 °C splits acids (litmus red, methyl orange red, phenolphthalein colourless) from alkalis (litmus blue, methyl orange yellow, phenolphthalein pink).</p></div>
           <div class="p-4 bg-amber-950/30 border border-amber-800/60 rounded-lg"><p class="text-[11px] font-bold text-amber-300 uppercase tracking-wider mb-2">Dilution slides the number, never past 7</p><p class="text-xs text-slate-300">Strong acid ×10 dilution: pH +1 (1.0 → 2.0 → 3.0 … → approaches 7). Strong alkali ×10: pH −1 (13 → 12 → … → approaches 7). “Diluting an acid raises its pH towards 7 (it cannot become alkaline)” is the sentence to memorise.</p></div>
         </div>
+        <!-- ══ INTERACTIVE SIMULATOR B1: LIVE pH SLIDER & 4-INDICATOR COLOUR SWATCH STUDIO (CP 2012 Q7 · CP 2013 Q4 · CP 2022 Q3) ══ -->
+        <div class="mt-6 apple-sim-panel space-y-5">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+            <div>
+              <span class="text-[10px] font-mono text-purple-400 uppercase font-bold">Interactive Simulator · Strand (b) Concept Check (CP 2012 Q7 · CP 2013 Q4 · CP 2022 Q3)</span>
+              <h4 class="text-sm font-bold text-white mt-0.5">Live pH Scale, $[\text{H}^+(aq)] / [\text{OH}^-(aq)]$ Calculator &amp; 4-Indicator Swatch Bench</h4>
+              <p class="text-[11px] text-slate-400">Drag the pH slider from 0.0 to 14.0 (or click a preset solution) to see live indicator colours and why methyl orange vs. phenolphthalein end-point wording is policed.</p>
+            </div>
+            <div class="flex flex-wrap gap-1.5 text-xs">
+              <button type="button" class="apple-btn !py-1 !px-2 text-[11px]" onclick="setPhPreset(0.0,'1.0 M HCl (Strong acid · CP 2015 Q1: pH = 0!)')">1.0 M HCl (pH 0)</button>
+              <button type="button" class="apple-btn !py-1 !px-2 text-[11px]" onclick="setPhPreset(1.0,'0.05 M H₂SO₄ (Dibasic strong acid: [H⁺] = 0.10 M)')">0.05 M H₂SO₄ (pH 1)</button>
+              <button type="button" class="apple-btn !py-1 !px-2 text-[11px]" onclick="setPhPreset(3.7,'Methyl Orange Titration End Point (pH 3.1–4.4 · Red → Orange!)')">MO End Point (pH 3.7)</button>
+              <button type="button" class="apple-btn !py-1 !px-2 text-[11px]" onclick="setPhPreset(7.0,'Pure Distilled Water at 25 °C ([H⁺] = [OH⁻] = 1.0×10⁻⁷ M)')">Neutral (pH 7)</button>
+              <button type="button" class="apple-btn !py-1 !px-2 text-[11px]" onclick="setPhPreset(9.0,'Phenolphthalein End Point (pH 8.2–10.0 · Colourless → Pale Pink!)')">PP End Point (pH 9.0)</button>
+              <button type="button" class="apple-btn !py-1 !px-2 text-[11px]" onclick="setPhPreset(13.0,'0.10 M NaOH (Strong alkali: [OH⁻] = 0.10 M)')">0.10 M NaOH (pH 13)</button>
+            </div>
+          </div>
+
+          <div class="space-y-3">
+            <div class="flex flex-wrap items-center justify-between text-xs gap-2">
+              <span id="phSimPresetLabel" class="text-slate-300 font-medium">Selected: 0.05 M H₂SO₄ (Dibasic strong acid: [H⁺] = 0.10 M)</span>
+              <span id="phSimReadout" class="font-mono text-sm font-bold text-sky-300 num-card">pH = 1.00  |  [H⁺(aq)] = 1.00×10⁻¹ M  |  [OH⁻(aq)] = 1.00×10⁻¹³ M</span>
+            </div>
+            <input type="range" id="phSlider" min="0" max="14" step="0.1" value="1.0" class="apple-slider" oninput="updatePhSim()">
+
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2 text-xs">
+              <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 flex items-center gap-3">
+                <div id="swatchLitmus" class="w-8 h-8 rounded-lg border border-white/20 shrink-0"></div>
+                <div><span class="text-[10px] font-mono text-slate-400 block">Litmus</span><span id="txtLitmus" class="font-bold text-white">Red</span></div>
+              </div>
+              <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 flex items-center gap-3">
+                <div id="swatchMO" class="w-8 h-8 rounded-lg border border-white/20 shrink-0"></div>
+                <div><span class="text-[10px] font-mono text-slate-400 block">Methyl Orange</span><span id="txtMO" class="font-bold text-white">Red</span></div>
+              </div>
+              <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 flex items-center gap-3">
+                <div id="swatchPP" class="w-8 h-8 rounded-lg border border-white/20 shrink-0"></div>
+                <div><span class="text-[10px] font-mono text-slate-400 block">Phenolphthalein</span><span id="txtPP" class="font-bold text-white">Colourless</span></div>
+              </div>
+              <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 flex items-center gap-3">
+                <div id="swatchUI" class="w-8 h-8 rounded-lg border border-white/20 shrink-0"></div>
+                <div><span class="text-[10px] font-mono text-slate-400 block">Universal Indicator</span><span id="txtUI" class="font-bold text-white">Red</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -771,6 +1280,35 @@ Depth caps: no weak-acid pH calculation · no Kw/pOH vocabulary · no salt hydro
         <div class="mt-4 p-4 bg-slate-900 border border-slate-800 rounded-lg">
           <p class="text-[11px] font-bold text-slate-300 uppercase tracking-wider mb-2">What moves a compound across the grid</p><p class="text-xs text-slate-400 leading-relaxed"><b>Adding water</b> slides any solution horizontally (concentrated → dilute) with <i>no</i> strength change. Nothing short of changing the chemical identity moves it between columns: HCl stays strong in any beaker, CH₃COOH stays weak. The MS vocabulary for the columns: “completely / slightly (incompletely) <b>ionised in water</b>”.</p>
         </div>
+        <!-- ══ INTERACTIVE SIMULATOR C1: STRONG VS WEAK ACID FAIR-TEST & SAME-pH DILUTION BENCH (CP 2013 Q4 · 2014 Q5 · 2015 Q5 · 2023 Q4) ══ -->
+        <div class="mt-6 apple-sim-panel space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+            <div>
+              <span class="text-[10px] font-mono text-emerald-400 uppercase font-bold">Interactive Simulator · Strand (c) Concept Check (CP 2014 Q5 · CP 2015 Q5 · CP 2023 Q4)</span>
+              <h4 class="text-sm font-bold text-white mt-0.5">Strong vs. Weak Acid Comparison Bench: Equal Molarity vs. Equal Initial pH</h4>
+              <p class="text-[11px] text-slate-400">Switch between <b>Mode A: Equal Concentration (0.10 mol dm⁻³ each)</b> and <b>Mode B: Equal Initial pH (pH 2.0 each)</b> to see what changes — and why titration volume fails in Mode A!</p>
+            </div>
+            <div class="flex items-center gap-1.5 bg-slate-900 p-1 rounded-xl border border-slate-700">
+              <button type="button" id="strModeEqualC" onclick="setStrengthModeSim('equalC')" class="apple-btn apple-btn-primary !py-1 !px-3 text-xs">Mode A: Equal Molarity (0.10 M)</button>
+              <button type="button" id="strModeEqualPh" onclick="setStrengthModeSim('equalPh')" class="apple-btn !py-1 !px-3 text-xs">Mode B: Equal Initial pH (pH 2.0)</button>
+            </div>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-xs text-slate-300 border-collapse">
+              <thead class="text-[10px] font-mono uppercase text-slate-400 bg-slate-950/90">
+                <tr>
+                  <th class="p-2.5 text-left">Property / Test (at 25 °C, 25.0 cm³ sample)</th>
+                  <th class="p-2.5 text-left text-sky-300">HCl(aq) (Strong Monobasic)</th>
+                  <th class="p-2.5 text-left text-amber-300">CH₃COOH(aq) (Weak Monobasic)</th>
+                  <th class="p-2.5 text-left text-emerald-300">Examiner Verdict &amp; Reason</th>
+                </tr>
+              </thead>
+              <tbody id="strSimTableBody" class="divide-y divide-slate-800/80"></tbody>
+            </table>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -967,6 +1505,44 @@ Depth caps: no weak-acid pH calculation · no Kw/pOH vocabulary · no salt hydro
         <div class="mt-4 p-4 bg-slate-900 border border-slate-800 rounded-lg">
           <p class="text-[11px] font-bold text-slate-300 uppercase tracking-wider mb-2">The volumetric workflow — strand (f) in one strip</p><p class="text-xs text-slate-400 leading-relaxed">Make/obtain a <b>standard solution</b> → <b>pipette</b> a fixed aliquot into the conical flask + indicator → <b>burette</b> titrate with concordant-repeat discipline → average the concordant titres → $n = cV$, mole ratio, scale the aliquot → answer <b>with units</b>. Every bench in the Solver tab is one link of this chain; the back-titration variant inserts “add known excess → titrate the leftovers → subtract”.</p>
         </div>
+        <!-- ══ INTERACTIVE SIMULATOR D1: SALT-PREPARATION ROUTER & VOLUMETRIC ERROR DIAGNOSTIC (CP 2012 Q6 · 2013 Q4(e) · 2014 Q12 · 2023 Q9) ══ -->
+        <div class="mt-6 apple-sim-panel space-y-5">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 text-xs">
+            <!-- Left: Salt Prep Router -->
+            <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-3">
+              <div>
+                <span class="text-[10px] font-mono text-rose-400 uppercase font-bold">1. Interactive Salt-Preparation Router (CP 2012 Q6 · CP 2023 Q9)</span>
+                <h4 class="text-sm font-bold text-white mt-0.5">Select Target Salt to Generate Full-Mark Procedure</h4>
+              </div>
+              <select id="saltPrepSel" onchange="updateSaltPrepSim()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white">
+                <option value="MgSO4" selected>MgSO₄·7H₂O crystals from MgCO₃(s) + H₂SO₄(aq) (CP 2023 Q9)</option>
+                <option value="CuSO4">CuSO₄·5H₂O crystals from CuO(s) + H₂SO₄(aq)</option>
+                <option value="NaCl">NaCl(s) crystals from NaOH(aq) + HCl(aq) (Titration)</option>
+                <option value="PbSO4">PbSO₄(s) dry powder from Pb(NO₃)₂(aq) + Na₂SO₄(aq) (CP 2012 Q6)</option>
+                <option value="CaSO4_from_CaCO3">PbSO₄ / CaSO₄ from PbCO₃ / CaCO₃ + H₂SO₄ (Why it FAILS!)</option>
+              </select>
+              <div id="saltPrepOut" class="space-y-1.5 text-slate-300 leading-relaxed"></div>
+            </div>
+
+            <!-- Right: Volumetric Rinsing & Procedure Error Simulator -->
+            <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-3">
+              <div>
+                <span class="text-[10px] font-mono text-cyan-400 uppercase font-bold">2. Titration Error Diagnostic (CP 2013 Q4(e) · MS Bank §4)</span>
+                <h4 class="text-sm font-bold text-white mt-0.5">Burette = NaOH(aq) · Conical Flask = 25.0 cm³ Pipetted Acid</h4>
+              </div>
+              <select id="titErrSel" onchange="updateTitErrSim()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white">
+                <option value="flask_water">Case 1: Conical flask rinsed with distilled water (water droplets left inside)</option>
+                <option value="flask_acid" selected>Case 2: Conical flask rinsed with the acid to be pipetted (CP 2013 Q4(e))</option>
+                <option value="burette_water">Case 3: Burette rinsed with distilled water only before filling with NaOH(aq)</option>
+                <option value="pipette_water">Case 4: Pipette rinsed with distilled water only before transferring acid</option>
+                <option value="funnel_left">Case 5: Filter funnel left on top of the burette during titration</option>
+                <option value="bubble_jet">Case 6: Air bubble in burette jet not removed before initial reading, flushed out during run</option>
+              </select>
+              <div id="titErrOut" class="space-y-1.5 text-slate-300 leading-relaxed"></div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -1109,6 +1685,69 @@ Depth caps: no weak-acid pH calculation · no Kw/pOH vocabulary · no salt hydro
         <button class="w-full bg-rose-700 hover:bg-rose-600 text-white text-xs font-semibold py-1.5 px-2 rounded-md" onclick="solverPurity()">Run the MS step chain</button>
         <div id="svPuOut" aria-live="polite" class="text-xs text-emerald-300 font-mono min-h-[20px]"></div>
         <div class="p-3 bg-slate-900 border border-slate-800 rounded-lg text-xs text-slate-300 leading-relaxed"><b class="text-rose-300">Worked (the default numbers are a real mark-scheme chain):</b> citric acid 1.65 g made up to 250.0 cm³; 25.00 cm³ aliquot titrated with 0.123 mol dm⁻³ NaOH, mean titre 18.45 cm³. n(NaOH) = 0.123 × 18.45 ÷ 1000 = 2.27 × 10⁻³ → ÷3 (tribasic) = 7.56 × 10⁻⁴ → ×10 (250/25) = 7.56 × 10⁻³ → ×192.0 = 1.45 g → ÷1.65 × 100 % = <b>88.0 %</b> <i>(MS step pattern, CP 2016 Q6)</i>.</div>
+      </div>
+    </div>
+
+    
+    <!-- ══ BENCH 5B · INTERACTIVE BACK-TITRATION WORKBENCH (NTF-2018 II-B IV (f) · CP 2024 Q4) ══ -->
+    <div class="mt-6 bg-slate-950 border border-slate-800 rounded-xl p-5 space-y-3">
+      <div class="flex flex-wrap items-center justify-between gap-2">
+        <div class="flex items-center gap-2">
+          <span class="text-[10px] font-mono text-cyan-400 uppercase font-bold px-2 py-0.5 bg-cyan-950 rounded border border-cyan-800">Bench 5B · Back Titration</span>
+          <h3 class="text-sm font-bold text-white">Back-Titration Step Chain: $\text{n(used)} = \text{n(added)} - \text{n(excess)}$ (NTF-2018 II-B IV (f))</h3>
+        </div>
+        <div class="flex gap-1.5 text-xs">
+          <button type="button" class="apple-btn !py-1 !px-2.5 text-[11px]" onclick="loadBackTitrePreset(1.25, 50.0, 1.00, 22.00, 1.00, 2, 100.1, 'CaCO₃ in limestone (2HCl : 1CaCO₃)')">Preset 1: CaCO₃ Antacid/Limestone</button>
+          <button type="button" class="apple-btn !py-1 !px-2.5 text-[11px]" onclick="loadBackTitrePreset(0.400, 50.0, 0.110, 20.40, 0.100, 2, 180.2, 'Aspirin tablet (2NaOH : 1Aspirin)')">Preset 2: Aspirin Tablet</button>
+        </div>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-6 gap-2 text-xs">
+        <div><label class="block text-slate-400 mb-1">Sample mass (g)</label><input id="btMass" type="number" step="any" value="1.25" class="w-full bg-slate-900 border border-slate-700 rounded-md px-2 py-1.5 text-slate-100 num-card"></div>
+        <div><label class="block text-slate-400 mb-1">Excess V₁ (cm³)</label><input id="btV1" type="number" step="any" value="50.0" class="w-full bg-slate-900 border border-slate-700 rounded-md px-2 py-1.5 text-slate-100 num-card"></div>
+        <div><label class="block text-slate-400 mb-1">Excess c₁ (M)</label><input id="btC1" type="number" step="any" value="1.00" class="w-full bg-slate-900 border border-slate-700 rounded-md px-2 py-1.5 text-slate-100 num-card"></div>
+        <div><label class="block text-slate-400 mb-1">Back-titre V₂ (cm³)</label><input id="btV2" type="number" step="any" value="22.00" class="w-full bg-slate-900 border border-slate-700 rounded-md px-2 py-1.5 text-slate-100 num-card"></div>
+        <div><label class="block text-slate-400 mb-1">Titrant c₂ (M)</label><input id="btC2" type="number" step="any" value="1.00" class="w-full bg-slate-900 border border-slate-700 rounded-md px-2 py-1.5 text-slate-100 num-card"></div>
+        <div><label class="block text-slate-400 mb-1">Mᵣ (ratio 2:1)</label><input id="btMr" type="number" step="any" value="100.1" class="w-full bg-slate-900 border border-slate-700 rounded-md px-2 py-1.5 text-slate-100 num-card"></div>
+      </div>
+      <button type="button" class="w-full apple-btn apple-btn-primary py-2" onclick="solveBackTitration()">Compute Back-Titration Step Marks (*)</button>
+      <div id="btOut" class="text-xs text-emerald-300 font-mono leading-relaxed p-2.5 rounded-lg bg-slate-900 border border-slate-800"></div>
+    </div>
+
+    <!-- ══ BENCH 6 · LIVE HKEAA MARK-SCHEME KEYWORD GRADER (TOPIC IV EDITION) ══ -->
+    <div class="mt-6 apple-sim-panel space-y-4">
+      <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+        <div>
+          <span class="text-[10px] font-mono text-sky-400 uppercase font-bold px-2 py-0.5 bg-sky-950 rounded border border-sky-800">Bench 6 · Interactive Examiner Grader</span>
+          <h3 class="text-base font-bold text-white mt-1">Practice Writing Full-Mark Topic IV Answers — Instant `[1M]` &amp; `[NOT ACCEPT]` Diagnostic</h3>
+          <p class="text-xs text-slate-400">Select a high-frequency Paper 1B question below and type your answer. The engine checks your phrasing against official HKEAA mark-scheme rubrics and flags fatal errors.</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 text-xs">
+        <div class="lg:col-span-1 space-y-2.5">
+          <label for="graderQSelect" class="block text-slate-300 font-semibold">Select HKDSE Exam Prompt:</label>
+          <select id="graderQSelect" onchange="loadGraderPrompt()" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white">
+            <option value="std_soln">Q1 (3 marks · CP 2014 Q7 / 2019 Q4 / 2021 Q7): Describe how to prepare 250.0 cm³ of standard Na₂CO₃(aq) from a weighed solid sample.</option>
+            <option value="weak_ph">Q2 (2 marks · CP 2013 Q4 / 2023 Q4): Explain why the pH of 0.050 mol dm⁻³ ethanedioic acid (H₂C₂O₄) is greater than 1.0.</option>
+            <option value="compare_alkali">Q3 (2 marks · CP 2015 Q5): Describe a chemical or physical method (with fair-test conditions) to show that NH₃(aq) is a weaker alkali than NaOH(aq).</option>
+            <option value="rinse_error">Q4 (2 marks · CP 2013 Q4(e)): Explain the effect on the titre if the conical flask is rinsed with the acid solution to be pipetted instead of distilled water.</option>
+            <option value="dh_neut">Q5 (2 marks · CP 2024 Q8): Explain why the enthalpy change of neutralisation between HCl(aq) and NaOH(aq) is almost the same as between HNO₃(aq) and KOH(aq).</option>
+            <option value="mgso4_prep">Q6 (3 marks · CP 2023 Q9): Describe how to prepare pure dry MgSO₄·7H₂O crystals from MgCO₃(s) and dilute H₂SO₄(aq).</option>
+          </select>
+          <div id="graderPromptBox" class="p-3 rounded-xl bg-slate-950 border border-slate-800 text-slate-200 leading-relaxed"></div>
+        </div>
+
+        <div class="lg:col-span-2 space-y-3">
+          <textarea id="graderInput" rows="4" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-sky-500" placeholder="Type your exam answer here..."></textarea>
+          <div class="flex flex-wrap gap-2">
+            <button type="button" onclick="gradeStudentAnswer()" class="apple-btn apple-btn-primary">✨ Grade My Answer Against Mark Scheme</button>
+            <button type="button" onclick="fillModelGraderAnswer()" class="apple-btn">Show Model Full-Mark Answer</button>
+            <button type="button" onclick="document.getElementById('graderInput').value='';document.getElementById('graderResultBox').innerHTML='Type an answer and click Grade.';" class="apple-btn">Clear</button>
+          </div>
+          <div id="graderResultBox" class="p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-300 space-y-2 leading-relaxed">
+            Type an answer above and click <b>Grade My Answer Against Mark Scheme</b> to see your mark breakdown and keyword hits.
+          </div>
+        </div>
       </div>
     </div>
 
@@ -1647,5 +2286,407 @@ else { try{ MOBILE_UX.init(); }catch(e){} }
   }catch(e){}
 })();
 </script>
+
+<!-- ═══════════ APPLE COMMAND PALETTE (⌘K) MODAL ═══════════ -->
+<div id="cmdModal" onclick="if(event.target===this)closeCmdModal()">
+  <div class="w-full max-w-xl mx-4 bg-slate-900 border border-slate-700/80 rounded-2xl shadow-2xl overflow-hidden">
+    <div class="flex items-center gap-3 px-4 py-3 border-b border-slate-800">
+      <span class="text-sky-400 text-sm">🔍</span>
+      <input id="cmdSearchInput" type="text" oninput="filterCmdList()" placeholder="Search any indicator, salt method, titration error, pH bench, or CP year..." class="w-full bg-transparent text-sm text-white placeholder-slate-400 focus:outline-none">
+      <button type="button" onclick="closeCmdModal()" class="text-xs text-slate-400 hover:text-white px-2 py-0.5 rounded bg-slate-800">ESC</button>
+    </div>
+    <div id="cmdResults" class="max-h-80 overflow-y-auto divide-y divide-slate-800/70 p-2 text-xs"></div>
+  </div>
+</div>
+
+<script>
+function toggleAppleTheme(){
+  const root = document.documentElement;
+  const isLight = root.classList.toggle('theme-light');
+  const icon = document.getElementById('themeToggleIcon');
+  if(icon) icon.textContent = isLight ? '🌙 Pro Dark' : '☀️ Daylight';
+  try { localStorage.setItem('hkdse_topic4_theme', isLight ? 'light' : 'dark'); } catch(e){}
+}
+
+const quizMasteryState = {};
+function injectQuizSelfCheckBars(){
+  ['acidQuiz','phQuiz','strengthQuiz','titrationQuiz'].forEach(qid => {
+    const container = document.getElementById(qid);
+    if(!container) return;
+    const headerDiv = container.previousElementSibling;
+    if(headerDiv && !headerDiv.querySelector('.hide-all-btn')){
+      const btnWrap = document.createElement('div');
+      btnWrap.className = 'flex items-center gap-2';
+      const revBtn = headerDiv.querySelector('button');
+      if(revBtn){
+        revBtn.parentNode.insertBefore(btnWrap, revBtn);
+        btnWrap.appendChild(revBtn);
+        const hideBtn = document.createElement('button');
+        hideBtn.type = 'button';
+        hideBtn.className = 'hide-all-btn text-[11px] font-semibold text-slate-300 border border-slate-700 px-3 py-1 rounded-full hover:bg-slate-800';
+        hideBtn.textContent = 'Reset Blanks';
+        hideBtn.onclick = () => container.querySelectorAll('.blur-answer').forEach(b => b.classList.remove('revealed'));
+        btnWrap.appendChild(hideBtn);
+      }
+    }
+    [...container.children].forEach((row, idx) => {
+      if(row.querySelector('.quiz-self-bar')) return;
+      const key = qid + '_' + idx;
+      const bar = document.createElement('div');
+      bar.className = 'quiz-self-bar';
+      bar.innerHTML = `<span class="text-[10px] font-mono text-slate-400">Tap blurred chips above to check each keyword, then log your recall:</span>
+        <div class="flex items-center gap-1.5">
+          <button type="button" class="apple-btn !py-0.5 !px-2 text-[10px]" onclick="markQuizRow('${key}', true, this)">✓ Got It</button>
+          <button type="button" class="apple-btn !py-0.5 !px-2 text-[10px]" onclick="markQuizRow('${key}', false, this)">↻ Review Again</button>
+        </div>`;
+      row.appendChild(bar);
+    });
+  });
+}
+function markQuizRow(key, mastered, btnEl){
+  quizMasteryState[key] = mastered;
+  const buttons = btnEl.parentElement.querySelectorAll('button');
+  buttons[0].className = mastered ? 'apple-btn !py-0.5 !px-2 text-[10px] !bg-emerald-600/30 !border-emerald-500 !text-emerald-300' : 'apple-btn !py-0.5 !px-2 text-[10px]';
+  buttons[1].className = !mastered ? 'apple-btn !py-0.5 !px-2 text-[10px] !bg-amber-600/30 !border-amber-500 !text-amber-300' : 'apple-btn !py-0.5 !px-2 text-[10px]';
+  updateMasteryRing();
+}
+function checkAllSyllabusOutcomes(){
+  document.querySelectorAll('.syl-chk').forEach(c => c.checked = true);
+  updateMasteryRing();
+}
+function updateMasteryRing(){
+  const sylChks = [...document.querySelectorAll('.syl-chk')];
+  const sylDone = sylChks.filter(c => c.checked).length;
+  const sylTotal = sylChks.length || 12;
+  const sylBadge = document.getElementById('sylAuditCount');
+  if(sylBadge) sylBadge.textContent = `${sylDone} / ${sylTotal} Outcomes Checked`;
+  const quizDone = Object.values(quizMasteryState).filter(Boolean).length;
+  const pct = Math.round(((sylDone + quizDone) / (sylTotal + 48)) * 100);
+  const circle = document.getElementById('masteryRingCircle');
+  const txt = document.getElementById('masteryPctText');
+  if(circle) circle.style.strokeDashoffset = String(94.2 - (94.2 * pct) / 100);
+  if(txt) txt.textContent = `${pct}% Mastered`;
+}
+
+/* Cation Sim */
+const CATION_DATA = {
+  'Cu2+': { title:'Copper(II) ion, Cu²⁺(aq) (Blue solution)', badge:'Pale Blue Precipitate, Cu(OH)₂(s)', naoh:'<b>+ Dilute NaOH(aq):</b> Forms a <b>pale blue precipitate</b> of $\text{Cu(OH)}_2(s)$. <b>Insoluble</b> in excess $\text{NaOH}(aq)$.', nh3:'<b>+ Dilute NH₃(aq):</b> Forms a pale blue precipitate of $\text{Cu(OH)}_2(s)$, which <b>dissolves in excess $\text{NH}_3(aq)$</b> to give a <b>deep blue solution</b> ($[\text{Cu(NH}_3)_4]^{2+}$)!', eq:'Cu²⁺(aq) + 2OH⁻(aq) → Cu(OH)₂(s)  |  Cu(OH)₂(s) + 4NH₃(aq) → [Cu(NH₃)₄]²⁺(aq) + 2OH⁻(aq)' },
+  'Fe2+': { title:'Iron(II) ion, Fe²⁺(aq) (Pale green solution)', badge:'Dirty Green Precipitate, Fe(OH)₂(s)', naoh:'<b>+ Dilute NaOH(aq):</b> Forms a <b>dirty green precipitate</b> of $\text{Fe(OH)}_2(s)$ (turns reddish-brown on standing in air due to oxidation to $\text{Fe(OH)}_3$). Insoluble in excess $\text{NaOH}(aq)$.', nh3:'<b>+ Dilute NH₃(aq):</b> Forms a dirty green precipitate of $\text{Fe(OH)}_2(s)$, <b>insoluble in excess $\text{NH}_3(aq)$</b>.', eq:'Fe²⁺(aq) + 2OH⁻(aq) → Fe(OH)₂(s)' },
+  'Fe3+': { title:'Iron(III) ion, Fe³⁺(aq) (Yellow / brown solution)', badge:'Reddish-Brown Precipitate, Fe(OH)₃(s)', naoh:'<b>+ Dilute NaOH(aq):</b> Forms a <b>reddish-brown precipitate</b> of $\text{Fe(OH)}_3(s)$. Insoluble in excess $\text{NaOH}(aq)$.', nh3:'<b>+ Dilute NH₃(aq):</b> Forms a reddish-brown precipitate of $\text{Fe(OH)}_3(s)$, <b>insoluble in excess $\text{NH}_3(aq)$</b>.', eq:'Fe³⁺(aq) + 3OH⁻(aq) → Fe(OH)₃(s)' },
+  'Al3+': { title:'Aluminium ion, Al³⁺(aq) (Colourless solution)', badge:'White Precipitate, Al(OH)₃(s) (Amphoteric!)', naoh:'<b>+ Dilute NaOH(aq):</b> Forms a <b>white precipitate</b> of $\text{Al(OH)}_3(s)$, which <b>dissolves in excess $\text{NaOH}(aq)$</b> to form a colourless solution of $[\text{Al(OH)}_4]^-(aq)$!', nh3:'<b>+ Dilute NH₃(aq):</b> Forms a white precipitate of $\text{Al(OH)}_3(s)$, <b>insoluble in excess $\text{NH}_3(aq)$</b> (distinguishes $\text{Al}^{3+}/\text{Pb}^{2+}$ from $\text{Zn}^{2+}$!).', eq:'Al³⁺(aq) + 3OH⁻(aq) → Al(OH)₃(s)  |  Al(OH)₃(s) + OH⁻(aq) → [Al(OH)₄]⁻(aq)' },
+  'Zn2+': { title:'Zinc ion, Zn²⁺(aq) (Colourless solution)', badge:'White Precipitate, Zn(OH)₂(s) (Dissolves in BOTH!)', naoh:'<b>+ Dilute NaOH(aq):</b> Forms a <b>white precipitate</b> of $\text{Zn(OH)}_2(s)$, which <b>dissolves in excess $\text{NaOH}(aq)$</b> to give a colourless solution ($[\text{Zn(OH)}_4]^{2-}$).', nh3:'<b>+ Dilute NH₃(aq):</b> Forms a white precipitate of $\text{Zn(OH)}_2(s)$, which <b>ALSO dissolves in excess $\text{NH}_3(aq)$</b> to give a colourless solution ($[\text{Zn(NH}_3)_4]^{2+}$)!', eq:'Zn²⁺(aq) + 2OH⁻(aq) → Zn(OH)₂(s)  |  Dissolves in both excess NaOH(aq) and excess NH₃(aq)' },
+  'Pb2+': { title:'Lead(II) ion, Pb²⁺(aq) (Colourless solution)', badge:'White Precipitate, Pb(OH)₂(s) (Amphoteric!)', naoh:'<b>+ Dilute NaOH(aq):</b> Forms a <b>white precipitate</b> of $\text{Pb(OH)}_2(s)$, which <b>dissolves in excess $\text{NaOH}(aq)$</b> to give a colourless solution ($[\text{Pb(OH)}_4]^{2-}$).', nh3:'<b>+ Dilute NH₃(aq):</b> Forms a white precipitate of $\text{Pb(OH)}_2(s)$, <b>insoluble in excess $\text{NH}_3(aq)$</b> (distinguish from $\text{Al}^{3+}$ by adding $\text{Cl}^- / \text{I}^-$).', eq:'Pb²⁺(aq) + 2OH⁻(aq) → Pb(OH)₂(s)  |  Pb(OH)₂(s) + 2OH⁻(aq) → [Pb(OH)₄]²⁻(aq)' },
+  'Mg2+': { title:'Magnesium ion, Mg²⁺(aq) (Colourless solution)', badge:'White Precipitate, Mg(OH)₂(s)', naoh:'<b>+ Dilute NaOH(aq):</b> Forms a <b>white precipitate</b> of $\text{Mg(OH)}_2(s)$, <b>insoluble in excess $\text{NaOH}(aq)$</b>.', nh3:'<b>+ Dilute NH₃(aq):</b> Forms a white precipitate of $\text{Mg(OH)}_2(s)$, <b>insoluble in excess $\text{NH}_3(aq)$</b>.', eq:'Mg²⁺(aq) + 2OH⁻(aq) → Mg(OH)₂(s)' },
+  'Ca2+': { title:'Calcium ion, Ca²⁺(aq) (Colourless solution)', badge:'White Precipitate, Ca(OH)₂(s) (NaOH only!)', naoh:'<b>+ Dilute NaOH(aq):</b> Forms a <b>white precipitate</b> of $\text{Ca(OH)}_2(s)$ (insoluble in excess $\text{NaOH}(aq)$).', nh3:'<b>+ Dilute NH₃(aq):</b> <b>No precipitate</b> (no observable change) because $\text{NH}_3(aq)$ is a weak alkali with too low an $[\text{OH}^-(aq)]$ to precipitate sparingly soluble $\text{Ca(OH)}_2$!', eq:'Ca²⁺(aq) + 2OH⁻(aq) → Ca(OH)₂(s) (with NaOH(aq) only; no ppt with NH₃(aq)!)' },
+  'NH4+': { title:'Ammonium ion, NH₄⁺(aq) (Colourless · CP 2018 Q2 / 2020 Q7)', badge:'No Precipitate · Pungent NH₃(g) on Warming', naoh:'<b>+ NaOH(aq) and Warm Gently:</b> No precipitate; evolves a colourless gas with a <b>pungent smell</b> that turns <b>moist red litmus paper blue</b> ($\text{NH}_3(g)$).', nh3:'<b>⚠️ CP 2018 Q2 Trap:</b> Never state that "$\text{NH}_4^+$ is alkaline" — $\text{NH}_4^+$ reacts with $\text{OH}^-$ on warming to liberate alkaline $\text{NH}_3(g)$!', eq:'NH₄⁺(aq) + OH⁻(aq) → NH₃(g) + H₂O(l)  (Warm gently)' }
+};
+
+function setCationSim(k){
+  const d = CATION_DATA[k];
+  if(!d) return;
+  document.querySelectorAll('.cat-btn').forEach(b => {
+    b.className = b.dataset.c === k ? 'cat-btn apple-btn apple-btn-primary' : 'cat-btn apple-btn';
+  });
+  document.getElementById('catSimTitle').textContent = d.title;
+  document.getElementById('catSimPptBadge').textContent = d.badge;
+  document.getElementById('catSimNaOH').innerHTML = d.naoh;
+  document.getElementById('catSimNH3').innerHTML = d.nh3;
+  document.getElementById('catSimEq').textContent = d.eq;
+  safeInitKaTeX();
+}
+
+const BASICITY_CARDS = [
+  '<b>Ethanoic acid, CH₃COOH (4 H atoms in formula, Basicity = 1 · Monobasic):</b> Only the <b>1 H atom attached to oxygen in the –COOH group</b> ionises in water ($\text{CH}_3\text{COOH}(aq) \rightleftharpoons \text{CH}_3\text{COO}^-(aq) + \text{H}^+(aq)$). The three $\text{C–H}$ bonds in $-\text{CH}_3$ are non-polar and never ionise!',
+  '<b>Ethanedioic acid (H₂C₂O₄, HOOC–COOH) &amp; Tartaric acid (HOOC–CH(OH)–CH(OH)–COOH · CP 2025 Q5):</b> Both are <b>dibasic (basicity = 2)</b>! In CP 2025 Q5(a), candidates lost marks by circling the entire $-\text{COOH}$ groups or the alcohol $-\text{OH}$ groups instead of the <b>two carboxylic H atoms</b>.',
+  '<b>Citric acid, C₆H₈O₇ (8 H atoms in formula, Basicity = 3 · Tribasic · CP 2016 Q6):</b> Contains <b>three –COOH carboxyl groups</b> (3 ionisable H atoms) plus one non-ionisable $-\text{OH}$ group and four $\text{C–H}$ bonds → $1\text{ mol citric acid}$ reacts with $3\text{ mol NaOH}$.',
+  '<b>Sulphamic acid, H₃NO₃S (H₂N–SO₃H · CP 2024 Q4(b)(iii)):</b> Contains 3 H atoms in its molecular formula, but is <b>monobasic (basicity = 1)</b> because only the $-\text{SO}_3\text{H}$ hydrogen ionises! CP 2024 Q4 flagged candidates who answered "3" by "solely counting the number of hydrogen atoms in the molecular formula".'
+];
+function showBasicityCard(i){
+  const el = document.getElementById('basicityCardOut');
+  if(el && BASICITY_CARDS[i]){ el.innerHTML = BASICITY_CARDS[i]; safeInitKaTeX(); }
+}
+
+/* pH & Indicator Swatch Sim */
+function setPhPreset(val, label){
+  const sl = document.getElementById('phSlider');
+  if(sl) sl.value = String(val);
+  document.getElementById('phSimPresetLabel').textContent = 'Selected: ' + label;
+  updatePhSim();
+}
+function updatePhSim(){
+  const sl = document.getElementById('phSlider');
+  if(!sl) return;
+  const ph = parseFloat(sl.value);
+  const h = Math.pow(10, -ph);
+  const oh = Math.pow(10, -(14 - ph));
+  document.getElementById('phSimReadout').textContent = `pH = ${ph.toFixed(1)}  |  [H⁺(aq)] = ${h.toExponential(2)} M  |  [OH⁻(aq)] = ${oh.toExponential(2)} M`;
+
+  const setSw = (idSw, idTxt, bg, txt) => {
+    document.getElementById(idSw).style.background = bg;
+    document.getElementById(idTxt).textContent = txt;
+  };
+  // Litmus
+  if(ph < 5.5) setSw('swatchLitmus','txtLitmus','#ef4444','Red (Acidic)');
+  else if(ph > 8.0) setSw('swatchLitmus','txtLitmus','#3b82f6','Blue (Alkaline)');
+  else setSw('swatchLitmus','txtLitmus','#a855f7','Purple (Neutral)');
+
+  // Methyl orange (3.1 - 4.4)
+  if(ph < 3.1) setSw('swatchMO','txtMO','#ef4444','Red (< 3.1)');
+  else if(ph <= 4.4) setSw('swatchMO','txtMO','#f97316','Orange (End Point!)');
+  else setSw('swatchMO','txtMO','#eab308','Yellow (> 4.4)');
+
+  // Phenolphthalein (8.2 - 10.0)
+  if(ph < 8.2) setSw('swatchPP','txtPP','rgba(255,255,255,0.08)','Colourless (< 8.2)');
+  else if(ph <= 10.0) setSw('swatchPP','txtPP','#f472b6','Pale Pink (End Point!)');
+  else setSw('swatchPP','txtPP','#db2777','Pink / Magenta (> 10)');
+
+  // Universal indicator
+  if(ph < 3) setSw('swatchUI','txtUI','#ef4444','Red (Strong Acid)');
+  else if(ph < 6) setSw('swatchUI','txtUI','#f59e0b','Orange / Yellow (Weak Acid)');
+  else if(ph <= 7.5) setSw('swatchUI','txtUI','#22c55e','Green (Neutral)');
+  else if(ph < 11) setSw('swatchUI','txtUI','#0ea5e9','Blue (Weak Alkali)');
+  else setSw('swatchUI','txtUI','#7e22ce','Purple / Violet (Strong Alkali)');
+}
+
+/* Strength Mode Sim */
+function setStrengthModeSim(mode){
+  document.getElementById('strModeEqualC').className = mode==='equalC' ? 'apple-btn apple-btn-primary !py-1 !px-3 text-xs' : 'apple-btn !py-1 !px-3 text-xs';
+  document.getElementById('strModeEqualPh').className = mode==='equalPh' ? 'apple-btn apple-btn-primary !py-1 !px-3 text-xs' : 'apple-btn !py-1 !px-3 text-xs';
+  const tb = document.getElementById('strSimTableBody');
+  if(!tb) return;
+  if(mode === 'equalC'){
+    tb.innerHTML = `
+      <tr><td class="p-2.5 font-semibold text-white">1. Initial [H⁺(aq)] &amp; pH</td><td class="p-2.5 font-mono text-sky-300">[H⁺] = 0.10 M · pH = 1.0</td><td class="p-2.5 font-mono text-amber-300">[H⁺] ≈ 0.0013 M · pH ≈ 2.9</td><td class="p-2.5">✅ <b>Valid Strength Test:</b> HCl ionises completely; CH₃COOH ionises only slightly.</td></tr>
+      <tr><td class="p-2.5 font-semibold text-white">2. Electrical Conductivity</td><td class="p-2.5 text-sky-300">Bright bulb / High current</td><td class="p-2.5 text-amber-300">Dim bulb / Low current</td><td class="p-2.5">✅ <b>Valid Strength Test:</b> Higher concentration of <b>mobile ions</b> in 0.10 M HCl.</td></tr>
+      <tr><td class="p-2.5 font-semibold text-white">3. Initial Rate with Excess Mg(s)</td><td class="p-2.5 text-sky-300">Vigorous fizzing (fast)</td><td class="p-2.5 text-amber-300">Slow effervescence</td><td class="p-2.5">✅ <b>Valid Strength Test:</b> Higher [H⁺(aq)] in 0.10 M HCl gives more frequent collisions.</td></tr>
+      <tr><td class="p-2.5 font-semibold text-white">4. Volume of 0.10 M NaOH for Neutralisation</td><td class="p-2.5 font-mono text-rose-300">25.00 cm³ (Identical!)</td><td class="p-2.5 font-mono text-rose-300">25.00 cm³ (Identical!)</td><td class="p-2.5">🚨 <b>CP 2015 Q5 Trap:</b> Equal moles of monobasic acid require the <b>EXACT SAME volume of NaOH</b> regardless of strength!</td></tr>
+    `;
+  } else {
+    tb.innerHTML = `
+      <tr><td class="p-2.5 font-semibold text-white">1. Initial [H⁺(aq)] &amp; Molarity</td><td class="p-2.5 font-mono text-sky-300">[H⁺] = 0.010 M (c = 0.010 M)</td><td class="p-2.5 font-mono text-amber-300">[H⁺] = 0.010 M (c ≈ 6.0 M!)</td><td class="p-2.5">To match pH 2.0, the weak acid must have a <b>much higher molar concentration</b> of unionised molecules!</td></tr>
+      <tr><td class="p-2.5 font-semibold text-white">2. pH After 10-Fold Dilution with Water</td><td class="p-2.5 font-mono text-sky-300">pH rises to <b>3.0</b> (+1.0 unit)</td><td class="p-2.5 font-mono text-amber-300">pH rises to <b>≈ 2.5</b> (&lt; 1 unit)</td><td class="p-2.5">✅ <b>Valid Same-pH Test:</b> Weak acid’s equilibrium ($\rightleftharpoons$) shifts right on dilution, releasing more H⁺(aq).</td></tr>
+      <tr><td class="p-2.5 font-semibold text-white">3. Reaction with Excess Mg Ribbon</td><td class="p-2.5 text-sky-300">Same initial rate, slows fast, less H₂</td><td class="p-2.5 text-amber-300">Same initial rate, fizzes much longer, much more H₂</td><td class="p-2.5">✅ <b>Valid Same-pH Test:</b> Weak acid has a large reserve of unionised CH₃COOH molecules.</td></tr>
+    `;
+  }
+  safeInitKaTeX();
+}
+
+/* Salt Prep & Titration Error Sim */
+const SALT_PREP_DATA = {
+  MgSO4: '<b>Method 1 · Acid + Excess Insoluble Solid (CP 2023 Q9):</b><br>1. Add <b>excess MgCO₃(s)</b> to warm dilute H₂SO₄(aq) with stirring until effervescence stops and undissolved solid remains (ensures all acid has reacted — never use excess H₂SO₄!).<br>2. <b>Filter</b> the mixture to remove unreacted MgCO₃ residue.<br>3. Heat the filtrate to evaporate some water until saturated, then leave to <b>cool slowly for a period of time</b> to crystallise.<br>4. Filter off the MgSO₄·7H₂O crystals, wash with a little cold distilled water, and dry between filter papers.',
+  CuSO4: '<b>Method 1 · Acid + Excess Insoluble Base:</b><br>1. Warm dilute H₂SO₄(aq) and add <b>excess black CuO(s) powder</b> with stirring until no more dissolves.<br>2. <b>Filter</b> off excess CuO(s) to collect the clear blue CuSO₄(aq) filtrate.<br>3. Concentrate the filtrate by heating, cool slowly to crystallise, filter, wash with minimal cold distilled water, and dry between filter papers.',
+  NaCl: '<b>Method 2 · Acid + Alkali Titration (Both Soluble Solutions):</b><br>1. Pipette 25.0 cm³ of NaOH(aq) into a conical flask with methyl orange / phenolphthalein and <b>titrate with dilute HCl(aq)</b> from a burette to find the exact end-point volume.<br>2. <b>Repeat by mixing 25.0 cm³ NaOH(aq) and the exact titre volume of HCl(aq) WITHOUT indicator</b> (so crystals are not contaminated).<br>3. Evaporate/crystallise the solution, filter, and dry the crystals.',
+  PbSO4: '<b>Method 3 · Precipitation of an Insoluble Salt (CP 2012 Q6 · CP 2014 Q12):</b><br>1. Mix aqueous <b>lead(II) nitrate, Pb(NO₃)₂(aq)</b> and aqueous <b>sodium sulphate, Na₂SO₄(aq)</b>: $\text{Pb}^{2+}(aq) + \text{SO}_4^{2-}(aq) \rightarrow \text{PbSO}_4(s)$.<br>2. <b>Filter</b> the mixture to collect the white $\text{PbSO}_4(s)$ precipitate as the residue.<br>3. <b>Wash the residue thoroughly with deionised/distilled water</b> (removes soluble $\text{NaNO}_3$ impurities) and <b>dry</b> in an oven / between filter papers.',
+  CaSO4_from_CaCO3: '<b>🚨 Why PbCO₃ / CaCO₃ + Dilute H₂SO₄ Fails to Go to Completion:</b><br>Adding dilute $\text{H}_2\text{SO}_4(aq)$ to $\text{PbCO}_3(s)$ or $\text{CaCO}_3(s)$ forms an <b>insoluble layer of $\text{PbSO}_4(s)$ / $\text{CaSO}_4(s)$ coating the surface of the solid carbonate</b>, which prevents further reaction between the acid and the unreacted carbonate core!'
+};
+function updateSaltPrepSim(){
+  const k = document.getElementById('saltPrepSel').value;
+  const out = document.getElementById('saltPrepOut');
+  if(out && SALT_PREP_DATA[k]){ out.innerHTML = SALT_PREP_DATA[k]; safeInitKaTeX(); }
+}
+
+const TIT_ERR_DATA = {
+  flask_water: '<span class="chip bg-emerald-950 text-emerald-300 border border-emerald-700">Titre: UNCHANGED (Correct Procedure)</span><p class="mt-1"><b>Why:</b> Distilled water left in the conical flask does <b>not change the number of moles of H⁺(aq)</b> pipetted into the flask, so the exact same volume of NaOH(aq) is required to reach the end point.</p>',
+  flask_acid: '<span class="chip bg-rose-950 text-rose-300 border border-rose-700">Titre: INCREASES (Too Large · CP 2013 Q4(e))</span><p class="mt-1"><b>HKEAA Verbatim Explanation:</b> Rinsing the conical flask with the acid leaves <b>extra moles of H⁺(aq) ions clinging to the inside of the flask</b>, so <b>more NaOH(aq) than actually required</b> is needed to neutralise it. (Never say "it changes the concentration of acid"!).</p>',
+  burette_water: '<span class="chip bg-rose-950 text-rose-300 border border-rose-700">Titre: INCREASES (Too Large)</span><p class="mt-1"><b>Why:</b> Water left inside the burette <b>dilutes the NaOH(aq) titrant</b>, so a larger volume of the diluted NaOH(aq) must be run out to supply the required moles of OH⁻(aq).</p>',
+  pipette_water: '<span class="chip bg-amber-950 text-amber-300 border border-amber-700">Titre: DECREASES (Too Small)</span><p class="mt-1"><b>Why:</b> Water left inside the pipette <b>dilutes the acid being measured</b>, so fewer moles of H⁺(aq) are delivered into the conical flask and less NaOH(aq) is required.</p>',
+  funnel_left: '<span class="chip bg-amber-950 text-amber-300 border border-amber-700">Titre: DECREASES (Smaller Reading than Used)</span><p class="mt-1"><b>MS Bank §4 Explanation:</b> Drops of NaOH(aq) clinging onto the stem of the funnel may fall into the burette during the titration, making the recorded titre volume smaller than what actually entered the flask.</p>',
+  bubble_jet: '<span class="chip bg-rose-950 text-rose-300 border border-rose-700">Titre: INCREASES (Too Large)</span><p class="mt-1"><b>Why:</b> Part of the measured volume drop from the burette goes into filling the air space in the jet rather than entering the conical flask, inflating the recorded titre.</p>'
+};
+function updateTitErrSim(){
+  const k = document.getElementById('titErrSel').value;
+  const out = document.getElementById('titErrOut');
+  if(out && TIT_ERR_DATA[k]) out.innerHTML = TIT_ERR_DATA[k];
+}
+
+/* Bench 5B: Back Titration */
+let btRatio = 2, btLabel = 'CaCO₃ in limestone (2HCl : 1CaCO₃)';
+function loadBackTitrePreset(m, v1, c1, v2, c2, ratio, mr, lbl){
+  document.getElementById('btMass').value = m;
+  document.getElementById('btV1').value = v1;
+  document.getElementById('btC1').value = c1;
+  document.getElementById('btV2').value = v2;
+  document.getElementById('btC2').value = c2;
+  document.getElementById('btMr').value = mr;
+  btRatio = ratio; btLabel = lbl;
+  solveBackTitration();
+}
+function solveBackTitration(){
+  const m = parseFloat(document.getElementById('btMass').value);
+  const v1 = parseFloat(document.getElementById('btV1').value);
+  const c1 = parseFloat(document.getElementById('btC1').value);
+  const v2 = parseFloat(document.getElementById('btV2').value);
+  const c2 = parseFloat(document.getElementById('btC2').value);
+  const mr = parseFloat(document.getElementById('btMr').value);
+  const out = document.getElementById('btOut');
+  if(![m,v1,c1,v2,c2,mr].every(x => x>0)){ out.textContent = 'Enter positive values in all 6 boxes.'; return; }
+  const nAdded = c1 * v1 / 1000;
+  const nExcess = c2 * v2 / 1000;
+  const nReacted = nAdded - nExcess;
+  if(nReacted <= 0){ out.textContent = 'Back-titre moles exceed added moles — check V₁, c₁ vs V₂, c₂.'; return; }
+  const nAnalyte = nReacted / btRatio;
+  const mPure = nAnalyte * mr;
+  const pct = (mPure / m) * 100;
+  out.innerHTML = `<b>[*1M] Moles of standard reagent added:</b> $n_{\text{added}} = ${c1} \times \frac{${v1}}{1000} = ${nAdded.toFixed(5)}\text{ mol}$<br>`
+    + `<b>[*1M] Moles of unreacted excess (from back-titre):</b> $n_{\text{excess}} = ${c2} \times \frac{${v2}}{1000} = ${nExcess.toFixed(5)}\text{ mol}$<br>`
+    + `<b>[*1M] Moles reacted with sample:</b> $n_{\text{reacted}} = ${nAdded.toFixed(5)} - ${nExcess.toFixed(5)} = ${nReacted.toFixed(5)}\text{ mol} \Rightarrow n_{\text{analyte}} = \div ${btRatio} = ${nAnalyte.toFixed(5)}\text{ mol}$<br>`
+    + `<b>[*1M] Mass &amp; % by mass:</b> $m = ${nAnalyte.toFixed(5)} \times ${mr} = ${mPure.toFixed(3)}\text{ g} \Rightarrow \%\text{ purity} = \frac{${mPure.toFixed(3)}}{${m}} \times 100\% = <b>${pct.toFixed(1)}\%</b>$`;
+  safeInitKaTeX();
+}
+
+/* Bench 6: Live HKEAA Keyword Answer Grader (Topic IV) */
+const GRADER_RUBRICS = {
+  std_soln: {
+    prompt: '<b>Question (3 marks · CP 2014 Q7 / CP 2019 Q4 / CP 2021 Q7):</b> Describe how to prepare 250.0 cm³ of a standard solution of sodium carbonate from an accurately weighed sample of anhydrous Na₂CO₃(s).',
+    model: 'Dissolve the weighed anhydrous Na₂CO₃ solid completely in distilled (or deionised) water in a clean beaker using a glass rod. Pour the solution (through a filter funnel) into a 250.0 cm³ volumetric flask, and rinse the beaker, glass rod and funnel several times with distilled water, transferring all washings into the flask. Add distilled water up to the graduation mark (dropwise near the mark), stopper the flask, and invert it several times to mix thoroughly.',
+    marks: [
+      { label: '1M · Dissolve in Beaker with Distilled/Deionised Water', re: /dissolve[\s\S]{0,55}(beaker[\s\S]{0,40}(distilled|deionised)|(distilled|deionised)[\s\S]{0,40}beaker)/i, hint: 'CP 2014 Q7 / CP 2019 Q4 Requirement: State dissolving the solid in <b>distilled/deionised water in a beaker</b> first.' },
+      { label: '1M · Transfer + Washings into 250.0 cm³ Volumetric Flask', re: /(rinse|washings?)[\s\S]{0,60}volumetric\s+flask|volumetric\s+flask[\s\S]{0,60}(rinse|washings?)/i, hint: 'CP 2021 Q7 Keywords: Transfer to a <b>(250.0 cm³) volumetric flask</b> along with all <b>washings/rinsings</b>.' },
+      { label: '1M · Make Up to Graduation Mark & Invert to Mix', re: /(graduation\s+mark|up\s+to\s+the\s+mark)[\s\S]{0,60}(invert|shake|mix)/i, hint: 'State adding distilled water up to the <b>graduation mark</b>, then stoppering and <b>inverting to mix</b>.' }
+    ],
+    traps: [
+      { re: /dissolve\s+(the\s+solid\s+)?(directly\s+)?in(side)?\s+the\s+volumetric\s+flask/i, msg: 'CP 2014 Q7 / CP 2019 Q4 Verbatim Error: Never dissolve the solid directly inside the volumetric flask — dissolve in a beaker first!' },
+      { re: /250(\.0)?\s*cm3\s+pipette/i, msg: 'CP 2019 Q4 Verbatim Error: "use a 250.0 cm³ pipette to transfer the solution" — no such transfer step is used!' }
+    ]
+  },
+  weak_ph: {
+    prompt: '<b>Question (2 marks · CP 2013 Q4 / CP 2023 Q4):</b> Explain why the pH of 0.050 mol dm⁻³ ethanedioic acid (H₂C₂O₄) is greater than 1.0.',
+    model: 'H₂C₂O₄ is a weak acid and undergoes incomplete (only partial) ionisation in water. Therefore, the concentration of H⁺(aq) ions in 0.050 mol dm⁻³ H₂C₂O₄ is less than 0.10 mol dm⁻³, and since pH = −log₁₀[H⁺(aq)], its pH is greater than 1.0.',
+    marks: [
+      { label: '1M · Weak Acid + Incomplete / Partial Ionisation', re: /(weak\s+acid[\s\S]{0,45})?(incomplete(ly)?|partial(ly)?|slightly)\s+(ioni[sz](es|ed|ation)|dissociat(es|ed|ion))/i, hint: 'State that H₂C₂O₄ is a <b>weak acid</b> that undergoes <b>incomplete (partial) ionisation in water</b>.' },
+      { label: '1M · [H⁺(aq)] < 0.10 M → pH > 1.0', re: /\[?h\+\]?[\s\S]{0,35}(less\s+than|<)\s*0\.1(0)?|ph\s*=\s*-\s*log/i, hint: 'State that <b>[H⁺(aq)] is less than 0.10 mol dm⁻³</b> (so pH = −log₁₀[H⁺(aq)] > 1.0).' }
+    ],
+    traps: []
+  },
+  compare_alkali: {
+    prompt: '<b>Question (2 marks · CP 2015 Q5):</b> Describe an experiment (including fair-test conditions) to show that aqueous ammonia is a weaker alkali than sodium hydroxide solution.',
+    model: 'Measure the pH (using a pH meter) or the electrical conductivity of aqueous ammonia and sodium hydroxide solution of the same molar concentration at the same temperature. The aqueous ammonia has a lower pH (or lower electrical conductivity / dimmer bulb) than the sodium hydroxide solution.',
+    marks: [
+      { label: '1M · Valid Property + Fair-Test Control (Same Concentration)', re: /same\s+(molar\s+)?concentration[\s\S]{0,70}(ph|conductivity|bulb)|(ph|conductivity|bulb)[\s\S]{0,70}same\s+(molar\s+)?concentration/i, hint: 'CP 2015 Q5 Requirement: Must specify <b>same concentration (and temperature)</b> and measure <b>pH or electrical conductivity</b>.' },
+      { label: '1M · Correct Comparison Observation', re: /(lower\s+ph|smaller\s+ph|lower\s+(electrical\s+)?conductivity|dimmer)/i, hint: 'State the result: NH₃(aq) has a <b>lower pH</b> (or <b>lower electrical conductivity / dimmer bulb</b>) than NaOH(aq).' }
+    ],
+    traps: [
+      { re: /(volume|amount)\s+of\s+(hcl|acid)\s+(needed|required|to\s+neutrali[sz]e)/i, msg: 'CP 2015 Q5 Headline Error: Comparing the amount/volume of HCl needed for neutralisation does NOT distinguish strength — equal moles of NH₃ and NaOH consume the exact same amount of HCl!' }
+    ]
+  },
+  rinse_error: {
+    prompt: '<b>Question (2 marks · CP 2013 Q4(e)):</b> In a titration where acid is pipetted into a conical flask and titrated with NaOH(aq) from a burette, explain the effect on the titre if the conical flask was rinsed with the acid instead of distilled water.',
+    model: 'Some extra H⁺(aq) ions (acid) remain clinging to the inside of the conical flask, so the total number of moles of H⁺(aq) in the flask is greater than the pipetted amount. Therefore, a larger volume of NaOH(aq) (more alkali than actually required) is needed to reach the end point.',
+    marks: [
+      { label: '1M · Extra Moles of Acid / H⁺(aq) Remain in Flask', re: /(extra|more|some)[\s\S]{0,30}(moles?\s+of\s+)?(acid|h\+)\s+remain/i, hint: 'MS Bank §4 Wording: State that <b>extra H⁺(aq) ions / acid remain in the conical flask</b>.' },
+      { label: '1M · Larger Volume / More Alkali Used', re: /(more\s+alkali|more\s+naoh|larger\s+(volume|titre)|titre\s+increases)/i, hint: 'Conclude that <b>more alkali (NaOH) than actually required is used (titre increases)</b>.' }
+    ],
+    traps: [
+      { re: /concentration\s+of\s+(the\s+)?acid\s+(increases|changes)/i, msg: 'CP 2013 Q4(e) Verbatim Error: Candidates wrongly said rinsing affects the concentration of the acid — it increases the <b>amount (moles)</b> of acid in the flask!' }
+    ]
+  },
+  dh_neut: {
+    prompt: '<b>Question (2 marks · CP 2024 Q8(b)):</b> Explain why the standard enthalpy change of neutralisation between HCl(aq) and NaOH(aq) is almost the same as that between HNO₃(aq) and KOH(aq).',
+    model: 'HCl, HNO₃, NaOH and KOH are all strong acids and strong alkalis that completely ionise (dissociate) in water. Both neutralisation reactions involve the exact same net ionic reaction, H⁺(aq) + OH⁻(aq) → H₂O(l), so the same amount of heat is released per mole of water formed.',
+    marks: [
+      { label: '1M · All Strong Acids/Alkalis → Completely Ionised', re: /(strong\s+acids?[\s\S]{0,30}strong\s+alkalis?|completely\s+(ioni[sz]e|dissociate))/i, hint: 'CP 2024 Q8(b) Requirement: State that they are all <b>strong acids and strong alkalis that completely ionise/dissociate in water</b>.' },
+      { label: '1M · Same Net Ionic Reaction: H⁺(aq) + OH⁻(aq) → H₂O(l)', re: /h\+(\(aq\))?\s*\+\s*oh-(\(aq\))?\s*(->|→|=)\s*h2o|same\s+(net\s+)?ionic\s+(equation|reaction)/i, hint: 'State that both reactions are the same ionic reaction: <b>H⁺(aq) + OH⁻(aq) → H₂O(l)</b>.' }
+    ],
+    traps: []
+  },
+  mgso4_prep: {
+    prompt: '<b>Question (3 marks · CP 2023 Q9):</b> Outline the experimental procedure to prepare pure dry hydrated magnesium sulphate crystals (MgSO₄·7H₂O) from solid magnesium carbonate and dilute sulphuric acid.',
+    model: 'Add excess solid magnesium carbonate (MgCO₃) to warm dilute sulphuric acid with stirring until effervescence stops and unreacted solid remains. Filter the mixture to remove the excess MgCO₃ residue. Heat the filtrate to evaporate some water until a saturated solution is obtained, allow it to cool slowly for a period of time to form crystals, then filter off the crystals, wash with a little cold distilled water and dry between filter papers.',
+    marks: [
+      { label: '1M · Excess MgCO₃(s) Added to H₂SO₄(aq) + Filter', re: /excess[\s\S]{0,30}(mgco3|magnesium\s+carbonate)[\s\S]{0,60}filter/i, hint: 'CP 2023 Q9 Requirement: Add <b>excess MgCO₃(s)</b> to the acid, then <b>filter</b> off the unreacted solid.' },
+      { label: '1M · Concentrate Filtrate & Cool for a Period of Time', re: /(evaporate|concentrate|saturated)[\s\S]{0,55}cool/i, hint: 'Heat the filtrate until saturated, then <b>allow to cool slowly (for a definite period of time)</b> to crystallise.' },
+      { label: '1M · Filter Crystals, Wash & Dry Between Filter Papers', re: /(wash|filter\s+papers?)[\s\S]{0,45}dry|dry[\s\S]{0,45}filter\s+papers?/i, hint: 'Filter off the crystals, <b>wash with minimal cold distilled water, and dry between filter papers</b>.' }
+    ],
+    traps: [
+      { re: /excess\s+(dilute\s+)?(sulphuric\s+acid|h2so4)/i, msg: 'CP 2023 Q9 Verbatim Error: "Wrongly used an excess amount of H₂SO₄ instead of an excess amount of MgCO₃" — excess acid cannot be removed by filtration!' }
+    ]
+  }
+};
+
+function loadGraderPrompt(){
+  const sel = document.getElementById('graderQSelect');
+  if(!sel) return;
+  const r = GRADER_RUBRICS[sel.value];
+  const box = document.getElementById('graderPromptBox');
+  if(box && r) box.innerHTML = r.prompt;
+}
+function fillModelGraderAnswer(){
+  const sel = document.getElementById('graderQSelect');
+  if(!sel) return;
+  const r = GRADER_RUBRICS[sel.value];
+  if(!r) return;
+  document.getElementById('graderInput').value = r.model;
+  gradeStudentAnswer();
+}
+function gradeStudentAnswer(){
+  const sel = document.getElementById('graderQSelect');
+  const txt = (document.getElementById('graderInput').value || '').trim();
+  const out = document.getElementById('graderResultBox');
+  if(!sel || !out) return;
+  const r = GRADER_RUBRICS[sel.value];
+  if(!txt){ out.innerHTML = '<span class="text-amber-300">Please type an answer first, or click "Show Model Full-Mark Answer".</span>'; return; }
+  let score = 0, rowsHtml = '', trapHtml = '';
+  r.marks.forEach(m => {
+    const hit = m.re.test(txt);
+    if(hit) score++;
+    rowsHtml += `<div class="p-2 rounded-lg border ${hit ? 'bg-emerald-950/40 border-emerald-700 text-emerald-200' : 'bg-slate-900 border-slate-800 text-slate-300'}"><b>${hit ? '✅ [1M Earned]' : '⬜ [0M Missed]'} ${m.label}:</b> ${hit ? 'Keyword verified in your answer.' : m.hint}</div>`;
+  });
+  r.traps.forEach(t => {
+    if(t.re.test(txt)) trapHtml += `<div class="p-2.5 rounded-lg bg-rose-950/60 border border-rose-600 text-rose-200 font-medium">🚨 <b>[NOT ACCEPT / Contradiction Penalty]:</b> ${t.msg}</div>`;
+  });
+  out.innerHTML = `<div class="flex items-center justify-between border-b border-slate-800 pb-2"><span class="font-bold text-white text-sm">Examiner Diagnostic Score: <span class="text-sky-400 font-mono">${score} / ${r.marks.length} marks</span></span><span class="chip ${score===r.marks.length && !trapHtml ? 'bg-emerald-950 text-emerald-300 border-emerald-700' : 'bg-amber-950 text-amber-300 border-amber-700'}">${score===r.marks.length && !trapHtml ? 'Full Marks Wording' : 'Keep Refining'}</span></div>${trapHtml}<div class="space-y-1.5 mt-2">${rowsHtml}</div>`;
+}
+
+const CMD_INDEX = [
+  { title: 'Virtual Cation Hydroxide Precipitate Lab (NaOH vs NH₃)', tag: 'Strand (a) · Sim', action: ()=>{switchTab('tab-acid');switchAcidMode('map');} },
+  { title: 'Basicity of Acids (CH₃COOH, H₂C₂O₄, Citric, Sulphamic)', tag: 'Strand (a) · CP 2024/2025', action: ()=>{switchTab('tab-acid');switchAcidMode('map');} },
+  { title: 'Live pH Slider & 4-Indicator Colour Swatch Bench', tag: 'Strand (b) · Sim', action: ()=>{switchTab('tab-ph');switchPhMode('map');} },
+  { title: 'Strong vs Weak Acid Fair-Test & Same-pH Dilution Lab', tag: 'Strand (c) · Sim', action: ()=>{switchTab('tab-strength');switchStrengthMode('map');} },
+  { title: 'Salt Preparation Router (Excess Solid, Titration, Precipitation)', tag: 'Strand (d) · Sim', action: ()=>{switchTab('tab-titration');switchTitrationMode('map');} },
+  { title: 'Volumetric Rinsing & Titre Error Diagnostic (CP 2013 Q4(e))', tag: 'Strand (f) · Sim', action: ()=>{switchTab('tab-titration');switchTitrationMode('map');} },
+  { title: 'Back-Titration Step-Mark Calculator (NTF-2018 II-B IV (f))', tag: 'Solver · Bench 5B', action: ()=>{switchTab('tab-solver');} },
+  { title: 'Live HKEAA Keyword Answer Grader (Bench 6)', tag: 'Solver · Exam Practice', action: ()=>{switchTab('tab-solver');} },
+  { title: 'Candidate Performance Intelligence (2012–2025)', tag: 'Past Papers · Tab 7', action: ()=>{switchTab('tab-pp');} }
+];
+function openCmdModal(){ const m=document.getElementById('cmdModal'); if(m){ m.classList.add('open'); const inp=document.getElementById('cmdSearchInput'); if(inp){inp.value='';filterCmdList();setTimeout(()=>inp.focus(),50);}}}
+function closeCmdModal(){ const m=document.getElementById('cmdModal'); if(m) m.classList.remove('open'); }
+function filterCmdList(){
+  const q = (document.getElementById('cmdSearchInput').value || '').toLowerCase();
+  const box = document.getElementById('cmdResults');
+  if(!box) return;
+  box.innerHTML = '';
+  CMD_INDEX.filter(i => i.title.toLowerCase().includes(q) || i.tag.toLowerCase().includes(q)).forEach(i => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'w-full text-left px-3 py-2.5 rounded-xl hover:bg-slate-800/80 flex items-center justify-between transition';
+    btn.innerHTML = `<span class="text-white font-medium">${i.title}</span><span class="chip bg-sky-950 text-sky-300 border border-sky-800">${i.tag}</span>`;
+    btn.onclick = () => { closeCmdModal(); i.action(); };
+    box.appendChild(btn);
+  });
+}
+document.addEventListener('keydown', e => {
+  if((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k'){ e.preventDefault(); const m=document.getElementById('cmdModal'); if(m && m.classList.contains('open')) closeCmdModal(); else openCmdModal(); }
+  else if(e.key === 'Escape') closeCmdModal();
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  try { if(localStorage.getItem('hkdse_topic4_theme') === 'light') toggleAppleTheme(); } catch(e){}
+  injectQuizSelfCheckBars();
+  setCationSim('Cu2+');
+  updatePhSim();
+  setStrengthModeSim('equalC');
+  updateSaltPrepSim();
+  updateTitErrSim();
+  solveBackTitration();
+  loadGraderPrompt();
+  updateMasteryRing();
+  document.getElementById('svAcidC').value = '0.050'; solverPh();
+  document.getElementById('svDc').value = '1.0'; document.getElementById('svDv1').value = '25.0'; document.getElementById('svDv2').value = '250.0'; solverDilute();
+  document.getElementById('svTc').value = '0.100'; document.getElementById('svTtv').value = '22.50'; solverTitre();
+  document.getElementById('svMv').value = '4.9'; document.getElementById('svMMr').value = '98'; solverConv();
+  solverPurity();
+});
+</script>
+
 </body>
 </html>

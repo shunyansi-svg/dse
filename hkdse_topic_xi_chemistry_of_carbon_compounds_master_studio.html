@@ -9,52 +9,375 @@
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
 <style>
-  :root { color-scheme: dark; }
-  body { background:#020617; font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
-  .tab-panel { display:none; }
-  .tab-panel.active { display:block; }
-  .blur-answer { filter: blur(6px); cursor:pointer; transition: filter .25s ease; user-select:none; }
-  .blur-answer.revealed { filter: blur(0); cursor:default; user-select:text; }
-  .engine-module { display:none; }
-  .engine-module.active { display:block; }
-  .mode-pill { cursor:pointer; }
-  .mode-pill.active { background:rgba(56,189,248,.15); color:#7dd3fc; border-color:#38bdf8; }
-  details > summary { cursor:pointer; list-style:none; }
-  details > summary::-webkit-details-marker { display:none; }
-  .chip { display:inline-block; padding:2px 10px; border-radius:9999px; font-size:11px; font-weight:600; }
-  .katex { font-size:1.05em; }
+  :root {
+    color-scheme: dark;
+    --hdr: 118px;
+    --bg-canvas: #000000;
+    --bg-elevated: rgba(22, 22, 29, 0.72);
+    --bg-card: rgba(28, 28, 36, 0.68);
+    --bg-card-solid: #16161d;
+    --bg-subcard: rgba(38, 38, 48, 0.55);
+    --bg-glass-nav: rgba(14, 14, 20, 0.76);
+    --border-hairline: rgba(255, 255, 255, 0.09);
+    --border-highlight: rgba(255, 255, 255, 0.16);
+    --text-primary: #f5f5f7;
+    --text-secondary: #a1a1aa;
+    --text-tertiary: #6e6e77;
+    --accent-blue: #0a84ff;
+    --accent-teal: #64d2ff;
+    --accent-purple: #bf5af2;
+    --accent-emerald: #30d158;
+    --accent-amber: #ff9f0a;
+    --accent-rose: #ff453a;
+    --shadow-card: 0 20px 44px -12px rgba(0, 0, 0, 0.65), inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+    --shadow-hover: 0 24px 52px -10px rgba(0, 0, 0, 0.75), inset 0 1px 0 0 rgba(255, 255, 255, 0.18);
+    --spring: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  html.theme-light {
+    color-scheme: light;
+    --bg-canvas: #f5f5f7;
+    --bg-elevated: rgba(255, 255, 255, 0.82);
+    --bg-card: rgba(255, 255, 255, 0.88);
+    --bg-card-solid: #ffffff;
+    --bg-subcard: rgba(242, 242, 247, 0.85);
+    --bg-glass-nav: rgba(248, 248, 252, 0.82);
+    --border-hairline: rgba(0, 0, 0, 0.08);
+    --border-highlight: rgba(0, 0, 0, 0.14);
+    --text-primary: #1d1d1f;
+    --text-secondary: #515154;
+    --text-tertiary: #86868b;
+    --shadow-card: 0 12px 32px -8px rgba(0, 0, 0, 0.07), inset 0 1px 0 0 rgba(255, 255, 255, 0.9);
+    --shadow-hover: 0 18px 40px -8px rgba(0, 0, 0, 0.12), inset 0 1px 0 0 rgba(255, 255, 255, 1);
+  }
+
+  html {
+    scroll-padding-top: calc(var(--hdr) + 14px);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--bg-canvas);
+    background-image:
+      radial-gradient(ellipse 80% 50% at 15% -10%, rgba(10, 132, 255, 0.16), transparent 60%),
+      radial-gradient(ellipse 70% 45% at 85% 5%, rgba(191, 90, 242, 0.12), transparent 60%),
+      radial-gradient(ellipse 60% 40% at 50% 100%, rgba(48, 209, 88, 0.08), transparent 60%);
+    background-attachment: fixed;
+    color: var(--text-primary);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: -0.011em;
+    transition: background-color 0.4s var(--spring), color 0.3s var(--spring);
+  }
+
+  h1, h2, h3, h4 {
+    letter-spacing: -0.024em;
+    font-weight: 650;
+  }
+
+  .font-mono {
+    font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+  }
+
+  header {
+    background: var(--bg-glass-nav) !important;
+    -webkit-backdrop-filter: saturate(190%) blur(28px) !important;
+    backdrop-filter: saturate(190%) blur(28px) !important;
+    border-bottom: 1px solid var(--border-hairline) !important;
+    box-shadow: 0 4px 24px -4px rgba(0, 0, 0, 0.28);
+    transition: background 0.35s var(--spring);
+  }
+
+  #mainNav {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border-hairline);
+    border-radius: 14px;
+    padding: 4px !important;
+    gap: 4px !important;
+    margin-bottom: 8px;
+  }
+  html.theme-light #mainNav {
+    background: rgba(0, 0, 0, 0.045);
+  }
+
+  #mainNav button {
+    border-radius: 10px !important;
+    border-bottom: none !important;
+    transition: all 0.28s var(--spring) !important;
+    position: relative;
+    font-weight: 500;
+  }
+  #mainNav button:hover { transform: translateY(-1px); }
+  #mainNav button:active { transform: scale(0.97); }
+  #mainNav button.tab-btn-active {
+    background: rgba(10, 132, 255, 0.22) !important;
+    color: #64d2ff !important;
+    box-shadow: 0 2px 10px rgba(10, 132, 255, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.22);
+    font-weight: 600 !important;
+  }
+  html.theme-light #mainNav button.tab-btn-active {
+    background: #ffffff !important;
+    color: #0066cc !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .bg-slate-900 {
+    background: var(--bg-elevated) !important;
+    -webkit-backdrop-filter: saturate(160%) blur(22px);
+    backdrop-filter: saturate(160%) blur(22px);
+    border-color: var(--border-hairline) !important;
+    border-radius: 22px !important;
+    box-shadow: var(--shadow-card);
+    transition: transform 0.35s var(--spring), box-shadow 0.35s var(--spring), border-color 0.3s ease;
+  }
+
+  .bg-slate-950 {
+    background: var(--bg-card) !important;
+    border-color: var(--border-hairline) !important;
+    border-radius: 18px !important;
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.06);
+    transition: transform 0.3s var(--spring), box-shadow 0.3s var(--spring), border-color 0.25s ease;
+  }
+  .bg-slate-950:hover {
+    border-color: var(--border-highlight) !important;
+  }
+
+  html.theme-light .text-white { color: #1d1d1f !important; }
+  html.theme-light .text-slate-100,
+  html.theme-light .text-slate-200,
+  html.theme-light .text-slate-300 { color: #2c2c2e !important; }
+  html.theme-light .text-slate-400 { color: #515154 !important; }
+  html.theme-light .text-slate-500 { color: #6e6e73 !important; }
+  html.theme-light .bg-slate-800,
+  html.theme-light .bg-slate-800\/50 { background-color: rgba(0, 0, 0, 0.05) !important; color: #1d1d1f !important; border-color: rgba(0,0,0,0.12) !important; }
+  html.theme-light .bg-sky-950\/40,
+  html.theme-light .bg-sky-950\/30,
+  html.theme-light .bg-sky-950 { background-color: rgba(10, 132, 255, 0.1) !important; color: #004080 !important; border-color: rgba(10, 132, 255, 0.28) !important; }
+  html.theme-light .bg-purple-950\/30,
+  html.theme-light .bg-purple-950 { background-color: rgba(175, 82, 222, 0.1) !important; color: #581c87 !important; border-color: rgba(175, 82, 222, 0.28) !important; }
+  html.theme-light .bg-emerald-950\/30,
+  html.theme-light .bg-emerald-950 { background-color: rgba(48, 209, 88, 0.12) !important; color: #065f46 !important; border-color: rgba(48, 209, 88, 0.3) !important; }
+  html.theme-light .bg-amber-950\/40,
+  html.theme-light .bg-amber-950\/30,
+  html.theme-light .bg-amber-950 { background-color: rgba(255, 159, 10, 0.13) !important; color: #78350f !important; border-color: rgba(255, 159, 10, 0.35) !important; }
+  html.theme-light .bg-rose-950\/40,
+  html.theme-light .bg-rose-950\/30,
+  html.theme-light .bg-rose-950 { background-color: rgba(255, 69, 58, 0.1) !important; color: #881337 !important; border-color: rgba(255, 69, 58, 0.28) !important; }
+  html.theme-light .text-sky-200, html.theme-light .text-sky-300, html.theme-light .text-sky-400 { color: #0055b3 !important; }
+  html.theme-light .text-amber-200, html.theme-light .text-amber-300, html.theme-light .text-amber-400 { color: #92400e !important; }
+  html.theme-light .text-rose-200, html.theme-light .text-rose-300, html.theme-light .text-rose-400 { color: #9f1239 !important; }
+  html.theme-light .text-emerald-300, html.theme-light .text-emerald-400 { color: #047857 !important; }
+  html.theme-light .text-purple-300, html.theme-light .text-purple-400 { color: #6b21a8 !important; }
+  html.theme-light .text-cyan-200, html.theme-light .text-cyan-300, html.theme-light .text-cyan-400 { color: #0e7490 !important; }
+
+  @keyframes appleStageIn {
+    0% { opacity: 0; transform: translateY(10px) scale(0.992); filter: blur(4px); }
+    100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+  }
+  .tab-panel { display: none; }
+  .tab-panel.active {
+    display: block;
+    animation: appleStageIn 0.42s var(--spring) forwards;
+  }
+  .engine-module { display: none; }
+  .engine-module.active {
+    display: block;
+    animation: appleStageIn 0.34s var(--spring) forwards;
+  }
+  .fam-card, .iso-card, .rxn-card, .conv-card {
+    animation: appleStageIn 0.3s var(--spring) forwards;
+  }
+
+  .blur-answer {
+    filter: blur(5.5px);
+    cursor: pointer;
+    transition: filter 0.28s var(--spring), background-color 0.28s ease, transform 0.2s var(--spring), box-shadow 0.25s ease;
+    user-select: none;
+    border: 1px solid rgba(100, 210, 255, 0.22);
+    padding: 1px 7px !important;
+    border-radius: 7px !important;
+  }
+  .blur-answer:hover {
+    filter: blur(2.5px);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(10, 132, 255, 0.2);
+  }
+  .blur-answer.revealed {
+    filter: blur(0);
+    cursor: pointer;
+    user-select: text;
+    background: rgba(48, 209, 88, 0.16) !important;
+    border-color: rgba(48, 209, 88, 0.45) !important;
+    box-shadow: 0 0 0 1px rgba(48, 209, 88, 0.15);
+  }
+
+  .mode-pill {
+    cursor: pointer;
+    transition: all 0.26s var(--spring);
+    border-radius: 9999px;
+    backdrop-filter: blur(10px);
+  }
+  .mode-pill:hover { transform: translateY(-1px); }
+  .mode-pill:active { transform: scale(0.96); }
+  .mode-pill.active {
+    background: linear-gradient(135deg, rgba(10, 132, 255, 0.26), rgba(100, 210, 255, 0.14)) !important;
+    color: #7dd3fc !important;
+    border-color: rgba(100, 210, 255, 0.65) !important;
+    box-shadow: 0 4px 14px -2px rgba(10, 132, 255, 0.35), inset 0 1px 0 rgba(255,255,255,0.2);
+  }
+
+  details > summary {
+    cursor: pointer;
+    list-style: none;
+    transition: background-color 0.2s ease;
+    border-radius: 14px;
+  }
+  details > summary::-webkit-details-marker { display: none; }
+  details[open] > summary {
+    border-bottom: 1px solid var(--border-hairline);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 10px;
+    border-radius: 9999px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.12);
+  }
+
+  .katex { font-size: 1.05em; }
   .num-card { font-variant-numeric: tabular-nums; }
-  input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner-spin-button { -webkit-appearance:none; margin:0; }
-  input[type=number] { -moz-appearance:textfield; }
-  .edot { font-size:10px; line-height:1; letter-spacing:-1px; }
-  .katex-block{overflow-x:auto;overflow-y:hidden}
-  .katex-block .katex-display{text-align:left;margin:.35em 0}
-  /* ══ MOBILE UX LAYER (chrome-only) ══ */
-  :root{--hdr:120px}
-  html{scroll-padding-top:calc(var(--hdr) + 10px)}
-  .toc-strip{display:none;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:2px 0 6px;margin-bottom:2px}
-  .toc-strip::-webkit-scrollbar{display:none}
-  .toc-chip{flex-shrink:0;font-size:10px;line-height:1;padding:7px 11px;border-radius:9999px;border:1px solid rgba(51,65,85,.9);background:rgba(15,23,42,.85);color:#94a3b8;font-weight:600;white-space:nowrap;cursor:pointer}
-  #backTop{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:70;width:44px;height:44px;border-radius:9999px;border:1px solid rgba(56,189,248,.35);background:rgba(8,14,26,.92);color:#7dd3fc;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transform:translateY(8px);transition:opacity .25s,transform .25s}
-  #backTop.show{opacity:1;pointer-events:auto;transform:none}
-  #scrollProg{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,#0ea5e9,#38bdf8);z-index:80;pointer-events:none}
+  input[type=number]::-webkit-outer-spin-button,
+  input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  input[type=number] { -moz-appearance: textfield; }
+  .katex-block { overflow-x: auto; overflow-y: hidden; }
+  .katex-block .katex-display { text-align: left; margin: .35em 0; }
+
+  .apple-sim-panel {
+    background: linear-gradient(165deg, rgba(20, 24, 38, 0.85), rgba(12, 15, 26, 0.92));
+    border: 1px solid rgba(100, 210, 255, 0.22);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 18px 40px -12px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  }
+  html.theme-light .apple-sim-panel {
+    background: linear-gradient(165deg, rgba(255, 255, 255, 0.95), rgba(240, 246, 255, 0.92));
+    border-color: rgba(10, 132, 255, 0.25);
+    box-shadow: 0 14px 32px -10px rgba(10, 132, 255, 0.12);
+  }
+
+  .apple-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 7px 14px;
+    transition: all 0.24s var(--spring);
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(255, 255, 255, 0.07);
+    color: var(--text-primary);
+  }
+  .apple-btn:hover {
+    background: rgba(255, 255, 255, 0.13);
+    transform: translateY(-1px);
+  }
+  .apple-btn:active { transform: scale(0.97); }
+  .apple-btn-primary {
+    background: linear-gradient(180deg, #1e90ff 0%, #0071e3 100%);
+    color: #ffffff !important;
+    border-color: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 4px 14px rgba(0, 113, 227, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  }
+  .apple-btn-primary:hover {
+    background: linear-gradient(180deg, #339dff 0%, #0a7ff0 100%);
+    box-shadow: 0 6px 18px rgba(0, 113, 227, 0.55);
+  }
+
+  input[type=range].apple-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 6px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #ff453a, #ff9f0a, #30d158, #0a84ff, #bf5af2);
+    outline: none;
+  }
+  input[type=range].apple-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 2px solid #0a84ff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+    cursor: grab;
+    transition: transform 0.18s var(--spring);
+  }
+  input[type=range].apple-slider::-webkit-slider-thumb:active {
+    transform: scale(1.15);
+    cursor: grabbing;
+  }
+
+  .quiz-self-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px dashed var(--border-hairline);
+    font-size: 11px;
+  }
+
+  #cmdModal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: rgba(0, 0, 0, 0.58);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 10vh;
+  }
+  #cmdModal.open {
+    display: flex;
+    animation: appleStageIn 0.22s var(--spring) forwards;
+  }
+
+  .toc-strip { display: none; gap: 6px; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 2px 0 6px; margin-bottom: 2px; }
+  .toc-strip::-webkit-scrollbar { display: none; }
+  .toc-chip { flex-shrink: 0; font-size: 10px; line-height: 1; padding: 7px 11px; border-radius: 9999px; border: 1px solid var(--border-hairline); background: var(--bg-card); color: var(--text-secondary); font-weight: 600; white-space: nowrap; cursor: pointer; transition: all 0.2s var(--spring); }
+  #backTop { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom)); z-index: 70; width: 44px; height: 44px; border-radius: 9999px; border: 1px solid rgba(100, 210, 255, 0.35); background: var(--bg-glass-nav); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); color: #7dd3fc; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transform: translateY(8px); transition: opacity .25s, transform .25s var(--spring); box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+  #backTop.show { opacity: 1; pointer-events: auto; transform: none; }
+  #scrollProg { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: linear-gradient(90deg, #0a84ff, #64d2ff, #30d158); z-index: 80; pointer-events: none; }
+
   @media (max-width:1023.98px){
-    header{background-color:rgba(2,6,23,.97)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;padding-top:env(safe-area-inset-top)}
-    #mainNav{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:4px}
-    #mainNav::-webkit-scrollbar{display:none}
-    #mainNav button{flex-shrink:0}
-    select,input[type="number"],input[type="text"]{font-size:16px!important}
-    #mainNav button{padding-top:10px;padding-bottom:10px}
-    .mode-pill{padding:8px 14px}
-    .toc-chip{padding:10px 12px}
-    .katex{font-size:1em}
-    .toc-strip{display:flex}
+    header { padding-top: env(safe-area-inset-top); }
+    #mainNav { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+    #mainNav::-webkit-scrollbar { display: none; }
+    #mainNav button { flex-shrink: 0; padding-top: 9px; padding-bottom: 9px; }
+    select, input[type="number"], input[type="text"] { font-size: 16px !important; }
+    .mode-pill { padding: 8px 14px; }
+    .toc-chip { padding: 10px 12px; }
+    .katex { font-size: 1em; }
+    .toc-strip { display: flex; }
   }
-  @media (max-width:767.98px){
-    .katex{font-size:.94em}
+  @media (prefers-reduced-motion:reduce){
+    .tab-panel.active, .engine-module.active { animation: none !important; }
+    .blur-answer, #backTop { transition: none !important; }
   }
-  @media (prefers-reduced-motion:reduce){.tab-panel.active{animation:none}
-    .blur-answer,#backTop{transition:none!important}}
 </style>
 </head>
 <body class="text-slate-200 min-h-screen">
@@ -64,14 +387,29 @@
   <div class="max-w-7xl mx-auto px-4 py-3">
     <div class="flex flex-wrap items-center justify-between gap-2">
       <div>
-        <h1 class="text-base sm:text-lg font-bold text-white leading-tight">HKDSE · Topic XI Master Studio</h1>
+        <div class="flex items-center gap-2.5"><div class="hidden sm:flex items-center gap-1.5 mr-1"><span class="w-2.5 h-2.5 rounded-full bg-[#ff5f56] inline-block shadow-sm"></span><span class="w-2.5 h-2.5 rounded-full bg-[#ffbd2e] inline-block shadow-sm"></span><span class="w-2.5 h-2.5 rounded-full bg-[#27c93f] inline-block shadow-sm"></span></div><h1 class="text-base sm:text-lg font-bold text-white leading-tight tracking-tight">HKDSE · Topic XI Master Studio — Chemistry of Carbon Compounds</h1><span class="chip bg-sky-500/15 text-sky-300 border border-sky-400/30 text-[10px]">Interactive Studio Pro</span></div>
         <p class="text-[11px] text-slate-400 font-mono">Chemistry of Carbon Compounds · Homologous Series, Isomerism, Functional-Group Reactions, Inter-Conversions, Important Organic Substances</p>
       </div>
-      <div class="flex gap-2 text-[10px] font-mono">
+      <div class="flex flex-wrap items-center gap-2 text-[10px] font-mono">
         <span class="chip bg-sky-950 text-sky-400 border border-sky-800">Strands (a)–(e)</span>
         <span class="chip bg-purple-950 text-purple-400 border border-purple-800">Paper 1A + 1B</span>
         <span class="chip bg-emerald-950 text-emerald-400 border border-emerald-800">C&amp;A Guide 2018</span>
-        <span class="chip bg-amber-950 text-amber-400 border border-amber-800">NTF 18/08/2018 · Annex XI (c)</span>
+        <div class="flex items-center gap-2 ml-1 pl-2 border-l border-slate-700/70">
+          <button type="button" onclick="openCmdModal()" class="apple-btn !py-1 !px-2.5 text-[11px]" title="Quick Concept &amp; Past-Paper Search (⌘K)">
+            <span>🔍 Search</span>
+            <kbd class="px-1.5 py-0.5 text-[9px] rounded bg-slate-800 text-slate-300 border border-slate-700">⌘K</kbd>
+          </button>
+          <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-900/90 border border-slate-700/80" title="Concept Mastery Progress across Quiz &amp; Syllabus Checkpoints">
+            <svg class="w-4 h-4 -rotate-90" viewBox="0 0 36 36">
+              <circle cx="18" cy="18" r="15" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="3.8"></circle>
+              <circle id="masteryRingCircle" cx="18" cy="18" r="15" fill="none" stroke="#30d158" stroke-width="3.8" stroke-dasharray="94.2" stroke-dashoffset="94.2" stroke-linecap="round"></circle>
+            </svg>
+            <span id="masteryPctText" class="text-[11px] font-semibold text-emerald-400 num-card">0% Mastered</span>
+          </div>
+          <button type="button" id="themeToggleBtn" onclick="toggleAppleTheme()" class="apple-btn !py-1 !px-2.5 text-[11px]" title="Switch between Apple Pro Dark and Cupertino Daylight mode">
+            <span id="themeToggleIcon">☀️ Daylight</span>
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -293,6 +631,73 @@
   </div>
 </section>
 
+
+    <!-- ══ INTERACTIVE SYLLABUS AUDIT & CONCEPT READINESS MATRIX (EDB C&A Guide 2018 · Topic XI Strands a–e & Annex XI(c)) ══ -->
+    <div class="mt-6 apple-sim-panel space-y-4" id="syllabus-audit-panel">
+      <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800/80 pb-3">
+        <div>
+          <span class="text-[10px] font-mono uppercase tracking-widest text-sky-400 font-bold">Interactive Syllabus Check-Off · EDB C&amp;A Guide (Topic XI Strands a–e &amp; Annex)</span>
+          <h3 class="text-base font-bold text-white mt-0.5">HKDSE Topic XI Competency Checklist &amp; Direct Simulator Links</h3>
+          <p class="text-xs text-slate-400">Tick each official EDB learning outcome across Strands (a)–(e) and Part II depth caps (`NTF-2018 II-B XI` + Annex XI(c)) as you master it.</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <span id="sylAuditCount" class="chip bg-emerald-950 text-emerald-300 border border-emerald-700 font-mono">0 / 12 Outcomes Checked</span>
+          <button type="button" class="apple-btn text-xs" onclick="checkAllSyllabusOutcomes()">Check All</button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs" id="sylAuditGrid">
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">XI(a) · 10 Homologous Series &amp; Naming ($\le 8\text{ C}$)</b>Alkanes, alkenes, haloalkanes, alcohols, aldehydes, ketones, carboxylic acids, esters, unsubstituted amides &amp; primary amines (NTF XI(a)). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-fam');switchFamMode('map')">Family Sim →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">XI(a) · Boiling Point, Volatility &amp; Water Solubility</b>Relate physical properties to molecular size (vdW) and functional-group polarity / H-bonding ($-\text{COOH}, -\text{OH}, -\text{CONH}_2$). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-fam');switchFamMode('map')">Family Sim →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">XI(b) · Structural Isomerism (Chain, Position, Functional)</b>Count &amp; draw isomers of $\text{C}_4\text{H}_{10}$, $\text{C}_5\text{H}_{12}$, $\text{C}_4\text{H}_9\text{OH}$ ($1^\circ/2^\circ/3^\circ$), $\text{C}_3\text{H}_6\text{O}$ (aldehyde/ketone) &amp; $\text{C}_3\text{H}_6\text{O}_2$ (acid/ester). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-iso');switchIsoMode('map')">Isomer Studio →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">XI(b) · Cis–Trans &amp; Enantiomerism (1 Chiral Carbon)</b>Restricted $\text{C=C}$ rotation + 2 different groups on each C; chiral C with 4 different groups; 3D wedge/dash mirror images &amp; plane-polarised light (NTF XI(b)). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-iso');switchIsoMode('map')">3D Stereo Sim →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">XI(c) · Alkane, Alkene &amp; Markovnikov’s Rule (CP 2021/2024)</b>Alkane $+\text{X}_2/\text{UV}$; alkene $+\text{H}_2/\text{Pt,Ni,Pd}$, $+\text{X}_2$, $+\text{HX}$ (Markovnikov major product required, Annex XI(c)). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-solver')">Markovnikov Bench →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">XI(c) · Haloalkane &amp; Alcohol Reactions (Distil vs. Reflux)</b>$\text{R–X} + \text{OH}^-(aq)$; $\text{R–OH} + \text{HX}/\text{PX}_3$; dehydration ($\text{Al}_2\text{O}_3$ or conc. $\text{H}_2\text{SO}_4$, heat); $1^\circ/2^\circ/3^\circ$ oxidation ($\text{Cr}_2\text{O}_7^{2-}/\text{H}^+$). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-rxn');switchRxnMode('map')">Apparatus Sim →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">XI(c) · Carbonyls, Acids, Esters &amp; Unsubstituted Amides</b>$\text{LiAlH}_4$ (dry ether, then $\text{H}^+$) vs $\text{NaBH}_4(aq)$ (CP 2016/2022/2024); esterification &amp; acidic/alkaline hydrolysis of esters/amides. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-rxn');switchRxnMode('map')">Wet-Lab Tests →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">XI(d) · Multi-Step Organic Synthesis Pathfinder</b>Plan 2–4 step routes using ONLY Annex XI(c) reactions with complete reagents and conditions on every arrow. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-rxn');switchRxnMode('map')">Pathfinder →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">XI(d) · Lab Preparation, Purification &amp; % Yield</b>Reflux vs distillation setup diagrams (CP 2016/2020/2022); separating funnel → anhydrous $\text{MgSO}_4/\text{CaCl}_2$ → fractional distillation. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-rxn');switchRxnMode('map')">Apparatus Sim →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">XI(e) · Aspirin &amp; Soaps vs. Soapless Detergents</b>Aspirin groups ($-\text{COOH}$ + ester) &amp; hydrolysis; saponification; hydrophilic ionic head + hydrophobic hydrocarbon tail emulsification (CP 2012/2019/2024). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-conv');switchConvMode('map')">Substances Sim →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">XI(e) · Nylon-6,6 &amp; Polyesters (PET / PLA) (CP 2016/2021/2024)</b>Bifunctional monomers; condensation polymerisation (eliminates $\text{H}_2\text{O}$); repeat units vs monomers; why PLA is biodegradable. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-conv');switchConvMode('map')">Polymer Sim →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">XI(Synthesis) · Full-Mark Organic Wording</b>Write full-mark Markovnikov, chiral, reflux/distillation, detergent, and condensation-polymer answers. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-solver')">Grader →</button></span>
+        </label>
+      </div>
+    </div>
+
 <!-- ═══════════ TAB 2 · ENGINE A · FAMILIES & FORMULAE ═══════════ -->
 <section id="tab-fam" class="tab-panel space-y-6">
   <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-sm">
@@ -501,6 +906,25 @@
             <tr><td class="p-2 font-semibold text-white">primary amine</td><td class="p-2 font-mono">CₙH₂ₙ₊₁NH₂</td><td class="p-2">amino group –NH₂</td><td class="p-2">methylamine, ethylamine</td></tr>
           </tbody></table></div>
         </div>
+        <!-- ══ INTERACTIVE SIMULATOR A1: MULTI-FUNCTIONAL GROUP SPOTTER & RING-ESTER TRAP CHECKER (CP 2012 Q28 · 2017 · 2022 Q11 · 2024 Q12 · 2025 Q12) ══ -->
+        <div class="mt-6 apple-sim-panel space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+            <div>
+              <span class="text-[10px] font-mono text-sky-400 uppercase font-bold">Interactive Simulator · Strand (a) Concept Check (CP 2012 Q28 · CP 2017 · CP 2022 Q11 · CP 2024 Q12)</span>
+              <h4 class="text-sm font-bold text-white mt-0.5">Multi-Functional Group Spotter &amp; IUPAC Hyphen/Locant Inspector</h4>
+              <p class="text-[11px] text-slate-400">Select an exam molecule below to identify every functional group present (watch out for the cyclic ester vs. ketone trap!) and verify its systematic IUPAC name.</p>
+            </div>
+            <select id="fgSpotSel" onchange="updateFgSpotSim()" class="bg-slate-900 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-white font-medium">
+              <option value="aspirin" selected>1. Aspirin (Acetylsalicylic acid · C₆H₄(COOH)(OCOCH₃) · CP 2018 Q12)</option>
+              <option value="lactone">2. Cyclic Ester (Lactone) vs. Cyclic Ketone Trap (CP 2012 Q28 / CP 2017 / CP 2025 Q12)</option>
+              <option value="ntf_pentenol">3. CH₃CH=CHCHBrCH₂OH — 2-bromopent-3-en-1-ol (NTF-2018 II-B XI(a) Exemplar)</option>
+              <option value="glycerol">4. HOCH₂CH(OH)CH₂OH — propane-1,2,3-triol (CP 2024 Q12 Spelling Rule!)</option>
+              <option value="cinnamaldehyde">5. Cinnamaldehyde (C₆H₅CH=CHCHO · Aldehyde + Carbon–Carbon Double Bond)</option>
+            </select>
+          </div>
+          <div id="fgSpotOut" class="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2 text-xs text-slate-300 leading-relaxed"></div>
+        </div>
+
       </div>
     </div>
 
@@ -723,6 +1147,29 @@
             <tr><td class="p-2 font-mono">C₄H₄O₄ (2 × –COOH)</td><td class="p-2">3</td><td class="p-2">3 printed in the report</td><td class="p-2">cis-; trans-but-2-enedioic; CH₂=C(COOH)₂ <i>(CP 2016 Q29)</i></td></tr>
           </tbody></table></div>
         </div>
+        <!-- ══ INTERACTIVE SIMULATOR B1: 3D CHIRAL ENANTIOMER & CIS–TRANS STEREOISOMERISM STUDIO (CP 2015 Q13/Q26 · 2016 Q13 · 2018 Q12 · 2021 Q11 · 2023 Q11) ══ -->
+        <div class="mt-6 apple-sim-panel space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+            <div>
+              <span class="text-[10px] font-mono text-purple-400 uppercase font-bold">Interactive Simulator · Strand (b) Concept Check (CP 2015 Q13/Q26 · CP 2018 Q12 · CP 2021 Q11 · CP 2023 Q11)</span>
+              <h4 class="text-sm font-bold text-white mt-0.5">3D Mirror-Image Enantiomer &amp; Cis–Trans Geometry Inspector</h4>
+              <p class="text-[11px] text-slate-400">Select a stereoisomerism case below to inspect the live 3D SVG mirror-image pair (or cis/trans pair) and the exact drawing rules tested in Paper 1B.</p>
+            </div>
+            <select id="stereoCaseSel" onchange="updateStereoSim()" class="bg-slate-900 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-white font-medium">
+              <option value="butan2ol" selected>1. Enantiomers of Butan-2-ol (CH₃CH*(OH)CH₂CH₃ · 3D Tetrahedral Mirror Pair · CP 2018/2021/2023)</option>
+              <option value="lactic">2. Enantiomers of 2-Hydroxypropanoic Acid (Lactic Acid, CH₃CH*(OH)COOH)</option>
+              <option value="but2ene_ct">3. Cis–Trans Isomers of But-2-ene vs. Why But-1-ene Fails (CP 2023 Q11)</option>
+              <option value="diene_2015">4. Symmetrical Diene CH₃CH=CH–CH=CHCH₃ (Why Only 3 Geometrical Isomers · CP 2015 Q26)</option>
+            </select>
+          </div>
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 items-center text-xs">
+            <div class="bg-slate-950 border border-slate-800 rounded-2xl p-4 flex flex-col items-center">
+              <svg id="stereoSvg" viewBox="0 0 280 155" class="w-full h-auto" role="img" aria-label="3D stereoisomer diagram"></svg>
+            </div>
+            <div id="stereoReadout" class="lg:col-span-2 p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2 text-slate-300 leading-relaxed"></div>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -1043,6 +1490,41 @@
           </tbody></table></div>
           <p class="text-[10px] text-slate-500 mt-2">Extraction caveat: the Annex is a reaction-chart table whose lines may interleave during text extraction — conditions above are kept to what the chart / NTF text actually states; verify the chart layout against the source PDF before quoting it in class.</p>
         </div>
+        <!-- ══ INTERACTIVE SIMULATOR C1: CHEMICAL DISTINGUISHING TEST & REFLUX VS DISTILLATION APPARATUS STUDIO (CP 2014 Q14 · 2016 Q13 · 2020 Q10 · 2022 Q11) ══ -->
+        <div class="mt-6 apple-sim-panel space-y-4">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 text-xs">
+            <!-- Left: Organic Chemical Test Bench -->
+            <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-3">
+              <div>
+                <span class="text-[10px] font-mono text-emerald-400 uppercase font-bold">1. Organic Chemical Test Comparer (CP 2014 Q14 · CP 2016 Q13 · CP 2021 Q4)</span>
+                <h4 class="text-sm font-bold text-white mt-0.5">Select Pair of Unknowns to Generate Reagent + Comparative Observations</h4>
+              </div>
+              <select id="orgTestSel" onchange="updateOrgTestSim()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white">
+                <option value="ald_ket" selected>1. Propanal (Aldehyde) vs. Propanone (Ketone)</option>
+                <option value="ket_alc">2. Butanone (Ketone) vs. Butan-2-ol (2° Alcohol · CP 2016 Q13(e) / CP 2024 P2)</option>
+                <option value="alc_12_vs_3">3. Butan-1-ol / Butan-2-ol (1°/2°) vs. 2-Methylpropan-2-ol (3° Alcohol)</option>
+                <option value="acid_ester">4. Propanoic Acid (–COOH) vs. Methyl Ethanoate (Ester · CP 2025 Q14)</option>
+                <option value="amide_acid">5. Ethanamide (–CONH₂) vs. Ethanoic Acid (–COOH)</option>
+              </select>
+              <div id="orgTestOut" class="space-y-1.5 text-slate-300 leading-relaxed"></div>
+            </div>
+
+            <!-- Right: Reflux vs Distillation Apparatus Checklist -->
+            <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-3">
+              <div>
+                <span class="text-[10px] font-mono text-amber-400 uppercase font-bold">2. Reflux vs. Distillation Setup Debugger (CP 2012 Q12 · 2016 Q13 · 2020 Q10 · 2022 Q11)</span>
+                <h4 class="text-sm font-bold text-white mt-0.5">Select Apparatus to Inspect Mandatory Labels &amp; Fatal Drawing Errors</h4>
+              </div>
+              <select id="appModeSel" onchange="updateAppModeSim()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white">
+                <option value="reflux" selected>Setup A: Heating Under Reflux (1° Alcohol → Acid; Esterification; Hydrolysis)</option>
+                <option value="distil">Setup B: Simple / Fractional Distillation (1° Alcohol → Aldehyde; Ester Isolation)</option>
+                <option value="sep_funnel">Setup C: Separating Funnel &amp; Drying Agent Purification Chain (CP 2014 P2)</option>
+              </select>
+              <div id="appModeOut" class="space-y-1.5 text-slate-300 leading-relaxed"></div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -1287,6 +1769,24 @@
             <tr><td class="p-2">ethanamide</td><td class="p-2">unsubstituted amide</td><td class="p-2">acid + NH₃, heat (formation); OH⁻/H⁺ hydrolysis</td><td class="p-2">the chart’s amide exemplar (CP 2013 Q32)</td></tr>
           </tbody></table></div>
         </div>
+        <!-- ══ INTERACTIVE SIMULATOR D1: CONDENSATION POLYMERS (NYLON-6,6, PET, PLA) & DETERGENT CLEANSING STUDIO (CP 2012 Q14 · 2016 Q31 · 2019 Q15 · 2021 Q13 · 2024 Q12) ══ -->
+        <div class="mt-6 apple-sim-panel space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+            <div>
+              <span class="text-[10px] font-mono text-cyan-400 uppercase font-bold">Interactive Simulator · Strand (e) Concept Check (CP 2012 Q14 · CP 2016 Q31 · CP 2019 Q15 · CP 2021 Q13 · CP 2024 Q12)</span>
+              <h4 class="text-sm font-bold text-white mt-0.5">Important Organic Substances Explorer: Nylon-6,6 · PET · Biodegradable PLA · Soaps &amp; Detergents</h4>
+              <p class="text-[11px] text-slate-400">Click any substance below to inspect its monomers, repeat unit, linkage, and the exact HKEAA explanation for its properties.</p>
+            </div>
+            <div class="flex flex-wrap gap-1.5 text-xs">
+              <button type="button" onclick="showSubstSim(0)" class="subst-btn apple-btn apple-btn-primary !py-1.5 !px-3">🧵 Nylon-6,6 &amp; Kevlar (Polyamides)</button>
+              <button type="button" onclick="showSubstSim(1)" class="subst-btn apple-btn !py-1.5 !px-3">🍾 PET / Terylene vs. Biodegradable PLA</button>
+              <button type="button" onclick="showSubstSim(2)" class="subst-btn apple-btn !py-1.5 !px-3">🫧 Soap vs. Soapless Detergent Emulsification</button>
+              <button type="button" onclick="showSubstSim(3)" class="subst-btn apple-btn !py-1.5 !px-3">💊 Aspirin Structure &amp; Hydrolysis</button>
+            </div>
+          </div>
+          <div id="substSimOut" class="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2 text-xs text-slate-300 leading-relaxed"></div>
+        </div>
+
       </div>
     </div>
 
@@ -1439,6 +1939,44 @@
         </div>
         <button class="w-full bg-rose-700 hover:bg-rose-600 text-white text-xs font-semibold py-1.5 px-2 rounded-md" onclick="solverYield()">Calculate % yield</button>
         <div id="svYOut" aria-live="polite" class="text-xs text-emerald-300 font-mono min-h-[20px] leading-relaxed"></div>
+      </div>
+    </div>
+
+    
+    <!-- ══ BENCH 6 · LIVE HKEAA MARK-SCHEME KEYWORD GRADER (TOPIC XI EDITION) ══ -->
+    <div class="mt-6 apple-sim-panel space-y-4">
+      <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+        <div>
+          <span class="text-[10px] font-mono text-sky-400 uppercase font-bold px-2 py-0.5 bg-sky-950 rounded border border-sky-800">Bench 6 · Interactive Examiner Grader</span>
+          <h3 class="text-base font-bold text-white mt-1">Practice Writing Full-Mark Topic XI Answers — Instant `[1M]` &amp; `[NOT ACCEPT]` Diagnostic</h3>
+          <p class="text-xs text-slate-400">Select a high-frequency Paper 1B question below and type your answer. The engine checks your phrasing against official HKEAA mark-scheme rubrics and flags fatal organic chemistry traps.</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 text-xs">
+        <div class="lg:col-span-1 space-y-2.5">
+          <label for="graderQSelect" class="block text-slate-300 font-semibold">Select HKDSE Exam Prompt:</label>
+          <select id="graderQSelect" onchange="loadGraderPrompt()" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white">
+            <option value="markov_rule">Q1 (2 marks · CP 2021 Q11(a) / 2024 Q11(d)): State Markovnikov’s rule and name the major organic product when propene reacts with HBr.</option>
+            <option value="enantiomer_prop">Q2 (2 marks · CP 2015 Q13 / 2016 Q13(d) / 2021 Q11): Explain why a pair of enantiomers are optically active and state how to distinguish between them physically.</option>
+            <option value="detergent_clean">Q3 (3 marks · CP 2012 Q14(b) / 2019 Q15 / 2024 Q12): Explain how a soap (such as C₁₇H₃₃COO⁻Na⁺) removes oily dirt from clothes in water.</option>
+            <option value="cond_polymer">Q4 (2 marks · CP 2016 Q31 / 2021 Q13 / 2024 P2): Explain why the formation of nylon-6,6 (or PLA) is classified as condensation polymerisation, and explain why PLA is biodegradable.</option>
+            <option value="ester_prep">Q5 (3 marks · CP 2014 P2 / 2015 Q12 / 2025 Q12): State the catalyst and conditions for preparing ethyl ethanoate from ethanoic acid and ethanol, and outline how to purify the crude ester.</option>
+          </select>
+          <div id="graderPromptBox" class="p-3 rounded-xl bg-slate-950 border border-slate-800 text-slate-200 leading-relaxed"></div>
+        </div>
+
+        <div class="lg:col-span-2 space-y-3">
+          <textarea id="graderInput" rows="4" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-sky-500" placeholder="Type your exam explanation here..."></textarea>
+          <div class="flex flex-wrap gap-2">
+            <button type="button" onclick="gradeStudentAnswer()" class="apple-btn apple-btn-primary">✨ Grade My Answer Against Mark Scheme</button>
+            <button type="button" onclick="fillModelGraderAnswer()" class="apple-btn">Show Model Full-Mark Answer</button>
+            <button type="button" onclick="document.getElementById('graderInput').value='';document.getElementById('graderResultBox').innerHTML='Type an answer and click Grade.';" class="apple-btn">Clear</button>
+          </div>
+          <div id="graderResultBox" class="p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-300 space-y-2 leading-relaxed">
+            Type an answer above and click <b>Grade My Answer Against Mark Scheme</b> to see your mark breakdown and keyword hits.
+          </div>
+        </div>
       </div>
     </div>
 
@@ -2151,5 +2689,360 @@ else { try{ MOBILE_UX.init(); }catch(e){} }
   }catch(e){}
 })();
 </script>
+
+<!-- ═══════════ APPLE COMMAND PALETTE (⌘K) MODAL ═══════════ -->
+<div id="cmdModal" onclick="if(event.target===this)closeCmdModal()">
+  <div class="w-full max-w-xl mx-4 bg-slate-900 border border-slate-700/80 rounded-2xl shadow-2xl overflow-hidden">
+    <div class="flex items-center gap-3 px-4 py-3 border-b border-slate-800">
+      <span class="text-sky-400 text-sm">🔍</span>
+      <input id="cmdSearchInput" type="text" oninput="filterCmdList()" placeholder="Search functional groups, enantiomers, Markovnikov, Annex reactions, reflux, soap, nylon, or CP year..." class="w-full bg-transparent text-sm text-white placeholder-slate-400 focus:outline-none">
+      <button type="button" onclick="closeCmdModal()" class="text-xs text-slate-400 hover:text-white px-2 py-0.5 rounded bg-slate-800">ESC</button>
+    </div>
+    <div id="cmdResults" class="max-h-80 overflow-y-auto divide-y divide-slate-800/70 p-2 text-xs"></div>
+  </div>
+</div>
+
+<script>
+function toggleAppleTheme(){
+  const root = document.documentElement;
+  const isLight = root.classList.toggle('theme-light');
+  const icon = document.getElementById('themeToggleIcon');
+  if(icon) icon.textContent = isLight ? '🌙 Pro Dark' : '☀️ Daylight';
+  try { localStorage.setItem('hkdse_topic11_theme', isLight ? 'light' : 'dark'); } catch(e){}
+}
+
+const quizMasteryState = {};
+function injectQuizSelfCheckBars(){
+  ['famQuiz','isoQuiz','rxnQuiz','convQuiz'].forEach(qid => {
+    const container = document.getElementById(qid);
+    if(!container) return;
+    const headerDiv = container.previousElementSibling;
+    if(headerDiv && !headerDiv.querySelector('.hide-all-btn')){
+      const btnWrap = document.createElement('div');
+      btnWrap.className = 'flex items-center gap-2';
+      const revBtn = headerDiv.querySelector('button');
+      if(revBtn){
+        revBtn.parentNode.insertBefore(btnWrap, revBtn);
+        btnWrap.appendChild(revBtn);
+        const hideBtn = document.createElement('button');
+        hideBtn.type = 'button';
+        hideBtn.className = 'hide-all-btn text-[11px] font-semibold text-slate-300 border border-slate-700 px-3 py-1 rounded-full hover:bg-slate-800';
+        hideBtn.textContent = 'Reset Blanks';
+        hideBtn.onclick = () => container.querySelectorAll('.blur-answer').forEach(b => b.classList.remove('revealed'));
+        btnWrap.appendChild(hideBtn);
+      }
+    }
+    [...container.children].forEach((row, idx) => {
+      if(row.querySelector('.quiz-self-bar')) return;
+      const key = qid + '_' + idx;
+      const bar = document.createElement('div');
+      bar.className = 'quiz-self-bar';
+      bar.innerHTML = `<span class="text-[10px] font-mono text-slate-400">Tap blurred chips above to check each keyword, then log your recall:</span>
+        <div class="flex items-center gap-1.5">
+          <button type="button" class="apple-btn !py-0.5 !px-2 text-[10px]" onclick="markQuizRow('${key}', true, this)">✓ Got It</button>
+          <button type="button" class="apple-btn !py-0.5 !px-2 text-[10px]" onclick="markQuizRow('${key}', false, this)">↻ Review Again</button>
+        </div>`;
+      row.appendChild(bar);
+    });
+  });
+}
+function markQuizRow(key, mastered, btnEl){
+  quizMasteryState[key] = mastered;
+  const buttons = btnEl.parentElement.querySelectorAll('button');
+  buttons[0].className = mastered ? 'apple-btn !py-0.5 !px-2 text-[10px] !bg-emerald-600/30 !border-emerald-500 !text-emerald-300' : 'apple-btn !py-0.5 !px-2 text-[10px]';
+  buttons[1].className = !mastered ? 'apple-btn !py-0.5 !px-2 text-[10px] !bg-amber-600/30 !border-amber-500 !text-amber-300' : 'apple-btn !py-0.5 !px-2 text-[10px]';
+  updateMasteryRing();
+}
+function checkAllSyllabusOutcomes(){
+  document.querySelectorAll('.syl-chk').forEach(c => c.checked = true);
+  updateMasteryRing();
+}
+function updateMasteryRing(){
+  const sylChks = [...document.querySelectorAll('.syl-chk')];
+  const sylDone = sylChks.filter(c => c.checked).length;
+  const sylTotal = sylChks.length || 12;
+  const sylBadge = document.getElementById('sylAuditCount');
+  if(sylBadge) sylBadge.textContent = `${sylDone} / ${sylTotal} Outcomes Checked`;
+  const quizDone = Object.values(quizMasteryState).filter(Boolean).length;
+  const pct = Math.round(((sylDone + quizDone) / (sylTotal + 51)) * 100);
+  const circle = document.getElementById('masteryRingCircle');
+  const txt = document.getElementById('masteryPctText');
+  if(circle) circle.style.strokeDashoffset = String(94.2 - (94.2 * pct) / 100);
+  if(txt) txt.textContent = `${pct}% Mastered`;
+}
+
+/* 1. Multi-Functional Group Spotter */
+const FG_SPOT_DATA = {
+  aspirin: '<b>Aspirin (Acetylsalicylic acid, $\text{C}_6\text{H}_4(\text{COOH})(\text{OCOCH}_3)$ · CP 2018 Q12):</b><br>• <b>Functional Groups Present:</b> (1) <b>Carboxyl group ($-\text{COOH}$)</b>, (2) <b>Ester group ($-\text{COO}-$)</b> (and a benzene ring).<br>• <b>Acidic Hydrolysis ($\text{H}^+(aq)$, heat):</b> Cleaves the ester link to give 2-hydroxybenzoic acid (salicylic acid) + ethanoic acid ($\text{CH}_3\text{COOH}$).<br>• <b>Alkaline Hydrolysis ($\text{NaOH}(aq)$, heat):</b> Forms the <b>sodium carboxylate salts</b> (never the free acids while in alkaline medium, CP 2020 Q11 / CP 2025 Q14!).',
+  lactone: '<b>🚨 Cyclic Ester (Lactone) vs. Cyclic Ketone Trap (CP 2012 Q28 · CP 2016 Q12 · CP 2017 · CP 2025 Q12):</b><br>• When a ring contains $-\text{C(=O)–O–}$ built into the ring skeleton, the functional group is an <b>ester group</b>, NEVER a ketone group!<br>• <b>How to Spot It:</b> Always check the two atoms directly attached to the carbonyl carbon ($\text{C=O}$): if one of them is an <b>oxygen atom ($-\text{O}-$)</b>, it is an <b>ester</b> (which undergoes hydrolysis with $\text{H}^+(aq)$ or $\text{OH}^-(aq)$ to open the ring!).',
+  ntf_pentenol: '<b>$\text{CH}_3\text{CH=CHCHBrCH}_2\text{OH}$ — `2-bromopent-3-en-1-ol` (NTF-2018 II-B XI(a) Official Exemplar):</b><br>• <b>Functional Groups Present:</b> Hydroxyl group ($-\text{OH}$), carbon–carbon double bond ($\text{C=C}$), and bromo substituent ($-\text{Br}$).<br>• <b>Numbering Rule:</b> Start at the $-\text{CH}_2\text{OH}$ carbon as <b>C1</b> (`-1-ol`), putting `-bromo-` at <b>C2</b> and the double bond starting at <b>C3</b> (`pent-3-en-1-ol`). Note the chiral carbon at C2!',
+  glycerol: '<b>$\text{HOCH}_2\text{CH(OH)CH}_2\text{OH}$ — `propane-1,2,3-triol` (Glycerol · CP 2024 Q12):</b><br>• <b>CP 2024 Q12 Spelling &amp; Hyphen Rule:</b> Keep the vowel "e" in `propane-` when the suffix starts with a consonant (`-triol`), put commas between numbers (`1,2,3`), and hyphens between numbers and letters (`propane-1,2,3-triol`). Writing "propan-1,2,3-triol" or omitting hyphens lost marks in 2024!',
+  cinnamaldehyde: '<b>Cinnamaldehyde, $\text{C}_6\text{H}_5\text{CH=CHCHO}$ (MS Bank §5):</b><br>• <b>Functional Groups Present:</b> <b>Aldehyde group ($-\text{CHO}$)</b> and <b>carbon–carbon double bond ($\text{C=C}$)</b> (plus phenyl ring).<br>• <b>Reactions:</b> Decolourises $\text{Br}_2$ in organic solvent (at $\text{C=C}$); gives orange/red precipitate with 2,4-DNPH (at $-\text{CHO}$); reduced by $\text{NaBH}_4(aq)$ to $\text{C}_6\text{H}_5\text{CH=CHCH}_2\text{OH}$ ($	ext{NaBH}_4$ reduces $-\text{CHO}$ but NOT $\text{C=C}$!).'
+};
+function updateFgSpotSim(){
+  const k = document.getElementById('fgSpotSel').value;
+  const out = document.getElementById('fgSpotOut');
+  if(out && FG_SPOT_DATA[k]){ out.innerHTML = FG_SPOT_DATA[k]; safeInitKaTeX(); }
+}
+
+/* 2. 3D Stereoisomerism Studio */
+const STEREO_SIM_DATA = {
+  butan2ol: {
+    svg: `
+      <!-- Mirror plane -->
+      <line x1="140" y1="12" x2="140" y2="142" stroke="#38bdf8" stroke-width="1.8" stroke-dasharray="4 3"/>
+      <text x="140" y="150" fill="#7dd3fc" font-size="9" text-anchor="middle">Mirror Plane</text>
+      <!-- Left Enantiomer -->
+      <line x1="72" y1="74" x2="72" y2="30" stroke="#e2e8f0" stroke-width="2.2"/>
+      <line x1="62" y1="84" x2="24" y2="110" stroke="#e2e8f0" stroke-width="2.2"/>
+      <polygon points="80,86 112,118 118,108" fill="#38bdf8"/>
+      <line x1="82" y1="78" x2="118" y2="90" stroke="#94a3b8" stroke-width="2.2" stroke-dasharray="3 2"/>
+      <text x="72" y="86" fill="#f43f5e" font-size="13" font-weight="bold" text-anchor="middle">C*</text>
+      <text x="72" y="24" fill="#34d399" font-size="11" font-weight="bold" text-anchor="middle">OH</text>
+      <text x="16" y="120" fill="#cbd5e1" font-size="10" font-weight="bold" text-anchor="middle">C₂H₅</text>
+      <text x="122" y="128" fill="#fbbf24" font-size="10" font-weight="bold" text-anchor="middle">CH₃</text>
+      <text x="124" y="94" fill="#94a3b8" font-size="10" font-weight="bold" text-anchor="middle">H</text>
+      <!-- Right Enantiomer (Mirror Image) -->
+      <line x1="208" y1="74" x2="208" y2="30" stroke="#e2e8f0" stroke-width="2.2"/>
+      <line x1="218" y1="84" x2="256" y2="110" stroke="#e2e8f0" stroke-width="2.2"/>
+      <polygon points="200,86 168,118 162,108" fill="#38bdf8"/>
+      <line x1="198" y1="78" x2="162" y2="90" stroke="#94a3b8" stroke-width="2.2" stroke-dasharray="3 2"/>
+      <text x="208" y="86" fill="#f43f5e" font-size="13" font-weight="bold" text-anchor="middle">C*</text>
+      <text x="208" y="24" fill="#34d399" font-size="11" font-weight="bold" text-anchor="middle">OH</text>
+      <text x="264" y="120" fill="#cbd5e1" font-size="10" font-weight="bold" text-anchor="middle">C₂H₅</text>
+      <text x="158" y="128" fill="#fbbf24" font-size="10" font-weight="bold" text-anchor="middle">CH₃</text>
+      <text x="156" y="94" fill="#94a3b8" font-size="10" font-weight="bold" text-anchor="middle">H</text>
+    `,
+    text: '<b>Enantiomers of Butan-2-ol ($\text{CH}_3\text{CH}^*(\text{OH})\text{CH}_2\text{CH}_3$ · CP 2018 Q12 · CP 2021 Q11 · CP 2023 Q11):</b><br>• <b>Chiral Carbon ($\text{C}^*$):</b> C2 is bonded to <b>four different atoms or groups</b> ($-\text{H}, -\text{OH}, -\text{CH}_3, -\text{C}_2\text{H}_5$).<br>• <b>3D Drawing Checklist (CP 2021/2023):</b> Draw a dashed mirror line; use <b>2 solid lines, 1 solid wedge, and 1 dashed wedge</b> around $\text{C}^*$; ensure the two structures are true non-superimposable mirror images (and connect $-\text{OH}$ via the O atom and $-\text{C}_2\text{H}_5$ via the C atom!).<br>• <b>Physical Distinction:</b> They rotate the plane of <b>plane-polarised light to opposite directions by the same extent</b> (their boiling points and chemical properties with achiral reagents are identical!).'
+  },
+  lactic: {
+    svg: `
+      <line x1="140" y1="12" x2="140" y2="142" stroke="#38bdf8" stroke-width="1.8" stroke-dasharray="4 3"/>
+      <line x1="72" y1="74" x2="72" y2="30" stroke="#e2e8f0" stroke-width="2.2"/><line x1="62" y1="84" x2="24" y2="110" stroke="#e2e8f0" stroke-width="2.2"/><polygon points="80,86 112,118 118,108" fill="#38bdf8"/><line x1="82" y1="78" x2="118" y2="90" stroke="#94a3b8" stroke-width="2.2" stroke-dasharray="3 2"/>
+      <text x="72" y="86" fill="#f43f5e" font-size="13" font-weight="bold" text-anchor="middle">C*</text><text x="72" y="24" fill="#34d399" font-size="10" font-weight="bold" text-anchor="middle">COOH</text><text x="18" y="120" fill="#cbd5e1" font-size="10" font-weight="bold" text-anchor="middle">HO</text><text x="122" y="128" fill="#fbbf24" font-size="10" font-weight="bold" text-anchor="middle">CH₃</text><text x="124" y="94" fill="#94a3b8" font-size="10" font-weight="bold" text-anchor="middle">H</text>
+      <line x1="208" y1="74" x2="208" y2="30" stroke="#e2e8f0" stroke-width="2.2"/><line x1="218" y1="84" x2="256" y2="110" stroke="#e2e8f0" stroke-width="2.2"/><polygon points="200,86 168,118 162,108" fill="#38bdf8"/><line x1="198" y1="78" x2="162" y2="90" stroke="#94a3b8" stroke-width="2.2" stroke-dasharray="3 2"/>
+      <text x="208" y="86" fill="#f43f5e" font-size="13" font-weight="bold" text-anchor="middle">C*</text><text x="208" y="24" fill="#34d399" font-size="10" font-weight="bold" text-anchor="middle">COOH</text><text x="262" y="120" fill="#cbd5e1" font-size="10" font-weight="bold" text-anchor="middle">OH</text><text x="158" y="128" fill="#fbbf24" font-size="10" font-weight="bold" text-anchor="middle">CH₃</text><text x="156" y="94" fill="#94a3b8" font-size="10" font-weight="bold" text-anchor="middle">H</text>
+    `,
+    text: '<b>2-Hydroxypropanoic Acid (Lactic Acid, $\text{CH}_3\text{CH}^*(\text{OH})\text{COOH}$):</b><br>• <b>Four Attachments on C2:</b> $-\text{H}, -\text{OH}, -\text{CH}_3, -\text{COOH}$.<br>• <b>Link to PLA (Strand e):</b> Lactic acid is a <b>bifunctional monomer</b> (contains both $-\text{OH}$ and $-\text{COOH}$) that undergoes <b>condensation polymerisation</b> to form biodegradable polylactic acid (PLA)!'
+  },
+  but2ene_ct: {
+    svg: `
+      <text x="70" y="22" fill="#38bdf8" font-size="10.5" font-weight="bold" text-anchor="middle">cis-but-2-ene</text>
+      <text x="52" y="82" fill="#f8fafc" font-size="13" font-weight="bold">C = C</text>
+      <line x1="54" y1="68" x2="40" y2="42" stroke="#e2e8f0" stroke-width="2"/><text x="34" y="38" fill="#fbbf24" font-size="10" font-weight="bold">H₃C</text>
+      <line x1="82" y1="68" x2="96" y2="42" stroke="#e2e8f0" stroke-width="2"/><text x="104" y="38" fill="#fbbf24" font-size="10" font-weight="bold">CH₃</text>
+      <line x1="54" y1="88" x2="40" y2="114" stroke="#e2e8f0" stroke-width="2"/><text x="34" y="126" fill="#94a3b8" font-size="10" font-weight="bold">H</text>
+      <line x1="82" y1="88" x2="96" y2="114" stroke="#e2e8f0" stroke-width="2"/><text x="100" y="126" fill="#94a3b8" font-size="10" font-weight="bold">H</text>
+
+      <text x="210" y="22" fill="#34d399" font-size="10.5" font-weight="bold" text-anchor="middle">trans-but-2-ene</text>
+      <text x="192" y="82" fill="#f8fafc" font-size="13" font-weight="bold">C = C</text>
+      <line x1="194" y1="68" x2="180" y2="42" stroke="#e2e8f0" stroke-width="2"/><text x="174" y="38" fill="#fbbf24" font-size="10" font-weight="bold">H₃C</text>
+      <line x1="222" y1="68" x2="236" y2="42" stroke="#e2e8f0" stroke-width="2"/><text x="242" y="38" fill="#94a3b8" font-size="10" font-weight="bold">H</text>
+      <line x1="194" y1="88" x2="180" y2="114" stroke="#e2e8f0" stroke-width="2"/><text x="174" y="126" fill="#94a3b8" font-size="10" font-weight="bold">H</text>
+      <line x1="222" y1="88" x2="236" y2="114" stroke="#e2e8f0" stroke-width="2"/><text x="244" y="126" fill="#fbbf24" font-size="10" font-weight="bold">CH₃</text>
+    `,
+    text: '<b>Cis–Trans Isomerism in But-2-ene vs. But-1-ene (CP 2013 Q15 · CP 2023 Q11):</b><br>• <b>Two Requirements for Cis–Trans Isomerism:</b> (1) <b>Restricted rotation about the $\text{C=C}$ double bond</b>, AND (2) <b>each carbon atom of the $\text{C=C}$ bond is attached to two different atoms or groups</b>.<br>• <b>Why But-1-ene ($\text{CH}_2\text{=CHCH}_2\text{CH}_3$) Has NO Cis–Trans Isomers:</b> C1 of the double bond is bonded to <b>two identical H atoms</b>!'
+  },
+  diene_2015: {
+    svg: `
+      <text x="140" y="38" fill="#38bdf8" font-size="11" font-weight="bold" text-anchor="middle">CH₃–CH=CH–CH=CH–CH₃</text>
+      <text x="140" y="68" fill="#34d399" font-size="10.5" text-anchor="middle">1. (cis, cis)-hexa-2,4-diene</text>
+      <text x="140" y="92" fill="#fbbf24" font-size="10.5" text-anchor="middle">2. (trans, trans)-hexa-2,4-diene</text>
+      <text x="140" y="116" fill="#f43f5e" font-size="10.5" text-anchor="middle">3. (cis, trans) ≡ (trans, cis) [Identical!]</text>
+    `,
+    text: '<b>Symmetrical Diene $\text{CH}_3\text{CH=CH–CH=CHCH}_3$ (CP 2015 Q26):</b><br>• Although there are two $\text{C=C}$ double bonds, the molecule is <b>symmetrical from both ends</b>!<br>• Therefore, the <i>(cis, trans)</i> arrangement and the <i>(trans, cis)</i> arrangement are the <b>exact same molecule flipped $180^\circ$</b>, leaving <b>3 geometrical isomers in total</b> (not 4!).'
+  }
+};
+function updateStereoSim(){
+  const k = document.getElementById('stereoCaseSel').value;
+  const d = STEREO_SIM_DATA[k];
+  if(!d) return;
+  document.getElementById('stereoSvg').innerHTML = d.svg;
+  document.getElementById('stereoReadout').innerHTML = d.text;
+  safeInitKaTeX();
+}
+
+/* 3. Chemical Distinguishing Tests & Apparatus Studio */
+const ORG_TEST_DATA = {
+  ald_ket: '<b>Distinguish Propanal (Aldehyde) vs. Propanone (Ketone):</b><br>• <b>Reagent &amp; Condition:</b> Warm each compound with <b>acidified potassium dichromate solution, $\text{K}_2\text{Cr}_2\text{O}_7(aq)/\text{H}^+(aq)$</b>.<br>• <b>Observations (Comparative!):</b> Propanal turns the solution from <b>orange to green</b> (oxidised to propanoic acid), whereas propanone shows <b>no observable change</b> (stays orange).<br>• <b>Note:</b> 2,4-DNPH gives a yellow/orange/red precipitate with <b>BOTH</b> compounds (cannot distinguish between an aldehyde and a ketone!).',
+  ket_alc: '<b>Distinguish Butanone (Ketone) vs. Butan-2-ol ($2^\circ$ Alcohol · CP 2016 Q13(e) / CP 2024 P2):</b><br>• <b>Method 1 (2,4-DNPH):</b> Add <b>2,4-dinitrophenylhydrazine</b> (write full name, CP 2024 P2!). Butanone gives a <b>yellow / orange / red precipitate</b> (never say brown!), whereas butan-2-ol gives no precipitate.<br>• <b>Method 2 (Oxidation):</b> Warm with <b>acidified $\text{K}_2\text{Cr}_2\text{O}_7(aq)$</b>. Butan-2-ol turns the solution from <b>orange to green</b>, whereas butanone gives no observable change.',
+  alc_12_vs_3: '<b>Distinguish $1^\circ / 2^\circ$ Alcohol (Butan-1-ol) vs. $3^\circ$ Alcohol (2-Methylpropan-2-ol):</b><br>• <b>Reagent &amp; Condition:</b> Warm each alcohol with <b>acidified $\text{K}_2\text{Cr}_2\text{O}_7(aq)$</b>.<br>• <b>Observations:</b> Butan-1-ol (or butan-2-ol) turns the solution from <b>orange to green</b>, whereas 2-methylpropan-2-ol ($3^\circ$ alcohol) shows <b>no observable change</b>.',
+  acid_ester: '<b>Distinguish Propanoic Acid ($-\text{COOH}$) vs. Methyl Ethanoate (Ester · CP 2025 Q14):</b><br>• <b>Reagent:</b> Add aqueous <b>sodium hydrogencarbonate, $\text{NaHCO}_3(aq)$</b> (or $\text{Na}_2\text{CO}_3(aq)$).<br>• <b>Observations:</b> Propanoic acid gives <b>colourless gas bubbles (effervescence)</b> of $\text{CO}_2(g)$, whereas the ester gives <b>no observable change</b>.',
+  amide_acid: '<b>Distinguish Ethanamide ($-\text{CONH}_2$) vs. Ethanoic Acid ($-\text{COOH}$):</b><br>• <b>Method 1:</b> Heat with <b>$\text{NaOH}(aq)$</b>: ethanamide evolves a colourless gas with a pungent smell ($\text{NH}_3$) that turns <b>moist red litmus paper blue</b>, whereas ethanoic acid gives no gas.<br>• <b>Method 2:</b> Add <b>$\text{NaHCO}_3(aq)$</b> at room temperature: ethanoic acid gives effervescence, whereas ethanamide gives no observable change.'
+};
+function updateOrgTestSim(){
+  const k = document.getElementById('orgTestSel').value;
+  const out = document.getElementById('orgTestOut');
+  if(out && ORG_TEST_DATA[k]){ out.innerHTML = ORG_TEST_DATA[k]; safeInitKaTeX(); }
+}
+
+const APP_MODE_DATA = {
+  reflux: '<b>Setup A · Heating Under Reflux (CP 2016 Q13(a) · CP 2020 Q10 · CP 2022 Q11):</b><br>• <b>Purpose:</b> Prevents volatile organic reactants/products from escaping while heating for a prolonged time.<br>• <b>5 Mandatory Diagram Checkpoints (CP 2022 Q11):</b><br>1. Condenser mounted <b>vertically</b> directly above the pear-shaped/round-bottomed flask.<br>2. <b>Top of the condenser MUST be open</b> to the atmosphere (NEVER draw a stopper or thermometer at the top — a closed heated system explodes!).<br>3. Cooling water enters at the <b>lower inlet ("water in")</b> and leaves at the <b>upper outlet ("water out")</b>.<br>4. Include <b>anti-bumping granules</b> in the reaction mixture.<br>5. Use a water bath if heating flammable liquids.',
+  distil: '<b>Setup B · Simple / Fractional Distillation (CP 2012 Q12(c)):</b><br>• <b>Purpose:</b> Distils off a volatile product (e.g. aldehyde from $1^\circ$ alcohol oxidation, or crude ester) or separates miscible liquids by boiling point.<br>• <b>4 Mandatory Diagram Checkpoints:</b><br>1. <b>Thermometer bulb</b> positioned exactly level with the <b>side-arm junction</b> of the still head.<br>2. Liebig condenser tilted downwards with <b>water in at the bottom (lowest point)</b> and <b>water out at the top</b>.<br>3. System open to the air at the receiver adaptor (never a closed system!).<br>4. Anti-bumping granules in the flask.',
+  sep_funnel: '<b>Setup C · Ester / Haloalkane Purification Chain (CP 2014 P2 · MS Bank §5):</b><br>1. Shake distillate with <b>$\text{Na}_2\text{CO}_3(aq)$</b> in a <b>separating funnel</b> (venting the tap periodically) to neutralise unreacted acid, then run off the <b>lower aqueous layer</b>.<br>2. Dry the upper organic layer using <b>anhydrous $\text{MgSO}_4(s)$ or anhydrous $\text{CaCl}_2(s)$</b> until clear, then filter off the drying agent.<br>3. Purify the dried organic liquid by <b>fractional distillation</b> (collect the fraction at the ester’s boiling point).'
+};
+function updateAppModeSim(){
+  const k = document.getElementById('appModeSel').value;
+  const out = document.getElementById('appModeOut');
+  if(out && APP_MODE_DATA[k]){ out.innerHTML = APP_MODE_DATA[k]; safeInitKaTeX(); }
+}
+
+/* 4. Important Substances Studio */
+const SUBST_SIM_DATA = [
+  '<b>🧵 Nylon-6,6 &amp; Kevlar — Condensation Polyamides (CP 2016 Q31 · CP 2021 Q13):</b><br>• <b>Monomers of Nylon-6,6:</b> $\text{H}_2\text{N(CH}_2)_6\text{NH}_2$ (hexane-1,6-diamine) and $\text{HOOC(CH}_2)_4\text{COOH}$ (hexanedioic acid / adipic acid) — both are <b>bifunctional monomers</b> (CP 2021 Q13).<br>• <b>Repeat Unit (CP 2016 Q31):</b> $-[\text{NH(CH}_2)_6\text{NH–CO(CH}_2)_4\text{CO}]-$ (notice there are <b>4 $-\text{CH}_2-$ groups between the two $\text{C=O}$ groups</b> and 6 between the two N atoms!).<br>• <b>Why Kevlar is Even Stronger (MS Bank):</b> Kevlar chains contain rigid benzene rings and form strong <b>intermolecular hydrogen bonds between $-\text{NH}-$ and $\text{C=O}$ groups</b> of adjacent chains.',
+  '<b>🍾 Polyesters: PET / Terylene vs. Biodegradable PLA (CP 2016 P2 · CP 2023 P2 · CP 2024 P2):</b><br>• <b>PET Monomers:</b> Benzene-1,4-dicarboxylic acid ($\text{HOOC–C}_6\text{H}_4\text{–COOH}$) and ethane-1,2-diol ($\text{HOCH}_2\text{CH}_2\text{OH}$). Eliminates $\text{H}_2\text{O}$ to form <b>ester linkages ($-\text{COO}-$)</b>.<br>• <b>Polylactic Acid (PLA) Monomer:</b> Lactic acid ($\text{CH}_3\text{CH(OH)COOH}$).<br>• <b>Why PLA is Biodegradable (MS Bank §5 / CP 2024 P2):</b> PLA contains many <b>ester linkages ($-\text{COO}-$)</b> in its polymer chains, which can be <b>hydrolysed (broken down) by water in the presence of acids, alkalis or microorganisms/bacteria</b>.',
+  '<b>🫧 Soaps vs. Soapless Detergents &amp; Emulsification (CP 2012 Q14(b) · CP 2019 Q15 · CP 2024 Q12):</b><br>• <b>Structure (2 Parts Required, CP 2019 Q15):</b> A soap/detergent anion consists of a <b>hydrophobic hydrocarbon tail</b> ($-\text{C}_{17}\text{H}_{33}$, oil-soluble) and a <b>hydrophilic ionic head</b> ($-\text{COO}^-$ or $-\text{SO}_3^-$, water-soluble).<br>• <b>Emulsifying Action (3-Step Mark Scheme):</b> (1) The hydrophobic hydrocarbon tails dissolve in the grease while the hydrophilic ionic heads remain in the surrounding water; (2) agitation lifts the grease off the surface as tiny <b>negatively charged oil droplets</b>; (3) the <b>negatively charged ionic heads on the droplets repel each other</b>, preventing the oil droplets from coalescing (forming a stable emulsion).',
+  '<b>💊 Aspirin (Acetylsalicylic Acid · Strand e · CP 2018 Q12):</b><br>• <b>Structure:</b> Benzene ring carrying a <b>carboxyl group ($-\text{COOH}$)</b> and an <b>ester group ($-\text{OCOCH}_3$)</b>.<br>• <b>Medical Uses:</b> Relieves pain (analgesic), reduces fever (antipyretic) and inflammation, and reduces the risk of heart attacks.<br>• <b>Scope Cap (NTF-2018 II-B XI(e)):</b> Back-titration analysis of aspirin tablets is NOT expected in Topic XI.'
+];
+function showSubstSim(i){
+  document.querySelectorAll('.subst-btn').forEach((b, idx) => {
+    b.className = idx === i ? 'subst-btn apple-btn apple-btn-primary !py-1.5 !px-3' : 'subst-btn apple-btn !py-1.5 !px-3';
+  });
+  const out = document.getElementById('substSimOut');
+  if(out && SUBST_SIM_DATA[i]){ out.innerHTML = SUBST_SIM_DATA[i]; safeInitKaTeX(); }
+}
+
+/* 5. Bench 6: Live HKEAA Keyword Answer Grader (Topic XI) */
+const GRADER_RUBRICS = {
+  markov_rule: {
+    prompt: '<b>Question (2 marks · CP 2021 Q11(a) / CP 2024 Q11(d)):</b> State Markovnikov’s rule and name the major organic product formed when propene reacts with hydrogen bromide.',
+    model: 'Markovnikov’s rule states that when an unsymmetrical alkene reacts with a hydrogen halide (HX), the hydrogen atom of HX is added to the carbon atom of the carbon–carbon double bond that already carries a greater number of hydrogen atoms. Major product: 2-bromopropane.',
+    marks: [
+      { label: '1M · H Added to C=C Carbon With Greater Number of H Atoms', re: /hydrogen\s+atom[\s\S]{0,65}carbon[\s\S]{0,45}double\s+bond[\s\S]{0,45}(greater|more)\s+(number\s+of\s+)?hydrogen/i, hint: 'MS Bank §5 Wording: State that <b>the hydrogen atom of HX is added to the carbon atom of the C=C double bond attached to a greater number of hydrogen atoms</b>.' },
+      { label: '1M · Major Product: 2-bromopropane', re: /2-bromopropane/i, hint: 'Name the major product: <b>2-bromopropane</b>.' }
+    ],
+    traps: [
+      { re: /1-bromopropane\s+is\s+the\s+major/i, msg: 'CP 2024 Q11(d) Minor-Product Trap: 1-bromopropane is the minor product — the major product is <b>2-bromopropane</b>!' }
+    ]
+  },
+  enantiomer_prop: {
+    prompt: '<b>Question (2 marks · CP 2015 Q13 / CP 2016 Q13(d) / CP 2021 Q11):</b> Explain why a pair of enantiomers of butan-2-ol are optically active, and state how they can be distinguished by a physical measurement.',
+    model: 'Butan-2-ol contains a chiral carbon atom bonded to four different atoms or groups, so its two enantiomers are non-superimposable mirror images. They can be distinguished because the two enantiomers rotate the plane of plane-polarised light to opposite directions by the same extent.',
+    marks: [
+      { label: '1M · Chiral Carbon Bonded to Four Different Atoms/Groups (Non-Superimposable)', re: /chiral\s+carbon[\s\S]{0,45}four\s+different\s+(atoms|groups)/i, hint: 'State that the molecule has a <b>chiral carbon bonded to four different atoms or groups</b>.' },
+      { label: '1M · Rotate Plane-Polarised Light in Opposite Directions', re: /rotate[\s\S]{0,35}plane-?polari[sz]ed\s+light[\s\S]{0,35}opposite\s+directions/i, hint: 'MS Bank §5 / CP 2023 Q11 Wording: State that they <b>rotate the plane of plane-polarised light in opposite directions</b>.' }
+    ],
+    traps: [
+      { re: /four\s+different\s+molecules/i, msg: 'CP 2015 Q13 Verbatim Error: A chiral carbon is bonded to four different <b>atoms or groups</b>, NEVER "four different molecules"!' },
+      { re: /different\s+(boiling|melting)\s+points/i, msg: 'CP 2016 Q13(d) Verbatim Error: Enantiomers have identical melting and boiling points!' }
+    ]
+  },
+  detergent_clean: {
+    prompt: '<b>Question (3 marks · CP 2012 Q14(b) / CP 2019 Q15 / CP 2024 Q12):</b> Explain how a soap (such as C₁₇H₃₃COO⁻Na⁺) removes oily dirt from a surface in water.',
+    model: 'The soap anion (C₁₇H₃₃COO⁻) has a hydrophobic hydrocarbon tail (–C₁₇H₃₃) and a hydrophilic ionic head (–COO⁻). The hydrophobic hydrocarbon tails dissolve in the oily dirt while the hydrophilic ionic heads remain in the water. On agitation, the oil is lifted off the surface into the water as tiny negatively charged droplets; the ionic heads on the droplets repel each other, preventing the droplets from joining together again (forming a stable emulsion).',
+    marks: [
+      { label: '1M · Hydrophobic Hydrocarbon Tail + Hydrophilic Ionic Head', re: /(hydrophobic[\s\S]{0,30}hydrocarbon\s+(tail|part)|hydrophilic[\s\S]{0,30}ionic\s+(head|part))/i, hint: 'CP 2012 Q14 / CP 2019 Q15 Requirement: Identify BOTH the <b>hydrophobic hydrocarbon tail</b> and the <b>hydrophilic ionic head</b>.' },
+      { label: '1M · Tails Dissolve in Oil/Grease, Heads Dissolve in Water', re: /tails?[\s\S]{0,30}(oil|grease)[\s\S]{0,40}heads?[\s\S]{0,30}water/i, hint: 'State that the <b>hydrophobic tails dissolve in the grease while the hydrophilic heads stay in the water</b>.' },
+      { label: '1M · Ionic Heads Repel Each Other → Emulsion / Droplets Do Not Coalesce', re: /(repel\s+each\s+other|repulsion)[\s\S]{0,45}(droplets|emulsion|coalesce|join)/i, hint: 'MS Bank §5 Wording: State that <b>the negatively charged ionic heads of the grease droplets repel each other</b>, forming an emulsion.' }
+    ],
+    traps: []
+  },
+  cond_polymer: {
+    prompt: '<b>Question (2 marks · CP 2016 Q31 / CP 2021 Q13 / CP 2024 P2):</b> Explain why the formation of polylactic acid (PLA) or nylon-6,6 is classified as condensation polymerisation, and explain why PLA is biodegradable.',
+    model: 'It is condensation polymerisation because the bifunctional monomer molecules react repeatedly to form polymer chains with the elimination of small molecules (H₂O). PLA is biodegradable because there are many ester linkages (groups) along its polymer chains that can be hydrolysed (broken down) under acidic, alkaline or bacterial conditions.',
+    marks: [
+      { label: '1M · Monomers Join with Elimination of Small Molecules (H₂O)', re: /(elimination|release|loss)\s+of\s+(small\s+molecules|water|h2o)/i, hint: 'MS Bank §5 Wording: State that monomers join with the <b>elimination of small molecules (such as H₂O)</b>.' },
+      { label: '1M · Ester Linkages/Groups Hydrolysed by Acid/Alkali/Bacteria', re: /ester\s+(groups?|link(age)?s?)[\s\S]{0,55}(hydroly[sz]ed|broken\s+down)/i, hint: 'MS Bank §5 Wording: State that PLA has <b>many ester groups/linkages that can be broken down (hydrolysed)</b> by acids, alkalis or bacteria.' }
+    ],
+    traps: []
+  },
+  ester_prep: {
+    prompt: '<b>Question (3 marks · CP 2014 P2 / CP 2015 Q12 / CP 2025 Q12):</b> State the catalyst and condition needed to prepare ethyl ethanoate from ethanoic acid and ethanol, and outline how to isolate and purify the ester from the reaction mixture.',
+    model: 'Catalyst and condition: concentrated sulphuric acid (conc. H₂SO₄) and heat under reflux. To purify: shake the distillate with aqueous sodium carbonate in a separating funnel and remove the lower aqueous layer; dry the upper organic layer over anhydrous magnesium sulphate (or anhydrous CaCl₂), filter, and purify by fractional distillation.',
+    marks: [
+      { label: '1M · Concentrated H₂SO₄ + Heat', re: /(concentrated|conc\.?)\s+(sulphuric\s+acid|h2so4)[\s\S]{0,30}heat/i, hint: 'CP 2015 Q12 / CP 2025 Q12 Requirement: Must specify <b>concentrated H₂SO₄ AND heat</b>.' },
+      { label: '1M · Separating Funnel to Remove Aqueous Layer', re: /separating\s+funnel/i, hint: 'MS Bank §5 Wording: Use a <b>separating funnel</b> to remove the lower aqueous layer.' },
+      { label: '1M · Dry with Anhydrous MgSO₄/CaCl₂ + Fractional Distillation', re: /anhydrous\s+(magnesium\s+sulphate|mgso4|calcium\s+chloride|cacl2)[\s\S]{0,50}fractional\s+distillation/i, hint: 'CP 2014 P2 Requirement: Dry with <b>anhydrous MgSO₄ (or CaCl₂)</b>, then carry out <b>fractional distillation</b>.' }
+    ],
+    traps: [
+      { re: /dilute\s+(sulphuric\s+acid|h2so4)/i, msg: 'CP 2016 Q12 Verbatim Error: Never use dilute H₂SO₄ for esterification — it requires <b>concentrated H₂SO₄</b>!' }
+    ]
+  }
+};
+
+function loadGraderPrompt(){
+  const sel = document.getElementById('graderQSelect');
+  if(!sel) return;
+  const r = GRADER_RUBRICS[sel.value];
+  const box = document.getElementById('graderPromptBox');
+  if(box && r) box.innerHTML = r.prompt;
+}
+function fillModelGraderAnswer(){
+  const sel = document.getElementById('graderQSelect');
+  if(!sel) return;
+  const r = GRADER_RUBRICS[sel.value];
+  if(!r) return;
+  document.getElementById('graderInput').value = r.model;
+  gradeStudentAnswer();
+}
+function gradeStudentAnswer(){
+  const sel = document.getElementById('graderQSelect');
+  const txt = (document.getElementById('graderInput').value || '').trim();
+  const out = document.getElementById('graderResultBox');
+  if(!sel || !out) return;
+  const r = GRADER_RUBRICS[sel.value];
+  if(!txt){ out.innerHTML = '<span class="text-amber-300">Please type an answer first, or click "Show Model Full-Mark Answer".</span>'; return; }
+  let score = 0, rowsHtml = '', trapHtml = '';
+  r.marks.forEach(m => {
+    const hit = m.re.test(txt);
+    if(hit) score++;
+    rowsHtml += `<div class="p-2 rounded-lg border ${hit ? 'bg-emerald-950/40 border-emerald-700 text-emerald-200' : 'bg-slate-900 border-slate-800 text-slate-300'}"><b>${hit ? '✅ [1M Earned]' : '⬜ [0M Missed]'} ${m.label}:</b> ${hit ? 'Keyword verified in your answer.' : m.hint}</div>`;
+  });
+  r.traps.forEach(t => {
+    if(t.re.test(txt)) trapHtml += `<div class="p-2.5 rounded-lg bg-rose-950/60 border border-rose-600 text-rose-200 font-medium">🚨 <b>[NOT ACCEPT / Contradiction Penalty]:</b> ${t.msg}</div>`;
+  });
+  out.innerHTML = `<div class="flex items-center justify-between border-b border-slate-800 pb-2"><span class="font-bold text-white text-sm">Examiner Diagnostic Score: <span class="text-sky-400 font-mono">${score} / ${r.marks.length} marks</span></span><span class="chip ${score===r.marks.length && !trapHtml ? 'bg-emerald-950 text-emerald-300 border-emerald-700' : 'bg-amber-950 text-amber-300 border-amber-700'}">${score===r.marks.length && !trapHtml ? 'Full Marks Wording' : 'Keep Refining'}</span></div>${trapHtml}<div class="space-y-1.5 mt-2">${rowsHtml}</div>`;
+}
+
+const CMD_INDEX = [
+  { title: 'Multi-Functional Group Spotter & Ring-Ester Trap Checker', tag: 'Strand (a) · Sim', action: ()=>{switchTab('tab-fam');switchFamMode('map');} },
+  { title: '3D Chiral Enantiomer & Cis–Trans Stereoisomerism Studio', tag: 'Strand (b) · Sim', action: ()=>{switchTab('tab-iso');switchIsoMode('map');} },
+  { title: 'Annex XI(c) Multi-Step Synthesis Pathfinder', tag: 'Strand (c)/(d) · Sim', action: ()=>{switchTab('tab-rxn');switchRxnMode('map');} },
+  { title: 'Organic Chemical Test & Reflux vs Distillation Debugger', tag: 'Strand (c)/(d) · Sim', action: ()=>{switchTab('tab-rxn');switchRxnMode('map');} },
+  { title: 'Nylon-6,6, PET, Biodegradable PLA, Soap & Aspirin Studio', tag: 'Strand (e) · Sim', action: ()=>{switchTab('tab-conv');switchConvMode('map');} },
+  { title: 'Combustion, Markovnikov, Oxidation & % Yield Benches', tag: 'Solver · Benches 1–5', action: ()=>{switchTab('tab-solver');} },
+  { title: 'Live HKEAA Keyword Answer Grader (Bench 6)', tag: 'Solver · Exam Practice', action: ()=>{switchTab('tab-solver');} },
+  { title: 'Candidate Performance Intelligence (2012–2025)', tag: 'Past Papers · Tab 7', action: ()=>{switchTab('tab-pp');} }
+];
+function openCmdModal(){ const m=document.getElementById('cmdModal'); if(m){ m.classList.add('open'); const inp=document.getElementById('cmdSearchInput'); if(inp){inp.value='';filterCmdList();setTimeout(()=>inp.focus(),50);}}}
+function closeCmdModal(){ const m=document.getElementById('cmdModal'); if(m) m.classList.remove('open'); }
+function filterCmdList(){
+  const q = (document.getElementById('cmdSearchInput').value || '').toLowerCase();
+  const box = document.getElementById('cmdResults');
+  if(!box) return;
+  box.innerHTML = '';
+  CMD_INDEX.filter(i => i.title.toLowerCase().includes(q) || i.tag.toLowerCase().includes(q)).forEach(i => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'w-full text-left px-3 py-2.5 rounded-xl hover:bg-slate-800/80 flex items-center justify-between transition';
+    btn.innerHTML = `<span class="text-white font-medium">${i.title}</span><span class="chip bg-sky-950 text-sky-300 border border-sky-800">${i.tag}</span>`;
+    btn.onclick = () => { closeCmdModal(); i.action(); };
+    box.appendChild(btn);
+  });
+}
+document.addEventListener('keydown', e => {
+  if((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k'){ e.preventDefault(); const m=document.getElementById('cmdModal'); if(m && m.classList.contains('open')) closeCmdModal(); else openCmdModal(); }
+  else if(e.key === 'Escape') closeCmdModal();
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  try { if(localStorage.getItem('hkdse_topic11_theme') === 'light') toggleAppleTheme(); } catch(e){}
+  injectQuizSelfCheckBars();
+  updateFgSpotSim();
+  updateStereoSim();
+  routeSolve();
+  updateOrgTestSim();
+  updateAppModeSim();
+  showSubstSim(0);
+  loadGraderPrompt();
+  updateMasteryRing();
+  solverMr();
+  solverCombust();
+  solverMarkov();
+  solverOx();
+  solverYield();
+});
+</script>
+
 </body>
 </html>

@@ -9,48 +9,375 @@
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
 <style>
-:root { color-scheme: dark; }
-body { background:#020617; font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
-.tab-panel { display:none; }
-.tab-panel.active { display:block; }
-.blur-answer { filter: blur(6px); cursor:pointer; transition: filter .25s ease; user-select:none; }
-.blur-answer.revealed { filter: blur(0); cursor:default; user-select:text; }
-.engine-module { display:none; }
-.engine-module.active { display:block; }
-.mode-pill { cursor:pointer; }
-.mode-pill.active { background:rgba(56,189,248,.15); color:#7dd3fc; border-color:#38bdf8; }
-details > summary { cursor:pointer; list-style:none; }
-details > summary::-webkit-details-marker { display:none; }
-.chip { display:inline-block; padding:2px 10px; border-radius:9999px; font-size:11px; font-weight:600; }
-.katex { font-size:1.05em; }
-.num-card { font-variant-numeric: tabular-nums; }
-input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner-spin-button { -webkit-appearance:none; margin:0; }
-input[type=number] { -moz-appearance:textfield; }
-.katex-block{overflow-x:auto;overflow-y:hidden}
-.katex-block .katex-display{text-align:left;margin:.35em 0}
-/* ══ MOBILE UX LAYER (chrome-only) ══ */
-:root{--hdr:120px}
-html{scroll-padding-top:calc(var(--hdr) + 10px)}
-.toc-strip{display:none;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:2px 0 6px;margin-bottom:2px}
-.toc-strip::-webkit-scrollbar{display:none}
-.toc-chip{flex-shrink:0;font-size:10px;line-height:1;padding:7px 11px;border-radius:9999px;border:1px solid rgba(51,65,85,.9);background:rgba(15,23,42,.85);color:#94a3b8;font-weight:600;white-space:nowrap;cursor:pointer}
-#backTop{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:70;width:44px;height:44px;border-radius:9999px;border:1px solid rgba(56,189,248,.35);background:rgba(8,14,26,.92);color:#7dd3fc;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transform:translateY(8px);transition:opacity .25s,transform .25s}
-#backTop.show{opacity:1;pointer-events:auto;transform:none}
-#scrollProg{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,#0ea5e9,#38bdf8);z-index:80;pointer-events:none}
-@media (max-width:1023.98px){
-header{background-color:rgba(2,6,23,.97)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;padding-top:env(safe-area-inset-top)}
-#mainNav{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:4px}
-#mainNav::-webkit-scrollbar{display:none}
-#mainNav button{flex-shrink:0}
-select,input[type="number"],input[type="text"]{font-size:16px!important}
-#mainNav button{padding-top:10px;padding-bottom:10px}
-.mode-pill{padding:8px 14px}
-.toc-chip{padding:10px 12px}
-.katex{font-size:1em}
-.toc-strip{display:flex}
-}
-@media (prefers-reduced-motion:reduce){.tab-panel.active{animation:none}
-.blur-answer,#backTop{transition:none!important}}
+  :root {
+    color-scheme: dark;
+    --hdr: 118px;
+    --bg-canvas: #000000;
+    --bg-elevated: rgba(22, 22, 29, 0.72);
+    --bg-card: rgba(28, 28, 36, 0.68);
+    --bg-card-solid: #16161d;
+    --bg-subcard: rgba(38, 38, 48, 0.55);
+    --bg-glass-nav: rgba(14, 14, 20, 0.76);
+    --border-hairline: rgba(255, 255, 255, 0.09);
+    --border-highlight: rgba(255, 255, 255, 0.16);
+    --text-primary: #f5f5f7;
+    --text-secondary: #a1a1aa;
+    --text-tertiary: #6e6e77;
+    --accent-blue: #0a84ff;
+    --accent-teal: #64d2ff;
+    --accent-purple: #bf5af2;
+    --accent-emerald: #30d158;
+    --accent-amber: #ff9f0a;
+    --accent-rose: #ff453a;
+    --shadow-card: 0 20px 44px -12px rgba(0, 0, 0, 0.65), inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+    --shadow-hover: 0 24px 52px -10px rgba(0, 0, 0, 0.75), inset 0 1px 0 0 rgba(255, 255, 255, 0.18);
+    --spring: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  html.theme-light {
+    color-scheme: light;
+    --bg-canvas: #f5f5f7;
+    --bg-elevated: rgba(255, 255, 255, 0.82);
+    --bg-card: rgba(255, 255, 255, 0.88);
+    --bg-card-solid: #ffffff;
+    --bg-subcard: rgba(242, 242, 247, 0.85);
+    --bg-glass-nav: rgba(248, 248, 252, 0.82);
+    --border-hairline: rgba(0, 0, 0, 0.08);
+    --border-highlight: rgba(0, 0, 0, 0.14);
+    --text-primary: #1d1d1f;
+    --text-secondary: #515154;
+    --text-tertiary: #86868b;
+    --shadow-card: 0 12px 32px -8px rgba(0, 0, 0, 0.07), inset 0 1px 0 0 rgba(255, 255, 255, 0.9);
+    --shadow-hover: 0 18px 40px -8px rgba(0, 0, 0, 0.12), inset 0 1px 0 0 rgba(255, 255, 255, 1);
+  }
+
+  html {
+    scroll-padding-top: calc(var(--hdr) + 14px);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--bg-canvas);
+    background-image:
+      radial-gradient(ellipse 80% 50% at 15% -10%, rgba(10, 132, 255, 0.16), transparent 60%),
+      radial-gradient(ellipse 70% 45% at 85% 5%, rgba(191, 90, 242, 0.12), transparent 60%),
+      radial-gradient(ellipse 60% 40% at 50% 100%, rgba(48, 209, 88, 0.08), transparent 60%);
+    background-attachment: fixed;
+    color: var(--text-primary);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: -0.011em;
+    transition: background-color 0.4s var(--spring), color 0.3s var(--spring);
+  }
+
+  h1, h2, h3, h4 {
+    letter-spacing: -0.024em;
+    font-weight: 650;
+  }
+
+  .font-mono {
+    font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+  }
+
+  header {
+    background: var(--bg-glass-nav) !important;
+    -webkit-backdrop-filter: saturate(190%) blur(28px) !important;
+    backdrop-filter: saturate(190%) blur(28px) !important;
+    border-bottom: 1px solid var(--border-hairline) !important;
+    box-shadow: 0 4px 24px -4px rgba(0, 0, 0, 0.28);
+    transition: background 0.35s var(--spring);
+  }
+
+  #mainNav {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border-hairline);
+    border-radius: 14px;
+    padding: 4px !important;
+    gap: 4px !important;
+    margin-bottom: 8px;
+  }
+  html.theme-light #mainNav {
+    background: rgba(0, 0, 0, 0.045);
+  }
+
+  #mainNav button {
+    border-radius: 10px !important;
+    border-bottom: none !important;
+    transition: all 0.28s var(--spring) !important;
+    position: relative;
+    font-weight: 500;
+  }
+  #mainNav button:hover { transform: translateY(-1px); }
+  #mainNav button:active { transform: scale(0.97); }
+  #mainNav button.tab-btn-active {
+    background: rgba(10, 132, 255, 0.22) !important;
+    color: #64d2ff !important;
+    box-shadow: 0 2px 10px rgba(10, 132, 255, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.22);
+    font-weight: 600 !important;
+  }
+  html.theme-light #mainNav button.tab-btn-active {
+    background: #ffffff !important;
+    color: #0066cc !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .bg-slate-900 {
+    background: var(--bg-elevated) !important;
+    -webkit-backdrop-filter: saturate(160%) blur(22px);
+    backdrop-filter: saturate(160%) blur(22px);
+    border-color: var(--border-hairline) !important;
+    border-radius: 22px !important;
+    box-shadow: var(--shadow-card);
+    transition: transform 0.35s var(--spring), box-shadow 0.35s var(--spring), border-color 0.3s ease;
+  }
+
+  .bg-slate-950 {
+    background: var(--bg-card) !important;
+    border-color: var(--border-hairline) !important;
+    border-radius: 18px !important;
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.06);
+    transition: transform 0.3s var(--spring), box-shadow 0.3s var(--spring), border-color 0.25s ease;
+  }
+  .bg-slate-950:hover {
+    border-color: var(--border-highlight) !important;
+  }
+
+  html.theme-light .text-white { color: #1d1d1f !important; }
+  html.theme-light .text-slate-100,
+  html.theme-light .text-slate-200,
+  html.theme-light .text-slate-300 { color: #2c2c2e !important; }
+  html.theme-light .text-slate-400 { color: #515154 !important; }
+  html.theme-light .text-slate-500 { color: #6e6e73 !important; }
+  html.theme-light .bg-slate-800,
+  html.theme-light .bg-slate-800\/50 { background-color: rgba(0, 0, 0, 0.05) !important; color: #1d1d1f !important; border-color: rgba(0,0,0,0.12) !important; }
+  html.theme-light .bg-sky-950\/40,
+  html.theme-light .bg-sky-950\/30,
+  html.theme-light .bg-sky-950 { background-color: rgba(10, 132, 255, 0.1) !important; color: #004080 !important; border-color: rgba(10, 132, 255, 0.28) !important; }
+  html.theme-light .bg-purple-950\/30,
+  html.theme-light .bg-purple-950 { background-color: rgba(175, 82, 222, 0.1) !important; color: #581c87 !important; border-color: rgba(175, 82, 222, 0.28) !important; }
+  html.theme-light .bg-emerald-950\/30,
+  html.theme-light .bg-emerald-950 { background-color: rgba(48, 209, 88, 0.12) !important; color: #065f46 !important; border-color: rgba(48, 209, 88, 0.3) !important; }
+  html.theme-light .bg-amber-950\/40,
+  html.theme-light .bg-amber-950\/30,
+  html.theme-light .bg-amber-950 { background-color: rgba(255, 159, 10, 0.13) !important; color: #78350f !important; border-color: rgba(255, 159, 10, 0.35) !important; }
+  html.theme-light .bg-rose-950\/40,
+  html.theme-light .bg-rose-950\/30,
+  html.theme-light .bg-rose-950 { background-color: rgba(255, 69, 58, 0.1) !important; color: #881337 !important; border-color: rgba(255, 69, 58, 0.28) !important; }
+  html.theme-light .text-sky-200, html.theme-light .text-sky-300, html.theme-light .text-sky-400 { color: #0055b3 !important; }
+  html.theme-light .text-amber-200, html.theme-light .text-amber-300, html.theme-light .text-amber-400 { color: #92400e !important; }
+  html.theme-light .text-rose-200, html.theme-light .text-rose-300, html.theme-light .text-rose-400 { color: #9f1239 !important; }
+  html.theme-light .text-emerald-300, html.theme-light .text-emerald-400 { color: #047857 !important; }
+  html.theme-light .text-purple-300, html.theme-light .text-purple-400 { color: #6b21a8 !important; }
+  html.theme-light .text-cyan-200, html.theme-light .text-cyan-300, html.theme-light .text-cyan-400 { color: #0e7490 !important; }
+
+  @keyframes appleStageIn {
+    0% { opacity: 0; transform: translateY(10px) scale(0.992); filter: blur(4px); }
+    100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+  }
+  .tab-panel { display: none; }
+  .tab-panel.active {
+    display: block;
+    animation: appleStageIn 0.42s var(--spring) forwards;
+  }
+  .engine-module { display: none; }
+  .engine-module.active {
+    display: block;
+    animation: appleStageIn 0.34s var(--spring) forwards;
+  }
+  .rate-card, .energy-card, .proc-card, .green-card {
+    animation: appleStageIn 0.3s var(--spring) forwards;
+  }
+
+  .blur-answer {
+    filter: blur(5.5px);
+    cursor: pointer;
+    transition: filter 0.28s var(--spring), background-color 0.28s ease, transform 0.2s var(--spring), box-shadow 0.25s ease;
+    user-select: none;
+    border: 1px solid rgba(100, 210, 255, 0.22);
+    padding: 1px 7px !important;
+    border-radius: 7px !important;
+  }
+  .blur-answer:hover {
+    filter: blur(2.5px);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(10, 132, 255, 0.2);
+  }
+  .blur-answer.revealed {
+    filter: blur(0);
+    cursor: pointer;
+    user-select: text;
+    background: rgba(48, 209, 88, 0.16) !important;
+    border-color: rgba(48, 209, 88, 0.45) !important;
+    box-shadow: 0 0 0 1px rgba(48, 209, 88, 0.15);
+  }
+
+  .mode-pill {
+    cursor: pointer;
+    transition: all 0.26s var(--spring);
+    border-radius: 9999px;
+    backdrop-filter: blur(10px);
+  }
+  .mode-pill:hover { transform: translateY(-1px); }
+  .mode-pill:active { transform: scale(0.96); }
+  .mode-pill.active {
+    background: linear-gradient(135deg, rgba(10, 132, 255, 0.26), rgba(100, 210, 255, 0.14)) !important;
+    color: #7dd3fc !important;
+    border-color: rgba(100, 210, 255, 0.65) !important;
+    box-shadow: 0 4px 14px -2px rgba(10, 132, 255, 0.35), inset 0 1px 0 rgba(255,255,255,0.2);
+  }
+
+  details > summary {
+    cursor: pointer;
+    list-style: none;
+    transition: background-color 0.2s ease;
+    border-radius: 14px;
+  }
+  details > summary::-webkit-details-marker { display: none; }
+  details[open] > summary {
+    border-bottom: 1px solid var(--border-hairline);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 10px;
+    border-radius: 9999px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.12);
+  }
+
+  .katex { font-size: 1.05em; }
+  .num-card { font-variant-numeric: tabular-nums; }
+  input[type=number]::-webkit-outer-spin-button,
+  input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  input[type=number] { -moz-appearance: textfield; }
+  .katex-block { overflow-x: auto; overflow-y: hidden; }
+  .katex-block .katex-display { text-align: left; margin: .35em 0; }
+
+  .apple-sim-panel {
+    background: linear-gradient(165deg, rgba(20, 24, 38, 0.85), rgba(12, 15, 26, 0.92));
+    border: 1px solid rgba(100, 210, 255, 0.22);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 18px 40px -12px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  }
+  html.theme-light .apple-sim-panel {
+    background: linear-gradient(165deg, rgba(255, 255, 255, 0.95), rgba(240, 246, 255, 0.92));
+    border-color: rgba(10, 132, 255, 0.25);
+    box-shadow: 0 14px 32px -10px rgba(10, 132, 255, 0.12);
+  }
+
+  .apple-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 7px 14px;
+    transition: all 0.24s var(--spring);
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(255, 255, 255, 0.07);
+    color: var(--text-primary);
+  }
+  .apple-btn:hover {
+    background: rgba(255, 255, 255, 0.13);
+    transform: translateY(-1px);
+  }
+  .apple-btn:active { transform: scale(0.97); }
+  .apple-btn-primary {
+    background: linear-gradient(180deg, #1e90ff 0%, #0071e3 100%);
+    color: #ffffff !important;
+    border-color: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 4px 14px rgba(0, 113, 227, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  }
+  .apple-btn-primary:hover {
+    background: linear-gradient(180deg, #339dff 0%, #0a7ff0 100%);
+    box-shadow: 0 6px 18px rgba(0, 113, 227, 0.55);
+  }
+
+  input[type=range].apple-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 6px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #ff453a, #ff9f0a, #30d158, #0a84ff, #bf5af2);
+    outline: none;
+  }
+  input[type=range].apple-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 2px solid #0a84ff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+    cursor: grab;
+    transition: transform 0.18s var(--spring);
+  }
+  input[type=range].apple-slider::-webkit-slider-thumb:active {
+    transform: scale(1.15);
+    cursor: grabbing;
+  }
+
+  .quiz-self-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px dashed var(--border-hairline);
+    font-size: 11px;
+  }
+
+  #cmdModal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: rgba(0, 0, 0, 0.58);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 10vh;
+  }
+  #cmdModal.open {
+    display: flex;
+    animation: appleStageIn 0.22s var(--spring) forwards;
+  }
+
+  .toc-strip { display: none; gap: 6px; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 2px 0 6px; margin-bottom: 2px; }
+  .toc-strip::-webkit-scrollbar { display: none; }
+  .toc-chip { flex-shrink: 0; font-size: 10px; line-height: 1; padding: 7px 11px; border-radius: 9999px; border: 1px solid var(--border-hairline); background: var(--bg-card); color: var(--text-secondary); font-weight: 600; white-space: nowrap; cursor: pointer; transition: all 0.2s var(--spring); }
+  #backTop { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom)); z-index: 70; width: 44px; height: 44px; border-radius: 9999px; border: 1px solid rgba(100, 210, 255, 0.35); background: var(--bg-glass-nav); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); color: #7dd3fc; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transform: translateY(8px); transition: opacity .25s, transform .25s var(--spring); box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+  #backTop.show { opacity: 1; pointer-events: auto; transform: none; }
+  #scrollProg { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: linear-gradient(90deg, #0a84ff, #64d2ff, #30d158); z-index: 80; pointer-events: none; }
+
+  @media (max-width:1023.98px){
+    header { padding-top: env(safe-area-inset-top); }
+    #mainNav { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+    #mainNav::-webkit-scrollbar { display: none; }
+    #mainNav button { flex-shrink: 0; padding-top: 9px; padding-bottom: 9px; }
+    select, input[type="number"], input[type="text"] { font-size: 16px !important; }
+    .mode-pill { padding: 8px 14px; }
+    .toc-chip { padding: 10px 12px; }
+    .katex { font-size: 1em; }
+    .toc-strip { display: flex; }
+  }
+  @media (prefers-reduced-motion:reduce){
+    .tab-panel.active, .engine-module.active { animation: none !important; }
+    .blur-answer, #backTop { transition: none !important; }
+  }
 </style>
 </head>
 <body class="text-slate-200 min-h-screen">
@@ -58,14 +385,29 @@ select,input[type="number"],input[type="text"]{font-size:16px!important}
 <div class="max-w-7xl mx-auto px-4 py-3">
 <div class="flex flex-wrap items-center justify-between gap-2">
 <div>
-<h1 class="text-base sm:text-lg font-bold text-white leading-tight">HKDSE · Topic XIII Master Studio</h1>
+<div class="flex items-center gap-2.5"><div class="hidden sm:flex items-center gap-1.5 mr-1"><span class="w-2.5 h-2.5 rounded-full bg-[#ff5f56] inline-block shadow-sm"></span><span class="w-2.5 h-2.5 rounded-full bg-[#ffbd2e] inline-block shadow-sm"></span><span class="w-2.5 h-2.5 rounded-full bg-[#27c93f] inline-block shadow-sm"></span></div><h1 class="text-base sm:text-lg font-bold text-white leading-tight tracking-tight">HKDSE · Topic XIII Master Studio — Industrial Chemistry</h1><span class="chip bg-sky-500/15 text-sky-300 border border-sky-400/30 text-[10px]">Interactive Studio Pro</span></div>
 <p class="text-[11px] text-slate-400 font-mono">Industrial Chemistry · Rate Equation → Catalysis → Haber, Chloroalkali, Methanol → Green Chemistry</p>
 </div>
-<div class="flex gap-2 text-[10px] font-mono">
+<div class="flex flex-wrap items-center gap-2 text-[10px] font-mono">
 <span class="chip bg-sky-950 text-sky-400 border border-sky-800">Strands (a)–(f)</span>
 <span class="chip bg-purple-950 text-purple-400 border border-purple-800">Paper 2 · Section A</span>
 <span class="chip bg-emerald-950 text-emerald-400 border border-emerald-800">C&amp;A Guide 2018</span>
-<span class="chip bg-amber-950 text-amber-400 border border-amber-800">1 h · answer 2 of 3 electives</span>
+<div class="flex items-center gap-2 ml-1 pl-2 border-l border-slate-700/70">
+  <button type="button" onclick="openCmdModal()" class="apple-btn !py-1 !px-2.5 text-[11px]" title="Quick Concept &amp; Past-Paper Search (⌘K)">
+    <span>🔍 Search</span>
+    <kbd class="px-1.5 py-0.5 text-[9px] rounded bg-slate-800 text-slate-300 border border-slate-700">⌘K</kbd>
+  </button>
+  <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-900/90 border border-slate-700/80" title="Concept Mastery Progress across Quiz &amp; Syllabus Checkpoints">
+    <svg class="w-4 h-4 -rotate-90" viewBox="0 0 36 36">
+      <circle cx="18" cy="18" r="15" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="3.8"></circle>
+      <circle id="masteryRingCircle" cx="18" cy="18" r="15" fill="none" stroke="#30d158" stroke-width="3.8" stroke-dasharray="94.2" stroke-dashoffset="94.2" stroke-linecap="round"></circle>
+    </svg>
+    <span id="masteryPctText" class="text-[11px] font-semibold text-emerald-400 num-card">0% Mastered</span>
+  </div>
+  <button type="button" id="themeToggleBtn" onclick="toggleAppleTheme()" class="apple-btn !py-1 !px-2.5 text-[11px]" title="Switch between Apple Pro Dark and Cupertino Daylight mode">
+    <span id="themeToggleIcon">☀️ Daylight</span>
+  </button>
+</div>
 </div>
 </div>
 </div>
@@ -249,6 +591,73 @@ select,input[type="number"],input[type="text"]{font-size:16px!important}
 </div>
 </div>
 </section>
+
+<!-- ══ INTERACTIVE SYLLABUS AUDIT & CONCEPT READINESS MATRIX (EDB C&A Guide 2018 · Topic XIII Strands a–f) ══ -->
+<div class="mt-6 apple-sim-panel space-y-4" id="syllabus-audit-panel">
+  <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800/80 pb-3">
+    <div>
+      <span class="text-[10px] font-mono uppercase tracking-widest text-sky-400 font-bold">Interactive Syllabus Check-Off · EDB C&amp;A Guide (Topic XIII Strands a–f)</span>
+      <h3 class="text-base font-bold text-white mt-0.5">HKDSE Topic XIII Competency Checklist &amp; Direct Simulator Links</h3>
+      <p class="text-xs text-slate-400">Tick each official EDB learning outcome across Strands (a)–(f) and Part II depth caps (`NTF-2018 II-B XIII (a)/(b)/(f)`) as you master it.</p>
+    </div>
+    <div class="flex items-center gap-2">
+      <span id="sylAuditCount" class="chip bg-emerald-950 text-emerald-300 border border-emerald-700 font-mono">0 / 12 Outcomes Checked</span>
+      <button type="button" class="apple-btn text-xs" onclick="checkAllSyllabusOutcomes()">Check All</button>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs" id="sylAuditGrid">
+    <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+      <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+      <span><b class="text-white block">XIII(a) · Importance of Industrial Processes</b>Social, economic &amp; environmental perspectives; glucose as raw material for Vitamin C (process details not expected, NTF XIII(a)). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-green');selectGreen(3)">Inspect →</button></span>
+    </label>
+    <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+      <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+      <span><b class="text-white block">XIII(b) · Rate Equation &amp; Method of Initial Rates</b>Deduce $\text{rate} = k[\text{A}]^m[\text{B}]^n$ from data with ratio shown (CP 2012 Q1c); half-life NOT expected (NTF XIII(b)). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-rate');switchRateMode('map')">Rate Sim →</button></span>
+    </label>
+    <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+      <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+      <span><b class="text-white block">XIII(b) · Two-Way $k$ Units &amp; Excess Folding</b>Derive $k$ units $(\text{mol dm}^{-3})^{1-n}\text{ s}^{-1}$ (incl. fractional $n=2.5$, CP 2021/2024); explain excess $[\text{H}^+]$ folding into $k'$ (CP 2022 Q1c). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-rate');switchRateMode('map')">Rate Sim →</button></span>
+    </label>
+    <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+      <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+      <span><b class="text-white block">XIII(c) · Energy Profile &amp; Same-Sketch Rule</b>Draw uncatalysed &amp; catalysed profiles on ONE sketch (CP 2015 Q1b); compute $E_a(\text{rev}) = E_a(\text{fwd}) - \Delta H$ (CP 2021/2023). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-energy');switchEnergyMode('map')">MB &amp; Profile Sim →</button></span>
+    </label>
+    <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+      <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+      <span><b class="text-white block">XIII(c) · Maxwell–Boltzmann Distribution Curve</b>Label x-axis "molecular kinetic energy" (CP 2013); whole area = total molecules (unchanged with $T$, CP 2016); mark lower $E_a'$ on SAME curve (CP 2021). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-energy');switchEnergyMode('map')">MB &amp; Profile Sim →</button></span>
+    </label>
+    <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+      <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+      <span><b class="text-white block">XIII(c) · Arrhenius Equation &amp; $\log k$ vs $1/T$</b>$\log k = \text{constant} - \frac{E_a}{2.3RT}$; slope $= -\frac{E_a}{2.3R}$; convert $E_a$ from $\text{kJ mol}^{-1}$ to $\text{J mol}^{-1}$ (CP 2013/2019/2021). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-energy');switchEnergyMode('map')">Arrhenius Sim →</button></span>
+    </label>
+    <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+      <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+      <span><b class="text-white block">XIII(d) · Catalysis &amp; Reversible Reactions</b>"Alternative pathway with lower $E_a$" (CP 2013); increases forward &amp; backward rates to the SAME extent (CP 2023); enzyme denaturation (CP 2014). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-energy');selectEnergy(5)">Inspect →</button></span>
+    </label>
+    <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+      <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+      <span><b class="text-white block">XIII(e) · Haber Process &amp; Nitric Acid Fertilisers</b>Feedstocks (liquefied air + steam reforming of $\text{CH}_4$), $450^\circ\text{C} / 200\text{ atm} / \text{finely divided Fe}$, condense &amp; recycle, $\text{NH}_3 \to \text{NO} \to \text{NO}_2 \to \text{HNO}_3$ (CP 2016). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-proc');switchProcMode('map')">Plant Sim →</button></span>
+    </label>
+    <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+      <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+      <span><b class="text-white block">XIII(e) · Chloroalkali Industry (Mercury vs Membrane)</b>Electrolysis of <b>brine</b> (not sea water, CP 2013); flowing mercury cell vs cation-selective membrane cell (no toxic $\text{Hg}$, less energy, CP 2015/2020/2024). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-proc');switchProcMode('map')">Cell Sim →</button></span>
+    </label>
+    <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+      <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+      <span><b class="text-white block">XIII(e) · Methane $\to$ Syngas $\to$ Methanol &amp; Ethanoic Acid</b>$\text{CH}_4 + \text{H}_2\text{O} \to \text{CO} + 3\text{H}_2$; $\text{CO} + 2\text{H}_2 \rightleftharpoons \text{CH}_3\text{OH}$ ($\text{Cu/ZnO/Al}_2\text{O}_3, 200\text{–}300^\circ\text{C}, 50\text{–}100\text{ atm}$); carbonylation $\text{CH}_3\text{OH}+\text{CO}\to\text{CH}_3\text{COOH}$ (CP 2018). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-proc');selectProc(6)">Inspect →</button></span>
+    </label>
+    <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+      <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+      <span><b class="text-white block">XIII(f) · Atom Economy vs Reaction Yield</b>$\text{AE} = \frac{M_r(\text{desired})}{\sum M_r(\text{reactants})}\times 100\%$; distinguish blueprint AE (assumes 100% completion) from experimental yield (CP 2013/2019). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-green');switchGreenMode('map')">Green Sim →</button></span>
+    </label>
+    <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+      <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+      <span><b class="text-white block">XIII(f) · Process-Anchored Green Evaluation</b>Anchor green arguments to the named process; name explicit hazards (<b>toxic</b> $\text{CO}/\text{CH}_3\text{OH}/\text{Cl}_2$, not vague "harmful", CP 2021/2022/2023). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-solver')">Grader →</button></span>
+    </label>
+  </div>
+</div>
+
 <section id="tab-rate" class="tab-panel space-y-6">
 <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-sm">
 <div class="border-b border-slate-800 pb-4 mb-6">
@@ -426,6 +835,75 @@ select,input[type="number"],input[type="text"]{font-size:16px!important}
 </div>
 </div>
 <div class="mt-4 p-3 bg-slate-900 border border-slate-800 rounded-lg text-[11px] text-slate-400 leading-relaxed"><b class="text-slate-300">The strip that connects:</b> rate responds to concentration through the <b>orders</b> (this engine); rate responds to temperature through <b>k</b> (Engine B: Arrhenius); industry tunes rate with <b>catalyst + conditions</b> (Engines B &amp; C). One reaction, three levers, three vocabularies — never mix them.</div>
+
+<!-- ══ INTERACTIVE SIMULATOR A1: LIVE RATE ORDER, k-UNIT & PSEUDO-ORDER FOLDING LAB (CP 2012 / CP 2020 / CP 2021 / CP 2022 / CP 2024) ══ -->
+<div class="mt-6 apple-sim-panel space-y-4">
+  <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+    <div>
+      <span class="text-[10px] font-mono uppercase tracking-widest text-sky-400 font-bold">Interactive Kinetics Lab · Strand (b)</span>
+      <h4 class="text-sm font-bold text-white mt-0.5">Live Rate-Order Curve Plotter, Two-Way $k$-Unit Deriver &amp; Excess Reactant Folder</h4>
+      <p class="text-xs text-slate-400">Adjust orders $m$ (for A) and $n$ (for B) or toggle <b>[B] in Large Excess (CP 2022 Q1c)</b> to inspect the Concentration–Time and Rate–[A] graphs plus exact HKEAA deduction sentences.</p>
+    </div>
+    <span id="rateSimBadge" class="chip bg-sky-950 text-sky-300 border border-sky-700 font-mono">Overall Order = 3 · k in mol⁻² dm⁶ s⁻¹</span>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-3 text-xs">
+    <div class="p-3 bg-slate-950/90 border border-slate-800 rounded-xl space-y-1.5">
+      <label class="text-slate-400 font-semibold block">Order w.r.t. A ($m$)</label>
+      <select id="simOrderM" onchange="updateRateLabSim()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-white font-mono">
+        <option value="0">m = 0 (Zero order in A · CP 2020)</option>
+        <option value="1">m = 1 (First order in A · CP 2024)</option>
+        <option value="2" selected>m = 2 (Second order in A · CP 2012)</option>
+      </select>
+    </div>
+    <div class="p-3 bg-slate-950/90 border border-slate-800 rounded-xl space-y-1.5">
+      <label class="text-slate-400 font-semibold block">Order w.r.t. B ($n$)</label>
+      <select id="simOrderN" onchange="updateRateLabSim()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-white font-mono">
+        <option value="0">n = 0 (Zero order in B)</option>
+        <option value="1" selected>n = 1 (First order in B)</option>
+        <option value="1.5">n = 1.5 (3/2 fractional order · CP 2021)</option>
+        <option value="2">n = 2 (Second order in B)</option>
+      </select>
+    </div>
+    <div class="p-3 bg-slate-950/90 border border-slate-800 rounded-xl space-y-1.5">
+      <label class="text-slate-400 font-semibold block">Concentration Multiplier</label>
+      <select id="simConcMult" onchange="updateRateLabSim()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-white font-mono">
+        <option value="2|1" selected>Double [A] only (×2, [B] fixed)</option>
+        <option value="1|2">Double [B] only ([A] fixed, ×2)</option>
+        <option value="2|2">Double BOTH [A] and [B] (×2, ×2)</option>
+        <option value="3|1">Triple [A] only (×3, [B] fixed)</option>
+        <option value="0.5|0.5">Dilute mixture to 2× volume (×½, ×½)</option>
+      </select>
+    </div>
+    <div class="p-3 bg-slate-950/90 border border-slate-800 rounded-xl flex flex-col justify-between">
+      <label class="text-slate-400 font-semibold block">Pseudo-Order Condition (CP 2022)</label>
+      <label class="flex items-center gap-2 cursor-pointer mt-1">
+        <input type="checkbox" id="simExcessB" onchange="updateRateLabSim()" class="accent-sky-500 rounded">
+        <span class="text-sky-300 font-semibold">Flood [B] in large excess ($k' = k[	ext{B}]^n$)</span>
+      </label>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+    <div class="p-3 bg-slate-950 border border-slate-800 rounded-xl">
+      <div class="flex justify-between items-center mb-1">
+        <span class="text-[11px] font-bold text-sky-300 uppercase tracking-wider">Graph 1 · [A] vs Time Progress Curve</span>
+        <span id="rateSimG1Tag" class="text-[10px] font-mono text-slate-400">Tangent at t = 0 gives initial rate</span>
+      </div>
+      <svg id="rateSimSvg1" viewBox="0 0 380 185" class="w-full h-auto"></svg>
+    </div>
+    <div class="p-3 bg-slate-950 border border-slate-800 rounded-xl">
+      <div class="flex justify-between items-center mb-1">
+        <span class="text-[11px] font-bold text-purple-300 uppercase tracking-wider">Graph 2 · Initial Rate vs [A] (at fixed [B])</span>
+        <span id="rateSimG2Tag" class="text-[10px] font-mono text-slate-400">Upward parabola (m = 2)</span>
+      </div>
+      <svg id="rateSimSvg2" viewBox="0 0 380 185" class="w-full h-auto"></svg>
+    </div>
+  </div>
+
+  <div id="rateSimVerdict" class="p-3.5 bg-slate-950 border border-sky-800/60 rounded-xl text-xs text-slate-200 leading-relaxed space-y-1"></div>
+</div>
+
 </div>
 </div>
 <div id="rate-quiz" class="engine-module">
@@ -634,6 +1112,67 @@ select,input[type="number"],input[type="text"]{font-size:16px!important}
 <div class="p-3 bg-slate-900 border border-slate-800 rounded-lg text-[11px] text-slate-300 leading-relaxed"><b class="text-sky-300">Read 2 · The tail:</b> never touches the axis — some molecules always have very high energies; that is why reactions happen cold.</div>
 <div class="p-3 bg-slate-900 border border-slate-800 rounded-lg text-[11px] text-slate-300 leading-relaxed"><b class="text-amber-300">Read 3 · The shaded bar:</b> rate language lives or dies here — “larger portion of molecules will have kinetic energy greater than Eₐ” <i>(ms bank §7)</i>.</div>
 </div>
+
+<!-- ══ INTERACTIVE SIMULATOR B1: SYNCHRONIZED MAXWELL-BOLTZMANN, ENERGY PROFILE & ARRHENIUS LAB (CP 2013–2025) ══ -->
+<div class="mt-6 apple-sim-panel space-y-4">
+  <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+    <div>
+      <span class="text-[10px] font-mono uppercase tracking-widest text-purple-400 font-bold">Interactive Energy &amp; Catalysis Workbench · Strands (c) + (d)</span>
+      <h4 class="text-sm font-bold text-white mt-0.5">Synchronized Energy Profile, Maxwell–Boltzmann Curve &amp; Two-Point Arrhenius Calculator</h4>
+      <p class="text-xs text-slate-400">Adjust $T_1, T_2$, uncatalysed $E_a$, $\Delta H$, and toggle the <b>Catalyst</b> to see why the energy profile gets a second lower hump on the same sketch while the MB distribution marks $E_a'$ on the <b>same curve</b> (CP 2015 Q1b / CP 2021 Q1b / CP 2023 Q1b).</p>
+    </div>
+    <span id="mbSimRatioBadge" class="chip bg-purple-950 text-purple-300 border border-purple-700 font-mono">k₂ / k₁ = 5.42</span>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-5 gap-3 text-xs">
+    <div class="p-3 bg-slate-950/90 border border-slate-800 rounded-xl space-y-1">
+      <div class="flex justify-between"><span class="text-slate-400">Temp $T_1$ / $T_2$ (K)</span><span id="mbTempLbl" class="font-mono text-sky-300">500 K → 560 K</span></div>
+      <input id="mbT2Slider" type="range" min="450" max="750" step="10" value="560" oninput="updateEnergyLabSim()" class="w-full accent-purple-500">
+    </div>
+    <div class="p-3 bg-slate-950/90 border border-slate-800 rounded-xl space-y-1">
+      <div class="flex justify-between"><span class="text-slate-400">Fwd $E_a$ (kJ mol⁻¹)</span><span id="mbEaLbl" class="font-mono text-amber-300">65.0 kJ mol⁻¹</span></div>
+      <input id="mbEaSlider" type="range" min="30" max="160" step="5" value="65" oninput="updateEnergyLabSim()" class="w-full accent-amber-500">
+    </div>
+    <div class="p-3 bg-slate-950/90 border border-slate-800 rounded-xl space-y-1">
+      <div class="flex justify-between"><span class="text-slate-400">$\Delta H$ (kJ mol⁻¹)</span><span id="mbDhLbl" class="font-mono text-emerald-300">−45.0 kJ mol⁻¹</span></div>
+      <input id="mbDhSlider" type="range" min="-95" max="60" step="5" value="-45" oninput="updateEnergyLabSim()" class="w-full accent-emerald-500">
+    </div>
+    <div class="p-3 bg-slate-950/90 border border-slate-800 rounded-xl flex flex-col justify-between">
+      <span class="text-slate-400 font-semibold">Catalyst Pathway</span>
+      <label class="flex items-center gap-2 cursor-pointer mt-1">
+        <input type="checkbox" id="mbCatChk" checked onchange="updateEnergyLabSim()" class="accent-emerald-500 rounded">
+        <span class="text-emerald-300 font-semibold">Show Catalysed ($E_a' = E_a - 25$)</span>
+      </label>
+    </div>
+    <div class="p-3 bg-slate-950/90 border border-slate-800 rounded-xl flex flex-col justify-between">
+      <span class="text-slate-400 font-semibold">Exam Preset</span>
+      <div class="flex gap-1 mt-1">
+        <button type="button" onclick="setMbPreset(65,-45,560,true)" class="apple-btn !px-2 !py-1 text-[10px]">CP 2021 (65 kJ)</button>
+        <button type="button" onclick="setMbPreset(20,-92,700,true)" class="apple-btn !px-2 !py-1 text-[10px]">Haber (20/−92)</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+    <div class="p-3 bg-slate-950 border border-slate-800 rounded-xl">
+      <div class="flex justify-between items-center mb-1">
+        <span class="text-[11px] font-bold text-amber-300 uppercase tracking-wider">Sketch A · Potential Energy Profile (x = Progress of Reaction)</span>
+        <span id="profRevEaTag" class="text-[10px] font-mono text-emerald-300">Ea(rev) = 110.0 kJ mol⁻¹</span>
+      </div>
+      <svg id="profSimSvg" viewBox="0 0 400 200" class="w-full h-auto"></svg>
+    </div>
+    <div class="p-3 bg-slate-950 border border-slate-800 rounded-xl">
+      <div class="flex justify-between items-center mb-1">
+        <span class="text-[11px] font-bold text-purple-300 uppercase tracking-wider">Sketch B · Arrhenius Plot ($\log k$ vs $1/T \ / \ 10^{-3}	ext{ K}^{-1}$)</span>
+        <span id="arrSlopeTag" class="text-[10px] font-mono text-sky-300">Slope = −Ea / (2.3R)</span>
+      </div>
+      <svg id="arrSimSvg" viewBox="0 0 400 200" class="w-full h-auto"></svg>
+    </div>
+  </div>
+
+  <div id="energySimVerdict" class="p-3.5 bg-slate-950 border border-purple-800/60 rounded-xl text-xs text-slate-200 leading-relaxed space-y-1"></div>
+</div>
+
 </div>
 </div>
 <div id="energy-quiz" class="engine-module">
@@ -824,6 +1363,30 @@ select,input[type="number"],input[type="text"]{font-size:16px!important}
 </tbody>
 </table></div>
 <div class="mt-4 p-3 bg-slate-900 border border-slate-800 rounded-lg text-[11px] text-slate-400 leading-relaxed"><b class="text-slate-300">Reading rules:</b> ⚑ rows are status-flagged companions — learn them as compromise grammar, not recall lists. Every “yield says” cell is Topic X Le Chatelier in work clothes; every “rate says” cell is Topic IX/Engine B; the <b>compromise sentence</b> (“often involve a compromise between rate, yield and economic considerations”, Part I (e)) is the Topic XIII signature mark.</div>
+
+<!-- ══ INTERACTIVE SIMULATOR C1: CHLOROALKALI CELL COMPARATOR & HABER/SYNGAS FLOW LAB (CP 2013 / CP 2015 / CP 2020 / CP 2022 / CP 2024) ══ -->
+<div class="mt-6 apple-sim-panel space-y-4">
+  <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+    <div>
+      <span class="text-[10px] font-mono uppercase tracking-widest text-emerald-400 font-bold">Interactive Electrolysis &amp; Plant Inspector · Strand (e)</span>
+      <h4 class="text-sm font-bold text-white mt-0.5">Chloroalkali Cell Comparator (Membrane vs Flowing Mercury vs Diaphragm)</h4>
+      <p class="text-xs text-slate-400">Select a chloroalkali cell design to inspect the live SVG compartment schematic, anode/cathode half-equations, ion migration, NaOH purity, and HKEAA environmental/energy verdicts.</p>
+    </div>
+    <div class="flex flex-wrap gap-1.5">
+      <button type="button" id="cellBtnMem" onclick="selectChloroCell('membrane')" class="apple-btn !py-1 !px-3 text-xs border-emerald-500/60 text-emerald-300">Membrane Cell (Modern)</button>
+      <button type="button" id="cellBtnHg" onclick="selectChloroCell('mercury')" class="apple-btn !py-1 !px-3 text-xs">Flowing Mercury Cell</button>
+      <button type="button" id="cellBtnDia" onclick="selectChloroCell('diaphragm')" class="apple-btn !py-1 !px-3 text-xs">Diaphragm Cell</button>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-5 gap-4 items-center">
+    <div class="lg:col-span-3 p-3 bg-slate-950 border border-slate-800 rounded-xl">
+      <svg id="chloroCellSvg" viewBox="0 0 460 220" class="w-full h-auto"></svg>
+    </div>
+    <div id="chloroCellDetails" class="lg:col-span-2 p-4 bg-slate-950 border border-emerald-800/60 rounded-xl text-xs text-slate-200 space-y-2 leading-relaxed"></div>
+  </div>
+</div>
+
 </div>
 </div>
 <div id="proc-quiz" class="engine-module">
@@ -1015,6 +1578,27 @@ select,input[type="number"],input[type="text"]{font-size:16px!important}
 </div>
 </div>
 <div class="mt-4 p-3 bg-slate-900 border border-slate-800 rounded-lg text-[11px] text-slate-400 leading-relaxed"><b class="text-slate-300">Life-cycle strip:</b> raw material → synthesis → product use → disposal/reuse. Green chemistry is the only lens in this topic that reads the <b>whole</b> strip — which is exactly why a single 100% atom-economy number never settles an argument by itself.</div>
+
+<!-- ══ INTERACTIVE SIMULATOR D1: TWO-ROUTE GREEN CHEMISTRY & ATOM ECONOMY COMPARATOR (CP 2013 / CP 2019 / CP 2022 / CP 2023) ══ -->
+<div class="mt-6 apple-sim-panel space-y-4">
+  <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+    <div>
+      <span class="text-[10px] font-mono uppercase tracking-widest text-rose-400 font-bold">Interactive Green Process Auditor · Strands (a) + (f)</span>
+      <h4 class="text-sm font-bold text-white mt-0.5">Head-to-Head Industrial Route Greenness &amp; Hazard Veto Evaluator</h4>
+      <p class="text-xs text-slate-400">Compare real HKDSE Paper 2 Section A industrial synthesis pairs across Atom Economy, Hazard Class (<b>toxic</b> vs <b>corrosive</b> vs <b>flammable</b> — never vague "harmful", CP 2021/2022), Catalyst/Energy, and Feedstock.</p>
+    </div>
+    <select id="greenCaseSelect" onchange="updateGreenAuditSim()" class="bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white font-semibold">
+      <option value="ethanoic">Case 1 · Ethanoic Acid: Methanol Carbonylation vs Butane Oxidation (CP 2018 / 2022 / 2024)</option>
+      <option value="ppo">Case 2 · Propylene Oxide: H₂O₂ Route vs Chlorohydrin Route (CP 2013 / MS Bank §10)</option>
+      <option value="ethanol">Case 3 · Ethanol: Fermentation of Starch vs Catalytic Hydration of Ethene (CP 2015 / 2016)</option>
+      <option value="vitc">Case 4 · Vitamin C: Classical Multi-Step Cl₂/H₂SO₄ Route vs Modern Bio-Fermentation (CP 2018 / 2023)</option>
+    </select>
+  </div>
+
+  <div id="greenAuditComparisonGrid" class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs"></div>
+  <div id="greenAuditVerdictBox" class="p-3.5 bg-slate-950 border border-rose-800/60 rounded-xl text-xs text-slate-200 leading-relaxed"></div>
+</div>
+
 </div>
 </div>
 <div id="green-quiz" class="engine-module">
@@ -1147,6 +1731,53 @@ select,input[type="number"],input[type="text"]{font-size:16px!important}
 <div id="haberOut" aria-live="polite" class="p-3 bg-slate-900 border border-slate-800 rounded-lg text-xs text-amber-200 font-mono leading-relaxed min-h-[3rem]">Awaiting change…</div>
 </div>
 </div>
+
+<div class="bg-slate-950 border border-sky-800/70 rounded-xl p-5 space-y-4 lg:col-span-2 apple-sim-panel">
+  <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+    <div>
+      <span class="text-[10px] font-mono text-sky-400 uppercase font-bold px-2 py-0.5 bg-sky-950 rounded border border-sky-800">Bench 6 · AI-Style HKEAA Keyword Grader</span>
+      <h3 class="text-sm font-bold text-white mt-1">Live Paper 2 Section A Long-Question Answer Grader (2012–2025 Marking Scheme Rubrics)</h3>
+      <p class="text-[11px] text-slate-400">Select an authentic HKDSE Topic XIII question, type your explanation, and get instant mark-by-mark diagnostic feedback plus recorded <b>[NOT ACCEPT]</b> trap warnings.</p>
+    </div>
+    <div class="flex items-center gap-2">
+      <button type="button" onclick="fillModelGraderAnswer()" class="apple-btn text-xs">Show Model Full-Mark Answer</button>
+    </div>
+  </div>
+
+  <div>
+    <label for="graderQSelect" class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Select Question (Paper 2 Section A)</label>
+    <select id="graderQSelect" onchange="loadGraderPrompt()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white font-semibold">
+      <option value="cat_rev">Q1 · Catalyst Definition &amp; Effect on Reversible Haber Equilibrium (3 marks · CP 2013 Q1b / CP 2021 Q1b / CP 2023 Q1b)</option>
+      <option value="mb_temp">Q2 · Maxwell–Boltzmann Distribution: Area Meaning &amp; Temperature Effect on Rate (3 marks · CP 2013 Q1a / CP 2016 Q1a)</option>
+      <option value="haber_cond">Q3 · Haber Process Operating Conditions (450 °C, 200 atm) &amp; Condense-Recycle Logic (3 marks · CP 2012 Q1a / CP 2021 Q1b)</option>
+      <option value="green_ethanoic">Q4 · Green Chemistry Evaluation: Methanol Carbonylation CH₃OH + CO → CH₃COOH (3 marks · CP 2018 Q1b / CP 2022 Q1a)</option>
+    </select>
+  </div>
+
+  <div id="graderPromptBox" class="p-3.5 bg-slate-900/90 border border-slate-800 rounded-xl text-xs text-slate-200 leading-relaxed"></div>
+
+  <textarea id="graderInput" rows="4" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-sky-500" placeholder="Type your full HKDSE exam answer here..."></textarea>
+
+  <div class="flex flex-wrap gap-2">
+    <button type="button" onclick="gradeStudentAnswer()" class="py-2 px-4 rounded-lg bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold transition">Grade My Answer Against HKEAA Marking Scheme</button>
+    <button type="button" onclick="document.getElementById('graderInput').value='';document.getElementById('graderResultBox').innerHTML='Awaiting your answer...';" class="py-2 px-3 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold">Clear</button>
+  </div>
+
+  <div id="graderResultBox" aria-live="polite" class="p-3.5 bg-slate-900 border border-slate-800 rounded-xl text-xs text-slate-300 space-y-2">Awaiting your answer...</div>
+</div>
+
+<!-- Command-K Modal -->
+<div id="cmdModal" class="cmd-modal-backdrop" onclick="if(event.target===this)closeCmdModal()">
+  <div class="cmd-modal-box">
+    <div class="flex items-center gap-2 px-4 py-3 border-b border-slate-800">
+      <span class="text-sky-400">🔍</span>
+      <input id="cmdSearchInput" type="text" oninput="filterCmdList()" placeholder="Jump to any Topic XIII concept, simulator, industrial process, or past-paper trap..." class="w-full bg-transparent text-sm text-white focus:outline-none">
+      <button type="button" onclick="closeCmdModal()" class="text-xs text-slate-400 hover:text-white px-1.5 py-0.5 rounded bg-slate-800">ESC</button>
+    </div>
+    <div id="cmdResults" class="p-2 max-h-80 overflow-y-auto space-y-1 text-xs"></div>
+  </div>
+</div>
+
 <div class="mt-6 p-3 bg-slate-900 border border-slate-800 rounded-lg text-xs text-slate-300 leading-relaxed"><b class="text-amber-300">Why this matters — the exam chain:</b> a §A question typically runs <b>Bench 1</b> (write the law, get k + units — the 2012/2016 rate mark) → <b>Bench 4</b> (justify the temperature language on the curve — the 2013/2016 energy marks) → <b>Bench 5</b> (defend the plant’s conditions — the 2012 compromise marks) → <b>Bench 3</b> (settle the green argument with arithmetic — the 2013 atom-economy marks). <b>Bench 2</b> is the unit insurance policy attached to every calculation in the chain: “the unit must be correct”.</div>
 </div>
 </section>
@@ -1706,5 +2337,538 @@ if(window.ResizeObserver){ const ro=new ResizeObserver(()=>M.syncHeader()); hs.f
 }catch(e){}
 })();
 </script>
+
+<script>
+/* ══ APPLE STUDIO PRO INTERACTIVE UPGRADE · TOPIC XIII INDUSTRIAL CHEMISTRY ══ */
+function toggleAppleTheme(){
+  const b = document.body;
+  const isLight = b.classList.toggle('light-mode');
+  const icon = document.getElementById('themeToggleIcon');
+  if(icon) icon.textContent = isLight ? '🌙 Studio Dark' : '☀️ Daylight';
+  try { localStorage.setItem('hkdse_topic13_theme', isLight ? 'light' : 'dark'); } catch(e){}
+}
+
+function updateMasteryRing(){
+  const chks = document.querySelectorAll('.syl-chk');
+  const checked = [...chks].filter(c => c.checked).length;
+  const sylBadge = document.getElementById('sylAuditCount');
+  if(sylBadge) sylBadge.textContent = `${checked} / ${chks.length} Outcomes Checked`;
+  const blurs = document.querySelectorAll('.blur-answer');
+  const revealed = [...blurs].filter(b => b.classList.contains('revealed')).length;
+  const total = chks.length + blurs.length;
+  const pct = total > 0 ? Math.round(((checked + revealed) / total) * 100) : 0;
+  const circle = document.getElementById('masteryRingCircle');
+  const txt = document.getElementById('masteryPctText');
+  if(circle){
+    const circ = 94.2;
+    circle.style.strokeDashoffset = (circ - (circ * pct) / 100).toFixed(1);
+  }
+  if(txt) txt.textContent = `${pct}% Mastered`;
+}
+function checkAllSyllabusOutcomes(){
+  document.querySelectorAll('.syl-chk').forEach(c => { c.checked = true; });
+  updateMasteryRing();
+}
+document.addEventListener('click', e => {
+  if(e.target && e.target.classList && e.target.classList.contains('blur-answer')){
+    setTimeout(updateMasteryRing, 50);
+  }
+});
+
+function injectQuizSelfCheckBars(){
+  ['rateQuiz','energyQuiz','procQuiz','greenQuiz'].forEach(qid => {
+    const box = document.getElementById(qid);
+    if(!box) return;
+    const total = box.querySelectorAll('.blur-answer').length;
+    const bar = document.createElement('div');
+    bar.className = 'mb-3 p-2.5 rounded-xl bg-slate-900/90 border border-slate-800 flex items-center justify-between text-xs';
+    bar.innerHTML = `<span class="text-slate-400">Active-Recall Blanks in this Engine: <b class="text-sky-300 font-mono">${total} blanks</b> (tap any blur to reveal &amp; update mastery ring)</span><button type="button" class="apple-btn !py-1 !px-2.5 text-[11px]" onclick="document.querySelectorAll('#${qid} .blur-answer').forEach(b=>b.classList.remove('revealed'));updateMasteryRing();">Reset Blanks</button>`;
+    box.parentElement.insertBefore(bar, box);
+  });
+}
+
+/* ── Simulator A1: Rate Order, k-Units & Excess Folding ── */
+function updateRateLabSim(){
+  const m = parseFloat(document.getElementById('simOrderM').value);
+  const n = parseFloat(document.getElementById('simOrderN').value);
+  const [multA, multB] = document.getElementById('simConcMult').value.split('|').map(Number);
+  const excessB = document.getElementById('simExcessB').checked;
+  const overall = snapOrder(m + n);
+  const u = kUnits(overall, 's');
+  const uApp = kUnits(m, 's');
+  const badge = document.getElementById('rateSimBadge');
+  if(badge) badge.textContent = excessB ? `Pseudo-Order = ${m} (k' in ${uApp}) · True Overall = ${overall}` : `Overall Order = ${overall} · k in ${u}`;
+
+  // Graph 1: [A] vs Time
+  const svg1 = document.getElementById('rateSimSvg1');
+  const g1Tag = document.getElementById('rateSimG1Tag');
+  let pts1 = [];
+  for(let i=0;i<=40;i++){
+    const t = i/40;
+    let yVal = 1.0;
+    if(m === 0) yVal = Math.max(0, 1 - 0.85*t);
+    else if(m === 1) yVal = Math.exp(-2.6*t);
+    else yVal = 1 / (1 + 4.2*t);
+    const x = 45 + t*310;
+    const y = 155 - yVal*125;
+    pts1.push(`${x.toFixed(1)},${y.toFixed(1)}`);
+  }
+  // Tangent at t=0
+  const slope0 = m===0 ? 0.85 : (m===1 ? 2.6 : 4.2);
+  const tEnd = Math.min(1.0, 1.0 / slope0);
+  const tx2 = 45 + tEnd*310;
+  const ty2 = 155 - Math.max(0, 1 - slope0*tEnd)*125;
+  if(g1Tag) g1Tag.textContent = m===0 ? 'Linear decrease ⇒ rate independent of [A] (CP 2020)' : `Curved decay (m = ${m}) · Tangent at t = 0 gives initial rate`;
+  if(svg1){
+    svg1.innerHTML = `
+      <line x1="45" y1="20" x2="45" y2="155" stroke="#475569" stroke-width="1.5"/>
+      <line x1="45" y1="155" x2="365" y2="155" stroke="#475569" stroke-width="1.5"/>
+      <text x="12" y="32" fill="#94a3b8" font-size="10">[A]</text>
+      <text x="310" y="173" fill="#94a3b8" font-size="10">time →</text>
+      <line x1="45" y1="30" x2="${tx2.toFixed(1)}" y2="${ty2.toFixed(1)}" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="4 3"/>
+      <text x="${Math.min(240, tx2+6).toFixed(1)}" y="${Math.max(45, ty2-4).toFixed(1)}" fill="#fbbf24" font-size="9.5">tangent at t = 0 (initial rate)</text>
+      <polyline fill="none" stroke="#38bdf8" stroke-width="2.6" points="${pts1.join(' ')}"/>
+    `;
+  }
+
+  // Graph 2: Initial rate vs [A]
+  const svg2 = document.getElementById('rateSimSvg2');
+  const g2Tag = document.getElementById('rateSimG2Tag');
+  let pts2 = [];
+  for(let i=0;i<=40;i++){
+    const a = i/40;
+    let rVal = m===0 ? 0.55 : (m===1 ? a : a*a);
+    const x = 45 + a*310;
+    const y = 155 - rVal*125;
+    pts2.push(`${x.toFixed(1)},${y.toFixed(1)}`);
+  }
+  if(g2Tag) g2Tag.textContent = m===0 ? 'Horizontal line (order 0)' : (m===1 ? 'Straight line through origin (order 1 · CP 2025)' : 'Upward parabola (order 2 · rate ∝ [A]²)');
+  if(svg2){
+    svg2.innerHTML = `
+      <line x1="45" y1="20" x2="45" y2="155" stroke="#475569" stroke-width="1.5"/>
+      <line x1="45" y1="155" x2="365" y2="155" stroke="#475569" stroke-width="1.5"/>
+      <text x="8" y="32" fill="#94a3b8" font-size="10">Rate</text>
+      <text x="305" y="173" fill="#94a3b8" font-size="10">[A] / mol dm⁻³ →</text>
+      <polyline fill="none" stroke="#c084fc" stroke-width="2.6" points="${pts2.join(' ')}"/>
+    `;
+  }
+
+  const rateFactor = Math.pow(multA, m) * (excessB ? 1 : Math.pow(multB, n));
+  const box = document.getElementById('rateSimVerdict');
+  if(box){
+    box.innerHTML = `
+      <div><b>1. Rate Equation Format (CP 2012 Q1c):</b> <span class="font-mono text-sky-300">rate = k[A]${m===0?'⁰':sup(m)}[B]${n===0?'⁰':sup(n)}</span> ${excessB ? `→ with <b>[B] in large excess</b>, [B] changes negligibly during the run so $k[\text{B}]^{${n}}$ is regarded as a constant $k'$, folding the law into <span class="font-mono text-emerald-300">rate = k'[A]${m===0?'⁰':sup(m)}</span> (<b>NOT</b> because the order w.r.t. B is zero! — CP 2022 Q1c).` : ''}</div>
+      <div><b>2. Two-Way $k$-Unit Check (CP 2021 Q1a / CP 2024 Q1c):</b> Overall order $n_{\text{tot}} = ${overall} \implies \text{units of } k = (\text{mol dm}^{-3})^{1-${overall}}\text{ s}^{-1} =$ <span class="font-mono text-amber-300">${u}</span>.</div>
+      <div><b>3. Visible Ratio Deduction:</b> Scaling $[\text{A}] \times ${multA}$ and $[\text{B}] \times ${multB}$ multiplies the initial rate by $(${multA})^{${m}} \times (${excessB ? '1\text{ [excess B fixed]}' : multB + ')^{' + n}} = $ <b class="text-emerald-300 font-mono">×${fmt(rateFactor)}</b>.</div>
+    `;
+  }
+}
+
+/* ── Simulator B1: Synchronized Energy Profile, MB & Arrhenius ── */
+function setMbPreset(ea, dh, t2, cat){
+  document.getElementById('mbEaSlider').value = ea;
+  document.getElementById('mbDhSlider').value = dh;
+  document.getElementById('mbT2Slider').value = t2;
+  document.getElementById('mbCatChk').checked = cat;
+  updateEnergyLabSim();
+}
+function updateEnergyLabSim(){
+  const T1 = 500;
+  const T2 = parseFloat(document.getElementById('mbT2Slider').value);
+  const Ea = parseFloat(document.getElementById('mbEaSlider').value);
+  const dH = parseFloat(document.getElementById('mbDhSlider').value);
+  const hasCat = document.getElementById('mbCatChk').checked;
+  const EaCat = Math.max(10, Ea - 25);
+  const EaRev = Ea - dH;
+  const EaRevCat = EaCat - dH;
+
+  document.getElementById('mbTempLbl').textContent = `${T1} K → ${T2} K`;
+  document.getElementById('mbEaLbl').textContent = `${Ea.toFixed(1)} kJ mol⁻¹`;
+  document.getElementById('mbDhLbl').textContent = `${dH>=0?'+':''}${dH.toFixed(1)} kJ mol⁻¹`;
+  document.getElementById('profRevEaTag').textContent = `Ea(rev, uncat) = ${Ea.toFixed(0)} − (${dH.toFixed(0)}) = ${EaRev.toFixed(1)} kJ mol⁻¹`;
+
+  // Arrhenius ratio k2/k1 = 10^( -(Ea*1000)/(2.3*8.31) * (1/T2 - 1/T1) )
+  const logRatio = -((Ea * 1000) / (2.3 * 8.31)) * (1/T2 - 1/T1);
+  const ratio = Math.pow(10, logRatio);
+  document.getElementById('mbSimRatioBadge').textContent = `k(${T2} K) / k(${T1} K) = ${fmt(ratio)}`;
+  const slopeK = -((Ea * 1000) / (2.3 * 8.31));
+  document.getElementById('arrSlopeTag').textContent = `Slope = −Ea/(2.3R) = ${Math.round(slopeK)} K`;
+
+  // Draw Potential Energy Profile
+  const profSvg = document.getElementById('profSimSvg');
+  const yReact = 115;
+  const yProd = Math.max(45, Math.min(170, yReact - dH * 0.55));
+  const yPeak = Math.max(18, yReact - Ea * 0.55);
+  const yPeakCat = Math.max(32, yReact - EaCat * 0.55);
+  if(profSvg){
+    profSvg.innerHTML = `
+      <line x1="40" y1="15" x2="40" y2="180" stroke="#475569" stroke-width="1.5"/>
+      <line x1="40" y1="180" x2="385" y2="180" stroke="#475569" stroke-width="1.5"/>
+      <text x="46" y="26" fill="#94a3b8" font-size="9.5">Energy (NOT kinetic energy!)</text>
+      <text x="245" y="195" fill="#94a3b8" font-size="9.5">Progress of reaction →</text>
+      <!-- Reactant & Product levels -->
+      <line x1="50" y1="${yReact}" x2="120" y2="${yReact}" stroke="#38bdf8" stroke-width="2.5"/>
+      <text x="54" y="${yReact-6}" fill="#7dd3fc" font-size="9.5" font-weight="bold">Reactants</text>
+      <line x1="290" y1="${yProd}" x2="370" y2="${yProd}" stroke="#38bdf8" stroke-width="2.5"/>
+      <text x="295" y="${yProd-6}" fill="#7dd3fc" font-size="9.5" font-weight="bold">Products</text>
+      <!-- Uncatalysed curve -->
+      <path d="M 120 ${yReact} C 165 ${yReact}, 175 ${yPeak}, 205 ${yPeak} C 235 ${yPeak}, 245 ${yProd}, 290 ${yProd}" fill="none" stroke="#f59e0b" stroke-width="2.4"/>
+      <text x="160" y="${Math.max(14, yPeak-5)}" fill="#fbbf24" font-size="9">Uncatalysed (Ea = ${Ea})</text>
+      ${hasCat ? `<path d="M 120 ${yReact} C 165 ${yReact}, 175 ${yPeakCat}, 205 ${yPeakCat} C 235 ${yPeakCat}, 245 ${yProd}, 290 ${yProd}" fill="none" stroke="#34d399" stroke-width="2.2" stroke-dasharray="5 3"/>
+      <text x="155" y="${yPeakCat+13}" fill="#6ee7b7" font-size="9">Catalysed route (Ea' = ${EaCat})</text>` : ''}
+      <!-- ΔH marker -->
+      <line x1="275" y1="${yReact}" x2="275" y2="${yProd}" stroke="#c084fc" stroke-width="1.5" stroke-dasharray="3 2"/>
+      <text x="280" y="${((yReact+yProd)/2+3).toFixed(1)}" fill="#d8b4fe" font-size="9">ΔH = ${dH>=0?'+':''}${dH}</text>
+    `;
+  }
+
+  // Draw Arrhenius Plot log k vs 1/T
+  const arrSvg = document.getElementById('arrSimSvg');
+  if(arrSvg){
+    const x1 = 75, y1 = 45;
+    const x2 = 335, y2 = Math.min(168, 45 + (Ea / 160) * 118);
+    const xT1 = 270;
+    const yT1 = y1 + ((xT1 - x1)/(x2 - x1))*(y2 - y1);
+    const xT2 = Math.max(85, 270 - (T2 - 500)*0.65);
+    const yT2 = y1 + ((xT2 - x1)/(x2 - x1))*(y2 - y1);
+    arrSvg.innerHTML = `
+      <line x1="50" y1="20" x2="50" y2="175" stroke="#475569" stroke-width="1.5"/>
+      <line x1="50" y1="175" x2="380" y2="175" stroke="#475569" stroke-width="1.5"/>
+      <text x="56" y="30" fill="#94a3b8" font-size="9.5">log k (base 10, NOT ln k!)</text>
+      <text x="245" y="193" fill="#94a3b8" font-size="9.5">1/T (10⁻³ K⁻¹) →</text>
+      <line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2.toFixed(1)}" stroke="#c084fc" stroke-width="2.5"/>
+      <circle cx="${xT1}" cy="${yT1.toFixed(1)}" r="4" fill="#38bdf8"/>
+      <text x="${xT1+6}" y="${(yT1-4).toFixed(1)}" fill="#7dd3fc" font-size="9">T₁=${T1}K</text>
+      <circle cx="${xT2.toFixed(1)}" cy="${yT2.toFixed(1)}" r="4.5" fill="#34d399"/>
+      <text x="${(xT2-45).toFixed(1)}" y="${(yT2-7).toFixed(1)}" fill="#6ee7b7" font-size="9">T₂=${T2}K</text>
+      <text x="70" y="158" fill="#fbbf24" font-size="9.5">slope = −Ea / (2.3R) = −${(Ea*1000).toFixed(0)} / (2.3 × 8.31)</text>
+    `;
+  }
+
+  const vBox = document.getElementById('energySimVerdict');
+  if(vBox){
+    vBox.innerHTML = `
+      <div><b>1. Arrhenius Unit Guard (CP 2019 Q1c / CP 2021 Q1a):</b> Convert $E_a = ${Ea.toFixed(1)}\text{ kJ mol}^{-1} \to \mathbf{${(Ea*1000).toFixed(0)}\text{ J mol}^{-1}}$ before dividing by $2.3R$ ($2.3 \times 8.31 = 19.113\text{ J K}^{-1}\text{ mol}^{-1}$): $\log(k_2/k_1) = -\frac{${(Ea*1000).toFixed(0)}}{2.3 \times 8.31}\left(\frac{1}{${T2}} - \frac{1}{${T1}}\right) = ${logRatio.toFixed(4)} \implies k_2/k_1 = \mathbf{${fmt(ratio)}}$.</div>
+      <div><b>2. Backward Barrier Arithmetic (CP 2021 Q1a / CP 2023 Q1b):</b> Uncatalysed $E_a(\text{reverse}) = E_a(\text{forward}) - \Delta H = ${Ea.toFixed(1)} - (${dH.toFixed(1)}) = \mathbf{${EaRev.toFixed(1)}\text{ kJ mol}^{-1}}$${hasCat ? `; Catalysed $E_a'(\text{reverse}) = ${EaCat.toFixed(1)} - (${dH.toFixed(1)}) = \mathbf{${EaRevCat.toFixed(1)}\text{ kJ mol}^{-1}}$ (both barriers drop by the exact same 25 kJ mol⁻¹, so forward and backward rates increase to the <b>same extent</b>!).` : '.'}</div>
+    `;
+  }
+}
+
+/* ── Simulator C1: Chloroalkali Cell Comparator ── */
+const CHLORO_DB = {
+  membrane: {
+    title: 'Membrane Electrolytic Cell (Modern Industry Standard)',
+    feed: 'Purified brine (concentrated NaCl(aq)) into anode compartment; pure water/dilute NaOH into cathode compartment.',
+    anode: '2Cl⁻(aq) → Cl₂(g) + 2e⁻ (Titanium anode — Cl⁻ selectively discharged over OH⁻ due to high [Cl⁻] in brine, CP 2022 Q1b)',
+    cathode: '2H₂O(l) + 2e⁻ → H₂(g) + 2OH⁻(aq) (Nickel cathode)',
+    sep: 'Cation-exchange membrane: permeable ONLY to cations (Na⁺ migrates anode → cathode) and impermeable to anions (Cl⁻ and OH⁻ blocked).',
+    verdict: '✅ <b>HKEAA Advantage Pair (CP 2015 / 2020 / 2024):</b> (M1) Does NOT use toxic mercury (more environmentally friendly than mercury cell); (M2) Consumes less electrical energy &amp; produces pure, chloride-free NaOH(aq) (unlike diaphragm cell).'
+  },
+  mercury: {
+    title: 'Flowing Mercury Cell (Castner–Kellner)',
+    feed: 'Brine (concentrated NaCl(aq)) flowing over a liquid mercury cathode.',
+    anode: '2Cl⁻(aq) → Cl₂(g) + 2e⁻ (Graphite / titanium anode)',
+    cathode: 'Na⁺(aq) + e⁻ + Hg(l) → Na/Hg(l) (sodium amalgam formed at flowing mercury cathode)',
+    sep: 'Separate decomposer tower: 2Na/Hg(l) + 2H₂O(l) → 2NaOH(aq) + H₂(g) + 2Hg(l) (mercury recycled).',
+    verdict: '⚠️ <b>HKEAA Environmental Verdict (CP 2015 / 2020):</b> Produces high-purity NaOH(aq), but <b>mercury is toxic/poisonous</b> — leakage causes severe water pollution and Minamata-type food-chain bioaccumulation.'
+  },
+  diaphragm: {
+    title: 'Diaphragm Electrolytic Cell',
+    feed: 'Brine enters anode compartment and percolates slowly through a porous diaphragm into the cathode compartment.',
+    anode: '2Cl⁻(aq) → Cl₂(g) + 2e⁻',
+    cathode: '2H₂O(l) + 2e⁻ → H₂(g) + 2OH⁻(aq)',
+    sep: 'Porous diaphragm (traditionally asbestos): keeps Cl₂(g) and H₂(g) gases separate, but allows both Na⁺ and unreacted Cl⁻(aq) to pass through.',
+    verdict: '⚠️ <b>HKEAA Comparison Verdict (CP 2015 Q1c):</b> The resulting NaOH(aq) is dilute (~10–12%) and <b>contaminated with unreacted NaCl(aq)</b>; asbestos diaphragms also pose health hazards.'
+  }
+};
+function selectChloroCell(type){
+  ['membrane','mercury','diaphragm'].forEach(k => {
+    const id = k==='membrane'?'cellBtnMem':(k==='mercury'?'cellBtnHg':'cellBtnDia');
+    const b = document.getElementById(id);
+    if(b) b.className = k===type ? 'apple-btn !py-1 !px-3 text-xs border-emerald-500 text-emerald-300 bg-emerald-950/50' : 'apple-btn !py-1 !px-3 text-xs';
+  });
+  const d = CHLORO_DB[type];
+  const box = document.getElementById('chloroCellDetails');
+  if(box && d){
+    box.innerHTML = `
+      <div class="font-bold text-white text-sm">${d.title}</div>
+      <div><b class="text-sky-300">Feedstock:</b> ${d.feed}</div>
+      <div><b class="text-emerald-300">Anode (+):</b> <span class="font-mono">${d.anode}</span></div>
+      <div><b class="text-purple-300">Cathode (−):</b> <span class="font-mono">${d.cathode}</span></div>
+      <div><b class="text-amber-300">Separation Principle:</b> ${d.sep}</div>
+      <div class="pt-1 border-t border-slate-800">${d.verdict}</div>
+    `;
+  }
+  const svg = document.getElementById('chloroCellSvg');
+  if(!svg) return;
+  if(type === 'membrane'){
+    svg.innerHTML = `
+      <rect x="25" y="25" width="410" height="170" rx="12" fill="#0f172a" stroke="#334155" stroke-width="2"/>
+      <line x1="230" y1="25" x2="230" y2="195" stroke="#34d399" stroke-width="3.5" stroke-dasharray="6 3"/>
+      <text x="155" y="18" fill="#6ee7b7" font-size="10" font-weight="bold">Cation-Selective Membrane (Na⁺ only)</text>
+      <!-- Anode -->
+      <rect x="75" y="45" width="22" height="115" rx="4" fill="#0284c7"/>
+      <text x="58" y="40" fill="#7dd3fc" font-size="10" font-weight="bold">Anode (+): Cl₂(g) ↑</text>
+      <text x="45" y="182" fill="#94a3b8" font-size="9.5">Brine in (conc. NaCl)</text>
+      <!-- Cathode -->
+      <rect x="360" y="45" width="22" height="115" rx="4" fill="#9333ea"/>
+      <text x="325" y="40" fill="#d8b4fe" font-size="10" font-weight="bold">Cathode (−): H₂(g) ↑</text>
+      <text x="275" y="182" fill="#6ee7b7" font-size="9.5">Pure NaOH(aq) out (no Cl⁻)</text>
+      <!-- Ion arrows -->
+      <path d="M 165 95 L 295 95" stroke="#34d399" stroke-width="2.2" marker-end="url(#arrG)"/>
+      <text x="188" y="88" fill="#34d399" font-size="10.5" font-weight="bold">Na⁺ passes →</text>
+      <text x="140" y="135" fill="#fb7185" font-size="10">Cl⁻ blocked ✗</text>
+      <text x="242" y="135" fill="#fb7185" font-size="10">✗ OH⁻ blocked</text>
+    `;
+  } else if(type === 'mercury'){
+    svg.innerHTML = `
+      <rect x="20" y="25" width="255" height="165" rx="12" fill="#0f172a" stroke="#334155" stroke-width="2"/>
+      <text x="45" y="45" fill="#7dd3fc" font-size="10" font-weight="bold">Brine Electrolysis Cell (Anode: Cl₂ ↑)</text>
+      <rect x="30" y="162" width="235" height="18" rx="4" fill="#64748b"/>
+      <text x="52" y="175" fill="#f8fafc" font-size="9.5" font-weight="bold">Flowing Hg(l) Cathode: Na⁺ + e⁻ → Na/Hg →</text>
+      <!-- Decomposer tower -->
+      <rect x="305" y="25" width="135" height="165" rx="12" fill="#0f172a" stroke="#f59e0b" stroke-width="2"/>
+      <text x="315" y="45" fill="#fbbf24" font-size="10" font-weight="bold">Amalgam Reactor</text>
+      <text x="315" y="75" fill="#e2e8f0" font-size="9.5">Na/Hg + H₂O →</text>
+      <text x="315" y="95" fill="#34d399" font-size="10" font-weight="bold">NaOH(aq) + H₂(g) ↑</text>
+      <text x="315" y="130" fill="#fb7185" font-size="9.5">⚠️ Toxic Hg hazard!</text>
+    `;
+  } else {
+    svg.innerHTML = `
+      <rect x="25" y="25" width="410" height="170" rx="12" fill="#0f172a" stroke="#334155" stroke-width="2"/>
+      <line x1="230" y1="25" x2="230" y2="195" stroke="#f59e0b" stroke-width="4" stroke-dasharray="3 3"/>
+      <text x="150" y="18" fill="#fbbf24" font-size="10" font-weight="bold">Porous Asbestos Diaphragm (Brine seeps through)</text>
+      <rect x="75" y="45" width="22" height="115" rx="4" fill="#0284c7"/>
+      <text x="58" y="40" fill="#7dd3fc" font-size="10" font-weight="bold">Anode (+): Cl₂(g) ↑</text>
+      <rect x="360" y="45" width="22" height="115" rx="4" fill="#9333ea"/>
+      <text x="325" y="40" fill="#d8b4fe" font-size="10" font-weight="bold">Cathode (−): H₂(g) ↑</text>
+      <text x="165" y="100" fill="#fbbf24" font-size="10">Na⁺ AND Cl⁻ seep →</text>
+      <text x="250" y="182" fill="#fda4af" font-size="9.5">Output: NaOH(aq) mixed with NaCl(aq)</text>
+    `;
+  }
+}
+
+/* ── Simulator D1: Green Chemistry Multi-Route Evaluator ── */
+const GREEN_CASES = {
+  ethanoic: {
+    r1: {
+      name: 'Route A · Methanol Carbonylation (Monsanto / Cativa)',
+      eq: 'CH₃OH(l) + CO(g) → CH₃COOH(l)',
+      ae: '60.0 / (32.0 + 28.0) × 100% = 100% (addition reaction, no by-product)',
+      haz: '⚠️ Uses TOXIC reactants: CH₃OH(l) and CO(g) (must state "toxic", NOT "harmful" — CP 2022 Q1a); HI promoter is corrosive.',
+      cond: '150–200 °C, 30–60 atm, Rh/Ir + HI catalyst (high selectivity, fewer steps).'
+    },
+    r2: {
+      name: 'Route B · Catalytic Oxidation of Butane / Naphtha',
+      eq: '2C₄H₁₀(g) + 5O₂(g) → 4CH₃COOH(l) + 2H₂O(l) (+ CO/CO₂/methanoic acid by-products)',
+      ae: '240.0 / (116.0 + 160.0) × 100% = 87.0% (water + side-products lower yield &amp; AE, CP 2024 Q1a)',
+      haz: '⚠️ Butane is flammable; harsh oxidation generates multiple side-products requiring energy-intensive fractional distillation.',
+      cond: '~180 °C, 50 atm, Co/Mn ethanoate catalyst.'
+    },
+    verdict: '<b>HKEAA Comparative Verdict (CP 2018 / CP 2022 / CP 2024):</b> Route A is greener in terms of <b>100% atom economy</b>, <b>fewer reaction steps</b>, and <b>less chemical waste / easier separation</b>; however, Route A is NOT green regarding reagent hazard because both <b>CH₃OH and CO are toxic</b>.'
+  },
+  ppo: {
+    r1: {
+      name: 'Method 1 · Hydrogen Peroxide Epoxidation (Green Route)',
+      eq: 'C₃H₆(g) + H₂O₂(aq) → C₃H₆O(l) + H₂O(l)',
+      ae: '58.0 / (42.0 + 34.0) × 100% = 76.3% (MS Bank §10: 58/76 = 76.32%)',
+      haz: '✅ Co-product is harmless water (H₂O); avoids toxic chlorine gas.',
+      cond: 'Catalytic, mild conditions.'
+    },
+    r2: {
+      name: 'Method 2 · Chlorohydrin Route (Traditional)',
+      eq: 'C₃H₆ + Cl₂ + Ca(OH)₂ → C₃H₆O + CaCl₂ + H₂O',
+      ae: '58.0 / (42.0 + 71.0 + 74.1) × 100% = 31.0%',
+      haz: '⚠️ Uses <b>toxic Cl₂(g)</b> and produces large stoichiometric waste of CaCl₂ brine effluent.',
+      cond: 'Multi-step stoichiometric synthesis.'
+    },
+    verdict: '<b>HKEAA Comparative Verdict (CP 2013 Q1c / MS Bank §10):</b> Method 1 is greener than Method 2 because it has a <b>higher atom economy (76.3% vs 31.0%)</b>, produces <b>harmless H₂O instead of CaCl₂ waste</b>, and avoids using <b>toxic Cl₂(g)</b>.'
+  },
+  ethanol: {
+    r1: {
+      name: 'Route A · Fermentation of Renewable Carbohydrate (Starch / Glucose)',
+      eq: 'C₆H₁₂O₆(aq) → 2C₂H₅OH(aq) + 2CO₂(g) (yeast enzymes)',
+      ae: '92.0 / 180.0 × 100% = 51.1%',
+      haz: '✅ Mild ambient temperature (~35 °C, low energy bill) &amp; renewable biomass feedstock; ⚠️ competes with food supply / land use (MS Bank §10).',
+      cond: 'Yeast provides enzymes (CP 2024 Q1a); enzymes denature at high T (CP 2014 Q1).'
+    },
+    r2: {
+      name: 'Route B · Catalytic Hydration of Petrochemical Ethene',
+      eq: 'C₂H₄(g) + H₂O(g) ⇌ C₂H₅OH(g)',
+      ae: '46.0 / (28.0 + 18.0) × 100% = 100%',
+      haz: '⚠️ Ethene comes from non-renewable petroleum cracking; runs at <b>300 °C and 60–70 atm</b> with corrosive H₃PO₄/SiO₂ catalyst (high energy demand, CP 2016 Q1a).',
+      cond: '300 °C is a rate–yield compromise for an exothermic forward reaction.'
+    },
+    verdict: '<b>HKEAA Comparative Verdict (CP 2015 Q1b / CP 2016 Q1a):</b> Fermentation is greener on <b>renewable feedstock (starch/biomass)</b> and <b>mild temperature (low energy consumption)</b>; catalytic hydration is greener on <b>100% atom economy</b>.'
+  },
+  vitc: {
+    r1: {
+      name: 'Classical Reichstein Process (Multi-Step Chemical Synthesis)',
+      eq: 'D-glucose → sorbitol → L-sorbose → diacetone-L-sorbose (uses Cl₂/NaOH, conc. H₂SO₄, acetone) → Vitamin C',
+      ae: 'Low overall atom economy across 5+ steps with stoichiometric protection/deprotection wastes.',
+      haz: '⚠️ Uses <b>toxic reactant Cl₂</b> and <b>corrosive NaOH / conc. H₂SO₄</b> plus volatile organic solvents (CP 2023 Q1a).',
+      cond: 'High-pressure hydrogenation + multiple chemical oxidation steps.'
+    },
+    r2: {
+      name: 'Modern Two-Step Bio-Fermentation Route',
+      eq: 'D-glucose (renewable, CP 2018 Q1a) → 2-keto-L-gulonic acid (via microbes) → Vitamin C',
+      ae: 'Higher atom economy with fewer synthetic steps and less chemical waste (CP 2024 Q1b).',
+      haz: '✅ Replaces toxic chemical oxidants (Cl₂/KMnO₄) with microbial enzymes in aqueous medium at mild temperatures.',
+      cond: 'Biocatalytic fermentation at ambient temperature &amp; pressure.'
+    },
+    verdict: '<b>HKEAA Comparative Verdict (CP 2018 Q1a / CP 2023 Q1a):</b> Both start from renewable <b>glucose</b>, but the classical route violates green chemistry by using <b>toxic Cl₂</b> and <b>corrosive conc. H₂SO₄ / NaOH</b> across many waste-producing steps.'
+  }
+};
+function updateGreenAuditSim(){
+  const k = document.getElementById('greenCaseSelect').value;
+  const c = GREEN_CASES[k];
+  const grid = document.getElementById('greenAuditComparisonGrid');
+  const vBox = document.getElementById('greenAuditVerdictBox');
+  if(!c || !grid || !vBox) return;
+  grid.innerHTML = [c.r1, c.r2].map((r, idx) => `
+    <div class="p-4 bg-slate-950 border ${idx===0?'border-emerald-800/60':'border-purple-800/60'} rounded-xl space-y-2">
+      <div class="font-bold text-white text-sm">${r.name}</div>
+      <div><b class="text-sky-300">Equation:</b> <span class="font-mono">${r.eq}</span></div>
+      <div><b class="text-emerald-300">Atom Economy:</b> <span class="font-mono">${r.ae}</span></div>
+      <div><b class="text-rose-300">Hazard &amp; Waste Audit:</b> ${r.haz}</div>
+      <div><b class="text-amber-300">Conditions &amp; Catalyst:</b> ${r.cond}</div>
+    </div>
+  `).join('');
+  vBox.innerHTML = c.verdict;
+}
+
+/* ── Bench 6: Live HKEAA Keyword Answer Grader ── */
+const GRADER_RUBRICS = {
+  cat_rev: {
+    prompt: '<b>Question (3 marks · CP 2013 Q1b / CP 2021 Q1b / CP 2023 Q1b):</b> In the Haber process, N₂(g) + 3H₂(g) ⇌ 2NH₃(g), finely divided iron is used as a catalyst. Explain how the iron catalyst increases the rate of ammonia production, and explain whether using more iron catalyst increases the equilibrium yield of ammonia.',
+    model: 'Finely divided iron provides an alternative pathway with a lower activation energy, so a larger fraction of reactant molecules have kinetic energy equal to or greater than the activation energy. Since the reaction is reversible, the catalyst increases the rate of the forward reaction and the rate of the backward reaction to the same extent. Therefore, it does not shift the equilibrium position and does not increase the equilibrium yield of ammonia (though it increases the amount of NH₃ produced per unit time).',
+    marks: [
+      { label: '1M · Alternative Pathway with Lower Activation Energy', re: /alternative[\s\S]{0,25}(pathway|route)[\s\S]{0,35}lower[\s\S]{0,25}activation\s+energy/i, hint: 'CP 2013 Q1b / MS Bank §7 Requirement: State that a catalyst <b>provides an alternative pathway with a lower activation energy</b>.' },
+      { label: '1M · Increases Forward & Backward Rates to the SAME Extent', re: /(forward[\s\S]{0,30}(backward|reverse)|(backward|reverse)[\s\S]{0,30}forward)[\s\S]{0,40}same\s+extent/i, hint: 'CP 2013 Q1b / CP 2023 Q1b Requirement: State that the catalyst increases the rate of the forward reaction and that of the backward reaction <b>to the same extent</b>.' },
+      { label: '1M · Does Not Shift Equilibrium Position / Equilibrium Yield Unchanged', re: /(no\s+effect\s+on|not\s+shift|not\s+change|unchanged)[\s\S]{0,35}(equilibrium\s+position|equilibrium\s+yield|yield)/i, hint: 'CP 2023 Q1b Requirement: State explicitly that the catalyst <b>does not shift the equilibrium position</b> (so equilibrium yield is unchanged).' }
+    ],
+    traps: [
+      { re: /lowers?\s+the\s+activation\s+energy\s+of\s+the\s+(reaction|uncatalysed)/i, msg: 'CP 2013 Q1b / CP 2021 Q1b Verbatim Error: Never write "lowers the activation energy of the reaction/uncatalysed pathway" — the original barrier is unchanged; the catalyst provides an ALTERNATIVE pathway with a lower Ea!' }
+    ]
+  },
+  mb_temp: {
+    prompt: '<b>Question (3 marks · CP 2013 Q1a / CP 2016 Q1a):</b> With reference to a Maxwell–Boltzmann distribution curve, state what the total area under the curve represents, and explain why an increase in temperature greatly increases the rate of a gaseous reaction.',
+    model: 'The total area under the Maxwell–Boltzmann distribution curve represents the total number (or total fraction) of molecules in the system, which remains unchanged when temperature increases. At a higher temperature, the average kinetic energy of the molecules increases, so the curve flattens and shifts to the right. A much larger portion (fraction) of molecules have molecular kinetic energy equal to or greater than the activation energy (Ea), resulting in a higher frequency of effective collisions.',
+    marks: [
+      { label: '1M · Total Area = Total Number / Fraction of Molecules (Unchanged with T)', re: /area[\s\S]{0,45}total\s+(number|fraction|amount)\s+of\s+(molecules|particles)/i, hint: 'CP 2016 Q1a Requirement: State that the area under the curve represents the <b>total number (or total fraction) of molecules</b>.' },
+      { label: '1M · Higher T → Larger Fraction of Molecules with Kinetic Energy ≥ Ea', re: /(larger|greater|more)[\s\S]{0,35}(portion|fraction|proportion|number\s+of\s+molecules)[\s\S]{0,45}(kinetic\s+energy|energy)[\s\S]{0,25}(greater|equal|>=|≥|above|exceed)[\s\S]{0,20}(activation\s+energy|e_?a)/i, hint: 'MS Bank §7 Requirement: State that a <b>larger portion/fraction of molecules have kinetic energy greater than or equal to Ea</b>.' },
+      { label: '1M · More Effective Collisions per Unit Time', re: /effective\s+collisions?[\s\S]{0,25}(per\s+unit\s+time|frequency)/i, hint: 'MS Bank §7 Requirement: Conclude that there are <b>more effective collisions per unit time</b> (higher frequency of effective collisions).' }
+    ],
+    traps: [
+      { re: /area\s+under[\s\S]{0,25}(increases|grows|larger)\s+with\s+temperature/i, msg: 'CP 2016 Q1a Error: The total area under the Maxwell–Boltzmann curve does NOT increase with temperature — only the shaded area beyond Ea increases!' }
+    ]
+  },
+  haber_cond: {
+    prompt: '<b>Question (3 marks · CP 2012 Q1a / CP 2021 Q1b):</b> The Haber process (N₂(g) + 3H₂(g) ⇌ 2NH₃(g), ΔH < 0) operates at about 450 °C and 200 atm. Explain the choice of (i) 450 °C and (ii) 200 atm separately, and explain why unreacted N₂ and H₂ are recycled after cooling the product mixture.',
+    model: '(i) Temperature (450 °C): Since the forward reaction is exothermic, a lower temperature favours a higher equilibrium yield, but a moderately high temperature of 450 °C is used to speed up the reaction rate (a compromise between rate and yield). (ii) Pressure (200 atm): High pressure shifts the equilibrium to the right (4 moles of gas to 2 moles) and increases yield, but pressure above 200 atm requires expensive thick-walled reaction chambers/pipelines and poses safety hazards. (iii) Ammonia has a higher boiling point than N₂ and H₂ so it condenses to liquid first; unreacted N₂ and H₂ are passed again to the reaction chamber to conserve raw materials and avoid waste.',
+    marks: [
+      { label: '1M · Temperature Explained Separately (Rate vs Exothermic Yield Compromise)', re: /(450|temperature)[\s\S]{0,65}(speed\s+up|rate)[\s\S]{0,65}(exothermic|compromise|yield)/i, hint: 'CP 2012 Q1a / MS Bank §10 Requirement: Explain temperature separately — 450 °C is a <b>compromise</b>: high enough for a fast reaction rate though the exothermic forward reaction favours lower T for yield.' },
+      { label: '1M · Pressure Cap Explained via Chamber/Pipeline Cost & Safety Limits', re: /(200|pressure)[\s\S]{0,75}(safety|mechanical\s+design|chamber|pipeline|equipment\s+cost)/i, hint: 'CP 2012 Q1a / MS Bank §10 Requirement: Don't just write "expensive" — mention <b>limits of mechanical design / safety concerns / high cost of thick-walled chambers and pipelines</b>.' },
+      { label: '1M · Condense NH₃ (Higher b.p.) & Recycle N₂/H₂ to Conserve Feedstock', re: /(higher\s+boiling\s+point|condense)[\s\S]{0,70}(recycle|passed\s+again|not\s+waste|conserve)/i, hint: 'CP 2021 Q1b / MS Bank §10 Requirement: State that NH₃ condenses due to its <b>higher boiling point</b>, and unreacted N₂/H₂ are recycled to <b>conserve reactants / avoid waste</b>.' }
+    ],
+    traps: [
+      { re: /high\s+temperature\s+and\s+low(er)?\s+pressure\s+can\s+increase/i, msg: 'CP 2012 Q1a Verbatim Error: Never fuse the two conditions into "high temperature and lower pressure increase rate" — explain T and P separately!' }
+    ]
+  },
+  green_ethanoic: {
+    prompt: '<b>Question (3 marks · CP 2018 Q1b / CP 2022 Q1a):</b> Ethanoic acid is manufactured industrially by the carbonylation of methanol: CH₃OH(l) + CO(g) → CH₃COOH(l). State ONE reason why this process is considered green and ONE reason why it is NOT considered green from a green chemistry perspective.',
+    model: 'The process is considered green because it is an addition reaction with 100% atom economy (all reactant atoms are incorporated into the desired product CH₃COOH, producing no by-product waste). However, it is NOT considered green because the reactants methanol (CH₃OH) and carbon monoxide (CO) are toxic (and the HI promoter is corrosive).',
+    marks: [
+      { label: '1M · Green Reason: 100% Atom Economy / No By-Product Waste', re: /(100\s*%\s*atom\s+economy|atom\s+economy[\s\S]{0,25}100\s*%|no\s+by-?products?)/i, hint: 'CP 2022 Q1a Requirement: State that the reaction has <b>100% atom economy</b> (or produces no by-products/waste).' },
+      { label: '1M · Non-Green Reason: Names Specific Reactant (CH₃OH or CO)', re: /(methanol|ch3oh|ch_3oh|carbon\s+monoxide|co)/i, hint: 'CP 2012 Q1b / CP 2022 Q1a Requirement: Reference the specific substances in the process (<b>CH₃OH and/or CO</b>).' },
+      { label: '1M · Explicit Hazard Class: States "Toxic" / "Poisonous" (NOT "Harmful")', re: /(toxic|poisonous|corrosive)/i, hint: 'CP 2021 Q1c / CP 2022 Q1a Requirement: State the explicit hazard class — <b>toxic</b> (for CO/CH₃OH) or <b>corrosive</b> (for HI).' }
+    ],
+    traps: [
+      { re: /harmful/i, msg: 'CP 2021 Q1c / CP 2022 Q1a Verbatim Error: "Some mentioned that CO/CH₃OH is harmful instead of toxic" — always write TOXIC, never vague "harmful"!' }
+    ]
+  }
+};
+
+function loadGraderPrompt(){
+  const sel = document.getElementById('graderQSelect');
+  if(!sel) return;
+  const r = GRADER_RUBRICS[sel.value];
+  const box = document.getElementById('graderPromptBox');
+  if(box && r) box.innerHTML = r.prompt;
+}
+function fillModelGraderAnswer(){
+  const sel = document.getElementById('graderQSelect');
+  if(!sel) return;
+  const r = GRADER_RUBRICS[sel.value];
+  if(!r) return;
+  document.getElementById('graderInput').value = r.model;
+  gradeStudentAnswer();
+}
+function gradeStudentAnswer(){
+  const sel = document.getElementById('graderQSelect');
+  const txt = (document.getElementById('graderInput').value || '').trim();
+  const out = document.getElementById('graderResultBox');
+  if(!sel || !out) return;
+  const r = GRADER_RUBRICS[sel.value];
+  if(!txt){ out.innerHTML = '<span class="text-amber-300">Please type an answer first, or click "Show Model Full-Mark Answer".</span>'; return; }
+  let score = 0, rowsHtml = '', trapHtml = '';
+  r.marks.forEach(m => {
+    const hit = m.re.test(txt);
+    if(hit) score++;
+    rowsHtml += `<div class="p-2 rounded-lg border ${hit ? 'bg-emerald-950/40 border-emerald-700 text-emerald-200' : 'bg-slate-900 border-slate-800 text-slate-300'}"><b>${hit ? '✅ [1M Earned]' : '⬜ [0M Missed]'} ${m.label}:</b> ${hit ? 'Keyword verified in your answer.' : m.hint}</div>`;
+  });
+  r.traps.forEach(t => {
+    if(t.re.test(txt)) trapHtml += `<div class="p-2.5 rounded-lg bg-rose-950/60 border border-rose-600 text-rose-200 font-medium">🚨 <b>[NOT ACCEPT / Examiner Trap]:</b> ${t.msg}</div>`;
+  });
+  out.innerHTML = `<div class="flex items-center justify-between border-b border-slate-800 pb-2"><span class="font-bold text-white text-sm">Examiner Diagnostic Score: <span class="text-sky-400 font-mono">${score} / ${r.marks.length} marks</span></span><span class="chip ${score===r.marks.length && !trapHtml ? 'bg-emerald-950 text-emerald-300 border-emerald-700' : 'bg-amber-950 text-amber-300 border-amber-700'}">${score===r.marks.length && !trapHtml ? 'Full Marks Wording' : 'Keep Refining'}</span></div>${trapHtml}<div class="space-y-1.5 mt-2">${rowsHtml}</div>`;
+}
+
+const CMD_INDEX = [
+  { title: 'Live Rate-Order Curve Plotter, k-Unit Deriver & Excess Folder', tag: 'Strand (b) · Sim', action: ()=>{switchTab('tab-rate');switchRateMode('map');} },
+  { title: 'Synchronized Energy Profile, Maxwell–Boltzmann & Arrhenius Plotter', tag: 'Strands (c)+(d) · Sim', action: ()=>{switchTab('tab-energy');switchEnergyMode('map');} },
+  { title: 'Chloroalkali Cell Comparator (Membrane vs Mercury vs Diaphragm)', tag: 'Strand (e) · Sim', action: ()=>{switchTab('tab-proc');switchProcMode('map');} },
+  { title: 'Head-to-Head Industrial Route Greenness & Hazard Veto Auditor', tag: 'Strands (a)+(f) · Sim', action: ()=>{switchTab('tab-green');switchGreenMode('map');} },
+  { title: 'Initial-Rate, k-Units, Atom Economy, MB & Haber Benches', tag: 'Solver · Benches 1–5', action: ()=>{switchTab('tab-solver');} },
+  { title: 'Live HKEAA Keyword Answer Grader (Bench 6)', tag: 'Solver · Exam Practice', action: ()=>{switchTab('tab-solver');} },
+  { title: 'Paper 2 Section A Past Papers Intelligence (2012–2025)', tag: 'Past Papers · Tab 7', action: ()=>{switchTab('tab-pp');} }
+];
+function openCmdModal(){ const m=document.getElementById('cmdModal'); if(m){ m.classList.add('open'); const inp=document.getElementById('cmdSearchInput'); if(inp){inp.value='';filterCmdList();setTimeout(()=>inp.focus(),50);}}}
+function closeCmdModal(){ const m=document.getElementById('cmdModal'); if(m) m.classList.remove('open'); }
+function filterCmdList(){
+  const q = (document.getElementById('cmdSearchInput').value || '').toLowerCase();
+  const box = document.getElementById('cmdResults');
+  if(!box) return;
+  box.innerHTML = '';
+  CMD_INDEX.filter(i => i.title.toLowerCase().includes(q) || i.tag.toLowerCase().includes(q)).forEach(i => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'w-full text-left px-3 py-2.5 rounded-xl hover:bg-slate-800/80 flex items-center justify-between transition';
+    btn.innerHTML = `<span class="text-white font-medium">${i.title}</span><span class="chip bg-sky-950 text-sky-300 border border-sky-800">${i.tag}</span>`;
+    btn.onclick = () => { closeCmdModal(); i.action(); };
+    box.appendChild(btn);
+  });
+}
+document.addEventListener('keydown', e => {
+  if((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k'){ e.preventDefault(); const m=document.getElementById('cmdModal'); if(m && m.classList.contains('open')) closeCmdModal(); else openCmdModal(); }
+  else if(e.key === 'Escape') closeCmdModal();
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  try { if(localStorage.getItem('hkdse_topic13_theme') === 'light') toggleAppleTheme(); } catch(e){}
+  injectQuizSelfCheckBars();
+  updateRateLabSim();
+  updateEnergyLabSim();
+  selectChloroCell('membrane');
+  updateGreenAuditSim();
+  loadGraderPrompt();
+  updateMasteryRing();
+  solveOrders();
+  solveKunits();
+  solveAtomEcon();
+  solveMb();
+  solveHaber();
+});
+</script>
+
 </body>
 </html>

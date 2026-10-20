@@ -9,49 +9,375 @@
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
 <style>
-  :root { color-scheme: dark; }
-  body { background:#020617; font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
-  .tab-panel { display:none; }
-  .tab-panel.active { display:block; }
-  .blur-answer { filter: blur(6px); cursor:pointer; transition: filter .25s ease; user-select:none; }
-  .blur-answer.revealed { filter: blur(0); cursor:default; user-select:text; }
-  .engine-module { display:none; }
-  .engine-module.active { display:block; }
-  .mode-pill { cursor:pointer; }
-  .mode-pill.active { background:rgba(56,189,248,.15); color:#7dd3fc; border-color:#38bdf8; }
-  details > summary { cursor:pointer; list-style:none; }
-  details > summary::-webkit-details-marker { display:none; }
-  .chip { display:inline-block; padding:2px 10px; border-radius:9999px; font-size:11px; font-weight:600; }
-  .katex { font-size:1.05em; }
-  .num-card { font-variant-numeric: tabular-nums; }
-  input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner-spin-button { -webkit-appearance:none; margin:0; }
-  input[type=number] { -moz-appearance:textfield; }
-  .edot { font-size:10px; line-height:1; letter-spacing:-1px; }
-  .katex-block{overflow-x:auto;overflow-y:hidden}
-  .katex-block .katex-display{text-align:left;margin:.35em 0}
-  /* ══ MOBILE UX LAYER (chrome-only) ══ */
-  :root{--hdr:120px}
-  html{scroll-padding-top:calc(var(--hdr) + 10px)}
-  .toc-strip{display:none;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:2px 0 6px;margin-bottom:2px}
-  .toc-strip::-webkit-scrollbar{display:none}
-  .toc-chip{flex-shrink:0;font-size:10px;line-height:1;padding:7px 11px;border-radius:9999px;border:1px solid rgba(51,65,85,.9);background:rgba(15,23,42,.85);color:#94a3b8;font-weight:600;white-space:nowrap;cursor:pointer}
-  #backTop{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:70;width:44px;height:44px;border-radius:9999px;border:1px solid rgba(56,189,248,.35);background:rgba(8,14,26,.92);color:#7dd3fc;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transform:translateY(8px);transition:opacity .25s,transform .25s}
-  #backTop.show{opacity:1;pointer-events:auto;transform:none}
-  #scrollProg{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,#0ea5e9,#38bdf8);z-index:80;pointer-events:none}
-  @media (max-width:1023.98px){
-    header{background-color:rgba(2,6,23,.97)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;padding-top:env(safe-area-inset-top)}
-    #mainNav{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:4px}
-    #mainNav::-webkit-scrollbar{display:none}
-    #mainNav button{flex-shrink:0}
-    select,input[type="number"],input[type="text"]{font-size:16px!important}
-    #mainNav button{padding-top:10px;padding-bottom:10px}
-    .mode-pill{padding:8px 14px}
-    .toc-chip{padding:10px 12px}
-    .katex{font-size:1em}
-    .toc-strip{display:flex}
+  :root {
+    color-scheme: dark;
+    --hdr: 118px;
+    --bg-canvas: #000000;
+    --bg-elevated: rgba(22, 22, 29, 0.72);
+    --bg-card: rgba(28, 28, 36, 0.68);
+    --bg-card-solid: #16161d;
+    --bg-subcard: rgba(38, 38, 48, 0.55);
+    --bg-glass-nav: rgba(14, 14, 20, 0.76);
+    --border-hairline: rgba(255, 255, 255, 0.09);
+    --border-highlight: rgba(255, 255, 255, 0.16);
+    --text-primary: #f5f5f7;
+    --text-secondary: #a1a1aa;
+    --text-tertiary: #6e6e77;
+    --accent-blue: #0a84ff;
+    --accent-teal: #64d2ff;
+    --accent-purple: #bf5af2;
+    --accent-emerald: #30d158;
+    --accent-amber: #ff9f0a;
+    --accent-rose: #ff453a;
+    --shadow-card: 0 20px 44px -12px rgba(0, 0, 0, 0.65), inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+    --shadow-hover: 0 24px 52px -10px rgba(0, 0, 0, 0.75), inset 0 1px 0 0 rgba(255, 255, 255, 0.18);
+    --spring: cubic-bezier(0.22, 1, 0.36, 1);
   }
-  @media (prefers-reduced-motion:reduce){.tab-panel.active{animation:none}
-    .blur-answer,#backTop{transition:none!important}}
+
+  html.theme-light {
+    color-scheme: light;
+    --bg-canvas: #f5f5f7;
+    --bg-elevated: rgba(255, 255, 255, 0.82);
+    --bg-card: rgba(255, 255, 255, 0.88);
+    --bg-card-solid: #ffffff;
+    --bg-subcard: rgba(242, 242, 247, 0.85);
+    --bg-glass-nav: rgba(248, 248, 252, 0.82);
+    --border-hairline: rgba(0, 0, 0, 0.08);
+    --border-highlight: rgba(0, 0, 0, 0.14);
+    --text-primary: #1d1d1f;
+    --text-secondary: #515154;
+    --text-tertiary: #86868b;
+    --shadow-card: 0 12px 32px -8px rgba(0, 0, 0, 0.07), inset 0 1px 0 0 rgba(255, 255, 255, 0.9);
+    --shadow-hover: 0 18px 40px -8px rgba(0, 0, 0, 0.12), inset 0 1px 0 0 rgba(255, 255, 255, 1);
+  }
+
+  html {
+    scroll-padding-top: calc(var(--hdr) + 14px);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--bg-canvas);
+    background-image:
+      radial-gradient(ellipse 80% 50% at 15% -10%, rgba(10, 132, 255, 0.16), transparent 60%),
+      radial-gradient(ellipse 70% 45% at 85% 5%, rgba(191, 90, 242, 0.12), transparent 60%),
+      radial-gradient(ellipse 60% 40% at 50% 100%, rgba(48, 209, 88, 0.08), transparent 60%);
+    background-attachment: fixed;
+    color: var(--text-primary);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: -0.011em;
+    transition: background-color 0.4s var(--spring), color 0.3s var(--spring);
+  }
+
+  h1, h2, h3, h4 {
+    letter-spacing: -0.024em;
+    font-weight: 650;
+  }
+
+  .font-mono {
+    font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+  }
+
+  header {
+    background: var(--bg-glass-nav) !important;
+    -webkit-backdrop-filter: saturate(190%) blur(28px) !important;
+    backdrop-filter: saturate(190%) blur(28px) !important;
+    border-bottom: 1px solid var(--border-hairline) !important;
+    box-shadow: 0 4px 24px -4px rgba(0, 0, 0, 0.28);
+    transition: background 0.35s var(--spring);
+  }
+
+  #mainNav {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border-hairline);
+    border-radius: 14px;
+    padding: 4px !important;
+    gap: 4px !important;
+    margin-bottom: 8px;
+  }
+  html.theme-light #mainNav {
+    background: rgba(0, 0, 0, 0.045);
+  }
+
+  #mainNav button {
+    border-radius: 10px !important;
+    border-bottom: none !important;
+    transition: all 0.28s var(--spring) !important;
+    position: relative;
+    font-weight: 500;
+  }
+  #mainNav button:hover { transform: translateY(-1px); }
+  #mainNav button:active { transform: scale(0.97); }
+  #mainNav button.tab-btn-active {
+    background: rgba(10, 132, 255, 0.22) !important;
+    color: #64d2ff !important;
+    box-shadow: 0 2px 10px rgba(10, 132, 255, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.22);
+    font-weight: 600 !important;
+  }
+  html.theme-light #mainNav button.tab-btn-active {
+    background: #ffffff !important;
+    color: #0066cc !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .bg-slate-900 {
+    background: var(--bg-elevated) !important;
+    -webkit-backdrop-filter: saturate(160%) blur(22px);
+    backdrop-filter: saturate(160%) blur(22px);
+    border-color: var(--border-hairline) !important;
+    border-radius: 22px !important;
+    box-shadow: var(--shadow-card);
+    transition: transform 0.35s var(--spring), box-shadow 0.35s var(--spring), border-color 0.3s ease;
+  }
+
+  .bg-slate-950 {
+    background: var(--bg-card) !important;
+    border-color: var(--border-hairline) !important;
+    border-radius: 18px !important;
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.06);
+    transition: transform 0.3s var(--spring), box-shadow 0.3s var(--spring), border-color 0.25s ease;
+  }
+  .bg-slate-950:hover {
+    border-color: var(--border-highlight) !important;
+  }
+
+  html.theme-light .text-white { color: #1d1d1f !important; }
+  html.theme-light .text-slate-100,
+  html.theme-light .text-slate-200,
+  html.theme-light .text-slate-300 { color: #2c2c2e !important; }
+  html.theme-light .text-slate-400 { color: #515154 !important; }
+  html.theme-light .text-slate-500 { color: #6e6e73 !important; }
+  html.theme-light .bg-slate-800,
+  html.theme-light .bg-slate-800\/50 { background-color: rgba(0, 0, 0, 0.05) !important; color: #1d1d1f !important; border-color: rgba(0,0,0,0.12) !important; }
+  html.theme-light .bg-sky-950\/40,
+  html.theme-light .bg-sky-950\/30,
+  html.theme-light .bg-sky-950 { background-color: rgba(10, 132, 255, 0.1) !important; color: #004080 !important; border-color: rgba(10, 132, 255, 0.28) !important; }
+  html.theme-light .bg-purple-950\/30,
+  html.theme-light .bg-purple-950 { background-color: rgba(175, 82, 222, 0.1) !important; color: #581c87 !important; border-color: rgba(175, 82, 222, 0.28) !important; }
+  html.theme-light .bg-emerald-950\/30,
+  html.theme-light .bg-emerald-950 { background-color: rgba(48, 209, 88, 0.12) !important; color: #065f46 !important; border-color: rgba(48, 209, 88, 0.3) !important; }
+  html.theme-light .bg-amber-950\/40,
+  html.theme-light .bg-amber-950\/30,
+  html.theme-light .bg-amber-950 { background-color: rgba(255, 159, 10, 0.13) !important; color: #78350f !important; border-color: rgba(255, 159, 10, 0.35) !important; }
+  html.theme-light .bg-rose-950\/40,
+  html.theme-light .bg-rose-950\/30,
+  html.theme-light .bg-rose-950 { background-color: rgba(255, 69, 58, 0.1) !important; color: #881337 !important; border-color: rgba(255, 69, 58, 0.28) !important; }
+  html.theme-light .text-sky-200, html.theme-light .text-sky-300, html.theme-light .text-sky-400 { color: #0055b3 !important; }
+  html.theme-light .text-amber-200, html.theme-light .text-amber-300, html.theme-light .text-amber-400 { color: #92400e !important; }
+  html.theme-light .text-rose-200, html.theme-light .text-rose-300, html.theme-light .text-rose-400 { color: #9f1239 !important; }
+  html.theme-light .text-emerald-300, html.theme-light .text-emerald-400 { color: #047857 !important; }
+  html.theme-light .text-purple-300, html.theme-light .text-purple-400 { color: #6b21a8 !important; }
+  html.theme-light .text-cyan-200, html.theme-light .text-cyan-300, html.theme-light .text-cyan-400 { color: #0e7490 !important; }
+
+  @keyframes appleStageIn {
+    0% { opacity: 0; transform: translateY(10px) scale(0.992); filter: blur(4px); }
+    100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+  }
+  .tab-panel { display: none; }
+  .tab-panel.active {
+    display: block;
+    animation: appleStageIn 0.42s var(--spring) forwards;
+  }
+  .engine-module { display: none; }
+  .engine-module.active {
+    display: block;
+    animation: appleStageIn 0.34s var(--spring) forwards;
+  }
+  .polar-card, .forces-card, .crystal-card, .shape-card {
+    animation: appleStageIn 0.3s var(--spring) forwards;
+  }
+
+  .blur-answer {
+    filter: blur(5.5px);
+    cursor: pointer;
+    transition: filter 0.28s var(--spring), background-color 0.28s ease, transform 0.2s var(--spring), box-shadow 0.25s ease;
+    user-select: none;
+    border: 1px solid rgba(100, 210, 255, 0.22);
+    padding: 1px 7px !important;
+    border-radius: 7px !important;
+  }
+  .blur-answer:hover {
+    filter: blur(2.5px);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(10, 132, 255, 0.2);
+  }
+  .blur-answer.revealed {
+    filter: blur(0);
+    cursor: pointer;
+    user-select: text;
+    background: rgba(48, 209, 88, 0.16) !important;
+    border-color: rgba(48, 209, 88, 0.45) !important;
+    box-shadow: 0 0 0 1px rgba(48, 209, 88, 0.15);
+  }
+
+  .mode-pill {
+    cursor: pointer;
+    transition: all 0.26s var(--spring);
+    border-radius: 9999px;
+    backdrop-filter: blur(10px);
+  }
+  .mode-pill:hover { transform: translateY(-1px); }
+  .mode-pill:active { transform: scale(0.96); }
+  .mode-pill.active {
+    background: linear-gradient(135deg, rgba(10, 132, 255, 0.26), rgba(100, 210, 255, 0.14)) !important;
+    color: #7dd3fc !important;
+    border-color: rgba(100, 210, 255, 0.65) !important;
+    box-shadow: 0 4px 14px -2px rgba(10, 132, 255, 0.35), inset 0 1px 0 rgba(255,255,255,0.2);
+  }
+
+  details > summary {
+    cursor: pointer;
+    list-style: none;
+    transition: background-color 0.2s ease;
+    border-radius: 14px;
+  }
+  details > summary::-webkit-details-marker { display: none; }
+  details[open] > summary {
+    border-bottom: 1px solid var(--border-hairline);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 10px;
+    border-radius: 9999px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.12);
+  }
+
+  .katex { font-size: 1.05em; }
+  .num-card { font-variant-numeric: tabular-nums; }
+  input[type=number]::-webkit-outer-spin-button,
+  input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  input[type=number] { -moz-appearance: textfield; }
+  .katex-block { overflow-x: auto; overflow-y: hidden; }
+  .katex-block .katex-display { text-align: left; margin: .35em 0; }
+
+  .apple-sim-panel {
+    background: linear-gradient(165deg, rgba(20, 24, 38, 0.85), rgba(12, 15, 26, 0.92));
+    border: 1px solid rgba(100, 210, 255, 0.22);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 18px 40px -12px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  }
+  html.theme-light .apple-sim-panel {
+    background: linear-gradient(165deg, rgba(255, 255, 255, 0.95), rgba(240, 246, 255, 0.92));
+    border-color: rgba(10, 132, 255, 0.25);
+    box-shadow: 0 14px 32px -10px rgba(10, 132, 255, 0.12);
+  }
+
+  .apple-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 7px 14px;
+    transition: all 0.24s var(--spring);
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(255, 255, 255, 0.07);
+    color: var(--text-primary);
+  }
+  .apple-btn:hover {
+    background: rgba(255, 255, 255, 0.13);
+    transform: translateY(-1px);
+  }
+  .apple-btn:active { transform: scale(0.97); }
+  .apple-btn-primary {
+    background: linear-gradient(180deg, #1e90ff 0%, #0071e3 100%);
+    color: #ffffff !important;
+    border-color: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 4px 14px rgba(0, 113, 227, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  }
+  .apple-btn-primary:hover {
+    background: linear-gradient(180deg, #339dff 0%, #0a7ff0 100%);
+    box-shadow: 0 6px 18px rgba(0, 113, 227, 0.55);
+  }
+
+  input[type=range].apple-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 6px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #ff453a, #ff9f0a, #30d158, #0a84ff, #bf5af2);
+    outline: none;
+  }
+  input[type=range].apple-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 2px solid #0a84ff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+    cursor: grab;
+    transition: transform 0.18s var(--spring);
+  }
+  input[type=range].apple-slider::-webkit-slider-thumb:active {
+    transform: scale(1.15);
+    cursor: grabbing;
+  }
+
+  .quiz-self-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px dashed var(--border-hairline);
+    font-size: 11px;
+  }
+
+  #cmdModal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: rgba(0, 0, 0, 0.58);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 10vh;
+  }
+  #cmdModal.open {
+    display: flex;
+    animation: appleStageIn 0.22s var(--spring) forwards;
+  }
+
+  .toc-strip { display: none; gap: 6px; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 2px 0 6px; margin-bottom: 2px; }
+  .toc-strip::-webkit-scrollbar { display: none; }
+  .toc-chip { flex-shrink: 0; font-size: 10px; line-height: 1; padding: 7px 11px; border-radius: 9999px; border: 1px solid var(--border-hairline); background: var(--bg-card); color: var(--text-secondary); font-weight: 600; white-space: nowrap; cursor: pointer; transition: all 0.2s var(--spring); }
+  #backTop { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom)); z-index: 70; width: 44px; height: 44px; border-radius: 9999px; border: 1px solid rgba(100, 210, 255, 0.35); background: var(--bg-glass-nav); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); color: #7dd3fc; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transform: translateY(8px); transition: opacity .25s, transform .25s var(--spring); box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+  #backTop.show { opacity: 1; pointer-events: auto; transform: none; }
+  #scrollProg { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: linear-gradient(90deg, #0a84ff, #64d2ff, #30d158); z-index: 80; pointer-events: none; }
+
+  @media (max-width:1023.98px){
+    header { padding-top: env(safe-area-inset-top); }
+    #mainNav { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+    #mainNav::-webkit-scrollbar { display: none; }
+    #mainNav button { flex-shrink: 0; padding-top: 9px; padding-bottom: 9px; }
+    select, input[type="number"], input[type="text"] { font-size: 16px !important; }
+    .mode-pill { padding: 8px 14px; }
+    .toc-chip { padding: 10px 12px; }
+    .katex { font-size: 1em; }
+    .toc-strip { display: flex; }
+  }
+  @media (prefers-reduced-motion:reduce){
+    .tab-panel.active, .engine-module.active { animation: none !important; }
+    .blur-answer, #backTop { transition: none !important; }
+  }
 </style>
 </head>
 <body class="text-slate-200 min-h-screen">
@@ -61,14 +387,29 @@
   <div class="max-w-7xl mx-auto px-4 py-3">
     <div class="flex flex-wrap items-center justify-between gap-2">
       <div>
-        <h1 class="text-base sm:text-lg font-bold text-white leading-tight">HKDSE · Topic VI Master Studio</h1>
+        <div class="flex items-center gap-2.5"><div class="hidden sm:flex items-center gap-1.5 mr-1"><span class="w-2.5 h-2.5 rounded-full bg-[#ff5f56] inline-block shadow-sm"></span><span class="w-2.5 h-2.5 rounded-full bg-[#ffbd2e] inline-block shadow-sm"></span><span class="w-2.5 h-2.5 rounded-full bg-[#27c93f] inline-block shadow-sm"></span></div><h1 class="text-base sm:text-lg font-bold text-white leading-tight tracking-tight">HKDSE · Topic VI Master Studio — Microscopic World II</h1><span class="chip bg-sky-500/15 text-sky-300 border border-sky-400/30 text-[10px]">Interactive Studio Pro</span></div>
         <p class="text-[11px] text-slate-400 font-mono">Microscopic World II · Bond &amp; Molecule Polarity, Intermolecular Forces, Molecular Crystals &amp; Shapes</p>
       </div>
-      <div class="flex gap-2 text-[10px] font-mono">
+      <div class="flex flex-wrap items-center gap-2 text-[10px] font-mono">
         <span class="chip bg-sky-950 text-sky-400 border border-sky-800">Strands (a)–(e)</span>
         <span class="chip bg-purple-950 text-purple-400 border border-purple-800">Paper 1A + 1B</span>
         <span class="chip bg-emerald-950 text-emerald-400 border border-emerald-800">C&amp;A Guide 2018</span>
-        <span class="chip bg-amber-950 text-amber-400 border border-amber-800">NTF 18/08/2018 scope</span>
+        <div class="flex items-center gap-2 ml-1 pl-2 border-l border-slate-700/70">
+          <button type="button" onclick="openCmdModal()" class="apple-btn !py-1 !px-2.5 text-[11px]" title="Quick Concept &amp; Past-Paper Search (⌘K)">
+            <span>🔍 Search</span>
+            <kbd class="px-1.5 py-0.5 text-[9px] rounded bg-slate-800 text-slate-300 border border-slate-700">⌘K</kbd>
+          </button>
+          <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-900/90 border border-slate-700/80" title="Concept Mastery Progress across Quiz &amp; Syllabus Checkpoints">
+            <svg class="w-4 h-4 -rotate-90" viewBox="0 0 36 36">
+              <circle cx="18" cy="18" r="15" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="3.8"></circle>
+              <circle id="masteryRingCircle" cx="18" cy="18" r="15" fill="none" stroke="#30d158" stroke-width="3.8" stroke-dasharray="94.2" stroke-dashoffset="94.2" stroke-linecap="round"></circle>
+            </svg>
+            <span id="masteryPctText" class="text-[11px] font-semibold text-emerald-400 num-card">0% Mastered</span>
+          </div>
+          <button type="button" id="themeToggleBtn" onclick="toggleAppleTheme()" class="apple-btn !py-1 !px-2.5 text-[11px]" title="Switch between Apple Pro Dark and Cupertino Daylight mode">
+            <span id="themeToggleIcon">☀️ Daylight</span>
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -274,6 +615,73 @@ shapes = octet central atoms + BF₃/PCl₅/SF₆ (no lone pair on central) · N
     </div>
   </div>
 </section>
+
+    <!-- ══ INTERACTIVE SYLLABUS AUDIT & CONCEPT READINESS MATRIX (EDB C&A Guide 2018 · Topic VI Strands a–e) ══ -->
+    <div class="mt-6 apple-sim-panel space-y-4" id="syllabus-audit-panel">
+      <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800/80 pb-3">
+        <div>
+          <span class="text-[10px] font-mono uppercase tracking-widest text-sky-400 font-bold">Interactive Syllabus Check-Off · EDB C&amp;A Guide (Topic VI Strands a–e)</span>
+          <h3 class="text-base font-bold text-white mt-0.5">HKDSE Topic VI Competency Checklist &amp; Direct Simulator Links</h3>
+          <p class="text-xs text-slate-400">Tick each official EDB learning outcome across Strands (a)–(e) and Part II depth caps (`NTF-2018 II-B VI (a)/(b)/(e)`) as you master it.</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <span id="sylAuditCount" class="chip bg-emerald-950 text-emerald-300 border border-emerald-700 font-mono">0 / 12 Outcomes Checked</span>
+          <button type="button" class="apple-btn text-xs" onclick="checkAllSyllabusOutcomes()">Check All</button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs" id="sylAuditGrid">
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">VI(a) · Electronegativity &amp; Bond Polarity</b>Define electronegativity ("attract shared pair in a covalent bond"); periodic trend ($\uparrow$ across period, $\downarrow$ down group); $\delta+ / \delta-$. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-polar');selectPolar(0)">Inspect →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">VI(a) · Molecule Polarity &amp; Jet Deflection Lab</b>Symmetric cancellation ($\text{CO}_2, \text{CS}_2, \text{BF}_3, \text{CCl}_4, \text{SF}_6$) vs polar ($\text{H}_2\text{O}, \text{NH}_3, \text{CHCl}_3$); liquid-jet deflection test. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-polar');switchPolarMode('map')">Jet Sim →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">VI(b) · van der Waals’ Forces &amp; Molecular Size</b>Present in ALL molecular substances; larger molecular size $\rightarrow$ stronger vdW (never argue by "molecular mass", CP 2018/2022/2023). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-forces');selectForces(1)">Inspect →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">VI(b) · Hydrogen Bonding ($\text{HF}, \text{H}_2\text{O}, \text{NH}_3$)</b>$\delta+\text{ H}$ attached to highly electronegative $\text{F, O, N}$ attracted to a lone pair on $\text{F, O, N}$ of a neighbour; draw dotted line. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-forces');switchForcesMode('map')">H-Bond Sim →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">VI(b) · H-Bonding Effects: bp, Viscosity &amp; Solubility</b>Compare propane / methoxymethane / ethanol; multi-$-\text{OH}$ viscosity (CP 2025 Q7); explicitly rank H-bond &gt; vdW (CP 2022/2024). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-forces');switchForcesMode('map')">Viscosity Sim →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">VI(c) · Open Tetrahedral Structure of Ice (CP 2013 Q1)</b>Directional H-bonds hold $\text{H}_2\text{O}$ in a tetrahedral open structure (lower density); collapses on melting so molecules pack closer. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-crystal');switchCrystalMode('map')">Crystal Sim →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">VI(c) · Buckminsterfullerene $\text{C}_{60}$ &amp; $\text{S}_8$ (CP 2014/2024)</b>Discrete $\text{C}_{60}$ spheres &amp; $\text{S}_8$ rings held by weak vdW between molecules; low mp, soft, non-conductor, soluble in organic solvents. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-crystal');switchCrystalMode('map')">Crystal Sim →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">VI(d) · Non-Octet Molecules ($\text{BF}_3, \text{PCl}_5, \text{SF}_6$)</b>Draw electron diagrams showing 6 e⁻ on B, 10 e⁻ on P, 12 e⁻ on S + all lone pairs on terminal F/Cl atoms (CP 2016). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-shape');switchShapeMode('map')">3D Studio →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">VI(d) · $\text{BF}_3 + \text{NH}_3 \to \text{F}_3\text{B}\leftarrow\text{NH}_3$ Adduct</b>Dative covalent bond (NOT hydrogen bond, CP 2013 Q2!): B accepts N’s lone pair to attain the neon octet. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-crystal');selectCrystal(7)">Inspect →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">VI(e) · 5 Octet Shapes ($\text{CO}_2, \text{CH}_4, \text{NH}_3, \text{H}_2\text{O}$)</b>Predict &amp; draw 3D wedge-and-dash shapes: linear, tetrahedral, trigonal pyramidal, bent (no bond angles required, NTF VI(e)). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-shape');switchShapeMode('map')">3D Studio →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">VI(e) · 3 Non-Octet Shapes ($\text{BF}_3, \text{PCl}_5, \text{SF}_6$)</b>Trigonal planar ($\text{BF}_3$), trigonal bipyramidal ($\text{PCl}_5$), octahedral ($\text{SF}_6$); 0 lone pairs on central atom. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-shape');switchShapeMode('map')">3D Studio →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">VI(Synthesis) · Structure ↔ Force ↔ Property Writing</b>Write full-mark explanations for boiling points, ice density, and polarity without mixing covalent bonds and intermolecular forces. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-solver')">Grader →</button></span>
+        </label>
+      </div>
+    </div>
+
 <!-- ═══════════ TAB 2 · ENGINE A · POLARITY OF BOND & MOLECULE ═══════════ -->
 <section id="tab-polar" class="tab-panel space-y-6">
   <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-sm">
@@ -419,6 +827,40 @@ shapes = octet central atoms + BF₃/PCl₅/SF₆ (no lone pair on central) · N
             <tr><td class="p-2 font-mono">Cl₂ / H₂</td><td class="p-2">no (same atoms)</td><td class="p-2">—</td><td class="p-2 font-semibold text-rose-300">non-polar</td></tr>
           </tbody></table></div>
         </div>
+        <!-- ══ INTERACTIVE SIMULATOR A1: LIQUID-JET ELECTROSTATIC DEFLECTION & SYMMETRY CANCELLATION STUDIO (EDB Activity · CP 2016 · 2022 Q4 · 2024 Q7 · 2025 Q7) ══ -->
+        <div class="mt-6 apple-sim-panel space-y-5">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+            <div>
+              <span class="text-[10px] font-mono text-sky-400 uppercase font-bold">Interactive Simulator · Strand (a) Concept Check (EDB Suggested Activity · CP 2022 Q4 · CP 2024 Q7 · CP 2025 Q7)</span>
+              <h4 class="text-sm font-bold text-white mt-0.5">Burette Liquid-Jet Deflection &amp; Bond-Polarity Vector Studio</h4>
+              <p class="text-[11px] text-slate-400">Select a molecule/liquid below and bring a charged rod near the stream to see whether the jet deflects and inspect the exact HKEAA phrasing for bond-polarity cancellation.</p>
+            </div>
+            <select id="polarMolSel" onchange="updatePolarSim()" class="bg-slate-900 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-white font-medium">
+              <option value="H2O" selected>1. Water, H₂O(l) (Bent · 2 lone pairs on O)</option>
+              <option value="CHCl3">2. Trichloromethane, CHCl₃(l) / CH₂Cl₂(l) (Tetrahedral, asymmetric · CP 2024 Q7)</option>
+              <option value="NF3">3. Nitrogen trifluoride, NF₃ (Trigonal pyramidal · CP 2025 Q7)</option>
+              <option value="CCl4">4. Tetrachloromethane, CCl₄(l) (Tetrahedral, symmetric)</option>
+              <option value="CS2">5. Carbon disulphide, CS₂(l) / CO₂(g) (Linear S=C=S · CP 2016)</option>
+              <option value="BF3">6. Boron trifluoride, BF₃ (Trigonal planar · CP 2013 Q2 / CP 2025 Q7)</option>
+              <option value="SF6">7. Sulphur hexafluoride, SF₆ (Octahedral · CP 2022 Q4)</option>
+            </select>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 items-center text-xs">
+            <div class="flex flex-col items-center justify-center p-4 rounded-2xl bg-slate-950 border border-slate-800 min-h-[180px]">
+              <svg id="jetSvg" width="210" height="150" viewBox="0 0 210 150" role="img" aria-label="Burette liquid stream near charged rod"></svg>
+              <span id="jetBadge" class="chip bg-emerald-950 text-emerald-300 border border-emerald-700 mt-1 font-mono">Stream DEFLECTED Towards Rod!</span>
+            </div>
+
+            <div class="lg:col-span-2 p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2.5">
+              <div id="polarSimTitle" class="font-bold text-white text-sm">Water, H₂O — Polar Molecule (Bent Shape)</div>
+              <p id="polarSimBonds" class="text-slate-300 leading-relaxed"></p>
+              <p id="polarSimSym" class="text-emerald-300 leading-relaxed"></p>
+              <p id="polarSimTrap" class="text-rose-300 leading-relaxed"></p>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -604,6 +1046,25 @@ shapes = octet central atoms + BF₃/PCl₅/SF₆ (no lone pair on central) · N
             <tr><td class="p-2 font-mono">C₆₀ ··· solvent</td><td class="p-2">yes</td><td class="p-2 font-semibold text-rose-300">no</td><td class="p-2">soluble in some organic solvents (Engine C)</td></tr>
           </tbody></table></div>
         </div>
+        <!-- ══ INTERACTIVE SIMULATOR B1: HYDROGEN-BONDING DIAGRAM & MULTI-OH VISCOSITY BENCH (CP 2012 · 2014 Q2 · 2022 Q4 · 2024 Q7 · 2025 Q7) ══ -->
+        <div class="mt-6 apple-sim-panel space-y-5">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+            <div>
+              <span class="text-[10px] font-mono text-emerald-400 uppercase font-bold">Interactive Simulator · Strand (b) Concept Check (CP 2012 · CP 2022 Q4 · CP 2024 Q7 · CP 2025 Q7)</span>
+              <h4 class="text-sm font-bold text-white mt-0.5">Intermolecular Force Comparison Bench: Boiling Point, Viscosity &amp; Water Solubility</h4>
+              <p class="text-[11px] text-slate-400">Select an exam comparison pair below to inspect the exact 3-step HKEAA argument (1. Identify forces in each, 2. Compare relative strength or extent, 3. Link to energy/viscosity/solubility).</p>
+            </div>
+            <select id="imfPairSel" onchange="updateImfSim()" class="bg-slate-900 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-white font-medium">
+              <option value="alcohols_visc" selected>1. Viscosity: propan-1-ol vs ethane-1,2-diol vs propane-1,2,3-triol (CP 2025 Q7)</option>
+              <option value="bf3_sf6_h2o">2. Boiling point order: BF₃ &lt; SF₆ &lt; H₂O (CP 2022 Q4)</option>
+              <option value="ch2cl2_etoh">3. Boiling point: CH₂Cl₂ vs CH₃CH₂OH (CP 2024 Q7)</option>
+              <option value="nh3_ph3_ch4">4. Boiling point: NH₃ vs PH₃ vs CH₄ (CP 2018 Q3)</option>
+              <option value="hf_diagram">5. Drawing Hydrogen Bonding in HF / H₂O / NH₃ (CP 2012 / CP 2017)</option>
+            </select>
+          </div>
+          <div id="imfSimOut" class="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2 text-xs text-slate-300 leading-relaxed"></div>
+        </div>
+
       </div>
     </div>
 
@@ -786,6 +1247,24 @@ shapes = octet central atoms + BF₃/PCl₅/SF₆ (no lone pair on central) · N
           </svg>
           <p class="text-[11px] text-slate-400 mt-2">Reading rule: a plateau’s <b>height</b> = relative strength of the intermolecular forces (compare substances on the same axis); its <b>width</b> = how much energy goes into separating molecules at constant temperature.</p>
         </div>
+        <!-- ══ INTERACTIVE SIMULATOR C1: MOLECULAR CRYSTALS (ICE, C60, S8) VS GIANT COVALENT (CP 2013 Q1 · 2014 Q1 · 2023 Q13 · 2024 Q13) ══ -->
+        <div class="mt-6 apple-sim-panel space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+            <div>
+              <span class="text-[10px] font-mono text-purple-400 uppercase font-bold">Interactive Simulator · Strand (c) Concept Check (CP 2013 Q1 · CP 2014 Q1 · CP 2023 Q13 · CP 2024 Q13)</span>
+              <h4 class="text-sm font-bold text-white mt-0.5">Crystal Structure &amp; Phase-Change Explorer: Ice · $\text{C}_{60}$ · $\text{S}_8$ · $\text{P}_4\text{O}_{10}$ vs. $\text{SiO}_2$</h4>
+              <p class="text-[11px] text-slate-400">Click any crystal below to see its lattice unit, what holds the lattice together, and why candidates lost marks in 2013–2024.</p>
+            </div>
+            <div class="flex flex-wrap gap-1.5 text-xs">
+              <button type="button" onclick="showCrystalSim(0)" class="crys-btn apple-btn apple-btn-primary !py-1.5 !px-3">❄️ Ice vs. Liquid Water (CP 2013 Q1)</button>
+              <button type="button" onclick="showCrystalSim(1)" class="crys-btn apple-btn !py-1.5 !px-3">⚽ Buckminsterfullerene C₆₀ (CP 2014 Q1)</button>
+              <button type="button" onclick="showCrystalSim(2)" class="crys-btn apple-btn !py-1.5 !px-3">🟡 Sulphur S₈ vs. Cl₂ (CP 2024 Q13)</button>
+              <button type="button" onclick="showCrystalSim(3)" class="crys-btn apple-btn !py-1.5 !px-3">🪨 SiO₂ vs. P₄O₁₀ &amp; SO₂ (CP 2023 Q13)</button>
+            </div>
+          </div>
+          <div id="crystalSimOut" class="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2 text-xs text-slate-300 leading-relaxed"></div>
+        </div>
+
       </div>
     </div>
 
@@ -953,6 +1432,34 @@ shapes = octet central atoms + BF₃/PCl₅/SF₆ (no lone pair on central) · N
           </tbody></table></div>
           <p class="text-[10px] text-slate-500 mt-2">CHCl₃ is tetrahedral-shaped but polar (unlike corners). Any other lone-pair combination is outside the examined set — the studio does not teach it and neither should your revision.</p>
         </div>
+        <!-- ══ INTERACTIVE SIMULATOR D1: 3D WEDGE-AND-DASH MOLECULAR SHAPE & ELECTRON DIAGRAM STUDIO (CP 2013 Q2 · CP 2016 · CP 2022 Q4) ══ -->
+        <div class="mt-6 apple-sim-panel space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+            <div>
+              <span class="text-[10px] font-mono text-amber-400 uppercase font-bold">Interactive Simulator · Strand (d)+(e) Concept Check (CP 2013 Q2 · CP 2016 · CP 2022 Q4)</span>
+              <h4 class="text-sm font-bold text-white mt-0.5">Interactive 3D Wedge-and-Dash Shape &amp; Central-Atom Pair Inspector</h4>
+              <p class="text-[11px] text-slate-400">Select any of the 8 syllabus molecules below to inspect its <b>3D Wedge-and-Dash Diagram</b>, <b>Bonding Pair / Lone Pair Count</b>, and <b>Molecular Polarity Verdict</b>.</p>
+            </div>
+            <select id="shapeMolSel" onchange="updateShapeSim()" class="bg-slate-900 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-white font-medium">
+              <option value="CS2" selected>1. CS₂ / CO₂ — Linear (2 bp, 0 lp · CP 2016)</option>
+              <option value="BF3">2. BF₃ — Trigonal planar (3 bp, 0 lp · Non-octet 6 e⁻ · CP 2013 Q2)</option>
+              <option value="CH2Br2">3. CH₄ / CCl₄ / CH₂Br₂ — Tetrahedral (4 bp, 0 lp · CP 2016)</option>
+              <option value="NH3">4. NH₃ / NF₃ — Trigonal pyramidal (3 bp, 1 lp · CP 2013 Q2)</option>
+              <option value="H2O">5. H₂O / H₂S — Bent / V-shaped (2 bp, 2 lp)</option>
+              <option value="PCl5">6. PCl₅ — Trigonal bipyramidal (5 bp, 0 lp · Non-octet 10 e⁻ · CP 2016)</option>
+              <option value="SF6">7. SF₆ — Octahedral (6 bp, 0 lp · Non-octet 12 e⁻ · CP 2022 Q4)</option>
+            </select>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 items-center text-xs">
+            <div class="flex flex-col items-center justify-center p-4 rounded-2xl bg-slate-950 border border-slate-800 min-h-[185px]">
+              <svg id="shape3dSvg" width="210" height="155" viewBox="0 0 210 155" role="img" aria-label="3D wedge-and-dash molecular shape"></svg>
+              <span id="shape3dBadge" class="chip bg-amber-950 text-amber-300 border border-amber-700 mt-1 font-mono">Linear · Non-polar</span>
+            </div>
+            <div id="shape3dDetails" class="lg:col-span-2 p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2 text-slate-300 leading-relaxed"></div>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -1056,6 +1563,45 @@ shapes = octet central atoms + BF₃/PCl₅/SF₆ (no lone pair on central) · N
         </div>
         <button class="w-full bg-amber-700 hover:bg-amber-600 text-white text-xs font-semibold py-1.5 px-2 rounded-md" onclick="solverDensity()">Check against water (1.00 g cm⁻³)</button>
         <div id="svDenOut" aria-live="polite" class="text-xs text-emerald-300 font-mono min-h-[20px] leading-relaxed"></div>
+      </div>
+    </div>
+
+    
+    <!-- ══ BENCH 5 · LIVE HKEAA MARK-SCHEME KEYWORD GRADER (TOPIC VI EDITION) ══ -->
+    <div class="mt-6 apple-sim-panel space-y-4">
+      <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+        <div>
+          <span class="text-[10px] font-mono text-sky-400 uppercase font-bold px-2 py-0.5 bg-sky-950 rounded border border-sky-800">Bench 5 · Interactive Examiner Grader</span>
+          <h3 class="text-base font-bold text-white mt-1">Practice Writing Full-Mark Topic VI Answers — Instant `[1M]` &amp; `[NOT ACCEPT]` Diagnostic</h3>
+          <p class="text-xs text-slate-400">Select a high-frequency Paper 1B question below and type your explanation. The engine checks your phrasing against official HKEAA mark-scheme rubrics and flags fatal errors.</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 text-xs">
+        <div class="lg:col-span-1 space-y-2.5">
+          <label for="graderQSelect" class="block text-slate-300 font-semibold">Select HKDSE Exam Prompt:</label>
+          <select id="graderQSelect" onchange="loadGraderPrompt()" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white">
+            <option value="bf3_nh3_polar">Q1 (3 marks · CP 2013 Q2 / 2025 Q7): Explain why BF₃ is a non-polar molecule whereas NF₃ (or NH₃) is a polar molecule.</option>
+            <option value="ice_density">Q2 (3 marks · CP 2013 Q1): Explain, in terms of structure and bonding, why ice has a lower density than liquid water.</option>
+            <option value="bp_order_2022">Q3 (3 marks · CP 2022 Q4): Arrange BF₃, SF₆ and H₂O in increasing order of boiling point and explain your answer.</option>
+            <option value="visc_alcohols">Q4 (2 marks · CP 2014 Q2 / 2025 Q7): Explain why propane-1,2,3-triol (glycerol) has a much higher viscosity (and water solubility) than propan-1-ol.</option>
+            <option value="c60_prop">Q5 (2 marks · CP 2014 Q1): Explain why buckminsterfullerene (C₆₀) has a much lower melting point than diamond and is soluble in toluene.</option>
+            <option value="dative_bf3">Q6 (2 marks · CP 2013 Q2): Explain how BF₃ reacts with NH₃ to form H₃N→BF₃, and state the shape around the B atom before and after the reaction.</option>
+          </select>
+          <div id="graderPromptBox" class="p-3 rounded-xl bg-slate-950 border border-slate-800 text-slate-200 leading-relaxed"></div>
+        </div>
+
+        <div class="lg:col-span-2 space-y-3">
+          <textarea id="graderInput" rows="4" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-sky-500" placeholder="Type your exam explanation here..."></textarea>
+          <div class="flex flex-wrap gap-2">
+            <button type="button" onclick="gradeStudentAnswer()" class="apple-btn apple-btn-primary">✨ Grade My Answer Against Mark Scheme</button>
+            <button type="button" onclick="fillModelGraderAnswer()" class="apple-btn">Show Model Full-Mark Answer</button>
+            <button type="button" onclick="document.getElementById('graderInput').value='';document.getElementById('graderResultBox').innerHTML='Type an answer and click Grade.';" class="apple-btn">Clear</button>
+          </div>
+          <div id="graderResultBox" class="p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-300 space-y-2 leading-relaxed">
+            Type an answer above and click <b>Grade My Answer Against Mark Scheme</b> to see your mark breakdown and keyword hits.
+          </div>
+        </div>
       </div>
     </div>
 
@@ -1599,5 +2145,402 @@ else { try{ MOBILE_UX.init(); }catch(e){} }
   }catch(e){}
 })();
 </script>
+
+<!-- ═══════════ APPLE COMMAND PALETTE (⌘K) MODAL ═══════════ -->
+<div id="cmdModal" onclick="if(event.target===this)closeCmdModal()">
+  <div class="w-full max-w-xl mx-4 bg-slate-900 border border-slate-700/80 rounded-2xl shadow-2xl overflow-hidden">
+    <div class="flex items-center gap-3 px-4 py-3 border-b border-slate-800">
+      <span class="text-sky-400 text-sm">🔍</span>
+      <input id="cmdSearchInput" type="text" oninput="filterCmdList()" placeholder="Search polarity, hydrogen bonding, ice, C60, 3D shapes (BF3, PCl5, SF6), or CP year..." class="w-full bg-transparent text-sm text-white placeholder-slate-400 focus:outline-none">
+      <button type="button" onclick="closeCmdModal()" class="text-xs text-slate-400 hover:text-white px-2 py-0.5 rounded bg-slate-800">ESC</button>
+    </div>
+    <div id="cmdResults" class="max-h-80 overflow-y-auto divide-y divide-slate-800/70 p-2 text-xs"></div>
+  </div>
+</div>
+
+<script>
+function toggleAppleTheme(){
+  const root = document.documentElement;
+  const isLight = root.classList.toggle('theme-light');
+  const icon = document.getElementById('themeToggleIcon');
+  if(icon) icon.textContent = isLight ? '🌙 Pro Dark' : '☀️ Daylight';
+  try { localStorage.setItem('hkdse_topic6_theme', isLight ? 'light' : 'dark'); } catch(e){}
+}
+
+const quizMasteryState = {};
+function injectQuizSelfCheckBars(){
+  ['polarQuiz','forcesQuiz','crystalQuiz','shapeQuiz'].forEach(qid => {
+    const container = document.getElementById(qid);
+    if(!container) return;
+    const headerDiv = container.previousElementSibling;
+    if(headerDiv && !headerDiv.querySelector('.hide-all-btn')){
+      const btnWrap = document.createElement('div');
+      btnWrap.className = 'flex items-center gap-2';
+      const revBtn = headerDiv.querySelector('button');
+      if(revBtn){
+        revBtn.parentNode.insertBefore(btnWrap, revBtn);
+        btnWrap.appendChild(revBtn);
+        const hideBtn = document.createElement('button');
+        hideBtn.type = 'button';
+        hideBtn.className = 'hide-all-btn text-[11px] font-semibold text-slate-300 border border-slate-700 px-3 py-1 rounded-full hover:bg-slate-800';
+        hideBtn.textContent = 'Reset Blanks';
+        hideBtn.onclick = () => container.querySelectorAll('.blur-answer').forEach(b => b.classList.remove('revealed'));
+        btnWrap.appendChild(hideBtn);
+      }
+    }
+    [...container.children].forEach((row, idx) => {
+      if(row.querySelector('.quiz-self-bar')) return;
+      const key = qid + '_' + idx;
+      const bar = document.createElement('div');
+      bar.className = 'quiz-self-bar';
+      bar.innerHTML = `<span class="text-[10px] font-mono text-slate-400">Tap blurred chips above to check each keyword, then log your recall:</span>
+        <div class="flex items-center gap-1.5">
+          <button type="button" class="apple-btn !py-0.5 !px-2 text-[10px]" onclick="markQuizRow('${key}', true, this)">✓ Got It</button>
+          <button type="button" class="apple-btn !py-0.5 !px-2 text-[10px]" onclick="markQuizRow('${key}', false, this)">↻ Review Again</button>
+        </div>`;
+      row.appendChild(bar);
+    });
+  });
+}
+function markQuizRow(key, mastered, btnEl){
+  quizMasteryState[key] = mastered;
+  const buttons = btnEl.parentElement.querySelectorAll('button');
+  buttons[0].className = mastered ? 'apple-btn !py-0.5 !px-2 text-[10px] !bg-emerald-600/30 !border-emerald-500 !text-emerald-300' : 'apple-btn !py-0.5 !px-2 text-[10px]';
+  buttons[1].className = !mastered ? 'apple-btn !py-0.5 !px-2 text-[10px] !bg-amber-600/30 !border-amber-500 !text-amber-300' : 'apple-btn !py-0.5 !px-2 text-[10px]';
+  updateMasteryRing();
+}
+function checkAllSyllabusOutcomes(){
+  document.querySelectorAll('.syl-chk').forEach(c => c.checked = true);
+  updateMasteryRing();
+}
+function updateMasteryRing(){
+  const sylChks = [...document.querySelectorAll('.syl-chk')];
+  const sylDone = sylChks.filter(c => c.checked).length;
+  const sylTotal = sylChks.length || 12;
+  const sylBadge = document.getElementById('sylAuditCount');
+  if(sylBadge) sylBadge.textContent = `${sylDone} / ${sylTotal} Outcomes Checked`;
+  const quizDone = Object.values(quizMasteryState).filter(Boolean).length;
+  const pct = Math.round(((sylDone + quizDone) / (sylTotal + 45)) * 100);
+  const circle = document.getElementById('masteryRingCircle');
+  const txt = document.getElementById('masteryPctText');
+  if(circle) circle.style.strokeDashoffset = String(94.2 - (94.2 * pct) / 100);
+  if(txt) txt.textContent = `${pct}% Mastered`;
+}
+
+/* 1. Polarity & Jet Deflection Sim */
+const POLAR_SIM_DATA = {
+  H2O: {
+    polar: true, title: 'Water, H₂O(l) — Polar Molecule (Bent / V-Shaped)',
+    bonds: '<b>1. Bond Polarity:</b> Each $\text{O–H}$ bond is polar because O is much more electronegative than H ($\text{O}^{\delta-}\text{–H}^{\delta+}$).',
+    sym: '<b>2. Shape &amp; Cancellation Verdict:</b> Because oxygen has <b>2 lone pairs</b>, the $\text{H}_2\text{O}$ molecule is <b>bent (V-shaped)</b>. The polarities of the two polar $\text{O–H}$ bonds are <b>not symmetrically arranged</b> and do not cancel out, so the molecule has a net dipole and <b>deflects towards a charged rod</b>!',
+    trap: '<b>💡 Jet Deflection Note:</b> Whether the rod is positively or negatively charged, the polar stream is <b>always attracted (deflected towards the rod)</b> because the molecules rotate to align their opposite partial charge towards the rod!'
+  },
+  CHCl3: {
+    polar: true, title: 'Trichloromethane (CHCl₃) / Dichloromethane (CH₂Cl₂ · CP 2024 Q7) — Polar Molecule',
+    bonds: '<b>1. Bond Polarity:</b> Each $\text{C–Cl}$ bond is polar (Cl is more electronegative than C, so Cl carries $\delta-$ and C carries $\delta+$).',
+    sym: '<b>2. Shape &amp; Cancellation Verdict:</b> Although the molecule is <b>tetrahedral</b>, the four bonds around C are <b>not identical</b> (3 $\text{C–Cl}$ and 1 $\text{C–H}$ in $\text{CHCl}_3$; 2 $\text{C–Cl}$ and 2 $\text{C–H}$ in $\text{CH}_2\text{Cl}_2$). Thus the bond polarities <b>do not cancel out</b> → <b>polar molecule</b>!',
+    trap: '<b>🚨 CP 2024 Q7 Trap:</b> Many candidates falsely assumed $\text{CH}_2\text{Cl}_2$ is non-polar by drawing it as a flat square with Cl atoms opposite each other — in a 3D tetrahedron, any two corners are at an angle and NEVER cancel!'
+  },
+  NF3: {
+    polar: true, title: 'Nitrogen trifluoride, NF₃ (CP 2025 Q7) — Polar Molecule (Trigonal Pyramidal)',
+    bonds: '<b>1. Bond Polarity:</b> Each $\text{N–F}$ bond is polar because F is more electronegative than N ($\text{N}^{\delta+}\text{–F}^{\delta-}$).',
+    sym: '<b>2. Shape &amp; Cancellation Verdict:</b> The central N atom has <b>1 lone pair</b> and 3 bonding pairs, giving a <b>trigonal pyramidal</b> shape. Because the three polar $\text{N–F}$ bonds are <b>not on the same plane (asymmetrical)</b>, their bond polarities do not cancel out.',
+    trap: '<b>🚨 CP 2025 Q7 Contrast:</b> Compare $\text{BF}_3$ (trigonal planar, 0 lone pairs on B → non-polar) with $\text{NF}_3$ (trigonal pyramidal, 1 lone pair on N → polar)!'
+  },
+  CCl4: {
+    polar: false, title: 'Tetrachloromethane, CCl₄(l) — Non-Polar Molecule (Symmetrical Tetrahedral)',
+    bonds: '<b>1. Bond Polarity:</b> Each of the four $\text{C–Cl}$ bonds is polar (Cl is more electronegative than C).',
+    sym: '<b>2. Shape &amp; Cancellation Verdict:</b> The molecule is <b>tetrahedral</b> and the four identical polar $\text{C–Cl}$ bonds are <b>symmetrically arranged</b> around the central C atom, so the <b>polarities of the four C–Cl bonds cancel out each other</b> → non-polar molecule (jet is NOT deflected).',
+    trap: '<b>🚨 CP 2022 Q4 / CP 2024 Q7 Wording Rule:</b> Always say "the <b>polarities</b> of the bonds cancel out" — never say "the bonds cancel out" ("Can a bond cancel another bond?", CP 2024 Q7)!'
+  },
+  CS2: {
+    polar: false, title: 'Carbon disulphide, CS₂(l) &amp; Carbon dioxide, CO₂(g) (CP 2016) — Non-Polar Molecules (Linear)',
+    bonds: '<b>1. Bond Polarity:</b> The $\text{C=S}$ (and $\text{C=O}$) double bonds are polar because S (and O) differ in electronegativity from C.',
+    sym: '<b>2. Shape &amp; Cancellation Verdict:</b> Both $\text{S=C=S}$ and $\text{O=C=O}$ have no lone pairs on C and are <b>linear</b>. The two identical polar bonds pull equally in opposite directions (<b>symmetrically arranged</b>), so their bond polarities cancel out.',
+    trap: '<b>🚨 CP 2016 Trap:</b> Candidates wrongly claimed "$\text{CO}_2$ is non-polar while $\text{CS}_2$ is polar" or drew $\text{CS}_2$ as bent — both are linear and non-polar!'
+  },
+  BF3: {
+    polar: false, title: 'Boron trifluoride, BF₃ — Non-Polar Molecule (Trigonal Planar · Non-Octet)',
+    bonds: '<b>1. Bond Polarity:</b> Each $\text{B–F}$ bond is strongly polar (F is much more electronegative than B).',
+    sym: '<b>2. MS Bank Verbatim Sentence:</b> "<b>$\text{BF}_3$ is a non-polar molecule. The three polar $\text{B–F}$ bonds are symmetrically arranged on the same plane</b>, so their bond polarities cancel out each other."',
+    trap: '<b>⚠️ Non-Octet Note:</b> Central B atom has only <b>6 outermost shell electrons</b> (3 bonding pairs, 0 lone pairs).'
+  },
+  SF6: {
+    polar: false, title: 'Sulphur hexafluoride, SF₆ (CP 2022 Q4) — Non-Polar Molecule (Octahedral · Non-Octet)',
+    bonds: '<b>1. Bond Polarity:</b> Each of the six $\text{S–F}$ bonds is polar.',
+    sym: '<b>2. CP 2022 Q4 Accepted Sentence:</b> $\text{SF}_6$ is <b>octahedral</b> (symmetrical), so "<b>the polarities of the S–F bonds in $\text{SF}_6$ cancel out</b>" → non-polar molecule.',
+    trap: '<b>🚨 CP 2022 Q4 Rejected Phrases:</b> Writing "the electronegativities of the F atoms cancelled out each other" or "the polar S–F bonds cancelled out each other" scored 0 marks!'
+  }
+};
+
+function updatePolarSim(){
+  const k = document.getElementById('polarMolSel').value;
+  const d = POLAR_SIM_DATA[k];
+  if(!d) return;
+  document.getElementById('polarSimTitle').textContent = d.title;
+  document.getElementById('polarSimBonds').innerHTML = d.bonds;
+  document.getElementById('polarSimSym').innerHTML = d.sym;
+  document.getElementById('polarSimTrap').innerHTML = d.trap;
+
+  const badge = document.getElementById('jetBadge');
+  const svg = document.getElementById('jetSvg');
+  if(d.polar){
+    badge.className = 'chip bg-emerald-950 text-emerald-300 border border-emerald-700 mt-1 font-mono';
+    badge.textContent = 'Polar → Stream DEFLECTED!';
+    svg.innerHTML = `
+      <!-- Burette tip -->
+      <rect x="85" y="6" width="14" height="24" fill="#475569" stroke="#94a3b8"/>
+      <polygon points="85,30 99,30 94,42 90,42" fill="#475569"/>
+      <!-- Deflected stream -->
+      <path d="M 92 42 Q 94 85, 132 138" fill="none" stroke="#38bdf8" stroke-width="4" stroke-linecap="round"/>
+      <!-- Charged rod -->
+      <rect x="142" y="62" width="52" height="14" rx="4" fill="#f43f5e" stroke="#fda4af"/>
+      <text x="168" y="72" fill="#ffffff" font-size="9" font-weight="bold" text-anchor="middle">− − − Rod</text>
+      <text x="54" y="105" fill="#38bdf8" font-size="10" font-weight="bold">Deflects!</text>
+    `;
+  } else {
+    badge.className = 'chip bg-slate-800 text-slate-300 border border-slate-700 mt-1 font-mono';
+    badge.textContent = 'Non-polar → NO Deflection';
+    svg.innerHTML = `
+      <rect x="85" y="6" width="14" height="24" fill="#475569" stroke="#94a3b8"/>
+      <polygon points="85,30 99,30 94,42 90,42" fill="#475569"/>
+      <!-- Straight stream -->
+      <line x1="92" y1="42" x2="92" y2="138" stroke="#94a3b8" stroke-width="4" stroke-linecap="round"/>
+      <rect x="142" y="62" width="52" height="14" rx="4" fill="#f43f5e" stroke="#fda4af"/>
+      <text x="168" y="72" fill="#ffffff" font-size="9" font-weight="bold" text-anchor="middle">− − − Rod</text>
+      <text x="45" y="105" fill="#94a3b8" font-size="10">Straight down</text>
+    `;
+  }
+  safeInitKaTeX();
+}
+
+/* 2. IMF Comparison Bench */
+const IMF_SIM_DATA = {
+  alcohols_visc: '<b>Viscosity &amp; Boiling Point of Alcohols: propan-1-ol &lt; ethane-1,2-diol &lt; propane-1,2,3-triol (CP 2025 Q7):</b><br>• <b>1. Identify the group count:</b> Propan-1-ol has 1 $-\text{OH}$ group per molecule, ethane-1,2-diol has 2, and propane-1,2,3-triol has 3.<br>• <b>2. CP 2025 Q7 Mandatory Link:</b> With more $-\text{OH}$ groups per molecule, each propane-1,2,3-triol molecule can form a <b>greater number of intermolecular hydrogen bonds</b> (more extensive hydrogen bonding) with neighbouring molecules.<br>• <b>3. Property Link:</b> Stronger intermolecular attraction makes it harder for molecules to slide past one another → <b>highest viscosity</b> (and highest boiling point).',
+  bf3_sf6_h2o: '<b>Boiling Point Order: $\text{BF}_3 &lt; \text{SF}_6 &lt; \text{H}_2\text{O}$ (CP 2022 Q4):</b><br>• <b>1. Compare $\text{H}_2\text{O}$ vs $\text{BF}_3 / \text{SF}_6$:</b> $\text{H}_2\text{O}$ molecules are held together by <b>intermolecular hydrogen bonds</b> (and van der Waals’ forces), whereas non-polar $\text{BF}_3$ and $\text{SF}_6$ molecules are held only by <b>van der Waals’ forces</b>.<br>• <b>2. CP 2022 Q4 Mandatory Clause:</b> Since <b>hydrogen bonds are stronger than van der Waals’ forces</b>, $\text{H}_2\text{O}$ has the highest boiling point.<br>• <b>3. Compare $\text{SF}_6$ vs $\text{BF}_3$:</b> $\text{SF}_6$ has a <b>larger molecular size</b> than $\text{BF}_3$ (never say "larger molecular mass"!), so the van der Waals’ forces between $\text{SF}_6$ molecules are stronger than those between $\text{BF}_3$ molecules.',
+  ch2cl2_etoh: '<b>Boiling Point: Dichloromethane ($\text{CH}_2\text{Cl}_2$, 40 °C) vs. Ethanol ($\text{CH}_3\text{CH}_2\text{OH}$, 78 °C) (CP 2024 Q7):</b><br>• Ethanol molecules have an $-\text{OH}$ group and form <b>intermolecular hydrogen bonds</b> (in addition to van der Waals’ forces), whereas polar $\text{CH}_2\text{Cl}_2$ molecules have no H bonded to F, O or N and are held only by <b>van der Waals’ forces</b>.<br>• <b>CP 2024 Q7 Reminder:</b> You MUST explicitly state that <b>the intermolecular hydrogen bonds in ethanol are stronger than the van der Waals’ forces in $\text{CH}_2\text{Cl}_2$</b>, so more heat energy is needed to separate ethanol molecules.',
+  nh3_ph3_ch4: '<b>Boiling Point Order: $\text{CH}_4 &lt; \text{PH}_3 &lt; \text{NH}_3$ (CP 2018 Q3):</b><br>• $\text{NH}_3$ has the highest boiling point because its molecules form <b>intermolecular hydrogen bonds</b>, which are <b>stronger than the van der Waals’ forces</b> between $\text{PH}_3$ or $\text{CH}_4$ molecules.<br>• Both $\text{PH}_3$ and $\text{CH}_4$ have only van der Waals’ forces between molecules; $\text{PH}_3$ has a <b>larger molecular size</b> (and is polar) compared with non-polar $\text{CH}_4$, so van der Waals’ forces between $\text{PH}_3$ molecules are stronger (never argue via "molecular mass", CP 2018 Q3!).',
+  hf_diagram: '<b>Drawing &amp; Explaining Hydrogen Bonding in HF / H₂O / NH₃ (CP 2012 · CP 2017):</b><br>• <b>Wording (CP 2012):</b> Fluorine is a <b>highly electronegative element</b>, so the $\text{H–F}$ covalent bond is very polar. The $\delta+\text{ H}$ atom of one $\text{HF}$ molecule is strongly attracted to a <b>lone pair of electrons on the F atom of a neighbouring $\text{HF}$ molecule</b>.<br>• <b>Diagram Checklist:</b> Draw at least 2 molecules; use a <b>dotted/dashed line (`---`)</b> for the intermolecular hydrogen bond between H and the lone pair on F/O/N; show all lone pairs on F/O/N; label "hydrogen bond" on the dotted line (never on the covalent bond inside the molecule, CP 2017!).'
+};
+function updateImfSim(){
+  const k = document.getElementById('imfPairSel').value;
+  const out = document.getElementById('imfSimOut');
+  if(out && IMF_SIM_DATA[k]){ out.innerHTML = IMF_SIM_DATA[k]; safeInitKaTeX(); }
+}
+
+/* 3. Crystal Sim */
+const CRYS_SIM_DATA = [
+  '<b>❄️ Ice vs. Liquid Water (CP 2013 Q1):</b><br>• <b>Structure of Ice:</b> In ice, each $\text{H}_2\text{O}$ molecule is tetrahedrally surrounded by 4 neighbours via <b>directional intermolecular hydrogen bonds</b>, forming a rigid <b>open cage-like structure</b> with large empty spaces.<br>• <b>Why Ice Has Lower Density than Water:</b> When ice melts into liquid water, the open structure <b>partially collapses</b> and the water molecules pack more closely together (smaller volume for the same mass → higher density).',
+  '<b>⚽ Buckminsterfullerene, $\text{C}_{60}$ (CP 2014 Q1):</b><br>• <b>Structure Type:</b> <b>Simple molecular structure</b> consisting of discrete spherical $\text{C}_{60}$ molecules held together by <b>weak van der Waals’ forces</b>.<br>• <b>Properties vs. Diamond/Graphite:</b> Low sublimation/melting point and soft (only weak van der Waals’ forces between $\text{C}_{60}$ molecules are overcome); non-conductor (delocalised electrons cannot jump between separate $\text{C}_{60}$ molecules); <b>soluble in non-polar organic solvents</b> (e.g. toluene) because $\text{C}_{60}$ molecules and solvent molecules have similar weak van der Waals’ forces (CP 2014 Q1).',
+  '<b>🟡 Sulphur ($\text{S}_8$) vs. Chlorine ($\text{Cl}_2$) at Room Conditions (CP 2024 Q13):</b><br>• <b>🚨 CP 2024 Q13 Warning:</b> Never write "Sulphur has a giant covalent structure"! Both sulphur and chlorine have <b>simple molecular structures</b>.<br>• <b>Full-Mark Explanation:</b> Sulphur exists as <b>$\text{S}_8$ crown-ring molecules</b>, whereas chlorine exists as $\text{Cl}_2$ molecules. Since an $\text{S}_8$ molecule has a much <b>larger molecular size</b> than a $\text{Cl}_2$ molecule, the <b>van der Waals’ forces between $\text{S}_8$ molecules are much stronger</b> than those between $\text{Cl}_2$ molecules, so $\text{S}_8$ is a solid while $\text{Cl}_2$ is a gas at r.t.p.',
+  '<b>🪨 Period 3 &amp; Group IV Oxides: $\text{SiO}_2$ vs. $\text{P}_4\text{O}_{10}$ and $\text{SO}_2$ (CP 2021 Q3 · CP 2023 Q13):</b><br>• <b>$\text{SiO}_2$ (Quartz):</b> <b>Giant covalent structure</b> — melting requires breaking <b>millions of strong covalent bonds between Si and O atoms</b> (never write "$\text{SiO}_2$ molecules", CP 2021 Q3 &amp; CP 2023 Q13!).<br>• <b>$\text{P}_4\text{O}_{10}$ &amp; $\text{SO}_2$:</b> Both have <b>simple molecular structures</b> held by <b>weak van der Waals’ forces between molecules</b>. $\text{P}_4\text{O}_{10}$ has a <b>larger molecular size</b> than $\text{SO}_2$, so van der Waals’ forces between $\text{P}_4\text{O}_{10}$ molecules are stronger than those between $\text{SO}_2$ molecules.'
+];
+function showCrystalSim(i){
+  document.querySelectorAll('.crys-btn').forEach((b, idx) => {
+    b.className = idx === i ? 'crys-btn apple-btn apple-btn-primary !py-1.5 !px-3' : 'crys-btn apple-btn !py-1.5 !px-3';
+  });
+  const out = document.getElementById('crystalSimOut');
+  if(out && CRYS_SIM_DATA[i]){ out.innerHTML = CRYS_SIM_DATA[i]; safeInitKaTeX(); }
+}
+
+/* 4. 3D Wedge-and-Dash Shape Studio */
+const SHAPE_SIM_DATA = {
+  CS2: {
+    badge: 'Linear · Non-polar',
+    svg: `<line x1="35" y1="78" x2="90" y2="78" stroke="#e2e8f0" stroke-width="2.5"/><line x1="35" y1="84" x2="90" y2="84" stroke="#e2e8f0" stroke-width="2.5"/><line x1="120" y1="78" x2="175" y2="78" stroke="#e2e8f0" stroke-width="2.5"/><line x1="120" y1="84" x2="175" y2="84" stroke="#e2e8f0" stroke-width="2.5"/><text x="105" y="86" fill="#38bdf8" font-size="16" font-weight="bold" text-anchor="middle">C</text><text x="22" y="86" fill="#fbbf24" font-size="16" font-weight="bold" text-anchor="middle">S</text><text x="188" y="86" fill="#fbbf24" font-size="16" font-weight="bold" text-anchor="middle">S</text>`,
+    text: '<b>Linear ($\text{CS}_2$ and $\text{CO}_2$ · CP 2016):</b><br>• <b>Central Atom Count:</b> C forms 2 double bonds (2 bonded neighbours) and has <b>0 lone pairs</b> → <b>linear</b>.<br>• <b>CP 2016 Warning:</b> Never draw $\text{CS}_2$ as bent, and never hand in a dot-and-cross diagram when a 3D shape is asked!'
+  },
+  BF3: {
+    badge: 'Trigonal Planar · Non-polar (Non-octet: 6 e⁻)',
+    svg: `<line x1="105" y1="72" x2="105" y2="26" stroke="#e2e8f0" stroke-width="2.5"/><line x1="95" y1="88" x2="50" y2="122" stroke="#e2e8f0" stroke-width="2.5"/><line x1="115" y1="88" x2="160" y2="122" stroke="#e2e8f0" stroke-width="2.5"/><text x="105" y="88" fill="#38bdf8" font-size="16" font-weight="bold" text-anchor="middle">B</text><text x="105" y="20" fill="#34d399" font-size="15" font-weight="bold" text-anchor="middle">F</text><text x="38" y="132" fill="#34d399" font-size="15" font-weight="bold" text-anchor="middle">F</text><text x="172" y="132" fill="#34d399" font-size="15" font-weight="bold" text-anchor="middle">F</text>`,
+    text: '<b>Trigonal Planar ($\text{BF}_3$ · CP 2013 Q2 / CP 2022 Q4 / CP 2025 Q7):</b><br>• <b>Central Atom Count:</b> B has 3 bonding pairs and <b>0 lone pairs</b> (incomplete octet of 6 outermost electrons) → flat <b>trigonal planar</b>.<br>• <b>Polarity:</b> Non-polar because the 3 polar $\text{B–F}$ bonds are symmetrically arranged on the same plane.'
+  },
+  CH2Br2: {
+    badge: 'Tetrahedral · 3D Wedge & Dash',
+    svg: `<line x1="105" y1="68" x2="105" y2="24" stroke="#e2e8f0" stroke-width="2.5"/><line x1="94" y1="82" x2="46" y2="112" stroke="#e2e8f0" stroke-width="2.5"/><polygon points="114,84 156,122 164,110" fill="#38bdf8"/><line x1="116" y1="78" x2="166" y2="92" stroke="#94a3b8" stroke-width="2.5" stroke-dasharray="3 3"/><text x="105" y="84" fill="#f8fafc" font-size="16" font-weight="bold" text-anchor="middle">C</text><text x="105" y="18" fill="#cbd5e1" font-size="14" font-weight="bold" text-anchor="middle">H</text><text x="34" y="120" fill="#cbd5e1" font-size="14" font-weight="bold" text-anchor="middle">H</text><text x="172" y="128" fill="#fb923c" font-size="14" font-weight="bold" text-anchor="middle">Br</text><text x="180" y="96" fill="#fb923c" font-size="14" font-weight="bold" text-anchor="middle">Br</text>`,
+    text: '<b>Tetrahedral ($\text{CH}_4, \text{CCl}_4, \text{CHCl}_3, \text{CH}_2\text{Br}_2$ · CP 2016 / CP 2024 Q7):</b><br>• <b>3D Drawing Rule:</b> Draw 2 bonds as solid lines in the plane of the paper, <b>1 solid wedge</b> (pointing towards you), and <b>1 dashed wedge/line</b> (pointing away). Never draw a flat $90^\circ$ cross!'
+  },
+  NH3: {
+    badge: 'Trigonal Pyramidal · Polar (1 Lone Pair)',
+    svg: `<ellipse cx="105" cy="36" rx="12" ry="18" fill="rgba(56,189,248,0.18)" stroke="#38bdf8" stroke-dasharray="2 2"/><circle cx="100" cy="34" r="2.2" fill="#38bdf8"/><circle cx="110" cy="34" r="2.2" fill="#38bdf8"/><line x1="94" y1="78" x2="48" y2="115" stroke="#e2e8f0" stroke-width="2.5"/><polygon points="105,82 100,128 112,128" fill="#38bdf8"/><line x1="115" y1="76" x2="164" y2="108" stroke="#94a3b8" stroke-width="2.5" stroke-dasharray="3 3"/><text x="105" y="76" fill="#a855f7" font-size="16" font-weight="bold" text-anchor="middle">N</text><text x="36" y="124" fill="#cbd5e1" font-size="14" font-weight="bold" text-anchor="middle">H</text><text x="106" y="142" fill="#cbd5e1" font-size="14" font-weight="bold" text-anchor="middle">H</text><text x="176" y="116" fill="#cbd5e1" font-size="14" font-weight="bold" text-anchor="middle">H</text>`,
+    text: '<b>Trigonal Pyramidal ($\text{NH}_3, \text{NF}_3, \text{PCl}_3$ · CP 2013 Q2 / CP 2025 Q7):</b><br>• <b>Central Atom Count:</b> N has 3 bonding pairs and <b>1 lone pair</b> (CP 2013 Q2 penalized drawing 2 lone pairs on N!).<br>• <b>Polarity:</b> Polar because the 3 polar $\text{N–H}$ (or $\text{N–F}$) bonds are <b>not on the same plane</b>.'
+  },
+  H2O: {
+    badge: 'Bent / V-Shaped · Polar (2 Lone Pairs)',
+    svg: `<ellipse cx="88" cy="40" rx="10" ry="15" fill="rgba(56,189,248,0.18)" stroke="#38bdf8" stroke-dasharray="2 2"/><ellipse cx="122" cy="40" rx="10" ry="15" fill="rgba(56,189,248,0.18)" stroke="#38bdf8" stroke-dasharray="2 2"/><line x1="94" y1="78" x2="52" y2="118" stroke="#e2e8f0" stroke-width="2.5"/><line x1="116" y1="78" x2="158" y2="118" stroke="#e2e8f0" stroke-width="2.5"/><text x="105" y="78" fill="#ef4444" font-size="16" font-weight="bold" text-anchor="middle">O</text><text x="40" y="128" fill="#cbd5e1" font-size="14" font-weight="bold" text-anchor="middle">H</text><text x="170" y="128" fill="#cbd5e1" font-size="14" font-weight="bold" text-anchor="middle">H</text>`,
+    text: '<b>Bent / V-Shaped ($\text{H}_2\text{O}, \text{H}_2\text{S}, \text{Cl}_2\text{O}$):</b><br>• <b>Central Atom Count:</b> O has 2 bonding pairs and <b>2 lone pairs</b> → <b>bent (V-shaped)</b>.<br>• <b>Polarity:</b> Polar because the two polar $\text{O–H}$ bonds are angled and do not cancel.'
+  },
+  PCl5: {
+    badge: 'Trigonal Bipyramidal · Non-octet (10 e⁻)',
+    svg: `<line x1="105" y1="66" x2="105" y2="18" stroke="#e2e8f0" stroke-width="2.5"/><line x1="105" y1="88" x2="105" y2="136" stroke="#e2e8f0" stroke-width="2.5"/><line x1="94" y1="77" x2="42" y2="77" stroke="#e2e8f0" stroke-width="2.5"/><polygon points="114,80 156,106 162,96" fill="#38bdf8"/><line x1="114" y1="73" x2="160" y2="54" stroke="#94a3b8" stroke-width="2.5" stroke-dasharray="3 3"/><text x="105" y="82" fill="#fb923c" font-size="15" font-weight="bold" text-anchor="middle">P</text><text x="105" y="14" fill="#34d399" font-size="12" font-weight="bold" text-anchor="middle">Cl</text><text x="105" y="148" fill="#34d399" font-size="12" font-weight="bold" text-anchor="middle">Cl</text><text x="28" y="81" fill="#34d399" font-size="12" font-weight="bold" text-anchor="middle">Cl</text><text x="174" y="110" fill="#34d399" font-size="12" font-weight="bold" text-anchor="middle">Cl</text><text x="174" y="54" fill="#34d399" font-size="12" font-weight="bold" text-anchor="middle">Cl</text>`,
+    text: '<b>Trigonal Bipyramidal ($\text{PCl}_5$ · CP 2016):</b><br>• <b>Central Atom Count:</b> P has 5 bonding pairs and <b>0 lone pairs</b> (expanded octet of 10 electrons).<br>• <b>CP 2016 Electron-Diagram Reminder:</b> When drawing the electron diagram of $\text{PCl}_5$, do NOT omit the 3 lone pairs on each of the 5 surrounding Cl atoms!'
+  },
+  SF6: {
+    badge: 'Octahedral · Non-polar (Non-octet: 12 e⁻)',
+    svg: `<line x1="105" y1="66" x2="105" y2="18" stroke="#e2e8f0" stroke-width="2.5"/><line x1="105" y1="88" x2="105" y2="136" stroke="#e2e8f0" stroke-width="2.5"/><polygon points="95,82 48,108 54,116" fill="#38bdf8"/><polygon points="115,82 156,116 162,108" fill="#38bdf8"/><line x1="95" y1="72" x2="50" y2="48" stroke="#94a3b8" stroke-width="2.5" stroke-dasharray="3 3"/><line x1="115" y1="72" x2="160" y2="48" stroke="#94a3b8" stroke-width="2.5" stroke-dasharray="3 3"/><text x="105" y="82" fill="#fbbf24" font-size="15" font-weight="bold" text-anchor="middle">S</text><text x="105" y="14" fill="#34d399" font-size="12" font-weight="bold" text-anchor="middle">F</text><text x="105" y="148" fill="#34d399" font-size="12" font-weight="bold" text-anchor="middle">F</text><text x="38" y="120" fill="#34d399" font-size="12" font-weight="bold" text-anchor="middle">F</text><text x="172" y="120" fill="#34d399" font-size="12" font-weight="bold" text-anchor="middle">F</text><text x="38" y="48" fill="#34d399" font-size="12" font-weight="bold" text-anchor="middle">F</text><text x="172" y="48" fill="#34d399" font-size="12" font-weight="bold" text-anchor="middle">F</text>`,
+    text: '<b>Octahedral ($\text{SF}_6$ · CP 2022 Q4):</b><br>• <b>Central Atom Count:</b> S has 6 bonding pairs and <b>0 lone pairs</b> (expanded octet of 12 electrons) → <b>octahedral</b>.<br>• <b>Polarity (CP 2022 Q4):</b> Non-polar because the polarities of the 6 polar $\text{S–F}$ bonds cancel out.'
+  }
+};
+function updateShapeSim(){
+  const k = document.getElementById('shapeMolSel').value;
+  const d = SHAPE_SIM_DATA[k];
+  if(!d) return;
+  document.getElementById('shape3dBadge').textContent = d.badge;
+  document.getElementById('shape3dSvg').innerHTML = d.svg;
+  document.getElementById('shape3dDetails').innerHTML = d.text;
+  safeInitKaTeX();
+}
+
+/* 5. Bench 5: Live HKEAA Keyword Answer Grader (Topic VI) */
+const GRADER_RUBRICS = {
+  bf3_nh3_polar: {
+    prompt: '<b>Question (3 marks · CP 2013 Q2 / CP 2025 Q7):</b> Explain why BF₃ is a non-polar molecule whereas NF₃ (or NH₃) is a polar molecule.',
+    model: 'In BF₃, the central B atom has no lone pairs and the molecule is trigonal planar (symmetrical), so the polarities of the three polar B–F bonds cancel out each other. In NF₃, the central N atom has one lone pair and the molecule is trigonal pyramidal (asymmetrical / bonds not on the same plane), so the polarities of the three polar N–F bonds do not cancel out.',
+    marks: [
+      { label: '1M · Polar Bonds Identified', re: /polar\s+(b[-–]f|n[-–]f|n[-–]h)\s+bonds?|(b[-–]f|n[-–]f)\s+bonds?\s+are\s+polar/i, hint: 'State that the <b>B–F and N–F (or N–H) bonds are polar</b>.' },
+      { label: '1M · BF₃ Trigonal Planar / Symmetrical → Polarities Cancel', re: /(trigonal\s+planar|same\s+plane|symmetr(ical|ically))[\s\S]{0,60}cancel/i, hint: 'State that BF₃ is <b>trigonal planar (symmetrical / on the same plane)</b>, so the <b>bond polarities cancel out</b>.' },
+      { label: '1M · NF₃/NH₃ Trigonal Pyramidal / Lone Pair → Do Not Cancel', re: /(trigonal\s+pyramidal|lone\s+pair|not\s+on\s+the\s+same\s+plane|asymmetr)[\s\S]{0,60}(do\s+not|cannot|don't)\s+cancel/i, hint: 'State that NF₃/NH₃ is <b>trigonal pyramidal (has a lone pair / not on the same plane)</b>, so the bond polarities <b>do not cancel out</b>.' }
+    ],
+    traps: [
+      { re: /electronegativities[\s\S]{0,25}cancel|polar\s+bonds?\s+cancelled\s+out/i, msg: 'CP 2022 Q4 / CP 2024 Q7 Wording Penalty: Bonds or electronegativities do NOT cancel out — write "the <b>polarities</b> of the polar bonds cancel out"!' }
+    ]
+  },
+  ice_density: {
+    prompt: '<b>Question (3 marks · CP 2013 Q1):</b> Explain, in terms of structure and bonding, why ice has a lower density than liquid water (why ice floats on water).',
+    model: 'In ice, each water molecule forms directional intermolecular hydrogen bonds with four neighbouring water molecules, holding them in a tetrahedral open structure with large empty spaces. When ice melts into liquid water, the open structure partially collapses and the water molecules pack more closely together, so ice has a lower density than liquid water.',
+    marks: [
+      { label: '1M · Directional Intermolecular Hydrogen Bonds', re: /(directional[\s\S]{0,30}hydrogen\s+bonds?|hydrogen\s+bonds?[\s\S]{0,30}(tetrahedral|directional))/i, hint: 'CP 2013 Q1 Requirement: Link the structure to <b>(directional) hydrogen bonds</b> between water molecules.' },
+      { label: '1M · Open (Tetrahedral) Structure in Ice', re: /open\s+(tetrahedral\s+)?structure|tetrahedral\s+arrangement/i, hint: 'State that ice has an <b>open (tetrahedral) structure</b> with empty spaces.' },
+      { label: '1M · Open Structure Collapses / Molecules Pack Closer in Water', re: /(collapses?|pack(ed)?\s+(more\s+)?closely)/i, hint: 'MS Bank Wording: State that in liquid water the <b>open structure collapses and the molecules become more closely packed</b>.' }
+    ],
+    traps: [
+      { re: /ice\s+is\s+lighter/i, msg: 'Precision Trap: Say ice is <b>less dense</b> than water, not "lighter"!' }
+    ]
+  },
+  bp_order_2022: {
+    prompt: '<b>Question (3 marks · CP 2022 Q4):</b> Arrange BF₃, SF₆ and H₂O in increasing order of boiling point, and explain your answer in terms of intermolecular forces.',
+    model: 'Increasing order of boiling point: BF₃ < SF₆ < H₂O. H₂O molecules are held together by intermolecular hydrogen bonds (and van der Waals’ forces), whereas BF₃ and SF₆ molecules are held only by van der Waals’ forces. Since hydrogen bonds are stronger than van der Waals’ forces, H₂O has the highest boiling point. Between SF₆ and BF₃, SF₆ has a larger molecular size than BF₃, so the van der Waals’ forces between SF₆ molecules are stronger than those between BF₃ molecules.',
+    marks: [
+      { label: '1M · H₂O Has Hydrogen Bonds vs BF₃/SF₆ van der Waals’ Only', re: /h2o[\s\S]{0,45}hydrogen\s+bonds?[\s\S]{0,60}van\s+der\s+waals/i, hint: 'State that H₂O has <b>intermolecular hydrogen bonds</b> whereas BF₃ and SF₆ have <b>only van der Waals’ forces</b>.' },
+      { label: '1M · Hydrogen Bonds Stronger Than van der Waals’ Forces', re: /hydrogen\s+bonds?[\s\S]{0,30}stronger\s+than[\s\S]{0,25}van\s+der\s+waals/i, hint: 'CP 2022 Q4 / CP 2024 Q7 Mandatory Clause: Explicitly state that <b>hydrogen bonds are stronger than van der Waals’ forces</b>!' },
+      { label: '1M · SF₆ Larger Molecular Size Than BF₃ → Stronger vdW', re: /sf6[\s\S]{0,40}(larger|greater|bigger)\s+molecular\s+size[\s\S]{0,45}stronger\s+van\s+der\s+waals/i, hint: 'State that SF₆ has a <b>larger molecular size</b> than BF₃, so van der Waals’ forces between SF₆ molecules are stronger.' }
+    ],
+    traps: [
+      { re: /molecular\s+mass|relative\s+molecular\s+mass/i, msg: 'CP 2017 / CP 2018 Q3 / CP 2022 Q4 / CP 2023 Q13 Penalty: Compare van der Waals’ strength in terms of <b>molecular size</b>, NEVER "molecular mass"!' }
+    ]
+  },
+  visc_alcohols: {
+    prompt: '<b>Question (2 marks · CP 2014 Q2 / CP 2025 Q7):</b> Explain why propane-1,2,3-triol (HOCH₂CH(OH)CH₂OH) has a much higher viscosity than propan-1-ol (CH₃CH₂CH₂OH).',
+    model: 'Each propane-1,2,3-triol molecule has three –OH (hydroxyl) groups whereas each propan-1-ol molecule has only one –OH group. Therefore, each propane-1,2,3-triol molecule can form a greater number of intermolecular hydrogen bonds (more extensive hydrogen bonding) with neighbouring molecules, making it harder for the molecules to slide past one another.',
+    marks: [
+      { label: '1M · More –OH (Hydroxyl) Groups Per Molecule', re: /(more|three|3)[\s\S]{0,25}(-?oh|hydroxyl)\s+groups/i, hint: 'State that propane-1,2,3-triol has <b>more (three) –OH / hydroxyl groups per molecule</b> than propan-1-ol.' },
+      { label: '1M · Forms More Intermolecular Hydrogen Bonds Per Molecule', re: /(more|greater\s+number\s+of|more\s+extensive)[\s\S]{0,30}(intermolecular\s+)?hydrogen\s+bonds/i, hint: 'CP 2025 Q7 Mandatory Clause: State that it forms a <b>greater number of (intermolecular) hydrogen bonds per molecule</b>.' }
+    ],
+    traps: []
+  },
+  c60_prop: {
+    prompt: '<b>Question (2 marks · CP 2014 Q1):</b> Explain, in terms of bonding and structure, why buckminsterfullerene (C₆₀) has a much lower melting point than diamond and is soluble in organic solvents such as toluene.',
+    model: 'C₆₀ has a simple molecular structure in which discrete C₆₀ molecules are held together by weak van der Waals’ forces, whereas diamond has a giant covalent structure where melting requires breaking millions of strong covalent bonds. C₆₀ is soluble in non-polar organic solvents because the non-polar C₆₀ molecules and solvent molecules are attracted by similar weak van der Waals’ (intermolecular) forces.',
+    marks: [
+      { label: '1M · Simple Molecular + Weak vdW Between C₆₀ Molecules', re: /simple\s+molecular[\s\S]{0,55}weak\s+van\s+der\s+waals|weak\s+van\s+der\s+waals[\s\S]{0,45}c60\s+molecules/i, hint: 'State that C₆₀ has a <b>simple molecular structure</b> with <b>weak van der Waals’ forces between C₆₀ molecules</b>.' },
+      { label: '1M · Non-Polar + Weak Intermolecular Forces With Solvent', re: /(non-?polar|weak\s+(intermolecular|van\s+der\s+waals)\s+forces)[\s\S]{0,55}solvent/i, hint: 'CP 2014 Q1 Requirement: Explain solubility via <b>weak intermolecular / van der Waals’ forces between non-polar C₆₀ and organic solvent molecules</b>.' }
+    ],
+    traps: [
+      { re: /c60\s+has\s+a\s+giant\s+covalent/i, msg: 'Fatal Classification Trap: C₆₀ is <b>simple molecular</b>, NEVER giant covalent!' }
+    ]
+  },
+  dative_bf3: {
+    prompt: '<b>Question (2 marks · CP 2013 Q2):</b> Explain what type of bond is formed between BF₃ and NH₃ when they react to form H₃N→BF₃, and state how this enables the boron atom to achieve stability.',
+    model: 'A dative covalent bond is formed when the N atom in NH₃ donates its lone pair of electrons to the electron-deficient B atom in BF₃. By accepting the lone pair of electrons from N, the B atom attains the stable electronic configuration (octet) of neon.',
+    marks: [
+      { label: '1M · Dative Covalent Bond + N Donates Lone Pair to B', re: /dative\s+covalent\s+bond[\s\S]{0,55}lone\s+pair|lone\s+pair[\s\S]{0,55}dative\s+covalent/i, hint: 'Name a <b>dative covalent bond</b> where N donates its <b>lone pair of electrons</b> to B.' },
+      { label: '1M · B Attains Stable Octet / Electronic Configuration of Neon', re: /stable\s+(octet|electronic\s+(configuration|arrangement))(\s+of\s+neon)?/i, hint: 'MS Bank §2 Wording: State that B <b>attains a stable octet / stable electronic configuration of neon</b>.' }
+    ],
+    traps: [
+      { re: /hydrogen\s+bond/i, msg: 'CP 2013 Q2 Verbatim Error: "Some candidates wrongly said a hydrogen bond forms between BF₃ and NH₃" — it is a <b>dative covalent bond</b>!' }
+    ]
+  }
+};
+
+function loadGraderPrompt(){
+  const sel = document.getElementById('graderQSelect');
+  if(!sel) return;
+  const r = GRADER_RUBRICS[sel.value];
+  const box = document.getElementById('graderPromptBox');
+  if(box && r) box.innerHTML = r.prompt;
+}
+function fillModelGraderAnswer(){
+  const sel = document.getElementById('graderQSelect');
+  if(!sel) return;
+  const r = GRADER_RUBRICS[sel.value];
+  if(!r) return;
+  document.getElementById('graderInput').value = r.model;
+  gradeStudentAnswer();
+}
+function gradeStudentAnswer(){
+  const sel = document.getElementById('graderQSelect');
+  const txt = (document.getElementById('graderInput').value || '').trim();
+  const out = document.getElementById('graderResultBox');
+  if(!sel || !out) return;
+  const r = GRADER_RUBRICS[sel.value];
+  if(!txt){ out.innerHTML = '<span class="text-amber-300">Please type an answer first, or click "Show Model Full-Mark Answer".</span>'; return; }
+  let score = 0, rowsHtml = '', trapHtml = '';
+  r.marks.forEach(m => {
+    const hit = m.re.test(txt);
+    if(hit) score++;
+    rowsHtml += `<div class="p-2 rounded-lg border ${hit ? 'bg-emerald-950/40 border-emerald-700 text-emerald-200' : 'bg-slate-900 border-slate-800 text-slate-300'}"><b>${hit ? '✅ [1M Earned]' : '⬜ [0M Missed]'} ${m.label}:</b> ${hit ? 'Keyword verified in your answer.' : m.hint}</div>`;
+  });
+  r.traps.forEach(t => {
+    if(t.re.test(txt)) trapHtml += `<div class="p-2.5 rounded-lg bg-rose-950/60 border border-rose-600 text-rose-200 font-medium">🚨 <b>[NOT ACCEPT / Contradiction Penalty]:</b> ${t.msg}</div>`;
+  });
+  out.innerHTML = `<div class="flex items-center justify-between border-b border-slate-800 pb-2"><span class="font-bold text-white text-sm">Examiner Diagnostic Score: <span class="text-sky-400 font-mono">${score} / ${r.marks.length} marks</span></span><span class="chip ${score===r.marks.length && !trapHtml ? 'bg-emerald-950 text-emerald-300 border-emerald-700' : 'bg-amber-950 text-amber-300 border-amber-700'}">${score===r.marks.length && !trapHtml ? 'Full Marks Wording' : 'Keep Refining'}</span></div>${trapHtml}<div class="space-y-1.5 mt-2">${rowsHtml}</div>`;
+}
+
+const CMD_INDEX = [
+  { title: 'Liquid-Jet Deflection & Bond-Polarity Cancellation Studio', tag: 'Strand (a) · Sim', action: ()=>{switchTab('tab-polar');switchPolarMode('map');} },
+  { title: 'Intermolecular Force & Multi-OH Viscosity Comparator', tag: 'Strand (b) · CP 2025 Q7', action: ()=>{switchTab('tab-forces');switchForcesMode('map');} },
+  { title: 'Molecular Crystals: Ice Open Lattice, C₆₀ & S₈ Explorer', tag: 'Strand (c) · CP 2013/2024', action: ()=>{switchTab('tab-crystal');switchCrystalMode('map');} },
+  { title: '3D Wedge-and-Dash Shape Studio (Linear to Octahedral)', tag: 'Strand (d)/(e) · Sim', action: ()=>{switchTab('tab-shape');switchShapeMode('map');} },
+  { title: 'Boiling-Point, Shape, Dipole & Ice-Density Benches', tag: 'Solver · Benches 1–4', action: ()=>{switchTab('tab-solver');} },
+  { title: 'Live HKEAA Keyword Answer Grader (Bench 5)', tag: 'Solver · Exam Practice', action: ()=>{switchTab('tab-solver');} },
+  { title: 'Candidate Performance Intelligence (2012–2025)', tag: 'Past Papers · Tab 7', action: ()=>{switchTab('tab-pp');} }
+];
+function openCmdModal(){ const m=document.getElementById('cmdModal'); if(m){ m.classList.add('open'); const inp=document.getElementById('cmdSearchInput'); if(inp){inp.value='';filterCmdList();setTimeout(()=>inp.focus(),50);}}}
+function closeCmdModal(){ const m=document.getElementById('cmdModal'); if(m) m.classList.remove('open'); }
+function filterCmdList(){
+  const q = (document.getElementById('cmdSearchInput').value || '').toLowerCase();
+  const box = document.getElementById('cmdResults');
+  if(!box) return;
+  box.innerHTML = '';
+  CMD_INDEX.filter(i => i.title.toLowerCase().includes(q) || i.tag.toLowerCase().includes(q)).forEach(i => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'w-full text-left px-3 py-2.5 rounded-xl hover:bg-slate-800/80 flex items-center justify-between transition';
+    btn.innerHTML = `<span class="text-white font-medium">${i.title}</span><span class="chip bg-sky-950 text-sky-300 border border-sky-800">${i.tag}</span>`;
+    btn.onclick = () => { closeCmdModal(); i.action(); };
+    box.appendChild(btn);
+  });
+}
+document.addEventListener('keydown', e => {
+  if((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k'){ e.preventDefault(); const m=document.getElementById('cmdModal'); if(m && m.classList.contains('open')) closeCmdModal(); else openCmdModal(); }
+  else if(e.key === 'Escape') closeCmdModal();
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  try { if(localStorage.getItem('hkdse_topic6_theme') === 'light') toggleAppleTheme(); } catch(e){}
+  injectQuizSelfCheckBars();
+  updatePolarSim();
+  updateImfSim();
+  showCrystalSim(0);
+  updateShapeSim();
+  loadGraderPrompt();
+  updateMasteryRing();
+  solverBp();
+  solverShapeName();
+  solverDipole();
+  solverDensity();
+});
+</script>
+
 </body>
 </html>

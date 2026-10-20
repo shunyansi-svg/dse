@@ -9,49 +9,375 @@
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
 <style>
-  :root { color-scheme: dark; }
-  body { background:#020617; font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
-  .tab-panel { display:none; }
-  .tab-panel.active { display:block; }
-  .blur-answer { filter: blur(6px); cursor:pointer; transition: filter .25s ease; user-select:none; }
-  .blur-answer.revealed { filter: blur(0); cursor:default; user-select:text; }
-  .engine-module { display:none; }
-  .engine-module.active { display:block; }
-  .mode-pill { cursor:pointer; }
-  .mode-pill.active { background:rgba(56,189,248,.15); color:#7dd3fc; border-color:#38bdf8; }
-  details > summary { cursor:pointer; list-style:none; }
-  details > summary::-webkit-details-marker { display:none; }
-  .chip { display:inline-block; padding:2px 10px; border-radius:9999px; font-size:11px; font-weight:600; }
-  .katex { font-size:1.05em; }
-  .num-card { font-variant-numeric: tabular-nums; }
-  input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner-spin-button { -webkit-appearance:none; margin:0; }
-  input[type=number] { -moz-appearance:textfield; }
-  .edot { font-size:10px; line-height:1; letter-spacing:-1px; }
-  .katex-block{overflow-x:auto;overflow-y:hidden}
-  .katex-block .katex-display{text-align:left;margin:.35em 0}
-  /* ══ MOBILE UX LAYER (chrome-only) ══ */
-  :root{--hdr:120px}
-  html{scroll-padding-top:calc(var(--hdr) + 10px)}
-  .toc-strip{display:none;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:2px 0 6px;margin-bottom:2px}
-  .toc-strip::-webkit-scrollbar{display:none}
-  .toc-chip{flex-shrink:0;font-size:10px;line-height:1;padding:7px 11px;border-radius:9999px;border:1px solid rgba(51,65,85,.9);background:rgba(15,23,42,.85);color:#94a3b8;font-weight:600;white-space:nowrap;cursor:pointer}
-  #backTop{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:70;width:44px;height:44px;border-radius:9999px;border:1px solid rgba(56,189,248,.35);background:rgba(8,14,26,.92);color:#7dd3fc;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transform:translateY(8px);transition:opacity .25s,transform .25s}
-  #backTop.show{opacity:1;pointer-events:auto;transform:none}
-  #scrollProg{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,#0ea5e9,#38bdf8);z-index:80;pointer-events:none}
-  @media (max-width:1023.98px){
-    header{background-color:rgba(2,6,23,.97)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;padding-top:env(safe-area-inset-top)}
-    #mainNav{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:4px}
-    #mainNav::-webkit-scrollbar{display:none}
-    #mainNav button{flex-shrink:0}
-    select,input[type="number"],input[type="text"]{font-size:16px!important}
-    #mainNav button{padding-top:10px;padding-bottom:10px}
-    .mode-pill{padding:8px 14px}
-    .toc-chip{padding:10px 12px}
-    .katex{font-size:1em}
-    .toc-strip{display:flex}
+  :root {
+    color-scheme: dark;
+    --hdr: 118px;
+    --bg-canvas: #000000;
+    --bg-elevated: rgba(22, 22, 29, 0.72);
+    --bg-card: rgba(28, 28, 36, 0.68);
+    --bg-card-solid: #16161d;
+    --bg-subcard: rgba(38, 38, 48, 0.55);
+    --bg-glass-nav: rgba(14, 14, 20, 0.76);
+    --border-hairline: rgba(255, 255, 255, 0.09);
+    --border-highlight: rgba(255, 255, 255, 0.16);
+    --text-primary: #f5f5f7;
+    --text-secondary: #a1a1aa;
+    --text-tertiary: #6e6e77;
+    --accent-blue: #0a84ff;
+    --accent-teal: #64d2ff;
+    --accent-purple: #bf5af2;
+    --accent-emerald: #30d158;
+    --accent-amber: #ff9f0a;
+    --accent-rose: #ff453a;
+    --shadow-card: 0 20px 44px -12px rgba(0, 0, 0, 0.65), inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+    --shadow-hover: 0 24px 52px -10px rgba(0, 0, 0, 0.75), inset 0 1px 0 0 rgba(255, 255, 255, 0.18);
+    --spring: cubic-bezier(0.22, 1, 0.36, 1);
   }
-  @media (prefers-reduced-motion:reduce){.tab-panel.active{animation:none}
-    .blur-answer,#backTop{transition:none!important}}
+
+  html.theme-light {
+    color-scheme: light;
+    --bg-canvas: #f5f5f7;
+    --bg-elevated: rgba(255, 255, 255, 0.82);
+    --bg-card: rgba(255, 255, 255, 0.88);
+    --bg-card-solid: #ffffff;
+    --bg-subcard: rgba(242, 242, 247, 0.85);
+    --bg-glass-nav: rgba(248, 248, 252, 0.82);
+    --border-hairline: rgba(0, 0, 0, 0.08);
+    --border-highlight: rgba(0, 0, 0, 0.14);
+    --text-primary: #1d1d1f;
+    --text-secondary: #515154;
+    --text-tertiary: #86868b;
+    --shadow-card: 0 12px 32px -8px rgba(0, 0, 0, 0.07), inset 0 1px 0 0 rgba(255, 255, 255, 0.9);
+    --shadow-hover: 0 18px 40px -8px rgba(0, 0, 0, 0.12), inset 0 1px 0 0 rgba(255, 255, 255, 1);
+  }
+
+  html {
+    scroll-padding-top: calc(var(--hdr) + 14px);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--bg-canvas);
+    background-image:
+      radial-gradient(ellipse 80% 50% at 15% -10%, rgba(10, 132, 255, 0.16), transparent 60%),
+      radial-gradient(ellipse 70% 45% at 85% 5%, rgba(191, 90, 242, 0.12), transparent 60%),
+      radial-gradient(ellipse 60% 40% at 50% 100%, rgba(48, 209, 88, 0.08), transparent 60%);
+    background-attachment: fixed;
+    color: var(--text-primary);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: -0.011em;
+    transition: background-color 0.4s var(--spring), color 0.3s var(--spring);
+  }
+
+  h1, h2, h3, h4 {
+    letter-spacing: -0.024em;
+    font-weight: 650;
+  }
+
+  .font-mono {
+    font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+  }
+
+  header {
+    background: var(--bg-glass-nav) !important;
+    -webkit-backdrop-filter: saturate(190%) blur(28px) !important;
+    backdrop-filter: saturate(190%) blur(28px) !important;
+    border-bottom: 1px solid var(--border-hairline) !important;
+    box-shadow: 0 4px 24px -4px rgba(0, 0, 0, 0.28);
+    transition: background 0.35s var(--spring);
+  }
+
+  #mainNav {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border-hairline);
+    border-radius: 14px;
+    padding: 4px !important;
+    gap: 4px !important;
+    margin-bottom: 8px;
+  }
+  html.theme-light #mainNav {
+    background: rgba(0, 0, 0, 0.045);
+  }
+
+  #mainNav button {
+    border-radius: 10px !important;
+    border-bottom: none !important;
+    transition: all 0.28s var(--spring) !important;
+    position: relative;
+    font-weight: 500;
+  }
+  #mainNav button:hover { transform: translateY(-1px); }
+  #mainNav button:active { transform: scale(0.97); }
+  #mainNav button.tab-btn-active {
+    background: rgba(10, 132, 255, 0.22) !important;
+    color: #64d2ff !important;
+    box-shadow: 0 2px 10px rgba(10, 132, 255, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.22);
+    font-weight: 600 !important;
+  }
+  html.theme-light #mainNav button.tab-btn-active {
+    background: #ffffff !important;
+    color: #0066cc !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .bg-slate-900 {
+    background: var(--bg-elevated) !important;
+    -webkit-backdrop-filter: saturate(160%) blur(22px);
+    backdrop-filter: saturate(160%) blur(22px);
+    border-color: var(--border-hairline) !important;
+    border-radius: 22px !important;
+    box-shadow: var(--shadow-card);
+    transition: transform 0.35s var(--spring), box-shadow 0.35s var(--spring), border-color 0.3s ease;
+  }
+
+  .bg-slate-950 {
+    background: var(--bg-card) !important;
+    border-color: var(--border-hairline) !important;
+    border-radius: 18px !important;
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.06);
+    transition: transform 0.3s var(--spring), box-shadow 0.3s var(--spring), border-color 0.25s ease;
+  }
+  .bg-slate-950:hover {
+    border-color: var(--border-highlight) !important;
+  }
+
+  html.theme-light .text-white { color: #1d1d1f !important; }
+  html.theme-light .text-slate-100,
+  html.theme-light .text-slate-200,
+  html.theme-light .text-slate-300 { color: #2c2c2e !important; }
+  html.theme-light .text-slate-400 { color: #515154 !important; }
+  html.theme-light .text-slate-500 { color: #6e6e73 !important; }
+  html.theme-light .bg-slate-800,
+  html.theme-light .bg-slate-800\/50 { background-color: rgba(0, 0, 0, 0.05) !important; color: #1d1d1f !important; border-color: rgba(0,0,0,0.12) !important; }
+  html.theme-light .bg-sky-950\/40,
+  html.theme-light .bg-sky-950\/30,
+  html.theme-light .bg-sky-950 { background-color: rgba(10, 132, 255, 0.1) !important; color: #004080 !important; border-color: rgba(10, 132, 255, 0.28) !important; }
+  html.theme-light .bg-purple-950\/30,
+  html.theme-light .bg-purple-950 { background-color: rgba(175, 82, 222, 0.1) !important; color: #581c87 !important; border-color: rgba(175, 82, 222, 0.28) !important; }
+  html.theme-light .bg-emerald-950\/30,
+  html.theme-light .bg-emerald-950 { background-color: rgba(48, 209, 88, 0.12) !important; color: #065f46 !important; border-color: rgba(48, 209, 88, 0.3) !important; }
+  html.theme-light .bg-amber-950\/40,
+  html.theme-light .bg-amber-950\/30,
+  html.theme-light .bg-amber-950 { background-color: rgba(255, 159, 10, 0.13) !important; color: #78350f !important; border-color: rgba(255, 159, 10, 0.35) !important; }
+  html.theme-light .bg-rose-950\/40,
+  html.theme-light .bg-rose-950\/30,
+  html.theme-light .bg-rose-950 { background-color: rgba(255, 69, 58, 0.1) !important; color: #881337 !important; border-color: rgba(255, 69, 58, 0.28) !important; }
+  html.theme-light .text-sky-200, html.theme-light .text-sky-300, html.theme-light .text-sky-400 { color: #0055b3 !important; }
+  html.theme-light .text-amber-200, html.theme-light .text-amber-300, html.theme-light .text-amber-400 { color: #92400e !important; }
+  html.theme-light .text-rose-200, html.theme-light .text-rose-300, html.theme-light .text-rose-400 { color: #9f1239 !important; }
+  html.theme-light .text-emerald-300, html.theme-light .text-emerald-400 { color: #047857 !important; }
+  html.theme-light .text-purple-300, html.theme-light .text-purple-400 { color: #6b21a8 !important; }
+  html.theme-light .text-cyan-200, html.theme-light .text-cyan-300, html.theme-light .text-cyan-400 { color: #0e7490 !important; }
+
+  @keyframes appleStageIn {
+    0% { opacity: 0; transform: translateY(10px) scale(0.992); filter: blur(4px); }
+    100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+  }
+  .tab-panel { display: none; }
+  .tab-panel.active {
+    display: block;
+    animation: appleStageIn 0.42s var(--spring) forwards;
+  }
+  .engine-module { display: none; }
+  .engine-module.active {
+    display: block;
+    animation: appleStageIn 0.34s var(--spring) forwards;
+  }
+  .measure-card, .rates-card, .factor-card, .mol-card {
+    animation: appleStageIn 0.3s var(--spring) forwards;
+  }
+
+  .blur-answer {
+    filter: blur(5.5px);
+    cursor: pointer;
+    transition: filter 0.28s var(--spring), background-color 0.28s ease, transform 0.2s var(--spring), box-shadow 0.25s ease;
+    user-select: none;
+    border: 1px solid rgba(100, 210, 255, 0.22);
+    padding: 1px 7px !important;
+    border-radius: 7px !important;
+  }
+  .blur-answer:hover {
+    filter: blur(2.5px);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(10, 132, 255, 0.2);
+  }
+  .blur-answer.revealed {
+    filter: blur(0);
+    cursor: pointer;
+    user-select: text;
+    background: rgba(48, 209, 88, 0.16) !important;
+    border-color: rgba(48, 209, 88, 0.45) !important;
+    box-shadow: 0 0 0 1px rgba(48, 209, 88, 0.15);
+  }
+
+  .mode-pill {
+    cursor: pointer;
+    transition: all 0.26s var(--spring);
+    border-radius: 9999px;
+    backdrop-filter: blur(10px);
+  }
+  .mode-pill:hover { transform: translateY(-1px); }
+  .mode-pill:active { transform: scale(0.96); }
+  .mode-pill.active {
+    background: linear-gradient(135deg, rgba(10, 132, 255, 0.26), rgba(100, 210, 255, 0.14)) !important;
+    color: #7dd3fc !important;
+    border-color: rgba(100, 210, 255, 0.65) !important;
+    box-shadow: 0 4px 14px -2px rgba(10, 132, 255, 0.35), inset 0 1px 0 rgba(255,255,255,0.2);
+  }
+
+  details > summary {
+    cursor: pointer;
+    list-style: none;
+    transition: background-color 0.2s ease;
+    border-radius: 14px;
+  }
+  details > summary::-webkit-details-marker { display: none; }
+  details[open] > summary {
+    border-bottom: 1px solid var(--border-hairline);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 10px;
+    border-radius: 9999px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.12);
+  }
+
+  .katex { font-size: 1.05em; }
+  .num-card { font-variant-numeric: tabular-nums; }
+  input[type=number]::-webkit-outer-spin-button,
+  input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  input[type=number] { -moz-appearance: textfield; }
+  .katex-block { overflow-x: auto; overflow-y: hidden; }
+  .katex-block .katex-display { text-align: left; margin: .35em 0; }
+
+  .apple-sim-panel {
+    background: linear-gradient(165deg, rgba(20, 24, 38, 0.85), rgba(12, 15, 26, 0.92));
+    border: 1px solid rgba(100, 210, 255, 0.22);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 18px 40px -12px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  }
+  html.theme-light .apple-sim-panel {
+    background: linear-gradient(165deg, rgba(255, 255, 255, 0.95), rgba(240, 246, 255, 0.92));
+    border-color: rgba(10, 132, 255, 0.25);
+    box-shadow: 0 14px 32px -10px rgba(10, 132, 255, 0.12);
+  }
+
+  .apple-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 7px 14px;
+    transition: all 0.24s var(--spring);
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(255, 255, 255, 0.07);
+    color: var(--text-primary);
+  }
+  .apple-btn:hover {
+    background: rgba(255, 255, 255, 0.13);
+    transform: translateY(-1px);
+  }
+  .apple-btn:active { transform: scale(0.97); }
+  .apple-btn-primary {
+    background: linear-gradient(180deg, #1e90ff 0%, #0071e3 100%);
+    color: #ffffff !important;
+    border-color: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 4px 14px rgba(0, 113, 227, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  }
+  .apple-btn-primary:hover {
+    background: linear-gradient(180deg, #339dff 0%, #0a7ff0 100%);
+    box-shadow: 0 6px 18px rgba(0, 113, 227, 0.55);
+  }
+
+  input[type=range].apple-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 6px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #ff453a, #ff9f0a, #30d158, #0a84ff, #bf5af2);
+    outline: none;
+  }
+  input[type=range].apple-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 2px solid #0a84ff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+    cursor: grab;
+    transition: transform 0.18s var(--spring);
+  }
+  input[type=range].apple-slider::-webkit-slider-thumb:active {
+    transform: scale(1.15);
+    cursor: grabbing;
+  }
+
+  .quiz-self-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px dashed var(--border-hairline);
+    font-size: 11px;
+  }
+
+  #cmdModal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: rgba(0, 0, 0, 0.58);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 10vh;
+  }
+  #cmdModal.open {
+    display: flex;
+    animation: appleStageIn 0.22s var(--spring) forwards;
+  }
+
+  .toc-strip { display: none; gap: 6px; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 2px 0 6px; margin-bottom: 2px; }
+  .toc-strip::-webkit-scrollbar { display: none; }
+  .toc-chip { flex-shrink: 0; font-size: 10px; line-height: 1; padding: 7px 11px; border-radius: 9999px; border: 1px solid var(--border-hairline); background: var(--bg-card); color: var(--text-secondary); font-weight: 600; white-space: nowrap; cursor: pointer; transition: all 0.2s var(--spring); }
+  #backTop { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom)); z-index: 70; width: 44px; height: 44px; border-radius: 9999px; border: 1px solid rgba(100, 210, 255, 0.35); background: var(--bg-glass-nav); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); color: #7dd3fc; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transform: translateY(8px); transition: opacity .25s, transform .25s var(--spring); box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+  #backTop.show { opacity: 1; pointer-events: auto; transform: none; }
+  #scrollProg { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: linear-gradient(90deg, #0a84ff, #64d2ff, #30d158); z-index: 80; pointer-events: none; }
+
+  @media (max-width:1023.98px){
+    header { padding-top: env(safe-area-inset-top); }
+    #mainNav { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+    #mainNav::-webkit-scrollbar { display: none; }
+    #mainNav button { flex-shrink: 0; padding-top: 9px; padding-bottom: 9px; }
+    select, input[type="number"], input[type="text"] { font-size: 16px !important; }
+    .mode-pill { padding: 8px 14px; }
+    .toc-chip { padding: 10px 12px; }
+    .katex { font-size: 1em; }
+    .toc-strip { display: flex; }
+  }
+  @media (prefers-reduced-motion:reduce){
+    .tab-panel.active, .engine-module.active { animation: none !important; }
+    .blur-answer, #backTop { transition: none !important; }
+  }
 </style>
 </head>
 <body class="text-slate-200 min-h-screen">
@@ -61,14 +387,29 @@
   <div class="max-w-7xl mx-auto px-4 py-3">
     <div class="flex flex-wrap items-center justify-between gap-2">
       <div>
-        <h1 class="text-base sm:text-lg font-bold text-white leading-tight">HKDSE · Topic IX Master Studio</h1>
+        <div class="flex items-center gap-2.5"><div class="hidden sm:flex items-center gap-1.5 mr-1"><span class="w-2.5 h-2.5 rounded-full bg-[#ff5f56] inline-block shadow-sm"></span><span class="w-2.5 h-2.5 rounded-full bg-[#ffbd2e] inline-block shadow-sm"></span><span class="w-2.5 h-2.5 rounded-full bg-[#27c93f] inline-block shadow-sm"></span></div><h1 class="text-base sm:text-lg font-bold text-white leading-tight tracking-tight">HKDSE · Topic IX Master Studio — Rate of Reaction</h1><span class="chip bg-sky-500/15 text-sky-300 border border-sky-400/30 text-[10px]">Interactive Studio Pro</span></div>
         <p class="text-[11px] text-slate-400 font-mono">Rate of Reaction · Following Progress, Rates from Graphs, Factors &amp; Molar Volume at r.t.p.</p>
       </div>
-      <div class="flex gap-2 text-[10px] font-mono">
+      <div class="flex flex-wrap items-center gap-2 text-[10px] font-mono">
         <span class="chip bg-sky-950 text-sky-400 border border-sky-800">Strands (a)–(c)</span>
         <span class="chip bg-purple-950 text-purple-400 border border-purple-800">Paper 1A + 1B</span>
         <span class="chip bg-emerald-950 text-emerald-400 border border-emerald-800">C&amp;A Guide 2018</span>
-        <span class="chip bg-amber-950 text-amber-400 border border-amber-800">NTF 18/08/2018 scope</span>
+        <div class="flex items-center gap-2 ml-1 pl-2 border-l border-slate-700/70">
+          <button type="button" onclick="openCmdModal()" class="apple-btn !py-1 !px-2.5 text-[11px]" title="Quick Concept &amp; Past-Paper Search (⌘K)">
+            <span>🔍 Search</span>
+            <kbd class="px-1.5 py-0.5 text-[9px] rounded bg-slate-800 text-slate-300 border border-slate-700">⌘K</kbd>
+          </button>
+          <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-900/90 border border-slate-700/80" title="Concept Mastery Progress across Quiz &amp; Syllabus Checkpoints">
+            <svg class="w-4 h-4 -rotate-90" viewBox="0 0 36 36">
+              <circle cx="18" cy="18" r="15" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="3.8"></circle>
+              <circle id="masteryRingCircle" cx="18" cy="18" r="15" fill="none" stroke="#30d158" stroke-width="3.8" stroke-dasharray="94.2" stroke-dashoffset="94.2" stroke-linecap="round"></circle>
+            </svg>
+            <span id="masteryPctText" class="text-[11px] font-semibold text-emerald-400 num-card">0% Mastered</span>
+          </div>
+          <button type="button" id="themeToggleBtn" onclick="toggleAppleTheme()" class="apple-btn !py-1 !px-2.5 text-[11px]" title="Switch between Apple Pro Dark and Cupertino Daylight mode">
+            <span id="themeToggleIcon">☀️ Daylight</span>
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -260,6 +601,73 @@
   </div>
 </section>
 
+
+    <!-- ══ INTERACTIVE SYLLABUS AUDIT & CONCEPT READINESS MATRIX (EDB C&A Guide 2018 · pp. I-36 to I-38) ══ -->
+    <div class="mt-6 apple-sim-panel space-y-4" id="syllabus-audit-panel">
+      <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800/80 pb-3">
+        <div>
+          <span class="text-[10px] font-mono uppercase tracking-widest text-sky-400 font-bold">Interactive Syllabus Check-Off · EDB C&amp;A Guide (pp. I-36 to I-38)</span>
+          <h3 class="text-base font-bold text-white mt-0.5">HKDSE Topic IX Competency Checklist &amp; Direct Simulator Links</h3>
+          <p class="text-xs text-slate-400">Tick each official EDB learning outcome across Strands (a)–(c) and Part II depth caps (`NTF-2018 II-B IX (a)/(b)`) as you master it.</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <span id="sylAuditCount" class="chip bg-emerald-950 text-emerald-300 border border-emerald-700 font-mono">0 / 12 Outcomes Checked</span>
+          <button type="button" class="apple-btn text-xs" onclick="checkAllSyllabusOutcomes()">Check All</button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs" id="sylAuditGrid">
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">IX(a) · Gas Volume &amp; Pressure Methods</b>Gas syringe / sealed pressure sensor for insoluble gases ($	ext{H}_2, 	ext{O}_2, 	ext{CO}_2$); reject for soluble $	ext{NH}_3 / 	ext{HCl}$. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-measure');switchMeasureMode('map')">Method Sim →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">IX(a) · Mass Loss, Colorimetry &amp; Turbidity ($1/t$)</b>Cotton-wool balance setup; colorimetry ("colourless at start", CP 2014; never "calorimetry", CP 2016); $	ext{S}_2	ext{O}_3^{2-} + 	ext{H}^+$ cross. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-measure');switchMeasureMode('map')">Method Sim →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">IX(a) · Titrimetric Analysis &amp; Quenching</b>Withdraw timed aliquots, quench (cool in ice / dilute) to freeze reaction, then titrate (e.g. ester hydrolysis). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-measure');selectMeasure(5)">Inspect →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">IX(a) · Average, Instantaneous &amp; Initial Rate ($t=0$)</b>Average = chord $\Delta q/\Delta t$; instantaneous = slope of tangent at $t$; initial = tangent slope at $t = 0$ (CP 2014/2018/2025). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-rates');switchRatesMode('map')">Tangent Sim →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">IX(a) · Species Stoichiometric Rate Ratio &amp; Units</b>Relate rates via coefficients ($2	ext{H}_2	ext{O}_2 	o 2	ext{H}_2	ext{O} + 	ext{O}_2$, CP 2017/2022); match rate unit to axis. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-rates');switchRatesMode('map')">Tangent Sim →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">IX(b) · Concentration &amp; Surface Area (Collision Theory)</b>More particles per unit volume / greater exposed surface area → higher collision frequency → more effective collisions/s. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-factors');switchFactorMode('map')">Curve Lab →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">IX(b) · Temperature Two-Half Explanation (CP 2013)</b>Higher average KE → more frequent collisions AND larger portion of particles have $E \ge E_a$ (no M-B curve needed, NTF IX(b)). <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-factors');selectFactor(2)">Inspect →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">IX(b) · Catalyst Pathway &amp; Plateau Rule (CP 2013/2022/2024)</b>Provides an alternative pathway with lower $E_a$; speeds rate AND remains chemically unchanged; same final yield. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-factors');switchFactorMode('map')">Curve Lab →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">IX(b) · Fair-Test Experimental Design (CP 2016 Q11 / 2020 Q13)</b>Keep total volume constant by adding distilled water so only one concentration varies; monitor parameter against time. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-factors');selectFactor(6)">Inspect →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">IX(c) · Molar Volume at r.t.p. ($24.0	ext{ dm}^3	ext{ mol}^{-1}$)</b>Deduce $24.0	ext{ dm}^3	ext{ mol}^{-1}$ from given data; convert $n = V(	ext{dm}^3)/24.0 = V(	ext{cm}^3)/24000$. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-mol');switchMolMode('map')">Gas Highway →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">IX(c) · Avogadro’s Gas Volume Ratio Principle</b>At the same T and P, equal volumes of gases contain equal numbers of molecules → gas volume ratio = mole ratio. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-mol');selectMol(4)">Inspect →</button></span>
+        </label>
+        <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800 cursor-pointer hover:border-sky-500/50 transition">
+          <input type="checkbox" class="syl-chk mt-0.5 accent-sky-500 rounded" onchange="updateMasteryRing()">
+          <span><b class="text-white block">IX(c) · Limiting-Reagent Gas Yields &amp; Airbag Chain (CP 2013)</b>Find which reactant limits the plateau volume; solve two-stage $	ext{NaN}_3 + 	ext{KNO}_3$ airbag stoichiometry. <button type="button" class="text-sky-400 underline ml-1" onclick="switchTab('tab-mol');switchMolMode('map')">Airbag Sim →</button></span>
+        </label>
+      </div>
+    </div>
+
 <!-- ═══════════ TAB 2 · ENGINE A · METHODS OF FOLLOWING PROGRESS ═══════════ -->
 <section id="tab-measure" class="tab-panel space-y-6">
   <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-sm">
@@ -368,6 +776,26 @@
           <p class="text-[11px] font-bold text-slate-300 uppercase tracking-wider mb-2">The methods comparison table — the answer sheet version</p>
           <div class="overflow-x-auto"><table class="w-full text-xs text-slate-300"><thead class="text-slate-400 uppercase tracking-wider text-[10px]"><tr><th class="p-2 text-left">Technique</th><th class="p-2 text-left">Measures</th><th class="p-2 text-left">Suitable for</th><th class="p-2 text-left">Breaks down when</th><th class="p-2 text-left">Continuous?</th></tr></thead><tbody class="divide-y divide-slate-800"><tr><td class="p-2 font-semibold text-white">Gas volume</td><td class="p-2">V of gas (cm³)</td><td class="p-2">insoluble gas evolved</td><td class="p-2">gas soluble / apparatus leaks</td><td class="p-2">yes</td></tr><tr><td class="p-2 font-semibold text-white">Gas pressure</td><td class="p-2">P in sealed vessel</td><td class="p-2">gas moles change, small V</td><td class="p-2">gas dissolves; T drifts</td><td class="p-2">yes (data-logger)</td></tr><tr><td class="p-2 font-semibold text-white">Mass loss</td><td class="p-2">mass of mixture (g)</td><td class="p-2">gas escapes, not soluble</td><td class="p-2">NH₃ / HCl / Cl₂ retained</td><td class="p-2">yes</td></tr><tr><td class="p-2 font-semibold text-white">Colour intensity</td><td class="p-2">colour / absorbance</td><td class="p-2">coloured species made/used</td><td class="p-2">all colourless; colour masked</td><td class="p-2">yes (colorimeter)</td></tr><tr><td class="p-2 font-semibold text-white">Turbidity</td><td class="p-2">cloudiness (cross time)</td><td class="p-2">insoluble product forms</td><td class="p-2">endpoint judgment varies</td><td class="p-2">no — fixed endpoint</td></tr><tr><td class="p-2 font-semibold text-white">Titration (quench)</td><td class="p-2">[reactant] left</td><td class="p-2">no other observable</td><td class="p-2">too slow/incomplete to titrate</td><td class="p-2">no — sampling</td></tr></tbody></table></div>
         </div>
+        <!-- ══ INTERACTIVE SIMULATOR A1: REACTION-PROGRESS METHOD SELECTOR & JUSTIFICATION TRAINER (CP 2014 · 2016 · 2021 Q10 · 2023 Q14 · 2024) ══ -->
+        <div class="mt-6 apple-sim-panel space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+            <div>
+              <span class="text-[10px] font-mono text-sky-400 uppercase font-bold">Interactive Simulator · Strand (a) Concept Check (EDB Activities p. I-37 · CP 2014 · CP 2023 Q14)</span>
+              <h4 class="text-sm font-bold text-white mt-0.5">Match the Reaction to the Best Monitoring Technique + Full-Mark Justification</h4>
+              <p class="text-[11px] text-slate-400">Select an HKDSE reaction below to see which techniques work, which ones fail, and the exact "measure [parameter] at regular time intervals" phrasing required.</p>
+            </div>
+            <select id="rxMethodSel" onchange="updateMethodSim()" class="bg-slate-900 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-white font-medium">
+              <option value="caco3_hcl" selected>1. CaCO₃(s) + 2HCl(aq) → CaCl₂(aq) + H₂O(l) + CO₂(g) (EDB Activity)</option>
+              <option value="mnO4_c2o4">2. 2MnO₄⁻(aq) + 5C₂O₄²⁻(aq) + 16H⁺(aq) → 2Mn²⁺(aq) + 10CO₂(g) + 8H₂O(l) (EDB Activity)</option>
+              <option value="s2o3_hcl">3. Na₂S₂O₃(aq) + 2HCl(aq) → 2NaCl(aq) + SO₂(aq) + H₂O(l) + S(s) (Disappearing Cross)</option>
+              <option value="ester_naoh">4. CH₃COOC₂H₅(l) + NaOH(aq) → CH₃COONa(aq) + C₂H₅OH(aq) (EDB Activity)</option>
+              <option value="h2o2_mno2">5. 2H₂O₂(aq) →(MnO₂) 2H₂O(l) + O₂(g) (Gas Syringe / Dish-Detergent Foam Height)</option>
+              <option value="nh4cl_naoh">6. NH₄Cl(aq) + NaOH(aq) → NaCl(aq) + H₂O(l) + NH₃(g) (Soluble Gas Trap!)</option>
+            </select>
+          </div>
+          <div id="methodSimOut" class="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2 text-xs text-slate-300 leading-relaxed"></div>
+        </div>
+
       </div>
     </div>
 
@@ -511,6 +939,39 @@
           <p class="text-[11px] font-bold text-slate-300 uppercase tracking-wider mb-2">Unit ladder — the quantity chooses the unit</p>
           <div class="overflow-x-auto"><table class="w-full text-xs text-slate-300"><thead class="text-slate-400 uppercase tracking-wider text-[10px]"><tr><th class="p-2 text-left">Graph tracks</th><th class="p-2 text-left">Rate unit</th><th class="p-2 text-left">Note</th></tr></thead><tbody class="divide-y divide-slate-800"><tr><td class="p-2">volume of gas</td><td class="p-2 font-mono text-emerald-300">cm³ s⁻¹ (or min⁻¹)</td><td class="p-2">not a mole rate unless asked</td></tr><tr><td class="p-2">mass of mixture</td><td class="p-2 font-mono text-emerald-300">g s⁻¹</td><td class="p-2">mass loss rate</td></tr><tr><td class="p-2">moles of substance</td><td class="p-2 font-mono text-emerald-300">mol s⁻¹</td><td class="p-2">amount, ignore volume</td></tr><tr><td class="p-2">concentration</td><td class="p-2 font-mono text-emerald-300">mol dm⁻³ s⁻¹</td><td class="p-2">per dm³ of mixture</td></tr></tbody></table></div>
         </div>
+        <!-- ══ INTERACTIVE SIMULATOR B1: LIVE SVG PROGRESS CURVE & TANGENT SLOPE EXPLORER (CP 2014 · 2017 · 2018 Q11 · 2025 Q10) ══ -->
+        <div class="mt-6 apple-sim-panel space-y-5">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+            <div>
+              <span class="text-[10px] font-mono text-emerald-400 uppercase font-bold">Interactive Simulator · Strand (a) Concept Check (CP 2014 · CP 2018 Q11 · CP 2025 Q10)</span>
+              <h4 class="text-sm font-bold text-white mt-0.5">Live Progress Curve $V(t)$: Drag Time $t$ to Inspect Tangent Slope vs. Chord Average Rate</h4>
+              <p class="text-[11px] text-slate-400">Reaction: $2\text{H}_2\text{O}_2(aq) \xrightarrow{\text{MnO}_2} 2\text{H}_2\text{O}(l) + \text{O}_2(g)$ (Final plateau $V_{\max} = 60.0\text{ cm}^3$). Drag the time slider to see how the tangent slope flattens as $[\text{H}_2\text{O}_2]$ drops.</p>
+            </div>
+            <span id="tanTimeBadge" class="chip bg-emerald-950 text-emerald-300 border border-emerald-700 font-mono">t = 0 s (Initial Rate!)</span>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 items-center text-xs">
+            <div class="lg:col-span-2 bg-slate-950 border border-slate-800 rounded-2xl p-4">
+              <svg id="tangentSvg" viewBox="0 0 420 220" class="w-full h-auto" role="img" aria-label="Interactive V-t curve with tangent line"></svg>
+              <div class="mt-2 flex items-center gap-3">
+                <span class="font-mono text-slate-400 shrink-0">Time t (0–120 s):</span>
+                <input type="range" id="tanTimeSlider" min="0" max="120" step="5" value="0" class="apple-slider" oninput="updateTangentSim()">
+              </div>
+            </div>
+
+            <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2.5">
+              <div id="tanReadoutTitle" class="font-bold text-white text-sm">At t = 0 s (Start of Reaction)</div>
+              <div class="p-2.5 rounded-lg bg-slate-900 border border-slate-800 font-mono space-y-1">
+                <div class="text-sky-300">V(O₂) at t: <b id="tanVolVal">0.0 cm³</b></div>
+                <div class="text-emerald-300">Instantaneous rate (tangent slope): <b id="tanInstVal">1.80 cm³ s⁻¹</b></div>
+                <div class="text-amber-300">Average rate (0 → t chord): <b id="tanAvgVal">— (at t = 0)</b></div>
+              </div>
+              <p id="tanStoichNote" class="text-slate-300 leading-relaxed"></p>
+              <p class="text-rose-300 leading-relaxed text-[11px]"><b>🚨 CP 2025 Q10 Trap:</b> Instantaneous rate is highest at $t=0$ (steepest tangent slope) and decreases as reactants are consumed — never claim a later point is faster "because gas pressure is higher"!</p>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -663,6 +1124,32 @@
           <p class="text-[11px] font-bold text-slate-300 uppercase tracking-wider mb-2">Graph signatures of the four factors (same moles of limiting reagent throughout)</p>
           <div class="overflow-x-auto"><table class="w-full text-xs text-slate-300"><thead class="text-slate-400 uppercase tracking-wider text-[10px]"><tr><th class="p-2 text-left">Change made</th><th class="p-2 text-left">Initial slope</th><th class="p-2 text-left">Final gas volume</th><th class="p-2 text-left">Time to finish</th></tr></thead><tbody class="divide-y divide-slate-800"><tr><td class="p-2">↑ concentration (volume kept constant)</td><td class="p-2">steeper</td><td class="p-2 font-mono">unchanged</td><td class="p-2">shorter</td></tr><tr><td class="p-2">↑ temperature</td><td class="p-2">steepest of all</td><td class="p-2 font-mono">unchanged</td><td class="p-2">shorter</td></tr><tr><td class="p-2">solid → powder</td><td class="p-2">steeper</td><td class="p-2 font-mono">unchanged</td><td class="p-2">shorter</td></tr><tr><td class="p-2">+ catalyst</td><td class="p-2">steeper</td><td class="p-2 font-mono">unchanged</td><td class="p-2">shorter</td></tr></tbody></table></div>
         </div>
+        <!-- ══ INTERACTIVE SIMULATOR C1: DUAL-CURVE FACTOR & PLATEAU COMPARATOR (CP 2012 Q11 · 2016 Q11 · 2021 Q10 · 2024 Q10) ══ -->
+        <div class="mt-6 apple-sim-panel space-y-5">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+            <div>
+              <span class="text-[10px] font-mono text-purple-400 uppercase font-bold">Interactive Simulator · Strand (b) Concept Check (CP 2012 Q11 · CP 2021 Q10 · CP 2024 Q10)</span>
+              <h4 class="text-sm font-bold text-white mt-0.5">Curve A (Control) vs. Curve B: How Each Change Alters Initial Slope &amp; Final Plateau</h4>
+              <p class="text-[11px] text-slate-400"><b>Control Curve A (Blue dashed):</b> $50\text{ cm}^3$ of $1.0\text{ M HCl}(aq)$ (limiting, $0.050\text{ mol}$) + excess $\text{CaCO}_3$ lumps at $25\,^\circ\text{C}$ ($V_{\max} = 600\text{ cm}^3$). Select a modification for <b>Curve B (Green solid)</b>:</p>
+            </div>
+            <select id="curveCompSel" onchange="updateCurveCompSim()" class="bg-slate-900 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-white font-medium">
+              <option value="powder" selected>Trial B1 · Use powdered CaCO₃ (same excess mass, 25 °C)</option>
+              <option value="temp_up">Trial B2 · Raise temperature to 45 °C (same 50 cm³ of 1.0 M HCl)</option>
+              <option value="conc_2m_same_v">Trial B3 · Use 50 cm³ of 2.0 M HCl (double concentration, same volume)</option>
+              <option value="h2so4_1m">Trial B4 · Use 50 cm³ of 1.0 M H₂SO₄ with excess Mg (CP 2012 Q11 Dibasic!)</option>
+              <option value="half_c_double_v">Trial B5 · Use 100 cm³ of 0.50 M HCl (half concentration, double volume)</option>
+              <option value="double_v_same_c">Trial B6 · Use 100 cm³ of 1.0 M HCl (same concentration, double volume · CP 2016)</option>
+            </select>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 items-center text-xs">
+            <div class="lg:col-span-2 bg-slate-950 border border-slate-800 rounded-2xl p-4">
+              <svg id="compCurveSvg" viewBox="0 0 420 210" class="w-full h-auto" role="img" aria-label="Dual curve comparison plot"></svg>
+            </div>
+            <div id="compCurveReadout" class="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2 text-slate-300 leading-relaxed"></div>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -806,6 +1293,23 @@
           <p class="text-[11px] font-bold text-slate-300 uppercase tracking-wider mb-2">The exit ramp — and the exam chain</p>
           <p class="text-xs text-slate-300 leading-relaxed">Exit: $V = n \times 24.0\ \text{dm}^3$ — <b>only</b> once n(gas) is final and the limiting reagent has been checked. Typical Paper 1B chain: <b>graph plateau → Gate 2</b> (moles of gas) → <b>Gate 4</b> (moles of solid) → <b>Gate 1 reversed</b> (mass or Mr) — or the mass-to-volume direction used to <b>deduce 24.0</b> first (Gate 1 → Gate 2 reversed). One more gate is a rate one: divide the volume change by the time it took (Engine B).</p>
         </div>
+        <!-- ══ INTERACTIVE SIMULATOR D1: TWO-STAGE CAR AIRBAG STOICHIOMETRY BENCH (CP 2013) ══ -->
+        <div class="mt-6 apple-sim-panel space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+            <div>
+              <span class="text-[10px] font-mono text-amber-400 uppercase font-bold">Interactive Simulator · Strand (c) Concept Check (CP 2013 Paper 1B Airbag Chain)</span>
+              <h4 class="text-sm font-bold text-white mt-0.5">Two-Stage Car Airbag $\text{N}_2(g)$ Yield &amp; Second-Stage Limiting-Reagent Checker</h4>
+              <p class="text-[11px] text-slate-400"><b>Reaction 1:</b> $2\text{NaN}_3(s) \rightarrow 2\text{Na}(s) + 3\text{N}_2(g)$ &nbsp;|&nbsp; <b>Reaction 2:</b> $10\text{Na}(s) + 2\text{KNO}_3(s) \rightarrow \text{K}_2\text{O}(s) + 5\text{Na}_2\text{O}(s) + \text{N}_2(g)$. Enter masses of $\text{NaN}_3$ ($M=65.0$) and $\text{KNO}_3$ ($M=101.1$):</p>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs items-end">
+            <div><label class="block text-slate-400 mb-1">Mass of $\text{NaN}_3(s)$ (g)</label><input id="abNaN3" type="number" step="any" value="130.0" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white num-card"></div>
+            <div><label class="block text-slate-400 mb-1">Mass of $\text{KNO}_3(s)$ (g)</label><input id="abKNO3" type="number" step="any" value="50.55" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white num-card"></div>
+            <button type="button" onclick="solveAirbagSim()" class="apple-btn apple-btn-primary py-2.5">Solve Both Stages &amp; Total V(N₂) at r.t.p.</button>
+          </div>
+          <div id="airbagSimOut" class="p-3.5 rounded-xl bg-slate-950 border border-slate-800 text-xs font-mono text-emerald-300 leading-relaxed"></div>
+        </div>
+
       </div>
     </div>
 
@@ -958,6 +1462,45 @@
         <button class="w-full bg-rose-700 hover:bg-rose-600 text-white text-xs font-semibold py-1.5 px-2 rounded-md" onclick="solverLimit()">Find limiting &amp; gas volume</button>
         <div id="svLimOut" aria-live="polite" class="text-xs text-emerald-300 font-mono min-h-[20px]"></div>
         <p class="text-[10px] text-slate-500 leading-relaxed">The bench compares <b>needed vs available</b> for HCl, takes n(gas) from the winner of that comparison, and multiplies by 24.0 — exactly the airbag-style chain CP 2013 says candidates lost at the limiting-reagent gate.</p>
+      </div>
+    </div>
+
+    
+    <!-- ══ BENCH 5 · LIVE HKEAA MARK-SCHEME KEYWORD GRADER (TOPIC IX EDITION) ══ -->
+    <div class="mt-6 apple-sim-panel space-y-4">
+      <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+        <div>
+          <span class="text-[10px] font-mono text-sky-400 uppercase font-bold px-2 py-0.5 bg-sky-950 rounded border border-sky-800">Bench 5 · Interactive Examiner Grader</span>
+          <h3 class="text-base font-bold text-white mt-1">Practice Writing Full-Mark Topic IX Answers — Instant `[1M]` &amp; `[NOT ACCEPT]` Diagnostic</h3>
+          <p class="text-xs text-slate-400">Select a high-frequency Paper 1B question below and type your answer. The engine checks your phrasing against official HKEAA mark-scheme rubrics and flags fatal collision-theory register errors.</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 text-xs">
+        <div class="lg:col-span-1 space-y-2.5">
+          <label for="graderQSelect" class="block text-slate-300 font-semibold">Select HKDSE Exam Prompt:</label>
+          <select id="graderQSelect" onchange="loadGraderPrompt()" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white">
+            <option value="temp_rate">Q1 (3 marks · CP 2013 / MS Bank §7): Explain, in terms of collision theory, why an increase in temperature increases the rate of a chemical reaction.</option>
+            <option value="cat_rate">Q2 (2 marks · CP 2012 / 2013 / 2022 Q10): Explain how a positive catalyst increases the rate of a reaction, and how to prove experimentally that MnO₂ is a catalyst.</option>
+            <option value="h2so4_hcl_rate">Q3 (2 marks · CP 2012 Q11): Explain why 2.0 mol dm⁻³ H₂SO₄(aq) has a higher initial rate of reaction with magnesium ribbon than 2.0 mol dm⁻³ HCl(aq).</option>
+            <option value="colorimetry_just">Q4 (2 marks · CP 2014 / 2016 / 2023 Q14): Explain how colorimetry can be used to follow the progress of a reaction where iodine (I₂(aq)) is formed from colourless reactants.</option>
+            <option value="init_rate_tangent">Q5 (2 marks · CP 2014 / 2018 Q11 / 2025 Q10): Define "initial rate" and explain how to determine it from a volume–time graph.</option>
+            <option value="fair_test_vol">Q6 (2 marks · CP 2016 Q11 / 2020 Q13): When investigating the effect of acid concentration on rate by mixing different volumes of 1.0 M HCl with water, explain why distilled water is added.</option>
+          </select>
+          <div id="graderPromptBox" class="p-3 rounded-xl bg-slate-950 border border-slate-800 text-slate-200 leading-relaxed"></div>
+        </div>
+
+        <div class="lg:col-span-2 space-y-3">
+          <textarea id="graderInput" rows="4" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-sky-500" placeholder="Type your exam explanation here..."></textarea>
+          <div class="flex flex-wrap gap-2">
+            <button type="button" onclick="gradeStudentAnswer()" class="apple-btn apple-btn-primary">✨ Grade My Answer Against Mark Scheme</button>
+            <button type="button" onclick="fillModelGraderAnswer()" class="apple-btn">Show Model Full-Mark Answer</button>
+            <button type="button" onclick="document.getElementById('graderInput').value='';document.getElementById('graderResultBox').innerHTML='Type an answer and click Grade.';" class="apple-btn">Clear</button>
+          </div>
+          <div id="graderResultBox" class="p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-300 space-y-2 leading-relaxed">
+            Type an answer above and click <b>Grade My Answer Against Mark Scheme</b> to see your mark breakdown and keyword hits.
+          </div>
+        </div>
       </div>
     </div>
 
@@ -1472,5 +2015,391 @@ else { try{ MOBILE_UX.init(); }catch(e){} }
   }catch(e){}
 })();
 </script>
+
+<!-- ═══════════ APPLE COMMAND PALETTE (⌘K) MODAL ═══════════ -->
+<div id="cmdModal" onclick="if(event.target===this)closeCmdModal()">
+  <div class="w-full max-w-xl mx-4 bg-slate-900 border border-slate-700/80 rounded-2xl shadow-2xl overflow-hidden">
+    <div class="flex items-center gap-3 px-4 py-3 border-b border-slate-800">
+      <span class="text-sky-400 text-sm">🔍</span>
+      <input id="cmdSearchInput" type="text" oninput="filterCmdList()" placeholder="Search monitoring methods, tangent slope, collision theory, molar volume 24.0, or CP year..." class="w-full bg-transparent text-sm text-white placeholder-slate-400 focus:outline-none">
+      <button type="button" onclick="closeCmdModal()" class="text-xs text-slate-400 hover:text-white px-2 py-0.5 rounded bg-slate-800">ESC</button>
+    </div>
+    <div id="cmdResults" class="max-h-80 overflow-y-auto divide-y divide-slate-800/70 p-2 text-xs"></div>
+  </div>
+</div>
+
+<script>
+function toggleAppleTheme(){
+  const root = document.documentElement;
+  const isLight = root.classList.toggle('theme-light');
+  const icon = document.getElementById('themeToggleIcon');
+  if(icon) icon.textContent = isLight ? '🌙 Pro Dark' : '☀️ Daylight';
+  try { localStorage.setItem('hkdse_topic9_theme', isLight ? 'light' : 'dark'); } catch(e){}
+}
+
+const quizMasteryState = {};
+function injectQuizSelfCheckBars(){
+  ['measureQuiz','ratesQuiz','factorQuiz','molQuiz'].forEach(qid => {
+    const container = document.getElementById(qid);
+    if(!container) return;
+    const headerDiv = container.previousElementSibling;
+    if(headerDiv && !headerDiv.querySelector('.hide-all-btn')){
+      const btnWrap = document.createElement('div');
+      btnWrap.className = 'flex items-center gap-2';
+      const revBtn = headerDiv.querySelector('button');
+      if(revBtn){
+        revBtn.parentNode.insertBefore(btnWrap, revBtn);
+        btnWrap.appendChild(revBtn);
+        const hideBtn = document.createElement('button');
+        hideBtn.type = 'button';
+        hideBtn.className = 'hide-all-btn text-[11px] font-semibold text-slate-300 border border-slate-700 px-3 py-1 rounded-full hover:bg-slate-800';
+        hideBtn.textContent = 'Reset Blanks';
+        hideBtn.onclick = () => container.querySelectorAll('.blur-answer').forEach(b => b.classList.remove('revealed'));
+        btnWrap.appendChild(hideBtn);
+      }
+    }
+    [...container.children].forEach((row, idx) => {
+      if(row.querySelector('.quiz-self-bar')) return;
+      const key = qid + '_' + idx;
+      const bar = document.createElement('div');
+      bar.className = 'quiz-self-bar';
+      bar.innerHTML = `<span class="text-[10px] font-mono text-slate-400">Tap blurred chips above to check each keyword, then log your recall:</span>
+        <div class="flex items-center gap-1.5">
+          <button type="button" class="apple-btn !py-0.5 !px-2 text-[10px]" onclick="markQuizRow('${key}', true, this)">✓ Got It</button>
+          <button type="button" class="apple-btn !py-0.5 !px-2 text-[10px]" onclick="markQuizRow('${key}', false, this)">↻ Review Again</button>
+        </div>`;
+      row.appendChild(bar);
+    });
+  });
+}
+function markQuizRow(key, mastered, btnEl){
+  quizMasteryState[key] = mastered;
+  const buttons = btnEl.parentElement.querySelectorAll('button');
+  buttons[0].className = mastered ? 'apple-btn !py-0.5 !px-2 text-[10px] !bg-emerald-600/30 !border-emerald-500 !text-emerald-300' : 'apple-btn !py-0.5 !px-2 text-[10px]';
+  buttons[1].className = !mastered ? 'apple-btn !py-0.5 !px-2 text-[10px] !bg-amber-600/30 !border-amber-500 !text-amber-300' : 'apple-btn !py-0.5 !px-2 text-[10px]';
+  updateMasteryRing();
+}
+function checkAllSyllabusOutcomes(){
+  document.querySelectorAll('.syl-chk').forEach(c => c.checked = true);
+  updateMasteryRing();
+}
+function updateMasteryRing(){
+  const sylChks = [...document.querySelectorAll('.syl-chk')];
+  const sylDone = sylChks.filter(c => c.checked).length;
+  const sylTotal = sylChks.length || 12;
+  const sylBadge = document.getElementById('sylAuditCount');
+  if(sylBadge) sylBadge.textContent = `${sylDone} / ${sylTotal} Outcomes Checked`;
+  const quizDone = Object.values(quizMasteryState).filter(Boolean).length;
+  const pct = Math.round(((sylDone + quizDone) / (sylTotal + 48)) * 100);
+  const circle = document.getElementById('masteryRingCircle');
+  const txt = document.getElementById('masteryPctText');
+  if(circle) circle.style.strokeDashoffset = String(94.2 - (94.2 * pct) / 100);
+  if(txt) txt.textContent = `${pct}% Mastered`;
+}
+
+/* Method Selector Sim */
+const METHOD_SIM_DATA = {
+  caco3_hcl: '<b>✅ Best Methods:</b> (1) <b>Measure volume of $\text{CO}_2(g)$ collected</b> using a <b>gas syringe</b> at regular time intervals (or pressure in a sealed vessel with a pressure sensor); (2) <b>Measure mass loss of the reaction mixture</b> on an electronic balance at regular time intervals (with a cotton-wool plug).<br><b>📝 Full-Mark Justification (CP 2021 Q10 / CP 2024):</b> $\text{CO}_2$ gas is evolved and escapes, and always include the phrase "<b>at regular time intervals / against time</b>"!',
+  mnO4_c2o4: '<b>✅ Best Method:</b> <b>Colorimetry</b> — measure the <b>absorbance / colour intensity of the reaction mixture at regular time intervals</b> using a <b>colorimeter</b> (or gas volume/pressure of $\text{CO}_2(g)$).<br><b>📝 Full-Mark Justification (CP 2014 / CP 2023 Q14):</b> Purple $\text{MnO}_4^-(aq)$ ion is consumed to form colourless products ($\text{Mn}^{2+}(aq)$), so the purple colour intensity decreases over time. (Never write "calorimetry" — CP 2016!).',
+  s2o3_hcl: '<b>✅ Best Method:</b> <b>Turbidity (Disappearing-Cross Method)</b> — place the conical flask over a white tile/paper marked with a black cross and <b>measure the time $t$ taken for the cross to become invisible (disappear)</b>; average rate $\propto 1/t$.<br><b>⚠️ Why NOT Gas Volume / Mass Loss:</b> $\text{SO}_2(g)$ is <b>very soluble in water</b>, so very little gas escapes! Solid yellow sulphur $\text{S}(s)$ precipitates and clouds the mixture.',
+  ester_naoh: '<b>✅ Best Method (EDB Activity p. I-37):</b> <b>Titrimetric Analysis with Quenching</b> — withdraw fixed aliquots at regular time intervals using a pipette, <b>quench</b> each sample immediately (by running into ice-cold distilled water), and titrate the remaining $\text{NaOH}(aq)$ with standard $\text{HCl}(aq)$.<br><b>📝 Why Other Methods Fail:</b> No gas is evolved, no precipitate forms, and all reactants and products are colourless!',
+  h2o2_mno2: '<b>✅ Best Methods:</b> (1) Collect insoluble $\text{O}_2(g)$ in a <b>gas syringe</b> and record volume at regular time intervals; (2) Seal with a <b>pressure sensor + data-logger</b>; (3) EDB Activity (p. I-37): Measure the <b>height of oxygen foam</b> at regular time intervals in the presence of dish detergent.',
+  nh4cl_naoh: '<b>🚨 Why Gas-Over-Water and Mass-Loss FAIL Here:</b> Ammonia gas ($\text{NH}_3$) is <b>extremely soluble in water</b>! Most of the $\text{NH}_3$ stays dissolved in the aqueous mixture rather than escaping, so mass loss or water displacement severely under-reads.'
+};
+function updateMethodSim(){
+  const k = document.getElementById('rxMethodSel').value;
+  const out = document.getElementById('methodSimOut');
+  if(out && METHOD_SIM_DATA[k]){ out.innerHTML = METHOD_SIM_DATA[k]; safeInitKaTeX(); }
+}
+
+/* Live Tangent SVG Explorer */
+function updateTangentSim(){
+  const sl = document.getElementById('tanTimeSlider');
+  if(!sl) return;
+  const t = parseFloat(sl.value);
+  const Vmax = 60.0, k = 0.030;
+  // V(t) = Vmax * (1 - exp(-k*t)), dV/dt = Vmax * k * exp(-k*t)
+  const Vt = Vmax * (1 - Math.exp(-k * t));
+  const slope = t >= 115 ? 0 : Vmax * k * Math.exp(-k * t);
+  const avg = t > 0 ? Vt / t : slope;
+
+  document.getElementById('tanTimeBadge').textContent = t === 0 ? 't = 0 s (Initial Rate!)' : (t >= 115 ? `t = ${t} s (Reaction Complete · Flat!)` : `t = ${t} s (Instantaneous Rate)`);
+  document.getElementById('tanReadoutTitle').textContent = t === 0 ? 'At t = 0 s (Initial Rate = Steepest Tangent)' : `At t = ${t} s`;
+  document.getElementById('tanVolVal').textContent = `${Vt.toFixed(1)} cm³`;
+  document.getElementById('tanInstVal').textContent = `${slope.toFixed(2)} cm³ s⁻¹`;
+  document.getElementById('tanAvgVal').textContent = t === 0 ? '— (same as initial at limit t→0)' : `${avg.toFixed(2)} cm³ s⁻¹ (0 to ${t} s)`;
+  document.getElementById('tanStoichNote').innerHTML = `<b>Species Stoichiometry (CP 2014 / 2017 / 2022 Q10):</b> In $2\text{H}_2\text{O}_2 \rightarrow 2\text{H}_2\text{O} + \text{O}_2$, $\text{H}_2\text{O}_2$ is consumed at <b>twice</b> the molar rate $\text{O}_2$ is formed! At $t=${t}\text{ s}$, $\text{rate}(\text{O}_2) = ${(slope/24000).toExponential(2)}\text{ mol s}^{-1} \Rightarrow \text{rate}(\text{H}_2\text{O}_2) = ${(2*slope/24000).toExponential(2)}\text{ mol s}^{-1}$.`;
+
+  // Render SVG (x: 45..395 for t=0..120; y: 185..25 for V=0..65)
+  const tx = time => 45 + (time / 120) * 350;
+  const ty = vol => 185 - (vol / 65) * 160;
+
+  let pts = '';
+  for(let s=0; s<=120; s+=2){
+    const v = s >= 115 ? 60.0 : Vmax * (1 - Math.exp(-k * s));
+    pts += `${tx(s).toFixed(1)},${ty(v).toFixed(1)} `;
+  }
+
+  // Tangent segment around t
+  const dt1 = Math.max(0, t - 25), dt2 = Math.min(120, t + 25);
+  let y1 = Vt + slope * (dt1 - t), y2 = Vt + slope * (dt2 - t);
+  y1 = Math.max(0, Math.min(65, y1));
+  y2 = Math.max(0, Math.min(65, y2));
+
+  const svg = document.getElementById('tangentSvg');
+  svg.innerHTML = `
+    <!-- Axes -->
+    <line x1="45" y1="20" x2="45" y2="185" stroke="#64748b" stroke-width="1.5"/>
+    <line x1="45" y1="185" x2="400" y2="185" stroke="#64748b" stroke-width="1.5"/>
+    <!-- Plateau dashed line -->
+    <line x1="45" y1="${ty(60)}" x2="400" y2="${ty(60)}" stroke="rgba(148,163,184,0.35)" stroke-dasharray="4 4"/>
+    <text x="40" y="${ty(60)+3}" fill="#94a3b8" font-size="9" text-anchor="end">60</text>
+    <text x="40" y="185" fill="#94a3b8" font-size="9" text-anchor="end">0</text>
+    <text x="220" y="208" fill="#94a3b8" font-size="10" text-anchor="middle">Time / s (0 to 120 s)</text>
+    <text x="14" y="105" fill="#94a3b8" font-size="10" text-anchor="middle" transform="rotate(-90 14 105)">V(O₂) / cm³</text>
+    <!-- Chord for average rate if t > 0 -->
+    ${t > 0 ? `<line x1="${tx(0)}" y1="${ty(0)}" x2="${tx(t)}" y2="${ty(Vt)}" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="3 3"/>` : ''}
+    <!-- Main Curve -->
+    <polyline fill="none" stroke="#38bdf8" stroke-width="2.6" points="${pts}"/>
+    <!-- Tangent Line -->
+    <line x1="${tx(dt1)}" y1="${ty(y1)}" x2="${tx(dt2)}" y2="${ty(y2)}" stroke="#f43f5e" stroke-width="2.2"/>
+    <!-- Touching Point -->
+    <circle cx="${tx(t)}" cy="${ty(Vt)}" r="4.5" fill="#f43f5e" stroke="#ffffff" stroke-width="1.5"/>
+  `;
+  safeInitKaTeX();
+}
+
+/* Dual-Curve Comparator */
+const COMP_CASES = {
+  powder: {
+    kB: 0.065, vmaxB: 600,
+    text: '<b>Trial B1 · Powdered $\text{CaCO}_3$ (Same excess mass, same $50\text{ cm}^3$ of $1.0\text{ M HCl}$):</b><br>• <b>Initial Slope:</b> <span class="text-emerald-300 font-bold">Steeper</span> — greater total exposed surface area → higher collision frequency.<br>• <b>Final Plateau:</b> <span class="text-sky-300 font-bold">UNCHANGED ($600\text{ cm}^3$)</span> — HCl is the limiting reagent and its moles ($0.050\text{ mol}$) did not change (CP 2021 Q10)!'
+  },
+  temp_up: {
+    kB: 0.080, vmaxB: 600,
+    text: '<b>Trial B2 · Higher Temperature ($45\,^\circ\text{C}$ vs $25\,^\circ\text{C}$):</b><br>• <b>Initial Slope:</b> <span class="text-emerald-300 font-bold">Much Steeper</span> — reactant particles have higher average KE, so they collide more frequently AND a larger fraction of collisions have $E \ge E_a$.<br>• <b>Final Plateau:</b> <span class="text-sky-300 font-bold">UNCHANGED ($600\text{ cm}^3$)</span> — same moles of limiting HCl.'
+  },
+  conc_2m_same_v: {
+    kB: 0.065, vmaxB: 1200,
+    text: '<b>Trial B3 · $50\text{ cm}^3$ of $2.0\text{ M HCl}$ (Double concentration, same volume, $\text{CaCO}_3$ still in excess):</b><br>• <b>Initial Slope:</b> <span class="text-emerald-300 font-bold">Steeper</span> — more $\text{H}^+(aq)$ ions per unit volume.<br>• <b>Final Plateau:</b> <span class="text-amber-300 font-bold">DOUBLED ($1200\text{ cm}^3$)</span> — moles of limiting HCl doubled ($0.10\text{ mol}$ vs $0.050\text{ mol}$).'
+  },
+  h2so4_1m: {
+    kB: 0.065, vmaxB: 1200,
+    text: '<b>Trial B4 · $50\text{ cm}^3$ of $1.0\text{ M H}_2\text{SO}_4$ with Excess $\text{Mg}$ (CP 2012 Q11):</b><br>• <b>Initial Slope:</b> <span class="text-emerald-300 font-bold">Steeper</span> — $\text{H}_2\text{SO}_4$ is a <b>dibasic acid</b>, so $[\text{H}^+(aq)]$ is $2.0\text{ M}$ (double that of $1.0\text{ M HCl}$).<br>• <b>Final Plateau:</b> <span class="text-amber-300 font-bold">DOUBLED ($1200\text{ cm}^3$)</span> — twice as many moles of $\text{H}^+(aq)$ ions are present.'
+  },
+  half_c_double_v: {
+    kB: 0.018, vmaxB: 600,
+    text: '<b>Trial B5 · $100\text{ cm}^3$ of $0.50\text{ M HCl}$ (Half concentration, double volume):</b><br>• <b>Initial Slope:</b> <span class="text-rose-300 font-bold">LESS Steep</span> — lower $[\text{H}^+(aq)]$ per unit volume → lower collision frequency.<br>• <b>Final Plateau:</b> <span class="text-sky-300 font-bold">UNCHANGED ($600\text{ cm}^3$)</span> — $n(\text{HCl}) = 0.50 \times 0.100 = 0.050\text{ mol}$ is identical!'
+  },
+  double_v_same_c: {
+    kB: 0.032, vmaxB: 1200,
+    text: '<b>Trial B6 · $100\text{ cm}^3$ of $1.0\text{ M HCl}$ (Same concentration, double volume · CP 2016 Trap!):</b><br>• <b>Initial Slope:</b> <span class="text-sky-300 font-bold">IDENTICAL Initial Slope!</span> Rate depends on <b>concentration (particles per unit volume)</b>, NOT total volume!<br>• <b>Final Plateau:</b> <span class="text-amber-300 font-bold">DOUBLED ($1200\text{ cm}^3$)</span> — twice the moles of limiting HCl.'
+  }
+};
+function updateCurveCompSim(){
+  const sel = document.getElementById('curveCompSel').value;
+  const c = COMP_CASES[sel];
+  if(!c) return;
+  document.getElementById('compCurveReadout').innerHTML = c.text;
+
+  const tx = time => 45 + (time / 120) * 350;
+  const ty = vol => 185 - (vol / 1300) * 160;
+  let ptsA = '', ptsB = '';
+  for(let s=0; s<=120; s+=2){
+    const vA = 600 * (1 - Math.exp(-0.032 * s));
+    const vB = c.vmaxB * (1 - Math.exp(-c.kB * s));
+    ptsA += `${tx(s).toFixed(1)},${ty(vA).toFixed(1)} `;
+    ptsB += `${tx(s).toFixed(1)},${ty(vB).toFixed(1)} `;
+  }
+  const svg = document.getElementById('compCurveSvg');
+  svg.innerHTML = `
+    <line x1="45" y1="20" x2="45" y2="185" stroke="#64748b" stroke-width="1.5"/>
+    <line x1="45" y1="185" x2="400" y2="185" stroke="#64748b" stroke-width="1.5"/>
+    <line x1="45" y1="${ty(600)}" x2="400" y2="${ty(600)}" stroke="rgba(56,189,248,0.3)" stroke-dasharray="3 3"/>
+    <line x1="45" y1="${ty(1200)}" x2="400" y2="${ty(1200)}" stroke="rgba(251,191,36,0.3)" stroke-dasharray="3 3"/>
+    <text x="40" y="${ty(600)+3}" fill="#38bdf8" font-size="9" text-anchor="end">600</text>
+    <text x="40" y="${ty(1200)+3}" fill="#fbbf24" font-size="9" text-anchor="end">1200</text>
+    <polyline fill="none" stroke="#38bdf8" stroke-width="2.2" stroke-dasharray="5 4" points="${ptsA}"/>
+    <polyline fill="none" stroke="#30d158" stroke-width="2.6" points="${ptsB}"/>
+    <text x="310" y="160" fill="#38bdf8" font-size="10" font-weight="bold">-- Curve A (Control)</text>
+    <text x="310" y="175" fill="#30d158" font-size="10" font-weight="bold">— Curve B (Modified)</text>
+  `;
+  safeInitKaTeX();
+}
+
+/* Airbag Two-Stage Sim (CP 2013) */
+function solveAirbagSim(){
+  const m1 = parseFloat(document.getElementById('abNaN3').value);
+  const m2 = parseFloat(document.getElementById('abKNO3').value);
+  const out = document.getElementById('airbagSimOut');
+  if(!(m1>0) || !(m2>0)){ out.textContent = 'Enter positive masses for both NaN₃ and KNO₃.'; return; }
+  const nNaN3 = m1 / 65.0;
+  const nN2_stage1 = nNaN3 * 1.5;
+  const nNa_formed = nNaN3; // 2:2 ratio
+  const nKNO3 = m2 / 101.1;
+  // Stage 2: 10 Na + 2 KNO3 -> K2O + 5 Na2O + N2
+  const qNa = nNa_formed / 10;
+  const qKNO3 = nKNO3 / 2;
+  const naLimits = qNa <= qKNO3;
+  const nN2_stage2 = Math.min(qNa, qKNO3) * 1;
+  const nTotal = nN2_stage1 + nN2_stage2;
+  const vTotal = nTotal * 24.0;
+  out.innerHTML = `<b>Stage 1 ($2\text{NaN}_3 \to 2\text{Na} + 3\text{N}_2$):</b> $n(\text{NaN}_3) = ${m1}/65.0 = ${nNaN3.toFixed(3)}\text{ mol} \Rightarrow n_1(\text{N}_2) = ${nN2_stage1.toFixed(3)}\text{ mol}$, and $n(\text{Na formed}) = ${nNa_formed.toFixed(3)}\text{ mol}$.<br>`
+    + `<b>Stage 2 ($10\text{Na} + 2\text{KNO}_3 \to \dots + \text{N}_2$ · CP 2013 Gate!):</b> $n(\text{KNO}_3) = ${m2}/101.1 = ${nKNO3.toFixed(3)}\text{ mol}$. Quotients: $\text{Na}/10 = ${qNa.toFixed(4)}$ vs $\text{KNO}_3/2 = ${qKNO3.toFixed(4)} \Rightarrow$ <b>${naLimits ? 'Na(s) is the limiting reagent!' : 'KNO₃(s) is the limiting reagent!'}</b> $n_2(\text{N}_2) = ${nN2_stage2.toFixed(3)}\text{ mol}$.<br>`
+    + `<b>Total $\text{N}_2(g)$ at r.t.p.:</b> $n_{\text{total}} = ${nN2_stage1.toFixed(3)} + ${nN2_stage2.toFixed(3)} = ${nTotal.toFixed(3)}\text{ mol} \Rightarrow V = ${nTotal.toFixed(3)} \times 24.0 = <b>${vTotal.toFixed(2)}\text{ dm}^3</b>$.`;
+  safeInitKaTeX();
+}
+
+/* Bench 5: Live HKEAA Keyword Answer Grader (Topic IX) */
+const GRADER_RUBRICS = {
+  temp_rate: {
+    prompt: '<b>Question (3 marks · CP 2013 / MS Bank §7):</b> Explain, in terms of collision theory, why an increase in temperature increases the rate of a chemical reaction.',
+    model: 'When temperature increases, the reactant particles have higher average kinetic energy and move faster, so the collision frequency increases. Furthermore, a much larger portion (fraction) of the colliding particles have kinetic energy equal to or greater than the activation energy (Eₐ). Therefore, the number of effective collisions per unit time increases, increasing the reaction rate.',
+    marks: [
+      { label: '1M · Higher Average KE / Move Faster + Collision Frequency ↑', re: /(average\s+kinetic\s+energy|move\s+faster)[\s\S]{0,60}(collision\s+frequency|more\s+frequent\s+collisions)/i, hint: 'State half 1: particles have <b>higher average kinetic energy (move faster)</b>, so <b>collision frequency increases</b>.' },
+      { label: '1M · Larger Portion / Fraction Have Energy ≥ Eₐ', re: /(larger|greater|higher|more)\s+(portion|fraction|proportion|percentage)[\s\S]{0,45}(activation\s+energy|e_?a)/i, hint: 'CP 2013 Requirement: State half 2: a <b>larger portion/fraction of particles have energy ≥ activation energy (Eₐ)</b>.' },
+      { label: '1M · More Effective Collisions Per Unit Time', re: /effective\s+collisions?\s+per\s+(unit\s+time|second)|frequency\s+of\s+effective\s+collisions/i, hint: 'Finish with the currency phrase: <b>more effective collisions per unit time</b> (or frequency of effective collisions increases).' }
+    ],
+    traps: [
+      { re: /lowers?\s+(the\s+)?activation\s+energy/i, msg: 'Fatal Confusion: Increasing temperature does NOT lower the activation energy — only a catalyst provides an alternative pathway with lower Eₐ!' },
+      { re: /particles?\s+(expand|get\s+bigger)/i, msg: 'Classroom Misconception Penalty: Particles do NOT expand or get bigger when heated!' }
+    ]
+  },
+  cat_rate: {
+    prompt: '<b>Question (2 marks · CP 2012 / CP 2013 / CP 2022 Q10):</b> Explain how a positive catalyst increases the rate of a chemical reaction.',
+    model: 'A positive catalyst provides an alternative reaction pathway with a lower activation energy. At the same temperature, a larger fraction of reactant particles have kinetic energy equal to or greater than the lower activation energy, so the number of effective collisions per unit time increases.',
+    marks: [
+      { label: '1M · Alternative Pathway with Lower Activation Energy', re: /alternative\s+(reaction\s+)?pathway[\s\S]{0,40}lower\s+activation\s+energy/i, hint: 'CP 2013 Mandatory Phrasing: State that a catalyst <b>provides an alternative pathway with a lower activation energy</b>.' },
+      { label: '1M · More Particles Have Sufficient Energy → Effective Collisions/Time ↑', re: /(more\s+particles?[\s\S]{0,45}(sufficient|enough|>=)\s+(kinetic\s+)?energy|effective\s+collisions?\s+per\s+(unit\s+time|second)|frequency\s+of\s+effective\s+collisions)/i, hint: 'State that more particles have sufficient energy to react, so <b>effective collisions per unit time increase</b>.' }
+    ],
+    traps: [
+      { re: /increases?\s+(the\s+)?collision\s+frequency/i, msg: 'CP 2012 / CP 2013 Register Error: A catalyst does NOT increase raw collision frequency — it increases the fraction of collisions that are effective via a lower-Eₐ pathway!' },
+      { re: /increases?\s+(the\s+)?yield/i, msg: 'Zero-Mark Trap: A catalyst NEVER increases the final yield (plateau) of a reaction!' }
+    ]
+  },
+  h2so4_hcl_rate: {
+    prompt: '<b>Question (2 marks · CP 2012 Q11):</b> Explain why 2.0 mol dm⁻³ sulphuric acid reacts faster with magnesium ribbon at the start of the reaction than 2.0 mol dm⁻³ hydrochloric acid.',
+    model: 'Sulphuric acid (H₂SO₄) is a dibasic acid whereas hydrochloric acid (HCl) is a monobasic acid, so 2.0 mol dm⁻³ H₂SO₄ has a higher concentration of H⁺(aq) ions than 2.0 mol dm⁻³ HCl. Since there are more H⁺(aq) ions per unit volume, the frequency of effective collisions between H⁺(aq) ions and Mg atoms is higher.',
+    marks: [
+      { label: '1M · H₂SO₄ Dibasic vs HCl Monobasic → Higher [H⁺(aq)]', re: /(dibasic[\s\S]{0,50}higher\s+concentration\s+of\s+h\+|higher\s+\[?h\+(\(aq\))?\]?)/i, hint: 'CP 2012 Q11 Requirement: State that H₂SO₄ is dibasic, so it has a <b>higher concentration of H⁺(aq) ions</b>.' },
+      { label: '1M · More H⁺ per Unit Volume → Effective Collisions/Time ↑', re: /(per\s+unit\s+volume|effective\s+collisions)/i, hint: 'Link to collision theory: more H⁺(aq) ions <b>per unit volume</b> → more <b>effective collisions per unit time</b>.' }
+    ],
+    traps: [
+      { re: /h2so4\s+is\s+a\s+stronger\s+acid\s+than\s+hcl/i, msg: 'Misconception Trap: Both H₂SO₄ and HCl are strong acids — the rate difference comes from <b>basicity ([H⁺(aq)])</b>, not acid strength!' }
+    ]
+  },
+  colorimetry_just: {
+    prompt: '<b>Question (2 marks · CP 2014 / CP 2016 / CP 2023 Q14):</b> In a reaction where brown aqueous iodine (I₂(aq)) is formed from colourless reactants, state what instrument can be used to follow the progress of the reaction and explain why.',
+    model: 'Use a colorimeter to measure the absorbance (colour intensity) of the reaction mixture at regular time intervals. The reaction mixture is colourless at the start and becomes brown (colour intensity increases) as aqueous iodine is formed.',
+    marks: [
+      { label: '1M · Colorimeter + Measure Colour Intensity at Regular Time Intervals', re: /colorimet(er|ry)[\s\S]{0,65}(time\s+intervals?|against\s+time)|(time\s+intervals?|against\s+time)[\s\S]{0,65}colorimet(er|ry)/i, hint: 'CP 2023 Q14 / CP 2024 Requirement: Name a <b>colorimeter</b> AND state measuring colour intensity/absorbance <b>at regular time intervals (against time)</b>.' },
+      { label: '1M · Colourless at Start → Brown / Coloured as I₂ Forms', re: /colourless[\s\S]{0,45}(brown|yellow|coloured)/i, hint: 'CP 2014 Requirement: State BOTH ends of the colour journey — <b>colourless at the start and turns brown/coloured</b> as I₂ forms.' }
+    ],
+    traps: [
+      { re: /calorimet(er|ry)/i, msg: 'CP 2016 Spelling/Instrument Penalty: "calorimetry" measures heat — spell it <b>colorimeter / colorimetry</b>!' }
+    ]
+  },
+  init_rate_tangent: {
+    prompt: '<b>Question (2 marks · CP 2014 / CP 2018 Q11 / CP 2025 Q10):</b> Explain the meaning of "initial rate" of a reaction and state how it can be obtained from a volume–time graph.',
+    model: 'The initial rate is the instantaneous rate of reaction at the very start of the reaction (at time t = 0). It is obtained by drawing a tangent to the curve at t = 0 and calculating the slope (gradient) of that tangent.',
+    marks: [
+      { label: '1M · Instantaneous Rate at Time t = 0 (Start)', re: /(instantaneous\s+rate|rate\s+of\s+reaction)[\s\S]{0,35}(t\s*=\s*0|start\s+of\s+(the\s+)?reaction)/i, hint: 'CP 2014 / CP 2022 Requirement: Define initial rate as the <b>instantaneous rate at time t = 0</b> (not "during the starting period"!).' },
+      { label: '1M · Slope / Gradient of Tangent at t = 0', re: /(slope|gradient)[\s\S]{0,30}tangent[\s\S]{0,25}(t\s*=\s*0|origin|start)/i, hint: 'CP 2018 Q11 Requirement: State finding the <b>slope (gradient) of the tangent to the curve at t = 0</b>.' }
+    ],
+    traps: [
+      { re: /starting\s+period|first\s+few\s+seconds/i, msg: 'CP 2022 Paper 2 Verbatim Error: "wrongly stated that the initial rate was the rate at the starting period" — it is the instantaneous rate at the single instant <b>t = 0</b>!' }
+    ]
+  },
+  fair_test_vol: {
+    prompt: '<b>Question (2 marks · CP 2016 Q11 / CP 2020 Q13):</b> In an experiment studying the effect of acid concentration on reaction rate by mixing different volumes of 1.0 M HCl(aq) with a fixed volume of Na₂S₂O₃(aq), explain why different volumes of distilled water must be added to the mixtures.',
+    model: 'Distilled water is added to keep the total volume of the reaction mixture constant across all trials. This ensures that the concentration of HCl(aq) is the only variable being changed (and that the concentration of Na₂S₂O₃(aq) and depth of solution remain the same for a fair comparison).',
+    marks: [
+      { label: '1M · Keep Total Volume of Reaction Mixture Constant', re: /(keep|maintain)[\s\S]{0,35}total\s+volume[\s\S]{0,25}(constant|same)/i, hint: 'CP 2016 Q11 Requirement: State that water is added to <b>keep the total volume of the reaction mixture the same (constant)</b>.' },
+      { label: '1M · Fair Test / Concentration is the Only Variable', re: /(only\s+variable|fair\s+(test|comparison)|depth\s+of\s+solution)/i, hint: 'State why: so that <b>concentration is the only variable</b> (for a <b>fair comparison</b>).' }
+    ],
+    traps: []
+  }
+};
+
+function loadGraderPrompt(){
+  const sel = document.getElementById('graderQSelect');
+  if(!sel) return;
+  const r = GRADER_RUBRICS[sel.value];
+  const box = document.getElementById('graderPromptBox');
+  if(box && r) box.innerHTML = r.prompt;
+}
+function fillModelGraderAnswer(){
+  const sel = document.getElementById('graderQSelect');
+  if(!sel) return;
+  const r = GRADER_RUBRICS[sel.value];
+  if(!r) return;
+  document.getElementById('graderInput').value = r.model;
+  gradeStudentAnswer();
+}
+function gradeStudentAnswer(){
+  const sel = document.getElementById('graderQSelect');
+  const txt = (document.getElementById('graderInput').value || '').trim();
+  const out = document.getElementById('graderResultBox');
+  if(!sel || !out) return;
+  const r = GRADER_RUBRICS[sel.value];
+  if(!txt){ out.innerHTML = '<span class="text-amber-300">Please type an answer first, or click "Show Model Full-Mark Answer".</span>'; return; }
+  let score = 0, rowsHtml = '', trapHtml = '';
+  r.marks.forEach(m => {
+    const hit = m.re.test(txt);
+    if(hit) score++;
+    rowsHtml += `<div class="p-2 rounded-lg border ${hit ? 'bg-emerald-950/40 border-emerald-700 text-emerald-200' : 'bg-slate-900 border-slate-800 text-slate-300'}"><b>${hit ? '✅ [1M Earned]' : '⬜ [0M Missed]'} ${m.label}:</b> ${hit ? 'Keyword verified in your answer.' : m.hint}</div>`;
+  });
+  r.traps.forEach(t => {
+    if(t.re.test(txt)) trapHtml += `<div class="p-2.5 rounded-lg bg-rose-950/60 border border-rose-600 text-rose-200 font-medium">🚨 <b>[NOT ACCEPT / Contradiction Penalty]:</b> ${t.msg}</div>`;
+  });
+  out.innerHTML = `<div class="flex items-center justify-between border-b border-slate-800 pb-2"><span class="font-bold text-white text-sm">Examiner Diagnostic Score: <span class="text-sky-400 font-mono">${score} / ${r.marks.length} marks</span></span><span class="chip ${score===r.marks.length && !trapHtml ? 'bg-emerald-950 text-emerald-300 border-emerald-700' : 'bg-amber-950 text-amber-300 border-amber-700'}">${score===r.marks.length && !trapHtml ? 'Full Marks Wording' : 'Keep Refining'}</span></div>${trapHtml}<div class="space-y-1.5 mt-2">${rowsHtml}</div>`;
+}
+
+const CMD_INDEX = [
+  { title: 'Reaction Progress Method Selector (Gas, Mass, Colorimetry, Turbidity, Quench)', tag: 'Strand (a) · Sim', action: ()=>{switchTab('tab-measure');switchMeasureMode('map');} },
+  { title: 'Live SVG Progress Curve & Tangent Slope Explorer (t = 0 to 120 s)', tag: 'Strand (a) · Sim', action: ()=>{switchTab('tab-rates');switchRatesMode('map');} },
+  { title: 'Dual-Curve Factor & Plateau Comparator (Powder, Temp, Dibasic H₂SO₄)', tag: 'Strand (b) · Sim', action: ()=>{switchTab('tab-factors');switchFactorMode('map');} },
+  { title: 'Two-Stage Car Airbag Stoichiometry & Limiting-Reagent Bench', tag: 'Strand (c) · CP 2013', action: ()=>{switchTab('tab-mol');switchMolMode('map');} },
+  { title: 'Molar Volume at r.t.p. (24.0 dm³ mol⁻¹) Calculators', tag: 'Solver · Benches 1–4', action: ()=>{switchTab('tab-solver');} },
+  { title: 'Live HKEAA Keyword Answer Grader (Bench 5)', tag: 'Solver · Exam Practice', action: ()=>{switchTab('tab-solver');} },
+  { title: 'Candidate Performance Intelligence (2012–2025)', tag: 'Past Papers · Tab 7', action: ()=>{switchTab('tab-pp');} }
+];
+function openCmdModal(){ const m=document.getElementById('cmdModal'); if(m){ m.classList.add('open'); const inp=document.getElementById('cmdSearchInput'); if(inp){inp.value='';filterCmdList();setTimeout(()=>inp.focus(),50);}}}
+function closeCmdModal(){ const m=document.getElementById('cmdModal'); if(m) m.classList.remove('open'); }
+function filterCmdList(){
+  const q = (document.getElementById('cmdSearchInput').value || '').toLowerCase();
+  const box = document.getElementById('cmdResults');
+  if(!box) return;
+  box.innerHTML = '';
+  CMD_INDEX.filter(i => i.title.toLowerCase().includes(q) || i.tag.toLowerCase().includes(q)).forEach(i => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'w-full text-left px-3 py-2.5 rounded-xl hover:bg-slate-800/80 flex items-center justify-between transition';
+    btn.innerHTML = `<span class="text-white font-medium">${i.title}</span><span class="chip bg-sky-950 text-sky-300 border border-sky-800">${i.tag}</span>`;
+    btn.onclick = () => { closeCmdModal(); i.action(); };
+    box.appendChild(btn);
+  });
+}
+document.addEventListener('keydown', e => {
+  if((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k'){ e.preventDefault(); const m=document.getElementById('cmdModal'); if(m && m.classList.contains('open')) closeCmdModal(); else openCmdModal(); }
+  else if(e.key === 'Escape') closeCmdModal();
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  try { if(localStorage.getItem('hkdse_topic9_theme') === 'light') toggleAppleTheme(); } catch(e){}
+  injectQuizSelfCheckBars();
+  updateMethodSim();
+  updateTangentSim();
+  updateCurveCompSim();
+  solveAirbagSim();
+  loadGraderPrompt();
+  updateMasteryRing();
+  document.getElementById('svT1').value = '0'; document.getElementById('svQ1').value = '0'; document.getElementById('svT2').value = '20'; document.getElementById('svQ2').value = '48'; solverMean();
+  document.getElementById('svTA').value = '0'; document.getElementById('svVA').value = '0'; document.getElementById('svTB').value = '4'; document.getElementById('svVB').value = '60'; solverTangent();
+  document.getElementById('svMV').value = '1.20'; document.getElementById('svMMol').value = '44'; solverMolar();
+  document.getElementById('svLM').value = '0.48'; document.getElementById('svLV').value = '50.0'; document.getElementById('svLC').value = '1.0'; solverLimit();
+});
+</script>
+
 </body>
 </html>
